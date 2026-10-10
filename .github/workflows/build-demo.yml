@@ -86,7 +86,7 @@ jobs:
               if script:
                   original=original.replace('</body>',script.group(0)+'</body>',1)
               target.write_text(original,encoding='utf-8')
-          for name in ['9916','6167','7432','4507','2855','2878','7447','7453','6269','6274','7634','7660','4503']:
+          for name in ['6167','7432','4507','2855','2878','7447','7453','6269','6274','7634','7660','4503']:
               photo=Path('images')/('rando-IMG_'+name+'.webp')
               if not photo.is_file():
                   raise RuntimeError('Missing randonnée photo: '+str(photo))
