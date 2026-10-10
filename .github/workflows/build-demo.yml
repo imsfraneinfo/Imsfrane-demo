@@ -44,11 +44,47 @@ jobs:
               hide='<style>.header,.concept-bar,.season-strip,.progress,footer,.footer{display:none!important}body{padding-top:0!important;margin:0!important}.hero{margin-top:0!important}</style>'
               html=html.replace('</head>',hide+'</head>',1)
               (root/'rafting-content.html').write_text(html,encoding='utf-8')
+              translations={
+                'Vivez':'Experience','rivière.':'the river.','Explorer les parcours':'Explore the routes','Voir les photos':'View photos',
+                'Expériences':'Experiences','De rivière':'Of river','À partir de / pers.':'From / person',
+                'Choisir son aventure':'Choose your adventure','Connaître la saison':'Check the season','Voir l’expérience':'See the experience',
+                'Nos photos sur la rivière':'Our river photos','Demander une date':'Ask about a date','Réponse personnalisée':'Personalized reply',
+                'De vrais rapides.':'Real rapids.','De vrais':'Real','souvenirs.':'memories.',
+                'L\'aventure est ici.':'Adventure starts here.','Le bon moment,':'The right time,','la bonne rivière.':'the right river.',
+                'Saison habituelle':'Typical season','Selon niveau d’eau':'Depending on water levels','Hors saison':'Off-season',
+                'Choisissez l\'intensité.':'Choose your adventure level.','DÉCOUVERTE':'DISCOVERY','AVENTURE':'ADVENTURE',
+                'EXPÉDITION':'EXPEDITION','à Tilouguite':'to Tilouguite','La grande':'The great','expédition':'expedition',
+                'Que comprend la sortie ?':'What is included?','Rendez-vous au lieu convenu':'Meet at the agreed location',
+                'Accompagné':'Guided','/ personne':'/ person','Prix du parcours':'Route price',
+                'Choisir ce parcours':'Choose this route','Découvrir l\'expédition':'Explore the expedition',
+                'Deux jours.':'Two days.','Mille souvenirs.':'A thousand memories.',
+                'Voir les deux destinations':'See both destinations','Jour 01 — En route vers l\'aventure':'Day 01 — The adventure begins',
+                'Jour 02 — Au cœur des gorges':'Day 02 — Into the gorges',
+                'La rivière en images.':'The river in pictures.','Votre aventure en 4 étapes.':'Your adventure in 4 steps.',
+                'Choisissez':'Choose','Contactez-nous':'Contact us','Préparez-vous':'Get ready',
+                'Vivez l\'Atlas':'Experience the Atlas','Bon à savoir.':'Good to know.',
+                'Prêt à rejoindre':'Ready to join','la rivière ?':'the river?',
+                'Vérifier une date':'Check a date','Réserver':'Book now','Questions fréquentes':'Frequently asked questions',
+                'SAISON HABITUELLE : MARS → JUIN':'TYPICAL SEASON: MARCH → JUNE',
+                'HAUT ATLAS · OUED AHANSAL · MAROC':'HIGH ATLAS · OUED AHANSAL · MOROCCO',
+                'EXPÉRIENCES AUTHENTIQUES':'AUTHENTIC EXPERIENCES','L\'AVENTURE, TOUT SIMPLEMENT':'ADVENTURE, PURE AND SIMPLE',
+                'AVANT DE CHOISIR UNE DATE':'BEFORE CHOOSING A DATE','VOTRE RIVIÈRE, VOTRE RYTHME':'YOUR RIVER, YOUR PACE',
+                'ÉMOTIONS SUR L’EAU':'THRILLS ON THE WATER','L\'EXPÉRIENCE SIGNATURE':'OUR SIGNATURE EXPERIENCE',
+                'À partir de':'From','Mars à juin, selon débit':'March to June, depending on river flow',
+                'PARCOURS 01 · OUED AHANSAL':'ROUTE 01 · OUED AHANSAL',
+                'PARCOURS 02 · OUED MELLOUL':'ROUTE 02 · OUED MELLOUL',
+                'PARCOURS 03 · 2 JOURS':'ROUTE 03 · 2 DAYS',
+              }
+              english=html.replace('<html lang="fr"','<html lang="en"')
+              for source,target in translations.items():
+                  english=english.replace('>'+source+'<','>'+target+'<')
+              (root/'rafting-content-en.html').write_text(english,encoding='utf-8')
               for lang in ('fr','en'):
                   f=root/lang/'rafting.html'
                   original=f.read_text(encoding='utf-8')
+                  content_file='rafting-content-en.html' if lang=='en' else 'rafting-content.html'
                   embedded='''<main class="rafting-page" id="mainContent" style="padding:0;max-width:none">
-          <iframe id="raftingExperienceFrame" title="Rafting Imsfrane" src="../rafting-content.html" loading="eager" scrolling="no" style="display:block;width:100%;height:2500px;border:0;overflow:hidden"></iframe>
+          <iframe id="raftingExperienceFrame" title="Rafting Imsfrane" src="../RAFTING_CONTENT_FILE" loading="eager" scrolling="no" style="display:block;width:100%;height:2500px;border:0;overflow:hidden"></iframe>
           </main>
           <script>
           (function(){
@@ -58,6 +94,7 @@ jobs:
             window.addEventListener('resize',resize);
           })();
           </script>'''
+                  embedded=embedded.replace('RAFTING_CONTENT_FILE',content_file)
                   begin=original.find('<main')
                   opening_end=original.find('>',begin)+1
                   finish=original.find('</main>',opening_end)+len('</main>')
