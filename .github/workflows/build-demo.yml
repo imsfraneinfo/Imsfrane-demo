@@ -88,7 +88,23 @@ jobs:
                       tag=re.sub(r'src="https://imsfrane.com/images/[^"]+"',
                                  'src="images/rafting-new/'+name+'"',tag,count=1)
                       html=html[:m.start()]+tag+html[m.end():]
-              (root/'rafting-content.html').write_text(html,encoding='utf-8')
+              # Complete the photo gallery with all fourteen unique uploaded images.
+              if new_photos.is_dir():
+                  gallery_start=html.find('id="gallery"')
+                  gallery_end=html.find('</div>',gallery_start)
+                  if gallery_start!=-1 and gallery_end!=-1:
+                      gallery_html=html[gallery_start:gallery_end]
+                      # Replace the eight gallery slots with eight unique photos.
+                      gallery_names=['IMG_7886.webp','IMG_9066.webp','IMG_1880.webp','IMG_0305.webp','IMG_2060.webp','IMG_7076.webp','IMG_6626.webp','IMG_2101.webp']
+                      for j,match in reversed(list(enumerate(re.finditer(r'<img\\b[^>]*>',gallery_html)))):
+                          if j>=len(gallery_names):continue
+                          name=gallery_names[j]
+                          tag=re.sub(r'src="[^"]+"','src="images/rafting-new/'+name+'"',match.group(0))
+                          gallery_html=gallery_html[:match.start()]+tag+gallery_html[match.end():]
+                      extra_names=['IMG_9296.webp','IMG_0296.webp','IMG_2012.webp','IMG_9129.webp','IMG_2089.webp','IMG_1893.webp']
+                      extra=''.join('<button aria-label="Agrandir la photo de rafting '+str(9+j)+'" data-image="'+str(8+j)+'" type="button"><img alt="Rafting Imsfrane — photo '+str(9+j)+'" loading="lazy" src="images/rafting-new/'+name+'"/></button>' for j,name in enumerate(extra_names))
+                      html=html[:gallery_start]+gallery_html+extra+html[gallery_end:]
+                            (root/'rafting-content.html').write_text(html,encoding='utf-8')
               translations={
               "Vivez": "Feel",
               "la": "the",
