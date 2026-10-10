@@ -2,7 +2,7 @@ name: Publish Imsfrane demo
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/build-demo.yml', 'rafting-v8.html', 'imsfrane_rafting_mobile_cadrage_corrige_v8*.html', 'images/rafting-new/**', 'quad-content-*.html', 'images/quad-new/**', 'images/IMG_*.webp', 'vtt-content-*.html', 'camping-content-*.html', 'randonnee-content-*.html', 'about-content-*.html', 'remaining-pages-theme.css', 'images/rando-*.webp', 'images/IMG_*.jpeg']
+    paths: ['.github/workflows/build-demo.yml', 'rafting-v8.html', 'imsfrane_rafting_mobile_cadrage_corrige_v8*.html', 'images/rafting-new/**', 'quad-content-*.html', 'images/quad-new/**', 'images/IMG_*.webp', 'vtt-content-*.html', 'camping-content-*.html', 'randonnee-content-*.html', 'about-content-*.html', 'remaining-pages-theme.css', 'rebuild_remaining.py', 'images/rando-*.webp', 'images/IMG_*.jpeg']
   workflow_dispatch:
 permissions:
   contents: write
@@ -16,6 +16,7 @@ jobs:
           git clone --depth 1 https://github.com/imsfraneinfo/imsfraneinfo.git /tmp/original
           mkdir -p public
           rsync -a --exclude=.git --exclude=.github --exclude=CNAME /tmp/original/ public/
+          python3 -m pip install --quiet beautifulsoup4
           python3 - <<'PY'
           from pathlib import Path
           import re
@@ -37,37 +38,16 @@ jobs:
           </style>"""
                   s=s.replace('</head>',css+'</head>',1)
               f.write_text(s,encoding='utf-8')
-          # Apply the new visual language to the remaining bilingual pages only.
-          # Preserve their original content, photography, booking forms, navigation and footer.
+          # Rebuild remaining bilingual page bodies, preserving source images, copy and links.
+          from rebuild_remaining import run as rebuild_pages
+          rebuild_pages(root)
           theme=Path('remaining-pages-theme.css').read_text(encoding='utf-8')
-          remaining=('hebergement','programme','booking','contact','memories','guide','store','blog')
           for lang in ('fr','en'):
-              for page in remaining:
+              for page in ('hebergement','programme','booking','contact','memories','guide','store','blog'):
                   target=root/lang/(page+'.html')
-                  if not target.is_file():
-                      raise RuntimeError('Missing demo page: '+str(target))
-                  original=target.read_text(encoding='utf-8')
-                  original=original.replace('</head>','<style id="imsfrane-remaining-theme">'+theme+'</style></head>',1)
-                  main_match=re.search('<main[^>]*>(.*?)</main>',original,re.S|re.I)
-                  if not main_match:
-                      raise RuntimeError('Missing main in '+str(target))
-                  body=main_match.group(1)
-                  first_image=re.search("<img[^>]+src=[\u0027\"]([^\u0027\"]+)[\u0027\"][^>]*>",body,re.I)
-                  title_match=re.search('<h1[^>]*>(.*?)</h1>',body,re.S|re.I)
-                  title=re.sub(r'<[^>]+>',' ',title_match.group(1)).strip() if title_match else page.title()
-                  title=re.sub(' +',' ',title)
-                  import html as html_lib
-                  title=html_lib.escape(html_lib.unescape(title))
-                  image=first_image.group(1) if first_image else '../images/25.webp'
-                  eyebrow='Imsfrane Cathédrale · Haut Atlas'
-                  action='Découvrir' if lang=='fr' else 'Explore'
-                  hero=('<section class="demo-editorial-hero" aria-label="'+html_lib.escape(page)+'">'
-                        '<div class="demo-editorial-copy"><span class="demo-editorial-eyebrow">'+eyebrow+'</span>'
-                        '<h1>'+title+'</h1><a class="demo-editorial-link" href="#demo-page-details">'+action+' ↓</a></div>'
-                        '<div class="demo-editorial-photo"><img src="'+html_lib.escape(image,quote=True)+'" alt="'+title+'" loading="eager"></div></section>')
-                  newmain=main_match.group(0).replace(body,hero+'<div class="demo-original-content" id="demo-page-details">'+body+'</div>',1)
-                  original=original[:main_match.start()]+newmain+original[main_match.end():]
-                  target.write_text(original,encoding='utf-8')
+                  content=target.read_text(encoding='utf-8')
+                  content=content.replace('</head>','<style id="imsfrane-remaining-theme">'+theme+'</style></head>',1)
+                  target.write_text(content,encoding='utf-8')
           # Copy uploaded VTT images from demo main to published site.
           import shutil
           vtt_images=['IMG_9763','IMG_8810','IMG_8792','IMG_7394','IMG_7410','IMG_2606','IMG_2634','IMG_2629','IMG_2604','IMG_2667']
