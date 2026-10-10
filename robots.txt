@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /404.html
+
+Sitemap: https://imsfrane.com/sitemap.xml
+Disallow: /admin/

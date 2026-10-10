@@ -1,0 +1,168 @@
+# CloudCannon — Imsfrane Cathédrale
+# Simple visual CMS: pages + real HTML article collections (no JSON array CMS)
+collections_config:
+  image_settings:
+    path: image-settings
+    name: "🖼️ Réglage des images / Image controls"
+    singular_name: "Page images"
+    icon: image
+    disable_add: true
+    _enabled_editors:
+      - data
+      - source
+  new_posts_fr:
+    path: posts/fr
+    name: "✍️ Nouveaux articles FR"
+    singular_name: "Article FR"
+    icon: post_add
+    disable_add_folder: true
+    _enabled_editors:
+      - content
+      - source
+    schemas:
+      post:
+        path: .cloudcannon/schemas/new-post-fr.md
+        name: "Nouvel article FR"
+    add_options:
+      - name: "Nouvel article FR"
+        schema: post
+        editor: content
+
+  new_posts_en:
+    path: posts/en
+    name: "✍️ New articles EN"
+    singular_name: "Article EN"
+    icon: post_add
+    disable_add_folder: true
+    _enabled_editors:
+      - content
+      - source
+    schemas:
+      post:
+        path: .cloudcannon/schemas/new-post-en.md
+        name: "New article EN"
+    add_options:
+      - name: "New article EN"
+        schema: post
+        editor: content
+
+  pages_fr:
+    path: fr
+    glob:
+      - "*.html"
+      - "!blog-*.html"
+      - "!article.html"
+    name: "🇫🇷 Pages FR"
+    singular_name: "Page FR"
+    icon: language
+    disable_add: true
+    _enabled_editors:
+      - visual
+      - source
+
+  articles_fr:
+    path: fr
+    glob:
+      - "blog-*.html"
+    name: "📝 Articles FR"
+    singular_name: "Article FR"
+    icon: edit_note
+    disable_add_folder: true
+    _enabled_editors:
+      - visual
+      - source
+    new_preview_url: /fr/blog-jebel-imsfrane.html
+    disable_add: true
+
+  pages_en:
+    path: en
+    glob:
+      - "*.html"
+      - "!blog-*.html"
+      - "!article.html"
+    name: "🇬🇧 Pages EN"
+    singular_name: "Page EN"
+    icon: language
+    disable_add: true
+    _enabled_editors:
+      - visual
+      - source
+
+  articles_en:
+    path: en
+    glob:
+      - "blog-*.html"
+    name: "📝 Articles EN"
+    singular_name: "Article EN"
+    icon: edit_note
+    disable_add_folder: true
+    _enabled_editors:
+      - visual
+      - source
+    new_preview_url: /en/blog-jebel-imsfrane.html
+    disable_add: true
+
+collection_groups:
+  - heading: "🖼️ Images — toutes les pages"
+    collections:
+      - image_settings
+  - heading: "🇫🇷 Français"
+    collections:
+      - pages_fr
+      - articles_fr
+      - new_posts_fr
+  - heading: "🇬🇧 English"
+    collections:
+      - pages_en
+      - articles_en
+      - new_posts_en
+
+paths:
+  uploads: /images
+  static: /
+
+_editables:
+  text:
+    bold: true
+    italic: true
+    link: true
+  block:
+    format: p h2 h3 h4
+    bold: true
+    italic: true
+    link: true
+    bulletedlist: true
+    numberedlist: true
+  image:
+    expandable: true
+    paths:
+      uploads: /images
+      static: /
+
+# Edit the per-page JSON in Image controls: position_x/y = 0–100,
+# zoom = 100–200, fit = cover or contain. The source image is unchanged.
+_inputs:
+  position_x:
+    type: range
+    options:
+      min: 0
+      max: 100
+      step: 1
+  position_y:
+    type: range
+    options:
+      min: 0
+      max: 100
+      step: 1
+  zoom:
+    type: range
+    options:
+      min: 100
+      max: 200
+      step: 1
+  fit:
+    type: select
+    options:
+      values:
+        - cover
+        - contain
