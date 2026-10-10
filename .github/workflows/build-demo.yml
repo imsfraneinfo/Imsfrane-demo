@@ -2,7 +2,7 @@ name: Publish Imsfrane demo
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/build-demo.yml', 'rafting-v8.html', 'imsfrane_rafting_mobile_cadrage_corrige_v8*.html', 'images/rafting-new/**', 'quad-content-*.html', 'images/quad-new/**', 'images/IMG_*.webp', 'vtt-content-*.html', 'camping-content-*.html', 'randonnee-content-*.html', 'about-content-*.html', 'images/rando-*.webp', 'images/IMG_*.jpeg']
+    paths: ['.github/workflows/build-demo.yml', 'rafting-v8.html', 'imsfrane_rafting_mobile_cadrage_corrige_v8*.html', 'images/rafting-new/**', 'quad-content-*.html', 'images/quad-new/**', 'images/IMG_*.webp', 'vtt-content-*.html', 'camping-content-*.html', 'randonnee-content-*.html', 'about-content-*.html', 'remaining-pages-theme.css', 'images/rando-*.webp', 'images/IMG_*.jpeg']
   workflow_dispatch:
 permissions:
   contents: write
@@ -37,6 +37,18 @@ jobs:
           </style>"""
                   s=s.replace('</head>',css+'</head>',1)
               f.write_text(s,encoding='utf-8')
+          # Apply the new visual language to the remaining bilingual pages only.
+          # Preserve their original content, photography, booking forms, navigation and footer.
+          theme=Path('remaining-pages-theme.css').read_text(encoding='utf-8')
+          remaining=('hebergement','programme','booking','contact','memories','guide','store','blog')
+          for lang in ('fr','en'):
+              for page in remaining:
+                  target=root/lang/(page+'.html')
+                  if not target.is_file():
+                      raise RuntimeError('Missing demo page: '+str(target))
+                  original=target.read_text(encoding='utf-8')
+                  original=original.replace('</head>','<style id="imsfrane-remaining-theme">'+theme+'</style></head>',1)
+                  target.write_text(original,encoding='utf-8')
           # Copy uploaded VTT images from demo main to published site.
           import shutil
           vtt_images=['IMG_9763','IMG_8810','IMG_8792','IMG_7394','IMG_7410','IMG_2606','IMG_2634','IMG_2629','IMG_2604','IMG_2667']
