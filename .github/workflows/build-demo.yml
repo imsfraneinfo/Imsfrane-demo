@@ -84,7 +84,9 @@ jobs:
               original=original.replace('</head>',''.join(styles)+'</head>',1)
               target.write_text(original,encoding='utf-8')
           # Copy camping photographs when uploaded directly to demo images/.
-          for photo in Path('images').glob('*.jpeg'):
+          for photo in Path('images').iterdir():
+              if not photo.is_file() or photo.suffix.lower() not in ('.jpeg', '.jpg', '.png', '.webp'):
+                  continue
               shutil.copy2(photo,root/'images'/photo.name)
           # Quad pages: retain original navigation and footer; replace main only.
           for lang in ('fr','en'):
