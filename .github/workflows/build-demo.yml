@@ -88,7 +88,7 @@ jobs:
                       tag=re.sub(r'src="https://imsfrane.com/images/[^"]+"',
                                  'src="images/rafting-new/'+name+'"',tag,count=1)
                       html=html[:m.start()]+tag+html[m.end():]
-                            (root/'rafting-content.html').write_text(html,encoding='utf-8')
+              (root/'rafting-content.html').write_text(html,encoding='utf-8')
               translations={
               "Vivez": "Feel",
               "la": "the",
