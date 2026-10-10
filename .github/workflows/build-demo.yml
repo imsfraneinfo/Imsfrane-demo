@@ -37,6 +37,15 @@ jobs:
           </style>"""
                   s=s.replace('</head>',css+'</head>',1)
               f.write_text(s,encoding='utf-8')
+          # Copy uploaded VTT images from demo main to published site.
+          import shutil
+          vtt_images=['IMG_9763','IMG_8810','IMG_8792','IMG_7394','IMG_7410','IMG_2606','IMG_2634','IMG_2629','IMG_2604','IMG_2667']
+          (root/'images').mkdir(parents=True,exist_ok=True)
+          for name in vtt_images:
+              src=Path('images')/(name+'.webp')
+              if not src.is_file():
+                  raise RuntimeError('Missing VTT photo: '+str(src))
+              shutil.copy2(src,root/'images'/src.name)
           # VTT pages: keep original site header, navigation and footer.
           for lang in ('fr','en'):
               target=root/lang/'vtt.html'
