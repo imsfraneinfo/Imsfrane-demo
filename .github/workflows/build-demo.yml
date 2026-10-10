@@ -1,21 +1,46 @@
-name: Build Imsfrane demo
+name: Publish Imsfrane demo
 on:
   push:
-    paths:
-      - '.github/workflows/build-demo.yml'
+    branches: [main]
+    paths: ['.github/workflows/build-demo.yml']
   workflow_dispatch:
 permissions:
   contents: write
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          persist-credentials: true
-      - name: Copy original website
+      - name: Fetch original site and prepare demo
         run: |
-          git clone --depth 1 https://github.com/imsfraneinfo/imsfraneinfo.git /tmp/imsfrane-original
-          cp -a /tmp/imsfrane-original/. ./
-          rm -rf .git
-          echo "This workflow requires a different deployment method" 
+          git clone --depth 1 https://github.com/imsfraneinfo/imsfraneinfo.git /tmp/original
+          mkdir -p public
+          rsync -a --exclude=.git --exclude=.github --exclude=CNAME /tmp/original/ public/
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          root=Path('public')
+          for f in root.rglob('*.html'):
+              s=f.read_text(encoding='utf-8')
+              s=re.sub(r'(?i)(href|src|action|poster)=(["\'])/(?!/|Imsfrane-demo/)',r'\1=\2/Imsfrane-demo/',s)
+              s=s.replace('https://imsfrane.com/fr/', '/Imsfrane-demo/fr/').replace('https://imsfrane.com/en/', '/Imsfrane-demo/en/')
+              if f.as_posix() in ('public/fr/rafting.html','public/en/rafting.html'):
+                  css="""<style id="imsfrane-demo-rafting-mobile">
+          @media(max-width:650px){
+          .hero-media,.hero-media .shot.main{height:320px!important;min-height:320px!important}
+          .hero-media img,.route-visual img,.story-photos img,.gallery-grid img{width:100%!important;height:100%!important;object-fit:cover!important}
+          .hero-media img{object-position:50% 85%!important}
+          .route-visual{height:255px!important;overflow:hidden!important}
+          .route-visual img{object-position:50% 80%!important}
+          .gallery-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important}
+          }
+          </style>"""
+                  s=s.replace('</head>',css+'</head>',1)
+              f.write_text(s,encoding='utf-8')
+          (root/'.nojekyll').touch()
+          PY
+      - uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          publish_branch: gh-pages
