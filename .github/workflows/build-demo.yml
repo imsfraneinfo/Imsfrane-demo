@@ -2,7 +2,7 @@ name: Publish Imsfrane demo
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/build-demo.yml', 'rafting-v8.html', 'imsfrane_rafting_mobile_cadrage_corrige_v8*.html', 'images/rafting-new/**', 'quad-content-*.html', 'images/quad-new/**', 'images/IMG_*.webp']
+    paths: ['.github/workflows/build-demo.yml', 'rafting-v8.html', 'imsfrane_rafting_mobile_cadrage_corrige_v8*.html', 'images/rafting-new/**', 'quad-content-*.html', 'images/quad-new/**', 'images/IMG_*.webp', 'vtt-content-*.html']
   workflow_dispatch:
 permissions:
   contents: write
@@ -37,6 +37,26 @@ jobs:
           </style>"""
                   s=s.replace('</head>',css+'</head>',1)
               f.write_text(s,encoding='utf-8')
+          # VTT pages: keep original site header, navigation and footer.
+          for lang in ('fr','en'):
+              target=root/lang/'vtt.html'
+              source=Path('vtt-content-'+lang+'.html')
+              if not (target.exists() and source.exists()):
+                  continue
+              original=target.read_text(encoding='utf-8')
+              vtt=source.read_text(encoding='utf-8')
+              vtt_main=re.search(r'<main[^>]*>.*?</main>',vtt,re.S|re.I)
+              if not vtt_main:
+                  raise RuntimeError('Missing VTT content main')
+              original,n=re.subn(r'<main[^>]*>.*?</main>',lambda m:vtt_main.group(0),original,count=1,flags=re.S|re.I)
+              if n!=1:
+                  raise RuntimeError('Missing original VTT main')
+              vtt_styles=re.findall(r'<style[^>]*>.*?</style>',vtt,re.S|re.I)
+              original=original.replace('</head>',''.join(vtt_styles)+'</head>',1)
+              vtt_script=re.search(r'<script>function show[(]el[)].*?</script>',vtt,re.S|re.I)
+              if vtt_script:
+                  original=original.replace('</body>',vtt_script.group(0)+'</body>',1)
+              target.write_text(original,encoding='utf-8')
           # Quad pages: retain original navigation and footer; replace main only.
           for lang in ('fr','en'):
               target=root/lang/'quad.html'
