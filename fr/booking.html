@@ -122,6 +122,27 @@ main:is(.accommodation-page,.program-page,.booking-page,.contact-page,.memories-
 main:is(.accommodation-page,.program-page,.booking-page,.contact-page,.memories-page,.guide-page,.store-page,.ij-main) :is(a,button,input,select,textarea):focus-visible{outline:3px solid var(--demo-gold);outline-offset:3px}
 @media(min-width:760px){main:is(.accommodation-page,.program-page,.booking-page,.contact-page,.memories-page,.guide-page,.store-page,.ij-main) :is(.card,[class*="-card"],[class*="__card"]){box-shadow:0 10px 35px #153b3020}}
 @media(max-width:640px){main:is(.accommodation-page,.program-page,.booking-page,.contact-page,.memories-page,.guide-page,.store-page,.ij-main) h1{font-size:clamp(2.7rem,11vw,4.2rem)}main:is(.accommodation-page,.program-page,.booking-page,.contact-page,.memories-page,.guide-page,.store-page,.ij-main) h2{font-size:clamp(2rem,8vw,3rem)}}
+
+/* Redesigned editorial composition across all non-home content pages */
+main:is(.accommodation-page,.program-page,.booking-page,.contact-page,.memories-page,.guide-page,.store-page,.ij-main)>.demo-editorial-hero{position:relative;isolation:isolate;display:grid;grid-template-columns:1fr 1fr;align-items:stretch;min-height:430px;background:#0b2927;color:#fff;overflow:hidden}
+main .demo-editorial-hero .demo-editorial-copy{padding:clamp(38px,6vw,96px);display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:16px}
+main .demo-editorial-hero .demo-editorial-eyebrow{font-size:11px;letter-spacing:.22em;color:#dfc279;font-weight:800;text-transform:uppercase}
+main .demo-editorial-hero h1{font-family:'Cormorant Garamond',Georgia,serif!important;font-size:clamp(52px,6.5vw,94px)!important;line-height:1.02!important;color:#fff!important;margin:0!important}
+main .demo-editorial-hero p{color:#d5e1dc!important;max-width:490px;font-size:15px}
+main .demo-editorial-hero .demo-editorial-photo{position:relative;min-height:360px;background:#183b35}
+main .demo-editorial-hero .demo-editorial-photo img{position:absolute;inset:0;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center 55%}
+main .demo-editorial-hero .demo-editorial-link{display:inline-block;padding:12px 24px;background:#d4b568;color:#0a2a25!important;text-decoration:none;border-radius:5px;font-weight:800;font-size:12px}
+main .demo-editorial-hero+.demo-original-content{padding-top:0}
+main .demo-original-content>section:not(:first-child){scroll-margin-top:90px}
+main .demo-original-content>section{position:relative}
+main .demo-original-content>section:not([class*="hero"]){padding-top:clamp(50px,6vw,95px);padding-bottom:clamp(50px,6vw,95px)}
+main .demo-original-content>section:nth-child(even):not([class*="hero"]){background:#eff2eb}
+main .demo-original-content>section:nth-child(odd):not([class*="hero"]){background:#faf9f5}
+main .demo-original-content :is(.container,[class*="container"]){max-width:1160px}
+main .demo-original-content :is(h2,h3){color:#17372f}
+main .demo-original-content :is(.card,[class*="-card"],[class*="__card"]){transition:transform .25s ease,box-shadow .25s ease}
+main .demo-original-content :is(.card,[class*="-card"],[class*="__card"]):hover{transform:translateY(-3px)}
+@media(max-width:760px){main:is(.accommodation-page,.program-page,.booking-page,.contact-page,.memories-page,.guide-page,.store-page,.ij-main)>.demo-editorial-hero{grid-template-columns:1fr}main .demo-editorial-hero .demo-editorial-photo{grid-row:1;min-height:290px}main .demo-editorial-hero .demo-editorial-copy{padding:35px 22px 45px}main .demo-editorial-hero h1{font-size:clamp(46px,12vw,70px)!important}}
 </style></head><body class="page-booking" data-lang="fr" data-nav-active="booking.html">
 <nav aria-label="Navigation principale" class="main-navigation" id="mainNavigation" inert="">
 <div class="navigation-header"><strong class="editable" data-cms-text="booking-t2">Imsfrane Cathédrale</strong><button aria-label="Fermer le menu de navigation" class="navigation-close" id="navigationClose" type="button"><i class="fa-solid fa-xmark"></i></button></div>
