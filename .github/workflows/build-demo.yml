@@ -58,7 +58,12 @@ jobs:
             window.addEventListener('resize',resize);
           })();
           </script>'''
-                  original=re.sub(r'<main\\b[^>]*>[\\s\\S]*?</main>',lambda m:embedded,original,count=1,flags=re.I)
+                  begin=original.find('<main')
+                  opening_end=original.find('>',begin)+1
+                  finish=original.find('</main>',opening_end)+len('</main>')
+                  if begin < 0 or finish < len('</main>'):
+                      raise RuntimeError('Cannot find original rafting main')
+                  original=original[:begin]+embedded+original[finish:]
                   f.write_text(original,encoding='utf-8')
           (root/'.nojekyll').touch()
           PY
