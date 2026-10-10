@@ -41,7 +41,6 @@ jobs:
           approved=next(iter(sorted(Path('.').glob('imsfrane_rafting_mobile_cadrage_corrige_v8*.html'))), Path('rafting-v8.html'))
           if approved.exists():
               html=approved.read_text(encoding='utf-8')
-              html=re.sub(r'(src|href|poster)=(["\\'])(?:\\.\\./|\\./|/)*(images|css|js)/',lambda m: m.group(1)+'='+m.group(2)+'https://imsfrane.com/'+m.group(3)+'/',html)
               hide='<style>.header,.concept-bar,.season-strip,.progress,footer,.footer{display:none!important}body{padding-top:0!important;margin:0!important}.hero{margin-top:0!important}</style>'
               html=html.replace('</head>',hide+'</head>',1)
               (root/'rafting-content.html').write_text(html,encoding='utf-8')
