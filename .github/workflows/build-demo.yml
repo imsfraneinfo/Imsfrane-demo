@@ -2,7 +2,7 @@ name: Publish Imsfrane demo
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/build-demo.yml', 'rafting-v8.html', 'imsfrane_rafting_mobile_cadrage_corrige_v8*.html', 'images/rafting-new/**']
+    paths: ['.github/workflows/build-demo.yml', 'rafting-v8.html', 'imsfrane_rafting_mobile_cadrage_corrige_v8*.html', 'images/rafting-new/**', 'quad-content-*.html', 'images/quad-new/**']
   workflow_dispatch:
 permissions:
   contents: write
@@ -37,6 +37,33 @@ jobs:
           </style>"""
                   s=s.replace('</head>',css+'</head>',1)
               f.write_text(s,encoding='utf-8')
+          # Quad pages: retain original navigation and footer; replace main only.
+          for lang in ('fr','en'):
+              target=root/lang/'quad.html'
+              source=Path('quad-content-'+lang+'.html')
+              if not (target.exists() and source.exists()):
+                  continue
+              original=target.read_text(encoding='utf-8')
+              quad=source.read_text(encoding='utf-8')
+              quad_main=re.search(r'<main\\b[^>]*>.*?</main>',quad,re.S|re.I)
+              if not quad_main:
+                  continue
+              original=re.sub(r'<main\\b[^>]*>.*?</main>',quad_main.group(0),original,count=1,flags=re.S|re.I)
+              quad_style=re.search(r'<style>.*?</style>',quad,re.S|re.I)
+              if quad_style:
+                  original=original.replace('</head>',quad_style.group(0)+'</head>',1)
+              quad_script=re.search(r'<script>function show\\(el\\).*?</script>',quad,re.S|re.I)
+              if quad_script:
+                  original=original.replace('</body>',quad_script.group(0)+'</body>',1)
+              target.write_text(original,encoding='utf-8')
+          # Publish new quad images when added to demo images/quad-new.
+          quad_source=Path('images/quad-new')
+          if quad_source.is_dir():
+              import shutil
+              quad_dest=root/'images/quad-new'
+              quad_dest.mkdir(parents=True,exist_ok=True)
+              for photo in quad_source.glob('*.webp'):
+                  shutil.copy2(photo,quad_dest/photo.name)
           # Preserve the original site header/menu/footer. Insert only V8 content.
           approved=next(iter(sorted(Path('.').glob('imsfrane_rafting_mobile_cadrage_corrige_v8*.html'))), Path('rafting-v8.html'))
           if approved.exists():
