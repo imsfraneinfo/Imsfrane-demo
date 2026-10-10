@@ -2,7 +2,7 @@ name: Publish Imsfrane demo
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/build-demo.yml', 'rafting-v8.html', 'imsfrane_rafting_mobile_cadrage_corrige_v8*.html', 'images/rafting-new/**', 'quad-content-*.html', 'images/quad-new/**']
+    paths: ['.github/workflows/build-demo.yml', 'rafting-v8.html', 'imsfrane_rafting_mobile_cadrage_corrige_v8*.html', 'images/rafting-new/**', 'quad-content-*.html', 'images/quad-new/**', 'images/IMG_*.webp']
   workflow_dispatch:
 permissions:
   contents: write
@@ -58,11 +58,15 @@ jobs:
               target.write_text(original,encoding='utf-8')
           # Publish new quad images when added to demo images/quad-new.
           quad_source=Path('images/quad-new')
-          if quad_source.is_dir():
-              import shutil
-              quad_dest=root/'images/quad-new'
-              quad_dest.mkdir(parents=True,exist_ok=True)
-              for photo in quad_source.glob('*.webp'):
+          import shutil
+          quad_dest=root/'images/quad-new'
+          quad_dest.mkdir(parents=True,exist_ok=True)
+          quad_names=['IMG_0284','IMG_0270','IMG_0310','IMG_0162','IMG_0179','IMG_9182','IMG_0026','IMG_0037','IMG_0021','IMG_0017','IMG_9087','IMG_9939']
+          for name in quad_names:
+              photo=quad_source/(name+'.webp')
+              if not photo.is_file():
+                  photo=Path('images')/(name+'.webp')
+              if photo.is_file():
                   shutil.copy2(photo,quad_dest/photo.name)
           # Preserve the original site header/menu/footer. Insert only V8 content.
           approved=next(iter(sorted(Path('.').glob('imsfrane_rafting_mobile_cadrage_corrige_v8*.html'))), Path('rafting-v8.html'))
