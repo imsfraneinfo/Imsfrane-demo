@@ -77,8 +77,9 @@ jobs:
                       'IMG_7886.webp','IMG_9066.webp','IMG_1880.webp',
                       'IMG_0305.webp','IMG_2060.webp'
                   ]
-                  image_tags=list(re.finditer(r'<img\\b[^>]*\\bsrc="https://imsfrane.com/images/[^"]+"[^>]*>',html))
-                  # Main visual, routes, editorial sections, then gallery.
+                  image_tags=list(re.finditer(r'<img\\b[^>]*>',html))
+                  # Replace image URLs in each actual img tag (regardless of attribute order).
+                  image_tags=[m for m in image_tags if re.search(r'src="https://imsfrane.com/images/[^"]+"',m.group(0))]
                   for i,m in reversed(list(enumerate(image_tags))):
                       name=image_sequence[i % len(image_sequence)]
                       if not (new_photos/name).is_file():
@@ -87,7 +88,7 @@ jobs:
                       tag=re.sub(r'src="https://imsfrane.com/images/[^"]+"',
                                  'src="images/rafting-new/'+name+'"',tag,count=1)
                       html=html[:m.start()]+tag+html[m.end():]
-              (root/'rafting-content.html').write_text(html,encoding='utf-8')
+                            (root/'rafting-content.html').write_text(html,encoding='utf-8')
               translations={
               "Vivez": "Feel",
               "la": "the",
