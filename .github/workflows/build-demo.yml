@@ -77,7 +77,7 @@ jobs:
                       'IMG_7886.webp','IMG_9066.webp','IMG_1880.webp',
                       'IMG_0305.webp','IMG_2060.webp'
                   ]
-                  image_tags=list(re.finditer(r'<img\\b[^>]*>',html))
+                  image_tags=list(re.finditer(r'<img\b[^>]*>',html))
                   # Replace image URLs in each actual img tag (regardless of attribute order).
                   image_tags=[m for m in image_tags if re.search(r'src="https://imsfrane.com/images/[^"]+"',m.group(0))]
                   for i,m in reversed(list(enumerate(image_tags))):
