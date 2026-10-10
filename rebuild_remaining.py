@@ -4,7 +4,12 @@ import re
 import html
 
 PAGES=('hebergement','programme','booking','contact','memories','guide','store','blog')
-def build_page(path):
+def image_key(src):
+    # Treat responsive variants of one photograph as the same image.
+    name=src.split('/')[-1].split('?')[0].lower()
+    return re.sub(r'-(?:480|680|768|800|1024|1200)(?=\\.)', '', name)
+
+def build_page(path, used_heroes):
     source=path.read_text(encoding='utf-8')
     soup=BeautifulSoup(source,'html.parser')
     main=soup.find('main')
@@ -22,7 +27,12 @@ def build_page(path):
             all_images.append(src)
     title_node=main.find('h1')
     title=title_node.get_text(' ',strip=True) if title_node else path.stem.title()
-    hero_photo=all_images[0] if all_images else '../images/25.webp'
+    # Prefer the page's own original photograph, not an image already used
+    # as the hero of another page. Never inject an unrelated fallback photo.
+    hero_photo=next((im for im in all_images if image_key(im) not in used_heroes), all_images[0] if all_images else '')
+    if hero_photo:
+        used_heroes.add(image_key(hero_photo))
+    used_images={image_key(hero_photo)} if hero_photo else set()
     lang=path.parent.name
     explore='Découvrir' if lang=='fr' else 'Explore'
     eyebrow='Imsfrane Cathédrale · Haut Atlas'
@@ -64,8 +74,16 @@ def build_page(path):
         # Section is rebuilt from actual source copy, images and original links.
         if not (name or paragraphs or images or links or forms or details):
             continue
-        photo=images[0] if images else ''
-        more=images[1:9]
+        # A photograph appears at most once per page, including its hero.
+        # Preserve every distinct original image, including full galleries.
+        unique=[]
+        for img in images:
+            key=image_key(img)
+            if key not in used_images:
+                used_images.add(key)
+                unique.append(img)
+        photo=unique[0] if unique else ''
+        more=unique[1:]
         media=('<div class="demo-rebuild-photo"><img loading="lazy" src="'+html.escape(photo,quote=True)+'" alt="'+html.escape(name or title)+'"></div>') if photo else ''
         gallery=('<div class="demo-rebuild-gallery">'+''.join('<img loading="lazy" src="'+html.escape(i,quote=True)+'" alt="'+html.escape(name or title)+'">' for i in more)+'</div>') if more else ''
         buttons='<div class="demo-rebuild-actions">'+''.join('<a href="'+html.escape(h,quote=True)+'">'+html.escape(t)+' ↗</a>' for t,h in links[:8])+'</div>' if links else ''
@@ -79,7 +97,8 @@ def build_page(path):
 
 def run(root):
     for lang in ('fr','en'):
+        used_heroes=set()
         for page in PAGES:
-            build_page(root/lang/(page+'.html'))
+            build_page(root/lang/(page+'.html'), used_heroes)
 if __name__=='__main__':
     run(Path('public'))
