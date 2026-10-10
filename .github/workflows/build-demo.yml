@@ -2,7 +2,7 @@ name: Publish Imsfrane demo
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/build-demo.yml', 'rafting-v8.html', 'imsfrane_rafting_mobile_cadrage_corrige_v8*.html', 'images/rafting-new/**', 'quad-content-*.html', 'images/quad-new/**', 'images/IMG_*.webp', 'vtt-content-*.html']
+    paths: ['.github/workflows/build-demo.yml', 'rafting-v8.html', 'imsfrane_rafting_mobile_cadrage_corrige_v8*.html', 'images/rafting-new/**', 'quad-content-*.html', 'images/quad-new/**', 'images/IMG_*.webp', 'vtt-content-*.html', 'camping-content-*.html', 'images/IMG_*.jpeg']
   workflow_dispatch:
 permissions:
   contents: write
@@ -66,6 +66,26 @@ jobs:
               if vtt_script:
                   original=original.replace('</body>',vtt_script.group(0)+'</body>',1)
               target.write_text(original,encoding='utf-8')
+          # Camping pages: preserve site navigation/footer and insert bilingual camping experience.
+          for lang in ('fr','en'):
+              target=root/lang/'camping.html'
+              source=Path('camping-content-'+lang+'.html')
+              if not (target.exists() and source.exists()):
+                  raise RuntimeError('Missing camping demo source or target')
+              original=target.read_text(encoding='utf-8')
+              camp=source.read_text(encoding='utf-8')
+              camp_main=re.search(r'<main[^>]*>.*?</main>',camp,re.S|re.I)
+              if not camp_main:
+                  raise RuntimeError('Missing camping main')
+              original,n=re.subn(r'<main[^>]*>.*?</main>',lambda m:camp_main.group(0),original,count=1,flags=re.S|re.I)
+              if n!=1:
+                  raise RuntimeError('Missing original camping main')
+              styles=re.findall(r'<style[^>]*>.*?</style>',camp,re.S|re.I)
+              original=original.replace('</head>',''.join(styles)+'</head>',1)
+              target.write_text(original,encoding='utf-8')
+          # Copy camping photographs when uploaded directly to demo images/.
+          for photo in Path('images').glob('*.jpeg'):
+              shutil.copy2(photo,root/'images'/photo.name)
           # Quad pages: retain original navigation and footer; replace main only.
           for lang in ('fr','en'):
               target=root/lang/'quad.html'
