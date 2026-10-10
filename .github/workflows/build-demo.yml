@@ -48,14 +48,14 @@ jobs:
                       raise RuntimeError('Missing demo page: '+str(target))
                   original=target.read_text(encoding='utf-8')
                   original=original.replace('</head>','<style id="imsfrane-remaining-theme">'+theme+'</style></head>',1)
-                  main_match=re.search(r'<main\\b[^>]*>(.*?)</main>',original,re.S|re.I)
+                  main_match=re.search('<main[^>]*>(.*?)</main>',original,re.S|re.I)
                   if not main_match:
                       raise RuntimeError('Missing main in '+str(target))
                   body=main_match.group(1)
-                  first_image=re.search(r'<img\\b[^>]*\\bsrc=["\\']([^"\\']+)["\\'][^>]*>',body,re.I)
-                  title_match=re.search(r'<h1\\b[^>]*>(.*?)</h1>',body,re.S|re.I)
+                  first_image=re.search("<img[^>]+src=[\u0027\"]([^\u0027\"]+)[\u0027\"][^>]*>",body,re.I)
+                  title_match=re.search('<h1[^>]*>(.*?)</h1>',body,re.S|re.I)
                   title=re.sub(r'<[^>]+>',' ',title_match.group(1)).strip() if title_match else page.title()
-                  title=re.sub(r'\\s+',' ',title)
+                  title=re.sub(' +',' ',title)
                   import html as html_lib
                   title=html_lib.escape(html_lib.unescape(title))
                   image=first_image.group(1) if first_image else '../images/25.webp'
