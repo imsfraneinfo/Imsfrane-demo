@@ -45,14 +45,14 @@ jobs:
                   continue
               original=target.read_text(encoding='utf-8')
               quad=source.read_text(encoding='utf-8')
-              quad_main=re.search(r'<main\\b[^>]*>.*?</main>',quad,re.S|re.I)
+              quad_main=re.search(r'<main[^>]*>.*?</main>',quad,re.S|re.I)
               if not quad_main:
                   continue
-              original=re.sub(r'<main\\b[^>]*>.*?</main>',quad_main.group(0),original,count=1,flags=re.S|re.I)
+              original=re.sub(r'<main[^>]*>.*?</main>',quad_main.group(0),original,count=1,flags=re.S|re.I)
               quad_style=re.search(r'<style>.*?</style>',quad,re.S|re.I)
               if quad_style:
                   original=original.replace('</head>',quad_style.group(0)+'</head>',1)
-              quad_script=re.search(r'<script>function show\\(el\\).*?</script>',quad,re.S|re.I)
+              quad_script=re.search(r'<script>function show[(]el[)].*?</script>',quad,re.S|re.I)
               if quad_script:
                   original=original.replace('</body>',quad_script.group(0)+'</body>',1)
               target.write_text(original,encoding='utf-8')
