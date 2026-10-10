@@ -48,6 +48,25 @@ jobs:
                       raise RuntimeError('Missing demo page: '+str(target))
                   original=target.read_text(encoding='utf-8')
                   original=original.replace('</head>','<style id="imsfrane-remaining-theme">'+theme+'</style></head>',1)
+                  main_match=re.search(r'<main\\b[^>]*>(.*?)</main>',original,re.S|re.I)
+                  if not main_match:
+                      raise RuntimeError('Missing main in '+str(target))
+                  body=main_match.group(1)
+                  first_image=re.search(r'<img\\b[^>]*\\bsrc=["\\']([^"\\']+)["\\'][^>]*>',body,re.I)
+                  title_match=re.search(r'<h1\\b[^>]*>(.*?)</h1>',body,re.S|re.I)
+                  title=re.sub(r'<[^>]+>',' ',title_match.group(1)).strip() if title_match else page.title()
+                  title=re.sub(r'\\s+',' ',title)
+                  import html as html_lib
+                  title=html_lib.escape(html_lib.unescape(title))
+                  image=first_image.group(1) if first_image else '../images/25.webp'
+                  eyebrow='Imsfrane Cathédrale · Haut Atlas'
+                  action='Découvrir' if lang=='fr' else 'Explore'
+                  hero=('<section class="demo-editorial-hero" aria-label="'+html_lib.escape(page)+'">'
+                        '<div class="demo-editorial-copy"><span class="demo-editorial-eyebrow">'+eyebrow+'</span>'
+                        '<h1>'+title+'</h1><a class="demo-editorial-link" href="#demo-page-details">'+action+' ↓</a></div>'
+                        '<div class="demo-editorial-photo"><img src="'+html_lib.escape(image,quote=True)+'" alt="'+title+'" loading="eager"></div></section>')
+                  newmain=main_match.group(0).replace(body,hero+'<div class="demo-original-content" id="demo-page-details">'+body+'</div>',1)
+                  original=original[:main_match.start()]+newmain+original[main_match.end():]
                   target.write_text(original,encoding='utf-8')
           # Copy uploaded VTT images from demo main to published site.
           import shutil
