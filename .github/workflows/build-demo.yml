@@ -63,7 +63,7 @@ jobs:
               html=html.replace('</head>',hide+desktop_css+'</head>',1)
               # Use the new rafting photo collection whenever uploaded to this demo repo.
               # Keep existing live-site photos as a fallback until the collection is present.
-              new_photos=Path('images/rafting-new')
+              new_photos=Path('images')
               if new_photos.is_dir():
                   import shutil
                   target=root/'images/rafting-new'
