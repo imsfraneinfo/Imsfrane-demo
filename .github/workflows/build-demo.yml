@@ -85,7 +85,7 @@ jobs:
                           continue
                       tag=m.group(0)
                       tag=re.sub(r'src="https://imsfrane.com/images/[^"]+"',
-                                 'src="../images/rafting-new/'+name+'"',tag,count=1)
+                                 'src="images/rafting-new/'+name+'"',tag,count=1)
                       html=html[:m.start()]+tag+html[m.end():]
               (root/'rafting-content.html').write_text(html,encoding='utf-8')
               translations={
