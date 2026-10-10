@@ -2,7 +2,7 @@ name: Publish Imsfrane demo
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/build-demo.yml', 'rafting-v8.html', 'imsfrane_rafting_mobile_cadrage_corrige_v8*.html']
+    paths: ['.github/workflows/build-demo.yml', 'rafting-v8.html', 'imsfrane_rafting_mobile_cadrage_corrige_v8*.html', 'images/rafting-new/**']
   workflow_dispatch:
 permissions:
   contents: write
@@ -61,6 +61,32 @@ jobs:
               }
               </style>"""
               html=html.replace('</head>',hide+desktop_css+'</head>',1)
+              # Use the new rafting photo collection whenever uploaded to this demo repo.
+              # Keep existing live-site photos as a fallback until the collection is present.
+              new_photos=Path('images/rafting-new')
+              if new_photos.is_dir():
+                  import shutil
+                  target=root/'images/rafting-new'
+                  target.mkdir(parents=True,exist_ok=True)
+                  for photo in new_photos.glob('*.webp'):
+                      shutil.copy2(photo,target/photo.name)
+                  image_sequence=[
+                      'IMG_9296.webp','IMG_0296.webp','IMG_2012.webp',
+                      'IMG_9129.webp','IMG_2089.webp','IMG_1893.webp',
+                      'IMG_2101.webp','IMG_6626.webp','IMG_7076.webp',
+                      'IMG_7886.webp','IMG_9066.webp','IMG_1880.webp',
+                      'IMG_0305.webp','IMG_2060.webp'
+                  ]
+                  image_tags=list(re.finditer(r'<img\\b[^>]*\\bsrc="https://imsfrane.com/images/[^"]+"[^>]*>',html))
+                  # Main visual, routes, editorial sections, then gallery.
+                  for i,m in reversed(list(enumerate(image_tags))):
+                      name=image_sequence[i % len(image_sequence)]
+                      if not (new_photos/name).is_file():
+                          continue
+                      tag=m.group(0)
+                      tag=re.sub(r'src="https://imsfrane.com/images/[^"]+"',
+                                 'src="../images/rafting-new/'+name+'"',tag,count=1)
+                      html=html[:m.start()]+tag+html[m.end():]
               (root/'rafting-content.html').write_text(html,encoding='utf-8')
               translations={
               "Vivez": "Feel",
