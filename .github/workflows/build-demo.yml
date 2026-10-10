@@ -101,10 +101,10 @@ jobs:
                           name=gallery_names[j]
                           tag=re.sub(r'src="[^"]+"','src="images/rafting-new/'+name+'"',match.group(0))
                           gallery_html=gallery_html[:match.start()]+tag+gallery_html[match.end():]
-                      extra_names=['IMG_9296.webp','IMG_0296.webp','IMG_2012.webp','IMG_9129.webp','IMG_2089.webp','IMG_1893.webp']
+                      extra_names=['IMG_9296.webp','IMG_0296.webp','IMG_2012.webp','IMG_9129.webp','IMG_2089.webp','IMG_1893.webp','IMG_9066.webp']
                       extra=''.join('<button aria-label="Agrandir la photo de rafting '+str(9+j)+'" data-image="'+str(8+j)+'" type="button"><img alt="Rafting Imsfrane — photo '+str(9+j)+'" loading="lazy" src="images/rafting-new/'+name+'"/></button>' for j,name in enumerate(extra_names))
                       html=html[:gallery_start]+gallery_html+extra+html[gallery_end:]
-                            (root/'rafting-content.html').write_text(html,encoding='utf-8')
+              (root/'rafting-content.html').write_text(html,encoding='utf-8')
               translations={
               "Vivez": "Feel",
               "la": "the",
