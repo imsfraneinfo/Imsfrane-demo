@@ -2,7 +2,7 @@ name: Publish Imsfrane demo
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/build-demo.yml', 'rafting-v8.html', 'imsfrane_rafting_mobile_cadrage_corrige_v8*.html', 'images/rafting-new/**', 'quad-content-*.html', 'images/quad-new/**', 'images/IMG_*.webp', 'vtt-content-*.html', 'camping-content-*.html', 'images/IMG_*.jpeg']
+    paths: ['.github/workflows/build-demo.yml', 'rafting-v8.html', 'imsfrane_rafting_mobile_cadrage_corrige_v8*.html', 'images/rafting-new/**', 'quad-content-*.html', 'images/quad-new/**', 'images/IMG_*.webp', 'vtt-content-*.html', 'camping-content-*.html', 'randonnee-content-*.html', 'images/rando-*.webp', 'images/IMG_*.jpeg']
   workflow_dispatch:
 permissions:
   contents: write
@@ -66,6 +66,31 @@ jobs:
               if vtt_script:
                   original=original.replace('</body>',vtt_script.group(0)+'</body>',1)
               target.write_text(original,encoding='utf-8')
+          # Randonnée pages: preserve original site header, navigation and footer.
+          for lang in ('fr','en'):
+              target=root/lang/'randonnee.html'
+              source=Path('randonnee-content-'+lang+'.html')
+              if not (target.exists() and source.exists()):
+                  raise RuntimeError('Missing randonnée demo source or target')
+              original=target.read_text(encoding='utf-8')
+              content=source.read_text(encoding='utf-8')
+              main=re.search(r'<main[^>]*>.*?</main>',content,re.S|re.I)
+              if not main:
+                  raise RuntimeError('Missing randonnée content main')
+              original,n=re.subn(r'<main[^>]*>.*?</main>',lambda m:main.group(0),original,count=1,flags=re.S|re.I)
+              if n!=1:
+                  raise RuntimeError('Missing original randonnée main')
+              styles=re.findall(r'<style[^>]*>.*?</style>',content,re.S|re.I)
+              original=original.replace('</head>',''.join(styles)+'</head>',1)
+              script=re.search(r'<script>function randoShow[(]el[)].*?</script>',content,re.S|re.I)
+              if script:
+                  original=original.replace('</body>',script.group(0)+'</body>',1)
+              target.write_text(original,encoding='utf-8')
+          for name in ['9916','6167','7432','4507','2855','2878','7447','7453','6269','6274','7634','7660','4503']:
+              photo=Path('images')/('rando-IMG_'+name+'.webp')
+              if not photo.is_file():
+                  raise RuntimeError('Missing randonnée photo: '+str(photo))
+              shutil.copy2(photo,root/'images'/photo.name)
           # Camping pages: preserve site navigation/footer and insert bilingual camping experience.
           for lang in ('fr','en'):
               target=root/lang/'camping.html'
