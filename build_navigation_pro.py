@@ -1,7 +1,7 @@
-"""Deploy the approved Triplan-inspired navigation on all Demo FR/EN pages.
+"""Deploy the approved Triplan-inspired navigation on all four Demo languages.
 
 Never edit the official GitHub repo, rewrite images/logos, or replace page main content.
-Only HTML in public/fr and public/en is patched during the Demo build.
+Only HTML in public/fr, public/en, public/ar and public/es is patched during the Demo build.
 """
 from __future__ import annotations
 
@@ -52,6 +52,28 @@ DICT = {
         "quad": "Quad biking", "stay": "Accommodation",
         "menu_open": "Open menu", "menu_close": "Close menu",
         "nav": "Imsfrane Cathédrale site menu",
+    },
+    "ar": {
+        "home": "الرئيسية", "activity": "الأنشطة", "route": "البرامج",
+        "booking": "طلب حجز", "book": "احجز رحلتك", "gallery": "الصور والذكريات",
+        "guide": "دليل الزيارة", "about": "من نحن؟", "blog": "المدونة",
+        "shop": "المتجر", "contact": "اتصل بنا", "heading": "اكتشف مسفران",
+        "services": "تجاربنا", "prepare": "خطّط لرحلتك",
+        "more": "معلومات إضافية", "hike": "المشي الجبلي", "vtt": "الدراجات الجبلية",
+        "quad": "جولات الكواد", "stay": "الإقامة",
+        "menu_open": "افتح القائمة", "menu_close": "أغلق القائمة",
+        "nav": "قائمة موقع مسفران كاتدرال",
+    },
+    "es": {
+        "home": "Inicio", "activity": "Actividades", "route": "Programas",
+        "booking": "Reservas", "book": "Reservar", "gallery": "Galería y recuerdos",
+        "guide": "Guía práctica", "about": "Quiénes somos", "blog": "Blog",
+        "shop": "Tienda", "contact": "Contacto", "heading": "DESCUBRE IMSFRANE",
+        "services": "NUESTROS SERVICIOS", "prepare": "PREPARA TU VIAJE",
+        "more": "MÁS INFORMACIÓN", "hike": "Senderismo", "vtt": "Bicicleta de montaña",
+        "quad": "Rutas en quad", "stay": "Alojamiento",
+        "menu_open": "Abrir menú", "menu_close": "Cerrar menú",
+        "nav": "Menú de Imsfrane Cathédrale",
     },
 }
 
@@ -104,7 +126,7 @@ def menu_link(filename, key, symbol, lang, current_file, sub=False):
     css = "atnav-submenu-link" if sub else "atnav-item"
     return f'<a class="{css}" href="{clean(filename)}"{current}>{ico}<span>{clean(label)}</span></a>'
 
-def nav(lang, current_file, alt_name, logo_prefix):
+def nav(lang, current_file, root, logo_prefix):
     t = DICT[lang]
     opposite = "en" if lang == "fr" else "fr"
     active = "true" if current_file in {p[0] for p in ACTIVITIES} else "false"
@@ -126,11 +148,15 @@ def nav(lang, current_file, alt_name, logo_prefix):
         +'</div>'
     )
     langs = '<div class="atnav-languages" aria-label="Language">'
-    for code in ("fr","en"):
-        fname = current_file if code == lang else alt_name
-        # Relative to a /fr/ or /en/ page.
-        href = "../"+code+"/"+fname
-        langs += '<a href="'+clean(href)+'" lang="'+code+'"'+(' aria-current="page"' if lang == code else '')+'>'+code.upper()+'</a>'
+    for code in ("fr","en","ar","es"):
+        # Use exactly matching translated URL when available; otherwise go to
+        # that language's editorial blog or homepage, never invent a missing page.
+        target_file = current_file if (root/code/current_file).is_file() else ("blog.html" if current_file.startswith("blog") else "index.html")
+        if not (root/code/target_file).is_file():
+            raise RuntimeError("Language menu target missing: "+code+"/"+target_file)
+        href = "../"+code+"/"+target_file
+        label = "العربية" if code == "ar" else code.upper()
+        langs += '<a href="'+clean(href)+'" lang="'+code+'"'+(' aria-current="page"' if lang == code else '')+'>'+label+'</a>'
     langs += '</div>'
     return (
       '<div class="atnav-backdrop" id="atnavBackdrop" aria-hidden="true"></div>'
@@ -187,9 +213,8 @@ def patch(path, lang, root):
     if not before_main and path.name not in {"article.html"}:
         raise RuntimeError(f"Missing main content in {path}")
     current=path.name
-    opp="en" if lang=="fr" else "fr"
-    alt_name=current if (root/opp/current).is_file() else "index.html"
-    # Existing pages and article pages are in /fr/ or /en/ (one directory deep).
+    # Every language lives one folder beneath public/. Cross-language targets
+    # are checked before rendering; no locale is linked to a missing page.
     logo_prefix="../"
     old_brand_logos=re.findall(r'<img\b[^>]*\bsrc="\.\./images/logo-104\.webp"[^>]*>',source,flags=re.I)
     header_regex=r'<header\b[^>]*\bid="siteHeader"[^>]*>[\s\S]*?</header>'
@@ -206,7 +231,7 @@ def patch(path, lang, root):
         if actions not in new_header:
             raise RuntimeError(f"Header actions missing: {path}")
         new_header=new_header.replace(actions,desktop_nav(lang,current)+actions,1)
-        source=source[:match.start()]+new_header+sprite()+nav(lang,current,alt_name,logo_prefix)+source[match.end():]
+        source=source[:match.start()]+new_header+sprite()+nav(lang,current,root,logo_prefix)+source[match.end():]
     else:
         # Standalone editorial articles have no site-wide header; supply a compact
         # branded header without modifying their original article or footer.
@@ -222,6 +247,11 @@ def patch(path, lang, root):
         source=source[:class_body.start()]+new_body+source[class_body.end():]
     else:
         source=re.sub(r'<body\b', '<body class="atnav-ready"',source,count=1,flags=re.I)
+    # Add search-engine alternates only where corresponding translations exist.
+    for code in ("ar","es"):
+        target=root/code/current
+        if target.is_file() and not re.search(r'<link[^>]*hreflang="'+code+r'"',source,flags=re.I):
+            source=source.replace('</head>','<link rel="alternate" hreflang="'+code+'" href="https://imsfraneinfo.github.io/Imsfrane-demo/'+code+'/'+current+'"></head>',1)
     source=source.replace('</head>','<link rel="stylesheet" href="../navigation-pro.css"></head>',1)
     source=source.replace('</body>','<script defer src="../navigation-pro.js"></script></body>',1)
     # Full content preservation check: the exact text, markup and internal structure
@@ -240,7 +270,7 @@ def patch(path, lang, root):
 
 def build(root: Path):
     counts={}
-    for lang in ("fr","en"):
+    for lang in ("fr","en","ar","es"):
         folder=root/lang
         pages=sorted(folder.glob("*.html"))
         if not pages:
