@@ -121,3 +121,41 @@ html[lang="ar"] .ij-content :is(h2,h3) {
   html[lang="ar"] :is(button,.hp-button,.header-book-button) {line-height:1.6}
   html[lang="ar"] .atnav-submenu a {font-size:16px;line-height:1.7}
 }
+
+
+/* Final cascade correction: earlier home-pro.css had an !important
+   Cairo rule specifically on .hp-home .hp-hero h1. Match that selector
+   AFTER home-pro.css so Alexandria truly renders, not the old Cairo. */
+html[lang="ar"] .hp-home .hp-hero h1,
+html[lang="ar"] .hp-home .hp-heading h2,
+html[lang="ar"] .hp-home .hp-hero h1 em,
+html[lang="ar"] .hp-home .hp-activity-card h3,
+html[lang="ar"] .hp-home .hp-trust-item h3 {
+  font-family:var(--ar-display)!important;
+  font-style:normal!important;
+  letter-spacing:0!important;
+  font-weight:800!important;
+}
+html[lang="ar"] .hp-home .hp-hero h1 span {
+  font-family:var(--ar-text)!important;
+  letter-spacing:0!important;
+  font-weight:600!important;
+  line-height:1.8!important;
+}
+/* Page-specific title rules can be unusually specific in the original
+   templates. Apply the same Arabic heading typeface to those titles. */
+html[lang="ar"] #imsfrane-booking .bp-hero h1,
+html[lang="ar"] #imsfrane-rafting :is(h1,h2,h3),
+html[lang="ar"] .camp-page :is(h1,h2,h3),
+html[lang="ar"] .journal-page :is(h1,h2,h3),
+html[lang="ar"] .gp-main :is(h1,h2,h3),
+html[lang="ar"] .aboutx :is(h1,h2,h3),
+html[lang="ar"] .sp-main :is(h1,h2,h3) {
+  font-family:var(--ar-display)!important;
+  letter-spacing:0!important;
+}
+/* Brand text is still Latin, and mixed-script numerals stay readable. */
+html[lang="ar"] :is(.hp-home,.bp-main,.gp-main,.camp-page,.journal-page)
+  :is(p,li,small,summary,blockquote) {
+  font-family:var(--ar-text)!important;
+}
