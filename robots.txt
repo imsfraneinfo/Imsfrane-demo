@@ -1,6 +1,1 @@
-User-agent: *
-Allow: /
-Disallow: /404.html
-
-Sitemap: https://imsfrane.com/sitemap.xml
-Disallow: /admin/
+User-agent: *\nAllow: /\nDisallow: /Imsfrane-demo/admin/\n\nSitemap: https://imsfraneinfo.github.io/Imsfrane-demo/sitemap.xml\n
