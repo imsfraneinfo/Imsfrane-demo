@@ -307,7 +307,7 @@ def publish(root):
         if updated.count('class="hp-activity-card')!=14:
             raise RuntimeError("All 14 main-site activities were not generated")
         if updated.count('data-slide="')!=5:raise RuntimeError("Five original homepage slider images missing")
-        rendered_main=re.search(r'<main\\b[^>]*>[\\s\\S]*?</main>',updated,flags=re.I).group(0)
+        rendered_main=re.search(r'<main\b[^>]*>[\s\S]*?</main>',updated,flags=re.I).group(0)
         if 'class="hp-facts"' in rendered_main or 'class="hp-about hp-container"' in rendered_main:
             raise RuntimeError("Removed facts/about sections reappeared in homepage")
         if updated.count('class="hp-google-reviews"')!=1:raise RuntimeError("Google Reviews directly under hero missing")
