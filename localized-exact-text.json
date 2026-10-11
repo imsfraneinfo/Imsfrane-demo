@@ -1277,6 +1277,22 @@
     "Vérification des niveaux d’eau et de la météo": {
       "ar": "التحقق من صبيب المياه والطقس",
       "es": "Comprobación del caudal y del tiempo"
+    },
+    "12 à 50 km": {
+      "ar": "من 12 إلى 50 كلم",
+      "es": "De 12 a 50 km"
+    },
+    "L’Atlas vous attend.": {
+      "ar": "الأطلس في انتظارك.",
+      "es": "El Atlas te espera."
+    },
+    "Parcours": {
+      "ar": "المسار",
+      "es": "Recorrido"
+    },
+    "Photos de rafting à Imsfrane": {
+      "ar": "صور التجديف في مسفران",
+      "es": "Fotos de rafting en Imsfrane"
     }
   },
   "vtt": {
