@@ -262,6 +262,39 @@ def build(root:Path):
                     hero.append(PAGES[base][lang]["title"])
                 lead=main.select_one("p")
                 if lead and lead.find_parent("main"):set_text(lead,PAGES[base][lang]["lead"])
+            if base=="booking":
+                # Keep the SAME original calculator, prices, choice rules and JS.
+                # Supply accurate locale labels to the original JSON-backed summary
+                # so selected offers don't turn into undefined in AR or ES.
+                choices=src.select_one("script#bpCatalog")
+                if choices:
+                    try:
+                        catalog=json.loads(choices.string or choices.get_text())
+                    except ValueError as exc:
+                        raise RuntimeError("Cannot parse original booking price catalog") from exc
+                    for collection in ("offers","requestOptions"):
+                        for item in catalog.get(collection,[]):
+                            key=norm(item.get("fr",""))
+                            row=GLOSS.get("booking",{}).get(key) or GLOSS.get("_shared",{}).get(key)
+                            if row:
+                                item[lang]=row[lang]
+                            else:
+                                item[lang]=str(item.get("en",key))
+                            detail=norm(item.get("detailFr",""))
+                            dr=GLOSS.get("booking",{}).get(detail) or GLOSS.get("_shared",{}).get(detail)
+                            if dr:item["detail"+lang.upper()]=dr[lang]
+                    choices.string=json.dumps(catalog,ensure_ascii=False)
+                opt=main.select_one("#bp-language")
+                if opt:
+                    selected={"ar":"العربية","es":"Español"}[lang]
+                    # Don't lose the 3 original choices; just add Spanish.
+                    if not any(z.get("value")=="Español" for z in opt.select("option")):
+                        esop=BeautifulSoup('<option value="Español">Español</option>',"html.parser").option
+                        opt.append(esop)
+                    for z in opt.select("option"):
+                        z.attrs.pop("selected",None)
+                        if z.get("value")==selected:z["selected"]=""
+                    if len(opt.select("option"))!=4:raise RuntimeError("Booking form must offer 4 languages")
             # Handle standalone CMS pages and remaining legacy editorials:
             # maintain source structure and locale-compatible relative links.
             replace_main(src,main)
