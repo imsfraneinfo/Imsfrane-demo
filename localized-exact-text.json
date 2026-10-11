@@ -2725,7 +2725,248 @@
     }
   },
   "blog": {},
-  "contact": {},
+  "contact": {
+    "Imsfrane Cathédrale · Haut Atlas": {
+      "ar": "مسفران كاتدرال · الأطلس الكبير",
+      "es": "Imsfrane Cathédrale · Alto Atlas"
+    },
+    "Contactez-nous": {
+      "ar": "تواصل معنا",
+      "es": "Contacta con nosotros"
+    },
+    "Découvrir ↓": {
+      "ar": "اكتشف ↓",
+      "es": "Descubrir ↓"
+    },
+    "Contactez-nous pour le rafting, le camping, la randonnée, l’hébergement, le transport ou un séjour personnalisé à Imsfrane.": {
+      "ar": "تواصل معنا للاستفسار عن التجديف والتخييم والمشي الجبلي والإقامة والنقل أو تنظيم رحلة خاصة إلى مسفران.",
+      "es": "Escríbenos para consultar sobre rafting, acampada, senderismo, alojamiento, transporte o una estancia personalizada en Imsfrane."
+    },
+    "Préparez votre aventure avec une équipe locale": {
+      "ar": "خطط لمغامرتك مع فريق محلي",
+      "es": "Prepara tu aventura con un equipo local"
+    },
+    "Indiquez-nous vos dates, le nombre de personnes et les activités souhaitées. Nous vous aiderons à organiser le programme adapté à la saison.": {
+      "ar": "أخبرنا بالمواعيد وعدد المشاركين والأنشطة التي تهمك، وسنساعدك على تنسيق برنامج ملائم للموسم.",
+      "es": "Indícanos fechas, número de personas y actividades deseadas. Te ayudaremos a organizar un programa adecuado a la temporada."
+    },
+    "Comment pouvons-nous vous aider ?": {
+      "ar": "كيف يمكننا مساعدتك؟",
+      "es": "¿Cómo podemos ayudarte?"
+    },
+    "Remplissez le formulaire puis choisissez l’envoi par WhatsApp ou par e-mail.": {
+      "ar": "املأ الاستمارة ثم اختر إرسالها عبر واتساب أو البريد الإلكتروني.",
+      "es": "Completa el formulario y elige enviarlo por WhatsApp o correo electrónico."
+    },
+    "Le temps de réponse peut être plus long pendant les activités en montagne.": {
+      "ar": "قد تتأخر إجابتنا قليلاً أثناء العمل في الجبال.",
+      "es": "La respuesta puede tardar algo más mientras estamos realizando actividades en la montaña."
+    },
+    "Coordonnées": {
+      "ar": "بيانات التواصل",
+      "es": "Datos de contacto"
+    },
+    "Tilouguite, Azilal, Morocco": {
+      "ar": "تيلوكيت، أزيلال، المغرب",
+      "es": "Tilouguite, Azilal, Marruecos"
+    },
+    "Disponibilité": {
+      "ar": "أوقات التواصل",
+      "es": "Disponibilidad"
+    },
+    "Messages à tout moment": {
+      "ar": "يمكن إرسال الرسائل في أي وقت",
+      "es": "Mensajes en cualquier momento"
+    },
+    "Sur réservation": {
+      "ar": "بحجز مسبق",
+      "es": "Con reserva previa"
+    },
+    "Suivez nos aventures": {
+      "ar": "تابع مغامراتنا",
+      "es": "Sigue nuestras aventuras"
+    },
+    "Nom complet": {
+      "ar": "الاسم الكامل",
+      "es": "Nombre completo"
+    },
+    "Téléphone / WhatsApp": {
+      "ar": "الهاتف / واتساب",
+      "es": "Teléfono / WhatsApp"
+    },
+    "Adresse e-mail": {
+      "ar": "البريد الإلكتروني",
+      "es": "Correo electrónico"
+    },
+    "Facultatif pour WhatsApp": {
+      "ar": "اختياري للتواصل عبر واتساب",
+      "es": "Opcional para WhatsApp"
+    },
+    "Pays": {
+      "ar": "البلد",
+      "es": "País"
+    },
+    "Sujet": {
+      "ar": "الموضوع",
+      "es": "Asunto"
+    },
+    "Choisissez un sujet": {
+      "ar": "اختر الموضوع",
+      "es": "Elige un asunto"
+    },
+    "Demande de réservation": {
+      "ar": "طلب حجز",
+      "es": "Solicitud de reserva"
+    },
+    "Informations rafting": {
+      "ar": "معلومات عن التجديف",
+      "es": "Información sobre rafting"
+    },
+    "Informations camping": {
+      "ar": "معلومات عن التخييم",
+      "es": "Información sobre acampada"
+    },
+    "Informations randonnée": {
+      "ar": "معلومات عن المشي الجبلي",
+      "es": "Información sobre senderismo"
+    },
+    "Hébergement": {
+      "ar": "الإقامة",
+      "es": "Alojamiento"
+    },
+    "Transport": {
+      "ar": "النقل",
+      "es": "Transporte"
+    },
+    "Programme personnalisé": {
+      "ar": "برنامج مخصص",
+      "es": "Programa personalizado"
+    },
+    "Partenariat": {
+      "ar": "شراكة",
+      "es": "Colaboración"
+    },
+    "Autre": {
+      "ar": "موضوع آخر",
+      "es": "Otro"
+    },
+    "Date souhaitée": {
+      "ar": "التاريخ المقترح",
+      "es": "Fecha prevista"
+    },
+    "Facultatif": {
+      "ar": "اختياري",
+      "es": "Opcional"
+    },
+    "Nombre de personnes": {
+      "ar": "عدد الأشخاص",
+      "es": "Número de personas"
+    },
+    "Votre message": {
+      "ar": "رسالتك",
+      "es": "Tu mensaje"
+    },
+    "Envoyer par WhatsApp": {
+      "ar": "إرسال عبر واتساب",
+      "es": "Enviar por WhatsApp"
+    },
+    "Envoyer par e-mail": {
+      "ar": "إرسال بالبريد الإلكتروني",
+      "es": "Enviar por correo electrónico"
+    },
+    "Effacer": {
+      "ar": "مسح",
+      "es": "Borrar"
+    },
+    "Tilouguite, porte d’entrée vers Imsfrane": {
+      "ar": "تيلوكيت، بوابة الوصول إلى مسفران",
+      "es": "Tilouguite, puerta de entrada a Imsfrane"
+    },
+    "Nos activités se déroulent autour de Tilouguite, d’Imsfrane Cathédrale et de l’Oued Ahansal. Le point exact est confirmé après réservation.": {
+      "ar": "تقام أنشطتنا في محيط تيلوكيت ومسفران ووادي أحنصال، وتُؤكَّد نقطة اللقاء الدقيقة بعد الحجز.",
+      "es": "Nuestras actividades se desarrollan cerca de Tilouguite, Imsfrane y el Ahansal. El punto exacto se confirma al reservar."
+    },
+    "Commune de Tilouguite, province d’Azilal": {
+      "ar": "جماعة تيلوكيت، إقليم أزيلال",
+      "es": "Comuna de Tilouguite, provincia de Azilal"
+    },
+    "Accès via Ouaouizeght et Tilouguite": {
+      "ar": "الوصول عبر واويزغت وتيلوكيت",
+      "es": "Acceso por Ouaouizeght y Tilouguite"
+    },
+    "Contactez-nous avant le départ pour l’état de la route": {
+      "ar": "استفسر عن حالة الطريق قبل الانطلاق",
+      "es": "Consulta el estado de la carretera antes de salir"
+    },
+    "Ouvrir l’itinéraire ↗": {
+      "ar": "عرض المسار ↗",
+      "es": "Ver la ruta ↗"
+    },
+    "Le moyen le plus simple de nous joindre": {
+      "ar": "أسهل طريقة للتواصل معنا",
+      "es": "La manera más fácil de contactarnos"
+    },
+    "Idéal pour les disponibilités, les tarifs et les questions rapides.": {
+      "ar": "مناسب للاستفسار عن التوفر والأسعار والأسئلة السريعة.",
+      "es": "Ideal para consultar disponibilidad, precios y dudas rápidas."
+    },
+    "Appelez-nous pour une question urgente ou une coordination de dernière minute.": {
+      "ar": "اتصل بنا عند الحاجة إلى مساعدة عاجلة أو تنسيق في اللحظة الأخيرة.",
+      "es": "Llámanos para dudas urgentes o coordinación de última hora."
+    },
+    "Adapté aux partenariats, groupes, programmes détaillés et demandes professionnelles.": {
+      "ar": "مناسب للشراكات والمجموعات والبرامج المفصلة والاستفسارات المهنية.",
+      "es": "Adecuado para colaboraciones, grupos, programas detallados y consultas profesionales."
+    },
+    "Appel téléphonique": {
+      "ar": "مكالمة هاتفية",
+      "es": "Llamada telefónica"
+    },
+    "Email": {
+      "ar": "البريد الإلكتروني",
+      "es": "Correo electrónico"
+    },
+    "Commencer la discussion ↗": {
+      "ar": "ابدأ المحادثة ↗",
+      "es": "Iniciar conversación ↗"
+    },
+    "Questions fréquentes": {
+      "ar": "الأسئلة الشائعة",
+      "es": "Preguntas frecuentes"
+    },
+    "Nous répondons généralement rapidement. Le délai peut être plus long pendant les activités en montagne.": {
+      "ar": "نجيب عادة في أقرب وقت ممكن، وقد يتأخر الرد أثناء الأنشطة الجبلية.",
+      "es": "Normalmente respondemos pronto, aunque puede llevar más tiempo durante las actividades de montaña."
+    },
+    "Oui. Le transport peut être organisé selon le nombre de personnes, le point de départ et le programme.": {
+      "ar": "نعم، يمكن تنسيق النقل بحسب عدد الأشخاص ونقطة الانطلاق والبرنامج.",
+      "es": "Sí, podemos organizar transporte según el grupo, el punto de salida y el programa."
+    },
+    "Oui. Nous organisons des activités pour familles, groupes, associations, entreprises et organisateurs de voyages.": {
+      "ar": "نعم، ننظم أنشطة للعائلات والمجموعات والجمعيات والشركات ومنظمي الرحلات.",
+      "es": "Sí. Organizamos actividades para familias, grupos, asociaciones, empresas y agencias de viajes."
+    },
+    "La réservation à l’avance est recommandée, surtout pour le rafting, le camping, l’hébergement et les groupes.": {
+      "ar": "نوصي بالحجز المسبق، خصوصاً للتجديف والتخييم والإقامة والمجموعات.",
+      "es": "Se recomienda reservar con antelación, especialmente rafting, acampada, alojamiento y grupos."
+    },
+    "Prêt à découvrir Imsfrane ?": {
+      "ar": "هل أنت مستعد لاكتشاف مسفران؟",
+      "es": "¿Listo para descubrir Imsfrane?"
+    },
+    "Envoyez-nous vos dates et le nombre de personnes. Nous vous aiderons à construire le programme adapté.": {
+      "ar": "أخبرنا بالمواعيد وعدد المشاركين وسنساعدك على إعداد البرنامج المناسب.",
+      "es": "Indícanos fechas y número de personas. Te ayudaremos a preparar el programa adecuado."
+    },
+    "Formulaire de réservation ↗": {
+      "ar": "استمارة الحجز ↗",
+      "es": "Formulario de reserva ↗"
+    },
+    "Contacter sur WhatsApp ↗": {
+      "ar": "تواصل عبر واتساب ↗",
+      "es": "Contactar por WhatsApp ↗"
+    }
+  },
   "about": {
     "LES VISAGES DERRIÈRE L’AVENTURE": {
       "ar": "الوجوه التي تقف خلف المغامرة",
