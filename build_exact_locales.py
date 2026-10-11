@@ -215,7 +215,7 @@ def build_rafting_embeds(root):
                 em.string="río."
                 hero.append("Vive");hero.append(br);hero.append("el ");hero.append(em)
             else:
-                em.string="del río Ahansal."
+                em.string="على وادي أحنصال."
                 hero.append("عِش مغامرة");hero.append(br);hero.append(em)
         for img in doc.find_all("img"):
             if img.get("alt"):
