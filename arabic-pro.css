@@ -384,3 +384,54 @@ html[lang="ar"] body.atnav-ready .atnav-langmini .atnav-langmini-panel {
     right:auto!important;
   }
 }
+
+
+/* RAFTING IFRAMED PAGE: exact visual regressions confirmed by user.
+   The rafting template uses --serif: Cormorant Garamond for bold,
+   .hero-badge b ("الأطلس من جهة النهر") and all monetary values
+   (.route-price strong, .exp-opt b, .hero-stat strong).
+   Those are NOT h1/h2/h3 and escaped previous headings-only overrides.
+   Replace template typography variables in the Arabic document itself. */
+html[lang="ar"] {
+  --serif:var(--ar-display)!important;
+  --font:var(--ar-text)!important;
+}
+html[lang="ar"] :is(
+  .hero-badge b,
+  .hero-stat strong,
+  .route-price strong,
+  .route-price span,
+  .exp-opt b,
+  .exp-opt strong,
+  .story-stamp,
+  .brand-copy strong,
+  .route-visual .num,
+  .step-index,
+  .foot strong
+) {
+  font-family:var(--ar-display)!important;
+  letter-spacing:0!important;
+  font-style:normal!important;
+  line-height:1.45!important;
+  font-weight:700!important;
+}
+html[lang="ar"] .hero-badge b {
+  font-size:clamp(19px,2.6vw,25px);
+  line-height:1.6!important;
+  direction:rtl!important;
+  text-align:right!important;
+  unicode-bidi:plaintext;
+}
+html[lang="ar"] :is(.hero-stat strong,.route-price strong,.exp-opt b) {
+  direction:rtl!important;
+  unicode-bidi:isolate;
+  font-variant-numeric:normal;
+}
+html[lang="ar"] :is(
+  .route-price small,.hero-stat small,.exp-opt small,
+  .route-content p,.route-details summary,.hero-badge span
+) {
+  font-family:var(--ar-text)!important;
+  letter-spacing:0!important;
+  line-height:1.85!important;
+}
