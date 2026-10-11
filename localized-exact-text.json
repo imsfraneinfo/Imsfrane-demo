@@ -1,0 +1,705 @@
+{
+  "_shared": {
+    "Accueil": {
+      "ar": "الرئيسية",
+      "es": "Inicio"
+    },
+    "Activités": {
+      "ar": "الأنشطة",
+      "es": "Actividades"
+    },
+    "Nos activités": {
+      "ar": "أنشطتنا",
+      "es": "Nuestras actividades"
+    },
+    "Découvrir": {
+      "ar": "اكتشف",
+      "es": "Descubrir"
+    },
+    "Explorer": {
+      "ar": "استكشف",
+      "es": "Explorar"
+    },
+    "Hébergement": {
+      "ar": "الإقامة",
+      "es": "Alojamiento"
+    },
+    "Réservation": {
+      "ar": "الحجز",
+      "es": "Reservas"
+    },
+    "Réserver": {
+      "ar": "احجز",
+      "es": "Reservar"
+    },
+    "Réserver maintenant": {
+      "ar": "احجز الآن",
+      "es": "Reservar ahora"
+    },
+    "Réserver sur WhatsApp ↗": {
+      "ar": "احجز عبر واتساب ↗",
+      "es": "Reservar por WhatsApp ↗"
+    },
+    "Demander une réservation ↗": {
+      "ar": "أرسل طلب حجز ↗",
+      "es": "Solicitar una reserva ↗"
+    },
+    "Demander une réservation": {
+      "ar": "اطلب الحجز",
+      "es": "Solicitar reserva"
+    },
+    "Réserver sur WhatsApp": {
+      "ar": "التواصل للحجز عبر واتساب",
+      "es": "Reservar por WhatsApp"
+    },
+    "Voir les photos": {
+      "ar": "مشاهدة الصور",
+      "es": "Ver las fotos"
+    },
+    "Voir les photos ↗": {
+      "ar": "مشاهدة الصور ↗",
+      "es": "Ver las fotos ↗"
+    },
+    "Voir les parcours": {
+      "ar": "اطّلع على المسارات",
+      "es": "Ver recorridos"
+    },
+    "Réserver votre séjour ↗": {
+      "ar": "احجز إقامتك ↗",
+      "es": "Reservar tu estancia ↗"
+    },
+    "Réserver une randonnée": {
+      "ar": "حجز جولة مشي جبلي",
+      "es": "Reservar una ruta de senderismo"
+    },
+    "Demander une date": {
+      "ar": "الاستفسار عن موعد",
+      "es": "Consultar una fecha"
+    },
+    "Contacter notre équipe →": {
+      "ar": "تواصل مع فريقنا ←",
+      "es": "Contactar con nuestro equipo →"
+    },
+    "Nous contacter": {
+      "ar": "تواصل معنا",
+      "es": "Contacta con nosotros"
+    },
+    "Contactez-nous": {
+      "ar": "تواصل معنا",
+      "es": "Contacta con nosotros"
+    },
+    "Contact": {
+      "ar": "التواصل",
+      "es": "Contacto"
+    },
+    "Préparez votre séjour": {
+      "ar": "خطّط لإقامتك",
+      "es": "Prepara tu estancia"
+    },
+    "Préparer votre séjour": {
+      "ar": "تخطيط الإقامة",
+      "es": "Prepara tu estancia"
+    },
+    "Guide pratique": {
+      "ar": "دليل الزيارة",
+      "es": "Guía práctica"
+    },
+    "Découvrez": {
+      "ar": "اكتشف",
+      "es": "Descubre"
+    },
+    "Voir plus": {
+      "ar": "اعرف المزيد",
+      "es": "Ver más"
+    },
+    "En savoir plus": {
+      "ar": "تعرّف على المزيد",
+      "es": "Saber más"
+    },
+    "Choisissez": {
+      "ar": "اختر",
+      "es": "Elige"
+    },
+    "Retour": {
+      "ar": "العودة",
+      "es": "Regreso"
+    },
+    "Votre expérience": {
+      "ar": "تجربتك",
+      "es": "Tu experiencia"
+    },
+    "Votre aventure commence ici": {
+      "ar": "مغامرتك تبدأ هنا",
+      "es": "Tu aventura empieza aquí"
+    },
+    "Localisation": {
+      "ar": "الموقع",
+      "es": "Ubicación"
+    },
+    "Lieu de départ": {
+      "ar": "نقطة الانطلاق",
+      "es": "Punto de salida"
+    },
+    "À confirmer": {
+      "ar": "يتطلب التأكيد",
+      "es": "Pendiente de confirmación"
+    },
+    "Sur demande": {
+      "ar": "عند الطلب",
+      "es": "Bajo petición"
+    },
+    "Tarif sur demande": {
+      "ar": "السعر عند الطلب",
+      "es": "Precio a consultar"
+    },
+    "Selon la disponibilité": {
+      "ar": "بحسب التوفر",
+      "es": "Según disponibilidad"
+    },
+    "Par personne": {
+      "ar": "للشخص",
+      "es": "Por persona"
+    },
+    "par personne": {
+      "ar": "للشخص",
+      "es": "por persona"
+    },
+    "/ personne": {
+      "ar": "للشخص",
+      "es": "/ persona"
+    },
+    "Par groupe": {
+      "ar": "للمجموعة",
+      "es": "Por grupo"
+    },
+    "par groupe": {
+      "ar": "للمجموعة",
+      "es": "por grupo"
+    },
+    "/ groupe": {
+      "ar": "للمجموعة",
+      "es": "/ grupo"
+    },
+    "Par nuit": {
+      "ar": "لليلة",
+      "es": "Por noche"
+    },
+    "par nuit": {
+      "ar": "لليلة",
+      "es": "por noche"
+    },
+    "/ nuit": {
+      "ar": "لليلة",
+      "es": "/ noche"
+    },
+    "/ tente": {
+      "ar": "للخيمة",
+      "es": "/ tienda"
+    },
+    "Équipement": {
+      "ar": "المعدات",
+      "es": "Equipo"
+    },
+    "Informations pratiques": {
+      "ar": "معلومات عملية",
+      "es": "Información práctica"
+    },
+    "Questions fréquentes": {
+      "ar": "أسئلة شائعة",
+      "es": "Preguntas frecuentes"
+    },
+    "Transport": {
+      "ar": "النقل",
+      "es": "Transporte"
+    },
+    "Activités à proximité": {
+      "ar": "أنشطة قريبة",
+      "es": "Actividades cercanas"
+    },
+    "Randonnée": {
+      "ar": "المشي الجبلي",
+      "es": "Senderismo"
+    },
+    "Camping": {
+      "ar": "التخييم",
+      "es": "Acampada"
+    },
+    "Rafting": {
+      "ar": "التجديف في المياه البيضاء",
+      "es": "Rafting"
+    },
+    "VTT": {
+      "ar": "الدراجات الجبلية",
+      "es": "BTT"
+    },
+    "Quad": {
+      "ar": "الكواد",
+      "es": "Quad"
+    },
+    "Programme": {
+      "ar": "البرنامج",
+      "es": "Programa"
+    },
+    "Programmes": {
+      "ar": "البرامج",
+      "es": "Programas"
+    },
+    "La montagne": {
+      "ar": "الجبال",
+      "es": "Las montañas"
+    },
+    "L’Atlas": {
+      "ar": "الأطلس الكبير",
+      "es": "El Atlas"
+    },
+    "Haut Atlas · Imsfrane · Maroc": {
+      "ar": "الأطلس الكبير · مسفران · المغرب",
+      "es": "Alto Atlas · Imsfrane · Marruecos"
+    },
+    "IMSFRANE · TILOUGUITE · HAUT ATLAS": {
+      "ar": "مسفران · تيلوكيت · الأطلس الكبير",
+      "es": "IMSFRANE · TILOUGUITE · ALTO ATLAS"
+    },
+    "IMSFRANE · AZILAL · MAROC": {
+      "ar": "مسفران · أزيلال · المغرب",
+      "es": "IMSFRANE · AZILAL · MARRUECOS"
+    },
+    "Départ possible depuis votre hébergement": {
+      "ar": "يمكن الانطلاق من مكان إقامتك",
+      "es": "Posibilidad de salir desde tu alojamiento"
+    },
+    "Guide local": {
+      "ar": "مرشد محلي",
+      "es": "Guía local"
+    },
+    "Accompagnement local": {
+      "ar": "مرافقة محلية",
+      "es": "Acompañamiento local"
+    },
+    "Préparez-vous": {
+      "ar": "استعد",
+      "es": "Prepárate"
+    },
+    "Expériences authentiques": {
+      "ar": "تجارب أصيلة",
+      "es": "Experiencias auténticas"
+    },
+    "EXPÉRIENCES AUTHENTIQUES": {
+      "ar": "تجارب أصيلة",
+      "es": "EXPERIENCIAS AUTÉNTICAS"
+    },
+    "IMSFRANE CATHÉDRALE": {
+      "ar": "مسفران كاتدرال",
+      "es": "IMSFRANE CATHÉDRALE"
+    },
+    "DEMANDE DE RÉSERVATION": {
+      "ar": "طلب حجز",
+      "es": "SOLICITUD DE RESERVA"
+    },
+    "BOUTIQUE": {
+      "ar": "المتجر",
+      "es": "TIENDA"
+    },
+    "Boutique": {
+      "ar": "المتجر",
+      "es": "Tienda"
+    },
+    "Blog": {
+      "ar": "المدونة",
+      "es": "Blog"
+    },
+    "Galerie": {
+      "ar": "الصور",
+      "es": "Galería"
+    },
+    "Contact direct": {
+      "ar": "تواصل مباشر",
+      "es": "Contacto directo"
+    },
+    "Informations": {
+      "ar": "معلومات",
+      "es": "Información"
+    },
+    "Voir sur Google Maps ↗": {
+      "ar": "عرض المكان على خرائط Google ↗",
+      "es": "Ver en Google Maps ↗"
+    },
+    "Lire l’article →": {
+      "ar": "قراءة المقال ←",
+      "es": "Leer artículo →"
+    },
+    "Lire l’article ↗": {
+      "ar": "قراءة المقال ↗",
+      "es": "Leer artículo ↗"
+    },
+    "Découverte": {
+      "ar": "اكتشاف",
+      "es": "Descubrimiento"
+    },
+    "Tous": {
+      "ar": "الكل",
+      "es": "Todos"
+    },
+    "À la une": {
+      "ar": "أبرز المقالات",
+      "es": "Destacado"
+    },
+    "Retour au journal": {
+      "ar": "العودة إلى المدونة",
+      "es": "Volver al blog"
+    },
+    "Partager cet article": {
+      "ar": "شارك المقال",
+      "es": "Compartir este artículo"
+    },
+    "Copier le lien": {
+      "ar": "نسخ الرابط",
+      "es": "Copiar enlace"
+    },
+    "À lire aussi": {
+      "ar": "مقالات ذات صلة",
+      "es": "También te puede interesar"
+    },
+    "Carte": {
+      "ar": "الخريطة",
+      "es": "Mapa"
+    },
+    "Choisissez votre expérience": {
+      "ar": "اختر تجربتك",
+      "es": "Elige tu experiencia"
+    },
+    "Choisissez vos activités": {
+      "ar": "اختر أنشطتك",
+      "es": "Elige tus actividades"
+    },
+    "Nos nouvelles photos": {
+      "ar": "أحدث صورنا",
+      "es": "Nuestras últimas fotos"
+    },
+    "Les souvenirs du site": {
+      "ar": "ذكريات من الموقع",
+      "es": "Recuerdos del sitio"
+    }
+  },
+  "camping": {
+    "CAMPING • IMSFRANE CATHÉDRALE": {
+      "ar": "التخييم · مسفران كاتدرال",
+      "es": "ACAMPADA · IMSFRANE CATHÉDRALE"
+    },
+    "Une nuit sous les étoiles": {
+      "ar": "ليلة تحت النجوم",
+      "es": "Una noche bajo las estrellas"
+    },
+    "au cœur de l’Atlas.": {
+      "ar": "في قلب الأطلس الكبير.",
+      "es": "en el corazón del Atlas."
+    },
+    "Au bord de l’oued Ahansal, vivez une parenthèse authentique entre forêt, montagnes et soirées autour du camp.": {
+      "ar": "عِش تجربة تخييم أصيلة على ضفاف وادي أحنصال، بين الغابات والجبال وأمسيات الطبيعة الهادئة.",
+      "es": "Acampa junto al río Ahansal, entre bosques y montañas, y disfruta de noches tranquilas rodeado de naturaleza."
+    },
+    "Découvrir nos photos": {
+      "ar": "اكتشف صورنا",
+      "es": "Descubre nuestras fotos"
+    },
+    "UNE EXPÉRIENCE NATURE": {
+      "ar": "تجربة في أحضان الطبيعة",
+      "es": "UNA EXPERIENCIA EN LA NATURALEZA"
+    },
+    "Le charme du camping à Imsfrane": {
+      "ar": "سحر التخييم في مسفران",
+      "es": "El encanto de acampar en Imsfrane"
+    },
+    "Des journées au bord de la rivière et des nuits sous les arbres : découvrez l’ambiance du bivouac dans l’Atlas marocain.": {
+      "ar": "أيام قرب النهر وليالٍ تحت الأشجار: استمتع بأجواء التخييم وسط طبيعة الأطلس الكبير.",
+      "es": "Días junto al río y noches entre árboles: descubre la esencia de la acampada en el Atlas marroquí."
+    },
+    "Au bord de la rivière": {
+      "ar": "على ضفاف النهر",
+      "es": "Junto al río"
+    },
+    "Profitez de la fraîcheur de l’oued et de l’ombre des arbres.": {
+      "ar": "استمتع بنسيم الوادي وظلال الأشجار.",
+      "es": "Disfruta del aire fresco del río y de la sombra de los árboles."
+    },
+    "Des nuits mémorables": {
+      "ar": "ليالٍ لا تُنسى",
+      "es": "Noches memorables"
+    },
+    "Partagez des moments uniques sous un ciel étoilé.": {
+      "ar": "عِش لحظات استثنائية تحت سماء مرصعة بالنجوم.",
+      "es": "Comparte momentos únicos bajo un cielo estrellado."
+    },
+    "Un cadre naturel": {
+      "ar": "بيئة طبيعية ساحرة",
+      "es": "Un entorno natural"
+    },
+    "Des tentes au milieu de la nature et des paysages de montagne.": {
+      "ar": "خيام وسط الطبيعة والمناظر الجبلية.",
+      "es": "Tiendas rodeadas de naturaleza y paisajes de montaña."
+    },
+    "TARIFS CAMPING": {
+      "ar": "أسعار التخييم",
+      "es": "TARIFAS DE ACAMPADA"
+    },
+    "Choisissez votre tente": {
+      "ar": "اختر خيمتك",
+      "es": "Elige tu tienda"
+    },
+    "Tarifs par tente et par nuit. Un emplacement pour votre propre tente est également disponible.": {
+      "ar": "الأسعار محددة لكل خيمة في الليلة، مع إمكانية حجز مكان لنصب خيمتك الخاصة.",
+      "es": "Tarifas por tienda y noche. También puedes reservar un espacio para montar tu propia tienda."
+    },
+    "Tente 1 personne": {
+      "ar": "خيمة لشخص واحد",
+      "es": "Tienda para 1 persona"
+    },
+    "Tente 2 personnes": {
+      "ar": "خيمة لشخصين",
+      "es": "Tienda para 2 personas"
+    },
+    "Tente 3 personnes": {
+      "ar": "خيمة لثلاثة أشخاص",
+      "es": "Tienda para 3 personas"
+    },
+    "Tente 4 personnes": {
+      "ar": "خيمة لأربعة أشخاص",
+      "es": "Tienda para 4 personas"
+    },
+    "Votre propre tente": {
+      "ar": "خيمتك الخاصة",
+      "es": "Tu propia tienda"
+    },
+    "emplacement": {
+      "ar": "مكان نصب الخيمة",
+      "es": "parcela"
+    },
+    "FORMULE TOUT COMPRIS": {
+      "ar": "باقة تشمل الوجبات",
+      "es": "PAQUETE CON COMIDAS INCLUIDAS"
+    },
+    "Camping et repas inclus": {
+      "ar": "تخييم مع الوجبات",
+      "es": "Acampada con comidas incluidas"
+    },
+    "Une nuit en tente avec petit-déjeuner, déjeuner et dîner. Cette formule est disponible uniquement sur réservation pour un groupe de 4 personnes minimum.": {
+      "ar": "ليلة في خيمة تشمل الفطور والغداء والعشاء. تتوفر هذه الباقة بالحجز المسبق لمجموعة من أربعة أشخاص على الأقل.",
+      "es": "Una noche en tienda con desayuno, almuerzo y cena. Esta opción requiere reserva previa y un mínimo de cuatro personas."
+    },
+    "/ personne": {
+      "ar": "للشخص",
+      "es": "/ persona"
+    },
+    "Repas uniquement sur demande • Minimum 4 personnes": {
+      "ar": "الوجبات عند الطلب · أربعة أشخاص على الأقل",
+      "es": "Comidas bajo petición · Mínimo 4 personas"
+    },
+    "INFORMATIONS PRATIQUES": {
+      "ar": "معلومات عملية",
+      "es": "INFORMACIÓN PRÁCTICA"
+    },
+    "Préparez votre séjour": {
+      "ar": "استعد لإقامتك",
+      "es": "Prepara tu estancia"
+    },
+    "Sur place": {
+      "ar": "في المخيم",
+      "es": "En el campamento"
+    },
+    "Espace réservé aux familles, éclairage nocturne et accès en voiture jusqu’à proximité des tentes.": {
+      "ar": "مساحة مناسبة للعائلات، وإنارة ليلية، وإمكانية الوصول بالسيارة إلى قرب الخيام.",
+      "es": "Zona para familias, iluminación nocturna y acceso en coche hasta las proximidades de las tiendas."
+    },
+    "Cuisine et repas": {
+      "ar": "الطبخ والوجبات",
+      "es": "Cocina y comidas"
+    },
+    "Vous pouvez cuisiner vous-même et utiliser les ustensiles mis à disposition, à rendre dans leur état initial. Pour les grands groupes, apportez de préférence votre matériel. Petit-déjeuner, déjeuner et dîner sur demande pour 4 personnes minimum.": {
+      "ar": "يمكنك إعداد وجباتك بنفسك واستعمال أدوات المطبخ المتاحة مع إعادتها بحالة جيدة. يُفضَّل أن تحضر المجموعات الكبيرة معداتها الخاصة؛ وتتوفّر الوجبات عند الطلب لأربعـة أشخاص على الأقل.",
+      "es": "Puedes cocinar y utilizar los utensilios disponibles, siempre dejándolos en buen estado. Para grupos grandes recomendamos traer material propio. Desayuno, almuerzo y cena bajo petición para un mínimo de cuatro personas."
+    },
+    "Situation et provisions": {
+      "ar": "الموقع والتموين",
+      "es": "Ubicación y provisiones"
+    },
+    "Imsfrane, commune de Tilouguite, province d’Azilal, entre Imi N’Ouarg et Tamga, à environ 90 km de Béni Mellal. Épicerie de légumes et viande à environ 15 minutes ; Tilouguite est à environ 10 km.": {
+      "ar": "يقع المخيم في منطقة مسفران بجماعة تيلوكيت، إقليم أزيلال، بين إمي نوارك وتامگا، على بُعد نحو 90 كلم من بني ملال. توجد محلات لاقتناء الخضر واللحم على بُعد نحو 15 دقيقة، وتبعد تيلوكيت قرابة 10 كلم.",
+      "es": "En Imsfrane, comuna de Tilouguite, provincia de Azilal, entre Imi N’Ouarg y Tamga, a unos 90 km de Beni Mellal. Hay tiendas de verduras y carne a unos 15 minutos, y Tilouguite está a unos 10 km."
+    },
+    "Comment venir": {
+      "ar": "كيفية الوصول",
+      "es": "Cómo llegar"
+    },
+    "Bus jusqu’à Béni Mellal, grand taxi pour Ouaouizeght (environ 25 DH), puis transport direct vers Imsfrane (environ 30 DH). Tarifs de transport indicatifs.": {
+      "ar": "يمكن الوصول بالحافلة إلى بني ملال، ثم بسيارة أجرة كبيرة نحو واويزغت (نحو 25 درهماً)، وبعدها نقل محلي إلى مسفران (نحو 30 درهماً). هذه أثمنة إرشادية.",
+      "es": "Puedes llegar en autobús a Beni Mellal, tomar un taxi compartido hasta Ouaouizeght (unos 25 MAD) y después transporte hasta Imsfrane (unos 30 MAD). Tarifas orientativas."
+    },
+    "Soirée amazighe": {
+      "ar": "أمسية أمازيغية",
+      "es": "Velada amazige"
+    },
+    "Sur demande, une soirée autour du feu avec Ahidous peut être organisée avec une contribution convenue entre les participants, selon les conditions de sécurité.": {
+      "ar": "يمكن تنظيم أمسية أحيدوس حول النار عند الطلب، بمساهمة يُتفق عليها بين المشاركين، مع مراعاة شروط السلامة.",
+      "es": "Bajo petición, se puede organizar una velada de Ahidous alrededor del fuego con una aportación acordada entre los participantes y siempre según las condiciones de seguridad."
+    },
+    "Voir les tentes en vidéo ↗": {
+      "ar": "شاهد الخيام بالفيديو ↗",
+      "es": "Ver las tiendas en vídeo ↗"
+    },
+    "CAMPING • PHOTO JOURNAL": {
+      "ar": "صور من المخيم",
+      "es": "ACAMPADA · FOTOGRAFÍAS"
+    },
+    "Des instants à vivre": {
+      "ar": "لحظات تستحق أن تعيشها",
+      "es": "Momentos para recordar"
+    },
+    "15 photos du camping : des nuits illuminées aux matinées près de la rivière.": {
+      "ar": "15 صورة من المخيم، من ليالي التخييم إلى الصباح قرب الوادي.",
+      "es": "15 fotografías de la acampada: desde noches iluminadas hasta mañanas junto al río."
+    },
+    "L’Atlas vous attend.": {
+      "ar": "الأطلس الكبير في انتظارك.",
+      "es": "El Atlas te espera."
+    },
+    "Organisons ensemble votre séjour camping à Imsfrane.": {
+      "ar": "نساعدك على تنظيم إقامتك في مخيم مسفران.",
+      "es": "Organiza con nosotros tu estancia de acampada en Imsfrane."
+    }
+  },
+  "randonnee": {
+    "Marchez.": {
+      "ar": "امشِ.",
+      "es": "Camina."
+    },
+    "Ressentez.": {
+      "ar": "واكتشف.",
+      "es": "Y siente."
+    },
+    "Du sommet de Msfrane aux gorges d’Ahansal, vivez la montagne autrement : sentiers, panoramas, cascades et rencontres.": {
+      "ar": "من قمة جبل مسفران إلى مضايق أحنصال، اكتشف الجبال عبر مسالك ومشاهد بانورامية وشلالات ولقاءات محلية.",
+      "es": "Desde la cima de Imsfrane hasta las gargantas del Ahansal, descubre senderos, vistas panorámicas, cascadas y encuentros locales."
+    },
+    "Altitude du sommet": {
+      "ar": "ارتفاع القمة",
+      "es": "Altitud de la cumbre"
+    },
+    "Parcours": {
+      "ar": "المسارات",
+      "es": "Rutas"
+    },
+    "Dénivelé sommet": {
+      "ar": "فارق الارتفاع",
+      "es": "Desnivel de ascenso"
+    },
+    "L’ATLAS À PIED": {
+      "ar": "الأطلس سيراً على الأقدام",
+      "es": "EL ATLAS A PIE"
+    },
+    "Choisissez votre aventure": {
+      "ar": "اختر مغامرتك",
+      "es": "Elige tu aventura"
+    },
+    "Trois façons de découvrir Msfrane": {
+      "ar": "ثلاث طرق لاكتشاف مسفران",
+      "es": "Tres maneras de descubrir Imsfrane"
+    },
+    "Des itinéraires accompagnés, entre crêtes, gorges et paysages du Haut Atlas. Les prix indiqués sont par groupe.": {
+      "ar": "مسارات مع مرشد محلي بين القمم والمضايق والمناظر الجبلية. الأسعار المذكورة تخص المجموعة.",
+      "es": "Rutas guiadas entre cumbres, gargantas y paisajes del Alto Atlas. Los precios indicados son por grupo."
+    },
+    "Sommet Msfrane": {
+      "ar": "قمة جبل مسفران",
+      "es": "Cumbre del Jebel Imsfrane"
+    },
+    "Une ascension jusqu’à 1 868 m avec panoramas sur les montagnes et les vallées.": {
+      "ar": "صعود إلى ارتفاع 1868 متراً مع إطلالات على الجبال والوديان.",
+      "es": "Ascensión a 1.868 metros, con panorámicas de montañas y valles."
+    },
+    "Moyenne": {
+      "ar": "متوسط",
+      "es": "Dificultad media"
+    },
+    "Gorges & Cascades": {
+      "ar": "المضايق والشلالات",
+      "es": "Gargantas y cascadas"
+    },
+    "Découvrez les gorges d’Ahansal, les cascades et les paysages de la vallée.": {
+      "ar": "اكتشف مضايق أحنصال والشلالات والمناظر الطبيعية في الوادي.",
+      "es": "Descubre las gargantas del Ahansal, las cascadas y los paisajes del valle."
+    },
+    "Facile": {
+      "ar": "سهل",
+      "es": "Fácil"
+    },
+    "Le Grand Tour": {
+      "ar": "الجولة الكبرى",
+      "es": "Gran recorrido"
+    },
+    "Une journée complète combinant sommet, gorges et cascades.": {
+      "ar": "يوم كامل يجمع بين القمة والمضايق والشلالات.",
+      "es": "Una jornada completa que combina cumbre, gargantas y cascadas."
+    },
+    "Soutenu": {
+      "ar": "مُجهد",
+      "es": "Exigente"
+    },
+    "La montagne, à votre rythme": {
+      "ar": "استمتع بالجبال على إيقاعك",
+      "es": "La montaña a tu ritmo"
+    },
+    "Accompagnement par un guide local": {
+      "ar": "مرافقة مرشد محلي",
+      "es": "Acompañamiento de guía local"
+    },
+    "Arrêts photos et découverte de la région": {
+      "ar": "توقفات للتصوير والتعرف على المنطقة",
+      "es": "Paradas fotográficas y descubrimiento de la región"
+    },
+    "Départ possible depuis votre hébergement": {
+      "ar": "يمكن الانطلاق من مكان إقامتك",
+      "es": "Posibilidad de salir desde tu alojamiento"
+    },
+    "Itinéraire adapté aux conditions météo et au groupe": {
+      "ar": "مسار يتناسب مع الطقس ومستوى المجموعة",
+      "es": "Recorrido adaptado al tiempo y al grupo"
+    },
+    "Souvenirs": {
+      "ar": "ذكريات",
+      "es": "Recuerdos"
+    },
+    "La randonnée en images": {
+      "ar": "صور من جولات المشي الجبلي",
+      "es": "Senderismo en imágenes"
+    },
+    "13 photos authentiques de nos paysages et sorties. Cliquez pour les voir en entier.": {
+      "ar": "13 صورة حقيقية من مسالكنا ورحلاتنا؛ اضغط لتشاهد الصور كاملة.",
+      "es": "13 fotografías auténticas de nuestros paisajes y excursiones. Haz clic para verlas completas."
+    },
+    "Prêt à partir ?": {
+      "ar": "هل أنت مستعد للانطلاق؟",
+      "es": "¿Listo para empezar?"
+    },
+    "Votre prochaine aventure commence ici.": {
+      "ar": "مغامرتك المقبلة تبدأ هنا.",
+      "es": "Tu próxima aventura empieza aquí."
+    },
+    "Contactez-nous pour choisir votre parcours et votre date.": {
+      "ar": "تواصل معنا لاختيار المسار والتاريخ المناسبين.",
+      "es": "Escríbenos para elegir la ruta y la fecha."
+    }
+  },
+  "rafting": {},
+  "vtt": {},
+  "quad": {},
+  "hebergement": {},
+  "programme": {},
+  "guide": {},
+  "booking": {},
+  "store": {},
+  "blog": {},
+  "contact": {},
+  "about": {},
+  "memories": {},
+  "index": {}
+}
