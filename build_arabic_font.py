@@ -20,7 +20,7 @@ FONTS=(
   ("Tajawal-Bold.woff2","tajawal/Tajawal-Bold.ttf"),
   ("Tajawal-ExtraBold.woff2","tajawal/Tajawal-ExtraBold.ttf"),
 )
-VERSION="rtl-arabic-20261011e"
+VERSION="rtl-arabic-20261011e-price1"
 
 def download(url: str) -> bytes:
     req=Request(url,headers={"User-Agent":"Imsfrane-Demo-Build/1.0"})
