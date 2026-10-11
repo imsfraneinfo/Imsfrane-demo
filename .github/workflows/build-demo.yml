@@ -2,7 +2,7 @@ name: Publish Imsfrane demo
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/build-demo.yml', 'rafting-v8.html', 'imsfrane_rafting_mobile_cadrage_corrige_v8*.html', 'images/rafting-new/**', 'quad-content-*.html', 'images/quad-new/**', 'images/IMG_*.webp', 'vtt-content-*.html', 'camping-content-*.html', 'randonnee-content-*.html', 'about-content-*.html', 'remaining-pages-theme.css', 'rebuild_remaining.py', 'build_memories_gallery.py', 'memories-gallery.css', 'build_blog_journal.py', 'blog-journal.css', 'blog-journal.js', 'build_new_articles.py', 'blog_new_topics.json', 'blog_article_research.json', 'blog_expanded_content.json', 'blog-articles.css', 'booking-prices.json', 'booking-pro.css', 'booking-pro.js', 'build_booking_pro.py', 'build_store_pro.py', 'store-products.json', 'store-pro.css', 'store-pro.js', 'build_guide_pro.py', 'guide-pro.css', 'build_home_pro.py', 'home-pro.css', 'home-pro.js', 'menu-preview.html', 'build_navigation_pro.py', 'navigation-pro.css', 'navigation-pro.js', 'build_localized_pages.py', 'localized-pages.json', 'localized-articles-es.json', 'localized-legacy-articles.json', 'build_localized_mirror.py', 'build_exact_locales.py', 'localized-exact-text.json', 'validate_site_locales.py', 'build_arabic_font.py', 'fix_core_demo_language.py', 'polish_arabic_currency.py', 'fix_arabic_price_bidi.py', 'arabic-pro.css', 'localized-site.css', 'localized-site.js', 'images/rando-*.webp', 'images/IMG_*.jpeg']
+    paths: ['.github/workflows/build-demo.yml', 'rafting-v8.html', 'imsfrane_rafting_mobile_cadrage_corrige_v8*.html', 'images/rafting-new/**', 'quad-content-*.html', 'images/quad-new/**', 'images/IMG_*.webp', 'vtt-content-*.html', 'camping-content-*.html', 'randonnee-content-*.html', 'about-content-*.html', 'remaining-pages-theme.css', 'rebuild_remaining.py', 'build_memories_gallery.py', 'memories-gallery.css', 'build_blog_journal.py', 'blog-journal.css', 'blog-journal.js', 'build_new_articles.py', 'blog_new_topics.json', 'blog_article_research.json', 'blog_expanded_content.json', 'blog-articles.css', 'booking-prices.json', 'booking-pro.css', 'booking-pro.js', 'build_booking_pro.py', 'build_store_pro.py', 'store-products.json', 'store-pro.css', 'store-pro.js', 'build_guide_pro.py', 'guide-pro.css', 'build_home_pro.py', 'home-pro.css', 'home-pro.js', 'menu-preview.html', 'build_navigation_pro.py', 'navigation-pro.css', 'navigation-pro.js', 'build_localized_pages.py', 'localized-pages.json', 'localized-articles-es.json', 'localized-legacy-articles.json', 'build_localized_mirror.py', 'build_exact_locales.py', 'localized-exact-text.json', 'validate_site_locales.py', 'build_arabic_font.py', 'fix_core_demo_language.py', 'install_google_reviews_live.py', 'google-reviews-live.js', 'google-reviews-live.css', 'polish_arabic_currency.py', 'fix_arabic_price_bidi.py', 'arabic-pro.css', 'localized-site.css', 'localized-site.js', 'images/rando-*.webp', 'images/IMG_*.jpeg']
   workflow_dispatch:
 concurrency:
   group: imsfrane-demo-publish
@@ -15,6 +15,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Fetch original site and prepare demo
+        env:
+          # A browser-visible key, restricted to this GitHub Pages origin and Maps JS API.
+          GOOGLE_MAPS_BROWSER_KEY: ${{ secrets.GOOGLE_MAPS_BROWSER_KEY }}
         run: |
           git clone --depth 1 https://github.com/imsfraneinfo/imsfraneinfo.git /tmp/original
           mkdir -p public
@@ -556,6 +559,10 @@ jobs:
           # Assets are copied from this demo repository, not written to the live site.
           for asset in ('booking-pro.css','booking-pro.js','store-pro.css','store-pro.js','guide-pro.css','home-pro.css','home-pro.js','menu-preview.html','navigation-pro.css','navigation-pro.js','localized-site.css','localized-site.js','arabic-pro.css'):
               shutil.copy2(Path(asset),root/asset)
+          # Read live Google Maps rating and up to 5 review excerpts in the visitor's browser.
+          # Only Demo homepages are patched, never the official source repository.
+          from install_google_reviews_live import install as install_google_reviews
+          install_google_reviews(root)
           (root/'.nojekyll').touch()
           PY
       - uses: peaceiris/actions-gh-pages@v4
