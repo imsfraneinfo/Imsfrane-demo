@@ -312,7 +312,7 @@ def publish(root):
             raise RuntimeError("Original brand logo changed: refusing Demo homepage update")
         if updated.count('class="hp-activity-card')!=14:
             raise RuntimeError("All 14 main-site activities were not generated")
-        if updated.count('class="hp-slide"')!=5:raise RuntimeError("Five original homepage slider images missing")
+        if updated.count('data-slide="')!=5:raise RuntimeError("Five original homepage slider images missing")
         if updated.count('class="hp-google-reviews"')!=1:raise RuntimeError("Google Reviews directly under hero missing")
         if updated.count('class="hp-program"')!=3:
             raise RuntimeError("Three programs were not generated")
