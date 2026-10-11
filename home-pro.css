@@ -250,3 +250,110 @@
 .hp-home .hp-final-buttons .hp-button{width:100%}
 }
 @media(prefers-reduced-motion:reduce){.hp-home *{transition:none!important;scroll-behavior:auto!important}}
+
+
+/* Homepage v2: original five-photo carousel, authentic Google review band, full two-column mobile catalogue. */
+.hp-home .hp-hero-visual{isolation:isolate;touch-action:pan-y}
+.hp-home .hp-slide-track,.hp-home .hp-slide{position:absolute;inset:0;width:100%;height:100%}
+.hp-home .hp-slide{opacity:0;visibility:hidden;transition:opacity .8s ease,visibility .8s ease;z-index:0}
+.hp-home .hp-slide.is-active{opacity:1;visibility:visible;z-index:1}
+.hp-home .hp-slide .hp-hero-image{position:absolute;inset:0;width:100%;height:100%!important;object-fit:cover;object-position:center 46%;display:block}
+.hp-home .hp-slide:nth-child(2) .hp-hero-image{object-position:center 36%}
+.hp-home .hp-slide:nth-child(3) .hp-hero-image{object-position:center 54%}
+.hp-home .hp-slide:nth-child(4) .hp-hero-image{object-position:center 59%}
+.hp-home .hp-slide:nth-child(5) .hp-hero-image{object-position:center 50%}
+.hp-home .hp-hero-visual:after{z-index:2}
+.hp-home .hp-hero-picture-note,.hp-home .hp-hero-altitude{z-index:4}
+.hp-home .hp-slider-controls{position:absolute;bottom:35px;right:24px;z-index:6;display:flex;gap:10px;align-items:center;padding:7px;border-radius:30px;background:#091e1fc2;backdrop-filter:blur(10px);border:1px solid #ffffff3c;box-shadow:0 9px 25px #091b193d}
+.hp-home .hp-slide-dots{display:flex;align-items:center;gap:7px}
+.hp-home .hp-slide-dot{background:#ffffff82;border:0;display:block;padding:0;width:7px;height:7px;border-radius:50%;cursor:pointer}
+.hp-home .hp-slide-dot.is-active{background:#ebc975;width:23px;border-radius:10px}
+.hp-home .hp-slide-arrow{width:30px;height:30px;display:grid;place-items:center;color:#fff;background:#ffffff1a;border:1px solid #ffffff32;border-radius:50%;cursor:pointer;font-size:11px}
+.hp-home .hp-slide-arrow:hover{background:#ffffff45}
+.hp-home .hp-google-reviews{background:#fff;border-bottom:1px solid #e5ebdf;position:relative;z-index:4}
+.hp-home .hp-reviews-inner{width:min(100% - 50px,1230px);min-height:137px;margin:auto;display:grid;grid-template-columns:64px 235px minmax(0,1fr) auto;gap:23px;align-items:center;padding:23px 0}
+.hp-home .hp-google-mark{width:61px;height:61px;display:grid;place-items:center;background:#f3f7fb;border:1px solid #e7edf4;border-radius:13px;color:#4285f4;font-size:29px}
+.hp-home .hp-google-rating{display:flex;flex-direction:column;gap:2px;min-width:0}
+.hp-home .hp-google-label{font-size:10px;letter-spacing:.13em;color:#677969;font-weight:850}
+.hp-home .hp-google-score{display:flex;align-items:center;gap:13px}
+.hp-home .hp-google-score strong{font-size:35px;letter-spacing:-.065em;font-weight:900;line-height:1.1;color:#204732;font-variant-numeric:tabular-nums}
+.hp-home .hp-google-score small{font-size:15px;color:#7a8b78;font-weight:700;margin-left:2px}
+.hp-home .hp-google-stars{font-size:18px;white-space:nowrap;letter-spacing:1px;color:#e4aa33}
+.hp-home .hp-review-count{font-size:10px;color:#758678;font-weight:650}
+.hp-home .hp-google-copy{border-left:1px solid #e5eadd;padding-left:25px;min-width:0}
+.hp-home .hp-google-copy h2{font-family:"Cormorant Garamond",Georgia,serif;font-size:30px;line-height:1.1;letter-spacing:-.024em;margin:0 0 7px;color:#1b4d38}
+.hp-home .hp-google-copy p{font-size:11px;color:#6b7f72;line-height:1.7;margin:0;max-width:360px}
+.hp-home .hp-google-link{background:#184e3a;color:#fff!important;border-radius:8px;font-size:11px;font-weight:850;padding:14px 17px;min-height:47px;display:inline-flex;align-items:center;gap:10px;justify-content:center;text-align:center;white-space:nowrap}
+.hp-home .hp-google-link:hover{background:#0c3628;transform:translateY(-1px)}
+.hp-home .hp-facts{background:#f6f6f1}
+@media(max-width:1100px){
+.hp-home .hp-reviews-inner{grid-template-columns:45px 210px minmax(0,1fr);gap:17px}
+.hp-home .hp-google-mark{width:45px;height:45px;font-size:25px}
+.hp-home .hp-google-link{grid-column:2/4;justify-self:end;margin-top:-4px}
+.hp-home .hp-google-copy{padding-left:18px}
+.hp-home .hp-slider-controls{right:17px;bottom:18px}
+.hp-home .hp-hero-picture-note{bottom:72px}
+}
+@media(max-width:860px){
+.hp-home .hp-hero-inner{position:relative;display:block;min-height:700px}
+.hp-home .hp-hero-visual{position:absolute;inset:0;min-height:0!important;height:100%;width:100%;z-index:0}
+.hp-home .hp-hero-visual:after{background:linear-gradient(to bottom,#091e20c5 0%,#09251fb5 36%,#09241e8a 63%,#091f1bc9 100%),linear-gradient(90deg,#071e1e66,transparent 75%);z-index:2}
+.hp-home .hp-hero-content{min-height:700px;background:none;justify-content:center;position:relative;z-index:3;padding:65px 32px 105px;pointer-events:none}
+.hp-home .hp-hero-content :is(a,button){pointer-events:auto}
+.hp-home .hp-hero-content:after{display:none}
+.hp-home .hp-hero-picture-note,.hp-home .hp-hero-altitude{display:none}
+.hp-home .hp-slider-controls{bottom:19px;right:18px;left:18px;margin:auto;width:max-content;max-width:calc(100% - 36px);z-index:6;gap:12px}
+.hp-home .hp-slide-arrow{width:38px;height:38px}
+.hp-home .hp-slide-dot{width:9px;height:9px}
+.hp-home .hp-slide-dot.is-active{width:27px}
+.hp-home .hp-scroll{display:none}
+.hp-home .hp-hero-image{object-position:center 43%!important}
+.hp-home .hp-slide:nth-child(2) .hp-hero-image{object-position:center 35%!important}
+.hp-home .hp-slide:nth-child(3) .hp-hero-image{object-position:center 56%!important}
+.hp-home .hp-slide:nth-child(4) .hp-hero-image{object-position:center 59%!important}
+.hp-home .hp-slide:nth-child(5) .hp-hero-image{object-position:center 49%!important}
+.hp-home .hp-reviews-inner{grid-template-columns:53px minmax(0,1fr);gap:15px;padding:24px 0}
+.hp-home .hp-google-mark{height:52px;width:52px}
+.hp-home .hp-google-rating{grid-column:2}
+.hp-home .hp-google-copy{border:0;padding:0;grid-column:1/3}
+.hp-home .hp-google-copy h2{font-size:30px}
+.hp-home .hp-google-link{grid-column:1/3;justify-self:stretch;margin:0}
+.hp-home .hp-google-score strong{font-size:34px}
+}
+@media(max-width:580px){
+.hp-home .hp-hero-inner{min-height:680px}
+.hp-home .hp-hero-content{min-height:680px;padding:61px 21px 101px;justify-content:center}
+.hp-home .hp-hero h1{font-size:clamp(53px,12.7vw,76px)!important}
+.hp-home .hp-hero-content>p{max-width:430px}
+.hp-home .hp-hero-foot{color:#edf1e9}
+.hp-home .hp-reviews-inner{width:calc(100% - 28px);gap:12px;padding:18px 0}
+.hp-home .hp-google-mark{height:50px;width:50px}
+.hp-home .hp-google-score{gap:9px}
+.hp-home .hp-google-score strong{font-size:33px}
+.hp-home .hp-google-stars{font-size:16px}
+.hp-home .hp-google-copy h2{font-size:29px}
+.hp-home .hp-google-link{font-size:12px;padding:13px 12px}
+.hp-home .hp-activity-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.hp-home .hp-activity-card{min-width:0;border-radius:8px}
+.hp-home .hp-activity-image{height:auto;aspect-ratio:1/1.05}
+.hp-home .hp-activity-card .hp-activity-image img{height:100%!important}
+.hp-home .hp-activity-body{padding:11px 10px 13px;min-width:0}
+.hp-home .hp-activity-note{font-size:8px;letter-spacing:0;line-height:1.45;min-height:26px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.hp-home .hp-activity-body h3{font-size:clamp(21px,5.5vw,28px);line-height:1.06;margin:8px 0 7px;overflow-wrap:anywhere}
+.hp-home .hp-activity-body>p{font-size:10px;line-height:1.55;margin:0 0 10px;overflow-wrap:break-word}
+.hp-home .hp-activity-bottom{display:flex;flex-direction:column;gap:7px;align-items:flex-start;padding-top:10px;margin-top:auto}
+.hp-home .hp-activity-bottom>strong{font-size:10px;line-height:1.45;max-width:100%;overflow-wrap:anywhere}
+.hp-home .hp-activity-bottom>a{display:flex;justify-content:space-between;align-items:center;gap:7px;width:100%;font-size:10px;border-top:1px solid #f0f2ed;padding-top:7px}
+.hp-home .hp-activities{padding:58px 0 65px}
+.hp-home .hp-facts-inner{padding:14px 0}
+.hp-home .hp-facts-inner strong{font-size:20px}
+}
+@media(max-width:370px){
+.hp-home .hp-activity-grid{gap:7px}
+.hp-home .hp-activity-body{padding:10px 8px}
+.hp-home .hp-activity-body h3{font-size:21px}
+.hp-home .hp-activity-note{font-size:8px}
+.hp-home .hp-google-score strong{font-size:28px}
+.hp-home .hp-google-stars{font-size:14px}
+}
+@media(prefers-reduced-motion:reduce){.hp-home .hp-slide{transition:none!important}}
