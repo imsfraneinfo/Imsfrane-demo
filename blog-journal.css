@@ -9,3 +9,6 @@ main.journal-page .journal-grid .journal-card:first-child .journal-card-image im
 main.journal-page .journal-card-image[href*="blog-guide-access-imsfrane"] img{object-position:center 64%}
 main.journal-page .journal-card-image[href*="blog-guide-three-days"] img{object-position:center 67%}
 main.journal-page .journal-card-image[href*="blog-guide-imsfrane-summit"] img{object-position:center 25%}
+
+main.journal-page .journal-grid .journal-card .journal-card-image[href*="blog-guide-access-imsfrane"] img{object-position:center 62%!important}
+main.journal-page .journal-grid .journal-card .journal-card-image[href*="blog-guide-three-days"] img{object-position:center 66%!important}
