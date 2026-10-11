@@ -1632,13 +1632,427 @@
     }
   },
   "hebergement": {},
-  "programme": {},
+  "programme": {
+    "Imsfrane Cathédrale · Haut Atlas": {
+      "ar": "مسفران كاتدرال · الأطلس الكبير",
+      "es": "Imsfrane Cathédrale · Alto Atlas"
+    },
+    "Aventure de 3 Jours en Camping Sauvage": {
+      "ar": "مغامرة من ثلاثة أيام مع التخييم في الطبيعة",
+      "es": "Aventura de 3 días de acampada en la naturaleza"
+    },
+    "Découvrir ↓": {
+      "ar": "اكتشف ↓",
+      "es": "Descubrir ↓"
+    },
+    "Randonnée au sommet, cascades, repas traditionnels, camping sauvage et soirées authentiques sous les étoiles.": {
+      "ar": "صعود إلى القمة وزيارة الشلالات ووجبات تقليدية وتخييم في الطبيعة وأمسيات أصيلة تحت النجوم.",
+      "es": "Ascensión a la cumbre, cascadas, gastronomía tradicional, acampada y noches auténticas bajo las estrellas."
+    },
+    "Réserver ce programme ↗": {
+      "ar": "اطلب حجز البرنامج ↗",
+      "es": "Reservar este programa ↗"
+    },
+    "Trois jours entre montagnes, rivière et étoiles": {
+      "ar": "ثلاثة أيام بين الجبال والنهر والنجوم",
+      "es": "Tres días entre montañas, río y estrellas"
+    },
+    "Découvrez Imsfrane Cathédrale, montez au sommet de 1 868 mètres, explorez les cascades Wakoudene et passez deux nuits dans notre camping sauvage. Le programme combine nature, cuisine locale, aventure et hospitalité amazighe.": {
+      "ar": "اكتشف مسفران كاتدرال واصعد إلى قمة تبلغ 1868 متراً، وزر شلالات واكودن، واقضِ ليلتين في مخيمنا وسط الطبيعة. يجمع البرنامج بين المغامرة والمأكولات المحلية والضيافة الأمازيغية.",
+      "es": "Descubre Imsfrane Cathédrale, asciende a su cumbre de 1.868 metros, visita las cascadas de Wakoudene y pasa dos noches en nuestro campamento. Naturaleza, cocina local, aventura y hospitalidad amazige."
+    },
+    "Modéré": {
+      "ar": "متوسط",
+      "es": "Moderado"
+    },
+    "Dormez sous les étoiles de l’Atlas": {
+      "ar": "نم تحت نجوم الأطلس",
+      "es": "Duerme bajo las estrellas del Atlas"
+    },
+    "Les deux nuits se passent dans notre propre camping sauvage près d’Imsfrane. Nous préparons les tentes, les matelas et les couvertures avant l’arrivée du groupe.": {
+      "ar": "تقضون الليلتين في مخيمنا قرب مسفران، حيث نجهّز الخيام والفرش والأغطية قبل وصول المجموعة.",
+      "es": "Las dos noches se pasan en nuestro campamento cerca de Imsfrane. Preparamos las tiendas, colchonetas y mantas antes de la llegada del grupo."
+    },
+    "Tentes équipées": {
+      "ar": "خيام مجهزة",
+      "es": "Tiendas equipadas"
+    },
+    "Matelas et couvertures": {
+      "ar": "فرش وأغطية",
+      "es": "Colchonetas y mantas"
+    },
+    "Ambiance feu de camp": {
+      "ar": "أجواء نار المخيم",
+      "es": "Ambiente de fogata"
+    },
+    "Repas traditionnels": {
+      "ar": "وجبات تقليدية",
+      "es": "Comidas tradicionales"
+    },
+    "Ciel clair de montagne": {
+      "ar": "سماء جبلية صافية",
+      "es": "Cielo despejado de montaña"
+    },
+    "Électricité disponible la nuit": {
+      "ar": "كهرباء متاحة ليلاً",
+      "es": "Electricidad disponible por la noche"
+    },
+    "Il s’agit d’une expérience de camping sauvage. Les services restent simples et proches de la nature.": {
+      "ar": "إنها تجربة تخييم في الطبيعة، بمرافق بسيطة تحافظ على روح المكان.",
+      "es": "Es una experiencia de acampada en la naturaleza, con servicios sencillos y cercanos al entorno."
+    },
+    "Votre aventure de trois jours": {
+      "ar": "مغامرتك خلال ثلاثة أيام",
+      "es": "Tu aventura de tres días"
+    },
+    "Bienvenue à Imsfrane": {
+      "ar": "مرحباً بك في مسفران",
+      "es": "Bienvenido a Imsfrane"
+    },
+    "Accueil et rencontre avec l’équipe locale près de Tilouguite ou d’Imsfrane.": {
+      "ar": "استقبال ولقاء بالفريق المحلي قرب تيلوكيت أو مسفران.",
+      "es": "Recepción y encuentro con el equipo local cerca de Tilouguite o Imsfrane."
+    },
+    "Transfert vers notre camping sauvage et installation dans les tentes.": {
+      "ar": "النقل إلى مخيمنا في الطبيعة والاستقرار في الخيام.",
+      "es": "Traslado al campamento e instalación en las tiendas."
+    },
+    "Thé d’accueil et présentation du programme de trois jours.": {
+      "ar": "شاي ترحيبي وتقديم برنامج الأيام الثلاثة.",
+      "es": "Té de bienvenida y presentación del programa de tres días."
+    },
+    "Petite promenade autour du camp, de la rivière et des paysages environnants.": {
+      "ar": "نزهة قصيرة حول المخيم والنهر والمناظر المحيطة.",
+      "es": "Paseo corto alrededor del campamento, el río y el paisaje."
+    },
+    "Dîner traditionnel préparé au camp.": {
+      "ar": "عشاء تقليدي يُحضَّر في المخيم.",
+      "es": "Cena tradicional preparada en el campamento."
+    },
+    "Première nuit dans nos tentes équipées.": {
+      "ar": "الليلة الأولى في الخيام المجهزة.",
+      "es": "Primera noche en nuestras tiendas equipadas."
+    },
+    "Soirée autour du feu avec thé, musique et ambiance paisible sous les étoiles.": {
+      "ar": "أمسية قرب النار مع الشاي والموسيقى وأجواء هادئة تحت النجوم.",
+      "es": "Velada junto al fuego con té, música y una atmósfera tranquila bajo las estrellas."
+    },
+    "Grande journée d’aventure": {
+      "ar": "يوم كامل من المغامرة",
+      "es": "Gran jornada de aventura"
+    },
+    "Petit-déjeuner traditionnel au camp.": {
+      "ar": "فطور تقليدي في المخيم.",
+      "es": "Desayuno tradicional en el campamento."
+    },
+    "Transfert en 4x4 par les pistes de montagne vers le point de départ.": {
+      "ar": "نقل بسيارة رباعية الدفع عبر المسالك الجبلية نحو نقطة الانطلاق.",
+      "es": "Traslado en 4×4 por las pistas de montaña hasta el inicio de la ruta."
+    },
+    "Ascension guidée du Jebel Imsfrane, culminant à 1 868 mètres.": {
+      "ar": "صعود مع مرشد إلى جبل مسفران الذي يبلغ ارتفاعه 1868 متراً.",
+      "es": "Ascensión guiada al Jebel Imsfrane, de 1.868 metros de altitud."
+    },
+    "Vue panoramique et pause photo au sommet.": {
+      "ar": "إطلالة بانورامية وتوقف للتصوير في القمة.",
+      "es": "Vistas panorámicas y parada para fotografías en la cumbre."
+    },
+    "Pique-nique ou déjeuner local dans la nature.": {
+      "ar": "نزهة غداء أو وجبة محلية في الطبيعة.",
+      "es": "Pícnic o comida local en la naturaleza."
+    },
+    "Visite des cascades Wakoudene et des bassins naturels selon la saison.": {
+      "ar": "زيارة شلالات واكودن والأحواض الطبيعية بحسب الموسم.",
+      "es": "Visita a las cascadas de Wakoudene y a las pozas naturales según la estación."
+    },
+    "Retour au camping sauvage, repos et dîner.": {
+      "ar": "العودة إلى المخيم للراحة والعشاء.",
+      "es": "Regreso al campamento, descanso y cena."
+    },
+    "Soirée traditionnelle avec guitare, musique Ahidouss et feu de camp.": {
+      "ar": "أمسية تقليدية مع العزف وموسيقى أحيدوس ونار المخيم.",
+      "es": "Velada tradicional con guitarra, música Ahidous y fogata."
+    },
+    "Dernière journée": {
+      "ar": "اليوم الأخير",
+      "es": "Último día"
+    },
+    "Réveil dans les montagnes et contemplation du paysage.": {
+      "ar": "استيقاظ وسط الجبال والاستمتاع بالمشهد.",
+      "es": "Despertar en las montañas y contemplar el paisaje."
+    },
+    "Petit-déjeuner au camping sauvage.": {
+      "ar": "الفطور في المخيم.",
+      "es": "Desayuno en el campamento."
+    },
+    "Descente rafting optionnelle sur l’Oued Ahansal.": {
+      "ar": "جولة تجديف اختيارية على وادي أحنصال.",
+      "es": "Descenso opcional de rafting en el Ahansal."
+    },
+    "Sortie VTT optionnelle sur les pistes locales.": {
+      "ar": "جولة اختيارية بالدراجات الجبلية على المسالك المحلية.",
+      "es": "Salida opcional en bicicleta de montaña."
+    },
+    "Excursion quad optionnelle en montagne.": {
+      "ar": "جولة اختيارية بالكواد وسط الجبال.",
+      "es": "Excursión opcional en quad por la montaña."
+    },
+    "Déjeuner avant le départ.": {
+      "ar": "الغداء قبل المغادرة.",
+      "es": "Almuerzo antes de partir."
+    },
+    "Fin du programme et départ selon l’organisation du transport.": {
+      "ar": "نهاية البرنامج والمغادرة وفق ترتيبات النقل.",
+      "es": "Fin del programa y salida según el transporte previsto."
+    },
+    "Arrivée et camping sauvage": {
+      "ar": "الوصول والتخييم في الطبيعة",
+      "es": "Llegada y acampada"
+    },
+    "Sommet d’Imsfrane et cascades Wakoudene": {
+      "ar": "قمة مسفران وشلالات واكودن",
+      "es": "Cumbre de Imsfrane y cascadas de Wakoudene"
+    },
+    "Activités et départ": {
+      "ar": "أنشطة والمغادرة",
+      "es": "Actividades y salida"
+    },
+    "Trois jours avec camping sauvage": {
+      "ar": "ثلاثة أيام من التخييم في الطبيعة",
+      "es": "Tres días de acampada"
+    },
+    "Comprend deux nuits en tentes équipées, les repas, le guide local, la randonnée, les cascades et la soirée traditionnelle.": {
+      "ar": "يشمل ليلتين في خيام مجهزة والوجبات والمرشد المحلي والمشي الجبلي والشلالات والأمسية التقليدية.",
+      "es": "Incluye dos noches en tiendas equipadas, comidas, guía local, senderismo, cascadas y una velada tradicional."
+    },
+    "Inclus et non inclus": {
+      "ar": "ما يشمله البرنامج وما لا يشمله",
+      "es": "Qué está incluido y qué no"
+    },
+    "Deux nuits dans notre camping sauvage": {
+      "ar": "ليلتان في مخيمنا",
+      "es": "Dos noches en el campamento"
+    },
+    "Tente, matelas et couverture": {
+      "ar": "خيمة وفرش وغطاء",
+      "es": "Tienda, colchoneta y manta"
+    },
+    "Deux petits-déjeuners": {
+      "ar": "وجبتا فطور",
+      "es": "Dos desayunos"
+    },
+    "Deux déjeuners": {
+      "ar": "وجبتا غداء",
+      "es": "Dos almuerzos"
+    },
+    "Deux dîners": {
+      "ar": "وجبتا عشاء",
+      "es": "Dos cenas"
+    },
+    "Guide local": {
+      "ar": "مرشد محلي",
+      "es": "Guía local"
+    },
+    "Randonnée au sommet": {
+      "ar": "المشي نحو القمة",
+      "es": "Senderismo hasta la cumbre"
+    },
+    "Visite des cascades Wakoudene": {
+      "ar": "زيارة شلالات واكودن",
+      "es": "Visita a las cascadas Wakoudene"
+    },
+    "Soirée traditionnelle et feu de camp": {
+      "ar": "أمسية تقليدية ونار المخيم",
+      "es": "Velada tradicional y fogata"
+    },
+    "Transport depuis votre ville": {
+      "ar": "النقل من مدينتك",
+      "es": "Transporte desde tu ciudad"
+    },
+    "Achats personnels": {
+      "ar": "المشتريات الشخصية",
+      "es": "Compras personales"
+    },
+    "Option rafting": {
+      "ar": "خيار التجديف",
+      "es": "Opción rafting"
+    },
+    "Option VTT": {
+      "ar": "خيار الدراجات الجبلية",
+      "es": "Opción BTT"
+    },
+    "Option quad": {
+      "ar": "خيار الكواد",
+      "es": "Opción quad"
+    },
+    "Assurance personnelle": {
+      "ar": "التأمين الشخصي",
+      "es": "Seguro personal"
+    },
+    "Inclus": {
+      "ar": "مشمول",
+      "es": "Incluido"
+    },
+    "Non inclus": {
+      "ar": "غير مشمول",
+      "es": "No incluido"
+    },
+    "Ajoutez plus d’aventure": {
+      "ar": "أضف المزيد من المغامرة",
+      "es": "Añade más aventura"
+    },
+    "Descente de 12 kilomètres sur l’Oued Ahansal, selon les conditions de la rivière et la météo.": {
+      "ar": "نزول لمسافة 12 كلم على وادي أحنصال بحسب ظروف النهر والطقس.",
+      "es": "Descenso de 12 kilómetros en el Ahansal, sujeto al caudal y a la meteorología."
+    },
+    "Sortie VTT sur les pistes et sentiers autour d’Imsfrane.": {
+      "ar": "جولة بالدراجات الجبلية في المسالك المحيطة بمسفران.",
+      "es": "Ruta en BTT por las pistas y senderos alrededor de Imsfrane."
+    },
+    "Excursion en quad sur les pistes et paysages panoramiques.": {
+      "ar": "جولة بالكواد عبر المسالك والإطلالات الجبلية.",
+      "es": "Excursión en quad por pistas con vistas panorámicas."
+    },
+    "Des nuits entourées par la nature": {
+      "ar": "ليالٍ تحتضنها الطبيعة",
+      "es": "Noches rodeadas de naturaleza"
+    },
+    "Un séjour simple, paisible et authentique sous le ciel de montagne.": {
+      "ar": "إقامة بسيطة وهادئة وأصيلة تحت سماء الجبال.",
+      "es": "Una estancia sencilla, tranquila y auténtica bajo el cielo de la montaña."
+    },
+    "Prêt pour trois jours dans l’Atlas sauvage ?": {
+      "ar": "هل أنت مستعد لثلاثة أيام في طبيعة الأطلس؟",
+      "es": "¿Listo para tres días en el Atlas?"
+    },
+    "Envoyez-nous vos dates et le nombre de personnes. Nous confirmerons la disponibilité et organiserons le programme adapté à votre groupe.": {
+      "ar": "أرسل لنا المواعيد وعدد الأشخاص؛ سنؤكد التوفر وننسق البرنامج المناسب لمجموعتك.",
+      "es": "Indícanos las fechas y el número de personas. Confirmaremos la disponibilidad y adaptaremos el programa a tu grupo."
+    },
+    "Formulaire de réservation ↗": {
+      "ar": "استمارة الحجز ↗",
+      "es": "Formulario de reserva ↗"
+    }
+  },
   "guide": {},
   "booking": {},
   "store": {},
   "blog": {},
   "contact": {},
-  "about": {},
+  "about": {
+    "LES VISAGES DERRIÈRE L’AVENTURE": {
+      "ar": "الوجوه التي تقف خلف المغامرة",
+      "es": "LAS PERSONAS DETRÁS DE LA AVENTURA"
+    },
+    "Nos racines.": {
+      "ar": "جذورنا.",
+      "es": "Nuestras raíces."
+    },
+    "Votre aventure.": {
+      "ar": "مغامرتك.",
+      "es": "Tu aventura."
+    },
+    "Nous vivons l’Atlas au quotidien. Découvrez les habitants, les paysages et les expériences qui font l’âme d’Imsfrane Cathédrale.": {
+      "ar": "نعيش في الأطلس ونعرف تفاصيله اليومية. ندعوك لاكتشاف الناس والمناظر والتجارب التي تمنح مسفران كاتدرال روحها الخاصة.",
+      "es": "Vivimos el Atlas cada día. Descubre las personas, paisajes y experiencias que dan vida a Imsfrane Cathédrale."
+    },
+    "Découvrir notre univers": {
+      "ar": "اكتشف عالمنا",
+      "es": "Descubre nuestro mundo"
+    },
+    "Préparer votre aventure": {
+      "ar": "خطط لمغامرتك",
+      "es": "Prepara tu aventura"
+    },
+    "QUI SOMMES-NOUS ?": {
+      "ar": "من نحن؟",
+      "es": "¿QUIÉNES SOMOS?"
+    },
+    "D’ici. Passionnés par la montagne.": {
+      "ar": "من هذه الأرض، وشغوفون بجبالها.",
+      "es": "De aquí y apasionados por la montaña."
+    },
+    "Imsfrane Cathédrale est une initiative locale de tourisme d’aventure, profondément liée aux montagnes de Msfrane, à Tilouguite et à la vallée de l’Ahansal. Notre attachement à ce territoire guide notre façon d’accueillir les visiteurs et de partager ses paysages.": {
+      "ar": "مسفران كاتدرال مبادرة محلية في سياحة المغامرات ترتبط ارتباطاً وثيقاً بجبال مسفران وتيلوكيت ووادي أحنصال. انتماؤنا لهذه المنطقة هو ما يوجّه أسلوب استقبالنا للزوار وتعريفهم بطبيعتها.",
+      "es": "Imsfrane Cathédrale es una iniciativa local de turismo de aventura, estrechamente vinculada a Imsfrane, Tilouguite y el valle del Ahansal. Nuestro arraigo guía la manera de recibir a los visitantes y compartir los paisajes."
+    },
+    "De la rivière aux sentiers de montagne, nous privilégions les rencontres authentiques, l’attention aux détails et des expériences adaptées aux saisons et aux conditions locales.": {
+      "ar": "من النهر إلى المسالك الجبلية، نهتم بالتجارب الأصيلة والتفاصيل الصغيرة، ونكيّف أنشطتنا مع الفصول والظروف المحلية.",
+      "es": "Desde el río hasta los senderos de montaña, valoramos los encuentros auténticos, la atención al detalle y las experiencias adaptadas a las estaciones."
+    },
+    "NOTRE TERRITOIRE": {
+      "ar": "منطقتنا",
+      "es": "NUESTRO TERRITORIO"
+    },
+    "Un lieu qui mérite d’être découvert": {
+      "ar": "مكان يستحق الاكتشاف",
+      "es": "Un lugar que merece ser descubierto"
+    },
+    "Les falaises de Msfrane, l’oued Ahansal et les villages du Haut Atlas ne sont pas un simple décor : ils sont au cœur de chaque aventure.": {
+      "ar": "ليست صخور مسفران ووادي أحنصال وقرى الأطلس مجرد خلفية للصور، بل هي جوهر كل مغامرة نخوضها.",
+      "es": "Los acantilados de Imsfrane, el Ahansal y los pueblos del Atlas no son un simple escenario: son el corazón de nuestras experiencias."
+    },
+    "LES VISAGES": {
+      "ar": "الوجوه",
+      "es": "LAS PERSONAS"
+    },
+    "Une équipe proche de la nature": {
+      "ar": "فريق قريب من الطبيعة",
+      "es": "Un equipo conectado con la naturaleza"
+    },
+    "Derrière chaque expérience, il y a des personnes du territoire qui aiment la montagne, la rivière et le partage. Les portraits originaux de notre équipe seront ajoutés ici.": {
+      "ar": "وراء كل تجربة أشخاص من المنطقة يحبون الجبل والنهر ومشاركة المعرفة. ستُضاف هنا صور فريقنا الأصلية.",
+      "es": "Detrás de cada experiencia hay personas de la región que aman la montaña, el río y compartir sus conocimientos. Aquí añadiremos los retratos originales del equipo."
+    },
+    "Notre équipe sur le terrain": {
+      "ar": "فريقنا أثناء العمل",
+      "es": "Nuestro equipo sobre el terreno"
+    },
+    "NOS EXPÉRIENCES": {
+      "ar": "تجاربنا",
+      "es": "NUESTRAS EXPERIENCIAS"
+    },
+    "À chacun sa façon d’explorer": {
+      "ar": "لكل شخص طريقته في الاكتشاف",
+      "es": "Cada persona tiene su forma de explorar"
+    },
+    "Découvrir ↗": {
+      "ar": "اكتشف ↗",
+      "es": "Descubrir ↗"
+    },
+    "NOTRE ENGAGEMENT": {
+      "ar": "التزامنا",
+      "es": "NUESTRO COMPROMISO"
+    },
+    "Une aventure qui a du sens": {
+      "ar": "مغامرة مسؤولة وهادفة",
+      "es": "Una aventura con sentido"
+    },
+    "Connaissance du terrain": {
+      "ar": "معرفة المسالك والتضاريس",
+      "es": "Conocimiento del terreno"
+    },
+    "Respect de la nature": {
+      "ar": "احترام الطبيعة",
+      "es": "Respeto por la naturaleza"
+    },
+    "Rencontres humaines": {
+      "ar": "التواصل الإنساني",
+      "es": "Encuentros humanos"
+    },
+    "L’Atlas vous attend.": {
+      "ar": "الأطلس في انتظارك.",
+      "es": "El Atlas te espera."
+    },
+    "Racontez-nous ce que vous souhaitez découvrir. Nous vous orienterons vers une expérience adaptée à la saison.": {
+      "ar": "أخبرنا بما ترغب في اكتشافه، وسنساعدك على اختيار تجربة تناسب الموسم.",
+      "es": "Cuéntanos qué te gustaría conocer y te orientaremos hacia una experiencia adecuada a la época."
+    },
+    "Préparer votre aventure ↗": {
+      "ar": "خطط لمغامرتك ↗",
+      "es": "Prepara tu aventura ↗"
+    }
+  },
   "memories": {},
   "index": {}
 }
