@@ -487,6 +487,10 @@ jobs:
           # Memories: display all uploaded demo photos and original website archive.
           from build_memories_gallery import build as build_memories
           build_memories(root)
+          # Publish all uploaded demo photos before building article pages.
+          for photo in Path('images').iterdir():
+              if photo.suffix.lower() in ('.webp','.jpeg','.jpg','.png'):
+                  shutil.copy2(photo,root/'images'/photo.name)
           # Generate original long-form articles in French, English and Arabic first.
           from build_new_articles import build as build_articles
           build_articles(root)
