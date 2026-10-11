@@ -40,7 +40,10 @@ dots.forEach(function(dot){
 });
 hero.addEventListener("mouseenter",function(){paused=true;stop()});
 hero.addEventListener("mouseleave",function(){paused=false;start()});
-hero.addEventListener("focusin",function(){paused=true;stop()});
+hero.addEventListener("focusin",function(ev){
+ // Pause only for keyboard navigation; a tap on an arrow must not stop autoplay.
+ if(ev.target.matches&&ev.target.matches(":focus-visible")){paused=true;stop()}
+});
 hero.addEventListener("focusout",function(ev){if(!hero.contains(ev.relatedTarget)){paused=false;start()}});
 hero.addEventListener("keydown",function(ev){
  if(ev.target.closest("button")&&(ev.key==="ArrowRight"||ev.key==="ArrowLeft")){
