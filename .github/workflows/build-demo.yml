@@ -2,7 +2,7 @@ name: Publish Imsfrane demo
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/build-demo.yml', 'rafting-v8.html', 'imsfrane_rafting_mobile_cadrage_corrige_v8*.html', 'images/rafting-new/**', 'quad-content-*.html', 'images/quad-new/**', 'images/IMG_*.webp', 'vtt-content-*.html', 'camping-content-*.html', 'randonnee-content-*.html', 'about-content-*.html', 'remaining-pages-theme.css', 'rebuild_remaining.py', 'build_memories_gallery.py', 'memories-gallery.css', 'build_blog_journal.py', 'blog-journal.css', 'blog-journal.js', 'build_new_articles.py', 'blog_new_topics.json', 'blog_article_research.json', 'blog_expanded_content.json', 'blog-articles.css', 'booking-prices.json', 'booking-pro.css', 'booking-pro.js', 'build_booking_pro.py', 'build_store_pro.py', 'store-products.json', 'store-pro.css', 'store-pro.js', 'build_guide_pro.py', 'guide-pro.css', 'build_home_pro.py', 'home-pro.css', 'home-pro.js', 'menu-preview.html', 'build_navigation_pro.py', 'navigation-pro.css', 'navigation-pro.js', 'build_localized_pages.py', 'localized-pages.json', 'localized-articles-es.json', 'localized-legacy-articles.json', 'build_localized_mirror.py', 'build_exact_locales.py', 'localized-exact-text.json', 'validate_site_locales.py', 'build_arabic_font.py', 'fix_core_demo_language.py', 'arabic-pro.css', 'localized-site.css', 'localized-site.js', 'images/rando-*.webp', 'images/IMG_*.jpeg']
+    paths: ['.github/workflows/build-demo.yml', 'rafting-v8.html', 'imsfrane_rafting_mobile_cadrage_corrige_v8*.html', 'images/rafting-new/**', 'quad-content-*.html', 'images/quad-new/**', 'images/IMG_*.webp', 'vtt-content-*.html', 'camping-content-*.html', 'randonnee-content-*.html', 'about-content-*.html', 'remaining-pages-theme.css', 'rebuild_remaining.py', 'build_memories_gallery.py', 'memories-gallery.css', 'build_blog_journal.py', 'blog-journal.css', 'blog-journal.js', 'build_new_articles.py', 'blog_new_topics.json', 'blog_article_research.json', 'blog_expanded_content.json', 'blog-articles.css', 'booking-prices.json', 'booking-pro.css', 'booking-pro.js', 'build_booking_pro.py', 'build_store_pro.py', 'store-products.json', 'store-pro.css', 'store-pro.js', 'build_guide_pro.py', 'guide-pro.css', 'build_home_pro.py', 'home-pro.css', 'home-pro.js', 'menu-preview.html', 'build_navigation_pro.py', 'navigation-pro.css', 'navigation-pro.js', 'build_localized_pages.py', 'localized-pages.json', 'localized-articles-es.json', 'localized-legacy-articles.json', 'build_localized_mirror.py', 'build_exact_locales.py', 'localized-exact-text.json', 'validate_site_locales.py', 'build_arabic_font.py', 'fix_core_demo_language.py', 'polish_arabic_currency.py', 'arabic-pro.css', 'localized-site.css', 'localized-site.js', 'images/rando-*.webp', 'images/IMG_*.jpeg']
   workflow_dispatch:
 concurrency:
   group: imsfrane-demo-publish
@@ -541,6 +541,8 @@ jobs:
           # Only <head> is touched; page structure and original images are kept.
           from build_arabic_font import build as enhance_arabic_font
           enhance_arabic_font(root)
+          from polish_arabic_currency import build as polish_currency
+          polish_currency(root)
           # Required self-hosted fonts must exist, or do not publish.
           fonts = root/'fonts'/'arabic'
           for name in ('Alexandria-VF.woff2','Tajawal-Regular.woff2',
