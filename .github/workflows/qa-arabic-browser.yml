@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - qa_arabic_browser.py
+      - qa_arabic_mobile_layout.py
       - .github/workflows/qa-arabic-browser.yml
 permissions:
   contents: read
@@ -22,10 +23,14 @@ jobs:
           google-chrome --version || chromium --version || true
       - name: Verify published Arabic RTL fonts in Chrome on mobile and desktop
         run: python3 qa_arabic_browser.py
+      - name: Diagnose Arabic mobile horizontal page movement
+        run: python3 qa_arabic_mobile_layout.py
       - name: Keep screenshots and text metrics
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: arabic-mobile-desktop-screenshots
-          path: arabic-browser-diagnostics/
+          path: |
+            arabic-browser-diagnostics/
+            arabic-layout-debug/
           if-no-files-found: ignore
