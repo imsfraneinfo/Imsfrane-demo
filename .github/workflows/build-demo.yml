@@ -19,7 +19,7 @@ jobs:
           git clone --depth 1 https://github.com/imsfraneinfo/imsfraneinfo.git /tmp/original
           mkdir -p public
           rsync -a --exclude=.git --exclude=.github --exclude=CNAME /tmp/original/ public/
-          python3 -m pip install --quiet beautifulsoup4 pillow
+          python3 -m pip install --quiet beautifulsoup4 pillow fonttools brotli
           python3 - <<'PY'
           from pathlib import Path
           import re
@@ -536,6 +536,13 @@ jobs:
           # Only <head> is touched; page structure and original images are kept.
           from build_arabic_font import build as enhance_arabic_font
           enhance_arabic_font(root)
+          # Required self-hosted fonts must exist, or do not publish.
+          fonts = root/'fonts'/'arabic'
+          for name in ('Alexandria-VF.woff2','Tajawal-Regular.woff2',
+                       'Tajawal-Medium.woff2','Tajawal-Bold.woff2','Tajawal-ExtraBold.woff2'):
+              asset=fonts/name
+              if not asset.is_file() or asset.stat().st_size<9000:
+                  raise RuntimeError('Arabic typography asset not published: '+str(asset))
           # Assets are copied from this demo repository, not written to the live site.
           for asset in ('booking-pro.css','booking-pro.js','store-pro.css','store-pro.js','guide-pro.css','home-pro.css','home-pro.js','menu-preview.html','navigation-pro.css','navigation-pro.js','localized-site.css','localized-site.js','arabic-pro.css'):
               shutil.copy2(Path(asset),root/asset)
