@@ -167,8 +167,8 @@ def build(root):
         original=original.replace("</body>",'<script type="application/json" id="bpCatalog">'+config+'</script><script defer src="../booking-pro.js"></script></body>',1)
         # No photos anywhere on the Booking pages, including shared header and footer.
         # Keep the site's textual wordmark and navigation intact.
-        original=re.sub(r'<img\\b[^>]*>', '', original, flags=re.I)
-        original=re.sub(r'<link\\b[^>]*\\bas=(["\\'])image\\1[^>]*>', '', original, flags=re.I)
+        original=re.sub(r'<img\b[^>]*>', '', original, flags=re.I)
+        original=re.sub(r'<link\b[^>]*\bas="image"[^>]*>', '', original, flags=re.I)
         original=original.replace('<script defer="" src="../js/pages/booking.min.js"></script>','')
         original=original.replace('<script defer src="../js/pages/booking.min.js"></script>','')
         original=original.replace('Choisissez votre activité, la date et le nombre de participants, puis envoyez votre demande par WhatsApp.','Créez votre séjour à Imsfrane et calculez le tarif du rafting, des tentes, du VTT, du quad et des randonnées.')
