@@ -31,6 +31,9 @@ AR_ADVICE={
 def esc(x):return html.escape(str(x),quote=True)
 def build(root):
     # Existing original article pages are left unchanged.
+    photo_keys=[re.sub(r'-(?:480|680|768|800|1024|1200)(?=\\.)','',t['image'].split('/')[-1].lower()) for t in TOPICS]
+    if len(photo_keys)!=len(set(photo_keys)):
+        raise RuntimeError('Duplicate photos found among new blog articles')
     for lang in ('fr','en','ar'):
         (root/lang).mkdir(parents=True,exist_ok=True)
         links=[]
@@ -40,12 +43,10 @@ def build(root):
             desc=topic['desc'+lang]
             cat=CATEGORY[topic['category']][{'fr':0,'en':1,'ar':2}[lang]]
             image=topic['image']
-            # Some new uploads live only in the demo repository; use an existing
-            # source photo if the requested asset has not been published.
+            # No repeated or unrelated fallback images: fail build if a photo is missing.
             image_file=root/'images'/image.split('/')[-1]
-            if not image_file.exists():
-                fallback={'vtt':'IMG_9763.webp','hiking':'22-800.webp','rafting':'24-800.webp','camping':'camping-1-800.webp','access':'19-800.webp','culture':'blog-tilouguite-800.webp','nature':'24.webp'}[topic['category']]
-                image='../images/'+fallback
+            if not image_file.is_file():
+                raise RuntimeError('Missing article photo for '+topic['slug']+': '+str(image_file))
             lead=(desc+' '+RESEARCH['details'][topic['slug']][0]) if lang=='fr' else (desc+' '+RESEARCH['enLead'][topic['category']] if lang=='en' else desc+' '+RESEARCH['arLead'][topic['category']])
             paragraphs=RESEARCH['details'][topic['slug']] if lang=='fr' else EN_ADVICE[topic['category']] if lang=='en' else AR_ADVICE[topic['category']]
             heads={'fr':['À savoir avant de partir','Préparer son expérience','Respecter la montagne'],'en':['What to know','Prepare your visit','Travel responsibly'],'ar':['معلومات مهمة','الاستعداد للخرجة','احترام الطبيعة']}
