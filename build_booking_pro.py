@@ -11,7 +11,7 @@ WORDS = {
 "tags":["Demande sans paiement","Calcul instantané","Confirmation humaine"],
 "steps":["Expériences","Votre séjour","Récapitulatif"],
 "eyebrow1":"ÉTAPE 01 · VOS ENVIES","pick":"Choisissez vos expériences",
-"pickhelp":"Ajoutez plusieurs activités au même séjour. Utilisez + et − pour définir le nombre de participants, de quads, de groupes ou de tentes.",
+"pickhelp":"Cochez les activités souhaitées avec une croix ×. Indiquez le nombre de personnes : le total s’actualise automatiquement. Pour les tentes et les quads, précisez les quantités.",
 "filters":{"all":"Tout voir","rafting":"Rafting","camping":"Tentes","hiking":"Randonnée","vtt":"VTT","quad":"Quad","stay":"Séjour"},
 "units":{"person":"par personne","tentNight":"par tente / nuit","group":"par groupe","vehicle":"par quad"},
 "season":"Le rafting est généralement proposé de mars à juin, parfois en juillet si le débit le permet. La sécurité et la disponibilité sont à confirmer.",
@@ -19,7 +19,7 @@ WORDS = {
 "detailshelp":"Une demande complète facilite la réponse de notre équipe. Aucune réservation n'est confirmée avant notre accord.",
 "name":"Nom complet","phone":"WhatsApp / téléphone","email":"E-mail","opt":"facultatif","country":"Pays",
 "start":"Date souhaitée","end":"Départ du camping","endhelp":"Pour les tentes, indiquez la date de départ afin de calculer les nuits.",
-"travelers":"Nombre de voyageurs","language":"Langue souhaitée","place":"Lieu de départ ou hébergement",
+"travelers":"Nombre de voyageurs","countHint":"Les tarifs par personne sont multipliés automatiquement par ce nombre.","quantity":"Quantité","selected":"Sélectionner","language":"Langue souhaitée","place":"Lieu de départ ou hébergement",
 "placehint":"Ex. Tilouguite, Imsfrane, Béni Mellal","extra":"Services supplémentaires (sur devis)",
 "notes":"Informations ou demandes particulières","noteshint":"Horaires, enfants, besoins particuliers, questions…",
 "disclaimer":"Le total comprend uniquement les prestations tarifées ci-dessus. Transport, chambres et services sur devis ne sont pas inclus. L'envoi sur WhatsApp n'est pas une réservation confirmée.",
@@ -34,7 +34,7 @@ WORDS = {
 "tags":["No online payment","Instant estimate","Personally confirmed"],
 "steps":["Experiences","Your trip","Summary"],
 "eyebrow1":"STEP 01 · YOUR ADVENTURE","pick":"Choose your experiences",
-"pickhelp":"Combine activities in one request. Use + and − to choose people, quads, groups or tents.",
+"pickhelp":"Tick × the activities you want and enter the number of travelers: the total updates automatically. For tents and quads, choose quantities.",
 "filters":{"all":"All","rafting":"Rafting","camping":"Tents","hiking":"Hiking","vtt":"Mountain biking","quad":"Quad","stay":"3-day stay"},
 "units":{"person":"per person","tentNight":"per tent / night","group":"per group","vehicle":"per quad"},
 "season":"Rafting is generally offered from March to June, sometimes July if river levels permit. Safety and availability must be confirmed.",
@@ -42,7 +42,7 @@ WORDS = {
 "detailshelp":"Providing your trip details helps our team reply. No booking is confirmed until we agree.",
 "name":"Full name","phone":"WhatsApp / phone","email":"Email","opt":"optional","country":"Country",
 "start":"Preferred date","end":"Camping check-out","endhelp":"For tents, enter your check-out date to calculate nights.",
-"travelers":"Number of travelers","language":"Preferred language","place":"Departure point or accommodation",
+"travelers":"Number of travelers","countHint":"Per-person prices automatically use this number.","quantity":"Quantity","selected":"Select","language":"Preferred language","place":"Departure point or accommodation",
 "placehint":"e.g. Tilouguite, Imsfrane, Beni Mellal","extra":"Additional services (quote required)",
 "notes":"Special requests","noteshint":"Timing, children, accessibility, questions…",
 "disclaimer":"The estimate includes only the priced services above. Transfers, rooms and quote-only services are excluded. Sending a WhatsApp message does not confirm a booking.",
@@ -64,14 +64,21 @@ def render(lang):
         name=e(p[lang])
         detail=e(p["detailFr" if lang=="fr" else "detailEn"])
         unit=e(t["units"][p["unit"]])
+        per_person = p["unit"]=="person"
+        counts = (t["travelers"] if per_person else t["quantity"])
+        controls = ('<span class="bp-count-auto" data-unit="people">× <strong>2</strong></span>' if per_person else
+                    '<div class="bp-stepper" role="group" aria-label="'+e(counts)+' — '+name+'">'
+                    '<button type="button" data-delta="-1" data-offer="'+e(p["id"])+'" aria-label="− '+name+'" disabled>−</button>'
+                    '<output aria-live="off">0</output>'
+                    '<button type="button" data-delta="1" data-offer="'+e(p["id"])+'" aria-label="+ '+name+'">+</button></div>')
         cards.append(
           '<article class="bp-offer" data-id="'+e(p["id"])+'" data-category="'+e(p["category"])+'" data-selected="false">'
-          '<div class="bp-offer-top"><span class="bp-icon" aria-hidden="true">'+ICONS[p["category"]]+'</span><span class="bp-unit">'+unit+'</span></div>'
+          '<div class="bp-offer-top"><label class="bp-select-activity" for="bp-choice-'+e(p["id"])+'">'
+          '<input class="bp-choice" id="bp-choice-'+e(p["id"])+'" type="checkbox" data-offer="'+e(p["id"])+'">'
+          '<span class="bp-select-label">'+e(t["selected"])+'</span></label>'
+          '<span class="bp-unit">'+unit+'</span></div>'
           '<h3>'+name+'</h3><p>'+detail+'</p><div class="bp-price-row"><div class="bp-offer-price">'+f'{p["price"]:,}'.replace(","," ")+' <small>MAD</small></div>'
-          '<div class="bp-stepper" role="group" aria-label="'+name+'">'
-          '<button type="button" data-delta="-1" data-offer="'+e(p["id"])+'" aria-label="− '+name+'" disabled>−</button>'
-          '<output aria-live="off">0</output>'
-          '<button type="button" data-delta="1" data-offer="'+e(p["id"])+'" aria-label="+ '+name+'">+</button></div></div></article>'
+          '<div class="bp-quantity-control">'+controls+'</div></div></article>'
         )
     cats=["all","rafting","camping","hiking","vtt","quad","stay"]
     filters="".join('<button type="button" class="bp-filter" data-filter="'+key+'" aria-pressed="'+str(key=="all").lower()+'">'+e(t["filters"][key])+'</button>' for key in cats)
@@ -89,7 +96,7 @@ def render(lang):
         field("bp-country",t["country"],extra='maxlength="70" autocomplete="country-name"'),
         field("bp-start",t["start"],ftype="date",extra='required'),
         '<div class="bp-field" id="bp-checkout-field" hidden><label for="bp-end">'+e(t["end"])+' *</label><input id="bp-end" type="date"><small class="bp-note">'+e(t["endhelp"])+'</small></div>',
-        field("bp-travelers",t["travelers"],ftype="number",extra='required min="1" max="60" value="2" inputmode="numeric"'),
+
         '<div class="bp-field"><label for="bp-language">'+e(t["language"])+'</label><select id="bp-language"><option value="Français"'+(' selected' if lang=="fr" else '')+'>Français</option><option value="English"'+(' selected' if lang=="en" else '')+'>English</option><option value="العربية">العربية</option></select></div>',
         field("bp-place",t["place"],extra='maxlength="150" placeholder="'+e(t["placehint"])+'"',full=True),
         '<div class="bp-field bp-full"><label>'+e(t["extra"])+'</label><div id="bp-extras" class="bp-extras">'+extras+'</div></div>',
@@ -100,7 +107,7 @@ def render(lang):
       <section class="bp-hero" aria-labelledby="bp-title">
         <div class="bp-hero-copy"><span class="bp-kicker">{e(t["kicker"])}</span><h1 id="bp-title">{t["hero"]}</h1>
           <p>{e(t["intro"])}</p><div class="bp-hero-tags">{tags}</div>
-        </div><div class="bp-hero-photo"><img src="../images/24.webp" alt="Rafting Imsfrane · Oued Ahansal" fetchpriority="high" decoding="async"></div>
+        </div>
       </section>
       <div class="bp-wrap">
         <ol class="bp-steps" aria-label="Reservation steps">{steps}</ol>
@@ -108,6 +115,11 @@ def render(lang):
           <div class="bp-main-col">
             <section class="bp-section" aria-labelledby="bp-select-heading">
               <div class="bp-section-heading"><div><span class="bp-heading-hint">{e(t["eyebrow1"])}</span><h2 id="bp-select-heading">{e(t["pick"])}</h2><p>{e(t["pickhelp"])}</p></div></div>
+              <div class="bp-travelers-box"><label for="bp-travelers">{e(t["travelers"])} <span aria-hidden="true">*</span></label>
+                <div class="bp-travelers-control"><button type="button" id="bp-people-minus" aria-label="− {e(t["travelers"])}">−</button>
+                <input id="bp-travelers" type="number" form="bp-form" min="1" max="60" value="2" inputmode="numeric" required aria-describedby="bp-people-help">
+                <button type="button" id="bp-people-plus" aria-label="+ {e(t["travelers"])}">+</button></div>
+                <p id="bp-people-help">{e(t["countHint"])}</p></div>
               <div id="bp-filters" class="bp-filters" role="group" aria-label="{e(t["pick"])}">{filters}</div>
               <div id="bp-offers" class="bp-offers">{"".join(cards)}</div>
               <p class="bp-alert" id="bp-season-tip" hidden>{e(t["season"])}</p>
@@ -153,6 +165,10 @@ def build(root):
             raise RuntimeError("Booking main missing: "+str(path))
         original=original.replace("</head>",'<link rel="stylesheet" href="../booking-pro.css"></head>',1)
         original=original.replace("</body>",'<script type="application/json" id="bpCatalog">'+config+'</script><script defer src="../booking-pro.js"></script></body>',1)
+        # No photos anywhere on the Booking pages, including shared header and footer.
+        # Keep the site's textual wordmark and navigation intact.
+        original=re.sub(r'<img\\b[^>]*>', '', original, flags=re.I)
+        original=re.sub(r'<link\\b[^>]*\\bas=(["\\'])image\\1[^>]*>', '', original, flags=re.I)
         original=original.replace('<script defer="" src="../js/pages/booking.min.js"></script>','')
         original=original.replace('<script defer src="../js/pages/booking.min.js"></script>','')
         original=original.replace('Choisissez votre activité, la date et le nombre de participants, puis envoyez votre demande par WhatsApp.','Créez votre séjour à Imsfrane et calculez le tarif du rafting, des tentes, du VTT, du quad et des randonnées.')
