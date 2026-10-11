@@ -50,13 +50,13 @@ def install(root: Path):
         html = html.replace(OLD_ID, PLACE_ID)
         if html.count('href="../google-reviews-live.css"') or html.count('src="../google-reviews-live.js"'):
             raise RuntimeError("Live reviews already installed: " + str(file))
-        css = '<link rel="stylesheet" href="../google-reviews-live.css">'
+        css = '<link rel="stylesheet" href="../google-reviews-live.css?v=20261011-debug3">'
         scripts = ''
         if key:
             # This browser key is visible to site visitors by design; protect with
             # HTTP referrer and Maps JavaScript API restrictions in Google Cloud.
             scripts = '<script>window.IMSFRANE_GOOGLE_MAPS_KEY=' + json.dumps(key) + ';</script>'
-        scripts += '<script defer src="../google-reviews-live.js"></script>'
+        scripts += '<script defer src="../google-reviews-live.js?v=20261011-debug3"></script>'
         html = html.replace('</head>', css + '</head>', 1)
         html = html.replace('</body>', scripts + '</body>', 1)
         file.write_text(html, encoding="utf-8")
