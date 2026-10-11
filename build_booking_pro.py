@@ -6,16 +6,16 @@ import re
 CATALOG = json.loads(Path("booking-prices.json").read_text(encoding="utf-8"))
 WORDS = {
 "fr":{
-"kicker":"RÉSERVATION DIRECTE · HAUT ATLAS","hero":"Composez votre <em>aventure.</em>",
-"intro":"Choisissez vos activités, le nombre de personnes et les dates : le prix estimé se calcule immédiatement.",
+"kicker":"RÉSERVATION DIRECTE · HAUT ATLAS","hero":"Votre aventure, <em>à votre façon.</em>",
+"intro":"Créez un séjour sur mesure dans le Haut Atlas. Choisissez, calculez et envoyez votre demande en toute simplicité.",
 "tags":["Demande sans paiement","Calcul instantané","Confirmation humaine"],
 "steps":["Expériences","Votre séjour","Récapitulatif"],
-"eyebrow1":"ÉTAPE 01 · VOS ENVIES","pick":"Choisissez vos expériences",
-"pickhelp":"Cochez les activités souhaitées avec une croix ×. Indiquez le nombre de personnes : le total s’actualise automatiquement. Pour les tentes et les quads, précisez les quantités.",
+"eyebrow1":"ÉTAPE 01 · VOS ENVIES","pick":"Choisissez vos activités",
+"pickhelp":"Cochez ce qui vous fait envie. Les tarifs s'actualisent selon le nombre de participants, de nuits et d'équipements.",
 "filters":{"all":"Tout voir","rafting":"Rafting","camping":"Tentes","hiking":"Randonnée","vtt":"VTT","quad":"Quad","stay":"Séjour"},
 "units":{"person":"par personne","tentNight":"par tente / nuit","group":"par groupe","vehicle":"par quad"},
 "season":"Le rafting est généralement proposé de mars à juin, parfois en juillet si le débit le permet. La sécurité et la disponibilité sont à confirmer.",
-"eyebrow2":"ÉTAPE 02 · VOS INFORMATIONS","details":"Les détails de votre séjour",
+"eyebrow2":"ÉTAPE 02 · VOS INFORMATIONS","details":"Finalisez votre demande",
 "detailshelp":"Une demande complète facilite la réponse de notre équipe. Aucune réservation n'est confirmée avant notre accord.",
 "name":"Nom complet","phone":"WhatsApp / téléphone","email":"E-mail","opt":"facultatif","country":"Pays",
 "start":"Date souhaitée","end":"Départ du camping","endhelp":"Pour les tentes, indiquez la date de départ afin de calculer les nuits.",
@@ -25,20 +25,20 @@ WORDS = {
 "disclaimer":"Le total comprend uniquement les prestations tarifées ci-dessus. Transport, chambres et services sur devis ne sont pas inclus. L'envoi sur WhatsApp n'est pas une réservation confirmée.",
 "summaryeyebrow":"VOTRE SÉLECTION","summary":"Votre récapitulatif","summaryempty":"Choisissez des activités pour afficher le détail du prix.","total":"Total estimé",
 "pending":"Disponibilité, tarif définitif et conditions confirmés par notre équipe. Aucun paiement demandé ici.",
-"send":"Envoyer sur WhatsApp","copy":"Copier le récapitulatif",
+"send":"Envoyer ma demande","copy":"Copier le récapitulatif",
 "trust":["Aucun paiement en ligne","Contact direct avec votre guide","Confirmation après vérification"]
 },
 "en":{
-"kicker":"DIRECT REQUEST · HIGH ATLAS","hero":"Build your <em>adventure.</em>",
-"intro":"Choose activities, the number of participants and your travel dates to see a clear, instant price estimate.",
+"kicker":"DIRECT REQUEST · HIGH ATLAS","hero":"Your adventure, <em>your way.</em>",
+"intro":"Build a tailored High Atlas experience. Choose your activities, see the price instantly and send your request.",
 "tags":["No online payment","Instant estimate","Personally confirmed"],
 "steps":["Experiences","Your trip","Summary"],
 "eyebrow1":"STEP 01 · YOUR ADVENTURE","pick":"Choose your experiences",
-"pickhelp":"Tick × the activities you want and enter the number of travelers: the total updates automatically. For tents and quads, choose quantities.",
+"pickhelp":"Tick the experiences you want. Prices update automatically for your group, nights and equipment.",
 "filters":{"all":"All","rafting":"Rafting","camping":"Tents","hiking":"Hiking","vtt":"Mountain biking","quad":"Quad","stay":"3-day stay"},
 "units":{"person":"per person","tentNight":"per tent / night","group":"per group","vehicle":"per quad"},
 "season":"Rafting is generally offered from March to June, sometimes July if river levels permit. Safety and availability must be confirmed.",
-"eyebrow2":"STEP 02 · YOUR DETAILS","details":"Your trip details",
+"eyebrow2":"STEP 02 · YOUR DETAILS","details":"Complete your request",
 "detailshelp":"Providing your trip details helps our team reply. No booking is confirmed until we agree.",
 "name":"Full name","phone":"WhatsApp / phone","email":"Email","opt":"optional","country":"Country",
 "start":"Preferred date","end":"Camping check-out","endhelp":"For tents, enter your check-out date to calculate nights.",
@@ -48,7 +48,7 @@ WORDS = {
 "disclaimer":"The estimate includes only the priced services above. Transfers, rooms and quote-only services are excluded. Sending a WhatsApp message does not confirm a booking.",
 "summaryeyebrow":"YOUR SELECTION","summary":"Booking summary","summaryempty":"Select an experience to see its price breakdown.","total":"Estimated total",
 "pending":"Final price, conditions and availability will be confirmed by our team. No payment is taken here.",
-"send":"Send via WhatsApp","copy":"Copy summary",
+"send":"Send booking request","copy":"Copy summary",
 "trust":["No online payment","Direct contact with your guide","Confirmed after checking"]
 }
 }
@@ -59,26 +59,31 @@ def e(value):
 
 def render(lang):
     t=WORDS[lang]
+
     cards=[]
     for p in CATALOG["offers"]:
         name=e(p[lang])
         detail=e(p["detailFr" if lang=="fr" else "detailEn"])
         unit=e(t["units"][p["unit"]])
-        per_person = p["unit"]=="person"
-        counts = (t["travelers"] if per_person else t["quantity"])
-        controls = ('<span class="bp-count-auto" data-unit="people">× <strong>2</strong></span>' if per_person else
-                    '<div class="bp-stepper" role="group" aria-label="'+e(counts)+' — '+name+'">'
-                    '<button type="button" data-delta="-1" data-offer="'+e(p["id"])+'" aria-label="− '+name+'" disabled>−</button>'
-                    '<output aria-live="off">0</output>'
-                    '<button type="button" data-delta="1" data-offer="'+e(p["id"])+'" aria-label="+ '+name+'">+</button></div>')
+        per_person=p["unit"]=="person"
+        count_label=t["travelers"] if per_person else t["quantity"]
+        controls=(
+          '<span class="bp-count-auto" data-unit="people">× <strong>2</strong></span>'
+          if per_person else
+          '<div class="bp-stepper" role="group" aria-label="'+e(count_label)+' — '+name+'">'
+          '<button type="button" data-delta="-1" data-offer="'+e(p["id"])+'" aria-label="− '+name+'" disabled>−</button>'
+          '<output aria-live="off">0</output>'
+          '<button type="button" data-delta="1" data-offer="'+e(p["id"])+'" aria-label="+ '+name+'">+</button></div>'
+        )
         cards.append(
           '<article class="bp-offer" data-id="'+e(p["id"])+'" data-category="'+e(p["category"])+'" data-selected="false">'
-          '<div class="bp-offer-top"><label class="bp-select-activity" for="bp-choice-'+e(p["id"])+'">'
+          '<label class="bp-select-activity" for="bp-choice-'+e(p["id"])+'">'
           '<input class="bp-choice" id="bp-choice-'+e(p["id"])+'" type="checkbox" data-offer="'+e(p["id"])+'">'
-          '<span class="bp-select-label">'+e(t["selected"])+'</span></label>'
-          '<span class="bp-unit">'+unit+'</span></div>'
-          '<h3>'+name+'</h3><p>'+detail+'</p><div class="bp-price-row"><div class="bp-offer-price">'+f'{p["price"]:,}'.replace(","," ")+' <small>MAD</small></div>'
-          '<div class="bp-quantity-control">'+controls+'</div></div></article>'
+          '<span class="bp-offer-details"><strong class="bp-offer-name">'+name+'</strong>'
+          '<span class="bp-offer-desc">'+detail+'</span></span></label>'
+          '<div class="bp-offer-actions"><div class="bp-offer-price">'+f'{p["price"]:,}'.replace(","," ")+' <small>MAD</small></div>'
+          '<span class="bp-offer-unit">'+unit+'</span><div class="bp-quantity-control">'+controls+'</div></div>'
+          '</article>'
         )
     cats=["all","rafting","camping","hiking","vtt","quad","stay"]
     filters="".join('<button type="button" class="bp-filter" data-filter="'+key+'" aria-pressed="'+str(key=="all").lower()+'">'+e(t["filters"][key])+'</button>' for key in cats)
@@ -120,6 +125,7 @@ def render(lang):
                 <input id="bp-travelers" type="number" form="bp-form" min="1" max="60" value="2" inputmode="numeric" required aria-describedby="bp-people-help">
                 <button type="button" id="bp-people-plus" aria-label="+ {e(t["travelers"])}">+</button></div>
                 <p id="bp-people-help">{e(t["countHint"])}</p></div>
+              <div class="bp-category-title"><strong>{e("EXPLORER LES EXPÉRIENCES" if lang=="fr" else "EXPLORE EXPERIENCES")}</strong><small>{len(CATALOG["offers"])} {e("formules" if lang=="fr" else "options")}</small></div>
               <div id="bp-filters" class="bp-filters" role="group" aria-label="{e(t["pick"])}">{filters}</div>
               <div id="bp-offers" class="bp-offers">{"".join(cards)}</div>
               <p class="bp-alert" id="bp-season-tip" hidden>{e(t["season"])}</p>
@@ -168,7 +174,7 @@ def build(root):
         original=original.replace("</body>",'<script type="application/json" id="bpCatalog">'+config+'</script><script defer src="../booking-pro.js"></script></body>',1)
         # Preserve the original header and footer brand logo markup intact.
         original=re.sub(r'<link\b[^>]*\bas="image"[^>]*>', '', original, flags=re.I)
-        logo_pattern=r'<img\\b[^>]*data-cms-image="booking-i(?:1|4)"[^>]*>'
+        logo_pattern=r'<img\b[^>]*data-cms-image="booking-i(?:1|4)"[^>]*>'
         original_logos=re.findall(logo_pattern, source_html, flags=re.I)
         published_logos=re.findall(logo_pattern, original, flags=re.I)
         if len(original_logos)!=2 or original_logos!=published_logos:
