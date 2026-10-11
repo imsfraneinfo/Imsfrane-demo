@@ -67,7 +67,7 @@
       camping:"تاريخ مغادرة المخيم",language:"اللغة المفضلة",place:"نقطة الانطلاق",
       info:"معلومات إضافية",selection:"الأنشطة المختارة",estimate:"الإجمالي التقديري",
       pending:"هذا طلب دون دفع مسبق؛ يجب تأكيد التوفر والسعر النهائي.",
-      request:"طلب حجز",unit:"MAD"
+      request:"طلب حجز",unit:"درهم"
     },
     es:{
       empty:"Elige una experiencia para ver el presupuesto detallado.",
@@ -96,7 +96,7 @@
   var offerMap=Object.create(null);
   offers.forEach(function(item){offerMap[item.id]=item});
   var element=function(id){return document.getElementById(id)};
-  var money=function(value){return new Intl.NumberFormat(language==="fr"?"fr-FR":language==="ar"?"ar-MA":language==="es"?"es-ES":"en-GB",{maximumFractionDigits:0}).format(value)+" MAD"};
+  var money=function(value){return new Intl.NumberFormat(language==="fr"?"fr-FR":language==="ar"?"ar-MA":language==="es"?"es-ES":"en-GB",{maximumFractionDigits:0}).format(value)+(language==="ar"?" درهم":" MAD")};
   var cards=[].slice.call(root.querySelectorAll(".bp-offer"));
   var filters=[].slice.call(root.querySelectorAll(".bp-filter"));
   var start=element("bp-start"),end=element("bp-end"),people=element("bp-travelers");
