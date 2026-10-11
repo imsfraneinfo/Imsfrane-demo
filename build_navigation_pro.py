@@ -177,7 +177,6 @@ def nav(lang, current_file, root, logo_prefix):
       +'<a class="atnav-book" href="booking.html">'+icon("calendar")+clean(t["book"])+'</a>'
       +'<a class="atnav-whatsapp" href="https://wa.me/212667772551" target="_blank" rel="noopener noreferrer">'+icon("chat")+'WhatsApp</a>'
       +'</div>'
-      +langs
       +'</div></aside>'
     )
 
@@ -253,7 +252,8 @@ def patch(path, lang, root):
         original_langs=locale_block.group(1)
         if lang in ("ar","es"):
             original_langs=original_langs.replace(' aria-current="page"','').replace('class="language-button active editable"','class="language-button editable"').replace('class="language-button active"','class="language-button"')
-        new_header=new_header[:locale_block.start()]+original_langs+compact_language(lang,current,root)+new_header[locale_block.end():]
+        # Exactly ONE compact four-language selector. No legacy EN/FR buttons.
+        new_header=new_header[:locale_block.start()]+compact_language(lang,current,root)+new_header[locale_block.end():]
         source=source[:match.start()]+new_header+sprite()+nav(lang,current,root,logo_prefix)+source[match.end():]
     else:
         # Standalone editorial articles have no site-wide header; supply a compact
