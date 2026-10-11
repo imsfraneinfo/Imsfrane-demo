@@ -45,6 +45,13 @@ with webdriver.Chrome(options=o) as b:
     button.click()
     time.sleep(.35)
     opened=snap("langmenu-open")
+    panel=opened["boxes"][".atnav-langmini-panel"]
+    if abs(opened["scrollLeft"])>1 or abs(opened["boxes"]["main"]["x"])>1:
+      raise AssertionError("Arabic language dropdown still shifts entire page horizontally: "+str(opened["scrollLeft"]))
+    if panel is None or panel["x"] < -1 or panel["right"] > width+1:
+      raise AssertionError("Arabic language dropdown escapes mobile viewport: "+str(panel))
+    if opened["scrollWidth"]>width+2:
+      raise AssertionError("Arabic language selector causes horizontal overflow")
     # focus the Arabic link without navigating; could trigger browser horizontal auto scroll
     b.execute_script('document.querySelector(\'.atnav-langmini-panel a[lang="ar"]\').focus()')
     time.sleep(.3)
