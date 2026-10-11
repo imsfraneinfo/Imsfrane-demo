@@ -2179,7 +2179,332 @@
       "es": "Formulario de reserva ↗"
     }
   },
-  "guide": {},
+  "guide": {
+    "GUIDE PRATIQUE · HAUT ATLAS · MAROC": {
+      "ar": "دليل الزيارة · الأطلس الكبير · المغرب",
+      "es": "GUÍA PRÁCTICA · ALTO ATLAS · MARRUECOS"
+    },
+    "Préparer votre voyage": {
+      "ar": "خطط لرحلتك",
+      "es": "Prepara tu viaje"
+    },
+    "à Imsfrane.": {
+      "ar": "إلى مسفران.",
+      "es": "a Imsfrane."
+    },
+    "Accès routier, itinéraires de randonnée, saisons, transport, camping et conseils de terrain. Toutes les informations essentielles au même endroit, sans photos inutiles.": {
+      "ar": "الطرق ومسارات المشي ومواسم الأنشطة والنقل والتخييم ونصائح عملية، في دليل واحد يساعدك على الاستعداد لزيارة مسفران.",
+      "es": "Accesos por carretera, rutas de senderismo, estaciones, transporte, acampada y consejos prácticos. Todo lo esencial para visitar Imsfrane."
+    },
+    "Comment venir": {
+      "ar": "كيفية الوصول",
+      "es": "Cómo llegar"
+    },
+    "Localiser Imsfrane": {
+      "ar": "تحديد موقع مسفران",
+      "es": "Localizar Imsfrane"
+    },
+    "À retenir": {
+      "ar": "نقاط مهمة",
+      "es": "Información importante"
+    },
+    "Le dernier tronçon est une route de montagne. Vérifiez la météo et l’état de la route, surtout après la pluie ou en hiver. Confirmez votre point de rendez-vous avant de partir.": {
+      "ar": "الطريق الأخير جبلي؛ تحقق من الطقس وحالة الطريق، خصوصاً بعد الأمطار أو شتاءً، وأكّد مكان اللقاء قبل الانطلاق.",
+      "es": "El último tramo discurre por carretera de montaña. Comprueba el tiempo y el estado de la vía, especialmente después de la lluvia o en invierno. Confirma el punto de encuentro."
+    },
+    "Parler à un guide local ↗": {
+      "ar": "تواصل مع مرشد محلي ↗",
+      "es": "Hablar con un guía local ↗"
+    },
+    "Sommet du Jebel Imsfrane": {
+      "ar": "قمة جبل مسفران",
+      "es": "Cumbre del Jebel Imsfrane"
+    },
+    "Depuis Tilouguite": {
+      "ar": "من تيلوكيت",
+      "es": "Desde Tilouguite"
+    },
+    "Mars – juin": {
+      "ar": "مارس – يونيو",
+      "es": "Marzo – junio"
+    },
+    "Période habituelle du rafting": {
+      "ar": "الموسم المعتاد للتجديف",
+      "es": "Temporada habitual de rafting"
+    },
+    "Province · Haut Atlas": {
+      "ar": "الإقليم · الأطلس الكبير",
+      "es": "Provincia · Alto Atlas"
+    },
+    "Dans ce guide": {
+      "ar": "محتويات الدليل",
+      "es": "En esta guía"
+    },
+    "Imsfrane en bref": {
+      "ar": "مسفران باختصار",
+      "es": "Imsfrane en breve"
+    },
+    "Transport local": {
+      "ar": "النقل المحلي",
+      "es": "Transporte local"
+    },
+    "Randonnées & trajets": {
+      "ar": "المشي والمسارات",
+      "es": "Senderismo y rutas"
+    },
+    "Lieux à découvrir": {
+      "ar": "أماكن تستحق الزيارة",
+      "es": "Lugares por descubrir"
+    },
+    "Activités & tarifs": {
+      "ar": "الأنشطة والأسعار",
+      "es": "Actividades y tarifas"
+    },
+    "Quand venir": {
+      "ar": "متى تزور المنطقة؟",
+      "es": "Cuándo visitar"
+    },
+    "Où dormir": {
+      "ar": "أماكن الإقامة",
+      "es": "Dónde dormir"
+    },
+    "Que prévoir": {
+      "ar": "ماذا تُحضر معك؟",
+      "es": "Qué llevar"
+    },
+    "Sécurité & respect": {
+      "ar": "السلامة واحترام المكان",
+      "es": "Seguridad y respeto"
+    },
+    "IMSFRANE · HAUT ATLAS": {
+      "ar": "مسفران · الأطلس الكبير",
+      "es": "IMSFRANE · ALTO ATLAS"
+    },
+    "Où se trouve Imsfrane ?": {
+      "ar": "أين تقع مسفران؟",
+      "es": "¿Dónde está Imsfrane?"
+    },
+    "Imsfrane (ou Msfrane) se situe dans la commune de Tilouguite, province d’Azilal, au cœur du Haut Atlas central. La montagne est surnommée « Cathédrale » en raison de sa silhouette rocheuse : il ne s’agit pas d’un lieu religieux.": {
+      "ar": "تقع مسفران في جماعة تيلوكيت بإقليم أزيلال، وسط الأطلس الكبير. ويُلقَّب جبلها بـ«كاتدرال» لشكل الصخور الذي يشبه الكاتدرائية؛ وليس مكاناً دينياً.",
+      "es": "Imsfrane, también llamada Msfrane, se encuentra en la comuna de Tilouguite, provincia de Azilal, en el Alto Atlas central. La montaña recibe el apodo de «Cathédrale» por su silueta rocosa; no es un lugar religioso."
+    },
+    "Situation": {
+      "ar": "الموقع",
+      "es": "Ubicación"
+    },
+    "Commune de Tilouguite · Province d’Azilal · Maroc.": {
+      "ar": "جماعة تيلوكيت · إقليم أزيلال · المغرب.",
+      "es": "Comuna de Tilouguite · Provincia de Azilal · Marruecos."
+    },
+    "Repères": {
+      "ar": "معالم بارزة",
+      "es": "Puntos de referencia"
+    },
+    "Jebel Imsfrane, vallées boisées, Oued Ahansal et paysages de montagne.": {
+      "ar": "جبل مسفران والوديان المشجرة ووادي أحنصال والمناظر الجبلية.",
+      "es": "Jebel Imsfrane, valles boscosos, río Ahansal y paisajes de montaña."
+    },
+    "Le bon réflexe": {
+      "ar": "نصيحة مفيدة",
+      "es": "Consejo práctico"
+    },
+    "Cherchez d’abord Tilouguite, puis faites confirmer l’emplacement exact de votre activité ou hébergement.": {
+      "ar": "ابدأ بتحديد تيلوكيت على الخريطة، ثم تأكد من الموقع الدقيق لنشاطك أو إقامتك.",
+      "es": "Localiza primero Tilouguite y confirma después el punto exacto de tu actividad o alojamiento."
+    },
+    "Comment venir à Imsfrane ?": {
+      "ar": "كيف تصل إلى مسفران؟",
+      "es": "¿Cómo llegar a Imsfrane?"
+    },
+    "Voici les trajets routiers utilisés pour rejoindre la région. Les durées varient selon le véhicule, les arrêts, les travaux et les conditions de la montagne.": {
+      "ar": "هذه أبرز الطرق المؤدية إلى المنطقة. تختلف مدة الرحلة حسب المركبة والتوقفات والأشغال والظروف الجبلية.",
+      "es": "Estas son las principales rutas de acceso. La duración varía según el vehículo, las paradas, las obras y las condiciones de montaña."
+    },
+    "Depuis Beni Mellal": {
+      "ar": "من بني ملال",
+      "es": "Desde Beni Mellal"
+    },
+    "L’itinéraire de référence pour arriver depuis Beni Mellal. Prévoir une marge sur les portions de montagne.": {
+      "ar": "طريق مرجعي للوصول من بني ملال؛ خصّص وقتاً إضافياً للمقاطع الجبلية.",
+      "es": "Ruta habitual desde Beni Mellal. Conviene dejar un margen de tiempo para los tramos de montaña."
+    },
+    "Depuis Azilal": {
+      "ar": "من أزيلال",
+      "es": "Desde Azilal"
+    },
+    "Une option d’accès depuis Azilal par Ouaouizeght et Tilouguite.": {
+      "ar": "مسار آخر من أزيلال عبر واويزغت وتيلوكيت.",
+      "es": "Otra opción de acceso desde Azilal, pasando por Ouaouizeght y Tilouguite."
+    },
+    "Depuis Marrakech ou Casablanca": {
+      "ar": "من مراكش أو الدار البيضاء",
+      "es": "Desde Marrakech o Casablanca"
+    },
+    "Votre ville": {
+      "ar": "مدينتك",
+      "es": "Tu ciudad"
+    },
+    "Planifiez l’itinéraire GPS complet et vérifiez votre correspondance : ne comptez pas sur un trajet direct garanti.": {
+      "ar": "خطّط للمسار الكامل على GPS وتحقق من التنقلات؛ لا تفترض توفر رحلة مباشرة.",
+      "es": "Planifica la ruta completa con GPS y comprueba los enlaces; no des por garantizado un transporte directo."
+    },
+    "La distance Tilouguite–Imsfrane est d’environ 10 km selon le point de départ. Il n’existe pas de durée universelle fiable sur ce tronçon : prévoyez une marge et privilégiez les déplacements de jour.": {
+      "ar": "تبلغ المسافة بين تيلوكيت ومسفران نحو 10 كيلومترات حسب نقطة الانطلاق، لكن المدة تختلف باختلاف الظروف؛ اترك هامشاً زمنياً وتنقّل نهاراً.",
+      "es": "De Tilouguite a Imsfrane hay unos 10 km según el punto de partida. La duración varía; deja margen y procura viajar de día."
+    },
+    "Localiser Tilouguite": {
+      "ar": "تحديد موقع تيلوكيت",
+      "es": "Localizar Tilouguite"
+    },
+    "Rechercher Imsfrane": {
+      "ar": "البحث عن مسفران",
+      "es": "Buscar Imsfrane"
+    },
+    "Transports et arrivée sur place": {
+      "ar": "النقل والوصول",
+      "es": "Transporte y llegada"
+    },
+    "Voiture personnelle, taxi partagé ou transfert convenu à l’avance : adaptez votre arrivée à l’heure de départ de l’activité.": {
+      "ar": "يمكنك الوصول بسيارتك أو سيارة أجرة مشتركة أو نقل مرتب مسبقاً؛ نسّق الوصول مع وقت انطلاق النشاط.",
+      "es": "Puedes llegar en coche propio, taxi compartido o traslado reservado. Ajusta la llegada al horario de la actividad."
+    },
+    "Voiture / location": {
+      "ar": "سيارة خاصة أو مستأجرة",
+      "es": "Coche propio o de alquiler"
+    },
+    "Téléchargez votre trajet hors ligne. Faites le plein avant les zones isolées et ne prévoyez pas d’arrivée tardive sans repérage.": {
+      "ar": "حمّل الخريطة للاستخدام دون إنترنت وتزوّد بالوقود قبل المناطق البعيدة، وتجنب الوصول ليلاً دون معرفة الطريق.",
+      "es": "Descarga el mapa sin conexión, reposta antes de las zonas aisladas y evita llegar tarde sin conocer el camino."
+    },
+    "Grands taxis": {
+      "ar": "سيارات الأجرة الكبيرة",
+      "es": "Taxis compartidos"
+    },
+    "Renseignez-vous pour les liaisons Beni Mellal → Ouaouizeght → Tilouguite. Les départs, correspondances et tarifs changent ; confirmez-les localement.": {
+      "ar": "اسأل عن النقل بين بني ملال وواويزغت وتيلوكيت. قد تتغير المواعيد والأسعار، لذا تأكد محلياً.",
+      "es": "Consulta las conexiones Beni Mellal → Ouaouizeght → Tilouguite. Horarios, transbordos y tarifas pueden cambiar; confírmalos localmente."
+    },
+    "Transfert privé": {
+      "ar": "نقل خاص",
+      "es": "Traslado privado"
+    },
+    "Indiquez votre ville de départ, la date, le nombre de voyageurs et les bagages. Le transport est chiffré sur demande.": {
+      "ar": "اذكر مدينة الانطلاق والتاريخ وعدد المسافرين والأمتعة للحصول على سعر النقل.",
+      "es": "Indica ciudad de origen, fecha, viajeros y equipaje para recibir un presupuesto de traslado."
+    },
+    "Point de rendez-vous": {
+      "ar": "نقطة اللقاء",
+      "es": "Punto de encuentro"
+    },
+    "Le lieu exact peut être différent pour le rafting, la randonnée et l’hébergement. Demandez le point GPS avant de prendre la route.": {
+      "ar": "قد يختلف مكان اللقاء بين التجديف والمشي الجبلي والإقامة؛ اطلب الموقع الدقيق قبل الانطلاق.",
+      "es": "El lugar de encuentro puede variar entre rafting, senderismo y alojamiento. Solicita la ubicación GPS antes de salir."
+    },
+    "Randonnées guidées et trajets pédestres": {
+      "ar": "جولات المشي الجبلي والمسارات",
+      "es": "Excursiones y senderos guiados"
+    },
+    "Trois formules locales pour explorer les paysages autour de Msfrane. Durées indicatives : rythme du groupe, météo et état des chemins peuvent les modifier.": {
+      "ar": "ثلاثة برامج محلية لاكتشاف مسفران. المدد تقريبية وتتغير حسب مستوى المجموعة والطقس وحالة المسالك.",
+      "es": "Tres rutas locales para explorar Imsfrane. La duración es orientativa y depende del grupo, el tiempo y los senderos."
+    },
+    "Sommet de Jebel Imsfrane": {
+      "ar": "قمة جبل مسفران",
+      "es": "Cumbre del Jebel Imsfrane"
+    },
+    "Moyenne": {
+      "ar": "متوسط",
+      "es": "Media"
+    },
+    "+668 m de dénivelé": {
+      "ar": "فارق ارتفاع +668 متراً",
+      "es": "+668 m de desnivel"
+    },
+    "Montée vers le sommet à environ 1 868 m, passages raides et pauses panoramiques. Chaussures de marche et eau indispensables.": {
+      "ar": "صعود إلى قمة تقارب 1868 متراً مع مقاطع شديدة الانحدار وتوقفات بانورامية. يلزم حذاء مناسب وماء كافٍ.",
+      "es": "Subida a la cumbre de unos 1.868 metros, con tramos empinados y paradas panorámicas. Imprescindible calzado adecuado y agua."
+    },
+    "Découvrir la randonnée": {
+      "ar": "اكتشف المشي الجبلي",
+      "es": "Descubrir el senderismo"
+    },
+    "Gorges et cascades de l’Ahansal": {
+      "ar": "مضايق أحنصال والشلالات",
+      "es": "Gargantas y cascadas del Ahansal"
+    },
+    "Facile": {
+      "ar": "سهل",
+      "es": "Fácil"
+    },
+    "Marche le long des paysages de l’Ahansal, avec découverte des gorges et points d’intérêt selon le parcours convenu.": {
+      "ar": "مشي بين مناظر أحنصال مع اكتشاف المضايق والمعالم وفق المسار المتفق عليه.",
+      "es": "Paseo entre los paisajes del Ahansal, descubriendo gargantas y puntos de interés según la ruta acordada."
+    },
+    "Le Grand Tour": {
+      "ar": "الجولة الكبرى",
+      "es": "Gran recorrido"
+    },
+    "Soutenu": {
+      "ar": "مُجهد",
+      "es": "Exigente"
+    },
+    "Grande journée combinant l’exploration de la montagne et des gorges. À réserver aux personnes habituées à la marche longue.": {
+      "ar": "يوم طويل يجمع بين الجبال والمضايق، ويناسب المعتادين على المشي لمسافات طويلة.",
+      "es": "Una jornada exigente que combina montaña y gargantas, indicada para quienes están acostumbrados a caminar durante horas."
+    },
+    "Prix indiqués par groupe pour la prestation guidée. Transport, nourriture et autres services ne sont pas automatiquement inclus ; confirmer la composition du groupe avec le guide.": {
+      "ar": "الأسعار للمجموعة مقابل المرافقة الإرشادية؛ ولا تشمل النقل والطعام والخدمات الأخرى تلقائياً. تأكد من تفاصيل مجموعتك مع المرشد.",
+      "es": "Precios por grupo para el servicio de guía. El transporte, la comida y otros servicios no se incluyen automáticamente; confirma los detalles."
+    },
+    "Autres lieux à découvrir autour d’Imsfrane": {
+      "ar": "أماكن أخرى لاكتشافها قرب مسفران",
+      "es": "Otros lugares para descubrir cerca de Imsfrane"
+    },
+    "Des idées de sorties à organiser selon l’accessibilité, le débit des cours d’eau et la disponibilité de guides locaux.": {
+      "ar": "أفكار لرحلات تعتمد على سهولة الوصول وصبيب المياه وتوفر المرشدين المحليين.",
+      "es": "Ideas de excursiones según los accesos, el caudal de los ríos y la disponibilidad de guías locales."
+    },
+    "Gorges de l’Ahansal": {
+      "ar": "مضايق أحنصال",
+      "es": "Gargantas del Ahansal"
+    },
+    "Couloirs rocheux et passages proches de la rivière. Évitez tout franchissement risqué lorsque l’eau monte.": {
+      "ar": "ممرات صخرية قريبة من النهر؛ تجنب عبور الأماكن الخطرة عند ارتفاع المياه.",
+      "es": "Corredores rocosos y pasos junto al río. Evita cruces peligrosos cuando sube el agua."
+    },
+    "Cascades d’Oukhodene": {
+      "ar": "شلالات أوخودن",
+      "es": "Cascadas de Oukhodene"
+    },
+    "Excursion à préparer avec un accompagnateur local ; l’accès pédestre et les conditions saisonnières sont à vérifier.": {
+      "ar": "رحلة يُفضَّل تنظيمها مع مرافق محلي مع التحقق من المسالك والظروف الموسمية.",
+      "es": "Una excursión que conviene preparar con un acompañante local y comprobar los accesos y las condiciones."
+    },
+    "Oued Ahansal et Oued Melloul": {
+      "ar": "وادي أحنصال ووادي ملول",
+      "es": "Ríos Ahansal y Melloul"
+    },
+    "Cours d’eau importants pour les activités de rivière : ne présumez jamais de la navigabilité ou de la sécurité.": {
+      "ar": "نهران مهمان للأنشطة المائية؛ لا تفترض صلاحية الملاحة أو توفر السلامة دون تقييم.",
+      "es": "Ríos importantes para las actividades acuáticas: nunca des por hecho que se puede navegar con seguridad."
+    },
+    "Bin El Ouidane & Zaouiat Ahansal": {
+      "ar": "بين الويدان وزاوية أحنصال",
+      "es": "Bin El Ouidane y Zaouiat Ahansal"
+    },
+    "Destinations régionales pour prolonger votre séjour ; demandez les trajets adaptés à votre programme.": {
+      "ar": "وجهتان يمكن إضافتهما للإقامة؛ استفسر عن الطريق المناسب لبرنامجك.",
+      "es": "Destinos de la región para prolongar tu visita; consulta los trayectos adecuados."
+    },
+    "Activités, saisons et tarifs indicatifs": {
+      "ar": "الأنشطة والمواسم والأسعار الإرشادية",
+      "es": "Actividades, temporadas y tarifas orientativas"
+    },
+    "Un aperçu pour préparer un budget. Les dates, conditions, capacités et prix définitifs sont à confirmer directement avant toute réservation.": {
+      "ar": "معلومات تساعدك على إعداد الميزانية. يجب تأكيد التواريخ والشروط والتوفر والأسعار النهائية قبل الحجز.",
+      "es": "Información orientativa para calcular un presupuesto. Fechas, condiciones, plazas y precios definitivos deben confirmarse antes de reservar."
+    }
+  },
   "booking": {
     "RÉSERVATION DIRECTE · HAUT ATLAS": {
       "ar": "حجز مباشر · الأطلس الكبير",
