@@ -7,6 +7,7 @@ from __future__ import annotations
 
 from pathlib import Path
 from html import escape
+from collections import Counter
 import re
 
 ICON_PATHS = {
@@ -190,7 +191,7 @@ def patch(path, lang, root):
     alt_name=current if (root/opp/current).is_file() else "index.html"
     # Existing pages and article pages are in /fr/ or /en/ (one directory deep).
     logo_prefix="../"
-    old_brand_logos=re.findall(r'<img\b[^>]*\bdata-cms-image="[^"]+"[^>]*\bsrc="\.\./images/logo-104\.webp"[^>]*>',source,flags=re.I)
+    old_brand_logos=re.findall(r'<img\b[^>]*\bsrc="\.\./images/logo-104\.webp"[^>]*>',source,flags=re.I)
     header_regex=r'<header\b[^>]*\bid="siteHeader"[^>]*>[\s\S]*?</header>'
     match=re.search(header_regex,source,flags=re.I)
     if match:
@@ -228,8 +229,8 @@ def patch(path, lang, root):
     after_main=re.search(r'<main\b[^>]*>[\s\S]*?</main>',source,flags=re.I)
     if (before_main.group(0) if before_main else None)!=(after_main.group(0) if after_main else None):
         raise RuntimeError(f"Main content changed: {path}")
-    changed_brand_logos=re.findall(r'<img\b[^>]*\bdata-cms-image="[^"]+"[^>]*\bsrc="\.\./images/logo-104\.webp"[^>]*>',source,flags=re.I)
-    if old_brand_logos!=changed_brand_logos:
+    changed_brand_logos=re.findall(r'<img\b[^>]*\bsrc="\.\./images/logo-104\.webp"[^>]*>',source,flags=re.I)
+    if any(changed_brand_logos.count(tag)<n for tag,n in Counter(old_brand_logos).items()):
         raise RuntimeError(f"Original branded logo was modified: {path}")
     if len(re.findall(r'class="atnav-submenu-link"',source))!=6:
         raise RuntimeError(f"Wrong number of activities in navigation: {path}")
