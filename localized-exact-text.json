@@ -2180,7 +2180,352 @@
     }
   },
   "guide": {},
-  "booking": {},
+  "booking": {
+    "RÉSERVATION DIRECTE · HAUT ATLAS": {
+      "ar": "حجز مباشر · الأطلس الكبير",
+      "es": "RESERVA DIRECTA · ALTO ATLAS"
+    },
+    "Votre aventure,": {
+      "ar": "مغامرتك،",
+      "es": "Tu aventura,"
+    },
+    "à votre façon.": {
+      "ar": "كما تحبها.",
+      "es": "a tu manera."
+    },
+    "Créez un séjour sur mesure dans le Haut Atlas. Choisissez, calculez et envoyez votre demande en toute simplicité.": {
+      "ar": "خطّط لإقامة تناسبك في الأطلس الكبير؛ اختر الأنشطة واطّلع على التكلفة التقديرية وأرسل طلبك بكل سهولة.",
+      "es": "Organiza una estancia a tu medida en el Alto Atlas. Elige actividades, calcula el presupuesto y envía tu solicitud fácilmente."
+    },
+    "✓ Demande sans paiement": {
+      "ar": "✓ طلب دون دفع مسبق",
+      "es": "✓ Solicitud sin pago"
+    },
+    "✓ Calcul instantané": {
+      "ar": "✓ حساب فوري",
+      "es": "✓ Cálculo inmediato"
+    },
+    "✓ Confirmation humaine": {
+      "ar": "✓ تأكيد شخصي",
+      "es": "✓ Confirmación personal"
+    },
+    "Expériences": {
+      "ar": "التجارب",
+      "es": "Experiencias"
+    },
+    "Votre séjour": {
+      "ar": "إقامتك",
+      "es": "Tu estancia"
+    },
+    "Récapitulatif": {
+      "ar": "الملخص",
+      "es": "Resumen"
+    },
+    "ÉTAPE 01 · VOS ENVIES": {
+      "ar": "المرحلة الأولى · اختياراتك",
+      "es": "PASO 01 · TUS PREFERENCIAS"
+    },
+    "Choisissez vos activités": {
+      "ar": "اختر الأنشطة التي تريدها",
+      "es": "Elige tus actividades"
+    },
+    "Cochez les expériences souhaitées. Le nombre d'activités et de tentes est calculé automatiquement selon votre groupe. Choisissez un seul type de tente et de quad ; précisez les combinaisons dans les notes.": {
+      "ar": "حدّد التجارب التي ترغب فيها، وسيُحسب عدد الأنشطة والخيام تلقائياً بحسب مجموعتك. اختر نوعاً واحداً من الخيام والكواد، واكتب أي تركيبة خاصة في الملاحظات.",
+      "es": "Marca las experiencias deseadas. El número de actividades y tiendas se calcula automáticamente según tu grupo. Elige un solo tipo de tienda y de quad; añade combinaciones especiales en las notas."
+    },
+    "Nombre de voyageurs": {
+      "ar": "عدد المسافرين",
+      "es": "Número de viajeros"
+    },
+    "Les tarifs par personne sont multipliés automatiquement par ce nombre.": {
+      "ar": "تُحتسب الأسعار المحددة للشخص تلقائياً بحسب عدد المسافرين.",
+      "es": "Los precios por persona se multiplican automáticamente por este número."
+    },
+    "EXPLORER LES EXPÉRIENCES": {
+      "ar": "اكتشف التجارب",
+      "es": "DESCUBRE LAS EXPERIENCIAS"
+    },
+    "16 formules": {
+      "ar": "16 خياراً",
+      "es": "16 modalidades"
+    },
+    "Tout voir": {
+      "ar": "عرض الكل",
+      "es": "Ver todo"
+    },
+    "Tentes": {
+      "ar": "الخيام",
+      "es": "Tiendas"
+    },
+    "Séjour": {
+      "ar": "الإقامة",
+      "es": "Estancia"
+    },
+    "Tente · 1 personne": {
+      "ar": "خيمة · شخص واحد",
+      "es": "Tienda · 1 persona"
+    },
+    "1 place · par tente et par nuit": {
+      "ar": "مكان واحد · لكل خيمة في الليلة",
+      "es": "1 plaza · por tienda y noche"
+    },
+    "Tente · 2 personnes": {
+      "ar": "خيمة · شخصان",
+      "es": "Tienda · 2 personas"
+    },
+    "2 places · par tente et par nuit": {
+      "ar": "مكانان · لكل خيمة في الليلة",
+      "es": "2 plazas · por tienda y noche"
+    },
+    "Tente · 3 personnes": {
+      "ar": "خيمة · 3 أشخاص",
+      "es": "Tienda · 3 personas"
+    },
+    "3 places · par tente et par nuit": {
+      "ar": "3 أماكن · لكل خيمة في الليلة",
+      "es": "3 plazas · por tienda y noche"
+    },
+    "Tente · 4 personnes": {
+      "ar": "خيمة · 4 أشخاص",
+      "es": "Tienda · 4 personas"
+    },
+    "4 places · par tente et par nuit": {
+      "ar": "4 أماكن · لكل خيمة في الليلة",
+      "es": "4 plazas · por tienda y noche"
+    },
+    "par tente / nuit": {
+      "ar": "لكل خيمة في الليلة",
+      "es": "por tienda y noche"
+    },
+    "Rafting · 12 km": {
+      "ar": "تجديف · 12 كلم",
+      "es": "Rafting · 12 km"
+    },
+    "Descente courte · par personne": {
+      "ar": "رحلة قصيرة · للشخص",
+      "es": "Descenso corto · por persona"
+    },
+    "Rafting · 30 km": {
+      "ar": "تجديف · 30 كلم",
+      "es": "Rafting · 30 km"
+    },
+    "Descente longue · par personne": {
+      "ar": "رحلة طويلة · للشخص",
+      "es": "Descenso largo · por persona"
+    },
+    "Rafting · 50 km · Sidi Youssef": {
+      "ar": "تجديف · 50 كلم · سيدي يوسف",
+      "es": "Rafting · 50 km · Sidi Youssef"
+    },
+    "Rafting · 50 km · Bin El Ouidane": {
+      "ar": "تجديف · 50 كلم · بين الويدان",
+      "es": "Rafting · 50 km · Bin El Ouidane"
+    },
+    "Expédition de 2 jours · par personne": {
+      "ar": "رحلة يومين · للشخص",
+      "es": "Expedición de 2 días · por persona"
+    },
+    "Sommet du Jebel Imsfrane": {
+      "ar": "قمة جبل مسفران",
+      "es": "Cumbre del Jebel Imsfrane"
+    },
+    "Randonnée guidée · 4–5 h · par groupe": {
+      "ar": "جولة مشي مع مرشد · 4 إلى 5 ساعات · للمجموعة",
+      "es": "Senderismo guiado · 4–5 h · por grupo"
+    },
+    "Gorges & cascades d’Ahansal": {
+      "ar": "مضايق أحنصال وشلالاتها",
+      "es": "Gargantas y cascadas del Ahansal"
+    },
+    "Randonnée guidée · 3–4 h · par groupe": {
+      "ar": "جولة مع مرشد · 3 إلى 4 ساعات · للمجموعة",
+      "es": "Senderismo guiado · 3–4 h · por grupo"
+    },
+    "Le Grand Tour": {
+      "ar": "الجولة الكبرى",
+      "es": "Gran recorrido"
+    },
+    "Circuit complet · 8–10 h · par groupe": {
+      "ar": "مسار متكامل · 8 إلى 10 ساعات · للمجموعة",
+      "es": "Ruta completa · 8–10 h · por grupo"
+    },
+    "VTT · sortie guidée": {
+      "ar": "دراجات جبلية · جولة مع مرشد",
+      "es": "BTT · ruta guiada"
+    },
+    "Jusqu’à 2 h · vélo inclus · par personne": {
+      "ar": "حتى ساعتين · الدراجة مشمولة · للشخص",
+      "es": "Hasta 2 h · bicicleta incluida · por persona"
+    },
+    "VTT · location journée": {
+      "ar": "دراجات جبلية · استئجار ليوم",
+      "es": "BTT · alquiler por día"
+    },
+    "Un vélo par personne · journée complète": {
+      "ar": "دراجة لكل شخص · يوم كامل",
+      "es": "Una bicicleta por persona · día completo"
+    },
+    "Quad · solo": {
+      "ar": "كواد · شخص واحد",
+      "es": "Quad · individual"
+    },
+    "1 h · 1 personne par quad": {
+      "ar": "ساعة · شخص واحد لكل كواد",
+      "es": "1 h · 1 persona por quad"
+    },
+    "Quad · duo": {
+      "ar": "كواد · شخصان",
+      "es": "Quad · dos personas"
+    },
+    "1 h · 2 personnes sur le même quad": {
+      "ar": "ساعة · شخصان على الكواد نفسه",
+      "es": "1 h · 2 personas en el mismo quad"
+    },
+    "par quad": {
+      "ar": "لكل كواد",
+      "es": "por quad"
+    },
+    "Séjour aventure · 3 jours": {
+      "ar": "إقامة مغامرات · 3 أيام",
+      "es": "Estancia de aventura · 3 días"
+    },
+    "2 nuits, repas, randonnée et guide · par personne": {
+      "ar": "ليلتان ووجبات ومشي جبلي ومرشد · للشخص",
+      "es": "2 noches, comidas, senderismo y guía · por persona"
+    },
+    "Le rafting est généralement proposé de mars à juin, parfois en juillet si le débit le permet. La sécurité et la disponibilité sont à confirmer.": {
+      "ar": "يُتاح التجديف غالباً من مارس إلى يونيو، وأحياناً في يوليو إذا سمح صبيب المياه. يُؤكَّد التوفر والسلامة قبل كل رحلة.",
+      "es": "El rafting suele ofrecerse de marzo a junio, a veces en julio si el caudal lo permite. La disponibilidad y la seguridad deben confirmarse."
+    },
+    "ÉTAPE 02 · VOS INFORMATIONS": {
+      "ar": "المرحلة الثانية · معلوماتك",
+      "es": "PASO 02 · TUS DATOS"
+    },
+    "Finalisez votre demande": {
+      "ar": "أكمل طلبك",
+      "es": "Completa tu solicitud"
+    },
+    "Une demande complète facilite la réponse de notre équipe. Aucune réservation n'est confirmée avant notre accord.": {
+      "ar": "يساعدنا الطلب الكامل على الرد بسرعة ودقة. لا يُعدّ الحجز مؤكداً قبل موافقة فريقنا.",
+      "es": "Una solicitud completa facilita la respuesta del equipo. Ninguna reserva queda confirmada hasta que la aceptemos."
+    },
+    "Nom complet": {
+      "ar": "الاسم الكامل",
+      "es": "Nombre completo"
+    },
+    "WhatsApp / téléphone": {
+      "ar": "واتساب / الهاتف",
+      "es": "WhatsApp / teléfono"
+    },
+    "E-mail": {
+      "ar": "البريد الإلكتروني",
+      "es": "Correo electrónico"
+    },
+    "(facultatif)": {
+      "ar": "(اختياري)",
+      "es": "(opcional)"
+    },
+    "Pays": {
+      "ar": "البلد",
+      "es": "País"
+    },
+    "Date souhaitée": {
+      "ar": "التاريخ المرغوب",
+      "es": "Fecha prevista"
+    },
+    "Départ du camping *": {
+      "ar": "تاريخ مغادرة المخيم *",
+      "es": "Salida del camping *"
+    },
+    "Pour les tentes, indiquez la date de départ afin de calculer les nuits.": {
+      "ar": "حدد تاريخ المغادرة لحساب عدد ليالي التخييم.",
+      "es": "Indica la fecha de salida para calcular las noches de acampada."
+    },
+    "Langue souhaitée": {
+      "ar": "اللغة المفضلة",
+      "es": "Idioma preferido"
+    },
+    "Français": {
+      "ar": "الفرنسية",
+      "es": "Francés"
+    },
+    "English": {
+      "ar": "الإنجليزية",
+      "es": "Inglés"
+    },
+    "العربية": {
+      "ar": "العربية",
+      "es": "Árabe"
+    },
+    "Lieu de départ ou hébergement": {
+      "ar": "مكان الانطلاق أو الإقامة",
+      "es": "Lugar de salida o alojamiento"
+    },
+    "Services supplémentaires (sur devis)": {
+      "ar": "خدمات إضافية (السعر عند الطلب)",
+      "es": "Servicios adicionales (bajo presupuesto)"
+    },
+    "Maison / chambres": {
+      "ar": "البيت / الغرف",
+      "es": "Casa / habitaciones"
+    },
+    "Transport / transfert": {
+      "ar": "النقل / التنقلات",
+      "es": "Transporte / traslado"
+    },
+    "Autre demande personnalisée": {
+      "ar": "طلب خاص آخر",
+      "es": "Otra petición personalizada"
+    },
+    "Informations ou demandes particulières": {
+      "ar": "معلومات أو طلبات خاصة",
+      "es": "Información o peticiones especiales"
+    },
+    "Le total comprend uniquement les prestations tarifées ci-dessus. Transport, chambres et services sur devis ne sont pas inclus. L'envoi sur WhatsApp n'est pas une réservation confirmée.": {
+      "ar": "يشمل الإجمالي الخدمات المسعّرة أعلاه فقط؛ ولا يشمل النقل أو الغرف أو الخدمات التي يُحدَّد سعرها عند الطلب. إرسال الرسالة عبر واتساب لا يعني تأكيد الحجز.",
+      "es": "El total incluye solo los servicios con precio indicado. No incluye transporte, habitaciones ni servicios bajo presupuesto. Enviar la solicitud por WhatsApp no confirma la reserva."
+    },
+    "VOTRE SÉLECTION": {
+      "ar": "اختياراتك",
+      "es": "TU SELECCIÓN"
+    },
+    "Votre récapitulatif": {
+      "ar": "ملخص طلبك",
+      "es": "Resumen de tu solicitud"
+    },
+    "Choisissez des activités pour afficher le détail du prix.": {
+      "ar": "اختر نشاطاً واحداً على الأقل لعرض تفاصيل السعر.",
+      "es": "Elige una actividad para ver el desglose del precio."
+    },
+    "Total estimé": {
+      "ar": "الإجمالي التقديري",
+      "es": "Total estimado"
+    },
+    "Disponibilité, tarif définitif et conditions confirmés par notre équipe. Aucun paiement demandé ici.": {
+      "ar": "يؤكد فريقنا التوفر والسعر النهائي والشروط؛ ولا نطلب منك الدفع هنا.",
+      "es": "Nuestro equipo confirmará disponibilidad, precio final y condiciones. Aquí no se solicita ningún pago."
+    },
+    "✉ Envoyer ma demande ↗": {
+      "ar": "✉ إرسال طلب الحجز ↗",
+      "es": "✉ Enviar mi solicitud ↗"
+    },
+    "Copier le récapitulatif": {
+      "ar": "نسخ الملخص",
+      "es": "Copiar resumen"
+    },
+    "Aucun paiement en ligne": {
+      "ar": "لا يوجد دفع عبر الإنترنت",
+      "es": "Sin pago en línea"
+    },
+    "Contact direct avec votre guide": {
+      "ar": "تواصل مباشر مع المرشد",
+      "es": "Contacto directo con tu guía"
+    },
+    "Confirmation après vérification": {
+      "ar": "التأكيد بعد التحقق",
+      "es": "Confirmación tras la comprobación"
+    }
+  },
   "store": {
     "BOUTIQUE LOCALE · IMSFRANE CATHÉDRALE": {
       "ar": "متجر محلي · مسفران كاتدرال",
