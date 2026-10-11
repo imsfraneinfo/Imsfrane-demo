@@ -69,14 +69,20 @@
   function selected(){return offers.filter(function(item){return qty(item)>0})}
   function hasCategory(cat){return selected().some(function(item){return item.category===cat})}
   function hasTents(){return selected().some(function(item){return item.unit==="tentNight"})}
-  function tentCount(){return selected().filter(function(item){return item.unit==="tentNight"}).reduce(function(sum,item){return sum+qty(item)*(item.capacity||0)},0)}
   function days(){
     if(!start.value||!end.value)return 1;
     var one=Date.parse(start.value+"T00:00:00Z"),two=Date.parse(end.value+"T00:00:00Z");
     return Number.isFinite(one)&&Number.isFinite(two)&&two>one?Math.round((two-one)/86400000):1
   }
-  function price(item){return qty(item)*item.price*(item.unit==="tentNight"?days():item.unit==="person"?travelerCount():1)}
   function travelerCount(){return Math.max(1,Math.min(60,Number(people.value)||1))}
+  // One group-size selector governs every price: people, tents and shared quads.
+  function requiredUnits(item){
+    if(!qty(item))return 0;
+    if(item.unit==="person")return travelerCount();
+    if(item.unit==="tentNight"||item.unit==="vehicle")return Math.ceil(travelerCount()/Math.max(1,Number(item.capacity)||1));
+    return 1; // Fixed fee per guided hiking group, subject to final confirmation.
+  }
+  function price(item){return requiredUnits(item)*item.price*(item.unit==="tentNight"?days():1)}
   function total(){return selected().reduce(function(sum,item){return sum+price(item)},0)}
   function extras(){
     return [].slice.call(element("bp-extras").querySelectorAll('input[type="checkbox"]:checked')).map(function(chk){
@@ -108,8 +114,7 @@
     selected().forEach(function(item){
       var row=line(),left=document.createElement("div");
       addText(left,"strong",item[language]);
-      var mult=(item.unit==="person"?travelerCount():qty(item))+" × "+money(item.price);
-      if(item.unit==="person" && qty(item)>1)mult+=" × "+qty(item);
+      var mult=requiredUnits(item)+" × "+money(item.price);
       if(item.unit==="tentNight")mult+=" × "+days()+" "+(days()===1?words.night:words.nights);
       addText(left,"small",mult);
       row.appendChild(left);
@@ -124,19 +129,13 @@
     }
     element("bp-total").textContent=money(total())
   }
-  function renderQty(id){
+  function renderChoice(id){
     var offer=cards.find(function(card){return card.dataset.id===id});
     if(!offer)return;
-    var number=amounts[id],buttons=offer.querySelectorAll("button[data-delta]");
-    offer.dataset.selected=number>0?"true":"false";
+    var picked=amounts[id]>0;
+    offer.dataset.selected=String(picked);
     var check=offer.querySelector(".bp-choice");
-    if(check)check.checked=number>0;
-    var out=offer.querySelector("output");
-    if(out)out.textContent=String(number);
-    buttons.forEach(function(button){
-      var delta=Number(button.dataset.delta);
-      button.disabled=delta<0?number<=0:number>=(offerMap[id].unit==="group"?10:30)
-    })
+    if(check)check.checked=picked;
   }
   function refreshPeople(){
     [].slice.call(root.querySelectorAll(".bp-count-auto strong")).forEach(function(label){label.textContent=String(travelerCount())});
@@ -148,18 +147,18 @@
     var checkbox=event.target.closest("input.bp-choice[data-offer]");
     if(!checkbox)return;
     var id=checkbox.dataset.offer;
-    amounts[id]=checkbox.checked?Math.max(1,amounts[id]):0;
-    renderQty(id);
-    showSummary()
-  });
-  root.querySelector("#bp-offers").addEventListener("click",function(event){
-    var button=event.target.closest("button[data-offer]");
-    if(!button)return;
-    var id=button.dataset.offer,item=offerMap[id];
-    if(!item)return;
-    var cap=item.unit==="group"?10:30;
-    amounts[id]=Math.max(0,Math.min(cap,amounts[id]+Number(button.dataset.delta)));
-    renderQty(id);
+    var item=offerMap[id];
+    // Route, tent size and quad seating are alternative options within a category.
+    if(checkbox.checked&&item&&["rafting","camping","quad"].includes(item.category)){
+      offers.forEach(function(other){
+        if(other.id!==id&&other.category===item.category){
+          amounts[other.id]=0;
+          renderChoice(other.id);
+        }
+      });
+    }
+    amounts[id]=checkbox.checked?1:0;
+    renderChoice(id);
     showSummary()
   });
   element("bp-filters").addEventListener("click",function(event){
@@ -201,7 +200,6 @@
     if(!people.checkValidity()||Number(people.value)<1||Number(people.value)>60)return fail(words.validationPeople,people);
     if(hasTents()){
       if(!end.value||end.value<=start.value||days()>45)return fail(words.validationCheckout,end);
-      if(tentCount()<Number(people.value))return fail(words.validationCapacity,people)
     }
     if(hasCategory("rafting")){
       var month=Number(start.value.slice(5,7));
@@ -226,7 +224,7 @@
     if(selected().length){
       lines.push("","*"+words.selection+"*");
       selected().forEach(function(item){
-        var caption=(item.unit==="person"?travelerCount():qty(item))+" × "+item[language];
+        var caption=requiredUnits(item)+" × "+item[language];
         if(item.unit==="tentNight")caption+=" × "+days()+" "+words.nights;
         lines.push("- "+caption+" — "+money(price(item)))
       })
