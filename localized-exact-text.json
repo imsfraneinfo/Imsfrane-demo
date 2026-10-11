@@ -1631,7 +1631,252 @@
       "es": "Contacta con nosotros para elegir fecha y confirmar las condiciones."
     }
   },
-  "hebergement": {},
+  "hebergement": {
+    "Imsfrane Cathédrale · Haut Atlas": {
+      "ar": "مسفران كاتدرال · الأطلس الكبير",
+      "es": "Imsfrane Cathédrale · Alto Atlas"
+    },
+    "Séjournez au Cœur de l’Atlas": {
+      "ar": "أقم في قلب الأطلس الكبير",
+      "es": "Alójate en el corazón del Atlas"
+    },
+    "Découvrir ↓": {
+      "ar": "اكتشف ↓",
+      "es": "Descubrir ↓"
+    },
+    "Une maison locale paisible entourée de montagnes, de rivière et de vie authentique.": {
+      "ar": "بيت محلي هادئ تحيط به الجبال والنهر وأجواء الحياة الأصيلة.",
+      "es": "Una casa local tranquila rodeada de montañas, río y vida auténtica."
+    },
+    "Dormez près de la nature et de l’Oued Ahansal": {
+      "ar": "إقامة قريبة من الطبيعة ووادي أحنصال",
+      "es": "Descansa cerca de la naturaleza y del río Ahansal"
+    },
+    "Séjournez dans une maison locale paisible près de Tilouguite, de l’Oued Ahansal et de la route vers Imsfrane. L’hébergement convient aux familles, randonneurs, groupes de rafting et voyageurs.": {
+      "ar": "أقم في بيت محلي هادئ قرب تيلوكيت ووادي أحنصال والطريق المؤدي إلى مسفران. تناسب الإقامة العائلات وممارسي المشي الجبلي ومجموعات التجديف والمسافرين.",
+      "es": "Alójate en una casa local tranquila cerca de Tilouguite, el Ahansal y el camino a Imsfrane. Ideal para familias, senderistas, grupos de rafting y viajeros."
+    },
+    "Près de la rivière": {
+      "ar": "قرب النهر",
+      "es": "Cerca del río"
+    },
+    "Près de l’Oued Ahansal et des montagnes.": {
+      "ar": "قرب وادي أحنصال والجبال.",
+      "es": "Cerca del río Ahansal y las montañas."
+    },
+    "Découvrez la vie authentique du Haut Atlas.": {
+      "ar": "اكتشف الحياة الأصيلة في الأطلس الكبير.",
+      "es": "Descubre la vida auténtica del Alto Atlas."
+    },
+    "Rafting, randonnée, VTT, quad et camping.": {
+      "ar": "التجديف والمشي الجبلي والدراجات والكواد والتخييم.",
+      "es": "Rafting, senderismo, BTT, quad y acampada."
+    },
+    "Un environnement calme loin du bruit.": {
+      "ar": "محيط هادئ بعيد عن الضجيج.",
+      "es": "Un entorno tranquilo y alejado del ruido."
+    },
+    "Ambiance locale": {
+      "ar": "أجواء محلية",
+      "es": "Ambiente local"
+    },
+    "Proche des activités": {
+      "ar": "قرب الأنشطة",
+      "es": "Cerca de las actividades"
+    },
+    "Nuits paisibles": {
+      "ar": "ليالٍ هادئة",
+      "es": "Noches tranquilas"
+    },
+    "Maison et Chambres près de l’Oued Ahansal": {
+      "ar": "بيت وغرف قرب وادي أحنصال",
+      "es": "Casa y habitaciones cerca del río Ahansal"
+    },
+    "Une maison locale simple et confortable, idéale pour se reposer avant ou après les activités. Elle se situe près de la rivière, environ 10 kilomètres avant Imsfrane.": {
+      "ar": "بيت محلي بسيط ومريح للاستراحة قبل الأنشطة أو بعدها، يقع قرب النهر على بُعد نحو 10 كيلومترات قبل الوصول إلى مسفران.",
+      "es": "Una casa local sencilla y acogedora, perfecta para descansar antes o después de las actividades. Está junto al río, unos 10 km antes de llegar a Imsfrane."
+    },
+    "Chambres confortables": {
+      "ar": "غرف مريحة",
+      "es": "Habitaciones cómodas"
+    },
+    "Salon traditionnel": {
+      "ar": "صالون تقليدي",
+      "es": "Salón tradicional"
+    },
+    "Cuisine": {
+      "ar": "مطبخ",
+      "es": "Cocina"
+    },
+    "Salle de bain": {
+      "ar": "حمّام",
+      "es": "Baño"
+    },
+    "Parking à proximité": {
+      "ar": "موقف سيارات قريب",
+      "es": "Aparcamiento cercano"
+    },
+    "Environnement montagneux": {
+      "ar": "محيط جبلي",
+      "es": "Entorno de montaña"
+    },
+    "Profitez d'une nuit inoubliable au cœur de la nature près d'Imsfrane Cathédrale. Tentes confortables, air pur, ciel étoilé et expérience authentique dans l'Atlas.": {
+      "ar": "استمتع بليلة لا تُنسى وسط طبيعة مسفران: خيام مريحة وهواء نقي وسماء مرصّعة بالنجوم وتجربة أصيلة في الأطلس.",
+      "es": "Disfruta de una noche inolvidable en la naturaleza cerca de Imsfrane: tiendas cómodas, aire puro, cielo estrellado y una experiencia auténtica en el Atlas."
+    },
+    "Tente équipée": {
+      "ar": "خيمة مجهزة",
+      "es": "Tienda equipada"
+    },
+    "Matelas et couverture": {
+      "ar": "فرش وغطاء",
+      "es": "Colchoneta y manta"
+    },
+    "Feu de camp": {
+      "ar": "نار المخيم",
+      "es": "Fogata"
+    },
+    "Vue sur les montagnes": {
+      "ar": "إطلالة على الجبال",
+      "es": "Vistas a las montañas"
+    },
+    "Activités à proximité": {
+      "ar": "أنشطة قريبة",
+      "es": "Actividades cercanas"
+    },
+    "Confirmer par WhatsApp": {
+      "ar": "التأكيد عبر واتساب",
+      "es": "Confirmar por WhatsApp"
+    },
+    "Réserver la maison ↗": {
+      "ar": "احجز البيت ↗",
+      "es": "Reservar la casa ↗"
+    },
+    "Voir le Camping ↗": {
+      "ar": "استكشف المخيم ↗",
+      "es": "Ver la zona de acampada ↗"
+    },
+    "Tout pour un séjour confortable": {
+      "ar": "كل ما تحتاجه لإقامة مريحة",
+      "es": "Todo para una estancia cómoda"
+    },
+    "Chambres, maison complète et tentes.": {
+      "ar": "غرف وبيت كامل وخيام.",
+      "es": "Habitaciones, casa completa y tiendas."
+    },
+    "Salle de bain disponible dans la maison.": {
+      "ar": "يتوفر حمّام داخل البيت.",
+      "es": "Baño disponible en la casa."
+    },
+    "Parking disponible près de la maison.": {
+      "ar": "موقف سيارات قرب البيت.",
+      "es": "Aparcamiento disponible cerca de la casa."
+    },
+    "Transport local possible sur demande.": {
+      "ar": "يمكن تنظيم النقل المحلي عند الطلب.",
+      "es": "Transporte local bajo petición."
+    },
+    "Parking": {
+      "ar": "موقف السيارات",
+      "es": "Aparcamiento"
+    },
+    "Transport": {
+      "ar": "النقل",
+      "es": "Transporte"
+    },
+    "Découvrez la maison et son ambiance": {
+      "ar": "اكتشف البيت وأجواءه",
+      "es": "Conoce la casa y su ambiente"
+    },
+    "Images originales de l’hébergement et de l’environnement autour d’Imsfrane.": {
+      "ar": "صور حقيقية للإقامة ومحيط مسفران.",
+      "es": "Fotografías originales del alojamiento y de los alrededores de Imsfrane."
+    },
+    "Hospitalité locale et environnement naturel": {
+      "ar": "ضيافة محلية ومحيط طبيعي",
+      "es": "Hospitalidad local y entorno natural"
+    },
+    "Montagnes, vallées et air frais.": {
+      "ar": "جبال ووديان وهواء نقي.",
+      "es": "Montañas, valles y aire fresco."
+    },
+    "Conseils, activités et informations locales.": {
+      "ar": "نصائح وأنشطة ومعلومات محلية.",
+      "es": "Consejos, actividades e información local."
+    },
+    "Reposez-vous loin du bruit et de la foule.": {
+      "ar": "استرح بعيداً عن الضوضاء والازدحام.",
+      "es": "Descansa lejos del ruido y las multitudes."
+    },
+    "Accès facile au rafting et à la randonnée.": {
+      "ar": "سهولة الوصول إلى التجديف والمشي الجبلي.",
+      "es": "Acceso sencillo al rafting y al senderismo."
+    },
+    "Proche de la nature": {
+      "ar": "قريب من الطبيعة",
+      "es": "Cerca de la naturaleza"
+    },
+    "Accompagnement local": {
+      "ar": "مرافقة محلية",
+      "es": "Acompañamiento local"
+    },
+    "Ambiance paisible": {
+      "ar": "أجواء هادئة",
+      "es": "Ambiente tranquilo"
+    },
+    "Près des aventures": {
+      "ar": "قريب من المغامرات",
+      "es": "Cerca de las aventuras"
+    },
+    "Près de Tilouguite et de l’Oued Ahansal": {
+      "ar": "قرب تيلوكيت ووادي أحنصال",
+      "es": "Cerca de Tilouguite y del río Ahansal"
+    },
+    "L’hébergement se situe près de Tilouguite, environ 10 kilomètres avant Imsfrane. Le lieu exact est envoyé après réservation.": {
+      "ar": "يقع مكان الإقامة قرب تيلوكيت، على بُعد نحو 10 كيلومترات قبل مسفران. يُرسَل الموقع الدقيق بعد تأكيد الحجز.",
+      "es": "El alojamiento está cerca de Tilouguite, unos 10 kilómetros antes de Imsfrane. Enviamos la ubicación exacta tras confirmar la reserva."
+    },
+    "Tilouguite, Azilal, Morocco": {
+      "ar": "تيلوكيت، أزيلال، المغرب",
+      "es": "Tilouguite, Azilal, Marruecos"
+    },
+    "Près de l’Oued Ahansal": {
+      "ar": "قرب وادي أحنصال",
+      "es": "Cerca del río Ahansal"
+    },
+    "Accessible en voiture": {
+      "ar": "يمكن الوصول بالسيارة",
+      "es": "Accesible en coche"
+    },
+    "Ouvrir l’itinéraire ↗": {
+      "ar": "افتح المسار ↗",
+      "es": "Ver la ruta ↗"
+    },
+    "Oui. La maison convient aux familles, couples, groupes et voyageurs.": {
+      "ar": "نعم، يناسب البيت العائلات والأزواج والمجموعات والمسافرين.",
+      "es": "Sí, la casa es adecuada para familias, parejas, grupos y viajeros."
+    },
+    "Oui, selon la disponibilité. Envoyez vos dates et le nombre de personnes.": {
+      "ar": "نعم، بحسب التوفر. أرسل التاريخ وعدد الأشخاص.",
+      "es": "Sí, según disponibilidad. Indícanos las fechas y el número de personas."
+    },
+    "Un parking est disponible près de la maison. Le point exact est confirmé avant l’arrivée.": {
+      "ar": "يوجد موقف سيارات قرب البيت، ويُؤكَّد موقعه قبل الوصول.",
+      "es": "Hay aparcamiento cerca de la casa; confirmamos el punto exacto antes de llegar."
+    },
+    "Oui. Le rafting, la randonnée, le VTT, le quad, le camping et le transport peuvent être organisés.": {
+      "ar": "نعم، يمكن تنظيم التجديف والمشي الجبلي والدراجات والكواد والتخييم والنقل.",
+      "es": "Sí, podemos organizar rafting, senderismo, BTT, quad, acampada y transporte."
+    },
+    "Prêt pour un séjour paisible dans l’Atlas ?": {
+      "ar": "هل أنت مستعد لإقامة هادئة في الأطلس؟",
+      "es": "¿Listo para una estancia tranquila en el Atlas?"
+    },
+    "Envoyez-nous vos dates, le nombre de personnes et l’hébergement souhaité. Nous confirmerons la disponibilité et le tarif.": {
+      "ar": "أرسل التواريخ وعدد الأشخاص ونوع الإقامة المرغوب، وسنؤكد التوفر والسعر.",
+      "es": "Indícanos las fechas, el número de personas y el tipo de alojamiento. Confirmaremos disponibilidad y precio."
+    }
+  },
   "programme": {
     "Imsfrane Cathédrale · Haut Atlas": {
       "ar": "مسفران كاتدرال · الأطلس الكبير",
@@ -1936,7 +2181,204 @@
   },
   "guide": {},
   "booking": {},
-  "store": {},
+  "store": {
+    "BOUTIQUE LOCALE · IMSFRANE CATHÉDRALE": {
+      "ar": "متجر محلي · مسفران كاتدرال",
+      "es": "TIENDA LOCAL · IMSFRANE CATHÉDRALE"
+    },
+    "Les trésors de l’Atlas,": {
+      "ar": "كنوز الأطلس،",
+      "es": "Los tesoros del Atlas,"
+    },
+    "tout simplement.": {
+      "ar": "ببساطة.",
+      "es": "sin complicaciones."
+    },
+    "Une boutique inspirée du plein air, avec des produits du terroir sélectionnés dans les montagnes de notre région.": {
+      "ar": "متجر مستوحى من الطبيعة يضم منتجات محلية مختارة من جبال منطقتنا.",
+      "es": "Una tienda inspirada en la naturaleza con productos locales seleccionados en las montañas de nuestra región."
+    },
+    "Explorer les produits": {
+      "ar": "تصفح المنتجات",
+      "es": "Explorar productos"
+    },
+    "Une question ?": {
+      "ar": "هل لديك سؤال؟",
+      "es": "¿Alguna pregunta?"
+    },
+    "Sélection locale": {
+      "ar": "منتجات محلية مختارة",
+      "es": "Selección local"
+    },
+    "Produits de l’Atlas": {
+      "ar": "منتجات الأطلس",
+      "es": "Productos del Atlas"
+    },
+    "3 références actuelles · d’autres à venir": {
+      "ar": "ثلاثة منتجات متاحة حالياً والمزيد قريباً",
+      "es": "Tres productos disponibles y más por llegar"
+    },
+    "À découvrir · Saveurs des montagnes marocaines": {
+      "ar": "للاكتشاف · نكهات جبال المغرب",
+      "es": "Para descubrir · Sabores de las montañas marroquíes"
+    },
+    "Commande directe": {
+      "ar": "طلب مباشر",
+      "es": "Pedido directo"
+    },
+    "Disponibilité confirmée avant commande": {
+      "ar": "يُؤكَّد التوفر قبل الطلب",
+      "es": "Disponibilidad confirmada antes del pedido"
+    },
+    "Explorer la boutique": {
+      "ar": "تصفح المتجر",
+      "es": "Explorar la tienda"
+    },
+    "Tous les produits": {
+      "ar": "جميع المنتجات",
+      "es": "Todos los productos"
+    },
+    "Miels de montagne": {
+      "ar": "عسل الجبال",
+      "es": "Mieles de montaña"
+    },
+    "Huiles locales": {
+      "ar": "زيوت محلية",
+      "es": "Aceites locales"
+    },
+    "Plantes & aromates": {
+      "ar": "أعشاب ونباتات عطرية",
+      "es": "Plantas y aromáticas"
+    },
+    "Demande sans paiement. Quantités, conditionnement, prix final, livraison et disponibilité à confirmer.": {
+      "ar": "طلب دون دفع مسبق؛ تُؤكَّد الكميات والتعبئة والسعر النهائي والتوصيل والتوفر قبل الشراء.",
+      "es": "Consulta sin pago. Cantidades, envases, precio final, entrega y disponibilidad sujetos a confirmación."
+    },
+    "IMSFRANE CATHÉDRALE / SHOP": {
+      "ar": "مسفران كاتدرال / المتجر",
+      "es": "IMSFRANE CATHÉDRALE / TIENDA"
+    },
+    "Notre sélection": {
+      "ar": "مختاراتنا",
+      "es": "Nuestra selección"
+    },
+    "Mon panier": {
+      "ar": "سلة مشترياتي",
+      "es": "Mi cesta"
+    },
+    "Rechercher dans la boutique": {
+      "ar": "البحث في المتجر",
+      "es": "Buscar en la tienda"
+    },
+    "Trier": {
+      "ar": "الترتيب",
+      "es": "Ordenar"
+    },
+    "Prix croissant": {
+      "ar": "السعر من الأقل إلى الأعلى",
+      "es": "Precio de menor a mayor"
+    },
+    "Prix décroissant": {
+      "ar": "السعر من الأعلى إلى الأقل",
+      "es": "Precio de mayor a menor"
+    },
+    "3 produits": {
+      "ar": "ثلاثة منتجات",
+      "es": "Tres productos"
+    },
+    "PRODUIT LOCAL": {
+      "ar": "منتج محلي",
+      "es": "PRODUCTO LOCAL"
+    },
+    "Miel naturel de l’Atlas": {
+      "ar": "عسل طبيعي من الأطلس",
+      "es": "Miel natural del Atlas"
+    },
+    "Miel de montagne au goût authentique, issu de la région de l’Atlas.": {
+      "ar": "عسل جبلي بمذاق أصيل من منطقة الأطلس.",
+      "es": "Miel de montaña de sabor auténtico procedente de la región del Atlas."
+    },
+    "Prix affiché · quantité à confirmer": {
+      "ar": "السعر المعروض · الكمية تُؤكَّد",
+      "es": "Precio indicado · cantidad por confirmar"
+    },
+    "Ajouter au panier": {
+      "ar": "أضف إلى السلة",
+      "es": "Añadir a la cesta"
+    },
+    "Zit Beldiya · Huile d’olive": {
+      "ar": "زيت بلدية · زيت الزيتون",
+      "es": "Zit Beldiya · Aceite de oliva"
+    },
+    "Huile d’olive traditionnelle aux saveurs locales.": {
+      "ar": "زيت زيتون تقليدي بنكهة محلية أصيلة.",
+      "es": "Aceite de oliva tradicional de sabor local."
+    },
+    "Prix affiché · volume à confirmer": {
+      "ar": "السعر المعروض · الحجم يُؤكَّد",
+      "es": "Precio indicado · volumen por confirmar"
+    },
+    "Zaatar · Thym sauvage": {
+      "ar": "زعتر · زعتر جبلي بري",
+      "es": "Zaatar · Tomillo silvestre"
+    },
+    "Thym sauvage de montagne, séché naturellement pour infusions et cuisine.": {
+      "ar": "زعتر جبلي بري يُجفَّف طبيعياً لاستعماله في المشروبات والطبخ.",
+      "es": "Tomillo silvestre de montaña secado de forma natural para infusiones y cocina."
+    },
+    "Par kilogramme": {
+      "ar": "للكيلوغرام",
+      "es": "Por kilogramo"
+    },
+    "Aucun produit ne correspond à votre recherche.": {
+      "ar": "لا توجد منتجات مطابقة لبحثك.",
+      "es": "No hay productos que coincidan con tu búsqueda."
+    },
+    "Effacer les filtres": {
+      "ar": "مسح عوامل التصفية",
+      "es": "Borrar filtros"
+    },
+    "Une boutique à taille humaine": {
+      "ar": "متجر بطابع محلي",
+      "es": "Una tienda cercana"
+    },
+    "Des produits qui racontent notre région": {
+      "ar": "منتجات تحكي قصة منطقتنا",
+      "es": "Productos que cuentan la historia de nuestra región"
+    },
+    "Découvrez une sélection simple de saveurs des montagnes de l’Atlas. Pas de paiement en ligne : chaque demande est confirmée directement avec notre équipe.": {
+      "ar": "اكتشف تشكيلة من نكهات جبال الأطلس. لا يوجد دفع إلكتروني؛ يؤكد فريقنا كل طلب بشكل مباشر.",
+      "es": "Descubre sabores seleccionados de las montañas del Atlas. No hay pago en línea: nuestro equipo confirma personalmente cada pedido."
+    },
+    "Produits de notre région": {
+      "ar": "منتجات من منطقتنا",
+      "es": "Productos de nuestra región"
+    },
+    "Échange direct avec une équipe locale": {
+      "ar": "تواصل مباشر مع فريق محلي",
+      "es": "Contacto directo con un equipo local"
+    },
+    "Quantités et livraison à confirmer": {
+      "ar": "تأكيد الكميات والتوصيل",
+      "es": "Cantidades y entrega por confirmar"
+    },
+    "Votre panier attend ses premières découvertes.": {
+      "ar": "سلتك تنتظر أول منتجاتك.",
+      "es": "Tu cesta espera sus primeros productos."
+    },
+    "Total indicatif": {
+      "ar": "الإجمالي التقريبي",
+      "es": "Total orientativo"
+    },
+    "Commander via WhatsApp": {
+      "ar": "اطلب عبر واتساب",
+      "es": "Pedir por WhatsApp"
+    },
+    "Voir mon panier": {
+      "ar": "عرض السلة",
+      "es": "Ver mi cesta"
+    }
+  },
   "blog": {},
   "contact": {},
   "about": {
