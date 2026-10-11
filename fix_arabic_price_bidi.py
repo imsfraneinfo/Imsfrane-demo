@@ -51,8 +51,8 @@ def build(root:Path):
                     for x in doc.select(".exp-opt .ar-formatted-price")]
             if values!=[("2500","درهم"),("3000","درهم")]:
                 raise RuntimeError("Expedition price mismatch: "+str(values))
-            card=doc.select_one(".route-price strong.ar-formatted-price")
-            if not card or card.select_one("bdi").get_text().replace("\u00a0","")!="2500":
+            cards=doc.select(".route-price strong.ar-formatted-price")
+            if not any((c.select_one("bdi") and c.select_one("bdi").get_text().replace("\u00a0","")=="2500") for c in cards):
                 raise RuntimeError("Rafting 2-day price was not isolated")
         if count:
             result=str(doc)
