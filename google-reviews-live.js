@@ -89,6 +89,10 @@
       countNode.textContent = count.toLocaleString(lang) + " " + tx.reviews;
     }
     const reviews = Array.isArray(place.reviews) ? place.reviews.slice(0, 5) : [];
+    diagnostic("SUCCESS: rating=" + (Number.isFinite(rating) ? rating : "none") +
+      "; total=" + (Number.isFinite(count) ? count : "none") +
+      "; reviewsReturned=" + reviews.length +
+      "; reviewContainer=" + Boolean(reviewList));
     if (!reviewList || !reviews.length) return;
     const cards = [];
     for (const r of reviews) {
@@ -115,9 +119,14 @@
       card.appendChild(link(tx.source + " ↗", r.googleMapsURI || maps || section.querySelector(".hp-google-link").href, "hp-live-review-credit"));
       cards.push(card);
     }
-    if (!cards.length) return;
+    if (!cards.length) {
+      diagnostic("SUCCESS: reviewsReturned=" + reviews.length + " but all are empty.");
+      return;
+    }
     reviewList.replaceChildren(...cards);
     reviewList.hidden = false;
+    diagnostic("SUCCESS: " + cards.length + " review cards rendered; " +
+      "visible=" + (getComputedStyle(reviewList).display !== "none"));
   }
   if (!key || !placeId) {
     diagnostic(!key ? "API_KEY_MISSING_IN_DEMO_DEPLOYMENT" : "PLACE_ID_MISSING");
