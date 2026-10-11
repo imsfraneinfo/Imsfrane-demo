@@ -1,6 +1,7 @@
 from pathlib import Path
 from bs4 import BeautifulSoup
 import html,re,json
+import xml.etree.ElementTree as ET
 
 def build(root):
     for lang in ('fr','en'):
@@ -42,6 +43,26 @@ def build(root):
                 image='../'+image.split('https://imsfrane.com/',1)[1].lstrip('/')
             cards.append(dict(href=article.name,title=title,description=desc,image=image,category=('Découverte' if fr else 'Discover'),date=''))
             seen.add(article.name)
+        # Two stories must not share the same photo in the magazine index.
+        # Keep their original article URLs untouched; hide duplicate thumbnails
+        # where a more detailed guide is already featured with that photograph.
+        distinct=[]
+        seen_photos=set()
+        for card in cards:
+            image_key=re.sub(r'-(?:480|680|768|800|1024|1200)(?=\\.[^.]+$)','',card['image'].split('?',1)[0].lower())
+            if image_key and image_key in seen_photos: continue
+            if image_key: seen_photos.add(image_key)
+            source=card['image'].split('?',1)[0]
+            if source.startswith('/Imsfrane-demo/images/'):
+                photo=root/'images'/source.split('/images/',1)[1]
+            elif source.startswith('../images/'):
+                photo=root/'images'/source.split('../images/',1)[1]
+            else:
+                photo=None
+            if photo is not None and not photo.is_file():
+                raise RuntimeError('Missing indexed blog photograph: '+str(photo))
+            distinct.append(card)
+        cards=distinct
         # Featured lead is the first original article, with its own photo.
         labels=dict(kicker='LE JOURNAL DE L’ATLAS' if fr else 'THE ATLAS JOURNAL',title='Histoires du Haut Atlas' if fr else 'Stories from the High Atlas',intro='Des récits authentiques sur Imsfrane, les rivières, les montagnes et la vie locale.' if fr else 'Authentic stories of Imsfrane, its rivers, mountains and local life.',search='Rechercher un article, un lieu, un thème…' if fr else 'Search stories, places, topics…',all='Tous' if fr else 'All',featured='À la une' if fr else 'Featured story',latest='Tous les articles' if fr else 'All stories',read='Lire l’article' if fr else 'Read story',none='Aucun article ne correspond à votre recherche.' if fr else 'No stories match your search.',more='Afficher plus' if fr else 'Show more',count='articles' if fr else 'stories',explore='Explorez nos récits' if fr else 'Explore our stories')
         def esc(s):return html.escape(str(s or ''),quote=True)
@@ -65,7 +86,41 @@ def build(root):
         original=re.sub(r'<main[^>]*>.*?</main>',lambda m:newmain,original,count=1,flags=re.S|re.I)
         css=Path('blog-journal.css').read_text(encoding='utf-8')
         js=Path('blog-journal.js').read_text(encoding='utf-8')
-        original=original.replace('</head>','<style id="journal-v2">'+css+'</style></head>',1)
+        # Add the Arabic article index to the translated blog landing pages.
+        arabic_hreflang='<link rel="alternate" hreflang="ar" href="https://imsfraneinfo.github.io/Imsfrane-demo/ar/blog.html">'
+        original=original.replace('</head>',arabic_hreflang+'<style id="journal-v2">'+css+'</style></head>',1)
         original=original.replace('</body>','<script>'+js+'</script></body>',1)
         path.write_text(original,encoding='utf-8')
+    # Demo-only sitemap: never publish new blog URLs into the live site's map.
+    sitemap=root/'sitemap.xml'
+    if sitemap.exists():
+        sitemap_ns='http://www.sitemaps.org/schemas/sitemap/0.9'
+        xhtml_ns='http://www.w3.org/1999/xhtml'
+        ET.register_namespace('',sitemap_ns)
+        ET.register_namespace('xhtml',xhtml_ns)
+        xml=ET.parse(sitemap)
+        urls=xml.getroot()
+        base='https://imsfraneinfo.github.io/Imsfrane-demo/'
+        for node in urls.iter():
+            if node.tag.endswith('}loc') and node.text and 'https://imsfrane.com/' in node.text:
+                node.text=node.text.replace('https://imsfrane.com/',base)
+            if node.tag.endswith('}link') and 'href' in node.attrib:
+                node.set('href',node.attrib['href'].replace('https://imsfrane.com/',base))
+        existing={el.text for el in urls.findall('.//{'+sitemap_ns+'}loc')}
+        slugs=['blog.html']+['blog-guide-'+t['slug']+'.html' for t in json.loads(Path('blog_new_topics.json').read_text(encoding='utf-8'))]
+        for slug in slugs:
+            for lang in ('fr','en','ar'):
+                target=root/lang/slug
+                if not target.exists(): raise RuntimeError('Missing indexed page: '+str(target))
+                url=base+lang+'/'+slug
+                if url in existing: continue
+                entry=ET.SubElement(urls,'{'+sitemap_ns+'}url')
+                ET.SubElement(entry,'{'+sitemap_ns+'}loc').text=url
+                for alternate in ('fr','en','ar'):
+                    ET.SubElement(entry,'{'+xhtml_ns+'}link',{'rel':'alternate','hreflang':alternate,'href':base+alternate+'/'+slug})
+                ET.SubElement(entry,'{'+xhtml_ns+'}link',{'rel':'alternate','hreflang':'x-default','href':base+'fr/'+slug})
+                existing.add(url)
+        xml.write(sitemap,encoding='utf-8',xml_declaration=True)
+        (root/'robots.txt').write_text('User-agent: *\\nAllow: /\\nDisallow: /Imsfrane-demo/admin/\\n\\nSitemap: '+base+'sitemap.xml\\n',encoding='utf-8')
+
 if __name__=='__main__':build(Path('public'))
