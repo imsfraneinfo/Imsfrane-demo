@@ -19,7 +19,7 @@ jobs:
           git clone --depth 1 https://github.com/imsfraneinfo/imsfraneinfo.git /tmp/original
           mkdir -p public
           rsync -a --exclude=.git --exclude=.github --exclude=CNAME /tmp/original/ public/
-          python3 -m pip install --quiet beautifulsoup4
+          python3 -m pip install --quiet beautifulsoup4 pillow
           python3 - <<'PY'
           from pathlib import Path
           import re
