@@ -2,7 +2,7 @@ name: Publish Imsfrane demo
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/build-demo.yml', 'rafting-v8.html', 'imsfrane_rafting_mobile_cadrage_corrige_v8*.html', 'images/rafting-new/**', 'quad-content-*.html', 'images/quad-new/**', 'images/IMG_*.webp', 'vtt-content-*.html', 'camping-content-*.html', 'randonnee-content-*.html', 'about-content-*.html', 'remaining-pages-theme.css', 'rebuild_remaining.py', 'build_memories_gallery.py', 'memories-gallery.css', 'build_blog_journal.py', 'blog-journal.css', 'blog-journal.js', 'build_new_articles.py', 'blog_new_topics.json', 'blog_article_research.json', 'blog_expanded_content.json', 'blog-articles.css', 'booking-prices.json', 'booking-pro.css', 'booking-pro.js', 'build_booking_pro.py', 'build_store_pro.py', 'store-products.json', 'store-pro.css', 'store-pro.js', 'build_guide_pro.py', 'guide-pro.css', 'images/rando-*.webp', 'images/IMG_*.jpeg']
+    paths: ['.github/workflows/build-demo.yml', 'rafting-v8.html', 'imsfrane_rafting_mobile_cadrage_corrige_v8*.html', 'images/rafting-new/**', 'quad-content-*.html', 'images/quad-new/**', 'images/IMG_*.webp', 'vtt-content-*.html', 'camping-content-*.html', 'randonnee-content-*.html', 'about-content-*.html', 'remaining-pages-theme.css', 'rebuild_remaining.py', 'build_memories_gallery.py', 'memories-gallery.css', 'build_blog_journal.py', 'blog-journal.css', 'blog-journal.js', 'build_new_articles.py', 'blog_new_topics.json', 'blog_article_research.json', 'blog_expanded_content.json', 'blog-articles.css', 'booking-prices.json', 'booking-pro.css', 'booking-pro.js', 'build_booking_pro.py', 'build_store_pro.py', 'store-products.json', 'store-pro.css', 'store-pro.js', 'build_guide_pro.py', 'guide-pro.css', 'build_home_pro.py', 'home-pro.css', 'images/rando-*.webp', 'images/IMG_*.jpeg']
   workflow_dispatch:
 concurrency:
   group: imsfrane-demo-publish
@@ -509,8 +509,11 @@ jobs:
           # Photo-free FR/EN practical guide; never alter the original site logo.
           from build_guide_pro import build as build_guide
           build_guide(root)
+          # Bilingual homepage redesign is strictly limited to Demo fr/en index files.
+          from build_home_pro import publish as build_home
+          build_home(root)
           # Assets are copied from this demo repository, not written to the live site.
-          for asset in ('booking-pro.css','booking-pro.js','store-pro.css','store-pro.js','guide-pro.css'):
+          for asset in ('booking-pro.css','booking-pro.js','store-pro.css','store-pro.js','guide-pro.css','home-pro.css'):
               shutil.copy2(Path(asset),root/asset)
           (root/'.nojekyll').touch()
           PY
