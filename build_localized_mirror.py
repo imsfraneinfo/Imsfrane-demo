@@ -18,7 +18,7 @@ def text(target,value):
 def rich(target,before,accent):
     if target is not None:
         target.clear();target.append(before+" ")
-        em=target.new_tag("em") if hasattr(target,"new_tag") else BeautifulSoup("<em></em>","html.parser").em
+        em=BeautifulSoup("<em></em>","html.parser").em
         em.string=accent;target.append(em)
 def opt(s,selector,value):
     text(s.select_one(selector),value)
@@ -90,7 +90,7 @@ def homepage_main(root,lang):
     first_text(main.select_one(".hp-google-link"),w["reviewLink"])
     opt(main,".hp-activities .hp-kicker",w["activities"])
     rich(main.select_one(".hp-activities h2"),w["choose"],"✦")
-    opt(main,".hp-activities .hp-heading p",l["choose"])
+    opt(main,".hp-activities .hp-heading p",PAGES["index"][lang]["sections"][0][1])
     cards=main.select(".hp-activity-card")
     if len(cards)!=14:raise RuntimeError("Home must keep 14 cards")
     for card in cards:
@@ -129,7 +129,7 @@ def homepage_main(root,lang):
     opt(main,".hp-programs .hp-heading p",PAGES["programme"][lang]["lead"])
     for i,pr in enumerate(main.select(".hp-program")):
         opt(pr,"h3",w["programNames"][i])
-        opt(pr,">p",PAGES["programme"][lang]["sections"][i][1])
+        opt(pr,"p",PAGES["programme"][lang]["sections"][i][1])
         spans=pr.select(".hp-program-details span")
         if len(spans)>1:first_text(spans[1],w["programLevels"][i])
         opt(pr,".hp-program-foot small",w["perGroup"])
