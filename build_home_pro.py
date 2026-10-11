@@ -215,7 +215,7 @@ def build(lang):
         <div class="hp-hero-picture-note"><span>{e(t["heroPhotoKicker"])}</span><strong>{e(t["heroPhotoLabel"])}</strong></div>
         <div class="hp-hero-altitude"><i class="fa-solid fa-mountain-sun" aria-hidden="true"></i><strong>1 868 m</strong><span>Jebel Imsfrane</span></div>
       </div>
-    </div><a class="hp-scroll" href="#about">{e(t["scroll"])} <i class="fa-solid fa-arrow-down" aria-hidden="true"></i></a></section>'''
+    </div><a class="hp-scroll" href="#activities">{e(t["scroll"])} <i class="fa-solid fa-arrow-down" aria-hidden="true"></i></a></section>'''
     reviews=f'''<section class="hp-google-reviews" id="google-reviews" aria-labelledby="hp-reviews-title">
       <div class="hp-reviews-inner"><div class="hp-google-mark" aria-hidden="true"><i class="fa-brands fa-google"></i></div>
         <div class="hp-google-rating"><span class="hp-google-label">GOOGLE REVIEWS</span><div class="hp-google-score"><strong>{e("4,8" if lang=="fr" else "4.8")}<small>/5</small></strong><span aria-label="5 stars" class="hp-google-stars">★★★★★</span></div>
@@ -224,12 +224,6 @@ def build(lang):
           <p>{e("Découvrez les avis publiés sur Google par les visiteurs de nos activités à Imsfrane." if lang=="fr" else "See real Google reviews left by visitors to our Imsfrane adventures.")}</p></div>
         <a class="hp-google-link" href="{GOOGLE_REVIEWS}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-google" aria-hidden="true"></i> {e("Lire les avis Google" if lang=="fr" else "Read Google reviews")} <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
       </div>
-    </section>'''
-    facts='<div class="hp-facts"><div class="hp-facts-inner">'+''.join('<div><strong>'+e(a)+'</strong><span>'+e(b)+'</span></div>' for a,b in t["metrics"])+'</div></div>'
-    about=f'''<section class="hp-about hp-container" id="about">
-      <div class="hp-about-lead">{titleBlock(t["introEyebrow"],t["introTitle"])}</div>
-      <div class="hp-about-right"><p>{e(t["introText"])}</p>
-      <a href="guide.html" class="hp-plain-link">{e(t["introMore"])} <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a></div>
     </section>'''
     cards=[]
     for slug,name,desc,price,note,link,picture,alt in t["activities"]:
@@ -293,7 +287,7 @@ def build(lang):
       <div class="hp-final-buttons"><a href="booking.html" class="hp-button hp-button-gold"><i class="fa-regular fa-calendar-check" aria-hidden="true"></i> {e(t["ctaBooking"])}</a>
       <a href="https://wa.me/212667772551" class="hp-button hp-button-outline" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> {e(t["ctaWhatsApp"])}</a></div>
     </div></section>'''
-    return '<main id="mainContent" class="hp-home">'+hero+reviews+facts+about+activities+destiny+programs+why+seasonal+memories+links+end+'</main>'
+    return '<main id="mainContent" class="hp-home">'+hero+reviews+activities+destiny+programs+why+seasonal+memories+links+end+'</main>'
 
 def publish(root):
     for lang in ("fr","en"):
@@ -313,6 +307,9 @@ def publish(root):
         if updated.count('class="hp-activity-card')!=14:
             raise RuntimeError("All 14 main-site activities were not generated")
         if updated.count('data-slide="')!=5:raise RuntimeError("Five original homepage slider images missing")
+        rendered_main=re.search(r'<main\\b[^>]*>[\\s\\S]*?</main>',updated,flags=re.I).group(0)
+        if 'class="hp-facts"' in rendered_main or 'class="hp-about hp-container"' in rendered_main:
+            raise RuntimeError("Removed facts/about sections reappeared in homepage")
         if updated.count('class="hp-google-reviews"')!=1:raise RuntimeError("Google Reviews directly under hero missing")
         if updated.count('class="hp-program"')!=3:
             raise RuntimeError("Three programs were not generated")
