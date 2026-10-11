@@ -26,7 +26,7 @@ def build(root:Path):
             raise RuntimeError("Arabic font was inserted twice: "+str(file))
         if "</head>" not in source:
             raise RuntimeError("Cannot add font stylesheet without head: "+str(file))
-        url="../arabic-pro.css" if file.parent.name=="ar" else "arabic-pro.css"
+        url=("../arabic-pro.css" if file.parent.name=="ar" else "arabic-pro.css")+"?v=20261011b"
         addition=('<link href="'+escape(URL,quote=True)+'" rel="stylesheet"/>'
                   '<link href="'+url+'" rel="stylesheet"/>')
         old_main=re.search(r"<main\b[^>]*>[\s\S]*?</main>",source,re.I)
