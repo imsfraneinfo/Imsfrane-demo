@@ -1,0 +1,617 @@
+{
+  "index": {
+    "img": "21.webp",
+    "ar": {
+      "title": "مسفران كاتدرال: مغامرتك في قلب الأطلس الكبير",
+      "kicker": "اكتشف الأطلس الكبير",
+      "lead": "بين تضاريس جبلية مهيبة ووادي أحنصال والقرى الأمازيغية، تفتح لك مسفران أبوابها لاكتشاف الطبيعة برفقة مرشدين محليين يعرفون المنطقة ومسالكها. اختر نشاطك بحسب الموسم واستمتع بتجربة أصيلة بعيداً عن صخب المدن.",
+      "sections": [
+        [
+          "وجهة مختلفة في كل فصل",
+          "تتنوع التجارب بين المشي الجبلي وركوب الدراجات والتخييم والاستكشاف. أما التجديف في المياه البيضاء فيعتمد على صبيب النهر والظروف الجوية، ويكون موسمه المعتاد من مارس إلى يونيو، وقد يمتد أحياناً إلى يوليو."
+        ],
+        [
+          "الجبال والوديان والإنسان",
+          "تقع مسفران في جماعة تيلوكيت بإقليم أزيلال. ويجمع محيطها بين المناظر الصخرية والغابات والوديان والتراث الأمازيغي الذي يميز هذه المنطقة من الأطلس الكبير."
+        ],
+        [
+          "رحلة على إيقاعك",
+          "سواء كنت تبحث عن يوم حافل بالمغامرة أو إقامة هادئة وسط الطبيعة، يساعدك فريقنا المحلي على اختيار النشاط المناسب والتعرف على شروطه قبل الانطلاق."
+        ]
+      ]
+    },
+    "es": {
+      "title": "Imsfrane Cathédrale: aventuras auténticas en el Alto Atlas",
+      "kicker": "Descubre el Alto Atlas",
+      "lead": "Entre montañas de formas sorprendentes, el río Ahansal y pueblos amaziges, Imsfrane invita a descubrir una cara más tranquila y auténtica de Marruecos. Explora sus senderos y paisajes con personas que conocen el territorio y eligen cada actividad según la estación.",
+      "sections": [
+        [
+          "Un destino para descubrir sin prisas",
+          "Caminar por las montañas, recorrer pistas en bicicleta o dormir bajo las estrellas son algunas de las experiencias que ofrece Imsfrane. El rafting, en cambio, depende del caudal del río y suele practicarse entre marzo y junio, a veces también en julio."
+        ],
+        [
+          "Paisajes y cultura del Atlas",
+          "Imsfrane se encuentra en la comuna de Tilouguite, provincia de Azilal. Su entorno reúne paredes rocosas, valles, bosques y pequeñas localidades donde la cultura amazige forma parte de la vida cotidiana."
+        ],
+        [
+          "Tu aventura, a tu ritmo",
+          "Nuestro equipo local te orienta para elegir rutas, actividades y alojamientos adecuados a tu grupo, al tiempo disponible y a las condiciones reales del día."
+        ]
+      ]
+    }
+  },
+  "rafting": {
+    "img": "24.webp",
+    "ar": {
+      "title": "التجديف في المياه البيضاء بوادي أحنصال",
+      "kicker": "رياضات مائية · نشاط موسمي",
+      "lead": "اختبر إثارة التجديف الجماعي في مياه وادي أحنصال، بين المنحدرات الصخرية والمناظر الجبلية. تختلف طبيعة النزول ومستوى صعوبته بحسب صبيب النهر؛ لذلك تُحدَّد المسارات المتاحة بعد تقييم الظروف الميدانية.",
+      "sections": [
+        [
+          "متى يبدأ موسم التجديف؟",
+          "يبدأ الموسم المعتاد في مارس ويمتد خلال أبريل ومايو ويونيو، وقد تستمر بعض الرحلات إلى يوليو إذا سمح منسوب المياه. لا يمكن ضمان انطلاق رحلة اعتماداً على التاريخ وحده."
+        ],
+        [
+          "قبل النزول إلى الماء",
+          "يقدّم المرشد تعليمات السلامة ويحدد التجهيزات المطلوبة، ومنها سترة الطفو والخوذة عند الاقتضاء. يتوقف اختيار المسار على مستوى المشاركين وصبيب المياه وحالة الطقس."
+        ],
+        [
+          "الحجز والتأكيد",
+          "أرسل التاريخ المرغوب وعدد المشاركين عبر نموذج التواصل أو واتساب. نتحقق من قابلية الملاحة ونؤكد المسار والنقطة المحددة للقاء قبل أي التزام نهائي."
+        ]
+      ]
+    },
+    "es": {
+      "title": "Rafting en el río Ahansal: aventura entre montañas",
+      "kicker": "Aguas bravas · Actividad de temporada",
+      "lead": "Vive la emoción de descender por el Ahansal rodeado de gargantas y paisajes del Alto Atlas. Cada tramo del río ofrece una experiencia diferente, por lo que la ruta y la dificultad se valoran siempre según el caudal y las condiciones del momento.",
+      "sections": [
+        [
+          "¿Cuándo se puede hacer rafting?",
+          "La temporada habitual va de marzo a junio, con posibles salidas hasta julio algunos años. La nieve acumulada, las lluvias y el nivel del agua hacen que la disponibilidad nunca pueda garantizarse por calendario."
+        ],
+        [
+          "Una experiencia guiada con seguridad",
+          "Antes del descenso se explican las maniobras básicas y las normas de seguridad. El guía determina la sección adecuada y el equipo necesario, como chaleco de flotación y casco según el recorrido."
+        ],
+        [
+          "Cómo solicitar una salida",
+          "Indícanos la fecha, el número de participantes y tu experiencia. Nuestro equipo comprobará las condiciones del río y confirmará los detalles antes de cerrar el plan."
+        ]
+      ]
+    }
+  },
+  "camping": {
+    "img": "29.webp",
+    "ar": {
+      "title": "التخييم في مسفران: ليالٍ هادئة تحت نجوم الأطلس",
+      "kicker": "الطبيعة · التخييم",
+      "lead": "ابتعد عن الضجيج واقضِ ليلة وسط المشاهد الجبلية والهواء النقي. يتيح التخييم في محيط مسفران فرصة للاستمتاع بالهدوء والسماء المرصعة بالنجوم والتعرف على طبيعة المنطقة عن قرب.",
+      "sections": [
+        [
+          "تجربة بسيطة وأصيلة",
+          "تختلف ترتيبات الإقامة بحسب الموسم والموقع وعدد المشاركين. ويمكن التنسيق بشأن الخيام والتجهيزات ووسائل الوصول قبل الرحلة لتتناسب التجربة مع احتياجات المجموعة."
+        ],
+        [
+          "احترام المكان أولاً",
+          "ينبغي اختيار موقع مسموح وآمن بعيد عن مجاري السيول، وعدم إشعال النار في الأماكن غير المرخصة. ونحرص على ترك الطبيعة نظيفة كما وجدناها."
+        ],
+        [
+          "الاستعداد للمبيت",
+          "قد تنخفض درجات الحرارة ليلاً حتى في الأيام المشمسة. أحضر ملابس دافئة ومصباحاً وماءً كافياً، واستفسر عن التجهيزات المتاحة عند الحجز."
+        ]
+      ]
+    },
+    "es": {
+      "title": "Acampada en Imsfrane: noches bajo el cielo del Atlas",
+      "kicker": "Naturaleza · Acampada",
+      "lead": "Imagina una noche tranquila entre montañas, lejos del ruido urbano. Acampar en los alrededores de Imsfrane es una manera cercana de disfrutar del paisaje, observar el cielo nocturno y reconectar con la naturaleza.",
+      "sections": [
+        [
+          "Dormir al ritmo de la montaña",
+          "Las opciones de acampada se adaptan al lugar, la temporada y el tamaño del grupo. Consúltanos con antelación qué equipo está incluido y cómo se organiza el acceso."
+        ],
+        [
+          "Cuidar el entorno",
+          "El campamento debe instalarse en lugares permitidos, alejados de cauces y zonas con riesgo de crecida. Evita encender fuego cuando no esté autorizado y retira todos los residuos."
+        ],
+        [
+          "Qué llevar",
+          "En montaña las noches pueden ser frescas. Lleva ropa de abrigo, una linterna y agua suficiente, y comprueba siempre la previsión meteorológica antes de salir."
+        ]
+      ]
+    }
+  },
+  "randonnee": {
+    "img": "19.webp",
+    "ar": {
+      "title": "المشي الجبلي في مسفران: مسالك نحو القمم والوديان",
+      "kicker": "المشي الجبلي · اكتشاف الطبيعة",
+      "lead": "اكتشف مسالك الأطلس الكبير سيراً على الأقدام، من الممرات الهادئة إلى المناظر المفتوحة على الوديان. يمكن اختيار جولة قصيرة أو برنامج أكثر تحدياً وفق مستوى المجموعة والظروف الجوية.",
+      "sections": [
+        [
+          "قمة جبل مسفران",
+          "يبلغ ارتفاع الجبل نحو 1868 متراً، وتتيح مسالكه إطلالات بانورامية مميزة. يستغرق برنامج الصعود المعتاد قرابة أربع إلى خمس ساعات، مع فارق ارتفاع يقارب 668 متراً."
+        ],
+        [
+          "المضايق والشلالات",
+          "تفتح المنطقة آفاقاً لاستكشاف مضايق أحنصال والقرى والمشاهد المائية الموسمية. تختلف مدة المسار وصعوبته وفق نقطة الانطلاق والطقس."
+        ],
+        [
+          "المرافقة والاستعداد",
+          "احرص على ارتداء حذاء مناسب وحمل الماء وملابس تحمي من تغير الطقس. يساعدك المرشد المحلي على اختيار مسار ملائم والتعرف على معالم المنطقة بأمان."
+        ]
+      ]
+    },
+    "es": {
+      "title": "Senderismo en Imsfrane: rutas por las montañas del Atlas",
+      "kicker": "Senderismo · Paisajes naturales",
+      "lead": "Recorre a pie los senderos del Alto Atlas, entre gargantas, valles y panorámicas de montaña. Hay opciones para disfrutar con calma del paisaje y otras más exigentes, siempre adaptadas a la experiencia del grupo.",
+      "sections": [
+        [
+          "Ascensión al Jebel Imsfrane",
+          "La cumbre alcanza aproximadamente los 1.868 metros. La excursión habitual dura unas cuatro o cinco horas y supone alrededor de 668 metros de desnivel positivo."
+        ],
+        [
+          "Gargantas y cascadas",
+          "Las rutas del valle del Ahansal permiten acercarse a desfiladeros, pequeños pueblos y cascadas estacionales. La dificultad real depende del recorrido elegido y de las condiciones."
+        ],
+        [
+          "Prepararse para caminar",
+          "Lleva calzado de montaña, agua y una capa de abrigo. Un guía local puede ayudarte a escoger el itinerario más adecuado y a interpretar el paisaje que te rodea."
+        ]
+      ]
+    }
+  },
+  "vtt": {
+    "img": "31.webp",
+    "ar": {
+      "title": "الدراجات الجبلية في مسفران: اكتشف الأطلس على عجلتين",
+      "kicker": "الدراجات الجبلية · المغامرة",
+      "lead": "انطلق عبر المسالك الطبيعية والطرق الجبلية التي تربط قرى منطقة مسفران. تمنحك الدراجة فرصة لاستكشاف المشاهد المتنوعة والاستمتاع بالحركة والهواء الطلق بعيداً عن الطرق المزدحمة.",
+      "sections": [
+        [
+          "مسارات لمستويات مختلفة",
+          "من جولات استكشافية سهلة نسبياً إلى مسالك صخرية تتطلب خبرة، يُختار المسار وفق قدرات المشاركين وحالة الطريق."
+        ],
+        [
+          "جولة مرافقة أو استئجار",
+          "يمكن الاستفسار عن إمكانية استئجار الدراجات أو تنظيم جولة برفقة مرشد محلي، مع التأكد مسبقاً من توفر المعدات والمقاسات المناسبة."
+        ],
+        [
+          "السلامة على المسالك",
+          "تأكد من سلامة المكابح والإطارات، وارتدِ الخوذة، واحمل الماء. خفف السرعة قرب السكان والمشاة والقطعان، وانتبه إلى التضاريس المتغيرة."
+        ]
+      ]
+    },
+    "es": {
+      "title": "Bicicleta de montaña en Imsfrane: explora el Atlas sobre ruedas",
+      "kicker": "BTT · Deporte al aire libre",
+      "lead": "Los caminos de montaña y las pistas que conectan los pueblos de Imsfrane invitan a descubrir el Alto Atlas sobre dos ruedas. Una experiencia activa para disfrutar del paisaje con tranquilidad o buscar un recorrido más deportivo.",
+      "sections": [
+        [
+          "Rutas a medida",
+          "La elección del itinerario depende de la experiencia del grupo y del estado de las pistas. Algunas zonas son suaves y panorámicas; otras presentan piedra suelta y pendientes exigentes."
+        ],
+        [
+          "Alquiler y rutas guiadas",
+          "Consulta la disponibilidad de bicicletas y salidas acompañadas. Nuestro equipo puede orientarte según el número de participantes y el tipo de terreno que prefieras."
+        ],
+        [
+          "Pedalear con seguridad",
+          "Revisa frenos, neumáticos y casco antes de salir. Lleva agua y respeta a caminantes, habitantes y animales que comparten los caminos."
+        ]
+      ]
+    }
+  },
+  "quad": {
+    "img": "27.webp",
+    "ar": {
+      "title": "جولات الكواد في مسفران: متعة القيادة وسط الجبال",
+      "kicker": "الكواد · استكشاف المسالك",
+      "lead": "استمتع بجولة على مركبة الكواد وسط مشاهد الأطلس الكبير، عبر مسالك طبيعية ونقاط مطلة على الجبال والوديان. نشاط مناسب لمن يرغب في الجمع بين القيادة واكتشاف المكان.",
+      "sections": [
+        [
+          "مسارات وتجارب متنوعة",
+          "تُنظَّم الجولات بحسب حالة المسالك وخبرة المشاركين والظروف الجوية. ويُحدَّد المسار ومدته قبل الانطلاق."
+        ],
+        [
+          "القيادة المسؤولة",
+          "يلتزم المشاركون بتعليمات المرشد واستعمال معدات الحماية المناسبة. السرعة ليست الهدف؛ الأولوية للاستمتاع بالمشهد واحترام السكان والممرات الطبيعية."
+        ],
+        [
+          "قبل الحجز",
+          "أخبرنا بعدد المشاركين والموعد المناسب. نوضح لك الإمكانات المتاحة والشروط العملية للجولة قبل تأكيدها."
+        ]
+      ]
+    },
+    "es": {
+      "title": "Rutas en quad por Imsfrane: descubre las pistas de montaña",
+      "kicker": "Quad · Exploración",
+      "lead": "Explora los paisajes del Alto Atlas en quad, siguiendo pistas naturales con vistas a montañas y valles. Una manera diferente de conocer los alrededores de Imsfrane mientras disfrutas de la conducción.",
+      "sections": [
+        [
+          "Recorridos adaptados",
+          "La ruta se ajusta al estado de los caminos, al tiempo disponible y a la experiencia de los participantes. Consulta las opciones antes de desplazarte."
+        ],
+        [
+          "Conducir con responsabilidad",
+          "Sigue las indicaciones del guía y utiliza el equipo de protección indicado. El objetivo es disfrutar del entorno respetando a sus habitantes y la naturaleza."
+        ],
+        [
+          "Organiza tu salida",
+          "Indícanos la fecha y el número de personas. Te informaremos de las condiciones de participación y de la disponibilidad real."
+        ]
+      ]
+    }
+  },
+  "hebergement": {
+    "img": "21.webp",
+    "ar": {
+      "title": "الإقامة في مسفران: راحة قريبة من الطبيعة",
+      "kicker": "الإقامة · الضيافة المحلية",
+      "lead": "اجعل مسفران نقطة انطلاق لاستكشاف جبال الأطلس الكبير. سواء اخترت غرفة مريحة أو إقامة بسيطة قريبة من الطبيعة، تساعدك الضيافة المحلية على قضاء وقت هادئ بعد يوم من المغامرة.",
+      "sections": [
+        [
+          "إقامة على مقربة من الأنشطة",
+          "يمكن تنسيق الإقامة مع أنشطة المشي الجبلي والدراجات والتخييم وفق البرنامج وعدد الضيوف. استفسر عن موقع السكن الفعلي وما يتوفر فيه قبل وصولك."
+        ],
+        [
+          "أجواء محلية أصيلة",
+          "تتيح الإقامة في المنطقة التعرف على حياة القرى والمنتجات المحلية والهدوء الذي يميز الأطلس الكبير."
+        ],
+        [
+          "معلومات مهمة قبل التأكيد",
+          "اذكر تواريخ السفر وعدد الأشخاص واحتياجاتك الخاصة. نوضح لك خيارات الإقامة والأسعار والخدمات المتاحة وفق التوفر الحقيقي."
+        ]
+      ]
+    },
+    "es": {
+      "title": "Alojamiento en Imsfrane: descansa cerca de la naturaleza",
+      "kicker": "Alojamiento · Hospitalidad local",
+      "lead": "Haz de Imsfrane tu base para explorar el Alto Atlas. Después de una jornada de senderismo o aventura, disfruta de un descanso sencillo y acogedor en un entorno de montaña.",
+      "sections": [
+        [
+          "Descanso y actividades",
+          "Podemos ayudarte a coordinar el alojamiento con excursiones a pie, rutas en bicicleta o experiencias de naturaleza, según tu itinerario y el tamaño del grupo."
+        ],
+        [
+          "Una estancia auténtica",
+          "Dormir en la zona permite acercarse al ritmo de los pueblos, a la hospitalidad local y a los paisajes que hacen especial esta región."
+        ],
+        [
+          "Antes de reservar",
+          "Consúltanos las fechas, los servicios incluidos y la ubicación exacta. Las opciones y los precios deben confirmarse según disponibilidad."
+        ]
+      ]
+    }
+  },
+  "programme": {
+    "img": "19.webp",
+    "ar": {
+      "title": "برامج استكشاف مسفران ومضايق أحنصال",
+      "kicker": "برامج بصحبة مرشد محلي",
+      "lead": "اختر برنامجاً يناسب وقتك ولياقتك: الصعود إلى قمة جبل مسفران، أو التجول بين المضايق والمعالم الطبيعية، أو الجمع بين التجربتين في يوم أطول.",
+      "sections": [
+        [
+          "قمة مسفران · نحو 4 إلى 5 ساعات",
+          "مسار متوسط الصعوبة نحو قمة ترتفع قرابة 1868 متراً، بفارق ارتفاع يقارب 668 متراً. السعر المرجعي 300 درهم للمجموعة، ويُؤكَّد عند الحجز."
+        ],
+        [
+          "المضايق والشلالات · نحو 3 إلى 4 ساعات",
+          "جولة سهلة نسبياً بطول يقارب 8 كيلومترات للتعرف على مضايق أحنصال وبعض المعالم المحلية. السعر المرجعي 200 درهم للمجموعة."
+        ],
+        [
+          "الجولة الكبرى · نحو 8 إلى 10 ساعات",
+          "برنامج يجمع بين مسارين في يوم مليء بالاستكشاف، لمسافة قد تبلغ نحو 24 كيلومتراً. يتطلب لياقة جيدة، والسعر المرجعي 400 درهم للمجموعة."
+        ]
+      ]
+    },
+    "es": {
+      "title": "Excursiones guiadas por Imsfrane y las gargantas del Ahansal",
+      "kicker": "Programas con guía local",
+      "lead": "Elige cómo descubrir la región: subir al Jebel Imsfrane, explorar gargantas y cascadas, o combinar ambos recorridos en una jornada completa.",
+      "sections": [
+        [
+          "Cumbre del Jebel Imsfrane · 4–5 horas",
+          "Ruta de dificultad media con una cumbre de unos 1.868 metros y aproximadamente 668 metros de desnivel. Precio orientativo: 300 MAD por grupo; sujeto a confirmación."
+        ],
+        [
+          "Gargantas y cascadas · 3–4 horas",
+          "Paseo relativamente fácil de unos 8 kilómetros para descubrir el valle del Ahansal y distintos puntos de interés. Precio orientativo: 200 MAD por grupo."
+        ],
+        [
+          "Gran recorrido · 8–10 horas",
+          "Una jornada exigente que combina ambas experiencias en un recorrido de aproximadamente 24 kilómetros. Precio orientativo: 400 MAD por grupo; conviene tener buena condición física."
+        ]
+      ]
+    }
+  },
+  "memories": {
+    "img": "29.webp",
+    "ar": {
+      "title": "صور وذكريات من مسفران",
+      "kicker": "معرض الصور · لحظات من الأطلس",
+      "lead": "تروي الصور حكاية المكان: قمم صخرية تلوح في الأفق، ومياه وادي أحنصال، ومسالك الدراجات، وليالٍ هادئة بين الجبال. تصفح مشاهد مختارة من تجارب الطبيعة في مسفران.",
+      "sections": [
+        [
+          "من النهر إلى القمة",
+          "تكشف المنطقة عن وجوه مختلفة مع تغير الضوء والفصول؛ من الربيع الذي تنشط فيه المياه إلى لحظات الغروب على المرتفعات."
+        ],
+        [
+          "لحظات تستحق الاحتفاظ بها",
+          "ليست الرحلة مجرد نشاط، بل فرصة لاكتشاف مكان جديد والتعرف على الناس والاستمتاع بالتفاصيل الصغيرة."
+        ],
+        [
+          "شاركنا تجربتك",
+          "إذا زرت المنطقة، يسعدنا أن نتعرف على انطباعاتك وذكرياتك وأن نساعدك على التخطيط لزيارة أخرى."
+        ]
+      ]
+    },
+    "es": {
+      "title": "Galería de Imsfrane: recuerdos del Alto Atlas",
+      "kicker": "Fotografía · Momentos para recordar",
+      "lead": "Cada imagen cuenta una historia: las montañas de Imsfrane, el río Ahansal, los caminos de bicicleta y las noches de acampada. Déjate inspirar por los paisajes de esta región del Atlas.",
+      "sections": [
+        [
+          "Del río a las cumbres",
+          "Los colores cambian con las estaciones y con la luz de cada momento: desde la primavera junto al agua hasta los atardeceres en las montañas."
+        ],
+        [
+          "Mucho más que una actividad",
+          "Viajar es descubrir personas, historias y pequeños detalles que permanecen en la memoria."
+        ],
+        [
+          "Comparte tu experiencia",
+          "Si ya has visitado Imsfrane, nos encantará conocer tus impresiones y ayudarte a preparar una próxima escapada."
+        ]
+      ]
+    }
+  },
+  "guide": {
+    "img": "21.webp",
+    "ar": {
+      "title": "دليل زيارة مسفران في الأطلس الكبير",
+      "kicker": "نصائح عملية · التخطيط للرحلة",
+      "lead": "دليل يساعدك على التخطيط لزيارة مسفران وتيلوكيت ومحيط وادي أحنصال، من اختيار موعد السفر إلى الاستعداد للمسالك الجبلية والتواصل مع الفريق المحلي.",
+      "sections": [
+        [
+          "أين تقع مسفران؟",
+          "تقع مسفران ضمن جماعة تيلوكيت في إقليم أزيلال، وسط الأطلس الكبير. يُفضَّل التأكد من الطريق الأخير مع جهة الإقامة أو المرشد، فقد تتغير ظروف المسالك الجبلية."
+        ],
+        [
+          "اختيار الموسم المناسب",
+          "يمكن الاستمتاع بالمشي الجبلي والدراجات وفق الأحوال الجوية. أما التجديف فيعتمد على صبيب النهر ويكون غالباً في الربيع وبداية الصيف."
+        ],
+        [
+          "ما الذي ينبغي إحضاره؟",
+          "ينصح بحذاء مناسب للمشي، وماء كافٍ، وملابس دافئة، وحماية من الشمس، وخريطة يمكن استعمالها دون اتصال بالإنترنت."
+        ]
+      ]
+    },
+    "es": {
+      "title": "Guía práctica para visitar Imsfrane y el Alto Atlas",
+      "kicker": "Consejos útiles · Prepara tu viaje",
+      "lead": "Toda escapada empieza con un buen plan. Aquí encontrarás información básica sobre Imsfrane, Tilouguite y el valle del Ahansal para viajar con tranquilidad y aprovechar mejor el tiempo.",
+      "sections": [
+        [
+          "Cómo llegar",
+          "Imsfrane se sitúa en la comuna de Tilouguite, provincia de Azilal. Conviene consultar el estado del último tramo de carretera, especialmente después de la lluvia o cuando hay obras."
+        ],
+        [
+          "La época adecuada",
+          "El senderismo y las excursiones en bicicleta dependen del tiempo. El rafting suele estar ligado al deshielo primaveral y a la disponibilidad de caudal suficiente."
+        ],
+        [
+          "Qué llevar a la montaña",
+          "Prepara calzado adecuado, agua, ropa de abrigo, protección solar y mapas sin conexión. La cobertura móvil puede ser irregular en algunas zonas."
+        ]
+      ]
+    }
+  },
+  "about": {
+    "img": "21.webp",
+    "ar": {
+      "title": "من نحن؟ فريق محلي يجمعه حب مسفران",
+      "kicker": "عن الفريق · السياحة المسؤولة",
+      "lead": "نؤمن بأن أفضل طريقة لاكتشاف جبال الأطلس هي الإصغاء إلى أهلها والتعرف على طبيعتها عن قرب. ننظم تجارب سياحية وأنشطة خارجية ترتكز على المعرفة المحلية واحترام المكان.",
+      "sections": [
+        [
+          "معرفة محلية وتجارب أصيلة",
+          "من مسالك المشي الجبلي إلى وادي أحنصال، نشارك الزوار معرفتنا بالمنطقة ونساعدهم على اختيار تجربة تناسب اهتماماتهم."
+        ],
+        [
+          "السلامة قبل المغامرة",
+          "تُراجع ظروف الطقس والمسالك وصبيب النهر قبل الأنشطة التي تتطلب ذلك. ولا نعِد بانطلاق نشاط عندما لا تسمح الظروف الطبيعية."
+        ],
+        [
+          "احترام الطبيعة والمجتمع",
+          "نحرص على تشجيع السياحة التي تحترم الغابات والمياه والسكان المحليين وتُظهر ثقافة المنطقة من دون اختزال أو مبالغة."
+        ]
+      ]
+    },
+    "es": {
+      "title": "Quiénes somos: un equipo local apasionado por Imsfrane",
+      "kicker": "Nuestro equipo · Turismo responsable",
+      "lead": "Creemos que los paisajes se comprenden mejor con quienes viven cerca de ellos. Nuestro trabajo consiste en compartir el Alto Atlas a través de experiencias auténticas, con respeto por la naturaleza y sus comunidades.",
+      "sections": [
+        [
+          "El conocimiento del territorio",
+          "Conocemos los senderos, el entorno del Ahansal y los ritmos de la montaña. Escuchamos las necesidades de cada grupo para proponer salidas realistas."
+        ],
+        [
+          "La seguridad forma parte del viaje",
+          "Antes de cada actividad se revisan las condiciones que afectan a los recorridos. Nunca se debe prometer una salida por el río si el caudal o la meteorología no lo permiten."
+        ],
+        [
+          "Un turismo que aporta valor",
+          "Buscamos fomentar el respeto a los pueblos, a los espacios naturales y a la cultura amazige, compartiendo la región sin perder su autenticidad."
+        ]
+      ]
+    }
+  },
+  "blog": {
+    "img": "19.webp",
+    "ar": {
+      "title": "مدونة مسفران: حكايات ونصائح من الأطلس",
+      "kicker": "مقالات · دليل الإلهام",
+      "lead": "اقرأ مقالات تساعدك على الاستعداد للمغامرة: موسم التجديف، ومسارات المشي الجبلي، وتجهيزات التخييم، واكتشاف القرى ومضايق وادي أحنصال.",
+      "sections": [
+        [
+          "معرفة المكان قبل الوصول",
+          "نشاركك إرشادات عملية حول المناخ والمسالك والأنشطة المتاحة خلال السنة، مع التأكيد على ضرورة التحقق من الظروف الفعلية قبل السفر."
+        ],
+        [
+          "طبيعة تستحق الاكتشاف",
+          "من قمة جبل مسفران إلى مضايق أحنصال، تجد أفكاراً متنوعة للرحلات والصور والتجارب المناسبة لمستويات مختلفة."
+        ],
+        [
+          "سافر بمسؤولية",
+          "تتضمن مقالاتنا نصائح لاحترام السكان والطبيعة وتجنب المخاطر في المناطق الجبلية والمائية."
+        ]
+      ]
+    },
+    "es": {
+      "title": "Blog de Imsfrane: ideas y consejos para tu aventura",
+      "kicker": "Artículos · Inspiración para viajar",
+      "lead": "Descubre consejos sobre la temporada de rafting, senderismo, ciclismo, acampada y vida local. Una selección de temas para conocer Imsfrane y planificar tu estancia en el Alto Atlas.",
+      "sections": [
+        [
+          "Preparar cada excursión",
+          "Aprende a interpretar las estaciones, consultar las condiciones y elegir la actividad adecuada antes de desplazarte."
+        ],
+        [
+          "Paisajes y experiencias",
+          "Explora nuestras recomendaciones sobre el Jebel Imsfrane, las gargantas del Ahansal y los pueblos de los alrededores."
+        ],
+        [
+          "Viajar de forma responsable",
+          "Compartimos pautas para respetar el entorno, cuidar los caminos y disfrutar de la montaña con precaución."
+        ]
+      ]
+    }
+  },
+  "store": {
+    "img": "31.webp",
+    "ar": {
+      "title": "متجر مسفران: تجهيزات وأنشطة في الهواء الطلق",
+      "kicker": "المتجر · مستلزمات المغامرة",
+      "lead": "اكتشف قسم المتجر المرتبط بأنشطة الطبيعة والمغامرات في مسفران. نفضّل تقديم معلومات واضحة عن المنتجات وتوفرها وطريقة طلبها قبل إتمام أي شراء.",
+      "sections": [
+        [
+          "اختيار ما يناسب نشاطك",
+          "تختلف احتياجات المشي الجبلي وركوب الدراجات والتخييم. تحقق من المواصفات والمقاسات قبل اتخاذ قرار الشراء."
+        ],
+        [
+          "التوفر والأسعار",
+          "قد تتغير المنتجات المتاحة والأسعار. تواصل معنا للحصول على أحدث المعلومات وتأكيد شروط التسليم أو الاستلام."
+        ],
+        [
+          "استفسار مباشر",
+          "إذا لم تجد التجهيز الذي تبحث عنه، أخبرنا بالنشاط والميزانية والاحتياجات وسنوضح لك ما يمكن توفيره."
+        ]
+      ]
+    },
+    "es": {
+      "title": "Tienda de Imsfrane: material para disfrutar al aire libre",
+      "kicker": "Tienda · Equipamiento",
+      "lead": "Conoce nuestra sección dedicada al material de aventura y actividades al aire libre. Para elegir bien, consulta las características, la disponibilidad y las condiciones de compra antes de confirmar un pedido.",
+      "sections": [
+        [
+          "Equipo según la actividad",
+          "Cada experiencia requiere material diferente. Infórmate sobre tallas, compatibilidad y uso recomendado antes de realizar una compra."
+        ],
+        [
+          "Disponibilidad y precios",
+          "El catálogo y los precios pueden cambiar. Contacta con nosotros para conocer las opciones reales y las condiciones de entrega o recogida."
+        ],
+        [
+          "Atención directa",
+          "Si necesitas asesoramiento, indícanos qué actividad te interesa y qué tipo de equipo estás buscando."
+        ]
+      ]
+    }
+  },
+  "booking": {
+    "img": "24.webp",
+    "ar": {
+      "title": "احجز مغامرتك في مسفران",
+      "kicker": "طلب حجز · تأكيد شخصي",
+      "lead": "اختر النشاط الذي ترغب في تجربته، وحدد التاريخ وعدد الأشخاص، ثم أرسل طلبك إلى فريقنا. نراجع الظروف والتوفر قبل إرسال التأكيد، خصوصاً في الأنشطة المرتبطة بالطقس وصبيب النهر.",
+      "sections": [
+        [
+          "كيف يتم طلب الحجز؟",
+          "املأ البيانات الأساسية في الاستمارة أسفل الصفحة. تُفتح رسالة واتساب تتضمن تفاصيل طلبك، ويمكنك تعديلها قبل الإرسال."
+        ],
+        [
+          "الطلب ليس حجزاً نهائياً",
+          "إرسال الطلب لا يعني تأكيد التوفر أو الدفع. نتواصل معك لتوضيح السعر والمسار والمكان والوقت والشروط."
+        ],
+        [
+          "اختيار الموسم المناسب",
+          "التجديف في وادي أحنصال نشاط موسمي، ويعتمد على منسوب المياه. ننصح بالسؤال عن الظروف الفعلية قبل إعداد برنامج السفر."
+        ]
+      ]
+    },
+    "es": {
+      "title": "Reserva tu aventura en Imsfrane",
+      "kicker": "Solicitud de reserva · Confirmación personal",
+      "lead": "Elige la experiencia que más te interesa, indica la fecha y el número de participantes y envía tu consulta a nuestro equipo. Confirmaremos las opciones disponibles y las condiciones antes de cerrar cualquier plan.",
+      "sections": [
+        [
+          "Cómo solicitar información",
+          "Completa el formulario al final de la página. Se abrirá WhatsApp con un mensaje preparado que podrás revisar antes de enviarlo."
+        ],
+        [
+          "La solicitud no confirma una plaza",
+          "El envío del mensaje no supone un pago ni una reserva automática. Confirmamos personalmente los detalles, el precio y el punto de encuentro."
+        ],
+        [
+          "Consulta siempre la temporada",
+          "El rafting depende del nivel del río Ahansal. Si la navegación no es viable, podemos comentarte otras actividades en tierra."
+        ]
+      ]
+    }
+  },
+  "contact": {
+    "img": "21.webp",
+    "ar": {
+      "title": "تواصل معنا لتنظيم رحلتك إلى مسفران",
+      "kicker": "تواصل مباشر · فريق محلي",
+      "lead": "هل لديك سؤال عن مسارات المشي أو موسم التجديف أو الإقامة أو الوصول إلى مسفران؟ أرسل لنا استفسارك، وسنساعدك بالمعلومات اللازمة لتخطيط تجربة تناسبك.",
+      "sections": [
+        [
+          "قبل أن تراسلنا",
+          "من المفيد ذكر تاريخ السفر وعدد المشاركين والأنشطة التي تهمك ومستوى الخبرة عند الحاجة."
+        ],
+        [
+          "استفسارات الأنشطة الموسمية",
+          "نؤكد إمكانية التجديف بعد مراجعة حالة النهر والطقس، وليس بناءً على موعد تقريبي فقط."
+        ],
+        [
+          "نسعد بالتواصل معك",
+          "يمكنك استخدام واتساب للتواصل المباشر وطرح أسئلتك حول البرامج والأسعار والتجهيزات وشروط المشاركة."
+        ]
+      ]
+    },
+    "es": {
+      "title": "Contacta con nuestro equipo en Imsfrane",
+      "kicker": "Atención directa · Equipo local",
+      "lead": "¿Quieres saber más sobre una ruta, la temporada de rafting, el alojamiento o cómo llegar a Imsfrane? Escríbenos y te ayudaremos a preparar un viaje adecuado a tus intereses.",
+      "sections": [
+        [
+          "Qué información es útil",
+          "Indícanos cuándo quieres viajar, cuántas personas sois y qué experiencias os gustaría realizar. Si se trata de una actividad deportiva, cuéntanos también vuestro nivel."
+        ],
+        [
+          "Actividades sujetas al tiempo",
+          "Las salidas de rafting se confirman después de comprobar el caudal del río y las condiciones meteorológicas."
+        ],
+        [
+          "Estamos para ayudarte",
+          "Puedes escribirnos por WhatsApp para resolver dudas sobre programas, material, tarifas y organización del viaje."
+        ]
+      ]
+    }
+  }
+}
