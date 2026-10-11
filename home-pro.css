@@ -441,3 +441,21 @@
     bottom:17px;
   }
 }
+
+
+/* Locales use the exact original .hp-home visual template, no FR/EN layout changes. */
+html[lang="ar"] .hp-home{font-family:Cairo,Tajawal,Tahoma,sans-serif}
+html[lang="ar"] .hp-home .hp-hero h1,html[lang="ar"] .hp-home h2,html[lang="ar"] .hp-home h3{font-family:Cairo,Tajawal,Tahoma,sans-serif!important;letter-spacing:0!important}
+html[lang="ar"] .hp-home .hp-hero h1{font-size:clamp(37px,5vw,76px)!important;line-height:1.35!important}
+html[lang="ar"] .hp-home .hp-hero h1 em{font-style:normal;line-height:1.25!important}
+html[lang="ar"] .hp-home p{line-height:2}
+html[lang="ar"] .hp-home .hp-hero-content{text-align:right;align-items:flex-start}
+html[lang="ar"] .hp-home .hp-hero-content:after{right:auto;left:-95px;background:linear-gradient(270deg,#0d302be8,transparent)}
+html[lang="ar"] .hp-home .hp-activity-body{text-align:right}
+html[lang="ar"] .hp-home .hp-trust-item{text-align:right}
+html[lang="ar"] .hp-home .hp-activity-bottom a i{transform:scaleX(-1)}
+html[lang="es"] .hp-home .hp-hero h1{font-size:clamp(54px,5.8vw,95px)!important}
+html[lang="ar"] .locale-request,html[lang="es"] .locale-request{margin-top:40px;margin-bottom:40px}
+html[lang="ar"] .hp-home .locale-request{direction:rtl}
+html[lang="ar"] .hp-home .hp-hero-inner{direction:rtl}
+@media(max-width:860px){html[lang="ar"] .hp-home .hp-hero h1{font-size:clamp(36px,9vw,58px)!important}}
