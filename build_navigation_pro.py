@@ -184,7 +184,13 @@ def compact_language(lang, current_file, root):
     labels={"fr":"Français","en":"English","ar":"العربية","es":"Español"}
     opts=[]
     for code in ("fr","en","ar","es"):
-        target=current_file if (root/code/current_file).is_file() else ("blog.html" if current_file.startswith("blog") else "index.html")
+        equivalent={
+            "blog-d-couvrir-le-jebel-imsfrane-au-c-ur-de-l-atlas.html":{
+                "en":"blog-discover-jebel-imsfrane-in-the-heart-of-the-atlas-mountains.html"},
+            "blog-discover-jebel-imsfrane-in-the-heart-of-the-atlas-mountains.html":{
+                "fr":"blog-d-couvrir-le-jebel-imsfrane-au-c-ur-de-l-atlas.html"},
+        }
+        target=current_file if (root/code/current_file).is_file() else equivalent.get(current_file,{}).get(code,"blog.html" if current_file.startswith("blog") else "index.html")
         if not (root/code/target).is_file():raise RuntimeError("Missing compact language target")
         opts.append('<a href="../'+code+'/'+target+'" lang="'+code+'"'
            +(' aria-current="page"' if lang==code else '')+'>'
