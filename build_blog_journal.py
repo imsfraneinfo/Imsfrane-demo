@@ -49,7 +49,7 @@ def build(root):
         distinct=[]
         seen_photos=set()
         for card in cards:
-            image_key=re.sub(r'-(?:480|680|768|800|1024|1200)(?=\\.[^.]+$)','',card['image'].split('?',1)[0].lower())
+            image_key=re.sub(r'-(?:480|680|768|800|1024|1200)(?=\.[^.]+$)','',card['image'].split('?',1)[0].lower())
             if image_key and image_key in seen_photos: continue
             if image_key: seen_photos.add(image_key)
             source=card['image'].split('?',1)[0]
@@ -121,6 +121,6 @@ def build(root):
                 ET.SubElement(entry,'{'+xhtml_ns+'}link',{'rel':'alternate','hreflang':'x-default','href':base+'fr/'+slug})
                 existing.add(url)
         xml.write(sitemap,encoding='utf-8',xml_declaration=True)
-        (root/'robots.txt').write_text('User-agent: *\\nAllow: /\\nDisallow: /Imsfrane-demo/admin/\\n\\nSitemap: '+base+'sitemap.xml\\n',encoding='utf-8')
+        (root/'robots.txt').write_text('User-agent: *\nAllow: /\nDisallow: /Imsfrane-demo/admin/\n\nSitemap: '+base+'sitemap.xml\n',encoding='utf-8')
 
 if __name__=='__main__':build(Path('public'))
