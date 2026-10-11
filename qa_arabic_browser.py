@@ -95,6 +95,36 @@ with webdriver.Chrome(options=opts) as driver:
                     raise AssertionError("User's Moroccan dirham price not found")
                 if "rtl-arabic-20261011e" not in child.get("liveCSS",""):
                     raise AssertionError("Browser cached old RTL stylesheet: "+str(child))
+                price_order=driver.execute_script("""
+                  const d=document.querySelector('#raftingExperienceFrame').contentDocument;
+                  return [...d.querySelectorAll('.exp-opt b.ar-formatted-price, .route-price strong.ar-formatted-price')]
+                  .filter(el=>el.querySelector('bdi'))
+                  .map(el=>{
+                    let b=el.querySelector('bdi'),unit=el.querySelector('.ar-price-unit'),text=b.textContent;
+                    let first=document.createRange(),last=document.createRange();
+                    // The first displayed digit must be left of the final
+                    // group of digits in a real, rendered LTR-isolated amount.
+                    first.setStart(b.firstChild,0);first.setEnd(b.firstChild,1);
+                    let index=text.indexOf('\\u00a0');
+                    if(index<0)index=text.indexOf(' ');
+                    last.setStart(b.firstChild,index+1);last.setEnd(b.firstChild,text.length);
+                    return {amount:text.replace(/\\s/g,''),unit:unit?.textContent.trim(),
+                      bidiDirection:getComputedStyle(b).direction,
+                      firstDigitX:Math.round(first.getBoundingClientRect().left),
+                      finalGroupX:Math.round(last.getBoundingClientRect().left),
+                      numberNowrap:getComputedStyle(b).whiteSpace};
+                  });
+                """)
+                print("AR PRICE VISUAL ORDER",json.dumps(price_order,ensure_ascii=False),flush=True)
+                sample=[x for x in price_order if x.get("amount") in ("2500","3000")]
+                if len(sample)<3 or {x.get("amount") for x in sample}!={"2500","3000"}:
+                    raise AssertionError("Missing visually isolated 2500 and 3000 price amounts: "+str(price_order))
+                for item in sample:
+                    if item["bidiDirection"]!="ltr" or item["firstDigitX"]>=item["finalGroupX"]:
+                        raise AssertionError("2500 or 3000 is visually REVERSED in Chrome: "+str(item))
+                    if item["unit"]!="درهم" or item["numberNowrap"]!="nowrap":
+                        raise AssertionError("Currency unit or no-wrap formatting is broken: "+str(item))
+                child["priceVisualOrder"]=sample
                 report.append({"viewport":viewport,"path":page,"iframe":child})
                 continue
             WebDriverWait(driver,35).until(lambda x: x.execute_script("return document.readyState!=='loading' && !!document.querySelector('main h1')"))
