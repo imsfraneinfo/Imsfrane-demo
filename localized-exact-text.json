@@ -690,8 +690,358 @@
     }
   },
   "rafting": {},
-  "vtt": {},
-  "quad": {},
+  "vtt": {
+    "Vivez": {
+      "ar": "عِش",
+      "es": "Vive"
+    },
+    "Atlas à vélo.": {
+      "ar": "الأطلس على الدراجة.",
+      "es": "el Atlas en bicicleta."
+    },
+    "Découvrez les sentiers d’Imsfrane en VTT, entre forêts, villages et paysages de montagne. Choisissez une location à la journée ou une balade guidée de deux heures maximum.": {
+      "ar": "اكتشف مسالك مسفران بالدراجة الجبلية بين الغابات والقرى والمناظر الطبيعية. اختر استئجار دراجة ليوم كامل أو جولة بصحبة مرشد لا تتجاوز ساعتين.",
+      "es": "Descubre los senderos de Imsfrane en bicicleta de montaña, entre bosques, pueblos y paisajes. Elige un alquiler de día completo o una excursión guiada de hasta dos horas."
+    },
+    "Location VTT · journée": {
+      "ar": "استئجار دراجة ليوم",
+      "es": "Alquiler de BTT · día completo"
+    },
+    "Tour VTT guidé": {
+      "ar": "جولة دراجات بمرافقة مرشد",
+      "es": "Ruta guiada en BTT"
+    },
+    "Jusqu’à 2 heures": {
+      "ar": "حتى ساعتين",
+      "es": "Hasta 2 horas"
+    },
+    "Vélo individuel et guide local": {
+      "ar": "دراجة لكل مشارك مع مرشد محلي",
+      "es": "Bicicleta individual y guía local"
+    },
+    "L’Atlas à vélo.": {
+      "ar": "الأطلس على عجلتين.",
+      "es": "El Atlas en bicicleta."
+    },
+    "150 DH / vélo": {
+      "ar": "150 درهماً للدراجة",
+      "es": "150 MAD / bicicleta"
+    },
+    "Journée complète": {
+      "ar": "يوم كامل",
+      "es": "Día completo"
+    },
+    "100 DH / personne": {
+      "ar": "100 درهم للشخص",
+      "es": "100 MAD / persona"
+    },
+    "10 photos": {
+      "ar": "10 صور",
+      "es": "10 fotos"
+    },
+    "Découvrez l’Atlas à votre rythme.": {
+      "ar": "اكتشف الأطلس على إيقاعك.",
+      "es": "Descubre el Atlas a tu ritmo."
+    },
+    "À vélo, explorez les pistes d’Imsfrane et de Tilouguite, entre paysages de montagne, forêts et villages. Une expérience au grand air, à partager avec vos proches.": {
+      "ar": "اكتشف بالدراجة مسالك مسفران وتيلوكيت بين الغابات والقرى والمشاهد الجبلية، في تجربة ممتعة وسط الهواء الطلق.",
+      "es": "Recorre en bicicleta los caminos de Imsfrane y Tilouguite entre montañas, bosques y pueblos. Una experiencia al aire libre para compartir."
+    },
+    "Votre expérience VTT en quatre étapes": {
+      "ar": "تجربة الدراجات الجبلية في أربع مراحل",
+      "es": "Tu experiencia en BTT en cuatro pasos"
+    },
+    "Choisissez": {
+      "ar": "اختر",
+      "es": "Elige"
+    },
+    "Louez un VTT pour la journée ou réservez une sortie guidée.": {
+      "ar": "استأجر دراجة ليوم كامل أو احجز جولة مرافقة.",
+      "es": "Alquila una bicicleta para el día o reserva una ruta guiada."
+    },
+    "Préparez-vous": {
+      "ar": "استعد",
+      "es": "Prepárate"
+    },
+    "Vérifiez le vélo et équipez-vous avant le départ.": {
+      "ar": "افحص الدراجة وتأكد من تجهيزاتك قبل الانطلاق.",
+      "es": "Revisa la bicicleta y prepárate antes de salir."
+    },
+    "Explorez": {
+      "ar": "استكشف",
+      "es": "Explora"
+    },
+    "Profitez des pistes et des panoramas de la région.": {
+      "ar": "استمتع بالمسالك والإطلالات في المنطقة.",
+      "es": "Disfruta de las pistas y vistas de la región."
+    },
+    "Retour": {
+      "ar": "العودة",
+      "es": "Regreso"
+    },
+    "Terminez votre sortie et partagez vos souvenirs.": {
+      "ar": "اختم الجولة وشارك ذكرياتك.",
+      "es": "Termina el recorrido y comparte tus recuerdos."
+    },
+    "LOCATION · TOUR GUIDÉ": {
+      "ar": "استئجار · جولة مرافقة",
+      "es": "ALQUILER · RUTA GUIADA"
+    },
+    "Deux façons de découvrir Imsfrane": {
+      "ar": "طريقتان لاكتشاف مسفران",
+      "es": "Dos formas de descubrir Imsfrane"
+    },
+    "Choisissez votre expérience : une journée en liberté ou une balade accompagnée.": {
+      "ar": "اختر بين يوم حر بالدراجة أو جولة مع مرشد محلي.",
+      "es": "Elige entre un día por tu cuenta o un recorrido acompañado."
+    },
+    "Location VTT – journée complète": {
+      "ar": "استئجار دراجة جبلية ليوم كامل",
+      "es": "Alquiler de BTT para el día completo"
+    },
+    "Une journée entière pour explorer Imsfrane à votre rythme.": {
+      "ar": "يوم كامل لاستكشاف مسفران بالدراجة على إيقاعك.",
+      "es": "Un día completo para explorar Imsfrane a tu ritmo."
+    },
+    "Par personne · 1 vélo": {
+      "ar": "للشخص · دراجة واحدة",
+      "es": "Por persona · una bicicleta"
+    },
+    "Découvrez la région avec un guide local lors d’une balade de deux heures maximum.": {
+      "ar": "اكتشف المنطقة بصحبة مرشد محلي خلال جولة لا تتجاوز ساعتين.",
+      "es": "Descubre la zona con un guía local en un recorrido de hasta dos horas."
+    },
+    "Par personne · vélo et guide inclus": {
+      "ar": "للشخص · يشمل الدراجة والمرشد",
+      "es": "Por persona · bicicleta y guía incluidos"
+    },
+    "10 PHOTOS · IMSFRANE": {
+      "ar": "10 صور · مسفران",
+      "es": "10 FOTOS · IMSFRANE"
+    },
+    "Le VTT en images": {
+      "ar": "صور من جولات الدراجات",
+      "es": "La BTT en imágenes"
+    },
+    "Dix photos de nos sorties dans l’Atlas. Touchez une photo pour la voir en entier.": {
+      "ar": "عشر صور من جولاتنا بالأطلس؛ اضغط على الصورة لمشاهدتها كاملة.",
+      "es": "Diez fotos de nuestras salidas en el Atlas. Toca una imagen para verla completa."
+    },
+    "Quel est le prix de location d’un VTT ?": {
+      "ar": "ما سعر استئجار دراجة جبلية؟",
+      "es": "¿Cuánto cuesta alquilar una BTT?"
+    },
+    "150 DH par personne pour une journée complète, avec un vélo par personne.": {
+      "ar": "150 درهماً للشخص ليوم كامل، مع دراجة لكل مشارك.",
+      "es": "150 MAD por persona para un día completo, con una bicicleta por participante."
+    },
+    "Quel est le tarif de la balade guidée ?": {
+      "ar": "ما سعر الجولة مع المرشد؟",
+      "es": "¿Cuánto cuesta la ruta guiada?"
+    },
+    "100 DH par personne pour une sortie de deux heures maximum, avec un vélo individuel et un guide local.": {
+      "ar": "100 درهم للشخص لجولة لا تتجاوز ساعتين، مع دراجة لكل مشارك ومرشد محلي.",
+      "es": "100 MAD por persona por una ruta de hasta dos horas con bicicleta individual y guía local."
+    },
+    "Peut-on louer un vélo sans guide ?": {
+      "ar": "هل يمكن استئجار دراجة دون مرشد؟",
+      "es": "¿Se puede alquilar una bicicleta sin guía?"
+    },
+    "Oui, la formule location à la journée est distincte du tour guidé.": {
+      "ar": "نعم، استئجار الدراجة ليوم كامل خيار مستقل عن الجولة المرافقة.",
+      "es": "Sí, el alquiler de día completo es independiente de la ruta guiada."
+    },
+    "Les itinéraires sont-ils adaptés à tous ?": {
+      "ar": "هل المسارات مناسبة للجميع؟",
+      "es": "¿Las rutas son aptas para todos?"
+    },
+    "Le parcours et le niveau de difficulté sont à confirmer selon votre expérience et les conditions du terrain.": {
+      "ar": "يُحدَّد المسار ومستوى الصعوبة بناءً على خبرتك وحالة التضاريس.",
+      "es": "La ruta y su dificultad se confirman según tu experiencia y el estado del terreno."
+    },
+    "Portez un casque et adaptez votre allure aux pistes et à la météo.": {
+      "ar": "ارتدِ الخوذة وعدّل سرعتك حسب المسالك والطقس.",
+      "es": "Usa casco y adapta el ritmo a las pistas y al tiempo."
+    }
+  },
+  "quad": {
+    "Vivez": {
+      "ar": "عِش",
+      "es": "Vive"
+    },
+    "aventure.": {
+      "ar": "المغامرة.",
+      "es": "la aventura."
+    },
+    "Une heure sur les pistes de montagne d’Imsfrane, accompagné d’un guide local. Aucune expérience préalable nécessaire : une initiation est prévue avant le départ.": {
+      "ar": "استمتع بساعة من القيادة على مسالك مسفران الجبلية مع مرشد محلي. لا تحتاج إلى خبرة سابقة؛ إذ تُقدَّم تعليمات القيادة قبل الانطلاق.",
+      "es": "Una hora por las pistas de montaña de Imsfrane, acompañado por un guía local. No necesitas experiencia previa: recibirás una introducción antes de salir."
+    },
+    "Durée": {
+      "ar": "المدة",
+      "es": "Duración"
+    },
+    "Par quad · selon occupants": {
+      "ar": "للكواد · بحسب عدد الركاب",
+      "es": "Por quad · según ocupantes"
+    },
+    "Guide inclus": {
+      "ar": "المرشد مشمول",
+      "es": "Guía incluido"
+    },
+    "Initiation avant départ": {
+      "ar": "تعليمات قبل الانطلاق",
+      "es": "Iniciación antes de salir"
+    },
+    "L’Atlas côté aventure.": {
+      "ar": "مغامرة على مسالك الأطلس.",
+      "es": "La cara aventurera del Atlas."
+    },
+    "par quad, 1 ou 2 personnes": {
+      "ar": "للكواد، شخص أو شخصان",
+      "es": "por quad, 1 o 2 personas"
+    },
+    "Guide accompagnateur": {
+      "ar": "مرشد مرافق",
+      "es": "Guía acompañante"
+    },
+    "pendant toute la balade": {
+      "ar": "طوال الجولة",
+      "es": "durante toda la ruta"
+    },
+    "Débutants bienvenus": {
+      "ar": "مناسب للمبتدئين",
+      "es": "Apto para principiantes"
+    },
+    "initiation avant le départ": {
+      "ar": "شرح القيادة قبل الانطلاق",
+      "es": "iniciación antes de partir"
+    },
+    "La montagne, autrement.": {
+      "ar": "اكتشف الجبال بطريقة مختلفة.",
+      "es": "La montaña, de otra manera."
+    },
+    "Une balade accompagnée sur les pistes de l’Atlas, entre forêts et paysages grandioses. Prenez le temps de profiter de chaque instant.": {
+      "ar": "جولة مرافقة على مسالك الأطلس بين الغابات والمناظر الجبلية؛ استمتع بكل لحظة على الطريق.",
+      "es": "Una excursión guiada por las pistas del Atlas, entre bosques y paisajes espectaculares. Disfruta de cada momento."
+    },
+    "QUAD EXPERIENCE": {
+      "ar": "تجربة الكواد",
+      "es": "EXPERIENCIA EN QUAD"
+    },
+    "Votre aventure en quatre étapes": {
+      "ar": "مغامرتك في أربع مراحل",
+      "es": "Tu aventura en cuatro pasos"
+    },
+    "Accueil": {
+      "ar": "الاستقبال",
+      "es": "Bienvenida"
+    },
+    "Rencontre avec votre guide et présentation de la sortie.": {
+      "ar": "لقاء المرشد والتعرف على برنامج الجولة.",
+      "es": "Encuentro con el guía y presentación de la ruta."
+    },
+    "Initiation": {
+      "ar": "تعليمات القيادة",
+      "es": "Iniciación"
+    },
+    "Explication des commandes et prise en main du quad.": {
+      "ar": "شرح أدوات التحكم والتدرب على القيادة.",
+      "es": "Explicación de los mandos y primeras maniobras con el quad."
+    },
+    "Balade guidée": {
+      "ar": "جولة مرافقة",
+      "es": "Ruta guiada"
+    },
+    "Une heure sur les pistes, avec un guide local.": {
+      "ar": "ساعة على المسالك بصحبة مرشد محلي.",
+      "es": "Una hora por las pistas con un guía local."
+    },
+    "Retour": {
+      "ar": "العودة",
+      "es": "Regreso"
+    },
+    "Fin de la balade et souvenirs de votre aventure.": {
+      "ar": "نهاية الجولة والاحتفاظ بذكريات المغامرة.",
+      "es": "Fin del recorrido y recuerdos de la aventura."
+    },
+    "Un prix clair pour votre aventure": {
+      "ar": "سعر واضح لمغامرتك",
+      "es": "Un precio claro para tu aventura"
+    },
+    "1 heure · 250 DH en solo / 300 DH à deux": {
+      "ar": "ساعة واحدة · 250 درهماً لشخص / 300 درهم لشخصين",
+      "es": "1 hora · 250 MAD en solitario / 300 MAD para dos"
+    },
+    "1 personne sur un quad": {
+      "ar": "شخص واحد على الكواد",
+      "es": "Una persona en un quad"
+    },
+    "2 personnes sur le même quad": {
+      "ar": "شخصان على الكواد نفسه",
+      "es": "Dos personas en el mismo quad"
+    },
+    "300 DH au total": {
+      "ar": "300 درهم إجمالاً",
+      "es": "300 MAD en total"
+    },
+    "12 PHOTOS · IMSFRANE": {
+      "ar": "12 صورة · مسفران",
+      "es": "12 FOTOS · IMSFRANE"
+    },
+    "La montagne en images": {
+      "ar": "صور من مغامرات الجبال",
+      "es": "La montaña en imágenes"
+    },
+    "Douze moments de nos aventures. Touchez une photo pour l’agrandir en entier.": {
+      "ar": "اثنتا عشرة صورة من مغامراتنا؛ اضغط لمشاهدة الصورة بحجمها الكامل.",
+      "es": "Doce momentos de nuestras aventuras. Toca una foto para ampliarla."
+    },
+    "Faut-il de l’expérience ?": {
+      "ar": "هل يلزم توفر خبرة؟",
+      "es": "¿Se necesita experiencia?"
+    },
+    "Non, une initiation à la conduite est prévue avant le départ.": {
+      "ar": "لا، تُقدَّم تعليمات القيادة والتجربة قبل الانطلاق.",
+      "es": "No, ofrecemos una introducción a la conducción antes de salir."
+    },
+    "Un guide est-il présent ?": {
+      "ar": "هل يرافقنا مرشد؟",
+      "es": "¿Hay un guía?"
+    },
+    "Oui, un guide local accompagne toute la balade.": {
+      "ar": "نعم، يرافقكم مرشد محلي طوال الجولة.",
+      "es": "Sí, un guía local acompaña todo el recorrido."
+    },
+    "Quel est le tarif pour deux personnes ?": {
+      "ar": "كم السعر لشخصين؟",
+      "es": "¿Cuánto cuesta para dos personas?"
+    },
+    "300 DH au total pour une heure, lorsque deux personnes partagent le même quad.": {
+      "ar": "300 درهم إجمالاً لساعة واحدة عندما يشترك شخصان في الكواد نفسه.",
+      "es": "300 MAD en total por una hora cuando dos personas comparten el mismo quad."
+    },
+    "Faut-il un permis ?": {
+      "ar": "هل تُشترط رخصة قيادة؟",
+      "es": "¿Se necesita permiso de conducir?"
+    },
+    "Les éventuelles exigences de permis dépendent du véhicule et du parcours. Notre équipe confirme les conditions applicables avant la réservation.": {
+      "ar": "تختلف متطلبات رخصة القيادة بحسب المركبة والمسار؛ يؤكد فريقنا الشروط المطبقة قبل الحجز.",
+      "es": "Los requisitos de permiso dependen del vehículo y la ruta. Confirmamos las condiciones aplicables antes de reservar."
+    },
+    "Casque, briefing et respect des consignes du guide. Itinéraire adapté à la météo et à l’état des pistes.": {
+      "ar": "خوذة وشرح للسلامة والتزام بتوجيهات المرشد، مع تكييف المسار وفق الطقس وحالة الطريق.",
+      "es": "Casco, instrucciones de seguridad y respeto a las indicaciones del guía. La ruta se adapta al tiempo y a las pistas."
+    },
+    "Votre aventure commence ici": {
+      "ar": "مغامرتك تبدأ هنا",
+      "es": "Tu aventura empieza aquí"
+    },
+    "Contactez notre équipe pour choisir une date et confirmer les conditions de votre sortie.": {
+      "ar": "تواصل مع فريقنا لاختيار التاريخ والتأكد من شروط الجولة.",
+      "es": "Contacta con nosotros para elegir fecha y confirmar las condiciones."
+    }
+  },
   "hebergement": {},
   "programme": {},
   "guide": {},
