@@ -3,6 +3,8 @@ import json,html,re
 from bs4 import BeautifulSoup
 
 TOPICS=json.loads(Path('blog_new_topics.json').read_text(encoding='utf-8'))
+if len({topic['image'] for topic in TOPICS}) != len(TOPICS):
+    raise RuntimeError('Each new blog topic must have its own unique source photo')
 RESEARCH=json.loads(Path('blog_article_research.json').read_text(encoding='utf-8'))
 EXPANDED=json.loads(Path('blog_expanded_content.json').read_text(encoding='utf-8'))
 CATEGORY={
