@@ -4,6 +4,24 @@ import re
 import html
 
 PAGES=('hebergement','programme','booking','contact','memories','guide','store','blog')
+
+def crop_contact_photo(root):
+    # Contact only: use the lower portion of the original HD rafting photo.
+    # Do not change the shared brand logo, hero frame, or other site images.
+    from PIL import Image
+    source=root/'images'/'25.webp'
+    destination=root/'images'/'contact-rafting-bottom.webp'
+    if not source.is_file():
+        raise FileNotFoundError('Original HD Contact photo is missing: '+str(source))
+    with Image.open(source) as photo:
+        width,height=photo.size
+        if width<800 or height<1000:
+            raise RuntimeError('Unexpected source Contact photo dimensions: '+str(photo.size))
+        lower_part=photo.crop((0,round(height*0.39),width,height))
+        lower_part.save(destination,format='WEBP',quality=91,method=6)
+    if not destination.is_file():
+        raise RuntimeError('Could not export cropped Contact rafting photo')
+
 def image_key(src):
     # Treat responsive variants of one photograph as the same image.
     name=src.split('/')[-1].split('?')[0].lower()
@@ -90,12 +108,18 @@ def build_page(path, used_heroes):
         detail='<div class="demo-rebuild-tags">'+''.join(details[:24])+'</div>' if details else ''
         body='<div class="demo-rebuild-copy">'+('<h2>'+html.escape(name)+'</h2>' if name else '')+''.join(paragraphs[:100])+detail+buttons+''.join(forms)+'</div>'
         blocks.append('<section class="demo-rebuild-section'+(' demo-rebuild-alt' if index%2 else '')+'" id="demo-section-'+str(index)+'"><div class="demo-rebuild-inner">'+media+body+'</div>'+gallery+'</section>')
-    hero='<section class="demo-editorial-hero"><div class="demo-editorial-copy"><span class="demo-editorial-eyebrow">'+eyebrow+'</span><h1>'+html.escape(title)+'</h1><a class="demo-editorial-link" href="#demo-section-0">'+explore+' ↓</a></div><div class="demo-editorial-photo"><img src="'+html.escape(hero_photo,quote=True)+'" alt="'+html.escape(title)+'"></div></section>'
+    hero_picture=hero_photo
+    if path.stem=='contact':
+        if image_key(hero_photo)!='25.webp':
+            raise RuntimeError('Unexpected Contact hero source: '+hero_photo)
+        hero_picture='../images/contact-rafting-bottom.webp'
+    hero='<section class="demo-editorial-hero"><div class="demo-editorial-copy"><span class="demo-editorial-eyebrow">'+eyebrow+'</span><h1>'+html.escape(title)+'</h1><a class="demo-editorial-link" href="#demo-section-0">'+explore+' ↓</a></div><div class="demo-editorial-photo"><img src="'+html.escape(hero_picture,quote=True)+'" alt="'+html.escape(title)+'"></div></section>'
     new_main='<main class="demo-rebuilt-page" id="mainContent">'+hero+''.join(blocks)+'</main>'
     source=re.sub(r'<main[^>]*>.*?</main>',lambda _:new_main,source,count=1,flags=re.S|re.I)
     path.write_text(source,encoding='utf-8')
 
 def run(root):
+    crop_contact_photo(root)
     for lang in ('fr','en'):
         used_heroes=set()
         for page in PAGES:
