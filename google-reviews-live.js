@@ -124,7 +124,12 @@
     return;
   }
   diagnostic("LOADING_GOOGLE_MAPS");
+  let completed = false;
+  if (debug) setTimeout(function () {
+    if (!completed) diagnostic("GOOGLE_MAPS_TIMEOUT: Check Billing status and open browser console.");
+  }, 18000);
   window.gm_authFailure = function () {
+    completed = true;
     diagnostic("GOOGLE_MAPS_AUTH_FAILED: Check Billing, key restrictions and enabled APIs.");
   };
   const callback = "imsfraneReviewsInit";
@@ -134,7 +139,9 @@
       const place = new Place({id: placeId});
       await place.fetchFields({fields:["displayName","rating","userRatingCount","reviews","googleMapsURI"]});
       show(place);
+      completed = true;
     } catch (e) {
+      completed = true;
       diagnostic(errorCode(e));
       console.warn("Google Maps live reviews unavailable; official listing link remains available.");
     } finally {
@@ -147,6 +154,7 @@
     encodeURIComponent(key) + "&v=weekly&libraries=places&loading=async&callback=" + callback +
     "&language=" + encodeURIComponent(lang);
   loader.onerror = function () {
+    completed = true;
     diagnostic("GOOGLE_MAPS_SCRIPT_BLOCKED: Check connectivity or browser blockers.");
     try { delete window[callback]; } catch (e) {}
   };
