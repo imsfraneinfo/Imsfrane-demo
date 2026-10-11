@@ -2503,6 +2503,342 @@
     "Un aperçu pour préparer un budget. Les dates, conditions, capacités et prix définitifs sont à confirmer directement avant toute réservation.": {
       "ar": "معلومات تساعدك على إعداد الميزانية. يجب تأكيد التواريخ والشروط والتوفر والأسعار النهائية قبل الحجز.",
       "es": "Información orientativa para calcular un presupuesto. Fechas, condiciones, plazas y precios definitivos deben confirmarse antes de reservar."
+    },
+    "Activité": {
+      "ar": "النشاط",
+      "es": "Actividad"
+    },
+    "Tarif affiché": {
+      "ar": "السعر المعروض",
+      "es": "Precio indicado"
+    },
+    "À savoir": {
+      "ar": "معلومات مهمة",
+      "es": "A tener en cuenta"
+    },
+    "Rafting · 12 km": {
+      "ar": "تجديف · 12 كلم",
+      "es": "Rafting · 12 km"
+    },
+    "Rafting · 30 km": {
+      "ar": "تجديف · 30 كلم",
+      "es": "Rafting · 30 km"
+    },
+    "400 MAD / personne": {
+      "ar": "400 درهم للشخص",
+      "es": "400 MAD/persona"
+    },
+    "800 MAD / personne": {
+      "ar": "800 درهم للشخص",
+      "es": "800 MAD/persona"
+    },
+    "Mars à juin, parfois juillet si le niveau le permet": {
+      "ar": "من مارس إلى يونيو، وأحياناً يوليو إذا سمح منسوب المياه",
+      "es": "De marzo a junio, a veces julio si el caudal lo permite"
+    },
+    "Selon les conditions de la rivière et du groupe": {
+      "ar": "وفق ظروف النهر والمجموعة",
+      "es": "Según las condiciones del río y del grupo"
+    },
+    "Voir ↗": {
+      "ar": "عرض التفاصيل ↗",
+      "es": "Ver detalles ↗"
+    },
+    "VTT · sortie guidée": {
+      "ar": "دراجات جبلية · جولة مع مرشد",
+      "es": "BTT · ruta guiada"
+    },
+    "100 MAD / personne": {
+      "ar": "100 درهم للشخص",
+      "es": "100 MAD/persona"
+    },
+    "Jusqu’à 2 h, selon disponibilités": {
+      "ar": "حتى ساعتين حسب التوفر",
+      "es": "Hasta 2 h, según disponibilidad"
+    },
+    "VTT · location journée": {
+      "ar": "دراجات جبلية · استئجار ليوم",
+      "es": "BTT · alquiler por día"
+    },
+    "150 MAD / personne": {
+      "ar": "150 درهماً للشخص",
+      "es": "150 MAD/persona"
+    },
+    "Vélo à confirmer selon disponibilité": {
+      "ar": "تأكيد توفر الدراجة مسبقاً",
+      "es": "Bicicleta sujeta a disponibilidad"
+    },
+    "Quad · solo": {
+      "ar": "كواد · شخص واحد",
+      "es": "Quad · individual"
+    },
+    "Quad · duo": {
+      "ar": "كواد · شخصان",
+      "es": "Quad · dos personas"
+    },
+    "250 MAD / quad": {
+      "ar": "250 درهماً للكواد",
+      "es": "250 MAD/quad"
+    },
+    "300 MAD / quad": {
+      "ar": "300 درهم للكواد",
+      "es": "300 MAD/quad"
+    },
+    "Parcours d’environ 1 h ; une personne": {
+      "ar": "مسار نحو ساعة لشخص واحد",
+      "es": "Recorrido de una hora aproximadamente; una persona"
+    },
+    "Parcours d’environ 1 h ; deux personnes": {
+      "ar": "مسار نحو ساعة لشخصين",
+      "es": "Recorrido de una hora aproximadamente; dos personas"
+    },
+    "Randonnée · sommet": {
+      "ar": "مشي جبلي · القمة",
+      "es": "Senderismo · cumbre"
+    },
+    "300 MAD / groupe": {
+      "ar": "300 درهم للمجموعة",
+      "es": "300 MAD/grupo"
+    },
+    "Voir itinéraire ci-dessus": {
+      "ar": "اطّلع على المسار أعلاه",
+      "es": "Ver la ruta anterior"
+    },
+    "Quelle est la meilleure période ?": {
+      "ar": "ما أفضل وقت للزيارة؟",
+      "es": "¿Cuál es la mejor época?"
+    },
+    "Les saisons en montagne sont très variables d’une année à l’autre. Le rafting dépend du débit réel, et les randonnées dépendent des conditions du sentier.": {
+      "ar": "تختلف الظروف الجبلية من سنة لأخرى. يعتمد التجديف على صبيب المياه، والمشي الجبلي على حالة المسالك والطقس.",
+      "es": "Las estaciones cambian de un año a otro. El rafting depende del caudal y el senderismo del estado de los senderos y del tiempo."
+    },
+    "Rafting en saison habituelle": {
+      "ar": "الموسم المعتاد للتجديف",
+      "es": "Temporada habitual de rafting"
+    },
+    "Débit à confirmer pour chaque descente. Randonnées à adapter à la météo.": {
+      "ar": "يجب التحقق من صبيب النهر قبل كل نزول، وتكييف المشي مع الطقس.",
+      "es": "Confirmar el caudal antes de cada descenso. Adaptar el senderismo al tiempo."
+    },
+    "Juillet – août": {
+      "ar": "يوليو – أغسطس",
+      "es": "Julio – agosto"
+    },
+    "Randonnées tôt le matin · VTT · quad": {
+      "ar": "المشي في الصباح الباكر · دراجات جبلية · كواد",
+      "es": "Senderismo temprano · BTT · quad"
+    },
+    "Rafting parfois possible en juillet, jamais garanti. Prévoir la chaleur en journée.": {
+      "ar": "قد يكون التجديف ممكناً في يوليو دون ضمان؛ استعد لحرارة النهار.",
+      "es": "A veces hay rafting en julio, pero no está garantizado. Prepárate para el calor diurno."
+    },
+    "Septembre – novembre": {
+      "ar": "سبتمبر – نوفمبر",
+      "es": "Septiembre – noviembre"
+    },
+    "Randonnées · nature · VTT": {
+      "ar": "المشي الجبلي · الطبيعة · الدراجات",
+      "es": "Senderismo · naturaleza · BTT"
+    },
+    "Jours qui raccourcissent ; vérifier les conditions des chemins et de la route.": {
+      "ar": "تقل ساعات النهار؛ تحقق من حالة المسالك والطرقات.",
+      "es": "Los días se acortan; conviene comprobar el estado de caminos y carreteras."
+    },
+    "Décembre – février": {
+      "ar": "ديسمبر – فبراير",
+      "es": "Diciembre – febrero"
+    },
+    "Séjour montagne selon conditions": {
+      "ar": "إقامة جبلية وفق الظروف",
+      "es": "Estancia en montaña según condiciones"
+    },
+    "Froid, intempéries et routes potentiellement difficiles. Contact préalable indispensable.": {
+      "ar": "قد يكون الجو بارداً والطرقات صعبة بسبب الطقس؛ التواصل المسبق ضروري.",
+      "es": "Frío, mal tiempo y posibles dificultades en las carreteras. Es esencial consultar antes."
+    },
+    "Camping et hébergement": {
+      "ar": "التخييم والإقامة",
+      "es": "Acampada y alojamiento"
+    },
+    "Les tarifs de tentes ci-dessous sont pour une tente complète et une nuit, et non pour chaque occupant.": {
+      "ar": "أسعار الخيام التالية تخص الخيمة كاملة في الليلة، ولا تُحتسب لكل شخص.",
+      "es": "Las siguientes tarifas son por tienda completa y noche, no por ocupante."
+    },
+    "Capacité de la tente": {
+      "ar": "سعة الخيمة",
+      "es": "Capacidad de la tienda"
+    },
+    "Prix par tente et par nuit": {
+      "ar": "السعر لكل خيمة في الليلة",
+      "es": "Precio por tienda y noche"
+    },
+    "1 place": {
+      "ar": "مكان واحد",
+      "es": "1 plaza"
+    },
+    "2 places": {
+      "ar": "مكانان",
+      "es": "2 plazas"
+    },
+    "3 places": {
+      "ar": "3 أماكن",
+      "es": "3 plazas"
+    },
+    "4 places": {
+      "ar": "4 أماكن",
+      "es": "4 plazas"
+    },
+    "60 MAD / nuit": {
+      "ar": "60 درهماً لليلة",
+      "es": "60 MAD/noche"
+    },
+    "120 MAD / nuit": {
+      "ar": "120 درهماً لليلة",
+      "es": "120 MAD/noche"
+    },
+    "150 MAD / nuit": {
+      "ar": "150 درهماً لليلة",
+      "es": "150 MAD/noche"
+    },
+    "200 MAD / nuit": {
+      "ar": "200 درهم لليلة",
+      "es": "200 MAD/noche"
+    },
+    "Pour les chambres, la maison et les transferts, demandez un devis selon le nombre de personnes et les dates.": {
+      "ar": "بالنسبة إلى الغرف والبيت والنقل، استفسر عن السعر بحسب عدد الأشخاص والتواريخ.",
+      "es": "Para habitaciones, casa y traslados, pide un presupuesto según el grupo y las fechas."
+    },
+    "Voir le camping ↗": {
+      "ar": "صفحة التخييم ↗",
+      "es": "Ver la acampada ↗"
+    },
+    "Voir l’hébergement ↗": {
+      "ar": "صفحة الإقامة ↗",
+      "es": "Ver el alojamiento ↗"
+    },
+    "Checklist avant de partir": {
+      "ar": "قائمة تجهيزات قبل الانطلاق",
+      "es": "Lista de preparación"
+    },
+    "À adapter à la météo, à la durée du trajet et à votre activité.": {
+      "ar": "عدّل التجهيزات بحسب الطقس ومدة الرحلة والنشاط.",
+      "es": "Adapta la lista al tiempo, la duración y la actividad."
+    },
+    "Pour la route": {
+      "ar": "للطريق",
+      "es": "Para el trayecto"
+    },
+    "Carte téléchargée hors connexion": {
+      "ar": "خريطة محمّلة دون اتصال",
+      "es": "Mapa descargado sin conexión"
+    },
+    "Téléphone chargé et batterie externe": {
+      "ar": "هاتف مشحون وبطارية إضافية",
+      "es": "Teléfono cargado y batería externa"
+    },
+    "Carburant suffisant et espèces en MAD": {
+      "ar": "وقود كافٍ ونقود بالدرهم",
+      "es": "Combustible suficiente y efectivo en MAD"
+    },
+    "Adresse et contact du point de rendez-vous": {
+      "ar": "عنوان ورقم التواصل لنقطة اللقاء",
+      "es": "Dirección y contacto del punto de encuentro"
+    },
+    "Pour la randonnée": {
+      "ar": "للمشي الجبلي",
+      "es": "Para el senderismo"
+    },
+    "Chaussures de marche avec adhérence": {
+      "ar": "حذاء مشي ثابت",
+      "es": "Calzado con buen agarre"
+    },
+    "Eau, encas et protection solaire": {
+      "ar": "ماء ووجبات خفيفة ووقاية من الشمس",
+      "es": "Agua, tentempiés y protección solar"
+    },
+    "Couche chaude / veste imperméable": {
+      "ar": "ملابس دافئة وسترة واقية من المطر",
+      "es": "Ropa de abrigo y chaqueta impermeable"
+    },
+    "Lampe frontale et petite trousse de secours": {
+      "ar": "مصباح رأس وحقيبة إسعافات أولية صغيرة",
+      "es": "Linterna frontal y botiquín pequeño"
+    },
+    "Pour le camping et la rivière": {
+      "ar": "للتخييم والأنشطة المائية",
+      "es": "Para la acampada y el río"
+    },
+    "Vêtements de rechange et affaires chaudes": {
+      "ar": "ملابس بديلة ودافئة",
+      "es": "Ropa de recambio y de abrigo"
+    },
+    "Sac étanche pour objets sensibles": {
+      "ar": "حقيبة مقاومة للماء للأغراض الحساسة",
+      "es": "Bolsa estanca para objetos delicados"
+    },
+    "Médicaments personnels": {
+      "ar": "الأدوية الشخصية",
+      "es": "Medicamentos personales"
+    },
+    "Briefing et équipement de sécurité fournis/confirmés par l’organisateur": {
+      "ar": "تعليمات ومعدات سلامة يوفّرها أو يؤكدها المنظّم",
+      "es": "Instrucciones y equipo de seguridad proporcionados o confirmados por el organizador"
+    },
+    "Sécurité, réseau et tourisme responsable": {
+      "ar": "السلامة والاتصال والسياحة المسؤولة",
+      "es": "Seguridad, cobertura y turismo responsable"
+    },
+    "Quelques précautions qui rendent votre sortie plus agréable et protègent les paysages.": {
+      "ar": "احتياطات بسيطة تجعل الرحلة أكثر راحة وتحافظ على الطبيعة.",
+      "es": "Precauciones sencillas que hacen la excursión más agradable y protegen el paisaje."
+    },
+    "Météo & rivière": {
+      "ar": "الطقس والنهر",
+      "es": "Tiempo y río"
+    },
+    "Orages, crues et débit peuvent modifier ou annuler un départ. Ne vous engagez jamais dans un canyon ou une rivière sans information récente.": {
+      "ar": "قد تغيّر العواصف والسيول والصبيب برنامج الرحلة أو تلغيه؛ لا تدخل مضيقاً أو نهراً دون معلومات حديثة.",
+      "es": "Las tormentas, crecidas y el caudal pueden modificar o cancelar una salida. No entres en una garganta o río sin información actualizada."
+    },
+    "Réseau & orientation": {
+      "ar": "الاتصال وتحديد الاتجاهات",
+      "es": "Cobertura y orientación"
+    },
+    "La couverture mobile peut être irrégulière. Gardez une carte hors connexion et indiquez votre programme à quelqu’un.": {
+      "ar": "قد تكون تغطية الهاتف ضعيفة؛ احتفظ بخريطة دون اتصال وأخبر شخصاً بخطة رحلتك.",
+      "es": "La cobertura móvil puede fallar. Lleva un mapa sin conexión y comunica tu itinerario a alguien."
+    },
+    "Randonnée & quad": {
+      "ar": "المشي الجبلي والكواد",
+      "es": "Senderismo y quad"
+    },
+    "Respectez les itinéraires choisis, les consignes du guide, votre niveau et la tranquillité des villages.": {
+      "ar": "احترم المسارات وتعليمات المرشد وقدراتك وهدوء القرى.",
+      "es": "Respeta las rutas, las indicaciones del guía, tu nivel y la tranquilidad de los pueblos."
+    },
+    "Respect des lieux": {
+      "ar": "احترام المكان",
+      "es": "Respeto por los lugares"
+    },
+    "Emportez vos déchets, ne prélevez pas de plantes et demandez l’autorisation avant de photographier les habitants.": {
+      "ar": "خذ مخلفاتك معك، ولا تجمع النباتات، واطلب الإذن قبل تصوير السكان.",
+      "es": "Retira tus residuos, no recojas plantas y pide permiso antes de fotografiar a los habitantes."
+    },
+    "Peut-on venir sans voiture ?": {
+      "ar": "هل يمكن الوصول دون سيارة خاصة؟",
+      "es": "¿Se puede llegar sin coche?"
+    },
+    "C’est possible en organisant les trajets avec des taxis ou un transfert privé. Confirmez en amont les correspondances jusqu’à Tilouguite et le dernier trajet vers Imsfrane.": {
+      "ar": "نعم، يمكن ترتيب النقل بسيارات الأجرة أو خدمة نقل خاصة، مع تأكيد التنقلات إلى تيلوكيت ثم مسفران مسبقاً.",
+      "es": "Sí, organizando el trayecto en taxis o traslado privado. Confirma los enlaces hasta Tilouguite y el último tramo a Imsfrane."
+    },
+    "Le rafting fonctionne-t-il toute l’année ?": {
+      "ar": "هل يتوفر التجديف طوال السنة؟",
+      "es": "¿Hay rafting todo el año?"
+    },
+    "Non. La période habituelle s’étend de mars à juin, parfois juillet si le débit et la sécurité le permettent. Aucune sortie n’est garantie sans accord du guide.": {
+      "ar": "لا، الموسم المعتاد من مارس إلى يونيو، وقد يمتد أحياناً إلى يوليو إذا سمحت ظروف المياه والسلامة؛ لا تنطلق أي رحلة دون تأكيد المرشد.",
+      "es": "No. La temporada habitual va de marzo a junio y, a veces, julio si el caudal y la seguridad lo permiten. Toda salida requiere confirmación."
     }
   },
   "booking": {
