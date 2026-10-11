@@ -89,7 +89,10 @@ def homepage_main(root,lang):
     opt(main,".hp-google-copy h2",w["review"]);opt(main,".hp-google-copy p",w["reviews"])
     first_text(main.select_one(".hp-google-link"),w["reviewLink"])
     opt(main,".hp-activities .hp-kicker",w["activities"])
-    rich(main.select_one(".hp-activities h2"),w["choose"],"✦")
+    if lang=="ar":
+        opt(main,".hp-activities h2",w["choose"])
+    else:
+        rich(main.select_one(".hp-activities h2"),w["choose"],"✦")
     opt(main,".hp-activities .hp-heading p",PAGES["index"][lang]["sections"][0][1])
     cards=main.select(".hp-activity-card")
     if len(cards)!=14:raise RuntimeError("Home must keep 14 cards")
