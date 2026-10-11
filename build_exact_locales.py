@@ -193,7 +193,34 @@ def wrap_meta(doc,lang,file,page):
             alt=doc.new_tag("link",rel="alternate",hreflang=code,href=BASE+code+"/"+file)
             head.append(alt)
 
+def build_rafting_embeds(root):
+    source=root/"rafting-content.html"
+    if not source.is_file():raise RuntimeError("Original rafting content missing")
+    raw=source.read_text(encoding="utf-8")
+    for lang in ("ar","es"):
+        doc=BeautifulSoup(raw,"html.parser")
+        html=doc.find("html")
+        if html:
+            html["lang"]=lang
+            if lang=="ar":html["dir"]="rtl"
+            elif html.has_attr("dir"):del html["dir"]
+        unknown=translate_nodes(doc,lang,"rafting")
+        attributes_trans(doc,lang,"rafting")
+        head=doc.head
+        if head:
+            if doc.title:doc.title.string=PAGES["rafting"][lang]["title"]+" | Imsfrane Cathédrale"
+            if lang=="ar":
+                st=doc.new_tag("style")
+                st.string='body{font-family:Cairo,Tajawal,Arial,sans-serif}h1,h2,h3{letter-spacing:0}body{text-align:right}'
+                head.append(st)
+        dest=root/("rafting-content-"+lang+".html")
+        dest.write_text(str(doc),encoding="utf-8")
+        check=dest.read_text(encoding="utf-8")
+        if len(check)<len(raw)*0.60 or check.count("<img")<raw.count("<img")-1:
+            raise RuntimeError("Original rafting images/layout lost: "+lang)
+        print("[Rafting localized] "+lang+": "+str(len(unknown))+" source-language text strings await final copyediting")
 def build(root:Path):
+    build_rafting_embeds(root)
     total={}
     for lang in ("ar","es"):
         tgt=root/lang
@@ -258,6 +285,20 @@ def build(root:Path):
             if source_logos and built.count('src="../images/logo-104.webp"')!=source_logos:
                 raise RuntimeError("Original branded logo changed "+lang+"/"+name)
             tgt.joinpath(name).write_text(built,encoding="utf-8")
+        # The English edition includes one unique slug; preserve its exact layout.
+        alias="blog-discover-jebel-imsfrane-in-the-heart-of-the-atlas-mountains.html"
+        en_alias=root/"en"/alias
+        if en_alias.is_file():
+            current=BeautifulSoup(en_alias.read_text(encoding="utf-8"),"html.parser")
+            art=current.find("main")
+            if art is None:raise RuntimeError("Missing original unique-language article")
+            mirror_legacy(art,lang,alias)
+            wrap_meta(current,lang,alias,"blog-jebel-imsfrane")
+            header_localize(current,lang);footer_localize(current,lang)
+            if current.html:
+                current.html["lang"]=lang
+                if lang=="ar":current.html["dir"]="rtl"
+            tgt.joinpath(alias).write_text(str(current),encoding="utf-8")
         total[lang]=len(list(tgt.glob("*.html")))
         print("[Exact Locale] "+lang+": "+str(total[lang])+" pages; original FR structures, classes, photos, widgets and galleries copied.")
     return total
