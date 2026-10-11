@@ -181,6 +181,23 @@ def nav(lang, current_file, root, logo_prefix):
       +'</div></aside>'
     )
 
+def compact_language(lang, current_file, root):
+    labels={"fr":"Français","en":"English","ar":"العربية","es":"Español"}
+    opts=[]
+    for code in ("fr","en","ar","es"):
+        target=current_file if (root/code/current_file).is_file() else ("blog.html" if current_file.startswith("blog") else "index.html")
+        if not (root/code/target).is_file():raise RuntimeError("Missing compact language target")
+        opts.append('<a href="../'+code+'/'+target+'" lang="'+code+'"'
+           +(' aria-current="page"' if lang==code else '')+'>'
+           +'<span class="atnav-lang-code">'+code.upper()+'</span><span>'+labels[code]+'</span></a>')
+    return ('<div class="atnav-langmini">'
+      +'<button type="button" class="atnav-langmini-trigger" aria-haspopup="true" aria-expanded="false"'
+      +' aria-label="'+clean("اختيار اللغة" if lang=="ar" else "Elegir idioma" if lang=="es" else "Choose language" if lang=="en" else "Choisir la langue")+'">'
+      +'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>'
+      +'<span class="atnav-lang-current">'+lang.upper()+'</span>'
+      +'<svg class="atnav-mini-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>'
+      +'<div class="atnav-langmini-panel" hidden>'+''.join(opts)+'</div></div>')
+
 def trigger(lang):
     t=DICT[lang]
     return ('<button type="button" class="atnav-open" id="atnavOpen" '
@@ -231,6 +248,12 @@ def patch(path, lang, root):
         if actions not in new_header:
             raise RuntimeError(f"Header actions missing: {path}")
         new_header=new_header.replace(actions,desktop_nav(lang,current)+actions,1)
+        locale_block=re.search(r'(<div[^>]*class="language-switcher"[^>]*>[\s\S]*?</div>)',new_header,re.I)
+        if not locale_block:raise RuntimeError("Original FR EN selector missing")
+        original_langs=locale_block.group(1)
+        if lang in ("ar","es"):
+            original_langs=original_langs.replace(' aria-current="page"','').replace('class="language-button active editable"','class="language-button editable"').replace('class="language-button active"','class="language-button"')
+        new_header=new_header[:locale_block.start()]+original_langs+compact_language(lang,current,root)+new_header[locale_block.end():]
         source=source[:match.start()]+new_header+sprite()+nav(lang,current,root,logo_prefix)+source[match.end():]
     else:
         # Standalone editorial articles have no site-wide header; supply a compact
@@ -238,7 +261,9 @@ def patch(path, lang, root):
         body_match=re.search(r'<body\b[^>]*>',source,flags=re.I)
         if body_match is None:
             raise RuntimeError(f"Article body tag missing: {path}")
-        insertion=sprite()+article_header(lang,logo_prefix)+nav(lang,current,root,logo_prefix)
+        article_markup=article_header(lang,logo_prefix)
+        article_markup=article_markup.replace('<div class="atnav-article-actions">','<div class="atnav-article-actions">'+compact_language(lang,current,root),1)
+        insertion=sprite()+article_markup+nav(lang,current,root,logo_prefix)
         source=source[:body_match.end()]+insertion+source[body_match.end():]
     class_body=re.search(r'<body\b[^>]*\bclass="([^"]*)"',source,flags=re.I)
     if class_body:
