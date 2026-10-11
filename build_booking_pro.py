@@ -11,7 +11,7 @@ WORDS = {
 "tags":["Demande sans paiement","Calcul instantané","Confirmation humaine"],
 "steps":["Expériences","Votre séjour","Récapitulatif"],
 "eyebrow1":"ÉTAPE 01 · VOS ENVIES","pick":"Choisissez vos activités",
-"pickhelp":"Cochez ce qui vous fait envie. Les tarifs s'actualisent selon le nombre de participants, de nuits et d'équipements.",
+"pickhelp":"Cochez les expériences souhaitées. Le nombre d'activités et de tentes est calculé automatiquement selon votre groupe. Choisissez un seul type de tente et de quad ; précisez les combinaisons dans les notes.",
 "filters":{"all":"Tout voir","rafting":"Rafting","camping":"Tentes","hiking":"Randonnée","vtt":"VTT","quad":"Quad","stay":"Séjour"},
 "units":{"person":"par personne","tentNight":"par tente / nuit","group":"par groupe","vehicle":"par quad"},
 "season":"Le rafting est généralement proposé de mars à juin, parfois en juillet si le débit le permet. La sécurité et la disponibilité sont à confirmer.",
@@ -34,7 +34,7 @@ WORDS = {
 "tags":["No online payment","Instant estimate","Personally confirmed"],
 "steps":["Experiences","Your trip","Summary"],
 "eyebrow1":"STEP 01 · YOUR ADVENTURE","pick":"Choose your experiences",
-"pickhelp":"Tick the experiences you want. Prices update automatically for your group, nights and equipment.",
+"pickhelp":"Tick your preferred experiences. Quantities are calculated automatically from your group size. Choose one tent and quad type; use the notes for a custom combination.",
 "filters":{"all":"All","rafting":"Rafting","camping":"Tents","hiking":"Hiking","vtt":"Mountain biking","quad":"Quad","stay":"3-day stay"},
 "units":{"person":"per person","tentNight":"per tent / night","group":"per group","vehicle":"per quad"},
 "season":"Rafting is generally offered from March to June, sometimes July if river levels permit. Safety and availability must be confirmed.",
@@ -65,16 +65,6 @@ def render(lang):
         name=e(p[lang])
         detail=e(p["detailFr" if lang=="fr" else "detailEn"])
         unit=e(t["units"][p["unit"]])
-        per_person=p["unit"]=="person"
-        count_label=t["travelers"] if per_person else t["quantity"]
-        controls=(
-          '<span class="bp-count-auto" data-unit="people">× <strong>2</strong></span>'
-          if per_person else
-          '<div class="bp-stepper" role="group" aria-label="'+e(count_label)+' — '+name+'">'
-          '<button type="button" data-delta="-1" data-offer="'+e(p["id"])+'" aria-label="− '+name+'" disabled>−</button>'
-          '<output aria-live="off">0</output>'
-          '<button type="button" data-delta="1" data-offer="'+e(p["id"])+'" aria-label="+ '+name+'">+</button></div>'
-        )
         cards.append(
           '<article class="bp-offer" data-id="'+e(p["id"])+'" data-category="'+e(p["category"])+'" data-selected="false">'
           '<label class="bp-select-activity" for="bp-choice-'+e(p["id"])+'">'
@@ -82,7 +72,7 @@ def render(lang):
           '<span class="bp-offer-details"><strong class="bp-offer-name">'+name+'</strong>'
           '<span class="bp-offer-desc">'+detail+'</span></span></label>'
           '<div class="bp-offer-actions"><div class="bp-offer-price">'+f'{p["price"]:,}'.replace(","," ")+' <small>MAD</small></div>'
-          '<span class="bp-offer-unit">'+unit+'</span><div class="bp-quantity-control">'+controls+'</div></div>'
+          '<span class="bp-offer-unit">'+unit+'</span></div>'
           '</article>'
         )
     cats=["all","rafting","camping","hiking","vtt","quad","stay"]
