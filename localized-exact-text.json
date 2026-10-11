@@ -1451,6 +1451,22 @@
     "Portez un casque et adaptez votre allure aux pistes et à la météo.": {
       "ar": "ارتدِ الخوذة وعدّل سرعتك حسب المسالك والطقس.",
       "es": "Usa casco y adapta el ritmo a las pistas y al tiempo."
+    },
+    "IMSFRANE · ATLAS": {
+      "ar": "مسفران · الأطلس الكبير",
+      "es": "IMSFRANE · ATLAS"
+    },
+    "VTT · MOUNTAIN BIKE": {
+      "ar": "دراجات جبلية",
+      "es": "BTT · BICICLETA DE MONTAÑA"
+    },
+    "L’Atlas vous attend.": {
+      "ar": "الأطلس في انتظارك.",
+      "es": "El Atlas te espera."
+    },
+    "Contactez-nous pour choisir votre formule et organiser votre sortie VTT.": {
+      "ar": "تواصل معنا لاختيار التجربة المناسبة وتنظيم جولتك بالدراجة الجبلية.",
+      "es": "Escríbenos para elegir la modalidad y organizar tu salida en bicicleta de montaña."
     }
   },
   "quad": {
@@ -1875,6 +1891,10 @@
     "Envoyez-nous vos dates, le nombre de personnes et l’hébergement souhaité. Nous confirmerons la disponibilité et le tarif.": {
       "ar": "أرسل التواريخ وعدد الأشخاص ونوع الإقامة المرغوب، وسنؤكد التوفر والسعر.",
       "es": "Indícanos las fechas, el número de personas y el tipo de alojamiento. Confirmaremos disponibilidad y precio."
+    },
+    "Formulaire de réservation ↗": {
+      "ar": "استمارة الحجز ↗",
+      "es": "Formulario de reserva ↗"
     }
   },
   "programme": {
@@ -2839,6 +2859,42 @@
     "Non. La période habituelle s’étend de mars à juin, parfois juillet si le débit et la sécurité le permettent. Aucune sortie n’est garantie sans accord du guide.": {
       "ar": "لا، الموسم المعتاد من مارس إلى يونيو، وقد يمتد أحياناً إلى يوليو إذا سمحت ظروف المياه والسلامة؛ لا تنطلق أي رحلة دون تأكيد المرشد.",
       "es": "No. La temporada habitual va de marzo a junio y, a veces, julio si el caudal y la seguridad lo permiten. Toda salida requiere confirmación."
+    },
+    "Les tarifs comprennent-ils le transport ?": {
+      "ar": "هل تشمل الأسعار النقل؟",
+      "es": "¿Las tarifas incluyen transporte?"
+    },
+    "Peut-on débuter la randonnée depuis l’hébergement ?": {
+      "ar": "هل يمكن بدء المشي الجبلي من مكان الإقامة؟",
+      "es": "¿Se puede empezar la ruta desde el alojamiento?"
+    },
+    "Les tentes sont-elles facturées par personne ?": {
+      "ar": "هل يُحتسب سعر الخيمة لكل شخص؟",
+      "es": "¿El precio de las tiendas se cobra por persona?"
+    },
+    "Comment réserver ou demander un itinéraire personnalisé ?": {
+      "ar": "كيف أحجز أو أطلب مساراً خاصاً؟",
+      "es": "¿Cómo reservar o solicitar una ruta personalizada?"
+    },
+    "Un séjour plus simple avec un guide local.": {
+      "ar": "رحلة أسهل بصحبة مرشد محلي.",
+      "es": "Una estancia más sencilla con un guía local."
+    },
+    "Préparer une réservation ↗": {
+      "ar": "التحضير للحجز ↗",
+      "es": "Preparar una reserva ↗"
+    },
+    "Écrire sur WhatsApp ↗": {
+      "ar": "التواصل عبر واتساب ↗",
+      "es": "Escribir por WhatsApp ↗"
+    },
+    "200 MAD / groupe": {
+      "ar": "200 درهم للمجموعة",
+      "es": "200 MAD/grupo"
+    },
+    "400 MAD / groupe": {
+      "ar": "400 درهم للمجموعة",
+      "es": "400 MAD/grupo"
     }
   },
   "booking": {
@@ -3383,9 +3439,42 @@
     "Voir mon panier": {
       "ar": "عرض السلة",
       "es": "Ver mi cesta"
+    },
+    "IMSFRANE SHOP": {
+      "ar": "متجر مسفران",
+      "es": "TIENDA IMSFRANE"
     }
   },
-  "blog": {},
+  "blog": {
+    "LE JOURNAL DE L’ATLAS": {
+      "ar": "مدونة الأطلس",
+      "es": "EL DIARIO DEL ATLAS"
+    },
+    "À la une": {
+      "ar": "أبرز المقالات",
+      "es": "Destacado"
+    },
+    "Lire l’article ↗": {
+      "ar": "قراءة المقال ↗",
+      "es": "Leer artículo ↗"
+    },
+    "Lire l’article →": {
+      "ar": "قراءة المقال ←",
+      "es": "Leer artículo →"
+    },
+    "23 articles": {
+      "ar": "23 مقالاً",
+      "es": "23 artículos"
+    },
+    "Aucun article ne correspond à votre recherche.": {
+      "ar": "لا توجد مقالات مطابقة لبحثك.",
+      "es": "No hay artículos que coincidan con tu búsqueda."
+    },
+    "Afficher plus ↓": {
+      "ar": "عرض المزيد ↓",
+      "es": "Mostrar más ↓"
+    }
+  },
   "contact": {
     "Imsfrane Cathédrale · Haut Atlas": {
       "ar": "مسفران كاتدرال · الأطلس الكبير",
