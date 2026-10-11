@@ -2,7 +2,7 @@ name: Publish Imsfrane demo
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/build-demo.yml', 'rafting-v8.html', 'imsfrane_rafting_mobile_cadrage_corrige_v8*.html', 'images/rafting-new/**', 'quad-content-*.html', 'images/quad-new/**', 'images/IMG_*.webp', 'vtt-content-*.html', 'camping-content-*.html', 'randonnee-content-*.html', 'about-content-*.html', 'remaining-pages-theme.css', 'rebuild_remaining.py', 'images/rando-*.webp', 'images/IMG_*.jpeg']
+    paths: ['.github/workflows/build-demo.yml', 'rafting-v8.html', 'imsfrane_rafting_mobile_cadrage_corrige_v8*.html', 'images/rafting-new/**', 'quad-content-*.html', 'images/quad-new/**', 'images/IMG_*.webp', 'vtt-content-*.html', 'camping-content-*.html', 'randonnee-content-*.html', 'about-content-*.html', 'remaining-pages-theme.css', 'rebuild_remaining.py', 'build_memories_gallery.py', 'memories-gallery.css', 'images/rando-*.webp', 'images/IMG_*.jpeg']
   workflow_dispatch:
 permissions:
   contents: write
@@ -484,6 +484,9 @@ jobs:
                       raise RuntimeError('Cannot find original rafting main')
                   original=original[:begin]+embedded+original[finish:]
                   f.write_text(original,encoding='utf-8')
+          # Memories: display all uploaded demo photos and original website archive.
+          from build_memories_gallery import build as build_memories
+          build_memories(root)
           (root/'.nojekyll').touch()
           PY
       - uses: peaceiris/actions-gh-pages@v4
