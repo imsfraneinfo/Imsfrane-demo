@@ -52,6 +52,19 @@ ACTIVITY_NAMES={
 "ar":["التجديف في المياه البيضاء","التخييم","المشي الجبلي","الدراجات الجبلية","الكواد","الإقامة"],
 "es":["Rafting","Acampada","Senderismo","BTT","Quad","Alojamiento"],
 }
+
+# Additional experiences available by direct WhatsApp enquiry only. No invented pages.
+OTHER_ACTIVITIES=[
+ ("tubing-800.webp","Tubing","التزلج بالعوامة في النهر","جولة مائية بالعوامة تُنظَّم بحسب صبيب وادي أحنصال وشروط السلامة.","Descenso en flotador","Una actividad acuática en el Ahansal, sujeta al caudal y a la evaluación de seguridad."),
+ ("jetski-800.webp","Jet Ski","الدراجات المائية","تجربة على مياه بحيرة بين الويدان؛ يُرجى الاستفسار عن التوفر والشروط.","Moto de agua","Una experiencia en el lago de Bin El Ouidane. Consulta disponibilidad y condiciones."),
+ ("4x4-800.webp","Excursion 4×4","جولة بسيارة رباعية الدفع","اكتشاف المسالك الجبلية والمناظر الطبيعية ضمن برنامج يُرتَّب مسبقاً.","Excursión en 4×4","Recorre pistas de montaña y miradores en una salida organizada con antelación."),
+ ("passage-800.webp","Passage Amazigh","الممر الأمازيغي في تاغية","اكتشف أحد المعالم الشهيرة في تاغية، مع تنظيم الوصول بحسب الظروف.","Pasaje Amazige de Taghia","Conoce este paso singular de Taghia. El acceso debe organizarse según las condiciones."),
+ ("zrkan-800.webp","Cascades Zrkan","شلالات زركان","رحلة طبيعية إلى الشلالات، بعد التأكد من إمكانية الوصول وحالة المسالك.","Cascadas de Zrkan","Una escapada a las cascadas, siempre comprobando previamente el acceso."),
+ ("anergui-800.webp","Visite Anergui","زيارة أنرگي","التعرف على القرى والمناظر الجبلية في منطقة أنرگي ضمن جولة مخصصة.","Visita a Anergui","Descubre sus pueblos y paisajes de montaña en una excursión a medida."),
+ ("almo-800.webp","Almou Ntalmast","ألمو نتالماست","استكشاف المراعي والمشاهد الطبيعية الجبلية بحسب الموسم.","Almou Ntalmast","Explora los pastos y paisajes de montaña según la estación."),
+ ("ahidous-800.webp","Soirée Ahidous","أمسية أحيدوس","تجربة للتعرف على الموسيقى والرقص الجماعي الأمازيغي، بتنظيم مسبق.","Velada de Ahidous","Descubre esta expresión musical y festiva de la cultura amazige, previa organización.")
+]
+
 HEADS={
 "ar":["التعرّف على التجربة","تفاصيل ينبغي معرفتها","الاستعداد للرحلة"],
 "es":["Conoce la experiencia","Lo que debes saber","Prepara tu visita"],
@@ -102,9 +115,22 @@ def cards(lang):
             +'<img loading="lazy" decoding="async" src="'+photo(image)+'" alt="'+esc(title)+'"></a>'
             +'<div class="locale-card-body"><h3>'+esc(title)+'</h3><p>'+esc(desc[:160].rsplit(" ",1)[0])+'…</p>'
             +'<a class="locale-card-link" href="'+p+'">'+esc(t["details"])+' ↗</a></div></article>')
+    extras=[]
+    for img,query,ar_name,ar_desc,es_name,es_desc in OTHER_ACTIVITIES:
+        name=ar_name if lang=="ar" else es_name
+        desc=ar_desc if lang=="ar" else es_desc
+        # All other experiences are contact-only; do not link to a missing page.
+        wa="https://wa.me/212667772551?text="+quote(("مرحباً، أود الاستفسار عن " if lang=="ar" else "Hola, me gustaría consultar ")+query, safe="")
+        extras.append('<article class="locale-card"><img loading="lazy" decoding="async" src="'+photo(img)+'" alt="'+esc(name)+'">'
+          +'<div class="locale-card-body"><h3>'+esc(name)+'</h3><p>'+esc(desc)+'</p>'
+          +'<a class="locale-card-link" href="'+esc(wa)+'" target="_blank" rel="noopener noreferrer">'+esc(t["whatsapp"])+' ↗</a></div></article>')
+    otherTitle="تجارب إضافية تُنظَّم عند الطلب" if lang=="ar" else "Más experiencias disponibles bajo petición"
     return ('<section class="locale-section" id="activities"><div class="locale-wrap">'
         +'<div class="locale-heading"><span class="locale-kicker">'+esc(t["activities"])+'</span><h2>'+esc(t["choose"])+'</h2></div>'
-        +'<div class="locale-activity-grid">'+''.join(out)+'</div></div></section>')
+        +'<div class="locale-activity-grid">'+''.join(out)+'</div>'
+        +'<div class="locale-heading" style="margin-top:55px"><h2>'+esc(otherTitle)+'</h2></div>'
+        +'<div class="locale-activity-grid">'+''.join(extras)+'</div>'
+        +'</div></section>')
 
 def photo_gallery(lang):
     t=LABELS[lang]
