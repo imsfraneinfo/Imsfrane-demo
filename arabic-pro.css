@@ -435,3 +435,48 @@ html[lang="ar"] :is(
   letter-spacing:0!important;
   line-height:1.85!important;
 }
+
+
+/* Mixed numerals and Arabic currency require separate bidirectional runs.
+   The number is logically 2 500 / 3 000, never 500 2 / 000 3.
+   This is limited to Arabic price blocks; the surrounding page remains RTL. */
+html[lang="ar"] .ar-formatted-price {
+  display:inline-flex!important;
+  flex-wrap:wrap;
+  align-items:baseline;
+  justify-content:flex-start;
+  gap:.2em;
+  direction:rtl!important;
+  unicode-bidi:isolate;
+  line-height:1.35!important;
+  text-align:right!important;
+  max-width:100%;
+}
+html[lang="ar"] .ar-formatted-price .ar-price-number {
+  direction:ltr!important;
+  unicode-bidi:isolate!important;
+  display:inline-block;
+  white-space:nowrap!important;
+  font-family:"Imsfrane Alexandria",Arial,sans-serif!important;
+  font-variant-numeric:lining-nums tabular-nums;
+  font-feature-settings:"tnum" 1, "lnum" 1;
+}
+html[lang="ar"] .ar-formatted-price .ar-price-unit {
+  direction:rtl!important;
+  unicode-bidi:isolate!important;
+  display:inline-block;
+  white-space:nowrap!important;
+  font-family:"Imsfrane Tajawal",Arial,sans-serif!important;
+  font-size:.67em;
+  font-weight:700;
+}
+html[lang="ar"] .exp-opt b.ar-formatted-price,
+html[lang="ar"] .route-price strong.ar-formatted-price {
+  font-size:clamp(26px,6vw,37px)!important;
+}
+@media (max-width:450px) {
+ html[lang="ar"] .exp-opt b.ar-formatted-price,
+ html[lang="ar"] .route-price strong.ar-formatted-price {
+   font-size:clamp(25px,6.2vw,33px)!important;
+ }
+}
