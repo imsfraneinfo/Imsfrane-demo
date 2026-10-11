@@ -67,7 +67,15 @@ with webdriver.Chrome(options=opts) as driver:
                         titleDirection:getComputedStyle(h).direction,
                         pFont:p?getComputedStyle(p).fontFamily:'',
                         realFontTitle:d.fonts.check('700 32px "Imsfrane Alexandria"','مسفران'),
-                        realFontText:d.fonts.check('400 17px "Imsfrane Tajawal"','المغامرة')});
+                        realFontText:d.fonts.check('400 17px "Imsfrane Tajawal"','المغامرة'),
+                        badgeText:d.querySelector('.hero-badge b')?.textContent.trim(),
+                        badgeFont:getComputedStyle(d.querySelector('.hero-badge b')).fontFamily,
+                        badgeAlign:getComputedStyle(d.querySelector('.hero-badge b')).textAlign,
+                        priceText:d.querySelector('.route-price strong')?.textContent.trim(),
+                        priceFont:getComputedStyle(d.querySelector('.route-price strong')).fontFamily,
+                        heroPriceFont:getComputedStyle(d.querySelector('.hero-stat strong')).fontFamily,
+                        expeditionPriceFont:getComputedStyle(d.querySelector('.exp-opt b')).fontFamily,
+                        liveCSS:d.querySelector('link[href*="arabic-pro.css"]')?.getAttribute('href')});
                     }).catch(e=>done({error:String(e)}));
                 """)
                 print("RAFTING IFRAME",json.dumps(child,ensure_ascii=False),flush=True)
@@ -78,6 +86,15 @@ with webdriver.Chrome(options=opts) as driver:
                     raise AssertionError("Arabic rafting iframe fonts are not decoded")
                 if "Imsfrane Alexandria" not in child["titleFont"] or child["titleDirection"]!="rtl":
                     raise AssertionError("Rafting Arabic title font and direction not applied")
+                for key in ("badgeFont","priceFont","heroPriceFont","expeditionPriceFont"):
+                    if "Imsfrane Alexandria" not in child.get(key,""):
+                        raise AssertionError("Still showing OLD serif in rafting "+key+": "+str(child))
+                if "الأطلس من جهة النهر" not in child.get("badgeText",""):
+                    raise AssertionError("User's rafting badge text not found")
+                if "درهم" not in child.get("priceText",""):
+                    raise AssertionError("User's Moroccan dirham price not found")
+                if "rtl-arabic-20261011e" not in child.get("liveCSS",""):
+                    raise AssertionError("Browser cached old RTL stylesheet: "+str(child))
                 report.append({"viewport":viewport,"path":page,"iframe":child})
                 continue
             WebDriverWait(driver,35).until(lambda x: x.execute_script("return document.readyState!=='loading' && !!document.querySelector('main h1')"))
