@@ -1,0 +1,31 @@
+name: Visual verify Arabic Demo
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - qa_arabic_browser.py
+      - .github/workflows/qa-arabic-browser.yml
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare actual browser
+        run: |
+          python3 -m pip install --quiet selenium
+          echo "Chrome location:"
+          command -v google-chrome || command -v chromium || true
+          google-chrome --version || chromium --version || true
+      - name: Verify published Arabic RTL fonts in Chrome on mobile and desktop
+        run: python3 qa_arabic_browser.py
+      - name: Keep screenshots and text metrics
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: arabic-mobile-desktop-screenshots
+          path: arabic-browser-diagnostics/
+          if-no-files-found: ignore
