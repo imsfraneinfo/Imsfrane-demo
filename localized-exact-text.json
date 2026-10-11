@@ -689,7 +689,596 @@
       "es": "Escríbenos para elegir la ruta y la fecha."
     }
   },
-  "rafting": {},
+  "rafting": {
+    "HAUT ATLAS · OUED AHANSAL · MAROC": {
+      "ar": "الأطلس الكبير · وادي أحنصال · المغرب",
+      "es": "ALTO ATLAS · RÍO AHANSAL · MARRUECOS"
+    },
+    "Vivez": {
+      "ar": "عِش",
+      "es": "Vive"
+    },
+    "rivière.": {
+      "ar": "مغامرة النهر.",
+      "es": "el río."
+    },
+    "Plus qu'une descente : des eaux vives, de grands paysages et cette sensation de liberté qu'on n'oublie pas. Une aventure accompagnée par notre équipe locale, au cœur de l'Atlas.": {
+      "ar": "أكثر من مجرد رحلة تجديف: مياه متدفقة ومناظر خلابة وإحساس لا يُنسى بالحرية. مغامرة بصحبة فريقنا المحلي في قلب الأطلس.",
+      "es": "Mucho más que un descenso: aguas bravas, paisajes inmensos y una sensación de libertad difícil de olvidar. Una aventura guiada por nuestro equipo local en pleno Atlas."
+    },
+    "Explorer les parcours": {
+      "ar": "اكتشف المسارات",
+      "es": "Descubre los recorridos"
+    },
+    "Voir les photos": {
+      "ar": "شاهد الصور",
+      "es": "Ver las fotos"
+    },
+    "Expériences": {
+      "ar": "تجارب",
+      "es": "Experiencias"
+    },
+    "De rivière": {
+      "ar": "نهرية",
+      "es": "Fluviales"
+    },
+    "À partir de / pers.": {
+      "ar": "ابتداءً من / الشخص",
+      "es": "Desde / persona"
+    },
+    "L'Atlas côté rivière.": {
+      "ar": "الأطلس من جهة النهر.",
+      "es": "El Atlas desde el río."
+    },
+    "IM SFRANE · AZILAL · MAROC": {
+      "ar": "مسفران · أزيلال · المغرب",
+      "es": "IMSFRANE · AZILAL · MARRUECOS"
+    },
+    "Choisir son aventure": {
+      "ar": "اختر مغامرتك",
+      "es": "Elige tu aventura"
+    },
+    "12, 30 ou 50 km": {
+      "ar": "12 أو 30 أو 50 كلم",
+      "es": "12, 30 o 50 km"
+    },
+    "Connaître la saison": {
+      "ar": "تعرّف على الموسم",
+      "es": "Conoce la temporada"
+    },
+    "Mars à juin, selon débit": {
+      "ar": "من مارس إلى يونيو حسب صبيب المياه",
+      "es": "De marzo a junio, según el caudal"
+    },
+    "Voir l’expérience": {
+      "ar": "اكتشف التجربة",
+      "es": "Ver la experiencia"
+    },
+    "Nos photos sur la rivière": {
+      "ar": "صورنا على النهر",
+      "es": "Nuestras fotos en el río"
+    },
+    "Demander une date": {
+      "ar": "استفسر عن موعد",
+      "es": "Consultar una fecha"
+    },
+    "Réponse personnalisée": {
+      "ar": "ردّ يناسب طلبك",
+      "es": "Respuesta personalizada"
+    },
+    "L'AVENTURE, TOUT SIMPLEMENT": {
+      "ar": "مغامرة حقيقية في الطبيعة",
+      "es": "AVENTURA EN ESTADO PURO"
+    },
+    "De vrais rapides.": {
+      "ar": "منحدرات مائية حقيقية.",
+      "es": "Rápidos de verdad."
+    },
+    "De vrais": {
+      "ar": "ذكريات",
+      "es": "Recuerdos"
+    },
+    "souvenirs.": {
+      "ar": "لا تُنسى.",
+      "es": "inolvidables."
+    },
+    "Au pied des montagnes de l’Atlas, l’Oued Ahansal traverse des vallées et des gorges qui se découvrent autrement depuis la rivière.": {
+      "ar": "يجري وادي أحنصال بين الجبال والمضايق في قلب الأطلس الكبير، ليكشف من الماء عن مشاهد لا تشبه تلك التي تراها من الطريق.",
+      "es": "A los pies de las montañas del Atlas, el Ahansal atraviesa valles y gargantas que se descubren de otra manera desde el agua."
+    },
+    "Entre éclats de rire, sensations et pauses pour profiter du paysage, chaque sortie est organisée selon le parcours choisi et les conditions du jour.": {
+      "ar": "بين لحظات الإثارة والاستمتاع بالمناظر والتوقف للراحة، تُنظَّم كل رحلة بحسب المسار المختار وظروف النهر في ذلك اليوم.",
+      "es": "Entre emociones, risas y paradas para contemplar el paisaje, cada salida se adapta al recorrido elegido y a las condiciones del día."
+    },
+    "Accompagnement local, matériel de sécurité, briefing avant le départ et transferts prévus dans les programmes.": {
+      "ar": "مرافقة محلية ومعدات سلامة وإرشادات قبل النزول، مع خدمات النقل المحددة في كل برنامج.",
+      "es": "Acompañamiento local, equipo de seguridad, instrucciones previas y traslados previstos en cada programa."
+    },
+    "L'aventure est ici.": {
+      "ar": "المغامرة هنا.",
+      "es": "La aventura está aquí."
+    },
+    "AVANT DE CHOISIR UNE DATE": {
+      "ar": "قبل اختيار الموعد",
+      "es": "ANTES DE ELEGIR UNA FECHA"
+    },
+    "Le bon moment,": {
+      "ar": "الوقت المناسب،",
+      "es": "El momento adecuado,"
+    },
+    "la bonne rivière.": {
+      "ar": "والنهر المناسب.",
+      "es": "el río adecuado."
+    },
+    "La saison habituelle du rafting s’étend de mars à juin. Certaines années, des sorties restent possibles en juillet, si le niveau de l’eau le permet.": {
+      "ar": "يمتد موسم التجديف المعتاد من مارس إلى يونيو، وقد تتوفر رحلات في يوليو خلال بعض السنوات إذا سمح منسوب المياه.",
+      "es": "La temporada habitual de rafting va de marzo a junio. Algunos años es posible salir también en julio, si el caudal lo permite."
+    },
+    "JAN": {
+      "ar": "يناير",
+      "es": "ENE"
+    },
+    "FÉV": {
+      "ar": "فبراير",
+      "es": "FEB"
+    },
+    "MAR": {
+      "ar": "مارس",
+      "es": "MAR"
+    },
+    "AVR": {
+      "ar": "أبريل",
+      "es": "ABR"
+    },
+    "MAI": {
+      "ar": "مايو",
+      "es": "MAY"
+    },
+    "JUIN": {
+      "ar": "يونيو",
+      "es": "JUN"
+    },
+    "JUIL": {
+      "ar": "يوليو",
+      "es": "JUL"
+    },
+    "AOÛ": {
+      "ar": "أغسطس",
+      "es": "AGO"
+    },
+    "SEP": {
+      "ar": "سبتمبر",
+      "es": "SEP"
+    },
+    "OCT": {
+      "ar": "أكتوبر",
+      "es": "OCT"
+    },
+    "NOV": {
+      "ar": "نوفمبر",
+      "es": "NOV"
+    },
+    "DÉC": {
+      "ar": "ديسمبر",
+      "es": "DIC"
+    },
+    "Saison habituelle": {
+      "ar": "الموسم المعتاد",
+      "es": "Temporada habitual"
+    },
+    "Selon niveau d’eau": {
+      "ar": "حسب منسوب المياه",
+      "es": "Según el nivel del agua"
+    },
+    "Hors saison": {
+      "ar": "خارج الموسم",
+      "es": "Fuera de temporada"
+    },
+    "Ce calendrier est indicatif : aucun mois ne garantit un départ. Chaque demande est validée après vérification de la météo, du débit et des conditions de sécurité.": {
+      "ar": "هذا التقويم إرشادي؛ لا يضمن أي شهر انطلاق الرحلات. يُؤكَّد كل طلب بعد التحقق من الطقس والصبيب وشروط السلامة.",
+      "es": "Este calendario es orientativo: ningún mes garantiza una salida. Cada solicitud se confirma tras comprobar el tiempo, el caudal y la seguridad."
+    },
+    "VOTRE RIVIÈRE, VOTRE RYTHME": {
+      "ar": "نهر واحد وتجارب متنوعة",
+      "es": "TU RÍO, TU RITMO"
+    },
+    "Choisissez l'intensité.": {
+      "ar": "اختر مستوى المغامرة.",
+      "es": "Elige la intensidad."
+    },
+    "Trois parcours pour découvrir les paysages de l'Atlas. Les itinéraires restent adaptés aux conditions réelles de la rivière.": {
+      "ar": "ثلاثة مسارات لاكتشاف الأطلس، ويُعدّل كل مسار وفق ظروف النهر الفعلية.",
+      "es": "Tres recorridos para descubrir los paisajes del Atlas, adaptados siempre a las condiciones reales del río."
+    },
+    "DÉCOUVERTE": {
+      "ar": "اكتشاف",
+      "es": "DESCUBRIMIENTO"
+    },
+    "PARCOURS 01 · OUED AHANSAL": {
+      "ar": "المسار 01 · وادي أحنصال",
+      "es": "RUTA 01 · RÍO AHANSAL"
+    },
+    "D'Amougr": {
+      "ar": "من أموگر",
+      "es": "De Amougr"
+    },
+    "à Tilouguite": {
+      "ar": "إلى تيلوكيت",
+      "es": "a Tilouguite"
+    },
+    "Une belle première approche de la rivière : sensations, paysages et bons moments au fil de l'eau.": {
+      "ar": "بداية جميلة لاكتشاف النهر، تجمع بين المغامرة والمناظر الطبيعية واللحظات الممتعة.",
+      "es": "Una primera experiencia junto al río que combina emoción, paisajes y buenos momentos."
+    },
+    "◷ Env. 2–3 h": {
+      "ar": "نحو ساعتين إلى ثلاث ساعات",
+      "es": "Unas 2–3 h"
+    },
+    "Accompagné": {
+      "ar": "بمرافقة مرشد",
+      "es": "Con guía"
+    },
+    "Que comprend la sortie ?": {
+      "ar": "ماذا تشمل الرحلة؟",
+      "es": "¿Qué incluye la salida?"
+    },
+    "Rendez-vous au lieu convenu": {
+      "ar": "اللقاء في المكان المتفق عليه",
+      "es": "Encuentro en el lugar acordado"
+    },
+    "Équipement, briefing et test pratique": {
+      "ar": "المعدات وإرشادات السلامة وتجربة عملية",
+      "es": "Equipo, instrucciones y prueba práctica"
+    },
+    "Transfert 4×4 vers Amougr": {
+      "ar": "نقل بسيارة رباعية الدفع إلى أموگر",
+      "es": "Traslado en 4×4 a Amougr"
+    },
+    "Descente avec pauses, photos et baignade selon conditions": {
+      "ar": "نزول مع توقفات وتصوير وسباحة إذا سمحت الظروف",
+      "es": "Descenso con paradas, fotos y baño si las condiciones lo permiten"
+    },
+    "Retour depuis le Pont de Tilouguite": {
+      "ar": "العودة من قنطرة تيلوكيت",
+      "es": "Regreso desde el puente de Tilouguite"
+    },
+    "Prix du parcours": {
+      "ar": "سعر المسار",
+      "es": "Precio del recorrido"
+    },
+    "Choisir ce parcours": {
+      "ar": "اختر هذا المسار",
+      "es": "Elegir este recorrido"
+    },
+    "AVENTURE": {
+      "ar": "مغامرة",
+      "es": "AVENTURA"
+    },
+    "PARCOURS 02 · OUED MELLOUL": {
+      "ar": "المسار 02 · وادي ملول",
+      "es": "RUTA 02 · RÍO MELLOUL"
+    },
+    "Du Pont Isgli": {
+      "ar": "من قنطرة إسگلي",
+      "es": "Desde el puente Isgli"
+    },
+    "Une descente plus longue, avec la traversée des paysages impressionnants des gorges de l'Oued Melloul.": {
+      "ar": "رحلة أطول تمر عبر مشاهد مضايق وادي ملول المذهلة.",
+      "es": "Un descenso más largo entre los imponentes paisajes de las gargantas del río Melloul."
+    },
+    "Gorges du Melloul": {
+      "ar": "مضايق ملول",
+      "es": "Gargantas del Melloul"
+    },
+    "Transfert jusqu'au Pont Isgli": {
+      "ar": "النقل إلى قنطرة إسگلي",
+      "es": "Traslado hasta el puente Isgli"
+    },
+    "Matériel, briefing et test pratique": {
+      "ar": "المعدات والتوجيهات وتجربة عملية",
+      "es": "Equipo, instrucciones y prueba práctica"
+    },
+    "Descente par les gorges du Melloul": {
+      "ar": "نزول عبر مضايق وادي ملول",
+      "es": "Descenso por las gargantas del Melloul"
+    },
+    "Arrivée à Tilouguite et retour": {
+      "ar": "الوصول إلى تيلوكيت والعودة",
+      "es": "Llegada a Tilouguite y regreso"
+    },
+    "EXPÉDITION": {
+      "ar": "رحلة استكشافية",
+      "es": "EXPEDICIÓN"
+    },
+    "PARCOURS 03 · 2 JOURS": {
+      "ar": "المسار 03 · يومان",
+      "es": "RUTA 03 · 2 DÍAS"
+    },
+    "La grande": {
+      "ar": "الرحلة",
+      "es": "La gran"
+    },
+    "expédition": {
+      "ar": "الكبرى",
+      "es": "expedición"
+    },
+    "Deux jours entre rivière, bivouac mobile, repas traditionnels et découverte du patrimoine amazigh.": {
+      "ar": "يومان بين النهر والتخييم المتنقل والوجبات التقليدية والتعرف على التراث الأمازيغي.",
+      "es": "Dos días de río, vivac itinerante, comidas tradicionales y descubrimiento del patrimonio amazige."
+    },
+    "↝ Environ 50 km": {
+      "ar": "نحو 50 كلم",
+      "es": "Unos 50 km"
+    },
+    "2 jours": {
+      "ar": "يومان",
+      "es": "2 días"
+    },
+    "Bivouac": {
+      "ar": "مبيت في الطبيعة",
+      "es": "Vivac"
+    },
+    "Voir les deux destinations": {
+      "ar": "اكتشف الوجهتين",
+      "es": "Ver los dos destinos"
+    },
+    "Pont Sidi Youssef : 2 500 DH / personne": {
+      "ar": "قنطرة سيدي يوسف: 2500 درهم للشخص",
+      "es": "Puente Sidi Youssef: 2.500 MAD/persona"
+    },
+    "Bin El Ouidane : 3 000 DH / personne": {
+      "ar": "بين الويدان: 3000 درهم للشخص",
+      "es": "Bin El Ouidane: 3.000 MAD/persona"
+    },
+    "Repas, bivouac et découvertes selon le programme": {
+      "ar": "الوجبات والمبيت والاكتشاف حسب البرنامج",
+      "es": "Comidas, vivac y visitas según el programa"
+    },
+    "À partir de": {
+      "ar": "ابتداءً من",
+      "es": "Desde"
+    },
+    "Découvrir l'expédition": {
+      "ar": "اكتشف الرحلة",
+      "es": "Descubrir la expedición"
+    },
+    "ÉMOTIONS SUR L’EAU": {
+      "ar": "مشاعر لا تُنسى على الماء",
+      "es": "EMOCIONES EN EL AGUA"
+    },
+    "Et soudain,": {
+      "ar": "وفجأة،",
+      "es": "Y de repente,"
+    },
+    "tout devient vivant.": {
+      "ar": "تنبض المغامرة بالحياة.",
+      "es": "todo cobra vida."
+    },
+    "Un instant dans les rapides, le suivant face à un paysage silencieux : chaque descente a son caractère.": {
+      "ar": "لحظة بين المياه السريعة وأخرى أمام منظر هادئ؛ لكل رحلة على النهر طابعها الخاص.",
+      "es": "Un momento entre rápidos y, al siguiente, frente a un paisaje silencioso: cada descenso tiene su carácter."
+    },
+    "L'EXPÉRIENCE SIGNATURE": {
+      "ar": "تجربتنا المميزة",
+      "es": "NUESTRA EXPERIENCIA ESPECIAL"
+    },
+    "Deux jours.": {
+      "ar": "يومان.",
+      "es": "Dos días."
+    },
+    "Mille souvenirs.": {
+      "ar": "وذكريات لا تُحصى.",
+      "es": "Mil recuerdos."
+    },
+    "Une véritable immersion le long de l'Oued Ahansal, avec une nuit en bivouac, des repas locaux et des rencontres avec le patrimoine de la région.": {
+      "ar": "رحلة غامرة على وادي أحنصال تشمل ليلة في المخيم ووجبات محلية واكتشاف جانب من تراث المنطقة.",
+      "es": "Una inmersión en el Ahansal con una noche de vivac, comidas locales y encuentros con el patrimonio de la región."
+    },
+    "Deux possibilités de fin de parcours : au Pont Sidi Youssef ou en poursuivant jusqu'au lac de Bin El Ouidane.": {
+      "ar": "نهايتان ممكنتان للمسار: قنطرة سيدي يوسف أو مواصلة الرحلة إلى بحيرة بين الويدان.",
+      "es": "Dos finales posibles: en el puente Sidi Youssef o continuando hasta el lago Bin El Ouidane."
+    },
+    "Jour 01 — En route vers l'aventure": {
+      "ar": "اليوم الأول — انطلاق المغامرة",
+      "es": "Día 1 — Comienza la aventura"
+    },
+    "Accueil, transfert 4×4, équipement et briefing": {
+      "ar": "استقبال ونقل بسيارة رباعية الدفع وتجهيزات وإرشادات",
+      "es": "Recepción, traslado en 4×4, equipo e instrucciones"
+    },
+    "Descente de rafting depuis Amougr": {
+      "ar": "التجديف انطلاقاً من أموگر",
+      "es": "Descenso de rafting desde Amougr"
+    },
+    "Déjeuner et temps de repos à Ighrman": {
+      "ar": "غداء واستراحة في إغرمَن",
+      "es": "Almuerzo y descanso en Ighrman"
+    },
+    "Découverte d'Aït Hssine et visite d'une huilerie traditionnelle": {
+      "ar": "زيارة آيت حسين ومعصرة زيت تقليدية",
+      "es": "Visita a Aït Hssine y a una almazara tradicional"
+    },
+    "Dîner, feu de camp et nuit en bivouac": {
+      "ar": "عشاء وأمسية قرب النار ومبيت في المخيم",
+      "es": "Cena, fogata y noche de vivac"
+    },
+    "Jour 02 — Au cœur des gorges": {
+      "ar": "اليوم الثاني — في قلب المضايق",
+      "es": "Día 2 — En el corazón de las gargantas"
+    },
+    "Petit-déjeuner et nouvelle mise à l'eau": {
+      "ar": "فطور والعودة إلى النهر",
+      "es": "Desayuno y nueva entrada al agua"
+    },
+    "Navigation en direction du Pont Sidi Youssef": {
+      "ar": "التجديف نحو قنطرة سيدي يوسف",
+      "es": "Navegación hacia el puente Sidi Youssef"
+    },
+    "Fin de l'expédition ou prolongation vers Bin El Ouidane": {
+      "ar": "نهاية الرحلة أو مواصلتها إلى بين الويدان",
+      "es": "Fin de la expedición o continuación hasta Bin El Ouidane"
+    },
+    "Dans l'option lac : bateau, déjeuner et retour": {
+      "ar": "في خيار البحيرة: قارب وغداء وعودة",
+      "es": "En la opción del lago: barco, almuerzo y regreso"
+    },
+    "OPTION A · SIDI YOUSSEF": {
+      "ar": "الخيار أ · سيدي يوسف",
+      "es": "OPCIÓN A · SIDI YOUSSEF"
+    },
+    "Par personne · Fin au pont et retour en 4×4": {
+      "ar": "للشخص · النهاية عند القنطرة والعودة بسيارة رباعية الدفع",
+      "es": "Por persona · Fin en el puente y regreso en 4×4"
+    },
+    "OPTION B · BIN EL OUIDANE": {
+      "ar": "الخيار ب · بين الويدان",
+      "es": "OPCIÓN B · BIN EL OUIDANE"
+    },
+    "Par personne · Lac, bateau et déjeuner inclus": {
+      "ar": "للشخص · يشمل البحيرة والقارب والغداء",
+      "es": "Por persona · Lago, barco y almuerzo incluidos"
+    },
+    "Demander une date pour l'expédition ↗": {
+      "ar": "استفسر عن موعد الرحلة ↗",
+      "es": "Consultar fecha de la expedición ↗"
+    },
+    "IMAGES VÉCUES, SOUVENIRS PARTAGÉS": {
+      "ar": "صور حقيقية وذكريات مشتركة",
+      "es": "IMÁGENES REALES, RECUERDOS COMPARTIDOS"
+    },
+    "La rivière en images.": {
+      "ar": "النهر في الصور.",
+      "es": "El río en imágenes."
+    },
+    "Des moments authentiques de rafting dans la région d’Imsfrane.": {
+      "ar": "لحظات حقيقية من التجديف في منطقة مسفران.",
+      "es": "Momentos auténticos de rafting en Imsfrane."
+    },
+    "Toutes les photos de rafting repérées dans la bibliothèque du site. Touchez une photo pour la voir en entier.": {
+      "ar": "صور التجديف المتاحة في مكتبة الموقع؛ اضغط على الصورة لمشاهدتها كاملة.",
+      "es": "Todas las fotos de rafting de nuestra colección. Toca una foto para verla completa."
+    },
+    "SIMPLE DU PREMIER MESSAGE AU RETOUR": {
+      "ar": "تجربة سهلة من التواصل الأول إلى العودة",
+      "es": "FÁCIL DESDE EL PRIMER MENSAJE HASTA EL REGRESO"
+    },
+    "Votre aventure en 4 étapes.": {
+      "ar": "مغامرتك في أربع مراحل.",
+      "es": "Tu aventura en cuatro pasos."
+    },
+    "Choisissez": {
+      "ar": "اختر",
+      "es": "Elige"
+    },
+    "Sélectionnez un parcours selon l'expérience recherchée.": {
+      "ar": "اختر المسار الذي يناسب تجربتك.",
+      "es": "Selecciona la ruta que mejor se adapte a ti."
+    },
+    "Contactez-nous": {
+      "ar": "تواصل معنا",
+      "es": "Contacta con nosotros"
+    },
+    "Envoyez une date et le nombre de participants.": {
+      "ar": "أخبرنا بالتاريخ وعدد المشاركين.",
+      "es": "Indica la fecha y el número de participantes."
+    },
+    "Préparez-vous": {
+      "ar": "استعد",
+      "es": "Prepárate"
+    },
+    "Après confirmation, rendez-vous, matériel et consignes de sécurité.": {
+      "ar": "بعد التأكيد، نحدّد مكان اللقاء والتجهيزات وتعليمات السلامة.",
+      "es": "Tras la confirmación, acordamos el encuentro, el equipo y las instrucciones de seguridad."
+    },
+    "Vivez l'Atlas": {
+      "ar": "عِش تجربة الأطلس",
+      "es": "Vive el Atlas"
+    },
+    "Une descente guidée, adaptée aux conditions de la rivière.": {
+      "ar": "تجديف مع مرشد وفق ظروف النهر.",
+      "es": "Un descenso guiado y adaptado a las condiciones del río."
+    },
+    "TOUTES LES RÉPONSES": {
+      "ar": "إجابات عن أسئلتك",
+      "es": "TODAS LAS RESPUESTAS"
+    },
+    "Bon à savoir.": {
+      "ar": "معلومات مفيدة.",
+      "es": "Información útil."
+    },
+    "Quelques points essentiels avant de choisir votre parcours.": {
+      "ar": "نقاط مهمة قبل اختيار المسار.",
+      "es": "Aspectos importantes antes de elegir el recorrido."
+    },
+    "Poser une question ↗": {
+      "ar": "اطرح سؤالاً ↗",
+      "es": "Hacer una consulta ↗"
+    },
+    "Quand peut-on pratiquer le rafting ?": {
+      "ar": "متى يمكن ممارسة التجديف؟",
+      "es": "¿Cuándo se puede hacer rafting?"
+    },
+    "Habituellement de mars à juin. Selon les années et les niveaux d’eau, juillet peut aussi être possible. Les dates sont toujours confirmées individuellement.": {
+      "ar": "غالباً من مارس إلى يونيو، وقد تتاح رحلات في يوليو حسب الموسم وصبيب المياه؛ ويُؤكَّد الموعد لكل طلب على حدة.",
+      "es": "Normalmente de marzo a junio. Algunos años puede ser posible en julio según el caudal. Las fechas se confirman individualmente."
+    },
+    "Le matériel de sécurité est-il fourni ?": {
+      "ar": "هل تُوفَّر معدات السلامة؟",
+      "es": "¿Se proporciona equipo de seguridad?"
+    },
+    "Oui. L'équipe prévoit le matériel de sécurité, le briefing et un test pratique avant la descente. Il faut respecter les consignes du guide pendant toute la sortie.": {
+      "ar": "نعم، يوفّر الفريق معدات السلامة والإرشادات وتجربة عملية قبل النزول. ويجب اتباع تعليمات المرشد طوال الرحلة.",
+      "es": "Sí. El equipo incluye material de seguridad, instrucciones y una prueba práctica. Es obligatorio seguir las indicaciones del guía."
+    },
+    "Où se fait le rendez-vous ?": {
+      "ar": "أين يكون مكان اللقاء؟",
+      "es": "¿Dónde es el punto de encuentro?"
+    },
+    "Selon l'organisation : à votre hébergement, au camping ou à un autre point convenu avec l'équipe.": {
+      "ar": "بحسب التنظيم، في مكان الإقامة أو المخيم أو نقطة أخرى يُتفق عليها مع الفريق.",
+      "es": "Según el plan, en el alojamiento, en el campamento o en otro lugar acordado con el equipo."
+    },
+    "Les parcours peuvent-ils changer ?": {
+      "ar": "هل يمكن تغيير المسارات؟",
+      "es": "¿Pueden cambiar las rutas?"
+    },
+    "Oui. Pour des raisons de sécurité, le débit, la météo et les conditions sur la rivière peuvent modifier ou empêcher une sortie.": {
+      "ar": "نعم. قد تتغير الرحلة أو تُلغى بسبب الصبيب أو الطقس أو ظروف السلامة.",
+      "es": "Sí. Por seguridad, el caudal, el tiempo y el estado del río pueden modificar o impedir una salida."
+    },
+    "Comment confirmer mon départ ?": {
+      "ar": "كيف أؤكد موعد رحلتي؟",
+      "es": "¿Cómo confirmo mi salida?"
+    },
+    "Envoyez votre parcours, la date souhaitée et le nombre de personnes. Nous vérifions les conditions puis vous confirmons si la sortie est possible.": {
+      "ar": "أرسل المسار والتاريخ وعدد المشاركين؛ نتحقق من الظروف ثم نؤكد إمكانية الرحلة.",
+      "es": "Indícanos la ruta, la fecha y el número de personas. Comprobamos las condiciones y confirmamos si la salida es posible."
+    },
+    "VOTRE AVENTURE COMMENCE ICI": {
+      "ar": "مغامرتك تبدأ هنا",
+      "es": "TU AVENTURA EMPIEZA AQUÍ"
+    },
+    "Prêt à rejoindre": {
+      "ar": "هل أنت مستعد لخوض",
+      "es": "¿Listo para"
+    },
+    "la rivière ?": {
+      "ar": "مغامرة النهر؟",
+      "es": "entrar en el río?"
+    },
+    "Choisissez une expérience et proposez une date. Nous vous répondrons personnellement pour confirmer la faisabilité et les informations de départ.": {
+      "ar": "اختر التجربة وأرسل موعداً مقترحاً؛ وسنرد عليك لتأكيد الإمكانية وتفاصيل الانطلاق.",
+      "es": "Elige una experiencia y propón una fecha. Te responderemos personalmente para confirmar la disponibilidad y los detalles."
+    },
+    "Contact direct avec notre équipe locale": {
+      "ar": "تواصل مباشر مع فريقنا المحلي",
+      "es": "Contacto directo con nuestro equipo local"
+    },
+    "Vérification des niveaux d’eau et de la météo": {
+      "ar": "التحقق من صبيب المياه والطقس",
+      "es": "Comprobación del caudal y del tiempo"
+    }
+  },
   "vtt": {
     "Vivez": {
       "ar": "عِش",
