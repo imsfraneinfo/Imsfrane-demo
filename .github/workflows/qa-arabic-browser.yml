@@ -1,18 +1,25 @@
 name: Visual verify Arabic Demo
 on:
   workflow_dispatch:
+  workflow_run:
+    workflows: ["Publish Imsfrane demo"]
+    branches: [main]
+    types: [completed]
   push:
     branches: [main]
     paths:
       - qa_arabic_browser.py
       - qa_arabic_mobile_layout.py
+      - qa_four_languages_browser.py
       - .github/workflows/qa-arabic-browser.yml
 permissions:
   contents: read
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    # A real Chrome suite covers AR fonts, mobile RTL and four-language parity.
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - name: Prepare actual browser
@@ -23,6 +30,8 @@ jobs:
           google-chrome --version || chromium --version || true
       - name: Verify published Arabic RTL fonts in Chrome on mobile and desktop
         run: python3 qa_arabic_browser.py
+      - name: Check FR EN AR ES runtime and original layout in actual Chrome
+        run: python3 qa_four_languages_browser.py
       - name: Diagnose Arabic mobile horizontal page movement
         run: python3 qa_arabic_mobile_layout.py
       - name: Keep screenshots and text metrics
@@ -33,4 +42,5 @@ jobs:
           path: |
             arabic-browser-diagnostics/
             arabic-layout-debug/
+            four-language-browser-diagnostics/
           if-no-files-found: ignore
