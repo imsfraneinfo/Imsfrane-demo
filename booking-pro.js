@@ -75,7 +75,8 @@
     var one=Date.parse(start.value+"T00:00:00Z"),two=Date.parse(end.value+"T00:00:00Z");
     return Number.isFinite(one)&&Number.isFinite(two)&&two>one?Math.round((two-one)/86400000):1
   }
-  function price(item){return qty(item)*item.price*(item.unit==="tentNight"?days():1)}
+  function price(item){return qty(item)*item.price*(item.unit==="tentNight"?days():item.unit==="person"?travelerCount():1)}
+  function travelerCount(){return Math.max(1,Math.min(60,Number(people.value)||1))}
   function total(){return selected().reduce(function(sum,item){return sum+price(item)},0)}
   function extras(){
     return [].slice.call(element("bp-extras").querySelectorAll('input[type="checkbox"]:checked')).map(function(chk){
@@ -107,7 +108,8 @@
     selected().forEach(function(item){
       var row=line(),left=document.createElement("div");
       addText(left,"strong",item[language]);
-      var mult=qty(item)+" × "+money(item.price);
+      var mult=(item.unit==="person"?travelerCount():qty(item))+" × "+money(item.price);
+      if(item.unit==="person" && qty(item)>1)mult+=" × "+qty(item);
       if(item.unit==="tentNight")mult+=" × "+days()+" "+(days()===1?words.night:words.nights);
       addText(left,"small",mult);
       row.appendChild(left);
@@ -127,12 +129,29 @@
     if(!offer)return;
     var number=amounts[id],buttons=offer.querySelectorAll("button[data-delta]");
     offer.dataset.selected=number>0?"true":"false";
-    offer.querySelector("output").textContent=String(number);
+    var check=offer.querySelector(".bp-choice");
+    if(check)check.checked=number>0;
+    var out=offer.querySelector("output");
+    if(out)out.textContent=String(number);
     buttons.forEach(function(button){
       var delta=Number(button.dataset.delta);
       button.disabled=delta<0?number<=0:number>=(offerMap[id].unit==="group"?10:30)
     })
   }
+  function refreshPeople(){
+    [].slice.call(root.querySelectorAll(".bp-count-auto strong")).forEach(function(label){label.textContent=String(travelerCount())});
+    element("bp-people-minus").disabled=travelerCount()<=1;
+    element("bp-people-plus").disabled=travelerCount()>=60;
+    showSummary()
+  }
+  root.querySelector("#bp-offers").addEventListener("change",function(event){
+    var checkbox=event.target.closest("input.bp-choice[data-offer]");
+    if(!checkbox)return;
+    var id=checkbox.dataset.offer;
+    amounts[id]=checkbox.checked?Math.max(1,amounts[id]):0;
+    renderQty(id);
+    showSummary()
+  });
   root.querySelector("#bp-offers").addEventListener("click",function(event){
     var button=event.target.closest("button[data-offer]");
     if(!button)return;
@@ -150,9 +169,19 @@
     filters.forEach(function(button){button.setAttribute("aria-pressed",String(button===clicked))});
     cards.forEach(function(card){card.hidden=cat!=="all"&&card.dataset.category!==cat})
   });
-  [start,end,people].forEach(function(input){
+  [start,end].forEach(function(input){
     input.addEventListener("change",showSummary);
     input.addEventListener("input",showSummary)
+  });
+  people.addEventListener("input",refreshPeople);
+  people.addEventListener("change",refreshPeople);
+  element("bp-people-minus").addEventListener("click",function(){
+    people.value=String(Math.max(1,travelerCount()-1));
+    refreshPeople()
+  });
+  element("bp-people-plus").addEventListener("click",function(){
+    people.value=String(Math.min(60,travelerCount()+1));
+    refreshPeople()
   });
   element("bp-extras").addEventListener("change",showSummary);
   function fail(message,control){
@@ -197,7 +226,7 @@
     if(selected().length){
       lines.push("","*"+words.selection+"*");
       selected().forEach(function(item){
-        var caption=qty(item)+" × "+item[language];
+        var caption=(item.unit==="person"?travelerCount():qty(item))+" × "+item[language];
         if(item.unit==="tentNight")caption+=" × "+days()+" "+words.nights;
         lines.push("- "+caption+" — "+money(price(item)))
       })
@@ -222,5 +251,5 @@
       navigator.clipboard.writeText(output).then(function(){button.textContent=words.copied},function(){button.textContent=words.copyError})
     }else{button.textContent=words.copyError}
   });
-  showSummary();
+  refreshPeople();
 })();
