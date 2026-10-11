@@ -59,13 +59,14 @@ with webdriver.Chrome(options=opts) as driver:
                     Promise.all([
                       d.fonts.load('700 32px "Imsfrane Alexandria"','مسفران'),
                       d.fonts.load('400 17px "Imsfrane Tajawal"','المغامرة')
-                    ]).then(()=> {
+                    ]).then(faces=> {
                       let h=d.querySelector('h1'),p=d.querySelector('p');
                       done({lang:d.documentElement.lang,dir:d.documentElement.dir,
                         titleFont:getComputedStyle(h).fontFamily,
                         titleAlign:getComputedStyle(h).textAlign,
                         titleDirection:getComputedStyle(h).direction,
                         pFont:p?getComputedStyle(p).fontFamily:'',
+                        realFaces:faces.map(group=>group.map(f=>({family:f.family,status:f.status}))),
                         realFontTitle:d.fonts.check('700 32px "Imsfrane Alexandria"','مسفران'),
                         realFontText:d.fonts.check('400 17px "Imsfrane Tajawal"','المغامرة'),
                         badgeText:d.querySelector('.hero-badge b')?.textContent.trim(),
@@ -84,6 +85,10 @@ with webdriver.Chrome(options=opts) as driver:
                     raise AssertionError("Arabic rafting iframe is not AR/RTL")
                 if not child["realFontTitle"] or not child["realFontText"]:
                     raise AssertionError("Arabic rafting iframe fonts are not decoded")
+                real_faces = child.get("realFaces", [])
+                if (len(real_faces) != 2 or
+                    any(not group or not all(f.get("status") == "loaded" for f in group) for group in real_faces)):
+                    raise AssertionError("Rafting iframe font face download returned fallback/empty: " + str(real_faces))
                 if "Imsfrane Alexandria" not in child["titleFont"] or child["titleDirection"]!="rtl":
                     raise AssertionError("Rafting Arabic title font and direction not applied")
                 for key in ("badgeFont","priceFont","heroPriceFont","expeditionPriceFont"):
@@ -163,6 +168,13 @@ with webdriver.Chrome(options=opts) as driver:
                 raise AssertionError("Arabic document direction missing")
             if not metrics["loadedTitle"] or not metrics["loadedBody"] or isinstance(loaded,dict):
                 raise AssertionError("Arabic font failed to load in browser")
+            # FontFaceSet.check() alone can return true for a *missing* family.
+            # document.fonts.load() must return actual decoded/loaded FontFace objects.
+            if (not isinstance(loaded, list) or len(loaded) != 2 or
+                any(not isinstance(group, list) or not group or
+                    not all(face.get("status") == "loaded" for face in group)
+                    for group in loaded)):
+                raise AssertionError("Chrome displayed fallback despite declared Alexandria/Tajawal: " + str(loaded))
             h2=metrics["h2"] or metrics["h1"]
             if 'Imsfrane Alexandria' not in h2["font"]:
                 raise AssertionError("Arabic display font not actually applied")
