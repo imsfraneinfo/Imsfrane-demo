@@ -1,11 +1,50 @@
+/* Locally-hosted fonts under the SIL Open Font License.
+   Actual font files are built into /fonts/arabic on the Demo Pages origin.
+   No Google Fonts request is needed to render Arabic. */
+@font-face {
+  font-family:"Imsfrane Alexandria";
+  src:url("fonts/arabic/Alexandria-VF.woff2") format("woff2");
+  font-style:normal;
+  font-weight:400 800;
+  font-display:swap;
+}
+@font-face {
+  font-family:"Imsfrane Tajawal";
+  src:url("fonts/arabic/Tajawal-Regular.woff2") format("woff2");
+  font-style:normal;
+  font-weight:400;
+  font-display:swap;
+}
+@font-face {
+  font-family:"Imsfrane Tajawal";
+  src:url("fonts/arabic/Tajawal-Medium.woff2") format("woff2");
+  font-style:normal;
+  font-weight:500 600;
+  font-display:swap;
+}
+@font-face {
+  font-family:"Imsfrane Tajawal";
+  src:url("fonts/arabic/Tajawal-Bold.woff2") format("woff2");
+  font-style:normal;
+  font-weight:700;
+  font-display:swap;
+}
+@font-face {
+  font-family:"Imsfrane Tajawal";
+  src:url("fonts/arabic/Tajawal-ExtraBold.woff2") format("woff2");
+  font-style:normal;
+  font-weight:800 900;
+  font-display:swap;
+}
+
 /* Arabic typography — Imsfrane Demo only.
    Display: Alexandria (distinct modern Kufic geometry)
    Reading/UI: Tajawal (clear humanist Arabic)
    Font source: Google Fonts; browser/system fallback keeps content legible.
    ONLY html[lang="ar"]; French, English and Spanish remain untouched. */
 html[lang="ar"] {
-  --ar-display:"Alexandria","Tajawal",Tahoma,Arial,sans-serif;
-  --ar-text:"Tajawal","Alexandria",Tahoma,Arial,sans-serif;
+  --ar-display:"Imsfrane Alexandria","Noto Kufi Arabic","Imsfrane Tajawal",Tahoma,Arial,sans-serif;
+  --ar-text:"Imsfrane Tajawal","Noto Sans Arabic","Imsfrane Alexandria",Tahoma,Arial,sans-serif;
   font-synthesis:none;
   text-rendering:optimizeLegibility;
 }
@@ -158,4 +197,167 @@ html[lang="ar"] .sp-main :is(h1,h2,h3) {
 html[lang="ar"] :is(.hp-home,.bp-main,.gp-main,.camp-page,.journal-page)
   :is(p,li,small,summary,blockquote) {
   font-family:var(--ar-text)!important;
+}
+
+
+/* Full Arabic RTL: not just translating text. Every text region follows
+   Arabic reading flow; branded Latin words and numerical entry remain LTR. */
+html[lang="ar"] {
+  direction:rtl!important;
+}
+html[lang="ar"] body {
+  direction:rtl!important;
+  text-align:right;
+  overflow-x:clip;
+}
+html[lang="ar"] body.atnav-ready #siteHeader,
+html[lang="ar"] body.atnav-ready #siteHeader .header-inner,
+html[lang="ar"] body.atnav-ready #siteHeader .header-actions,
+html[lang="ar"] :is(main,article,section,aside,footer,nav,form,fieldset,
+  .hp-home,.bp-main,.bp-wrap,.bp-layout,.bp-offers,.bp-offer,
+  .gp-main,.journal-page,.journal-grid,.journal-card,
+  .camp-page,.camp-wrap,.camp-features,.camp-tariff-grid,
+  .atnav-drawer,.atnav-drawer-inner,.atnav-drawer nav,
+  .quad-r-main,.rando,.aboutx,.sp-main,.memories-showcase,
+  .demo-rebuilt-page) {
+  direction:rtl!important;
+}
+html[lang="ar"] :is(main,footer,.atnav-drawer)
+  :is(h1,h2,h3,h4,h5,h6,p,ul,ol,li,dt,dd,summary,blockquote,
+     .hp-kicker,.hp-eyebrow,.hp-activity-note,
+     .journal-kicker,.journal-card-body,
+     .bp-kicker,.bp-note,.atnav-label) {
+  text-align:right!important;
+  direction:rtl!important;
+}
+html[lang="ar"] :is(main,footer,.atnav-drawer)
+  :is(h1,h2,h3,h4,h5,h6,p,li,summary,blockquote) {
+  unicode-bidi:normal;
+  word-break:normal;
+  overflow-wrap:break-word;
+}
+html[lang="ar"] main :is(.hp-heading,.hp-activity-body,
+   .hp-destination-content,.hp-trust-item,.hp-program,
+   .camp-feature,.camp-detail,.camp-tariff,
+   .rando .card,.quad-r-copy,.gp-main .card,
+   .journal-card-body,.journal-featured-copy,
+   .sp-main .card,.bp-hero-copy,.bp-offer,
+   .ij-content,.article-body,.memories-intro) {
+  direction:rtl!important;
+  text-align:right!important;
+}
+html[lang="ar"] .hp-home :is(.hp-section-row,.hp-heading,
+    .hp-activity-body,.hp-programs,.hp-explore,.hp-trust,.hp-memories) {
+  direction:rtl!important;
+}
+html[lang="ar"] .hp-home .hp-hero-content {
+  direction:rtl!important;
+  text-align:right!important;
+}
+html[lang="ar"] .hp-home .hp-hero-buttons,
+html[lang="ar"] .camp-buttons,
+html[lang="ar"] .quad-r-acts,
+html[lang="ar"] .hp-final-buttons {
+  direction:rtl!important;
+}
+html[lang="ar"] :is(.bp-field,.bp-section,.bp-offer,.bp-offer-actions,
+  .bp-section-heading,.bp-summary,.bp-recap,.bp-travelers-box,
+  .journal-search,.journal-controls,.journal-filters,.sp-controls,
+  .footer-column) {
+  direction:rtl!important;
+  text-align:right!important;
+}
+html[lang="ar"] :is(label,select,textarea,input:not([type="number"]):not([type="tel"]):not([type="email"]):not([type="date"])) {
+  direction:rtl!important;
+  text-align:right!important;
+}
+html[lang="ar"] input:is([type="number"],[type="tel"],[type="email"],[type="date"]) {
+  direction:ltr!important;
+  text-align:left!important;
+  unicode-bidi:isolate;
+}
+/* Arabic navigation starts at the RIGHT with gold icons beside titles. */
+html[lang="ar"] body.atnav-ready .atnav-drawer {
+  right:0!important;
+  left:auto!important;
+  text-align:right!important;
+}
+html[lang="ar"] body.atnav-ready .atnav-drawer
+  :is(.atnav-item,.atnav-submenu a,.atnav-drawer-top,.atnav-drawer-brand,
+      .atnav-intro,.atnav-actions) {
+  direction:rtl!important;
+  text-align:right!important;
+}
+html[lang="ar"] body.atnav-ready .atnav-drawer .atnav-item-icon,
+html[lang="ar"] body.atnav-ready .atnav-drawer .atnav-subicon {
+  margin-left:0;
+  margin-right:0;
+}
+html[lang="ar"] body.atnav-ready .atnav-drawer .atnav-chevron {
+  margin-left:0!important;
+  margin-right:auto!important;
+}
+html[lang="ar"] body.atnav-ready .atnav-drawer .atnav-languages {
+  direction:rtl!important;
+}
+/* Keep the single language control stable: FR/EN/AR/ES codes
+   are Latin abbreviations and should not be reversed. */
+html[lang="ar"] body.atnav-ready .atnav-langmini,
+html[lang="ar"] body.atnav-ready .atnav-langmini-trigger,
+html[lang="ar"] body.atnav-ready .atnav-langmini-panel {
+  direction:ltr!important;
+}
+html[lang="ar"] body.atnav-ready .atnav-langmini-panel a {
+  direction:ltr!important;
+  text-align:left!important;
+}
+html[lang="ar"] body.atnav-ready .atnav-langmini-panel a[lang="ar"] span:last-child {
+  direction:rtl!important;
+  unicode-bidi:isolate;
+}
+html[lang="ar"] :is(.brand-content,.atnav-drawer-brand) {
+  direction:ltr!important;
+}
+html[lang="ar"] :is(.brand-content strong,.atnav-drawer-brand strong,
+    .atnav-article-brand,.footer-brand strong) {
+  direction:ltr!important;
+  unicode-bidi:isolate;
+}
+html[lang="ar"] :is(.hp-google-score,.hp-google-rating,
+   .hp-hero-altitude,.hp-facts-inner,
+   .journal-card-meta,.bp-offer-price,
+   .sp-price,.hp-activity-bottom strong) {
+  unicode-bidi:isolate;
+}
+/* Keep intentionally centered rating totals, badges and CTA while
+   the body copy and headings flow from the right. */
+html[lang="ar"] :is(.hp-google-score,.hp-google-stars,
+   .hp-hero-altitude,.hp-facts-inner,.atnav-mark,
+   .hp-slide-dots,.bp-quantity) {
+  text-align:center;
+}
+html[lang="ar"] .atnav-open svg,
+html[lang="ar"] .atnav-close svg,
+html[lang="ar"] .hp-slider-controls svg {
+  transform:none;
+}
+html[lang="ar"] main :is(.fa-arrow-right,.fa-chevron-right) {
+  transform:scaleX(-1);
+}
+@media(max-width:670px) {
+  html[lang="ar"] body.atnav-ready #siteHeader .header-inner {
+    direction:rtl!important;
+  }
+  html[lang="ar"] :is(.hp-home,.gp-main,.bp-main,.journal-page,.camp-page)
+    :is(h1,h2,h3,p) {
+    text-align:right!important;
+    max-width:100%;
+  }
+  html[lang="ar"] main :is(.bp-layout,.hp-activity-grid,
+    .journal-grid,.camp-tariff-grid) > * {
+    min-width:0;
+  }
+  html[lang="ar"] .atnav-drawer-inner {
+    padding-inline:22px!important;
+  }
 }
