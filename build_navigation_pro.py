@@ -238,7 +238,7 @@ def patch(path, lang, root):
         body_match=re.search(r'<body\b[^>]*>',source,flags=re.I)
         if body_match is None:
             raise RuntimeError(f"Article body tag missing: {path}")
-        insertion=sprite()+article_header(lang,logo_prefix)+nav(lang,current,alt_name,logo_prefix)
+        insertion=sprite()+article_header(lang,logo_prefix)+nav(lang,current,root,logo_prefix)
         source=source[:body_match.end()]+insertion+source[body_match.end():]
     class_body=re.search(r'<body\b[^>]*\bclass="([^"]*)"',source,flags=re.I)
     if class_body:
