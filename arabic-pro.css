@@ -373,8 +373,6 @@ html[lang="ar"] main :is(.fa-arrow-right,.fa-chevron-right) {
 html[lang="ar"] body.atnav-ready .atnav-langmini .atnav-langmini-panel {
   left:0!important;
   right:auto!important;
-  inset-inline-start:auto!important;
-  inset-inline-end:auto!important;
   transform:none!important;
   max-width:min(202px,calc(100vw - 16px));
   overflow-x:hidden;
