@@ -101,3 +101,44 @@
 
 /* Author CSS display rules must not override native hidden attributes. */
 #imsfrane-booking [hidden]{display:none!important}
+
+/* Booking v2 — entirely text-based; activity checkmarks and automatic group pricing. */
+body.page-booking .brand-logo{display:none!important}
+#imsfrane-booking .bp-hero{display:block;min-height:0;background:radial-gradient(ellipse at 85% 15%,#426b4f 0%,transparent 38%),linear-gradient(128deg,#102e29,#17483b 70%,#23533e)}
+#imsfrane-booking .bp-hero-copy{max-width:1180px;margin:0 auto;padding:clamp(48px,7vw,94px) 24px}
+#imsfrane-booking .bp-hero p{max-width:760px}
+#imsfrane-booking .bp-hero-photo{display:none!important}
+#imsfrane-booking .bp-travelers-box{display:grid;grid-template-columns:auto auto minmax(0,1fr);align-items:center;gap:15px 22px;background:#eaf1e8;border:1px solid #bfd1be;border-radius:13px;padding:19px 22px;margin:21px 0 23px}
+#imsfrane-booking .bp-travelers-box>label{font-weight:850;font-size:16px;color:#183e35}
+#imsfrane-booking .bp-travelers-box>label span{color:#9c6d29}
+#imsfrane-booking .bp-travelers-box>p{font-size:12px;color:#54705e;line-height:1.55;margin:0}
+#imsfrane-booking .bp-travelers-control{display:flex;align-items:center;border:1px solid #bdcfc0;background:white;border-radius:9px;overflow:hidden;width:max-content;max-width:100%}
+#imsfrane-booking .bp-travelers-control button{background:#f8fbf6;border:0;color:#1b5945;font-weight:800;font-size:24px;width:42px;height:44px;line-height:1}
+#imsfrane-booking .bp-travelers-control button:disabled{opacity:.35;cursor:default}
+#imsfrane-booking .bp-travelers-control input{border:0;border-inline:1px solid #d8e5d8;background:#fff;color:#133d31;font-size:18px;font-weight:800;width:72px;text-align:center;height:44px;min-width:0;padding:0 5px;appearance:textfield;-moz-appearance:textfield}
+#imsfrane-booking .bp-travelers-control input::-webkit-inner-spin-button,#imsfrane-booking .bp-travelers-control input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+#imsfrane-booking .bp-select-activity{display:flex;align-items:center;gap:8px;cursor:pointer;min-width:0;padding:3px 4px 3px 0}
+#imsfrane-booking .bp-select-activity .bp-choice{appearance:none;-webkit-appearance:none;position:relative;display:inline-grid;place-items:center;flex:0 0 27px;width:27px;height:27px;border:2px solid #9fb6a5;background:white;border-radius:7px;cursor:pointer;margin:0}
+#imsfrane-booking .bp-select-activity .bp-choice:checked{border-color:#164f3e;background:#164f3e}
+#imsfrane-booking .bp-select-activity .bp-choice:checked:after{content:"×";font-family:Arial,sans-serif;color:white;font-size:26px;line-height:22px;font-weight:800;position:absolute;top:0;left:4px}
+#imsfrane-booking .bp-select-activity .bp-choice:focus-visible{outline:3px solid #c7a450;outline-offset:3px}
+#imsfrane-booking .bp-select-label{font-size:13px;font-weight:800;color:#276248}
+#imsfrane-booking .bp-offer[data-selected="true"] .bp-select-label{color:#12492e}
+#imsfrane-booking .bp-offer .bp-unit{font-size:10px;text-align:right}
+#imsfrane-booking .bp-offer .bp-count-auto{display:inline-block;padding:8px 12px;border-radius:100px;background:#edf5eb;color:#23523e;font-size:13px;white-space:nowrap;font-weight:700}
+#imsfrane-booking .bp-count-auto strong{font-variant-numeric:tabular-nums}
+#imsfrane-booking .bp-offer .bp-quantity-control{display:flex;align-items:center;justify-content:flex-end}
+#imsfrane-booking .bp-offer .bp-icon{display:none!important}
+#imsfrane-booking .bp-offer .bp-price-row{align-items:center}
+#imsfrane-booking .bp-offer h3{margin-top:16px}
+#imsfrane-booking .bp-offer[data-selected="true"]{background:#fbfdf9;border-color:#719f80}
+@media(max-width:1010px){#imsfrane-booking .bp-travelers-box{grid-template-columns:1fr auto}#imsfrane-booking .bp-travelers-box>p{grid-column:1/-1}}
+@media(max-width:610px){
+  #imsfrane-booking .bp-hero-copy{padding:38px 22px}
+  #imsfrane-booking .bp-travelers-box{grid-template-columns:1fr;gap:9px;padding:17px}
+  #imsfrane-booking .bp-travelers-box>p{grid-column:1}
+  #imsfrane-booking .bp-travelers-control{width:100%;justify-content:space-between}
+  #imsfrane-booking .bp-travelers-control input{flex:1}
+  #imsfrane-booking .bp-travelers-control button{width:58px}
+  #imsfrane-booking .bp-offer .bp-select-label{font-size:14px}
+}
