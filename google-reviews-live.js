@@ -21,6 +21,30 @@
   const key = (window.IMSFRANE_GOOGLE_MAPS_KEY || "").trim();
   const placeId = section.getAttribute("data-google-place-id");
   if (countNode) countNode.textContent = tx.fallback;
+  // Troubleshooting visible only when opened with ?reviews-debug=1. Never reveal key.
+  const debug = new URLSearchParams(location.search).has("reviews-debug");
+  let debugNode;
+  function diagnostic(message) {
+    if (!debug) return;
+    if (!debugNode) {
+      debugNode = document.createElement("p");
+      debugNode.className = "hp-reviews-debug";
+      debugNode.setAttribute("role", "status");
+      debugNode.style.cssText = "grid-column:1/-1;font:600 12px/1.6 sans-serif;color:#325341;padding:10px 13px;border:1px solid #cddfd0;border-radius:8px;background:#f5faf5;margin:0";
+      (section.querySelector(".hp-reviews-inner") || section).appendChild(debugNode);
+    }
+    debugNode.textContent = "Google Reviews Diagnostic: " + message;
+  }
+  function errorCode(error) {
+    const e = String((error && error.message) || error || "");
+    if (/BillingNotEnabled|billing/i.test(e)) return "BILLING_NOT_ENABLED";
+    if (/RefererNotAllowed|referrer|referer/i.test(e)) return "WEBSITE_RESTRICTION";
+    if (/ApiTargetBlocked|not.*allowed|api.?restriction/i.test(e)) return "API_KEY_RESTRICTION";
+    if (/ApiNotActivated|not.?enabled/i.test(e)) return "API_NOT_ENABLED";
+    if (/InvalidKey|ExpiredKey|invalid.?api.?key/i.test(e)) return "INVALID_API_KEY";
+    if (/quota|RESOURCE_EXHAUSTED|OVER_QUERY_LIMIT/i.test(e)) return "QUOTA_EXCEEDED";
+    return "GOOGLE_PLACE_REQUEST_FAILED";
+  }
 
   function safeUrl(value) {
     try {
@@ -44,6 +68,7 @@
     return el;
   }
   function show(place) {
+    diagnostic("SUCCESS: Google returned rating and reviews.");
     const rating = Number(place.rating);
     const count = Number(place.userRatingCount);
     const maps = safeUrl(place.googleMapsURI);
@@ -94,7 +119,14 @@
     reviewList.replaceChildren(...cards);
     reviewList.hidden = false;
   }
-  if (!key || !placeId) return;
+  if (!key || !placeId) {
+    diagnostic(!key ? "API_KEY_MISSING_IN_DEMO_DEPLOYMENT" : "PLACE_ID_MISSING");
+    return;
+  }
+  diagnostic("LOADING_GOOGLE_MAPS");
+  window.gm_authFailure = function () {
+    diagnostic("GOOGLE_MAPS_AUTH_FAILED: Check Billing, key restrictions and enabled APIs.");
+  };
   const callback = "imsfraneReviewsInit";
   window[callback] = async function () {
     try {
@@ -103,7 +135,8 @@
       await place.fetchFields({fields:["displayName","rating","userRatingCount","reviews","googleMapsURI"]});
       show(place);
     } catch (e) {
-      console.warn("Google Maps live reviews unavailable; the official listing link remains available.");
+      diagnostic(errorCode(e));
+      console.warn("Google Maps live reviews unavailable; official listing link remains available.");
     } finally {
       try { delete window[callback]; } catch (e) {}
     }
@@ -113,6 +146,9 @@
   loader.src = "https://maps.googleapis.com/maps/api/js?key=" +
     encodeURIComponent(key) + "&v=weekly&libraries=places&loading=async&callback=" + callback +
     "&language=" + encodeURIComponent(lang);
-  loader.onerror = function () { delete window[callback]; };
+  loader.onerror = function () {
+    diagnostic("GOOGLE_MAPS_SCRIPT_BLOCKED: Check connectivity or browser blockers.");
+    try { delete window[callback]; } catch (e) {}
+  };
   document.head.appendChild(loader);
 })();
