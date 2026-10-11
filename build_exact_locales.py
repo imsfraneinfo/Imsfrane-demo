@@ -189,8 +189,15 @@ def wrap_meta(doc,lang,file,page):
         for link in list(head.select('link[rel="canonical"], link[hreflang]')):link.decompose()
         lk=doc.new_tag("link",rel="canonical",href=BASE+lang+"/"+file)
         head.append(lk)
+        equivalent={
+            "blog-d-couvrir-le-jebel-imsfrane-au-c-ur-de-l-atlas.html":{
+                "en":"blog-discover-jebel-imsfrane-in-the-heart-of-the-atlas-mountains.html"},
+            "blog-discover-jebel-imsfrane-in-the-heart-of-the-atlas-mountains.html":{
+                "fr":"blog-d-couvrir-le-jebel-imsfrane-au-c-ur-de-l-atlas.html"},
+        }
         for code in ("fr","en","ar","es"):
-            alt=doc.new_tag("link",rel="alternate",hreflang=code,href=BASE+code+"/"+file)
+            target=equivalent.get(file,{}).get(code,file)
+            alt=doc.new_tag("link",rel="alternate",hreflang=code,href=BASE+code+"/"+target)
             head.append(alt)
 
 def build_rafting_embeds(root):
