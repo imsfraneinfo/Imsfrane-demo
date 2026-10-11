@@ -49,7 +49,7 @@ def build(root):
             if not image_file.is_file():
                 raise RuntimeError('Missing article photo for '+topic['slug']+': '+str(image_file))
             # Keep smaller files for cards but use the original full-resolution photo in the hero.
-            high_res_name=re.sub(r'-(?:480|680|768|800|1024|1200)(?=\\.[^.]+$)','',image.split('/')[-1])
+            high_res_name=re.sub(r'-(?:480|680|768|800|1024|1200)(?=\.[^.]+$)','',image.split('/')[-1])
             high_res_file=root/'images'/high_res_name
             hero_image='../images/'+high_res_name if high_res_file.is_file() else image
             lead=desc
