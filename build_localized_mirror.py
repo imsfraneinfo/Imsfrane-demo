@@ -159,7 +159,53 @@ def homepage_main(root,lang):
     if len(main.select(".hp-slide"))!=5 or len(main.select(".hp-activity-card"))!=14:raise RuntimeError("Original premium visuals missing")
     return str(main)
 
-def subpage_main(lang,page):
+
+def native_memories(source,lang):
+    """Keep ALL original photo-grid markup and image positions, only edit wording."""
+    d=BeautifulSoup(source,"html.parser")
+    main=d.select_one("main.memories-showcase")
+    if main is None:raise RuntimeError("Original full memories gallery missing")
+    old_count=len(main.select(".memory-tile img"))
+    if old_count<40:raise RuntimeError("Not all original memories photos found")
+    p=PAGES["memories"][lang];w=W[lang]
+    opt(main,".memories-intro h1",p["title"])
+    opt(main,".memories-intro p",p["lead"])
+    opt(main,".memories-intro .memories-scroll",w["viewPhotos"]+" ↓")
+    heads=main.select(".memories-heading")
+    if heads:
+        opt(heads[0],"h2","أحدث الصور" if lang=="ar" else "Últimas fotografías")
+        opt(heads[0],"p","مشاهد جديدة من مغامراتنا في مسفران." if lang=="ar" else "Imágenes recientes de nuestras aventuras en el Atlas.")
+    if len(heads)>1:
+        opt(heads[1],"h2","أرشيف الصور والذكريات" if lang=="ar" else "Archivo de recuerdos")
+        opt(heads[1],"p","لقطات من رحلات سابقة في منطقة مسفران." if lang=="ar" else "Una selección de imágenes de viajes anteriores a Imsfrane.")
+    for im in main.select(".memory-tile img"):
+        im["alt"]=("ذكرى مصورة من مسفران" if lang=="ar" else "Recuerdos de Imsfrane") + " · " + im.get("alt","").split("—")[-1].strip()
+    if len(main.select(".memory-tile img"))!=old_count:
+        raise RuntimeError("Memories photographs were lost during translation")
+    return str(main)
+
+def add_original_photos(original,html,lang,page):
+    """Re-use the original detailed photo collection on new-language pages."""
+    if page not in {"camping","randonnee","vtt","quad","hebergement","programme","about"}:
+        return html
+    doc=BeautifulSoup(original,"html.parser")
+    source=doc.select_one("main")
+    if source is None:return html
+    images=[]
+    for img in source.select("img[src]"):
+        src=img.get("src","")
+        if src.startswith("../images/") and not any(src==x[0] for x in images):
+            images.append((src,img.get("alt","")))
+    if not images:return html
+    w=W[lang];title=E(w["photosTitle"])
+    pieces=[]
+    for src,alt in images[:36]:
+        clean_alt=("صور من مسفران" if lang=="ar" else "Fotos de Imsfrane")
+        pieces.append(f'<a href="{E(src)}" target="_blank" rel="noopener noreferrer"><img src="{E(src)}" alt="{E(clean_alt)}" loading="lazy" decoding="async"></a>')
+    snippet=f'<section class="hp-memories hp-container" id="gallery"><div class="hp-memories-heading"><div class="hp-heading"><h2>{title}</h2></div></div><div class="hp-memories-grid">{"".join(pieces)}</div></section>'
+    return html.replace('</main>',snippet+'</main>',1)
+
+def subpage_main(lang,page,original):
     data=PAGES[page][lang];t=LABELS[lang];w=W[lang]
     image=E("../images/"+PAGES[page]["img"])
     title=E(data["title"])
@@ -210,7 +256,8 @@ def subpage_main(lang,page):
        f'<div class="hp-final-buttons"><a class="hp-button hp-button-gold" href="booking.html">{E(w["request"])} ↗</a>'
        f'<a class="hp-button hp-button-outline" href="https://wa.me/212667772551" target="_blank" rel="noopener noreferrer">'
        f'{E(w["contact"])}</a></div></div></section>')
-    return f'<main id="mainContent" class="hp-home" style="padding:0;max-width:none;margin:0">{hero}{details}{further}{ending}</main>'
+    full=f'<main id="mainContent" class="hp-home" style="padding:0;max-width:none;margin:0">{hero}{details}{further}{ending}</main>'
+    return add_original_photos(original,full,lang,page)
 def meta_replace(s,lang,page):
     title=PAGES[page][lang]["title"];desc=PAGES[page][lang]["lead"]
     s=re.sub(r'<html\b[^>]*>',f'<html lang="{lang}"'+(' dir="rtl"' if lang=="ar" else '')+'>',s,count=1,flags=re.I)
@@ -230,7 +277,8 @@ def build(root):
             src=(root/"fr"/(page+".html")).read_text(encoding="utf-8")
             if src.count('src="../images/logo-104.webp"')!=2:raise RuntimeError("Original shell logo changed: "+page)
             if page=="index":main=homepage_main(root,lang)
-            else:main=subpage_main(lang,page)
+            elif page=="memories":main=native_memories(src,lang)
+            else:main=subpage_main(lang,page,src)
             old=re.search(r'<main\b[^>]*>[\s\S]*?</main>',src,re.I)
             if not old:raise RuntimeError("Source missing main: "+page)
             src=src[:old.start()]+main+src[old.end():]
