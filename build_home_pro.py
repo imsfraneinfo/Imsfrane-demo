@@ -1,6 +1,7 @@
 """Build premium bilingual Demo homepage, without modifying the real site or its brand/logo."""
 from pathlib import Path
 from html import escape
+from urllib.parse import quote
 import re
 
 TXT = {
@@ -13,7 +14,7 @@ TXT = {
  "heroAlt":"L’Oued Ahansal et les paysages rocheux d’Imsfrane Cathédrale",
  "heroPhotoKicker":"Haut Atlas · Maroc","heroPhotoLabel":"Entre rivière et montagne",
  "heroTag":"À Tilouguite, province d’Azilal",
- "metrics":[("1 868 m","Sommet d’Imsfrane"),("6","Expériences à découvrir"),("Mars – juin","Rafting : saison habituelle"),("100 %","Contact direct avec l’équipe locale")],
+ "metrics":[("1 868 m","Sommet d’Imsfrane"),("14","Activités & expériences"),("Mars – juin","Rafting : saison habituelle"),("100 %","Contact direct avec l’équipe locale")],
  "introEyebrow":"BIENVENUE DANS LE HAUT ATLAS",
  "introTitle":"Un lieu rare. <em>Des souvenirs qui restent.</em>",
  "introText":"Msfrane — aussi appelée Imsfrane Cathédrale en raison de la silhouette de sa montagne — est une destination de nature dans la commune de Tilouguite. Entre forêts, villages, gorges et rivières, chaque sortie révèle une autre facette de l’Atlas.",
@@ -27,7 +28,15 @@ TXT = {
    ("camping","Camping","Des nuits simples et authentiques au cœur de la nature.","À partir de 60 MAD / tente / nuit","Selon la capacité des tentes","camping.html","camping-1-800.webp","Camping à Imsfrane dans l’Atlas"),
    ("vtt","VTT","Les reliefs de montagne à découvrir sur deux roues.","À partir de 100 MAD / personne","Sortie guidée ou location","vtt.html","vtt-800.webp","VTT et pistes de montagne"),
    ("quad","Quad","Des pistes et des points de vue hors du commun.","À partir de 250 MAD / quad","Solo ou duo · env. 1 h","quad.html","quad-800.webp","Sortie en quad à Imsfrane"),
-   ("hebergement","Hébergement","Prolongez l’expérience dans un cadre local et accueillant.","Tarif sur demande","Maison, chambres et séjour","hebergement.html","bab2-800.webp","Hébergement local aux environs d’Imsfrane")
+   ("hebergement","Hébergement","Prolongez l’expérience dans un cadre local et accueillant.","Tarif sur demande","Maison, chambres et séjour","hebergement.html","bab2-800.webp","Hébergement local aux environs d’Imsfrane"),
+   ("tubing","Tubing","Une expérience de rivière en bouée sur l’Oued Ahansal.","300 MAD / personne","Selon le niveau de l’eau","wa:Tubing sur Oued Ahansal","tubing-800.webp","Tubing sur l’Oued Ahansal"),
+   ("jetski","Jet Ski","Sensations sur le lac de Bin El Ouidane.","300 MAD · tarif à confirmer","Bin El Ouidane","wa:Jet Ski Bin El Ouidane","jetski-800.webp","Jet Ski au lac Bin El Ouidane"),
+   ("4x4","Excursion 4×4","Explorez les pistes de montagne et les beaux panoramas.","Tarif sur demande","Avec organisation préalable","wa:Excursion 4x4 Imsfrane","4x4-800.webp","Excursion 4x4 dans l’Atlas"),
+   ("passage","Passage Amazigh","Découvrez le passage emblématique de Taghia.","Tarif sur demande","Taghia · accès à organiser","wa:Passage Amazigh Taghia","passage-800.webp","Passage Amazigh à Taghia"),
+   ("zrkan","Cascades Zrkan","Découvrez des cascades et paysages préservés.","Tarif sur demande","Conditions d’accès à vérifier","wa:Cascades Zrkan","zrkan-800.webp","Cascades Zrkan dans l’Atlas"),
+   ("anergui","Visite d’Anergui","Villages et paysages authentiques du Haut Atlas.","Tarif sur demande","Excursion à organiser","wa:Visite Anergui","anergui-800.webp","Paysages autour d’Anergui"),
+   ("almou","Almou Ntalmast","Découverte des paysages et pâturages de montagne.","Tarif sur demande","Selon la saison","wa:Almou Ntalmast","almo-800.webp","Paysages d’Almou Ntalmast"),
+   ("ahidous","Soirée Ahidous","Découvrez la tradition musicale et festive amazighe.","800 MAD / groupe","Sur réservation","wa:Soirée Ahidous","ahidous-800.webp","Soirée Ahidous traditionnelle")
  ],
  "discover":"Découvrir","otherActivities":"Explorer toutes les possibilités",
  "seasonTip":"Le rafting est une activité saisonnière : généralement de mars à juin, parfois jusqu’en juillet selon le niveau de l’eau. Chaque descente nécessite une confirmation.",
@@ -89,7 +98,7 @@ TXT = {
  "heroAlt":"Ahansal River and the striking rock formations of Imsfrane",
  "heroPhotoKicker":"High Atlas · Morocco","heroPhotoLabel":"Where rivers meet mountains",
  "heroTag":"Tilouguite · Azilal Province",
- "metrics":[("1,868 m","Imsfrane summit"),("6","Experiences to explore"),("Mar – Jun","Usual rafting season"),("100%","Direct contact with local guides")],
+ "metrics":[("1,868 m","Imsfrane summit"),("14","Activities & experiences"),("Mar – Jun","Usual rafting season"),("100%","Direct contact with local guides")],
  "introEyebrow":"WELCOME TO THE HIGH ATLAS",
  "introTitle":"One remarkable place. <em>Lasting memories.</em>",
  "introText":"Msfrane — also called Imsfrane Cathedral for the distinctive shape of its mountain — is a nature destination in Tilouguite commune. Among forests, villages, gorges and rivers, there’s a different side of the Atlas around every bend.",
@@ -103,7 +112,15 @@ TXT = {
    ("camping","Camping","Unplug for a night in nature under the Atlas sky.","From 60 MAD / tent / night","Different tent capacities","camping.html","camping-1-800.webp","Camping in the Imsfrane mountains"),
    ("vtt","Mountain biking","Discover mountain trails and valleys on two wheels.","From 100 MAD / person","Guided ride or rental","vtt.html","vtt-800.webp","Mountain biking in the High Atlas"),
    ("quad","Quad biking","Explore scenic tracks and mountain viewpoints.","From 250 MAD / quad","Solo or duo · around 1 hour","quad.html","quad-800.webp","Quad biking around Imsfrane"),
-   ("hebergement","Accommodation","Stay a little longer in welcoming local surroundings.","Price on request","House, rooms and stays","hebergement.html","bab2-800.webp","Local accommodation around Imsfrane")
+   ("hebergement","Accommodation","Stay a little longer in welcoming local surroundings.","Price on request","House, rooms and stays","hebergement.html","bab2-800.webp","Local accommodation around Imsfrane"),
+   ("tubing","River tubing","Explore the Ahansal River in a river tube.","300 MAD / person","Subject to river levels","wa:Ahansal river tubing","tubing-800.webp","River tubing on the Ahansal"),
+   ("jetski","Jet Ski","A watersport adventure on Bin El Ouidane Lake.","300 MAD · confirm rate","Bin El Ouidane","wa:Jet Ski Bin El Ouidane","jetski-800.webp","Jet Ski on Bin El Ouidane"),
+   ("4x4","4×4 Excursion","Discover mountain trails and scenic viewpoints.","Price on request","Prearranged excursion","wa:Imsfrane 4x4 excursion","4x4-800.webp","Four-wheel-drive mountain excursion"),
+   ("passage","Amazigh Passage","Explore the iconic cliffside passage of Taghia.","Price on request","Taghia · arranged access","wa:Amazigh Passage Taghia","passage-800.webp","Amazigh Passage at Taghia"),
+   ("zrkan","Zrkan Waterfalls","A discovery trip to scenic mountain waterfalls.","Price on request","Access conditions to check","wa:Zrkan Waterfalls","zrkan-800.webp","Zrkan mountain waterfalls"),
+   ("anergui","Explore Anergui","Local village life and High Atlas scenery.","Price on request","Excursion on request","wa:Anergui visit","anergui-800.webp","Anergui landscapes"),
+   ("almou","Almou Ntalmast","Discover beautiful highland landscapes.","Price on request","Seasonal access","wa:Almou Ntalmast","almo-800.webp","Almou Ntalmast highland landscape"),
+   ("ahidous","Ahidous Evening","A traditional Amazigh music and dance evening.","800 MAD / group","By arrangement","wa:Traditional Ahidous evening","ahidous-800.webp","Traditional Ahidous cultural evening")
  ],
  "discover":"Discover","otherActivities":"See more possibilities",
  "seasonTip":"Rafting is seasonal: usually March to June, occasionally July when river levels permit. Every departure requires confirmation.",
@@ -167,7 +184,24 @@ def titleBlock(eyebrow,headline,desc=""):
     return '<div class="hp-heading"><span class="hp-kicker">'+e(eyebrow)+'</span><h2>'+headline+'</h2>'+('<p>'+e(desc)+'</p>' if desc else '')+'</div>'
 def build(lang):
     t=TXT[lang]
-    heroPicture=img("21.webp",t["heroAlt"],'class="hp-hero-image" fetchpriority="high" decoding="async" width="1200" height="1600" sizes="(max-width: 780px) 100vw, 50vw"',srcset="../images/21-800.webp 800w, ../images/21.webp 1200w")
+    slider_images=[
+      ("21.webp","21-800.webp",t["heroAlt"]),
+      ("24.webp","24-800.webp","Rafting on the Ahansal River"),
+      ("27.webp","27-800.webp","Quad biking by the Imsfrane mountain"),
+      ("29.webp","29-800.webp","An Imsfrane campsite at dusk"),
+      ("31.webp","31-800.webp","Mountain biking in the Atlas")
+    ]
+    slides=[]
+    for i,(original,thumb,alt) in enumerate(slider_images):
+        attrs=('fetchpriority="high"' if i==0 else 'loading="lazy"')
+        slides.append('<div class="hp-slide'+(' is-active' if i==0 else '')+'" aria-hidden="'+('false' if i==0 else 'true')+'" data-slide="'+str(i)+'">'+
+                      img(original,alt,'class="hp-hero-image" decoding="async" '+attrs+' sizes="(max-width: 860px) 100vw, 47vw"',srcset="../images/"+thumb+" 800w, ../images/"+original+" 1200w")+
+                      '</div>')
+    slider_dots=''.join('<button type="button" class="hp-slide-dot'+(' is-active' if i==0 else '')+'" data-slide-to="'+str(i)+'" aria-label="'+e(("Afficher la photo " if lang=="fr" else "Show photo ")+str(i+1))+'" aria-current="'+('true' if i==0 else 'false')+'"></button>' for i in range(len(slides)))
+    slider_control='<div class="hp-slider-controls" aria-label="'+e("Galerie photos Imsfrane" if lang=="fr" else "Imsfrane photo gallery")+'">'+\
+         '<button type="button" class="hp-slide-arrow" data-slide-dir="-1" aria-label="'+e("Photo précédente" if lang=="fr" else "Previous photo")+'"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>'+\
+         '<div class="hp-slide-dots">'+slider_dots+'</div>'+\
+         '<button type="button" class="hp-slide-arrow" data-slide-dir="1" aria-label="'+e("Photo suivante" if lang=="fr" else "Next photo")+'"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button></div>'
     hero=f'''<section class="hp-hero" aria-labelledby="hp-h1"><div class="hp-hero-inner">
       <div class="hp-hero-content"><span class="hp-eyebrow"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> {e(t["eyebrow"])}</span>
         <h1 id="hp-h1">{t["heroMain"]}<span>{e(t["heroSub"])}</span></h1>
@@ -177,11 +211,20 @@ def build(lang):
         </div>
         <div class="hp-hero-foot"><span class="hp-hero-dot"></span>{e(t["heroTag"])}</div>
       </div>
-      <div class="hp-hero-visual">{heroPicture}
+      <div class="hp-hero-visual hp-hero-slider" aria-roledescription="carousel"><div class="hp-slide-track">{"".join(slides)}</div>{slider_control}
         <div class="hp-hero-picture-note"><span>{e(t["heroPhotoKicker"])}</span><strong>{e(t["heroPhotoLabel"])}</strong></div>
         <div class="hp-hero-altitude"><i class="fa-solid fa-mountain-sun" aria-hidden="true"></i><strong>1 868 m</strong><span>Jebel Imsfrane</span></div>
       </div>
     </div><a class="hp-scroll" href="#about">{e(t["scroll"])} <i class="fa-solid fa-arrow-down" aria-hidden="true"></i></a></section>'''
+    reviews=f'''<section class="hp-google-reviews" id="google-reviews" aria-labelledby="hp-reviews-title">
+      <div class="hp-reviews-inner"><div class="hp-google-mark" aria-hidden="true"><i class="fa-brands fa-google"></i></div>
+        <div class="hp-google-rating"><span class="hp-google-label">GOOGLE REVIEWS</span><div class="hp-google-score"><strong>{e("4,8" if lang=="fr" else "4.8")}<small>/5</small></strong><span aria-label="5 stars" class="hp-google-stars">★★★★★</span></div>
+        <span class="hp-review-count">{e("23 avis affichés sur notre site" if lang=="fr" else "23 reviews listed on our site")}</span></div>
+        <div class="hp-google-copy"><h2 id="hp-reviews-title">{e("Vos avis comptent." if lang=="fr" else "Your reviews matter.")}</h2>
+          <p>{e("Découvrez les avis publiés sur Google par les visiteurs de nos activités à Imsfrane." if lang=="fr" else "See real Google reviews left by visitors to our Imsfrane adventures.")}</p></div>
+        <a class="hp-google-link" href="{GOOGLE_REVIEWS}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-google" aria-hidden="true"></i> {e("Lire les avis Google" if lang=="fr" else "Read Google reviews")} <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+      </div>
+    </section>'''
     facts='<div class="hp-facts"><div class="hp-facts-inner">'+''.join('<div><strong>'+e(a)+'</strong><span>'+e(b)+'</span></div>' for a,b in t["metrics"])+'</div></div>'
     about=f'''<section class="hp-about hp-container" id="about">
       <div class="hp-about-lead">{titleBlock(t["introEyebrow"],t["introTitle"])}</div>
@@ -190,6 +233,9 @@ def build(lang):
     </section>'''
     cards=[]
     for slug,name,desc,price,note,link,picture,alt in t["activities"]:
+        if link.startswith("wa:"):
+            message=("Bonjour, je souhaite avoir des informations sur " if lang=="fr" else "Hello, I would like information about ")+link[3:]+"."
+            link="https://wa.me/212667772551?text="+quote(message)
         cards.append('<article class="hp-activity-card hp-'+slug+'"><a class="hp-activity-image" href="'+e(link)+'" aria-label="'+e(name)+'">'+img(picture,alt,'loading="lazy" decoding="async"')+'</a>'+
             '<div class="hp-activity-body"><span class="hp-activity-note">'+e(note)+'</span><h3>'+e(name)+'</h3><p>'+e(desc)+'</p>'+
             '<div class="hp-activity-bottom"><strong>'+e(price)+'</strong><a href="'+e(link)+'" aria-label="'+e(t["discover"]+" "+name)+'"><span>'+e(t["discover"])+'</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div></div></article>')
@@ -247,7 +293,7 @@ def build(lang):
       <div class="hp-final-buttons"><a href="booking.html" class="hp-button hp-button-gold"><i class="fa-regular fa-calendar-check" aria-hidden="true"></i> {e(t["ctaBooking"])}</a>
       <a href="https://wa.me/212667772551" class="hp-button hp-button-outline" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> {e(t["ctaWhatsApp"])}</a></div>
     </div></section>'''
-    return '<main id="mainContent" class="hp-home">'+hero+facts+about+activities+destiny+programs+why+seasonal+memories+links+end+'</main>'
+    return '<main id="mainContent" class="hp-home">'+hero+reviews+facts+about+activities+destiny+programs+why+seasonal+memories+links+end+'</main>'
 
 def publish(root):
     for lang in ("fr","en"):
@@ -260,11 +306,14 @@ def publish(root):
         updated,count=re.subn(r'<main\b[^>]*>[\s\S]*?</main>',lambda _:fresh,source,count=1,flags=re.I)
         if count!=1:raise RuntimeError("Homepage main not found")
         updated=updated.replace("</head>",'<link rel="stylesheet" href="../home-pro.css"></head>',1)
+        updated=updated.replace("</body>",'<script defer src="../home-pro.js"></script></body>',1)
         # Keep original header and footer HTML, including the exact brand logo files and attributes.
         if re.findall(logos_re,updated,flags=re.I)!=original_logos:
             raise RuntimeError("Original brand logo changed: refusing Demo homepage update")
-        if updated.count('class="hp-activity-card')!=6:
-            raise RuntimeError("Six linked experiences were not generated")
+        if updated.count('class="hp-activity-card')!=14:
+            raise RuntimeError("All 14 main-site activities were not generated")
+        if updated.count('class="hp-slide"')!=5:raise RuntimeError("Five original homepage slider images missing")
+        if updated.count('class="hp-google-reviews"')!=1:raise RuntimeError("Google Reviews directly under hero missing")
         if updated.count('class="hp-program"')!=3:
             raise RuntimeError("Three programs were not generated")
         if updated.count('<h1')!=1:raise RuntimeError("Homepage H1 mismatch")
