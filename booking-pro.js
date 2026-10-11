@@ -6,7 +6,8 @@
   if(!root||!catalogNode)return;
   var config;
   try{config=JSON.parse(catalogNode.textContent)}catch(e){return}
-  var language=root.getAttribute("data-bp-lang")==="en"?"en":"fr";
+  var requestedLanguage=root.getAttribute("data-bp-lang");
+  var language=["fr","en","ar","es"].includes(requestedLanguage)?requestedLanguage:"fr";
   var words={
     fr:{
       empty:"Choisissez des activités pour afficher le détail du prix.",
@@ -47,6 +48,46 @@
       info:"Notes",selection:"Activities",estimate:"ESTIMATED TOTAL",
       pending:"No-payment request. Availability and final pricing must be confirmed.",
       request:"BOOKING REQUEST",unit:"MAD"
+    },
+    ar:{
+      empty:"اختر نشاطاً لعرض تفاصيل التكلفة التقديرية.",
+      night:"ليلة",nights:"ليالٍ",quote:"حسب عرض السعر",quoteTitle:"خدمات إضافية",
+      validationChoose:"اختر نشاطاً واحداً على الأقل أو خدمة إضافية.",
+      validationName:"يرجى إدخال اسمك الكامل.",
+      validationPhone:"يرجى إدخال رقم هاتف صحيح.",
+      validationDate:"اختر اليوم أو تاريخاً لاحقاً.",
+      validationCheckout:"يجب أن يكون تاريخ المغادرة بعد الوصول، بحد أقصى 45 ليلة.",
+      validationPeople:"حدد عدداً من المسافرين بين 1 و60.",
+      validationCapacity:"سعة الخيام المختارة أقل من عدد المسافرين.",
+      validationSeason:"التجديف متاح عادة بين مارس ويونيو، وقد يتاح في يوليو بحسب الصبيب. بقية الأشهر خارج الموسم.",
+      july:"تخضع رحلات التجديف في يوليو لمنسوب المياه وتأكيد المرشد.",
+      season:"موسم التجديف عادة من مارس إلى يونيو، وأحياناً يوليو حسب الصبيب. لا تُؤكَّد أي رحلة قبل التحقق من الظروف.",
+      copied:"تم نسخ الملخص!",copyError:"تعذر النسخ. استخدم واتساب.",
+      contact:"بيانات التواصل",requested:"التاريخ المرغوب",travelers:"المسافرون",
+      camping:"تاريخ مغادرة المخيم",language:"اللغة المفضلة",place:"نقطة الانطلاق",
+      info:"معلومات إضافية",selection:"الأنشطة المختارة",estimate:"الإجمالي التقديري",
+      pending:"هذا طلب دون دفع مسبق؛ يجب تأكيد التوفر والسعر النهائي.",
+      request:"طلب حجز",unit:"MAD"
+    },
+    es:{
+      empty:"Elige una experiencia para ver el presupuesto detallado.",
+      night:"noche",nights:"noches",quote:"A consultar",quoteTitle:"Servicios adicionales",
+      validationChoose:"Elige al menos una actividad o un servicio adicional.",
+      validationName:"Indica tu nombre completo.",
+      validationPhone:"Introduce un número de teléfono válido.",
+      validationDate:"Selecciona hoy o una fecha futura.",
+      validationCheckout:"La salida debe ser posterior a la llegada, con un máximo de 45 noches.",
+      validationPeople:"Indica entre 1 y 60 viajeros.",
+      validationCapacity:"La capacidad de las tiendas seleccionadas es inferior al número de viajeros.",
+      validationSeason:"Para rafting, elige de marzo a junio o julio sujeto al caudal. Los demás meses están fuera de temporada.",
+      july:"En julio el rafting depende del caudal y debe confirmarlo el guía.",
+      season:"El rafting suele realizarse de marzo a junio y, algunos años, en julio si el caudal lo permite. Todas las salidas requieren confirmación.",
+      copied:"¡Resumen copiado!",copyError:"No se pudo copiar. Usa WhatsApp.",
+      contact:"Datos de contacto",requested:"Fecha prevista",travelers:"Viajeros",
+      camping:"Salida del camping",language:"Idioma preferido",place:"Punto de salida",
+      info:"Información",selection:"Actividades",estimate:"TOTAL ESTIMADO",
+      pending:"Solicitud sin pago. Disponibilidad y precio final pendientes de confirmación.",
+      request:"SOLICITUD DE RESERVA",unit:"MAD"
     }
   }[language];
   var offers=config.offers||[];
@@ -55,7 +96,7 @@
   var offerMap=Object.create(null);
   offers.forEach(function(item){offerMap[item.id]=item});
   var element=function(id){return document.getElementById(id)};
-  var money=function(value){return new Intl.NumberFormat(language==="fr"?"fr-FR":"en-GB",{maximumFractionDigits:0}).format(value)+" MAD"};
+  var money=function(value){return new Intl.NumberFormat(language==="fr"?"fr-FR":language==="ar"?"ar-MA":language==="es"?"es-ES":"en-GB",{maximumFractionDigits:0}).format(value)+" MAD"};
   var cards=[].slice.call(root.querySelectorAll(".bp-offer"));
   var filters=[].slice.call(root.querySelectorAll(".bp-filter"));
   var start=element("bp-start"),end=element("bp-end"),people=element("bp-travelers");
