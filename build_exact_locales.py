@@ -206,6 +206,34 @@ def build_rafting_embeds(root):
             elif html.has_attr("dir"):del html["dir"]
         unknown=translate_nodes(doc,lang,"rafting")
         attributes_trans(doc,lang,"rafting")
+        # Translate grammatical fragments around emphasized hero text together.
+        hero=doc.select_one("#hero-title")
+        if hero:
+            hero.clear()
+            br=doc.new_tag("br");em=doc.new_tag("em")
+            if lang=="es":
+                em.string="río."
+                hero.append("Vive");hero.append(br);hero.append("el ");hero.append(em)
+            else:
+                em.string="del río Ahansal."
+                hero.append("عِش مغامرة");hero.append(br);hero.append(em)
+        for img in doc.find_all("img"):
+            if img.get("alt"):
+                img["alt"]="صور من التجديف في وادي أحنصال" if lang=="ar" else "Rafting en el río Ahansal"
+        for labelled in doc.select("[aria-label]"):
+            val=labelled.get("aria-label","")
+            if "rafting" in val.lower() or "photos" in val.lower():
+                labelled["aria-label"]="معرض صور التجديف" if lang=="ar" else "Galería de rafting"
+        for a in doc.select('a[href^="https://wa.me/212667772551?text="]'):
+            query=("مرحباً، أريد الاستفسار عن التجديف في مسفران." if lang=="ar"
+                 else "Hola, quisiera información sobre el rafting en Imsfrane.")
+            a["href"]="https://wa.me/212667772551?text="+quote(query,safe="")
+        for a in doc.select('a[href^="https://imsfrane.com/fr/"]'):
+            a["href"]=a["href"].replace("https://imsfrane.com/fr/",BASE+lang+"/")
+        for meta in doc.select('meta[property="og:url"]'):
+            meta["content"]=BASE+lang+"/rafting.html"
+        for link in doc.select('link[rel="canonical"]'):
+            link["href"]=BASE+lang+"/rafting.html"
         head=doc.head
         if head:
             if doc.title:doc.title.string=PAGES["rafting"][lang]["title"]+" | Imsfrane Cathédrale"
