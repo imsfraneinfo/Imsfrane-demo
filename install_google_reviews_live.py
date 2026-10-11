@@ -22,15 +22,16 @@ def install(root: Path):
     for code, fallback in LANG.items():
         file = root / code / "index.html"
         html = file.read_text(encoding="utf-8")
-        section = re.search(r'<section class="hp-google-reviews"[\s\S]*?</section>', html)
+        section = re.search(r'<section\b[^>]*\bclass="hp-google-reviews"[^>]*>[\s\S]*?</section>', html)
         if not section:
             raise RuntimeError("Missing exact Google review section: " + str(file))
         old = section.group(0)
         if "data-google-place-id" in old:
             raise RuntimeError("Google review integration inserted twice: " + str(file))
-        updated = old.replace(
-            '<section class="hp-google-reviews"',
-            '<section class="hp-google-reviews" data-google-place-id="' + PLACE_ID + '"', 1)
+        updated = re.sub(
+            r'<section\b[^>]*\bclass="hp-google-reviews"[^>]*>',
+            lambda m: m.group(0)[:-1] + ' data-google-place-id="' + PLACE_ID + '">',
+            old, count=1)
         updated, scores = re.subn(
             r'<div class="hp-google-score">[\s\S]*?</div>',
             '<div class="hp-google-score"><strong class="hp-google-rating-number" hidden></strong>'
