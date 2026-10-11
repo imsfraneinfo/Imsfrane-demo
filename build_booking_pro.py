@@ -159,16 +159,20 @@ def build(root):
     for lang in ("fr","en"):
         path=root/lang/"booking.html"
         original=path.read_text(encoding="utf-8")
+        source_html=original
         replacement=render(lang)
         original,n=re.subn(r"<main\b[^>]*>.*?</main>",lambda m:replacement,original,count=1,flags=re.S|re.I)
         if n!=1:
             raise RuntimeError("Booking main missing: "+str(path))
         original=original.replace("</head>",'<link rel="stylesheet" href="../booking-pro.css"></head>',1)
         original=original.replace("</body>",'<script type="application/json" id="bpCatalog">'+config+'</script><script defer src="../booking-pro.js"></script></body>',1)
-        # No photos anywhere on the Booking pages, including shared header and footer.
-        # Keep the site's textual wordmark and navigation intact.
-        original=re.sub(r'<img\b[^>]*>', '', original, flags=re.I)
+        # Preserve the original header and footer brand logo markup intact.
         original=re.sub(r'<link\b[^>]*\bas="image"[^>]*>', '', original, flags=re.I)
+        logo_pattern=r'<img\\b[^>]*data-cms-image="booking-i(?:1|4)"[^>]*>'
+        original_logos=re.findall(logo_pattern, source_html, flags=re.I)
+        published_logos=re.findall(logo_pattern, original, flags=re.I)
+        if len(original_logos)!=2 or original_logos!=published_logos:
+            raise RuntimeError("Header/footer original logo changed: cannot deploy booking")
         original=original.replace('<script defer="" src="../js/pages/booking.min.js"></script>','')
         original=original.replace('<script defer src="../js/pages/booking.min.js"></script>','')
         original=original.replace('Choisissez votre activité, la date et le nombre de participants, puis envoyez votre demande par WhatsApp.','Créez votre séjour à Imsfrane et calculez le tarif du rafting, des tentes, du VTT, du quad et des randonnées.')
