@@ -2,8 +2,11 @@ name: Publish Imsfrane demo
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/build-demo.yml', 'rafting-v8.html', 'imsfrane_rafting_mobile_cadrage_corrige_v8*.html', 'images/rafting-new/**', 'quad-content-*.html', 'images/quad-new/**', 'images/IMG_*.webp', 'vtt-content-*.html', 'camping-content-*.html', 'randonnee-content-*.html', 'about-content-*.html', 'remaining-pages-theme.css', 'rebuild_remaining.py', 'build_memories_gallery.py', 'memories-gallery.css', 'build_blog_journal.py', 'blog-journal.css', 'blog-journal.js', 'build_new_articles.py', 'blog_new_topics.json', 'blog_article_research.json', 'blog-articles.css', 'images/rando-*.webp', 'images/IMG_*.jpeg']
+    paths: ['.github/workflows/build-demo.yml', 'rafting-v8.html', 'imsfrane_rafting_mobile_cadrage_corrige_v8*.html', 'images/rafting-new/**', 'quad-content-*.html', 'images/quad-new/**', 'images/IMG_*.webp', 'vtt-content-*.html', 'camping-content-*.html', 'randonnee-content-*.html', 'about-content-*.html', 'remaining-pages-theme.css', 'rebuild_remaining.py', 'build_memories_gallery.py', 'memories-gallery.css', 'build_blog_journal.py', 'blog-journal.css', 'blog-journal.js', 'build_new_articles.py', 'blog_new_topics.json', 'blog_article_research.json', 'blog_expanded_content.json', 'blog-articles.css', 'images/rando-*.webp', 'images/IMG_*.jpeg']
   workflow_dispatch:
+concurrency:
+  group: imsfrane-demo-publish
+  cancel-in-progress: false
 permissions:
   contents: write
 jobs:
