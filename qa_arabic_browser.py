@@ -47,6 +47,39 @@ with webdriver.Chrome(options=opts) as driver:
         for page in PATHS:
             target=ROOT+page+"?real-browser-check=1"
             driver.get(target)
+            if page=="ar/rafting.html":
+                # Rafting has an original iframe instead of a heading in parent.
+                WebDriverWait(driver,35).until(lambda x: x.execute_script("""
+                  let f=document.querySelector('#raftingExperienceFrame');
+                  return !!(f && f.contentDocument && f.contentDocument.querySelector('h1'))
+                """))
+                child=driver.execute_async_script("""
+                    let done=arguments[arguments.length-1];
+                    let d=document.querySelector('#raftingExperienceFrame').contentDocument;
+                    Promise.all([
+                      d.fonts.load('700 32px "Imsfrane Alexandria"','مسفران'),
+                      d.fonts.load('400 17px "Imsfrane Tajawal"','المغامرة')
+                    ]).then(()=> {
+                      let h=d.querySelector('h1'),p=d.querySelector('p');
+                      done({lang:d.documentElement.lang,dir:d.documentElement.dir,
+                        titleFont:getComputedStyle(h).fontFamily,
+                        titleAlign:getComputedStyle(h).textAlign,
+                        titleDirection:getComputedStyle(h).direction,
+                        pFont:p?getComputedStyle(p).fontFamily:'',
+                        realFontTitle:d.fonts.check('700 32px "Imsfrane Alexandria"','مسفران'),
+                        realFontText:d.fonts.check('400 17px "Imsfrane Tajawal"','المغامرة')});
+                    }).catch(e=>done({error:String(e)}));
+                """)
+                print("RAFTING IFRAME",json.dumps(child,ensure_ascii=False),flush=True)
+                driver.save_screenshot(str(DIAGNOSTICS/(viewport+"-rafting.html.png")))
+                if not child or child.get("lang")!="ar" or child.get("dir")!="rtl":
+                    raise AssertionError("Arabic rafting iframe is not AR/RTL")
+                if not child["realFontTitle"] or not child["realFontText"]:
+                    raise AssertionError("Arabic rafting iframe fonts are not decoded")
+                if "Imsfrane Alexandria" not in child["titleFont"] or child["titleDirection"]!="rtl":
+                    raise AssertionError("Rafting Arabic title font and direction not applied")
+                report.append({"viewport":viewport,"path":page,"iframe":child})
+                continue
             WebDriverWait(driver,35).until(lambda x: x.execute_script("return document.readyState!=='loading' && !!document.querySelector('main h1')"))
             # Actually decode remote fonts; CSS family names alone are not proof.
             loaded=driver.execute_async_script("""
@@ -96,15 +129,5 @@ with webdriver.Chrome(options=opts) as driver:
                 raise AssertionError("Arabic navigation text not right-to-left")
             if metrics["scrollW"]>metrics["viewW"]+9:
                 print("WARNING horizontal overflow",page,viewport,metrics["scrollW"],metrics["viewW"],flush=True)
-            if page=="ar/rafting.html":
-                child=driver.execute_script("""
-                  let f=document.querySelector('#raftingExperienceFrame');
-                  let d=f?.contentDocument;
-                  return d?{dir:d.documentElement.dir,titleFont:getComputedStyle(d.querySelector('h1')).fontFamily,
-                  pFont:getComputedStyle(d.querySelector('p')).fontFamily}:null
-                """)
-                print("RAFTING IFRAME",json.dumps(child,ensure_ascii=False),flush=True)
-                if not child or child["dir"]!="rtl" or "Imsfrane Alexandria" not in child["titleFont"]:
-                    raise AssertionError("Arabic rafting iframe typography not working")
 (DIAGNOSTICS/"measurements.json").write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding="utf-8")
 print("PASS",len(report),"real Chrome rendered Arabic page/viewport combinations")
