@@ -361,3 +361,28 @@ html[lang="ar"] main :is(.fa-arrow-right,.fa-chevron-right) {
     padding-inline:22px!important;
   }
 }
+
+
+/* Mobile RTL overflow FIX (verified in real Chrome at 345/390 CSS px).
+   Old .atnav-langmini-panel {right:0} anchored the 187px dropdown to
+   the RIGHT edge of an AR selector only 33-43px wide and extended
+   77-88px LEFT outside the RTL viewport. Chrome then auto-scrolled
+   document.scrollingElement.scrollLeft=-77..-88, shifting ALL content
+   to the right. Keep the dropdown at the selector's LEFT edge so
+   it opens INTO the viewport, not out of it. */
+html[lang="ar"] body.atnav-ready .atnav-langmini .atnav-langmini-panel {
+  left:0!important;
+  right:auto!important;
+  inset-inline-start:auto!important;
+  inset-inline-end:auto!important;
+  transform:none!important;
+  max-width:min(202px,calc(100vw - 16px));
+  overflow-x:hidden;
+}
+@media(max-width:670px){
+  html[lang="ar"] body.atnav-ready .atnav-langmini .atnav-langmini-panel {
+    width:min(187px,calc(100vw - 16px))!important;
+    left:0!important;
+    right:auto!important;
+  }
+}
