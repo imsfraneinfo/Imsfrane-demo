@@ -12,6 +12,7 @@ import re
 PAGES=json.loads(Path("localized-pages.json").read_text(encoding="utf-8"))
 TOPICS=json.loads(Path("blog_new_topics.json").read_text(encoding="utf-8"))
 SPANISH=json.loads(Path("localized-articles-es.json").read_text(encoding="utf-8"))
+LEGACY=json.loads(Path("localized-legacy-articles.json").read_text(encoding="utf-8"))
 BASE="https://imsfraneinfo.github.io/Imsfrane-demo/"
 SIX=(
   ("rafting.html","Rafting","rafting","raft2-800.webp"),
@@ -195,6 +196,28 @@ def render_es_article(topic,root):
     result+='</main>'+footer("es")
     return result
 
+
+def render_legacy_article(lang, filename, data, root):
+    title,summary,paragraphs=data[lang]
+    if len(paragraphs)!=3:
+        raise RuntimeError("Each legacy language article needs three original sections: "+filename)
+    image=data["img"]
+    t=LABELS[lang]
+    result=head(lang,filename,title,summary,image,root)
+    result+='<body class="locale-page"><main class="locale-main"><section class="locale-hero" style="--lc-image:url('+photo(image)+')">'
+    result+='<div class="locale-wrap"><span class="locale-kicker">'+esc(t["articles"])+'</span>'
+    result+='<h1>'+esc(title)+'</h1><p>'+esc(summary)+'</p>'
+    result+='<a class="locale-hero-cta" href="blog.html">'+("→ العودة إلى المدونة" if lang=="ar" else "← Volver al blog")+'</a></div></section>'
+    result+='<section class="locale-section"><div class="locale-wrap"><div class="locale-feature-grid">'
+    for i,paragraph in enumerate(paragraphs):
+        result+='<article class="locale-feature"><b>0'+str(i+1)+'</b><h2>'+esc(HEADS[lang][i])+'</h2><p>'+esc(paragraph)+'</p></article>'
+    result+='</div><div class="locale-info" style="margin-top:30px">'+esc(t["season"])+'</div></div></section>'
+    result+='<div class="locale-wrap"><div class="locale-cta"><h2>'+esc(t["prepare"])+'</h2>'
+    result+='<p>'+esc(t["disclaimer"])+'</p><a href="booking.html">'+esc(t["book"])+' ↗</a>'
+    result+='<a href="blog.html" class="secondary">'+esc(t["articles"])+'</a></div></div></main>'
+    result+=footer(lang)
+    return result
+
 def polish_existing_ar_articles(root):
     ar=root/"ar"
     for topic in TOPICS:
@@ -219,8 +242,18 @@ def build(root:Path):
             (folder/(page+".html")).write_text(render_page(page,lang,root),encoding="utf-8")
     for topic in TOPICS:
         (es/("blog-guide-"+topic["slug"]+".html")).write_text(render_es_article(topic,root),encoding="utf-8")
+    if len(LEGACY)!=9:
+        raise RuntimeError("Expected nine editorial legacy article routes")
+    for filename,data in LEGACY.items():
+        for lang,folder in (("ar",ar),("es",es)):
+            (folder/filename).write_text(render_legacy_article(lang,filename,data,root),encoding="utf-8")
     polish_existing_ar_articles(root)
-    print("[Localisation] Arabic and Spanish: 15 original destination pages each; 20 topic articles each.")
+    for lang,folder in (("ar",ar),("es",es)):
+        count=len(list(folder.glob("*.html")))
+        if count!=44:
+            raise RuntimeError("Expected 44 fully localized pages in "+lang+", got "+str(count))
+        print("[Localisation] "+lang+": 44 pages, including 15 core pages and 29 editorial articles.")
+    print("[Localisation] Arabic and Spanish: 15 original destination pages each; 29 editorial routes each.")
     print("[Localisation] No auto translation, no false immediate reservations, all Arabic uses RTL.")
 
 if __name__=="__main__":
