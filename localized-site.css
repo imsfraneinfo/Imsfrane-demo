@@ -7,7 +7,7 @@ body.locale-page *,body.locale-page *:before,body.locale-page *:after{box-sizing
 body.locale-page main{margin:0;max-width:none;padding:0;background:var(--lc-paper)}
 body.locale-page h1,body.locale-page h2,body.locale-page h3{margin-top:0;line-height:1.22}
 body.locale-page .locale-hero{position:relative;min-height:clamp(430px,72svh,710px);display:flex;align-items:center;isolation:isolate;color:#fff;overflow:hidden;background:var(--lc-deep)}
-body.locale-page .locale-hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#08261df0 0%,#092c1eae 48%,#06291d35 100%),var(--lc-image) center var(--lc-position,center)/cover no-repeat;z-index:-1}
+body.locale-page .locale-hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#08261df0 0%,#092c1eae 48%,#06291d35 100%),var(--lc-image) var(--lc-position,center)/cover no-repeat;z-index:-1}
 html[dir=rtl] body.locale-page .locale-hero:before{background-image:linear-gradient(270deg,#08261def 0%,#092c1eb0 50%,#06291d35 100%),var(--lc-image)}
 .locale-wrap{width:min(1140px,100% - 36px);margin-inline:auto}
 .locale-hero .locale-wrap{padding-block:80px 86px}
