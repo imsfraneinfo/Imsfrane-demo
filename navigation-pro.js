@@ -104,7 +104,27 @@ function initAccountModal(){
  function message(v){q(".ims-login-state").textContent=v||""}
  function close(){dialog.hidden=true;document.body.style.overflow="";if(oldFocus)oldFocus.focus()}
  async function getClient(){if(!client){var sdk=await import("https://esm.sh/@supabase/supabase-js@2");client=sdk.createClient("https://ktrcrfoywokuuwzwnqsu.supabase.co","sb_publishable_GS2PtVM4vBv7epvV6aZSpA_XQyD9bCj");}return client}
- entry.addEventListener("click",function(e){e.preventDefault();oldFocus=entry;dialog.hidden=false;document.body.style.overflow="hidden";message("");render();q(".ims-login-close").focus()});
+
+ var profile=document.createElement("div");profile.className="ims-demo-profile";profile.hidden=true;
+ profile.innerHTML='<div class="ims-demo-person"><span class="ims-demo-avatar"></span><div><strong class="ims-demo-name"></strong><small class="ims-demo-mail"></small></div></div><a class="ims-demo-account-link" href="/Imsfrane-demo/members.html"></a><button type="button" class="ims-demo-logout"></button>';
+ q(".ims-login-body").appendChild(profile);
+ var profileStyle=document.createElement("style");profileStyle.textContent='.ims-demo-profile[hidden]{display:none!important}.ims-demo-person{display:flex;align-items:center;gap:14px;padding:8px 0 20px}.ims-demo-avatar{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:#173e30;color:#e8ca77;font-size:20px;font-weight:800;overflow:hidden;flex:none}.ims-demo-avatar img{width:100%;height:100%;object-fit:cover}.ims-demo-person strong,.ims-demo-person small{display:block;overflow-wrap:anywhere}.ims-demo-person small{color:#6e8177;font-size:12px;margin-top:3px}.ims-demo-account-link,.ims-demo-logout{display:block!important;text-align:center;text-decoration:none;margin-top:12px;padding:13px;border-radius:11px;font-weight:800;font-size:13px}.ims-demo-account-link{color:white!important;background:#173e30}.ims-demo-logout{width:100%;background:#f3f4ee;color:#315344;border:1px solid #e3e8db;cursor:pointer}.ims-member-entry.ims-signed-in{padding:0;overflow:hidden;border-radius:50%;border:2px solid #c6a43f;background:#193e30;color:#f2d680!important}.ims-member-entry.ims-signed-in img{width:100%;height:100%;object-fit:cover;border-radius:50%}.ims-member-entry.ims-signed-in .ims-initial{font-size:15px;font-weight:800}';document.head.appendChild(profileStyle);
+ function safePhotoUrl(u){try{var url=new URL(u);return url.protocol==="https:"&&url.hostname!=="localhost"?url.href:null}catch(e){return null}}
+ function setAvatar(el,user){el.replaceChildren();var photo=safePhotoUrl(user.user_metadata&&(user.user_metadata.avatar_url||user.user_metadata.picture));if(photo){var img=document.createElement("img");img.src=photo;img.alt="";img.referrerPolicy="no-referrer";img.onerror=function(){img.remove();el.textContent=(user.email||"U")[0].toUpperCase()};el.appendChild(img)}else{el.textContent=(user.user_metadata?.full_name||user.email||"U")[0].toUpperCase()}}
+ function refreshAccount(u){
+  entry.classList.toggle("ims-signed-in",!!u);
+  var title=u?({fr:"Mon profil",en:"My profile",ar:"ملفي الشخصي",es:"Mi perfil"}[lang]):labels[3];
+  entry.title=title;entry.setAttribute("aria-label",title);
+  if(u){setAvatar(entry,u);q(".ims-login-tabs").hidden=true;q(".ims-login-google").hidden=true;q(".ims-login-divider").hidden=true;q(".ims-login-form").hidden=true;profile.hidden=false;setAvatar(q(".ims-demo-avatar"),u);
+   q(".ims-demo-name").textContent=u.user_metadata?.full_name||u.user_metadata?.name||u.email?.split("@")[0]||labels[16];
+   q(".ims-demo-mail").textContent=u.email||"";q(".ims-demo-account-link").textContent=labels[16];q(".ims-demo-account-link").href="/Imsfrane-demo/members.html?lang="+lang;q(".ims-demo-logout").textContent=labels[17]
+  }else{entry.innerHTML='<svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"/><path d="M4.8 20c.3-4.4 3-6.6 7.2-6.6s6.9 2.2 7.2 6.6"/></svg>';q(".ims-login-tabs").hidden=false;q(".ims-login-google").hidden=false;q(".ims-login-divider").hidden=false;q(".ims-login-form").hidden=false;profile.hidden=true}
+ }
+ var accountUser=null;
+ entry.addEventListener("click",async function(e){e.preventDefault();oldFocus=entry;dialog.hidden=false;document.body.style.overflow="hidden";message("");render();q(".ims-login-close").focus();try{var db=await getClient(),r=await db.auth.getUser();accountUser=r.data?.user||null;refreshAccount(accountUser)}catch(e){message(e.message||"Connection error")}});
+ q(".ims-demo-logout").onclick=async function(){try{var db=await getClient(),r=await db.auth.signOut();if(r.error)throw r.error;accountUser=null;refreshAccount(null);close()}catch(e){message(e.message)}};
+ (async function(){try{var db=await getClient(),r=await db.auth.getUser();accountUser=r.data?.user||null;refreshAccount(accountUser);db.auth.onAuthStateChange(function(_event,session){accountUser=session?.user||null;refreshAccount(accountUser)})}catch(e){}})();
+
  q(".ims-login-close").onclick=close;dialog.addEventListener("click",function(e){if(e.target===dialog)close()});document.addEventListener("keydown",function(e){if(!dialog.hidden&&e.key==="Escape")close()});
  dialog.querySelectorAll(".ims-login-tab").forEach(function(b){b.onclick=function(){mode=b.dataset.mode;render()}});
  q(".ims-login-google").onclick=async function(){try{var db=await getClient();sessionStorage.setItem("ims-demo-return",location.href);var r=await db.auth.signInWithOAuth({provider:"google",options:{redirectTo:location.origin+"/Imsfrane-demo/members.html"}});if(r.error)throw r.error}catch(e){message(e.message)}};
