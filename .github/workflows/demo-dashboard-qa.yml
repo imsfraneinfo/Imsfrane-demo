@@ -1,0 +1,45 @@
+name: Demo Dashboard QA
+on:
+  push:
+    branches: [gh-pages]
+    paths:
+      - members.html
+      - navigation-pro.js
+      - dashboard-pro.js
+      - dashboard-pro.css
+      - .github/workflows/demo-dashboard-qa.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify JavaScript syntax
+        run: |
+          node --check navigation-pro.js
+          node --check dashboard-pro.js
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          page=Path('members.html').read_text()
+          block=re.search(r'<script type="module">([\s\S]*?)</script>',page)
+          assert block, 'member module script missing'
+          Path('/tmp/imsfrane-members.mjs').write_text(block.group(1))
+          PY
+          node --check /tmp/imsfrane-members.mjs
+      - name: Verify dashboard routes, assets, and account controls
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          s=Path('members.html').read_text()
+          for label in ['imsDashUi','imsSettingsPanel','imsDashMobileNav','profileForm','preferencesForm','dashboard-pro.css','dashboard-pro.js','ims:member-profile','ims:member-session']:
+              assert label in s,label
+          for l in ('fr','en','ar','es'):
+              for name in ('index','booking','rafting','randonnee','camping','vtt','quad','hebergement','blog','contact'):
+                  assert Path(l,name+'.html').is_file(),(l,name)
+          for p in ('images/logo.webp','images/rafting-new/IMG_2089.webp','images/camping-1.webp','images/vtt.webp','images/quad.webp','images/hero.webp','images/21.webp'):
+              assert Path(p).is_file(),p
+          print('PASS: Four-language dashboard, account forms and activity links')
+          PY
