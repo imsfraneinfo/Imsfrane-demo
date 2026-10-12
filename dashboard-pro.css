@@ -116,3 +116,7 @@ html[dir=rtl] .ims-dash-round-arrow{transform:scaleX(-1)}
  .ims-site-brand strong{font-size:15px!important}
  .ims-site-brand img{width:40px!important;height:40px!important}
 }
+
+.ims-sitebar .ims-dash-header-lang{width:auto!important;min-width:68px!important;max-width:78px!important;padding:9px 7px!important;background:#173a2d!important;border:1px solid #c6a43f80!important;color:#f1d17e!important;border-radius:9px!important;font-weight:850!important;font-size:12px!important;flex:none!important;cursor:pointer}
+.ims-sitebar .ims-dash-header-lang option{background:#123a2c;color:#fff}
+@media(max-width:640px){.ims-sitebar .ims-dash-header-lang{min-width:59px!important;padding:7px 5px!important}.ims-sitebar .ims-site-back{font-size:10px!important;max-width:95px!important;white-space:normal!important;text-align:center!important}.ims-sitebar{gap:7px!important}}
