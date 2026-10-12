@@ -1,6 +1,7 @@
 /* Demo-wide Imsfrane Cathédrale premium navigation. Native, no dependencies. */
 (function(){
 "use strict";
+try{if(/^\/Imsfrane-demo\/(?:fr|en|ar|es)\//.test(location.pathname))sessionStorage.setItem("ims-demo-lastpage",location.href)}catch(e){}
 function init(){
 var body=document.body, drawer=document.getElementById("atnavDrawer"), backdrop=document.getElementById("atnavBackdrop"), opener=document.getElementById("atnavOpen"), closer=document.getElementById("atnavClose"), toggle=document.getElementById("atnavActivities"), list=document.getElementById("atnavActivityList");
 if(!drawer||!backdrop||!opener||!closer||!toggle||!list)return;
