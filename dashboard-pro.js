@@ -1,0 +1,106 @@
+/* Imsfrane member dashboard, Demo only: real member data, no fictional points or bookings. */
+(function(){
+"use strict";
+const dash=document.getElementById("imsDashUi"),mobile=document.getElementById("imsDashMobileNav"),settings=document.getElementById("imsSettingsPanel");
+if(!dash||!mobile||!settings)return;
+const langs=["fr","en","ar","es"],base="/Imsfrane-demo/";
+const translations={
+ fr:{hello:"BONJOUR,",yourSpace:"VOTRE ESPACE IMSFRANE",welcome:"Votre prochaine aventure commence ici.",official:"↗ Retour au site officiel",dashboard:"Tableau de bord",home:"Accueil",bookings:"Réservations",favorites:"Favoris",activities:"Activités",account:"Compte",navigation:"VOTRE NAVIGATION",return:"Reprendre ma visite",returnDesc:"Retrouvez la dernière page que vous avez consultée.",gettingStarted:"VOS PREMIÈRES ÉTAPES",start:"Bien démarrer avec Imsfrane",done:"TERMINÉ",todo:"À COMPLÉTER",stepCreated:"Compte créé",stepCreatedDesc:"Votre compte Imsfrane est prêt.",stepVerified:"Adresse e-mail vérifiée",stepVerifiedDesc:"La vérification dépend de votre méthode de connexion.",stepProfile:"Complétez votre profil",stepProfileDesc:"Ajoutez votre nom public.",completeProfile:"Compléter mon profil →",stepExplore:"Découvrez nos aventures",stepExploreDesc:"Explorez les activités proposées à Imsfrane.",discover:"Découvrir les activités →",savedItems:"favoris sur cet appareil",completion:"profil complété",nextAdventure:"VOTRE PROCHAINE AVENTURE",nextTitle:"Prêt à explorer l’Atlas ?",noBooking:"Vos réservations ne sont pas encore reliées à votre compte.",noBookingDesc:"Découvrez les expériences, puis contactez-nous pour organiser votre aventure.",seeAdventures:"Découvrir les aventures",bookingSection:"MES RÉSERVATIONS",bookingTitle:"Suivi de mes expériences",bookingUnavailable:"Aucune réservation synchronisée",bookingExplain:"Les réservations se font actuellement avec notre équipe. Elles n’apparaissent pas encore automatiquement ici.",contactBook:"Réserver une activité",favoriteSection:"MES FAVORIS",favoritesTitle:"Les expériences qui m’inspirent",favoritesHint:"Vos favoris sont enregistrés uniquement dans ce navigateur, sur cet appareil.",addFavorites:"Parcourir les activités",activitySection:"IMSFRANE · ATLAS",activitiesTitle:"Choisir ma prochaine activité",activityHint:"Enregistrez vos activités préférées ou consultez leur page.",profileSection:"MES INFORMATIONS",profileTitle:"Mon profil et mes préférences",profileHint:"Modifiez vos informations et les préférences de votre compte ci-dessous.",view:"Voir",save:"Ajouter aux favoris",remove:"Retirer des favoris",emptyFavorites:"Vous n’avez pas encore ajouté d’activités favorites.",securityNote:"Cette fonctionnalité est en préparation."},
+ en:{hello:"HELLO,",yourSpace:"YOUR IMSFRANE SPACE",welcome:"Your next adventure starts here.",official:"↗ Back to the official website",dashboard:"My dashboard",home:"Home",bookings:"Bookings",favorites:"Favorites",activities:"Activities",account:"Account",navigation:"YOUR LAST VISIT",return:"Continue exploring",returnDesc:"Go back to the last page you visited.",gettingStarted:"YOUR FIRST STEPS",start:"Getting started with Imsfrane",done:"COMPLETE",todo:"TO DO",stepCreated:"Account created",stepCreatedDesc:"Your Imsfrane account is ready.",stepVerified:"Email verified",stepVerifiedDesc:"Verification depends on your sign-in method.",stepProfile:"Complete your profile",stepProfileDesc:"Add your public name.",completeProfile:"Complete my profile →",stepExplore:"Explore the adventures",stepExploreDesc:"See the experiences available in Imsfrane.",discover:"Discover activities →",savedItems:"favorites on this device",completion:"profile complete",nextAdventure:"YOUR NEXT ADVENTURE",nextTitle:"Ready to explore the Atlas?",noBooking:"Bookings are not yet linked to your account.",noBookingDesc:"Browse experiences and contact our team to plan your visit.",seeAdventures:"Browse adventures",bookingSection:"MY BOOKINGS",bookingTitle:"My experiences",bookingUnavailable:"No synced bookings",bookingExplain:"Bookings are currently arranged directly with our team and do not automatically appear here yet.",contactBook:"Book an activity",favoriteSection:"MY FAVORITES",favoritesTitle:"Experiences I love",favoritesHint:"Favorites are stored only in this browser on this device.",addFavorites:"Explore activities",activitySection:"IMSFRANE · ATLAS",activitiesTitle:"Choose my next activity",activityHint:"Save activities to favorites or open their pages.",profileSection:"MY DETAILS",profileTitle:"My profile and preferences",profileHint:"Edit your information and account preferences below.",view:"View",save:"Add to favorites",remove:"Remove favorite",emptyFavorites:"You have not saved any favorites yet.",securityNote:"This feature is under development."},
+ ar:{hello:"مرحباً،",yourSpace:"فضاؤك في مسفران",welcome:"مغامرتك القادمة تبدأ من هنا.",official:"↗ العودة إلى الموقع الرسمي",dashboard:"لوحة التحكم",home:"الرئيسية",bookings:"حجوزاتي",favorites:"المفضلة",activities:"الأنشطة",account:"حسابي",navigation:"متابعة التصفح",return:"العودة إلى آخر صفحة",returnDesc:"تابع تصفح الصفحة الأخيرة التي زرتها.",gettingStarted:"خطواتك الأولى",start:"ابدأ رحلتك مع مسفران",done:"مكتمل",todo:"غير مكتمل",stepCreated:"إنشاء الحساب",stepCreatedDesc:"حسابك في مسفران جاهز.",stepVerified:"تأكيد البريد الإلكتروني",stepVerifiedDesc:"يعتمد التأكيد على طريقة تسجيل الدخول.",stepProfile:"إكمال الملف الشخصي",stepProfileDesc:"أضف اسمك الذي سيظهر للآخرين.",completeProfile:"إكمال ملفي الشخصي ←",stepExplore:"اكتشاف المغامرات",stepExploreDesc:"تصفح الأنشطة المتاحة في مسفران.",discover:"اكتشف الأنشطة ←",savedItems:"أنشطة مفضلة على هذا الجهاز",completion:"اكتمال الملف الشخصي",nextAdventure:"مغامرتك القادمة",nextTitle:"هل أنت مستعد لاكتشاف الأطلس؟",noBooking:"الحجوزات غير مرتبطة بحسابك حتى الآن.",noBookingDesc:"اكتشف تجاربنا وتواصل معنا لترتيب مغامرتك.",seeAdventures:"استكشاف المغامرات",bookingSection:"حجوزاتي",bookingTitle:"متابعة تجاربي",bookingUnavailable:"لا توجد حجوزات متزامنة",bookingExplain:"يتم تنسيق الحجوزات حالياً مباشرة مع فريقنا، ولا تظهر تلقائياً في حسابك بعد.",contactBook:"حجز نشاط",favoriteSection:"قائمة المفضلة",favoritesTitle:"التجارب التي تهمني",favoritesHint:"تُحفظ المفضلة في هذا المتصفح وعلى هذا الجهاز فقط.",addFavorites:"تصفح الأنشطة",activitySection:"مسفران · الأطلس",activitiesTitle:"اختر نشاطك القادم",activityHint:"احفظ أنشطتك المفضلة أو افتح صفحاتها لمعرفة التفاصيل.",profileSection:"معلوماتي الشخصية",profileTitle:"ملفي الشخصي وتفضيلاتي",profileHint:"يمكنك تعديل معلوماتك وتفضيلات الحساب أدناه.",view:"عرض",save:"إضافة إلى المفضلة",remove:"إزالة من المفضلة",emptyFavorites:"لم تُضف أي نشاط إلى المفضلة بعد.",securityNote:"هذه الخاصية قيد التطوير."},
+ es:{hello:"¡HOLA!",yourSpace:"TU ESPACIO IMSFRANE",welcome:"Tu próxima aventura empieza aquí.",official:"↗ Volver al sitio oficial",dashboard:"Panel personal",home:"Inicio",bookings:"Reservas",favorites:"Favoritos",activities:"Actividades",account:"Mi cuenta",navigation:"TU NAVEGACIÓN",return:"Continuar mi visita",returnDesc:"Vuelve a la última página que visitaste.",gettingStarted:"TUS PRIMEROS PASOS",start:"Empieza con Imsfrane",done:"COMPLETADO",todo:"PENDIENTE",stepCreated:"Cuenta creada",stepCreatedDesc:"Tu cuenta Imsfrane ya está lista.",stepVerified:"Correo verificado",stepVerifiedDesc:"La verificación depende del método de acceso.",stepProfile:"Completa tu perfil",stepProfileDesc:"Añade tu nombre público.",completeProfile:"Completar mi perfil →",stepExplore:"Descubre aventuras",stepExploreDesc:"Explora las actividades disponibles en Imsfrane.",discover:"Descubrir actividades →",savedItems:"favoritos en este dispositivo",completion:"perfil completado",nextAdventure:"TU PRÓXIMA AVENTURA",nextTitle:"¿Listo para explorar el Atlas?",noBooking:"Las reservas aún no están vinculadas a tu cuenta.",noBookingDesc:"Explora las experiencias y contacta con nuestro equipo para organizar tu viaje.",seeAdventures:"Descubrir aventuras",bookingSection:"MIS RESERVAS",bookingTitle:"Mis experiencias",bookingUnavailable:"Sin reservas sincronizadas",bookingExplain:"Las reservas se organizan directamente con nuestro equipo y todavía no aparecen aquí automáticamente.",contactBook:"Reservar una actividad",favoriteSection:"MIS FAVORITOS",favoritesTitle:"Experiencias que me inspiran",favoritesHint:"Tus favoritos se guardan solo en este navegador y dispositivo.",addFavorites:"Explorar actividades",activitySection:"IMSFRANE · ATLAS",activitiesTitle:"Elegir mi próxima actividad",activityHint:"Guarda experiencias favoritas o consulta sus páginas.",profileSection:"MIS DATOS",profileTitle:"Mi perfil y preferencias",profileHint:"Edita tus datos y las preferencias de tu cuenta.",view:"Ver",save:"Guardar favorito",remove:"Eliminar favorito",emptyFavorites:"Todavía no tienes actividades favoritas.",securityNote:"Esta función está en desarrollo."}
+};
+const activities=[
+ {id:"rafting",photo:"images/rafting-new/IMG_2089.webp",names:{fr:"Rafting sur l’Ahansal",en:"Ahansal rafting",ar:"التجديف في أحنصال",es:"Rafting en Ahansal"}},
+ {id:"randonnee",photo:"images/hero.webp",names:{fr:"Randonnée au sommet",en:"Summit hiking",ar:"المشي نحو القمة",es:"Senderismo a la cima"}},
+ {id:"camping",photo:"images/camping-1.webp",names:{fr:"Camping en pleine nature",en:"Wild camping",ar:"التخييم في الطبيعة",es:"Camping en la naturaleza"}},
+ {id:"vtt",photo:"images/vtt.webp",names:{fr:"VTT dans l’Atlas",en:"Atlas mountain biking",ar:"الدراجات الجبلية",es:"BTT en el Atlas"}},
+ {id:"quad",photo:"images/quad.webp",names:{fr:"Aventure en quad",en:"Quad adventure",ar:"مغامرة الدراجات الرباعية",es:"Aventura en quad"}},
+ {id:"hebergement",photo:"images/21.webp",names:{fr:"Hébergement local",en:"Local accommodation",ar:"الإقامة المحلية",es:"Alojamiento local"}}
+];
+let currentUser=null,storedName="",tab="home";
+const getLang=()=>langs.includes(document.documentElement.lang)?document.documentElement.lang:"fr";
+const tr=()=>translations[getLang()];
+const el=id=>document.getElementById(id);
+const path=slug=>base+getLang()+"/"+slug+".html";
+const safe=(fn,fallback)=>{try{return fn()}catch(_e){return fallback}};
+const favKey=()=>"imsfrane-demo-favs:"+String(currentUser?.id||"guest");
+const seenKey=()=>"imsfrane-demo-explored:"+String(currentUser?.id||"guest");
+function savedFavorites(){let list=safe(()=>JSON.parse(localStorage.getItem(favKey())||"[]"),[]);return Array.isArray(list)?list.filter(id=>activities.some(a=>a.id===id)):[]}
+function rememberFavorites(list){safe(()=>localStorage.setItem(favKey(),JSON.stringify(list)))}
+function avatar(user){
+ const target=el("imsDashAvatar");if(!target)return;target.replaceChildren();const photo=user?.user_metadata?.avatar_url||user?.user_metadata?.picture;let valid=false;
+ if(typeof photo==="string")try{const u=new URL(photo);valid=u.protocol==="https:"&&u.hostname!=="localhost"}catch(e){}
+ if(valid){const img=document.createElement("img");img.src=photo;img.alt="";img.referrerPolicy="no-referrer";img.onerror=()=>{img.remove();target.textContent=(user?.email||"I")[0].toUpperCase()};target.append(img)}
+ else target.textContent=(storedName||user?.user_metadata?.name||user?.email||"I")[0].toUpperCase();
+}
+function renderProgress(){
+ const named=storedName.trim().length>0,verified=!!currentUser?.email_confirmed_at,seen=safe(()=>localStorage.getItem(seenKey())==="yes",false);
+ const completed={created:!!currentUser,verified:verified,named:named,explored:seen};
+ let done=Object.values(completed).filter(Boolean).length;
+ for(const [step,flag] of Object.entries(completed)){const card=dash.querySelector('[data-step="'+step+'"]');if(!card)continue;card.classList.toggle("is-done",flag);const status=card.querySelector("small");if(status)status.textContent=flag?tr().done:tr().todo;const dot=card.querySelector(".ims-step-dot");if(dot)dot.textContent=flag?"✓":String(["created","verified","named","explored"].indexOf(step)+1)}
+ el("imsDashStepCount").textContent=done+"/4";el("imsDashMeter").style.width=(done*25)+"%";el("imsProfilePct").textContent=(done*25)+"%";
+}
+function updateGreeting(){
+ if(!currentUser)return;
+ const name=storedName||currentUser.user_metadata?.full_name||currentUser.user_metadata?.name||currentUser.email?.split("@")[0]||"Imsfrane";
+ el("imsDashName").textContent=name;el("imsDashMail").textContent=currentUser.email||"";
+ avatar(currentUser);renderProgress();
+}
+function renderActivities(){
+ const target=el("imsActivitiesList");target.replaceChildren();const favorites=savedFavorites(),t=tr(),lang=getLang();
+ for(const a of activities){
+  const card=document.createElement("article");card.className="ims-activity-card";
+  const image=document.createElement("img");image.src=base+a.photo;image.alt=a.names[lang];image.loading="lazy";image.decoding="async";
+  const info=document.createElement("div");info.className="ims-activity-content";const h=document.createElement("h4");h.textContent=a.names[lang];const actions=document.createElement("div");actions.className="ims-activity-actions";
+  const visit=document.createElement("a");visit.href=path(a.id);visit.textContent=t.view;
+  const heart=document.createElement("button");heart.type="button";heart.dataset.favorite=a.id;heart.textContent=favorites.includes(a.id)?"♥":"♡";heart.setAttribute("aria-label",favorites.includes(a.id)?t.remove:t.save);heart.setAttribute("aria-pressed",String(favorites.includes(a.id)));
+  actions.append(visit,heart);info.append(h,actions);card.append(image,info);target.append(card);
+ }
+}
+function renderFavorites(){
+ const target=el("imsFavoritesList");target.replaceChildren();const ids=savedFavorites(),lang=getLang(),t=tr();el("imsFavCount").textContent=ids.length;
+ if(ids.length===0){const p=document.createElement("p");p.className="ims-dash-muted";p.textContent=t.emptyFavorites;target.append(p);return}
+ for(const id of ids){const a=activities.find(x=>x.id===id);if(!a)continue;const card=document.createElement("div");card.className="ims-fav-item";
+ const img=document.createElement("img");img.src=base+a.photo;img.alt="";img.loading="lazy";const strong=document.createElement("strong");strong.textContent=a.names[lang];
+ const link=document.createElement("a");link.href=path(a.id);link.textContent=t.view;const remove=document.createElement("button");remove.type="button";remove.dataset.favorite=id;remove.textContent="×";remove.setAttribute("aria-label",t.remove);card.append(img,strong,link,remove);target.append(card)}
+}
+function setTab(name,scroll){
+ if(!["home","bookings","favorites","activities","account"].includes(name))name="home";
+ tab=name;dash.dataset.view=name;
+ dash.querySelectorAll("[data-dash-pane]").forEach(p=>{p.hidden=p.dataset.dashPane!==name});
+ settings.hidden=name!=="account";
+ document.body.classList.toggle("ims-view-account",name==="account");
+ document.querySelectorAll("[data-dash-tab]").forEach(b=>{if(b.dataset.dashTab===name)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current")});
+ if(name==="activities"){safe(()=>localStorage.setItem(seenKey(),"yes"));renderProgress()}
+ if(name==="favorites")renderFavorites();
+ if(scroll)window.scrollTo({top:0,behavior:"smooth"});
+}
+function decorate(){
+ const t=tr(),lang=getLang();
+ dash.querySelectorAll("[data-i18n-dash]").forEach(e=>{const k=e.dataset.i18nDash;if(t[k])e.textContent=t[k]});
+ const official="https://imsfrane.com/"+lang+"/";el("imsDashOfficial").href=official;
+ el("imsDashBooking").href=path("booking");dash.querySelectorAll(".ims-dash-booking").forEach(a=>a.href=path("booking"));
+ const prev=safe(()=>sessionStorage.getItem("ims-demo-lastpage"),null);
+ let valid=null;if(prev)try{const u=new URL(prev,location.href);if(u.origin===location.origin&&u.pathname.startsWith(base+lang+"/")&&u.pathname!==location.pathname)valid=u.href}catch(e){}
+ el("imsDashReturn").href=valid||base+lang+"/index.html";
+ renderActivities();renderFavorites();renderProgress();
+ document.querySelectorAll("[data-dash-tab]").forEach(b=>b.querySelector("span")&&(b.querySelector("span").textContent=t[b.dataset.dashTab]));
+}
+function init(){
+ mobile.innerHTML=dash.querySelector(".ims-dash-tabs").innerHTML;
+ document.addEventListener("ims:member-session",e=>{currentUser=e.detail?.user||null;if(currentUser){updateGreeting();mobile.hidden=false}else{mobile.hidden=true;document.body.classList.remove("ims-view-account")};renderFavorites()});
+ document.addEventListener("ims:member-profile",e=>{storedName=e.detail?.name||"";updateGreeting()});
+ document.addEventListener("ims:member-language",()=>decorate());
+ dash.addEventListener("click",e=>{
+  const go=e.target.closest("[data-dash-go]");if(go){setTab(go.dataset.dashGo,true);return}
+  const tabBtn=e.target.closest("[data-dash-tab]");if(tabBtn){setTab(tabBtn.dataset.dashTab,true);return}
+  const heart=e.target.closest("button[data-favorite]");if(heart){const id=heart.dataset.favorite,now=savedFavorites();rememberFavorites(now.includes(id)?now.filter(x=>x!==id):[...now,id]);renderActivities();renderFavorites()}
+ });
+ mobile.addEventListener("click",e=>{const b=e.target.closest("[data-dash-tab]");if(b)setTab(b.dataset.dashTab,true)});
+ const after=window.IMSFRANE_MEMBER_DATA;
+ if(after){currentUser=after.user||null;storedName=after.name||"";if(currentUser){updateGreeting();mobile.hidden=false}}
+ decorate();setTab("home",false);
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
+})();
