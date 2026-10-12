@@ -96,6 +96,8 @@ html[dir="rtl"] #language{right:auto;left:32px}
 html[dir="rtl"] main>.row:first-child,html[dir="rtl"] .members-card{text-align:right}
 @media(max-width:780px){header{width:100%;height:70px;padding:18px 20px}header .brand{font-size:20px}main{display:block;padding:0 0 22px}.members-cover{position:relative;inset:auto;min-height:200px;height:215px;width:100%;padding:75px 23px 22px;justify-content:flex-end}.members-cover h2{font-size:30px;max-width:330px;margin-bottom:0}.members-cover p,.members-cover span{display:none}main>.row:first-child{padding:32px 24px 0!important}.members-card{padding:0 24px}#notice{margin:13px 24px 5px}main>section:not(#member){margin:18px 24px}#member{margin:0 24px!important}h1{font-size:32px}#language{top:21px;right:18px;border-color:#ffffffaa;background:#ffffffec;padding:7px 10px;max-width:125px!important}html[dir="rtl"] #language{left:18px}header .brand{max-width:60%;line-height:1.2}.members-cover{background-position:center 40%}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important}}
+</style><style id="mobile-layout-fix">
+@media(max-width:780px){main{display:flex;flex-direction:column}.members-hero{display:contents}.members-cover{order:-2}main>.row:first-child{order:-1}#notice{order:0}.members-card{order:1}#member{order:2}main>section:not(#member){order:3}main>section:last-child{order:4}}
 </style></head>
 <body>
 <header><span class="brand">Imsfrane Cathédrale</span><a href="https://imsfraneinfo.github.io/Imsfrane-demo/" id="back">← Demo</a></header>
