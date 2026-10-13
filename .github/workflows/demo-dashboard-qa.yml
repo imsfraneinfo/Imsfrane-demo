@@ -7,6 +7,8 @@ on:
       - navigation-pro.js
       - booking-pro.js
       - js/ims-favorites-demo.js
+      - js/member-notifications.js
+      - css/member-notifications.css
       - dashboard-pro.js
       - dashboard-pro.css
       - css/ims-favorites-pro.css
@@ -25,6 +27,7 @@ jobs:
           node --check dashboard-pro.js
           node --check booking-pro.js
           node --check js/ims-favorites-demo.js
+          node --check js/member-notifications.js
           python3 - <<'PY'
           from pathlib import Path
           import re
@@ -51,6 +54,16 @@ jobs:
           assert 'member_orders' in Path('booking-pro.js').read_text()
           assert 'member_favorites' in Path('js/ims-favorites-demo.js').read_text()
           assert 'member_favorites' in Path('dashboard-pro.js').read_text()
+          assert 'member-notifications.js' in s
+          assert 'member-notifications.js' in Path('navigation-pro.js').read_text()
+          script=Path('js/member-notifications.js').read_text()
+          assert 'send_member_announcement' in script
+          assert 'p_preview_only:true' in script, 'Staging must only send preview to admin'
+          assert 'member_notifications' in script and 'read_at' in script
+          assert 'member_admins' in script
+          assert 'member_notification_preferences' in s
+          assert Path('css/member-notifications.css').is_file()
+          print('PASS: Demo notification inbox and admin-only preview broadcasting')
           assert 'home-pro.css' in s and 'class="hp-home ims-dash-home-visual"' in s
           js=Path('dashboard-pro.js').read_text()
           assert 'new DOMParser()' in js and 'originalFavoriteCard' in js and 'sourceHomepage' in js
