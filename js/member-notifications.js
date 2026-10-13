@@ -40,7 +40,7 @@ function renderNotes(root,compact){
  for(const n of set){
   const card=el("article","ims-notify-card"+(n.read_at?"":" is-unread"));
   const icon=el("span","ims-notify-emoji",colors[n.category]||"📣");icon.setAttribute("aria-hidden","true");
-  const box=el("div","ims-notify-copy");const meta=el("small","",tr().categories[n.category]||tr().categories.news+" · "+new Date(n.created_at).toLocaleDateString(lang()));
+  const box=el("div","ims-notify-copy");const meta=el("small","",(tr().categories[n.category]||tr().categories.news)+" · "+new Date(n.created_at).toLocaleDateString(lang()==="ar"?"ar-MA":lang()));
   const title=el("strong","",n.title);
   const body=el("p","",n.body);
   const controls=el("div","ims-notify-actions");
