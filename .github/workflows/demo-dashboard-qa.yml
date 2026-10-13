@@ -7,6 +7,10 @@ on:
       - navigation-pro.js
       - booking-pro.js
       - js/ims-favorites-demo.js
+      - js/member-email-center.js
+      - css/member-email-center.css
+      - supabase/functions/member-email-dispatch/index.ts
+      - supabase/functions/member-email-unsubscribe/index.ts
       - js/member-notifications.js
       - css/member-notifications.css
       - dashboard-pro.js
@@ -27,6 +31,7 @@ jobs:
           node --check dashboard-pro.js
           node --check booking-pro.js
           node --check js/ims-favorites-demo.js
+          node --check js/member-email-center.js
           node --check js/member-notifications.js
           python3 - <<'PY'
           from pathlib import Path
@@ -52,6 +57,15 @@ jobs:
           for p in ('images/logo.webp','images/rafting-new/IMG_2089.webp','images/camping-1.webp','images/vtt.webp','images/quad.webp','images/hero.webp','images/21.webp'):
               assert Path(p).is_file(),p
           assert 'member_orders' in Path('booking-pro.js').read_text()
+          assert 'member-email-center.js' in s and 'member-email-center.css' in s
+          email=Path('js/member-email-center.js').read_text()
+          assert 'send_member_announcement' in email and 'member-email-dispatch' in email
+          assert 'p_preview_only:preview' in email
+          worker=Path('supabase/functions/member-email-dispatch/index.ts').read_text()
+          assert 'MEMBER_EMAIL_SEND_ENABLED' in worker and 'RESEND_API_KEY' in worker
+          assert 'member_notification_preferences' in worker and 'email_updates' in worker
+          optout=Path('supabase/functions/member-email-unsubscribe/index.ts').read_text()
+          assert 'email_updates:false' in optout
           assert 'member_favorites' in Path('js/ims-favorites-demo.js').read_text()
           assert 'member_favorites' in Path('dashboard-pro.js').read_text()
           assert 'member-notifications.js' in s
