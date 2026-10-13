@@ -148,7 +148,7 @@ function refreshAccount(u){
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",initAccountModal,{once:true});else initAccountModal();
 
-function loadFavoriteHearts(){if(!/^\/Imsfrane-demo\/(fr|en|ar|es)\//.test(location.pathname))return;if(document.querySelector('script[data-ims-fav]'))return;var script=document.createElement("script");script.src="/Imsfrane-demo/js/ims-favorites-demo.js?v=20261013b";script.defer=true;script.dataset.imsFav="yes";document.head.append(script)}
+function loadFavoriteHearts(){if(!/^\/Imsfrane-demo\/(fr|en|ar|es)\//.test(location.pathname))return;if(document.querySelector('script[data-ims-fav]'))return;var script=document.createElement("script");script.src="/Imsfrane-demo/js/ims-favorites-demo.js?v=20261013all14proheart-v1";script.defer=true;script.dataset.imsFav="yes";document.head.append(script)}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",loadFavoriteHearts,{once:true});else loadFavoriteHearts();
 
 })();
