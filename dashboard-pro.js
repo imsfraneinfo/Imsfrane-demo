@@ -11,12 +11,146 @@ const translations={
  es:{hello:"¡HOLA!",yourSpace:"TU ESPACIO IMSFRANE",welcome:"Tu próxima aventura empieza aquí.",official:"↗ Volver al sitio oficial",dashboard:"Panel personal",home:"Inicio",bookings:"Mis pedidos",favorites:"Favoritos",activities:"Actividades",account:"Mi cuenta",navigation:"TU NAVEGACIÓN",return:"Continuar mi visita",returnDesc:"Vuelve a la última página que visitaste.",gettingStarted:"TUS PRIMEROS PASOS",start:"Empieza con Imsfrane",done:"COMPLETADO",todo:"PENDIENTE",stepCreated:"Cuenta creada",stepCreatedDesc:"Tu cuenta Imsfrane ya está lista.",stepVerified:"Correo verificado",stepVerifiedDesc:"La verificación depende del método de acceso.",stepProfile:"Completa tu perfil",stepProfileDesc:"Añade tu nombre público.",completeProfile:"Completar mi perfil →",stepExplore:"Descubre aventuras",stepExploreDesc:"Explora las actividades disponibles en Imsfrane.",discover:"Descubrir actividades →",savedItems:"favoritos en este dispositivo",completion:"perfil completado",nextAdventure:"TU PRÓXIMA AVENTURA",nextTitle:"¿Listo para explorar el Atlas?",noBooking:"Las reservas aún no están vinculadas a tu cuenta.",noBookingDesc:"Explora las experiencias y contacta con nuestro equipo para organizar tu viaje.",seeAdventures:"Descubrir aventuras",bookingSection:"MIS PEDIDOS",bookingTitle:"Mis experiencias",bookingUnavailable:"Sin reservas sincronizadas",bookingExplain:"Las reservas se organizan directamente con nuestro equipo y todavía no aparecen aquí automáticamente.",contactBook:"Reservar una actividad",favoriteSection:"MIS FAVORITOS",favoritesTitle:"Experiencias que me inspiran",favoritesHint:"Aquí encontrarás tus actividades favoritas con las mismas fotos y detalles que en nuestro sitio.",addFavorites:"Explorar actividades",activitySection:"IMSFRANE · ATLAS",activitiesTitle:"Elegir mi próxima actividad",activityHint:"Guarda experiencias favoritas o consulta sus páginas.",profileSection:"MIS DATOS",profileTitle:"Mi perfil y preferencias",profileHint:"Edita tus datos y las preferencias de tu cuenta.",view:"Ver",save:"Guardar favorito",remove:"Eliminar favorito",emptyFavorites:"Todavía no tienes actividades favoritas.",securityNote:"Esta función está en desarrollo."}
 };
 const activities=[
- {id:"rafting",photo:"images/rafting-new/IMG_2089.webp",names:{fr:"Rafting sur l’Ahansal",en:"Ahansal rafting",ar:"التجديف في أحنصال",es:"Rafting en Ahansal"}},
- {id:"randonnee",photo:"images/hero.webp",names:{fr:"Randonnée au sommet",en:"Summit hiking",ar:"المشي نحو القمة",es:"Senderismo a la cima"}},
- {id:"camping",photo:"images/camping-1.webp",names:{fr:"Camping en pleine nature",en:"Wild camping",ar:"التخييم في الطبيعة",es:"Camping en la naturaleza"}},
- {id:"vtt",photo:"images/vtt.webp",names:{fr:"VTT dans l’Atlas",en:"Atlas mountain biking",ar:"الدراجات الجبلية",es:"BTT en el Atlas"}},
- {id:"quad",photo:"images/quad.webp",names:{fr:"Aventure en quad",en:"Quad adventure",ar:"مغامرة الدراجات الرباعية",es:"Aventura en quad"}},
- {id:"hebergement",photo:"images/21.webp",names:{fr:"Hébergement local",en:"Local accommodation",ar:"الإقامة المحلية",es:"Alojamiento local"}}
+ {
+  "id": "rafting",
+  "photo": "images/raft2-800.webp",
+  "names": {
+   "fr": "Rafting",
+   "en": "Rafting",
+   "ar": "التجديف في المياه البيضاء",
+   "es": "Rafting"
+  }
+ },
+ {
+  "id": "randonnee",
+  "photo": "images/19-800.webp",
+  "names": {
+   "fr": "Randonnée",
+   "en": "Hiking",
+   "ar": "المشي الجبلي",
+   "es": "Senderismo"
+  }
+ },
+ {
+  "id": "camping",
+  "photo": "images/camping-1-800.webp",
+  "names": {
+   "fr": "Camping",
+   "en": "Camping",
+   "ar": "التخييم",
+   "es": "Acampada"
+  }
+ },
+ {
+  "id": "vtt",
+  "photo": "images/vtt-800.webp",
+  "names": {
+   "fr": "VTT",
+   "en": "Mountain biking",
+   "ar": "الدراجات الجبلية",
+   "es": "BTT"
+  }
+ },
+ {
+  "id": "quad",
+  "photo": "images/quad-800.webp",
+  "names": {
+   "fr": "Quad",
+   "en": "Quad biking",
+   "ar": "الكواد",
+   "es": "Quad"
+  }
+ },
+ {
+  "id": "hebergement",
+  "photo": "images/bab2-800.webp",
+  "names": {
+   "fr": "Hébergement",
+   "en": "Accommodation",
+   "ar": "الإقامة",
+   "es": "Alojamiento"
+  }
+ },
+ {
+  "id": "tubing",
+  "photo": "images/tubing-800.webp",
+  "names": {
+   "fr": "Tubing",
+   "en": "River tubing",
+   "ar": "التزلج بالعوامة في النهر",
+   "es": "Descenso en flotador"
+  }
+ },
+ {
+  "id": "jetski",
+  "photo": "images/jetski-800.webp",
+  "names": {
+   "fr": "Jet Ski",
+   "en": "Jet Ski",
+   "ar": "الدراجات المائية",
+   "es": "Moto de agua"
+  }
+ },
+ {
+  "id": "4x4",
+  "photo": "images/4x4-800.webp",
+  "names": {
+   "fr": "Excursion 4×4",
+   "en": "4×4 Excursion",
+   "ar": "جولة بسيارة رباعية الدفع",
+   "es": "Excursión en 4×4"
+  }
+ },
+ {
+  "id": "passage",
+  "photo": "images/passage-800.webp",
+  "names": {
+   "fr": "Passage Amazigh",
+   "en": "Amazigh Passage",
+   "ar": "الممر الأمازيغي في تاغية",
+   "es": "Pasaje Amazige de Taghia"
+  }
+ },
+ {
+  "id": "zrkan",
+  "photo": "images/zrkan-800.webp",
+  "names": {
+   "fr": "Cascades Zrkan",
+   "en": "Zrkan Waterfalls",
+   "ar": "شلالات زركان",
+   "es": "Cascadas de Zrkan"
+  }
+ },
+ {
+  "id": "anergui",
+  "photo": "images/anergui-800.webp",
+  "names": {
+   "fr": "Visite d’Anergui",
+   "en": "Explore Anergui",
+   "ar": "زيارة أنرگي",
+   "es": "Visita a Anergui"
+  }
+ },
+ {
+  "id": "almou",
+  "photo": "images/almo-800.webp",
+  "names": {
+   "fr": "Almou Ntalmast",
+   "en": "Almou Ntalmast",
+   "ar": "ألمو نتالماست",
+   "es": "Almou Ntalmast"
+  }
+ },
+ {
+  "id": "ahidous",
+  "photo": "images/ahidous-800.webp",
+  "names": {
+   "fr": "Soirée Ahidous",
+   "en": "Ahidous Evening",
+   "ar": "أمسية أحيدوس",
+   "es": "Velada de Ahidous"
+  }
+ }
 ];
 let currentUser=null,storedName="",tab="home";
 const getLang=()=>langs.includes(document.documentElement.lang)?document.documentElement.lang:"fr";
@@ -108,11 +242,7 @@ async function renderActivities(){
    This preserves each original image, heading, description, price and card design. */
 const homepageCache=new Map();
 let favoritesRenderVersion=0;
-const fallbackCardImages={
- rafting:"images/raft2-800.webp",randonnee:"images/19-800.webp",
- camping:"images/camping-1-800.webp",vtt:"images/vtt-800.webp",
- quad:"images/quad-800.webp",hebergement:"images/bab2-800.webp"
-};
+const fallbackCardImages={"rafting":"images/raft2-800.webp","randonnee":"images/19-800.webp","camping":"images/camping-1-800.webp","vtt":"images/vtt-800.webp","quad":"images/quad-800.webp","hebergement":"images/bab2-800.webp","tubing":"images/tubing-800.webp","jetski":"images/jetski-800.webp","4x4":"images/4x4-800.webp","passage":"images/passage-800.webp","zrkan":"images/zrkan-800.webp","anergui":"images/anergui-800.webp","almou":"images/almo-800.webp","ahidous":"images/ahidous-800.webp"};
 function sourceHomepage(language){
  if(!homepageCache.has(language)){
   const url=base+language+"/index.html";
@@ -156,7 +286,11 @@ function originalFavoriteCard(id,language,homeDocument,selected=true){
  remove.setAttribute("aria-label",selected?tr().remove:tr().save);
  remove.setAttribute("aria-pressed",String(selected));
  remove.title=selected?tr().remove:tr().save;
- remove.textContent=selected?"♥":"♡";
+ const svg=document.createElementNS("http://www.w3.org/2000/svg","svg");
+ svg.classList.add("ims-heart-svg");svg.setAttribute("viewBox","0 0 24 24");svg.setAttribute("aria-hidden","true");svg.setAttribute("focusable","false");
+ const heartPath=document.createElementNS("http://www.w3.org/2000/svg","path");
+ heartPath.setAttribute("d","M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78Z");
+ svg.append(heartPath);remove.append(svg);
  card.append(remove);
  return card;
 }
