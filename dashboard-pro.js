@@ -103,12 +103,76 @@ function renderActivities(){
   actions.append(visit,heart);info.append(h,actions);card.append(image,info);target.append(card);
  }
 }
-function renderFavorites(){
- const target=el("imsFavoritesList");target.replaceChildren();const ids=savedFavorites(),lang=getLang(),t=tr();el("imsFavCount").textContent=ids.length;
- if(ids.length===0){const p=document.createElement("p");p.className="ims-dash-muted";p.textContent=t.emptyFavorites;target.append(p);return}
- for(const id of ids){const a=activities.find(x=>x.id===id);if(!a)continue;const card=document.createElement("div");card.className="ims-fav-item";
- const img=document.createElement("img");img.src=base+a.photo;img.alt="";img.loading="lazy";const strong=document.createElement("strong");strong.textContent=a.names[lang];
- const link=document.createElement("a");link.href=path(a.id);link.textContent=t.view;const remove=document.createElement("button");remove.type="button";remove.dataset.favorite=id;remove.textContent="×";remove.setAttribute("aria-label",t.remove);card.append(img,strong,link,remove);target.append(card)}
+/* Render saved activities from the actual localized homepage, not separate mini-cards.
+   This preserves each original image, heading, description, price and card design. */
+const homepageCache=new Map();
+let favoritesRenderVersion=0;
+const fallbackCardImages={
+ rafting:"images/raft2-800.webp",randonnee:"images/19-800.webp",
+ camping:"images/camping-1-800.webp",vtt:"images/vtt-800.webp",
+ quad:"images/quad-800.webp",hebergement:"images/bab2-800.webp"
+};
+function sourceHomepage(language){
+ if(!homepageCache.has(language)){
+  const url=base+language+"/index.html";
+  // The homepage is the single source of truth for cards.
+  homepageCache.set(language,fetch(url,{credentials:"same-origin"}).then(async response=>{
+   if(!response.ok)throw Error("Homepage unavailable");
+   return new DOMParser().parseFromString(await response.text(),"text/html");
+  }).catch(error=>{console.warn("Could not load original favorite cards",error);homepageCache.delete(language);return null}));
+ }
+ return homepageCache.get(language);
+}
+function originalFavoriteCard(id,language,homeDocument){
+ const source=homeDocument?.querySelector(".hp-activity-grid .hp-activity-card.hp-"+id);
+ let card;
+ if(source){
+  card=document.importNode(source,true);
+  const sourceUrl=new URL(base+language+"/index.html",location.href);
+  card.querySelectorAll("a[href]").forEach(link=>{
+   try{const href=link.getAttribute("href");if(href)link.href=new URL(href,sourceUrl).href}catch(e){}
+  });
+  card.querySelectorAll("img[src]").forEach(img=>{
+   try{const src=img.getAttribute("src");if(src)img.src=new URL(src,sourceUrl).href}catch(e){}
+  });
+ }else{
+  // Network fallback uses the very same image as the actual homepage card.
+  const a=activities.find(item=>item.id===id);
+  card=document.createElement("article");
+  card.className="hp-activity-card hp-"+id;
+  const link=document.createElement("a");link.className="hp-activity-image";link.href=path(id);
+  const photo=document.createElement("img");photo.src=base+fallbackCardImages[id];photo.alt=a?.names[language]||id;photo.loading="lazy";link.append(photo);
+  const content=document.createElement("div");content.className="hp-activity-body";
+  const title=document.createElement("h3");title.textContent=a?.names[language]||id;
+  const bottom=document.createElement("div");bottom.className="hp-activity-bottom";
+  const action=document.createElement("a");action.href=path(id);action.textContent=tr().view;
+  bottom.append(action);content.append(title,bottom);card.append(link,content);
+ }
+ card.style.position="relative";
+ const remove=document.createElement("button");
+ remove.type="button";remove.className="ims-original-fav-heart";
+ remove.dataset.favorite=id;
+ remove.setAttribute("aria-label",tr().remove);
+ remove.setAttribute("aria-pressed","true");
+ remove.title=tr().remove;remove.textContent="♥";
+ card.append(remove);
+ return card;
+}
+async function renderFavorites(){
+ const generation=++favoritesRenderVersion;
+ const target=el("imsFavoritesList");if(!target)return;
+ target.replaceChildren();
+ const ids=savedFavorites(),language=getLang();
+ el("imsFavCount").textContent=ids.length;
+ if(!ids.length){
+  const empty=document.createElement("p");empty.className="ims-dash-muted";empty.textContent=tr().emptyFavorites;
+  target.append(empty);return;
+ }
+ const home=await sourceHomepage(language);
+ if(generation!==favoritesRenderVersion||language!==getLang())return;
+ const fragment=document.createDocumentFragment();
+ ids.forEach(id=>fragment.append(originalFavoriteCard(id,language,home)));
+ target.append(fragment);
 }
 function setTab(name,scroll){
  if(!["home","bookings","favorites","activities","account"].includes(name))name="home";
