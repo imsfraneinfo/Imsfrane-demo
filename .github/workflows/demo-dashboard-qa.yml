@@ -43,6 +43,8 @@ jobs:
           for l in ('fr','en','ar','es'):
               for name in ('index','booking','rafting','randonnee','camping','vtt','quad','hebergement','blog','contact'):
                   assert Path(l,name+'.html').is_file(),(l,name)
+                  if name in ('index','rafting','camping','randonnee','vtt','quad','hebergement'):
+                      assert 'navigation-pro.js' in Path(l,name+'.html').read_text(),('missing member/favorites shell',l,name)
           for p in ('images/logo.webp','images/rafting-new/IMG_2089.webp','images/camping-1.webp','images/vtt.webp','images/quad.webp','images/hero.webp','images/21.webp'):
               assert Path(p).is_file(),p
           assert 'member_orders' in Path('booking-pro.js').read_text()
