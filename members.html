@@ -128,7 +128,7 @@ body.ims-profile-active #member button:not(.secondary){background:#173d2f!import
 body.ims-profile-active #language{position:static!important;border-color:#d6daca;max-width:165px}
 html[dir="rtl"] .ims-profile-banner{text-align:right}
 @media(max-width:800px){.ims-sitebar{padding:12px 16px!important;flex-wrap:wrap}.ims-site-links{order:3;width:100%;justify-content:center;gap:25px;border-top:1px solid #ffffff20;padding-top:11px}.ims-site-brand strong{font-size:17px}.ims-site-brand img{width:43px;height:43px}.ims-site-back{padding:8px;font-size:11px}body.ims-profile-active main{padding:16px 13px 45px!important}.ims-profile-banner{padding:24px 20px}.ims-profile-banner:after{display:none}}
-</style><link rel="stylesheet" href="dashboard-pro.css?v=20261012d1"></head>
+</style><link rel="stylesheet" href="dashboard-pro.css?v=20261012d1"><style id="ims-avatar-design">.ims-avatar-upload{display:flex;align-items:center;gap:18px;background:#fbfcf7;padding:18px;border:1px solid #e3e8dd;border-radius:14px;margin:18px 0}.ims-avatar-preview{width:88px;height:88px;flex:0 0 88px;border:3px solid #c6a43f;border-radius:50%;overflow:hidden;display:grid;place-items:center;background:#16402f;color:#f8deb0;font-size:29px}.ims-avatar-preview img{width:100%;height:100%;object-fit:cover}.ims-avatar-controls{flex:1;min-width:0}.ims-avatar-controls input{font-size:12px;width:100%;padding:9px!important}.ims-avatar-controls small{display:block;color:#6e8075;font-size:11px;margin-top:7px}.ims-avatar-controls button{padding:7px 12px!important;background:#f2ead6!important;color:#284330!important;font-size:11px!important}.ims-dash-ui .ims-dash-settings .ims-avatar-upload{border-color:#dce3d6}@media(max-width:530px){.ims-avatar-upload{gap:11px;padding:12px}.ims-avatar-preview{width:67px;height:67px;flex-basis:67px}}</style></head>
 <body>
 <header class="ims-sitebar"><a class="ims-site-brand" href="/Imsfrane-demo/fr/index.html"><img alt="Imsfrane Cathédrale" src="/Imsfrane-demo/images/logo.webp"><span><strong>Imsfrane Cathédrale</strong><small id="brandTagline">AVENTURES DANS L’ATLAS</small></span></a><nav class="ims-site-links" aria-label="Main navigation"><a id="navHome" href="/Imsfrane-demo/fr/">Accueil</a><a id="navBlog" href="/Imsfrane-demo/fr/blog/">Blog</a><a id="navContact" href="/Imsfrane-demo/fr/contact/">Contact</a></nav><select id="imsDashLang" class="ims-dash-header-lang" aria-label="Language"><option value="fr">FR</option><option value="en">EN</option><option value="ar">AR</option><option value="es">ES</option></select><a class="ims-site-back" href="/Imsfrane-demo/fr/" id="back">← Retour au site</a></header>
 <main>
@@ -175,7 +175,10 @@ html[dir="rtl"] .ims-profile-banner{text-align:right}
 <div id="imsSettingsPanel" class="ims-dash-settings" hidden><div class="ims-profile-banner"><span id="profileKicker">ESPACE MEMBRE</span><h2 id="profileHeading">Bienvenue dans votre espace</h2><p id="profileIntro">Gérez votre profil, vos préférences et retrouvez les aventures d’Imsfrane.</p><a class="ims-profile-home" href="/Imsfrane-demo/fr/" id="profileHome">← Retour à l’accueil</a></div>
 <div class="row" style="justify-content:space-between"><h2 id="welcome">Mon compte</h2><button type="button" class="secondary" id="logout">Déconnexion</button></div>
 <p id="accountEmail" class="muted"></p>
-<form id="profileForm"><label id="nameLabel" for="displayName">Votre nom public</label><input maxlength="80" id="displayName" autocomplete="nickname"><button id="saveProfile">Enregistrer le profil</button></form>
+<form id="profileForm"><label id="nameLabel" for="displayName">Votre nom public</label><input maxlength="80" id="displayName" autocomplete="nickname">
+<label id="phoneLabel" for="memberPhone">Téléphone (facultatif)</label><input id="memberPhone" type="tel" maxlength="28" autocomplete="tel" inputmode="tel" placeholder="+212 …" aria-describedby="memberPhoneHint"><small id="memberPhoneHint" class="muted">Seulement pour vous contacter si nécessaire.</small>
+<div class="ims-avatar-upload"><div id="memberAvatarPreview" class="ims-avatar-preview" aria-label="Photo du profil">👤</div><div class="ims-avatar-controls"><label id="avatarLabel" for="memberAvatarFile">Photo de profil (facultative)</label><input id="memberAvatarFile" type="file" accept="image/jpeg,image/png,image/webp"><small id="avatarHint">JPG, PNG ou WebP, maximum 2 Mo.</small><button type="button" id="removeAvatar" class="secondary">Supprimer la photo</button></div></div>
+<button id="saveProfile">Enregistrer le profil</button></form>
 <h3 id="prefTitle">Mes notifications</h3>
 <form id="preferencesForm">
 <label class="check"><input type="checkbox" id="prefInApp" checked><span id="inAppUpdates">Notifications dans mon compte (activées)</span></label><label class="check"><input type="checkbox" id="prefEmail"><span id="emailUpdates">Actualités par e-mail</span></label>
@@ -205,7 +208,7 @@ const msg=(s,error=false)=>{const n=$("notice");n.textContent=s;n.classList.togg
 const localized=()=>copy[lang];
 function translate(){lang=$("language").value;$("imsDashLang").value=lang;document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";for(const [k,v] of Object.entries(localized()))if($(k))$(k).textContent=v;const heroTexts={"fr":["IMSFRANE · MONTAGNES DE L’ATLAS","Vos aventures. Votre communauté.","Rencontrez nos guides locaux, partagez vos expériences et explorez les montagnes de l’Atlas avec nous.","IMSFRANE CATHÉDRALE · ESPACE MEMBRES"],"en":["IMSFRANE · ATLAS MOUNTAINS","Your adventures. Your community.","Connect with local guides, share experiences and explore the Atlas Mountains with us.","IMSFRANE CATHÉDRALE · MEMBERS"],"ar":["مسفران · جبال الأطلس","مغامراتك. مجتمعك.","تواصل مع المرشدين المحليين، شارك تجاربك واكتشف جبال الأطلس معنا.","مسفران كاتدرال · فضاء الأعضاء"],"es":["IMSFRANE · MONTAÑAS DEL ATLAS","Tus aventuras. Tu comunidad.","Conecta con guías locales, comparte experiencias y descubre las montañas del Atlas con nosotros.","IMSFRANE CATHÉDRALE · MIEMBROS"]};["heroEyebrow","heroTitle","heroDescription","memberKicker"].forEach((id,i)=>{$(id).textContent=heroTexts[lang][i]});document.title=localized().heading+" | Imsfrane Cathédrale";const route="/Imsfrane-demo/"+lang+"/";$("back").href="https://imsfrane.com/"+lang+"/";$("navHome").href=route+"index.html";$("navBlog").href=route+"blog.html";$("navContact").href=route+"contact.html";$("profileHome").href="https://imsfrane.com/"+lang+"/";
 const navCopy={fr:["AVENTURES DANS L’ATLAS","Accueil","Blog","Contact","← Retour au site","ESPACE MEMBRE","Bienvenue dans votre espace","Gérez votre profil et restez connecté à Imsfrane."],en:["ATLAS ADVENTURES","Home","Blog","Contact","← Back to site","MEMBER ACCOUNT","Welcome to your space","Manage your profile and stay connected with Imsfrane."],ar:["مغامرات الأطلس","الرئيسية","المدونة","اتصل بنا","← العودة للموقع","حساب العضو","مرحباً بك في حسابك","تحكم في ملفك الشخصي وابق على تواصل مع مسفران."],es:["AVENTURAS DEL ATLAS","Inicio","Blog","Contacto","← Volver al sitio","ÁREA DE MIEMBROS","Bienvenido a tu espacio","Gestiona tu perfil y mantente en contacto con Imsfrane."]}[lang];
-["brandTagline","navHome","navBlog","navContact","back","profileKicker","profileHeading","profileIntro"].forEach((k,i)=>$(k).textContent=navCopy[i]);const homeCopy={fr:"← Retour à l’accueil officiel",en:"← Back to official homepage",ar:"← الرجوع إلى الصفحة الرئيسية",es:"← Volver al inicio oficial"};$("profileHome").textContent=homeCopy[lang];$("back").textContent=navCopy[4];document.querySelector(".ims-site-brand").href="/Imsfrane-demo/"+lang+"/index.html";document.dispatchEvent(new Event("ims:member-language"));}
+["brandTagline","navHome","navBlog","navContact","back","profileKicker","profileHeading","profileIntro"].forEach((k,i)=>$(k).textContent=navCopy[i]);const homeCopy={fr:"← Retour à l’accueil officiel",en:"← Back to official homepage",ar:"← الرجوع إلى الصفحة الرئيسية",es:"← Volver al inicio oficial"};$("profileHome").textContent=homeCopy[lang];$("back").textContent=navCopy[4];document.querySelector(".ims-site-brand").href="/Imsfrane-demo/"+lang+"/index.html";const profileWords={fr:["Téléphone (facultatif)","Photo de profil (facultative)","JPG, PNG ou WebP, maximum 2 Mo.","Supprimer la photo","Seulement pour vous contacter si nécessaire."],en:["Phone number (optional)","Profile photo (optional)","JPG, PNG or WebP, 2 MB maximum.","Remove photo","Only used to contact you if necessary."],ar:["رقم الهاتف (اختياري)","الصورة الشخصية (اختيارية)","JPG أو PNG أو WebP، بحد أقصى 2 ميغابايت.","حذف الصورة","يُستخدم للتواصل معك عند الضرورة فقط."],es:["Teléfono (opcional)","Foto de perfil (opcional)","JPG, PNG o WebP, máximo 2 MB.","Eliminar foto","Solo para contactarte si es necesario."]}[lang];["phoneLabel","avatarLabel","avatarHint","removeAvatar","memberPhoneHint"].forEach((id,i)=>$(id).textContent=profileWords[i]);document.dispatchEvent(new Event("ims:member-language"));}
 $("imsDashLang").value=lang;$("imsDashLang").onchange=()=>{$("language").value=$("imsDashLang").value;$("language").dispatchEvent(new Event("change"))};
 $("language").onchange=async()=>{translate();await loadComments()};
 function showAuth(){ window.IMSFRANE_MEMBER_DATA={user:user,name:window.IMSFRANE_MEMBER_DATA?.name||""};document.dispatchEvent(new CustomEvent("ims:member-session",{detail:{user:user}}));document.body.classList.toggle("ims-profile-active",!!user);$("guest").classList.toggle("hidden",!!user);$("member").classList.toggle("hidden",!user);$("commentForm").classList.toggle("hidden",!user);$("mustLogin").classList.toggle("hidden",!!user);$("questionForm").classList.toggle("hidden",!user);$("questionLogin").classList.toggle("hidden",!!user);$("accountEmail").textContent=user?.email||"";}
@@ -215,8 +218,48 @@ $("signUp").onclick=()=>guarded(async()=>{if(!$("loginForm").reportValidity())re
 $("googleSignIn").onclick=()=>guarded(async()=>{const {error}=await db.auth.signInWithOAuth({provider:"google",options:{redirectTo:location.origin+location.pathname+location.search}});if(error)throw error});
 $("forgot").onclick=()=>guarded(async()=>{if(!$("email").checkValidity()){ $("email").reportValidity();return }const {error}=await db.auth.resetPasswordForEmail($("email").value.trim(),{redirectTo:location.origin+location.pathname});if(error)throw error;msg(localized().passwordMsg)});
 $("logout").onclick=()=>guarded(async()=>{const {error}=await db.auth.signOut();if(error)throw error;msg(localized().ready)});
-async function loadMember(){if(!user)return;const [p,n]=await Promise.all([db.from("member_profiles").select("display_name").eq("user_id",user.id).maybeSingle(),db.from("member_notification_preferences").select("*").eq("user_id",user.id).maybeSingle()]);if(p.error)throw p.error;if(n.error)throw n.error;$("displayName").value=p.data?.display_name||"";$("prefEmail").checked=!!n.data?.email_updates;$("prefInApp").checked=n.data?.in_app_updates!==false;$("prefPush").checked=!!n.data?.browser_push;$("prefMarketing").checked=!!n.data?.marketing_opt_in;window.IMSFRANE_MEMBER_DATA={user:user,name:p.data?.display_name||""};document.dispatchEvent(new CustomEvent("ims:member-profile",{detail:{name:p.data?.display_name||""}}));}
-$("profileForm").onsubmit=e=>{e.preventDefault();guarded(async()=>{const {error}=await db.from("member_profiles").upsert({user_id:user.id,display_name:$("displayName").value.trim(),locale:lang},{onConflict:"user_id"});if(error)throw error;msg(localized().saved);await loadComments()})};
+
+let memberAvatarPath=null,memberAvatarUrl=null,avatarRemoval=false;
+const pictureBox=$("memberAvatarPreview");
+function renderMemberAvatar(url){
+ pictureBox.replaceChildren();
+ if(url){const img=document.createElement("img");img.src=url;img.alt="";img.referrerPolicy="no-referrer";img.onerror=()=>{img.remove();pictureBox.textContent="👤"};pictureBox.append(img)}
+ else pictureBox.textContent="👤";
+}
+$("memberAvatarFile").onchange=()=>{
+ const file=$("memberAvatarFile").files?.[0];
+ avatarRemoval=false;
+ if(!file){renderMemberAvatar(memberAvatarUrl);return}
+ if(!["image/jpeg","image/png","image/webp"].includes(file.type)||file.size>2097152){
+  $("memberAvatarFile").value="";msg(({fr:"Choisissez un fichier JPG, PNG ou WebP de 2 Mo maximum.",en:"Choose a JPG, PNG or WebP image under 2 MB.",ar:"اختر صورة JPG أو PNG أو WebP بحجم لا يتجاوز 2 ميغابايت.",es:"Elige una imagen JPG, PNG o WebP de máximo 2 MB."})[lang],true);return;
+ }
+ renderMemberAvatar(URL.createObjectURL(file));
+};
+$("removeAvatar").onclick=()=>{avatarRemoval=true;$("memberAvatarFile").value="";renderMemberAvatar(null)};
+async function signedAvatar(path){
+ if(!path)return null;
+ const r=await db.storage.from("member-avatars").createSignedUrl(path,3600);
+ if(r.error){console.warn("Avatar preview unavailable");return null}
+ return r.data?.signedUrl||null;
+}
+
+async function loadMember(){if(!user)return;const [p,n]=await Promise.all([db.from("member_profiles").select("display_name,phone,avatar_path").eq("user_id",user.id).maybeSingle(),db.from("member_notification_preferences").select("*").eq("user_id",user.id).maybeSingle()]);if(p.error)throw p.error;if(n.error)throw n.error;$("displayName").value=p.data?.display_name||"";$("memberPhone").value=p.data?.phone||"";memberAvatarPath=p.data?.avatar_path||null;memberAvatarUrl=await signedAvatar(memberAvatarPath);renderMemberAvatar(memberAvatarUrl||user?.user_metadata?.avatar_url||null);avatarRemoval=false;$("prefEmail").checked=!!n.data?.email_updates;$("prefInApp").checked=n.data?.in_app_updates!==false;$("prefPush").checked=!!n.data?.browser_push;$("prefMarketing").checked=!!n.data?.marketing_opt_in;window.IMSFRANE_MEMBER_DATA={user:user,name:p.data?.display_name||""};document.dispatchEvent(new CustomEvent("ims:member-profile",{detail:{name:p.data?.display_name||"",avatarUrl:memberAvatarUrl}}));}
+$("profileForm").onsubmit=e=>{e.preventDefault();guarded(async()=>{
+const number=$("memberPhone").value.trim();
+if(number&&(!/^[+0-9 ()-]{7,28}$/.test(number)||number.replace(/\D/g,"").length<7))throw Error(({fr:"Numéro de téléphone invalide.",en:"Invalid phone number.",ar:"رقم الهاتف غير صالح.",es:"Número de teléfono no válido."})[lang]);
+let newAvatarPath=avatarRemoval?null:memberAvatarPath,oldPath=memberAvatarPath;
+const avatarFile=$("memberAvatarFile").files?.[0];
+if(avatarFile){
+ const ext={"image/jpeg":"jpg","image/png":"png","image/webp":"webp"}[avatarFile.type];
+ if(!ext||avatarFile.size>2097152)throw Error("Invalid image file");
+ newAvatarPath=user.id+"/avatar."+ext;
+ const uploaded=await db.storage.from("member-avatars").upload(newAvatarPath,avatarFile,{upsert:true,contentType:avatarFile.type,cacheControl:"60"});
+ if(uploaded.error)throw uploaded.error;
+}
+const {error}=await db.from("member_profiles").upsert({user_id:user.id,display_name:$("displayName").value.trim(),phone:number||null,avatar_path:newAvatarPath,locale:lang},{onConflict:"user_id"});
+if(!error&&oldPath&&oldPath!==newAvatarPath)await db.storage.from("member-avatars").remove([oldPath]);
+if(!error){$("memberAvatarFile").value="";await loadMember()}
+if(error)throw error;msg(localized().saved);await loadComments()})};
 $("preferencesForm").onsubmit=e=>{e.preventDefault();guarded(async()=>{const {error}=await db.from("member_notification_preferences").upsert({user_id:user.id,in_app_updates:$("prefInApp").checked,email_updates:$("prefEmail").checked,browser_push:$("prefPush").checked,marketing_opt_in:$("prefMarketing").checked},{onConflict:"user_id"});if(error)throw error;msg(localized().saved)})};
 $("commentForm").onsubmit=e=>{e.preventDefault();guarded(async()=>{const body=$("commentBody").value.trim();if(body.length<3)return;const {error}=await db.from("member_comments").insert({user_id:user.id,article_path:"/"+lang+"/blog/",body,status:"approved"});if(error)throw error;$("commentBody").value="";msg(localized().commentSent);await loadComments()})};
 async function loadComments(){
