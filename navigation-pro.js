@@ -159,4 +159,15 @@ function loadMemberNotifications(){
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",loadMemberNotifications,{once:true});else loadMemberNotifications();
 
+function loadMemberNotifications(){
+ if(!/^\/Imsfrane-demo\/(fr|en|ar|es)\//.test(location.pathname))return;
+ if(document.querySelector('script[data-ims-notifications]'))return;
+ var script=document.createElement("script");
+ script.src="/Imsfrane-demo/js/member-notifications.js?v=20261013-notify-demo2";
+ script.defer=true;
+ script.dataset.imsNotifications="1";
+ document.head.append(script);
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",loadMemberNotifications,{once:true});else loadMemberNotifications();
+
 })();
