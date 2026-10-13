@@ -50,5 +50,20 @@ jobs:
           assert 'member_orders' in Path('booking-pro.js').read_text()
           assert 'member_favorites' in Path('js/ims-favorites-demo.js').read_text()
           assert 'member_favorites' in Path('dashboard-pro.js').read_text()
+          assert 'home-pro.css' in s and 'class="hp-home ims-dash-home-visual"' in s
+          js=Path('dashboard-pro.js').read_text()
+          assert 'new DOMParser()' in js and 'originalFavoriteCard' in js and 'sourceHomepage' in js
+          import re
+          for l in ('fr','en','ar','es'):
+              html=Path(l,'index.html').read_text()
+              for slug in ('rafting','randonnee','camping','vtt','quad','hebergement'):
+                  match=re.search(r'<article class="hp-activity-card hp-'+slug+r'".*?</article>',html,re.S)
+                  assert match,('homepage card missing',l,slug)
+                  photo=re.search(r'<img[^>]*src="([^"]+)"',match.group(0))
+                  assert photo,('homepage card image missing',l,slug)
+                  local=Path(l,photo.group(1))
+                  assert local.resolve().is_file(),('original card photo missing',l,slug,photo.group(1))
+          print('PASS: Favorites mirror original homepage activity cards, photos, content and styling')
+
           print('PASS: Four-language dashboard, profile uploads, booking requests and synced favorites')
           PY
