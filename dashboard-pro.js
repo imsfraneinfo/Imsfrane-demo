@@ -92,16 +92,17 @@ function updateGreeting(){
  el("imsDashName").textContent=name;el("imsDashMail").textContent=currentUser.email||"";
  avatar(currentUser);renderProgress();
 }
-function renderActivities(){
- const target=el("imsActivitiesList");target.replaceChildren();const favorites=savedFavorites(),t=tr(),lang=getLang();
- for(const a of activities){
-  const card=document.createElement("article");card.className="ims-activity-card";
-  const image=document.createElement("img");image.src=base+a.photo;image.alt=a.names[lang];image.loading="lazy";image.decoding="async";
-  const info=document.createElement("div");info.className="ims-activity-content";const h=document.createElement("h4");h.textContent=a.names[lang];const actions=document.createElement("div");actions.className="ims-activity-actions";
-  const visit=document.createElement("a");visit.href=path(a.id);visit.textContent=t.view;
-  const heart=document.createElement("button");heart.type="button";heart.dataset.favorite=a.id;heart.textContent=favorites.includes(a.id)?"♥":"♡";heart.setAttribute("aria-label",favorites.includes(a.id)?t.remove:t.save);heart.setAttribute("aria-pressed",String(favorites.includes(a.id)));
-  actions.append(visit,heart);info.append(h,actions);card.append(image,info);target.append(card);
- }
+let activitiesRenderVersion=0;
+async function renderActivities(){
+ const generation=++activitiesRenderVersion;
+ const target=el("imsActivitiesList");if(!target)return;
+ target.replaceChildren();
+ const language=getLang(),ids=activities.map(a=>a.id);
+ const home=await sourceHomepage(language);
+ if(generation!==activitiesRenderVersion||language!==getLang())return;
+ const selected=new Set(savedFavorites()),fragment=document.createDocumentFragment();
+ ids.forEach(id=>fragment.append(originalFavoriteCard(id,language,home,selected.has(id))));
+ target.append(fragment);
 }
 /* Render saved activities from the actual localized homepage, not separate mini-cards.
    This preserves each original image, heading, description, price and card design. */
@@ -123,7 +124,7 @@ function sourceHomepage(language){
  }
  return homepageCache.get(language);
 }
-function originalFavoriteCard(id,language,homeDocument){
+function originalFavoriteCard(id,language,homeDocument,selected=true){
  const source=homeDocument?.querySelector(".hp-activity-grid .hp-activity-card.hp-"+id);
  let card;
  if(source){
@@ -152,9 +153,10 @@ function originalFavoriteCard(id,language,homeDocument){
  const remove=document.createElement("button");
  remove.type="button";remove.className="ims-original-fav-heart";
  remove.dataset.favorite=id;
- remove.setAttribute("aria-label",tr().remove);
- remove.setAttribute("aria-pressed","true");
- remove.title=tr().remove;remove.textContent="♥";
+ remove.setAttribute("aria-label",selected?tr().remove:tr().save);
+ remove.setAttribute("aria-pressed",String(selected));
+ remove.title=selected?tr().remove:tr().save;
+ remove.textContent=selected?"♥":"♡";
  card.append(remove);
  return card;
 }
