@@ -123,3 +123,20 @@ html[dir=rtl] .ims-dash-round-arrow{transform:scaleX(-1)}
 
 /* Private booking requests, never presented as confirmed reservations. */
 .ims-order-list{display:grid;gap:13px;margin-top:18px}.ims-order-card{border:1px solid #d9e3d5;background:#fdfef9;border-radius:13px;padding:18px;box-shadow:0 4px 14px #1838260a}.ims-order-card h4{color:#133a2b;font-size:17px;margin:0 0 8px;overflow-wrap:anywhere}.ims-order-card p{font-size:13px;color:#55695f;margin:8px 0;line-height:1.6}.ims-order-card small{display:block;font-size:12px;color:#6b735d;margin:6px 0}.ims-order-card .ims-order-note{font-size:11px;color:#8d7750}.ims-order-status{display:inline-block;padding:6px 10px;background:#f6eed7;color:#75581e;font-weight:850;font-size:11px;border-radius:8px}.ims-order-confirmed,.ims-order-completed{background:#e7f3e8;color:#286244}.ims-order-cancelled{background:#fbece5;color:#874531}
+
+/* Favorites and Activities reuse the actual homepage card HTML and home-pro.css.
+   Never replace original photos with different dashboard thumbnails. */
+.ims-dash-home-visual.hp-home{background:transparent!important;overflow:visible!important;margin:18px 0 0!important;border:0!important;width:100%;max-width:100%}
+.ims-dash-home-visual.hp-home .hp-activity-grid{width:100%;margin:0;align-items:stretch}
+.ims-dash-home-visual.hp-home .hp-activity-card{position:relative;min-height:0}
+.ims-dash-home-visual.hp-home .hp-activity-image{display:block}
+.ims-dash-home-visual.hp-home .hp-activity-image img{max-width:none}
+.ims-dash-home-visual.hp-home .hp-activity-bottom a i{font-style:normal;font-size:0}
+.ims-dash-home-visual.hp-home .hp-activity-bottom a i::after{content:"→";font-size:14px}
+html[dir="rtl"] .ims-dash-home-visual.hp-home .hp-activity-bottom a i::after{content:"←"}
+.ims-dash-home-visual.hp-home .ims-original-fav-heart{position:absolute;z-index:5;top:11px;inset-inline-end:11px;display:grid;place-items:center;min-width:43px;width:43px;height:43px;padding:0!important;margin:0!important;border:2px solid #c6a43f!important;border-radius:50%!important;background:#fffcf2f2!important;color:#123e2c!important;box-shadow:0 6px 18px #0b261c40;font:800 25px/1 system-ui,Arial,sans-serif!important;cursor:pointer}
+.ims-dash-home-visual.hp-home .ims-original-fav-heart[aria-pressed="true"]{background:#d9bd71!important;color:#123c2d!important}
+.ims-dash-home-visual.hp-home .ims-original-fav-heart:hover{transform:scale(1.07)}
+.ims-dash-home-visual.hp-home .ims-original-fav-heart:focus-visible{outline:3px solid #174a35!important;outline-offset:3px}
+.ims-dash-home-visual.hp-home .ims-original-fav-heart:disabled{opacity:.6;cursor:wait}
+@media(max-width:580px){.ims-dash-home-visual.hp-home .ims-original-fav-heart{top:7px;inset-inline-end:7px;min-width:36px;width:36px;height:36px;font-size:22px!important;border-width:1.5px!important}}
