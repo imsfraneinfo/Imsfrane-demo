@@ -144,7 +144,7 @@ function init(){
  });
  mobile.addEventListener("click",e=>{const b=e.target.closest("[data-dash-tab]");if(b)setTab(b.dataset.dashTab,true)});
  const after=window.IMSFRANE_MEMBER_DATA;
- if(after){currentUser=after.user||null;storedName=after.name||"";if(currentUser){updateGreeting();mobile.hidden=false;syncFavorites();loadOrders()}}
+ if(after){currentUser=after.user||null;storedName=after.name||"";storedPhone=after.phone||"";storedAvatar=after.avatarUrl||"";if(currentUser){updateGreeting();mobile.hidden=false;syncFavorites();loadOrders()}}
  decorate();setTab("home",false);
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
