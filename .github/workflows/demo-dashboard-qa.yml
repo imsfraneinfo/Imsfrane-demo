@@ -5,6 +5,8 @@ on:
     paths:
       - members.html
       - navigation-pro.js
+      - booking-pro.js
+      - js/ims-favorites-demo.js
       - dashboard-pro.js
       - dashboard-pro.css
       - .github/workflows/demo-dashboard-qa.yml
@@ -20,6 +22,8 @@ jobs:
         run: |
           node --check navigation-pro.js
           node --check dashboard-pro.js
+          node --check booking-pro.js
+          node --check js/ims-favorites-demo.js
           python3 - <<'PY'
           from pathlib import Path
           import re
@@ -34,12 +38,15 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           s=Path('members.html').read_text()
-          for label in ['imsDashUi','imsSettingsPanel','imsDashMobileNav','profileForm','preferencesForm','dashboard-pro.css','dashboard-pro.js','ims:member-profile','ims:member-session']:
+          for label in ['imsDashUi','imsSettingsPanel','imsDashMobileNav','profileForm','memberPhone','memberAvatarFile','imsDashOrders','preferencesForm','dashboard-pro.css','dashboard-pro.js','ims:member-profile','ims:member-session']:
               assert label in s,label
           for l in ('fr','en','ar','es'):
               for name in ('index','booking','rafting','randonnee','camping','vtt','quad','hebergement','blog','contact'):
                   assert Path(l,name+'.html').is_file(),(l,name)
           for p in ('images/logo.webp','images/rafting-new/IMG_2089.webp','images/camping-1.webp','images/vtt.webp','images/quad.webp','images/hero.webp','images/21.webp'):
               assert Path(p).is_file(),p
-          print('PASS: Four-language dashboard, account forms and activity links')
+          assert 'member_orders' in Path('booking-pro.js').read_text()
+          assert 'member_favorites' in Path('js/ims-favorites-demo.js').read_text()
+          assert 'member_favorites' in Path('dashboard-pro.js').read_text()
+          print('PASS: Four-language dashboard, profile uploads, booking requests and synced favorites')
           PY
