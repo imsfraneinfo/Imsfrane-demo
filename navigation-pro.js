@@ -151,4 +151,12 @@ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",
 function loadFavoriteHearts(){if(!/^\/Imsfrane-demo\/(fr|en|ar|es)\//.test(location.pathname))return;if(document.querySelector('script[data-ims-fav]'))return;var script=document.createElement("script");script.src="/Imsfrane-demo/js/ims-favorites-demo.js?v=20261013all14proheart-v1";script.defer=true;script.dataset.imsFav="yes";document.head.append(script)}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",loadFavoriteHearts,{once:true});else loadFavoriteHearts();
 
+/* Load member inbox bell across all four language versions. */
+function loadMemberNotifications(){
+ if(!/^\/Imsfrane-demo\/(fr|en|ar|es)\//.test(location.pathname))return;
+ if(document.querySelector('script[data-ims-notifications]'))return;
+ var tag=document.createElement("script");tag.src="/Imsfrane-demo/js/member-notifications.js?v=20261013notifications1";tag.defer=true;tag.dataset.imsNotifications="1";document.head.append(tag);
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",loadMemberNotifications,{once:true});else loadMemberNotifications();
+
 })();
