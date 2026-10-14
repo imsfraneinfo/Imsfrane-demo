@@ -314,3 +314,23 @@ body.atnav-ready main.journal-page .journal-featured-photo img{object-position:c
   width:100%;height:100%;object-position:center 54%!important;
  }
 }
+
+
+/* DEMO LANGUAGE ARABIC LABEL — share the site's authentic Arabic display font
+   across FR/EN/ES menus, which intentionally do not load arabic-pro.css. */
+@font-face{
+ font-family:"Imsfrane Menu Arabic";
+ src:url("/Imsfrane-demo/fonts/arabic/Alexandria-VF.woff2") format("woff2");
+ font-style:normal;font-weight:400 800;font-display:swap;
+}
+body.atnav-ready .atnav-langmini-panel a[lang="ar"] span:last-child{
+ font-family:"Imsfrane Menu Arabic","Noto Kufi Arabic",Tahoma,Arial,sans-serif!important;
+ font-weight:600!important;
+ font-size:15px!important;
+ line-height:1.7!important;
+ letter-spacing:0!important;
+ text-rendering:optimizeLegibility;
+ direction:rtl!important;
+ unicode-bidi:isolate;
+ white-space:nowrap;
+}

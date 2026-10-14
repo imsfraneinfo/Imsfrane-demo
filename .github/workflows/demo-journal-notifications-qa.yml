@@ -77,6 +77,13 @@ jobs:
               for filename in list(expected.values())+['IMG_5131.webp']:
                   assert filename in framing,(filename,'framing rule missing')
               assert 'grid-template-rows:auto auto!important' in framing,'Photo and caption must stack on mobile'
+          assert 'DEMO LANGUAGE ARABIC LABEL' in framing
+          assert 'Imsfrane Menu Arabic' in framing and 'Alexandria-VF.woff2' in framing
+          assert (roots/'fonts/arabic/Alexandria-VF.woff2').is_file(),'Local Arabic menu font missing'
+          assert 'a[lang="ar"] span:last-child' in framing,'Arabic selector label not styled'
+          for language in ('fr','en','es'):
+              menu=(roots/language/'blog.html').read_text()
+              assert 'class="atnav-langmini-panel"' in menu and '<span>العربية</span>' in menu,(language,'Arabic language option missing')
               assert 'journal-card-image[href*="blog-guide-access-imsfrane"]' in framing
               for slug in slugs:
                   article=roots/lang/('blog-guide-'+slug+'.html')
