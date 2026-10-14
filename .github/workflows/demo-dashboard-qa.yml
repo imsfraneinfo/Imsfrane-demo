@@ -69,7 +69,12 @@ jobs:
           assert 'member_favorites' in Path('js/ims-favorites-demo.js').read_text()
           assert 'member_favorites' in Path('dashboard-pro.js').read_text()
           assert 'member-notifications.js' in s
-          assert 'member-notifications.js' in Path('navigation-pro.js').read_text()
+          assert 'member-notifications.js' not in Path('navigation-pro.js').read_text(), 'No inbox bell should load in the public site header'
+          assert 'member-notifications-demo.js' not in s, 'Only one private inbox system should load'
+          assert 'member-notifications-demo.js' not in Path('navigation-pro.js').read_text()
+          style=Path('navigation-pro.css').read_text()
+          assert 'DEMO header refinement' in style
+          assert '.header-book-button' in style and '.atnav-article-book' in style
           script=Path('js/member-notifications.js').read_text()
           assert 'send_member_announcement' in script
           assert 'p_preview_only:true' in script, 'Staging must only send preview to admin'

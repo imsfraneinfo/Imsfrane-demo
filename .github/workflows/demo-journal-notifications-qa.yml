@@ -69,6 +69,9 @@ jobs:
           nav=(roots/'navigation-pro.js').read_text()
           assert 'p_preview_only:true' in script,'DEMO must never send mass announcements'
           assert 'send_member_announcement' in script
-          assert 'member-notifications-demo.js' in members and 'member-notifications-demo.js' in nav
+          assert 'member-notifications.js' in members, 'Private account inbox must remain accessible'
+          assert 'member-notifications-demo.js' not in members, 'No duplicate member notification UI'
+          assert 'member-notifications-demo.js' not in nav and 'function loadMemberNotifications()' not in nav, 'Public header has no bell'
+          assert 'p_preview_only:true' in (roots/'js/member-notifications.js').read_text(), 'Account announcements remain preview only'
           print('PASS: 6 meaningful guides in 4 languages, distinct photos, inbox and safe previews')
           PY
