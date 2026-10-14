@@ -64,6 +64,31 @@ function initLanguageMenus(){
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",initLanguageMenus,{once:true});else initLanguageMenus();
 
+
+/* DEMO article reading: keep the single four-language selector in the main header.
+   The article's old language row duplicated it and omitted Spanish. */
+function simplifyBlogArticleNav(){
+ var legacy=document.querySelector("header.article-nav");
+ var official=document.querySelector(".atnav-article-header .atnav-langmini, #siteHeader .atnav-langmini");
+ if(!legacy||!official)return;
+ var lang=(document.documentElement.lang||"fr").slice(0,2);
+ var text={fr:"Tous les articles",en:"All articles",ar:"جميع المقالات",es:"Todos los artículos"}[lang]||"All articles";
+ var bar=document.createElement("nav");
+ bar.className="ims-blog-return";
+ bar.setAttribute("aria-label",text);
+ var link=document.createElement("a");
+ link.href="blog.html";
+ link.setAttribute("aria-label",text);
+ var arrow=document.createElement("span");
+ arrow.className="ims-blog-return-arrow";
+ arrow.setAttribute("aria-hidden","true");
+ arrow.textContent=lang==="ar"?"→":"←";
+ var label=document.createElement("span");label.textContent=text;
+ link.append(arrow,label);bar.append(link);
+ legacy.replaceWith(bar);
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",simplifyBlogArticleNav,{once:true});else simplifyBlogArticleNav();
+
 function initMemberEntry(){
   var menu=document.querySelector(".atnav-langmini");
   if(!menu || document.querySelector(".ims-member-entry"))return;
@@ -151,31 +176,17 @@ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",
 function loadFavoriteHearts(){if(!/^\/Imsfrane-demo\/(fr|en|ar|es)\//.test(location.pathname))return;if(document.querySelector('script[data-ims-fav]'))return;var script=document.createElement("script");script.src="/Imsfrane-demo/js/ims-favorites-demo.js?v=20261013all14proheart-v1";script.defer=true;script.dataset.imsFav="yes";document.head.append(script)}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",loadFavoriteHearts,{once:true});else loadFavoriteHearts();
 
-/* Load member inbox bell across all four language versions. */
+/* Only one notification UI: the existing inbox, unread bell and admin test composer.
+   Don't also inject member-notifications-demo.js (it creates a second bell). */
 function loadMemberNotifications(){
- if(!/^\/Imsfrane-demo\/(fr|en|ar|es)\//.test(location.pathname))return;
- if(document.querySelector('script[data-ims-notifications]'))return;
- var tag=document.createElement("script");tag.src="/Imsfrane-demo/js/member-notifications.js?v=20261013notifications1";tag.defer=true;tag.dataset.imsNotifications="1";document.head.append(tag);
-}
-if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",loadMemberNotifications,{once:true});else loadMemberNotifications();
-
-function loadMemberNotifications(){
- if(!/^\/Imsfrane-demo\/(fr|en|ar|es)\//.test(location.pathname))return;
+ if(!/^\\/Imsfrane-demo\\/(fr|en|ar|es)\\//.test(location.pathname))return;
  if(document.querySelector('script[data-ims-notifications]'))return;
  var script=document.createElement("script");
- script.src="/Imsfrane-demo/js/member-notifications.js?v=20261013-notify-demo2";
+ script.src="/Imsfrane-demo/js/member-notifications.js?v=20261014-singlebell-v1";
  script.defer=true;
  script.dataset.imsNotifications="1";
  document.head.append(script);
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",loadMemberNotifications,{once:true});else loadMemberNotifications();
-
-function loadMemberNotices(){
- if(!/^\/Imsfrane-demo\/(fr|en|ar|es)\//.test(location.pathname))return;
- if(document.querySelector('script[data-member-notifs]'))return;
- var link=document.createElement("link");link.rel="stylesheet";link.href="/Imsfrane-demo/css/member-notifications-demo.css?v=20261014a";document.head.append(link);
- var script=document.createElement("script");script.defer=true;script.src="/Imsfrane-demo/js/member-notifications-demo.js?v=20261014a";script.dataset.memberNotifs="yes";document.head.append(script);
-}
-if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",loadMemberNotices,{once:true});else loadMemberNotices();
 
 })();

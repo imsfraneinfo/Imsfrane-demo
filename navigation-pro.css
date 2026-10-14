@@ -111,3 +111,15 @@ html[dir="rtl"] .atnav-drawer{font-family:Cairo,Tajawal,Arial,sans-serif}
 html[dir="rtl"] .atnav-drawer .atnav-item{font-family:Cairo,Tajawal,Arial,sans-serif}
 html[dir="rtl"] .atnav-drawer .atnav-submenu a{font-size:16px}
 html[dir="rtl"] .atnav-langmini-panel{direction:ltr}
+
+/* DEMO long-form article: a compact way back to Blog, not a second language toolbar. */
+body.atnav-ready .article-nav{display:flex;align-items:center;justify-content:flex-start;min-height:47px;gap:0;flex-wrap:nowrap;background:#102f2b;padding:10px clamp(20px,4vw,60px)}
+body.atnav-ready .article-nav>a,body.atnav-ready .article-nav nav>a:not(:first-child){display:none!important}
+body.atnav-ready .article-nav nav{display:flex;align-items:center;gap:0}
+body.atnav-ready .article-nav nav>a:first-child{font:700 13px/1.5 Montserrat,Arial,sans-serif;letter-spacing:0;color:#f1dfb1!important;white-space:normal}
+body.atnav-ready .ims-blog-return{display:flex;align-items:center;min-height:47px;background:#102f2b;padding:8px clamp(20px,4vw,60px)}
+body.atnav-ready .ims-blog-return a{display:inline-flex;align-items:center;gap:10px;color:#f2deb0!important;text-decoration:none;font:700 13px/1.5 Montserrat,Arial,sans-serif;padding:5px 1px;border-radius:4px}
+body.atnav-ready .ims-blog-return a:hover,body.atnav-ready .ims-blog-return a:focus-visible{text-decoration:underline;color:#fff8e7!important}
+body.atnav-ready .ims-blog-return-arrow{font:700 21px/1 Arial,sans-serif}
+html[dir="rtl"] body.atnav-ready .ims-blog-return{direction:rtl}
+@media(max-width:600px){body.atnav-ready .ims-blog-return,body.atnav-ready .article-nav{min-height:43px;padding:7px 18px}body.atnav-ready .ims-blog-return a{font-size:12px}}
