@@ -86,7 +86,7 @@ function report(e){console.warn("Notification service",e);if(status)status.textC
 async function load(){if(!supabase||!me)return;const id=me.id;const r=await supabase.from("member_notifications").select("id,title,body,category,link_path,read_at,created_at").eq("user_id",id).order("created_at",{ascending:false}).limit(80);if(r.error)throw r.error;if(me?.id!==id)return;rows=r.data||[];paint()}
 async function auth(user){me=user;btn.hidden=!user;rows=[];paint();if(!user){panel.hidden=true;return}try{let check=await supabase.from("member_admins").select("user_id").eq("user_id",user.id).maybeSingle();isAdmin=!check.error&&!!check.data;panel.querySelector(".ims-notif-admin").hidden=!(isAdmin&&location.pathname.endsWith("/members.html"));await load()}catch(e){report(e)}}
 async function start(){
- if(!document.querySelector(".ims-member-entry,.ims-sitebar .ims-dash-header-lang")){setTimeout(start,600);return}
+ if(!document.querySelector(".ims-member-entry,.ims-sitebar .ims-dash-header-lang"))return;
  build();try{const sdk=await import("https://esm.sh/@supabase/supabase-js@2");supabase=sdk.createClient(url,key);const session=await supabase.auth.getSession();await auth(session.data.session?.user||null);supabase.auth.onAuthStateChange((_event,s)=>{setTimeout(()=>auth(s?.user||null).catch(report),0)})}catch(e){report(e)}
  document.addEventListener("visibilitychange",()=>{if(!document.hidden&&me)load().catch(report)});
  setInterval(()=>{if(me&&!document.hidden)load().catch(report)},90000);

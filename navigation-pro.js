@@ -170,4 +170,12 @@ function loadMemberNotifications(){
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",loadMemberNotifications,{once:true});else loadMemberNotifications();
 
+function loadMemberNotices(){
+ if(!/^\/Imsfrane-demo\/(fr|en|ar|es)\//.test(location.pathname))return;
+ if(document.querySelector('script[data-member-notifs]'))return;
+ var link=document.createElement("link");link.rel="stylesheet";link.href="/Imsfrane-demo/css/member-notifications-demo.css?v=20261014a";document.head.append(link);
+ var script=document.createElement("script");script.defer=true;script.src="/Imsfrane-demo/js/member-notifications-demo.js?v=20261014a";script.dataset.memberNotifs="yes";document.head.append(script);
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",loadMemberNotices,{once:true});else loadMemberNotices();
+
 })();
