@@ -53,19 +53,19 @@ jobs:
                   assert image_path not in images,(lang,'duplicate featured card image',image_path)
                   images.add(image_path)
               assert found==set(slugs),(lang,found)
-          # All locale versions use the same six audited original photos.
-          expected={'rafting-season':'raft2.webp','imsfrane-summit':'randonnee-sommet.webp','ahansal-gorges-walk':'blog-gorges.webp','wild-camping':'camping-1.webp','vtt-imsfrane':'IMG_9763.webp','access-imsfrane':'hero.webp'}
-          for slug,filename in expected.items():
-              card=next(x for x in cards if 'blog-guide-'+slug+'.html' in x)
-              assert '../images/'+filename in card,(lang,slug,'unexpected cover photo')
-              article=roots/lang/('blog-guide-'+slug+'.html')
-              assert ('../images/'+filename) in article.read_text(),(lang,slug,'unexpected article hero photo')
-          framing=(roots/'navigation-pro.css').read_text()
-          assert 'IMSFRANE JOURNAL FOCAL FRAMING' in framing
-          for filename in list(expected.values())+['IMG_5131.webp']:
-              assert filename in framing,(filename,'framing rule missing')
-          assert 'grid-template-rows:auto auto!important' in framing,'Photo and caption must stack on mobile'
-          assert 'journal-card-image[href*="blog-guide-access-imsfrane"]' in framing
+              # All locale versions use the same six audited original photos.
+              expected={'rafting-season':'raft2.webp','imsfrane-summit':'randonnee-sommet.webp','ahansal-gorges-walk':'blog-gorges.webp','wild-camping':'camping-1.webp','vtt-imsfrane':'IMG_9763.webp','access-imsfrane':'hero.webp'}
+              for slug,filename in expected.items():
+                  card=next(x for x in cards if 'blog-guide-'+slug+'.html' in x)
+                  assert '../images/'+filename in card,(lang,slug,'unexpected cover photo')
+                  article=roots/lang/('blog-guide-'+slug+'.html')
+                  assert ('../images/'+filename) in article.read_text(),(lang,slug,'unexpected article hero photo')
+              framing=(roots/'navigation-pro.css').read_text()
+              assert 'IMSFRANE JOURNAL FOCAL FRAMING' in framing
+              for filename in list(expected.values())+['IMG_5131.webp']:
+                  assert filename in framing,(filename,'framing rule missing')
+              assert 'grid-template-rows:auto auto!important' in framing,'Photo and caption must stack on mobile'
+              assert 'journal-card-image[href*="blog-guide-access-imsfrane"]' in framing
               for slug in slugs:
                   article=roots/lang/('blog-guide-'+slug+'.html')
                   source=article.read_text()
