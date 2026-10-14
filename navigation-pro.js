@@ -179,7 +179,7 @@ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",
 /* Only one notification UI: the existing inbox, unread bell and admin test composer.
    Don't also inject member-notifications-demo.js (it creates a second bell). */
 function loadMemberNotifications(){
- if(!/^\\/Imsfrane-demo\\/(fr|en|ar|es)\\//.test(location.pathname))return;
+ if(!["fr","en","ar","es"].some(function(l){return location.pathname.indexOf("/Imsfrane-demo/"+l+"/")===0}))return;
  if(document.querySelector('script[data-ims-notifications]'))return;
  var script=document.createElement("script");
  script.src="/Imsfrane-demo/js/member-notifications.js?v=20261014-singlebell-v1";
