@@ -176,17 +176,6 @@ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",
 function loadFavoriteHearts(){if(!/^\/Imsfrane-demo\/(fr|en|ar|es)\//.test(location.pathname))return;if(document.querySelector('script[data-ims-fav]'))return;var script=document.createElement("script");script.src="/Imsfrane-demo/js/ims-favorites-demo.js?v=20261013all14proheart-v1";script.defer=true;script.dataset.imsFav="yes";document.head.append(script)}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",loadFavoriteHearts,{once:true});else loadFavoriteHearts();
 
-/* Only one notification UI: the existing inbox, unread bell and admin test composer.
-   Don't also inject member-notifications-demo.js (it creates a second bell). */
-function loadMemberNotifications(){
- if(!["fr","en","ar","es"].some(function(l){return location.pathname.indexOf("/Imsfrane-demo/"+l+"/")===0}))return;
- if(document.querySelector('script[data-ims-notifications]'))return;
- var script=document.createElement("script");
- script.src="/Imsfrane-demo/js/member-notifications.js?v=20261014-singlebell-v1";
- script.defer=true;
- script.dataset.imsNotifications="1";
- document.head.append(script);
-}
-if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",loadMemberNotifications,{once:true});else loadMemberNotifications();
+/* Site header: no notification bell. The full inbox stays on members.html. */
 
 })();
