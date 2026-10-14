@@ -35,6 +35,17 @@ jobs:
               page=(roots/lang/'blog.html').read_text()
               cards=re.findall(r'<article class="journal-card"[\s\S]*?</article>',page)
               assert len(cards)==6,(lang,'expected exactly 6 cards',len(cards))
+              if lang in ('ar','es'):
+                  assert 'Lire l’article' not in page,(lang,'French read links in localized journal')
+                  assert 'LE JOURNAL DE L’ATLAS' not in page,(lang,'French kicker in localized journal')
+                  assert 'Aucun article ne correspond' not in page,(lang,'French empty state')
+                  assert 'Afficher plus' not in page,(lang,'French load-more button')
+                  buttons=set(re.findall(r'<button class="journal-filter(?: active)?" data-category="([^"]+)"',page))
+                  categories=set(re.findall(r'<article class="journal-card" data-category="([^"]+)"',page))
+                  assert len(buttons)==5 and categories.issubset(buttons),(lang,'nonworking category filters',buttons,categories)
+                  assert 'count.textContent=matches+' in page and "'stories')" not in page,(lang,'untranslated article count')
+                  for card in cards:
+                      assert ('اقرأ المقال' if lang=='ar' else 'Leer el artículo') in card,(lang,'missing translated read action')
               found=set()
               images=set()
               for card in cards:
