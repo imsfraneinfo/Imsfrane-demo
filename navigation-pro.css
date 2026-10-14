@@ -210,6 +210,7 @@ body.atnav-ready main.journal-page .journal-hero-bg{
  width:100%!important;height:100%!important;min-height:490px;
  object-fit:cover!important;object-position:center 66%!important;
 }
+body.atnav-ready main.journal-page .journal-hero-bg[src$="/IMG_5131.webp"]{object-position:center 66%!important}
 body.atnav-ready main.journal-page .journal-hero-overlay{display:none!important}
 body.atnav-ready main.journal-page .journal-hero-content{
  grid-column:1;grid-row:1;min-width:0;max-width:unset!important;
