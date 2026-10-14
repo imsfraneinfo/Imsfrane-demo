@@ -1,0 +1,74 @@
+name: Demo Journal and Notifications QA
+on:
+  push:
+    branches: [gh-pages]
+    paths:
+      - '*/blog.html'
+      - '*/blog-guide-*.html'
+      - js/member-notifications-demo.js
+      - css/member-notifications-demo.css
+      - navigation-pro.js
+      - members.html
+      - .github/workflows/demo-journal-notifications-qa.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check JavaScript
+        run: |
+          node --check js/member-notifications-demo.js
+          node --check navigation-pro.js
+      - name: Check six multilingual guides and notification wiring
+        run: |
+          python3 - <<'PY'
+          import re,html
+          from pathlib import Path
+          langs=['fr','en','ar','es']
+          slugs=['rafting-season','imsfrane-summit','ahansal-gorges-walk','wild-camping','vtt-imsfrane','access-imsfrane']
+          roots=Path('.')
+          for lang in langs:
+              page=(roots/lang/'blog.html').read_text()
+              cards=re.findall(r'<article class="journal-card"[\s\S]*?</article>',page)
+              assert len(cards)==6,(lang,'expected exactly 6 cards',len(cards))
+              found=set()
+              images=set()
+              for card in cards:
+                  match=re.search(r'href="(blog-guide-([a-z-]+)\.html)"',card)
+                  assert match,(lang,'card link missing')
+                  slug=match.group(2)
+                  assert slug in slugs,(lang,'unwanted article',slug)
+                  found.add(slug)
+                  picture=re.search(r'<img[^>]+src="([^"]+)"',card)
+                  assert picture,(lang,'card image missing',slug)
+                  image_path=picture.group(1)
+                  if image_path.startswith('/Imsfrane-demo/'):
+                      image=roots/image_path.replace('/Imsfrane-demo/','',1)
+                  else:
+                      image=(roots/lang/image_path)
+                  assert image.is_file(),(lang,'image missing',image_path)
+                  assert image_path not in images,(lang,'duplicate featured card image',image_path)
+                  images.add(image_path)
+              assert found==set(slugs),(lang,found)
+              for slug in slugs:
+                  article=roots/lang/('blog-guide-'+slug+'.html')
+                  source=article.read_text()
+                  body=re.search(r'<article class="article-body">([\s\S]*?)</article>',source)
+                  assert body,(lang,slug,'missing body')
+                  text=re.sub(r'<[^>]+>',' ',body.group(1))
+                  length=len(text.split())
+                  assert length>=340,(lang,slug,'short article',length)
+                  assert body.group(1).count('<section id="guide-')==7,(lang,slug,'no sections')
+                  assert 'class="article-toc"' in body.group(1),(lang,slug,'no table of contents')
+                  assert 'dateModified' in source and 'wordCount' in source,(lang,slug,'missing structured data')
+          script=(roots/'js/member-notifications-demo.js').read_text()
+          members=(roots/'members.html').read_text()
+          nav=(roots/'navigation-pro.js').read_text()
+          assert 'p_preview_only:true' in script,'DEMO must never send mass announcements'
+          assert 'send_member_announcement' in script
+          assert 'member-notifications-demo.js' in members and 'member-notifications-demo.js' in nav
+          print('PASS: 6 meaningful guides in 4 languages, distinct photos, inbox and safe previews')
+          PY
