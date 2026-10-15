@@ -459,3 +459,24 @@ html[lang="ar"] .locale-request,html[lang="es"] .locale-request{margin-top:40px;
 html[lang="ar"] .hp-home .locale-request{direction:rtl}
 html[lang="ar"] .hp-home .hp-hero-inner{direction:rtl}
 @media(max-width:860px){html[lang="ar"] .hp-home .hp-hero h1{font-size:clamp(36px,9vw,58px)!important}}
+
+
+/* Demo experiment: full-width editorial activity cards, one activity per row */
+.hp-home .hp-activity-grid{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:22px!important;grid-auto-rows:auto!important;max-width:1180px;margin-inline:auto}
+.hp-home .hp-activity-grid>.hp-activity-card{display:grid!important;grid-template-columns:minmax(0,46%) minmax(0,54%)!important;align-items:stretch;min-height:285px;height:auto!important;border-radius:14px;overflow:hidden}
+.hp-home .hp-activity-grid>.hp-activity-card .hp-activity-image{height:100%!important;min-height:285px;max-height:none;flex-basis:auto!important;position:relative}
+.hp-home .hp-activity-grid>.hp-activity-card .hp-activity-image img{width:100%;height:100%!important;position:absolute;inset:0;object-fit:cover;object-position:center}
+.hp-home .hp-activity-grid>.hp-activity-card .hp-activity-body{min-height:285px!important;padding:26px 31px 23px;display:flex;flex-direction:column;justify-content:center}
+.hp-home .hp-activity-grid>.hp-activity-card .hp-activity-body h3{font-size:clamp(27px,3vw,38px);margin:12px 0}
+.hp-home .hp-activity-grid>.hp-activity-card .hp-activity-body>p{font-size:14px;line-height:1.85;flex:0 0 auto;margin-bottom:20px}
+.hp-home .hp-activity-grid>.hp-activity-card .hp-activity-bottom{margin-top:auto}
+html[lang="ar"] .hp-home .hp-activity-grid>.hp-activity-card .hp-activity-body h3{font-size:clamp(23px,2.6vw,30px);min-height:0}
+@media(max-width:700px){
+.hp-home .hp-activity-grid{grid-template-columns:minmax(0,1fr)!important;gap:17px!important}
+.hp-home .hp-activity-grid>.hp-activity-card{grid-template-columns:minmax(0,1fr)!important;display:flex!important;flex-direction:column!important;min-height:0}
+.hp-home .hp-activity-grid>.hp-activity-card .hp-activity-image{height:245px!important;min-height:245px;flex:0 0 245px!important}
+.hp-home .hp-activity-grid>.hp-activity-card .hp-activity-body{min-height:0!important;padding:21px 20px 18px}
+.hp-home .hp-activity-grid>.hp-activity-card .hp-activity-body h3{font-size:28px;margin:8px 0}
+.hp-home .hp-activity-grid>.hp-activity-card .hp-activity-body>p{font-size:13px;margin-bottom:18px}
+}
+@media(max-width:390px){.hp-home .hp-activity-grid>.hp-activity-card .hp-activity-image{height:205px!important;min-height:205px;flex-basis:205px!important}}
