@@ -25,3 +25,54 @@ html[lang="ar"] .kayak-page{font-family:"Imsfrane Menu Arabic",Tajawal,Tahoma,Ar
 .kayak-page .ky-field select{display:block;width:100%;min-height:45px;padding:11px 37px 11px 13px;border:1px solid #d6e0d8;border-radius:9px;background:#fafbf8;color:#132f23;font:inherit;font-size:13px;box-sizing:border-box}
 .kayak-page .ky-field select:focus-visible{outline:2px solid #c9ae70;outline-offset:2px}
 .kayak-page[dir="rtl"] .ky-field select{padding-inline:13px 37px}
+
+
+/* Kayak Demo 2026-10-15: high-visibility photography, programs and preparation. */
+.kayak-page .ky-hero-photo{isolation:isolate;background:#163b3a}
+.kayak-page .ky-hero-photo>img{display:block!important;opacity:1!important;visibility:visible!important;object-fit:cover!important;object-position:50% 57%!important}
+.kayak-page .ky-hero-photo:after{background:linear-gradient(180deg,#061b2010 35%,#061b20a0)}
+.kayak-page .ky-gallery-image img,.kayak-page .ky-river-image img,.kayak-page .ky-visual-double img,.kayak-page .ky-quote-photo img{display:block!important;visibility:visible!important;opacity:1!important;width:100%!important;height:100%!important;object-fit:cover!important}
+.kayak-page .ky-visual-double>div,.kayak-page .ky-gallery-image,.kayak-page .ky-river-image{position:relative;background:#bfd1c4}
+.kayak-page .ky-visual-double>div img{position:absolute;inset:0}
+.kayak-page .ky-gallery-image img{position:absolute;inset:0}
+.kayak-page .ky-gallery-image:first-child img{object-position:50% 69%}
+.kayak-page .ky-gallery-image:nth-child(2) img{object-position:50% 67%}
+.kayak-page .ky-gallery-image:nth-child(3) img{object-position:50% 48%}
+.kayak-page .ky-gallery-image:nth-child(4) img{object-position:50% 72%}
+.kayak-page .ky-hero-photo-label{background:#061d20aa;backdrop-filter:blur(6px)}
+.kayak-page .ky-programs-section{background:linear-gradient(180deg,#eef4ec 0%,#fffdf8 72%);padding:94px 0}
+.kayak-page .ky-programs-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:23px}
+.kayak-page .ky-program{min-width:0;overflow:hidden;background:white;border:1px solid #dee7dd;border-radius:15px;box-shadow:0 19px 44px #173c2b13;display:flex;flex-direction:column}
+.kayak-page .ky-program-visual{position:relative;height:262px;overflow:hidden;background:#214f43}
+.kayak-page .ky-program-visual img{position:absolute;inset:0;display:block!important;visibility:visible!important;opacity:1!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center 68%;transition:transform .5s ease}
+.kayak-page .ky-program:hover .ky-program-visual img{transform:scale(1.04)}
+.kayak-page .ky-program:nth-child(3) .ky-program-visual img{object-position:center 51%}
+.kayak-page .ky-program:nth-child(2) .ky-program-visual img{object-position:center 62%}
+.kayak-page .ky-program-visual:after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(0deg,#061d20b5,transparent);pointer-events:none}
+.kayak-page .ky-program-mark{position:absolute;z-index:1;inset-inline-start:17px;top:16px;background:#082c2dde;color:#fff;border:1px solid #ffffff55;border-radius:5px;padding:7px 12px;font-size:10px;font-weight:800;letter-spacing:.03em}
+.kayak-page .ky-program-length{position:absolute;z-index:1;inset-inline-start:17px;bottom:13px;font:700 26px/1.2 "Playfair Display",Georgia,serif;color:white;text-shadow:0 2px 8px #0005}
+.kayak-page .ky-program-body{padding:26px 26px 29px;display:flex;flex:1;flex-direction:column}
+.kayak-page .ky-program-body h3{font:700 clamp(24px,2.2vw,31px)/1.25 "Playfair Display",Georgia,serif;color:#174134;margin:0 0 9px}
+.kayak-page .ky-program-subtitle{font-weight:800;color:#a18643;font-size:13px;margin:0 0 12px}
+.kayak-page .ky-program-body>p:not(.ky-program-subtitle){color:#586f61;font-size:13px;line-height:1.9;margin-bottom:19px}
+.kayak-page .ky-program-features{padding:16px 0 10px;margin:auto 0 17px;border-top:1px solid #e6ebe2;list-style:none}
+.kayak-page .ky-program-features li{position:relative;padding:5px 0 5px 23px;color:#395a49;font-size:12px;line-height:1.6}
+.kayak-page .ky-program-features li:before{content:"✓";position:absolute;inset-inline-start:0;color:#947436;font-weight:900}
+.kayak-page .ky-program-body .ky-button{width:100%;min-height:46px}
+.kayak-page .ky-programs-note{margin:24px 0 0!important;color:#718273;text-align:center;font-size:12px;line-height:1.9}
+.kayak-page .ky-prep-section{padding:79px 0;background:#f7f8f2}
+.kayak-page .ky-prep-heading{max-width:780px;margin:0 auto 35px;text-align:center}
+.kayak-page .ky-prep-heading h2{font-size:clamp(32px,4vw,49px);color:#164334;margin:12px 0}
+.kayak-page .ky-prep-heading p{color:#577063}
+.kayak-page .ky-prep-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.kayak-page .ky-prep-item{padding:23px 25px;background:white;border:1px solid #e2e7dc;border-radius:12px;box-shadow:0 10px 25px #1e42290a}
+.kayak-page .ky-prep-item h3{display:flex;align-items:center;gap:11px;font-size:17px;margin:0 0 9px;color:#1a4838}
+.kayak-page .ky-prep-item h3:before{content:"◆";font-size:12px;color:#c0a160}
+.kayak-page .ky-prep-item p{font-size:13px;line-height:1.84;color:#587165;margin:0}
+.kayak-page .ky-prep-warning{margin-top:20px;padding:19px 23px;border-inline-start:3px solid #c5a25a;border-radius:8px;background:#e6ecdf;color:#335849;font-size:13px;line-height:1.9}
+html[lang="ar"] .kayak-page .ky-program-body h3,html[lang="ar"] .kayak-page .ky-program-length,html[lang="ar"] .kayak-page .ky-prep-heading h2{font-family:"Imsfrane Menu Arabic",Tajawal,Tahoma,Arial,sans-serif}
+html[lang="ar"] .kayak-page .ky-program-features li{padding-right:23px;padding-left:0}
+html[lang="ar"] .kayak-page .ky-program-mark{letter-spacing:0}
+@media(max-width:990px){.kayak-page .ky-programs-grid{gap:12px}.kayak-page .ky-program-visual{height:225px}.kayak-page .ky-program-body{padding:20px 18px}}
+@media(max-width:720px){.kayak-page .ky-hero-photo>img{object-position:50% 60%!important}.kayak-page .ky-hero-photo{height:clamp(340px,106vw,550px)}.kayak-page .ky-programs-section{padding:58px 0}.kayak-page .ky-programs-grid{grid-template-columns:1fr;gap:22px;max-width:490px;margin:0 auto}.kayak-page .ky-program-visual{height:clamp(250px,72vw,340px)}.kayak-page .ky-program-body{padding:25px 23px}.kayak-page .ky-program-body h3{font-size:30px}.kayak-page .ky-prep-section{padding:56px 0}.kayak-page .ky-prep-grid{grid-template-columns:1fr}.kayak-page .ky-gallery{grid-auto-rows:clamp(180px,50vw,245px)}.kayak-page .ky-visual-double>div{height:290px}.kayak-page .ky-visual-double>div:last-child{height:240px;margin-top:35px}}
+@media(max-width:410px){.kayak-page .ky-gallery{grid-auto-rows:190px}.kayak-page .ky-hero-photo>img{object-position:50% 57%!important}.kayak-page .ky-program-visual{height:275px}}
