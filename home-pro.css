@@ -626,7 +626,7 @@ html[lang="ar"] .hp-home .hp-hero-inner{direction:rtl}
 }
 
 /* Frame the subject instead of cropping out the paddlers, tents or summit. */
-.hp-home .hp-activity-grid>.hp-rafting .hp-activity-image img{object-position:50% 78%}
+.hp-home .hp-activity-grid>.hp-rafting .hp-activity-image img{object-position:50% 84%}
 .hp-home .hp-activity-grid>.hp-kayak .hp-activity-image img{object-position:50% 80%}
 .hp-home .hp-activity-grid>.hp-randonnee .hp-activity-image img{object-position:50% 80%}
 .hp-home .hp-activity-grid>.hp-camping .hp-activity-image img{object-position:50% 78%}
