@@ -76,3 +76,35 @@ html[lang="ar"] .kayak-page .ky-program-mark{letter-spacing:0}
 @media(max-width:990px){.kayak-page .ky-programs-grid{gap:12px}.kayak-page .ky-program-visual{height:225px}.kayak-page .ky-program-body{padding:20px 18px}}
 @media(max-width:720px){.kayak-page .ky-hero-photo>img{object-position:50% 60%!important}.kayak-page .ky-hero-photo{height:clamp(340px,106vw,550px)}.kayak-page .ky-programs-section{padding:58px 0}.kayak-page .ky-programs-grid{grid-template-columns:1fr;gap:22px;max-width:490px;margin:0 auto}.kayak-page .ky-program-visual{height:clamp(250px,72vw,340px)}.kayak-page .ky-program-body{padding:25px 23px}.kayak-page .ky-program-body h3{font-size:30px}.kayak-page .ky-prep-section{padding:56px 0}.kayak-page .ky-prep-grid{grid-template-columns:1fr}.kayak-page .ky-gallery{grid-auto-rows:clamp(180px,50vw,245px)}.kayak-page .ky-visual-double>div{height:290px}.kayak-page .ky-visual-double>div:last-child{height:240px;margin-top:35px}}
 @media(max-width:410px){.kayak-page .ky-gallery{grid-auto-rows:190px}.kayak-page .ky-hero-photo>img{object-position:50% 57%!important}.kayak-page .ky-program-visual{height:275px}}
+
+
+/* Kayak editorial image framing V2 — subject-led crops across mobile and desktop */
+.kayak-page .ky-hero-photo>img{object-position:50% 73%!important}
+.kayak-page .ky-visual-double>div:first-child img{object-position:50% 72%!important}
+.kayak-page .ky-visual-double>div:last-child img{object-position:50% 48%!important}
+.kayak-page .ky-river:first-child .ky-river-image img{object-position:50% 78%!important}
+.kayak-page .ky-river:nth-child(2) .ky-river-image img{object-position:50% 75%!important}
+.kayak-page .ky-program:nth-child(1) .ky-program-visual img{object-position:50% 73%!important}
+.kayak-page .ky-program:nth-child(2) .ky-program-visual img{object-position:50% 79%!important}
+.kayak-page .ky-program:nth-child(3) .ky-program-visual img{object-position:50% 48%!important}
+.kayak-page .ky-gallery-image:nth-child(1) img{object-position:50% 77%!important}
+.kayak-page .ky-gallery-image:nth-child(2) img{object-position:50% 75%!important}
+.kayak-page .ky-gallery-image:nth-child(3) img{object-position:50% 51%!important}
+.kayak-page .ky-gallery-image:nth-child(4) img{object-position:50% 77%!important}
+.kayak-page .ky-gallery-image:nth-child(5) img{object-position:50% 78%!important}
+.kayak-page .ky-gallery-image:nth-child(6) img{object-position:50% 65%!important}
+.kayak-page .ky-gallery-image:nth-child(7) img{object-position:50% 64%!important}
+.kayak-page .ky-quote-photo img{object-position:50% 67%!important}
+.kayak-page .ky-program-visual{height:310px}
+.kayak-page .ky-program-mark,.kayak-page .ky-program-length{pointer-events:none}
+@media(max-width:720px){
+.kayak-page .ky-hero-photo{height:clamp(355px,108vw,535px)}
+.kayak-page .ky-hero-photo>img{object-position:50% 75%!important}
+.kayak-page .ky-program-visual{height:clamp(295px,87vw,380px)}
+.kayak-page .ky-program:nth-child(1) .ky-program-visual img{object-position:50% 80%!important}
+.kayak-page .ky-program:nth-child(2) .ky-program-visual img{object-position:50% 80%!important}
+.kayak-page .ky-program:nth-child(3) .ky-program-visual img{object-position:50% 53%!important}
+.kayak-page .ky-gallery-image:first-child{grid-row:span 2;grid-column:span 2}
+.kayak-page .ky-gallery-image:first-child img{object-position:50% 80%!important}
+.kayak-page .ky-river-image{height:clamp(290px,85vw,380px)}
+}
