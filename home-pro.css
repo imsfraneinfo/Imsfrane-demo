@@ -461,22 +461,245 @@ html[lang="ar"] .hp-home .hp-hero-inner{direction:rtl}
 @media(max-width:860px){html[lang="ar"] .hp-home .hp-hero h1{font-size:clamp(36px,9vw,58px)!important}}
 
 
-/* Demo experiment: full-width editorial activity cards, one activity per row */
-.hp-home .hp-activity-grid{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:22px!important;grid-auto-rows:auto!important;max-width:1180px;margin-inline:auto}
-.hp-home .hp-activity-grid>.hp-activity-card{display:grid!important;grid-template-columns:minmax(0,46%) minmax(0,54%)!important;align-items:stretch;min-height:285px;height:auto!important;border-radius:14px;overflow:hidden}
-.hp-home .hp-activity-grid>.hp-activity-card .hp-activity-image{height:100%!important;min-height:285px;max-height:none;flex-basis:auto!important;position:relative}
-.hp-home .hp-activity-grid>.hp-activity-card .hp-activity-image img{width:100%;height:100%!important;position:absolute;inset:0;object-fit:cover;object-position:center}
-.hp-home .hp-activity-grid>.hp-activity-card .hp-activity-body{min-height:285px!important;padding:26px 31px 23px;display:flex;flex-direction:column;justify-content:center}
-.hp-home .hp-activity-grid>.hp-activity-card .hp-activity-body h3{font-size:clamp(27px,3vw,38px);margin:12px 0}
-.hp-home .hp-activity-grid>.hp-activity-card .hp-activity-body>p{font-size:14px;line-height:1.85;flex:0 0 auto;margin-bottom:20px}
-.hp-home .hp-activity-grid>.hp-activity-card .hp-activity-bottom{margin-top:auto}
-html[lang="ar"] .hp-home .hp-activity-grid>.hp-activity-card .hp-activity-body h3{font-size:clamp(23px,2.6vw,30px);min-height:0}
-@media(max-width:700px){
-.hp-home .hp-activity-grid{grid-template-columns:minmax(0,1fr)!important;gap:17px!important}
-.hp-home .hp-activity-grid>.hp-activity-card{grid-template-columns:minmax(0,1fr)!important;display:flex!important;flex-direction:column!important;min-height:0}
-.hp-home .hp-activity-grid>.hp-activity-card .hp-activity-image{height:245px!important;min-height:245px;flex:0 0 245px!important}
-.hp-home .hp-activity-grid>.hp-activity-card .hp-activity-body{min-height:0!important;padding:21px 20px 18px}
-.hp-home .hp-activity-grid>.hp-activity-card .hp-activity-body h3{font-size:28px;margin:8px 0}
-.hp-home .hp-activity-grid>.hp-activity-card .hp-activity-body>p{font-size:13px;margin-bottom:18px}
+/* V2 Demo — premium editorial adventures: large imagery, intentional framing, alternating rhythm */
+.hp-home .hp-activity-grid{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  grid-auto-rows:auto!important;
+  gap:clamp(17px,2.6vw,29px)!important;
+  max-width:1180px;
+  margin-inline:auto;
+  counter-reset:ims-adventures;
 }
-@media(max-width:390px){.hp-home .hp-activity-grid>.hp-activity-card .hp-activity-image{height:205px!important;min-height:205px;flex-basis:205px!important}}
+.hp-home .hp-activity-grid>.hp-activity-card{
+  counter-increment:ims-adventures;
+  direction:ltr;
+  display:grid!important;
+  grid-template-columns:minmax(0,48%) minmax(0,52%)!important;
+  align-items:stretch;
+  min-width:0;
+  min-height:330px;
+  height:auto!important;
+  overflow:hidden;
+  isolation:isolate;
+  border:1px solid #e1e7df;
+  border-radius:18px;
+  background:#fff;
+  box-shadow:0 10px 34px rgba(17,57,42,.065);
+  transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;
+}
+.hp-home .hp-activity-grid>.hp-activity-card:hover{
+  transform:translateY(-4px);
+  border-color:#d5dfd2;
+  box-shadow:0 22px 48px rgba(17,57,42,.13);
+}
+.hp-home .hp-activity-grid>.hp-activity-card:nth-child(even){
+  grid-template-columns:minmax(0,52%) minmax(0,48%)!important;
+}
+.hp-home .hp-activity-grid>.hp-activity-card:nth-child(even)>.hp-activity-image{grid-column:2;grid-row:1}
+.hp-home .hp-activity-grid>.hp-activity-card:nth-child(even)>.hp-activity-body{grid-column:1;grid-row:1}
+.hp-home .hp-activity-grid>.hp-activity-card>.hp-activity-image{
+  display:block;
+  position:relative;
+  min-height:330px;
+  height:100%!important;
+  flex:none!important;
+  overflow:hidden;
+  background:#dae1d9;
+}
+.hp-home .hp-activity-grid>.hp-activity-card>.hp-activity-image img{
+  position:absolute;
+  inset:0;
+  display:block;
+  width:100%;
+  height:100%!important;
+  object-fit:cover;
+  object-position:center;
+  transform:scale(1.001);
+  transition:transform .75s cubic-bezier(.2,.7,.2,1);
+}
+.hp-home .hp-activity-grid>.hp-activity-card:hover>.hp-activity-image img{transform:scale(1.035)}
+.hp-home .hp-activity-grid>.hp-activity-card>.hp-activity-image:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  background:linear-gradient(180deg,rgba(5,30,29,.22) 0%,transparent 42%,rgba(3,30,25,.21) 100%);
+}
+.hp-home .hp-activity-grid>.hp-activity-card>.hp-activity-image:before{
+  content:"0" counter(ims-adventures);
+  position:absolute;
+  z-index:2;
+  inset-block-start:19px;
+  inset-inline-start:19px;
+  color:#fff;
+  border:1px solid rgba(255,255,255,.56);
+  background:rgba(13,39,35,.6);
+  backdrop-filter:blur(8px);
+  padding:7px 12px;
+  border-radius:5px;
+  font:800 12px/1.1 Montserrat,Arial,sans-serif;
+  letter-spacing:.08em;
+}
+.hp-home .hp-activity-grid>.hp-activity-card>.hp-activity-body{
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  min-width:0;
+  min-height:330px!important;
+  padding:clamp(26px,3.3vw,42px) clamp(23px,4.3vw,52px) 30px!important;
+  background:radial-gradient(circle at 100% 0%,rgba(213,188,122,.07),transparent 46%),#fff;
+}
+.hp-home .hp-activity-grid>.hp-activity-card:nth-child(even)>.hp-activity-body{
+  background:radial-gradient(circle at 0% 100%,rgba(52,112,72,.07),transparent 50%),#fff;
+}
+.hp-home .hp-activity-grid>.hp-activity-card .hp-activity-note{
+  display:inline-flex;
+  align-self:flex-start;
+  max-width:100%;
+  padding:6px 12px;
+  border:1px solid #e9dfc8;
+  border-radius:99px;
+  background:#faf7ee;
+  color:#8e7137;
+  font-size:10px;
+  font-weight:800;
+  line-height:1.6;
+  letter-spacing:.015em;
+  text-transform:none;
+}
+.hp-home .hp-activity-grid>.hp-activity-card .hp-activity-body h3{
+  font-family:"Cormorant Garamond",Georgia,serif;
+  color:#173e30;
+  font-size:clamp(34px,3.8vw,47px);
+  font-weight:700;
+  line-height:1.15;
+  margin:17px 0 12px;
+}
+.hp-home .hp-activity-grid>.hp-activity-card .hp-activity-body>p{
+  flex:1;
+  color:#617267;
+  font-size:14px;
+  line-height:1.9;
+  margin:0 0 24px;
+  max-width:58ch;
+}
+.hp-home .hp-activity-grid>.hp-activity-card .hp-activity-bottom{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px 15px;
+  border-top:1px solid #e8eee8;
+  padding-top:20px;
+  margin-top:auto;
+  min-height:0;
+}
+.hp-home .hp-activity-grid>.hp-activity-card .hp-activity-bottom>strong{
+  max-width:none;
+  flex:1 1 125px;
+  font-size:12px;
+  line-height:1.6;
+  color:#225039;
+  font-weight:850;
+}
+.hp-home .hp-activity-grid>.hp-activity-card .hp-activity-bottom>a{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:11px 15px;
+  border-radius:99px;
+  background:#194d38;
+  color:#fff!important;
+  font-size:12px;
+  font-weight:750;
+  line-height:1.35;
+  white-space:nowrap;
+  text-decoration:none;
+  transition:background .2s ease,transform .2s ease;
+}
+.hp-home .hp-activity-grid>.hp-activity-card .hp-activity-bottom>a i{font-size:11px}
+.hp-home .hp-activity-grid>.hp-activity-card .hp-activity-bottom>a:hover{
+  color:#fff!important;
+  background:#0d3327;
+  transform:translateY(-1px);
+}
+.hp-home .hp-activity-grid>.hp-activity-card .hp-activity-bottom>a:focus-visible,
+.hp-home .hp-activity-grid>.hp-activity-card>.hp-activity-image:focus-visible{outline:3px solid #c6a43f;outline-offset:-3px}
+
+/* Subject-aware crops: keep rafters, paddlers, hikers, tents and quads in view */
+.hp-home .hp-activity-grid>.hp-rafting .hp-activity-image img{object-position:51% 80%}
+.hp-home .hp-activity-grid>.hp-kayak .hp-activity-image img{object-position:50% 79%}
+.hp-home .hp-activity-grid>.hp-randonnee .hp-activity-image img{object-position:49% 77%}
+.hp-home .hp-activity-grid>.hp-camping .hp-activity-image img{object-position:52% 65%}
+.hp-home .hp-activity-grid>.hp-vtt .hp-activity-image img{object-position:50% 49%}
+.hp-home .hp-activity-grid>.hp-quad .hp-activity-image img{object-position:51% 80%}
+.hp-home .hp-activity-grid>.hp-hebergement .hp-activity-image img{object-position:51% 65%}
+.hp-home .hp-activity-grid>.hp-tubing .hp-activity-image img{object-position:50% 79%}
+
+/* RTL text remains RTL; image placement follows the same editorial rhythm in all languages */
+html[lang="ar"] .hp-home .hp-activity-grid>.hp-activity-card>.hp-activity-body{
+  direction:rtl;
+  text-align:right;
+}
+html[lang="ar"] .hp-home .hp-activity-grid>.hp-activity-card .hp-activity-note{align-self:flex-start;letter-spacing:0}
+html[lang="ar"] .hp-home .hp-activity-grid>.hp-activity-card .hp-activity-body h3{
+  font-family:Cairo,Tajawal,Tahoma,Arial,sans-serif!important;
+  font-size:clamp(25px,2.7vw,32px);
+  line-height:1.5;
+  min-height:0;
+  margin:13px 0 10px;
+}
+html[lang="ar"] .hp-home .hp-activity-grid>.hp-activity-card .hp-activity-body>p{line-height:1.9}
+
+@media(max-width:800px){
+  .hp-home .hp-activity-grid{gap:18px!important}
+  .hp-home .hp-activity-grid>.hp-activity-card,
+  .hp-home .hp-activity-grid>.hp-activity-card:nth-child(even){
+    display:flex!important;
+    flex-direction:column!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    min-height:0;
+    border-radius:14px;
+  }
+  .hp-home .hp-activity-grid>.hp-activity-card>.hp-activity-image,
+  .hp-home .hp-activity-grid>.hp-activity-card:nth-child(even)>.hp-activity-image{
+    order:0;
+    grid-column:auto;
+    grid-row:auto;
+    height:clamp(240px,54vw,340px)!important;
+    min-height:0!important;
+    flex:0 0 clamp(240px,54vw,340px)!important;
+  }
+  .hp-home .hp-activity-grid>.hp-activity-card>.hp-activity-body,
+  .hp-home .hp-activity-grid>.hp-activity-card:nth-child(even)>.hp-activity-body{
+    order:1;
+    grid-column:auto;
+    grid-row:auto;
+    min-height:0!important;
+    padding:23px 24px 22px!important;
+  }
+  .hp-home .hp-activity-grid>.hp-activity-card .hp-activity-body h3{font-size:clamp(30px,5.6vw,38px);margin:11px 0 8px}
+  .hp-home .hp-activity-grid>.hp-activity-card .hp-activity-body>p{font-size:13px;line-height:1.85;margin-bottom:18px}
+  .hp-home .hp-activity-grid>.hp-activity-card .hp-activity-bottom{padding-top:15px}
+}
+@media(max-width:480px){
+  .hp-home .hp-activity-grid{gap:15px!important}
+  .hp-home .hp-activity-grid>.hp-activity-card>.hp-activity-image,
+  .hp-home .hp-activity-grid>.hp-activity-card:nth-child(even)>.hp-activity-image{
+    height:clamp(220px,65vw,290px)!important;
+    flex-basis:clamp(220px,65vw,290px)!important;
+  }
+  .hp-home .hp-activity-grid>.hp-activity-card>.hp-activity-body{padding:20px 19px 19px!important}
+  .hp-home .hp-activity-grid>.hp-activity-card .hp-activity-body h3{font-size:30px}
+  .hp-home .hp-activity-grid>.hp-activity-card .hp-activity-bottom{flex-direction:row;align-items:center;gap:11px}
+  .hp-home .hp-activity-grid>.hp-activity-card .hp-activity-bottom>strong{flex:1 1 105px}
+  .hp-home .hp-activity-grid>.hp-activity-card .hp-activity-bottom>a{padding:10px 13px}
+  html[lang="ar"] .hp-home .hp-activity-grid>.hp-activity-card .hp-activity-body h3{font-size:25px}
+}
+@media(prefers-reduced-motion:reduce){
+  .hp-home .hp-activity-grid>.hp-activity-card,
+  .hp-home .hp-activity-grid>.hp-activity-card>.hp-activity-image img,
+  .hp-home .hp-activity-grid>.hp-activity-card .hp-activity-bottom>a{transition:none!important}
+}
