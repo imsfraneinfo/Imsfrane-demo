@@ -444,8 +444,8 @@
 
 
 /* Locales use the exact original .hp-home visual template, no FR/EN layout changes. */
-html[lang="ar"] .hp-home{font-family:Cairo,Tajawal,Tahoma,sans-serif}
-html[lang="ar"] .hp-home .hp-hero h1,html[lang="ar"] .hp-home h2,html[lang="ar"] .hp-home h3{font-family:Cairo,Tajawal,Tahoma,sans-serif!important;letter-spacing:0!important}
+html[lang="ar"] .hp-home{font-family:var(--ar-text,"Imsfrane Tajawal",Tajawal,Tahoma,sans-serif)}
+html[lang="ar"] .hp-home .hp-hero h1,html[lang="ar"] .hp-home h2,html[lang="ar"] .hp-home h3{font-family:var(--ar-display,"Imsfrane Alexandria","Imsfrane Tajawal",Tahoma,sans-serif)!important;letter-spacing:0!important}
 html[lang="ar"] .hp-home .hp-hero h1{font-size:clamp(37px,5vw,76px)!important;line-height:1.35!important}
 html[lang="ar"] .hp-home .hp-hero h1 em{font-style:normal;line-height:1.25!important}
 html[lang="ar"] .hp-home p{line-height:2}
@@ -626,12 +626,12 @@ html[lang="ar"] .hp-home .hp-hero-inner{direction:rtl}
 }
 
 /* Frame the subject instead of cropping out the paddlers, tents or summit. */
-.hp-home .hp-activity-grid>.hp-rafting .hp-activity-image img{object-position:50% 85%}
+.hp-home .hp-activity-grid>.hp-rafting .hp-activity-image img{object-position:50% 78%}
 .hp-home .hp-activity-grid>.hp-kayak .hp-activity-image img{object-position:50% 80%}
 .hp-home .hp-activity-grid>.hp-randonnee .hp-activity-image img{object-position:50% 80%}
 .hp-home .hp-activity-grid>.hp-camping .hp-activity-image img{object-position:50% 78%}
-.hp-home .hp-activity-grid>.hp-vtt .hp-activity-image img{object-position:50% 52%}
-.hp-home .hp-activity-grid>.hp-quad .hp-activity-image img{object-position:50% 76%}
+.hp-home .hp-activity-grid>.hp-vtt .hp-activity-image img{object-position:50% 69%}
+.hp-home .hp-activity-grid>.hp-quad .hp-activity-image img{object-position:50% 82%}
 .hp-home .hp-activity-grid>.hp-hebergement .hp-activity-image img{object-position:50% 58%}
 .hp-home .hp-activity-grid>.hp-tubing .hp-activity-image img{object-position:50% 78%}
 
@@ -639,7 +639,7 @@ html[lang="ar"] .hp-home .hp-hero-inner{direction:rtl}
 html[lang="ar"] .hp-home .hp-activity-grid>.hp-activity-card>.hp-activity-body{direction:rtl;text-align:right}
 html[lang="ar"] .hp-home .hp-activity-grid>.hp-activity-card .hp-activity-note{letter-spacing:0;line-height:1.6}
 html[lang="ar"] .hp-home .hp-activity-grid>.hp-activity-card .hp-activity-body h3{
- font-family:Cairo,Tajawal,Tahoma,Arial,sans-serif!important;
+ font-family:var(--ar-display,"Imsfrane Alexandria","Imsfrane Tajawal",Tahoma,Arial,sans-serif)!important;
  font-size:clamp(20px,2vw,24px);
  line-height:1.5;
  min-height:0;
