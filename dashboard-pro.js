@@ -273,8 +273,8 @@ function originalFavoriteCard(id,language,homeDocument,selected=true){
   card.querySelectorAll("a[href]").forEach(link=>{
    try{const href=link.getAttribute("href");if(href)link.href=new URL(href,sourceUrl).href}catch(e){}
   });
-  card.querySelectorAll("img[src]").forEach(img=>{
-   try{const src=img.getAttribute("src");if(src)img.src=new URL(src,sourceUrl).href}catch(e){}
+  card.querySelectorAll("img[src],img[data-src]").forEach(img=>{
+   try{const src=img.getAttribute("data-src")||img.getAttribute("src");if(src)img.src=new URL(src,sourceUrl).href;img.removeAttribute("srcset");img.removeAttribute("data-srcset");img.removeAttribute("data-home-lazy")}catch(e){}
   });
  }else{
   // Network fallback uses the very same image as the actual homepage card.
