@@ -666,9 +666,9 @@ html[lang="ar"] .hp-home .hp-hero-inner{direction:rtl}
 /* Purposeful photo crops: central subjects stay inside every card. */
 .hp-home .hp-activity-grid>.hp-rafting .hp-activity-image img{object-position:50% 82%}
 .hp-home .hp-activity-grid>.hp-kayak .hp-activity-image img{object-position:50% 82%}
-.hp-home .hp-activity-grid>.hp-randonnee .hp-activity-image img{object-position:50% 78%}
+.hp-home .hp-activity-grid>.hp-randonnee .hp-activity-image img{object-position:50% 90%}
 .hp-home .hp-activity-grid>.hp-camping .hp-activity-image img{object-position:50% 76%}
-.hp-home .hp-activity-grid>.hp-vtt .hp-activity-image img{object-position:50% 70%}
+.hp-home .hp-activity-grid>.hp-vtt .hp-activity-image img{object-position:50% 84%}
 .hp-home .hp-activity-grid>.hp-quad .hp-activity-image img{object-position:50% 81%}
 .hp-home .hp-activity-grid>.hp-hebergement .hp-activity-image img{object-position:50% 56%}
 .hp-home .hp-activity-grid>.hp-tubing .hp-activity-image img{object-position:50% 80%}
@@ -818,3 +818,7 @@ html[lang="ar"] .hp-home .hp-activity-grid>.hp-activity-card>.hp-activity-image>
   line-height:1.2;
  }
 }
+
+/* Lower framing requested for the lake and 4x4 activity photos. */
+.hp-home .hp-activity-grid>.hp-jetski .hp-activity-image img{object-position:50% 65%}
+.hp-home .hp-activity-grid>.hp-4x4 .hp-activity-image img{object-position:50% 65%}
