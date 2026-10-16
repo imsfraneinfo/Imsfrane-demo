@@ -132,6 +132,7 @@
     diagnostic(!key ? "API_KEY_MISSING_IN_DEMO_DEPLOYMENT" : "PLACE_ID_MISSING");
     return;
   }
+  function loadReviews(){
   diagnostic("LOADING_GOOGLE_MAPS");
   let completed = false;
   if (debug) setTimeout(function () {
@@ -168,4 +169,16 @@
     try { delete window[callback]; } catch (e) {}
   };
   document.head.appendChild(loader);
+  }
+  // Load the live review integration when its section is visible, after
+  // the initial page load. The public Google listing link always works.
+  function observeReviews(){
+    if(!('IntersectionObserver' in window)){loadReviews();return}
+    const observer=new IntersectionObserver(entries=>{
+      if(entries.some(entry=>entry.isIntersecting)){observer.disconnect();loadReviews()}
+    },{rootMargin:'0px',threshold:0.05});
+    observer.observe(section);
+  }
+  if(document.readyState==='complete')observeReviews();
+  else window.addEventListener('load',observeReviews,{once:true});
 })();
