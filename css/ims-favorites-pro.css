@@ -1,21 +1,21 @@
 /* IMSFRANE · Refined favorites system, Demo only
-   Small, crisp outlined hearts with consistent states across cards and the member dashboard. */
+   Compact premium hearts with subtle ivory surface, green outlines, and accessible click targets across cards and the member dashboard. */
 .ims-fav-target{position:relative!important}
 button.ims-fav-heart,
 .ims-dash-home-visual.hp-home button.ims-original-fav-heart{
   -webkit-appearance:none!important;appearance:none!important;
   position:absolute!important;z-index:28!important;
-  inset-block-start:11px!important;inset-inline-end:11px!important;
+  inset-block-start:9px!important;inset-inline-end:9px!important;
   top:auto;right:auto;left:auto;bottom:auto;
   display:grid!important;place-items:center!important;
-  width:34px!important;height:34px!important;
-  min-width:34px!important;min-height:34px!important;
+  width:29px!important;height:29px!important;
+  min-width:29px!important;min-height:29px!important;
   padding:0!important;margin:0!important;
-  border:1px solid rgba(215,219,208,.96)!important;
+  border:1px solid rgba(239,235,217,.94)!important;
   border-radius:50%!important;
-  background:rgba(255,255,255,.95)!important;
-  color:#315a46!important;
-  box-shadow:0 3px 12px rgba(5,36,25,.17)!important;
+  background:rgba(255,255,255,.96)!important;
+  color:#2e5942!important;
+  box-shadow:0 3px 11px rgba(5,36,25,.16)!important;
   backdrop-filter:blur(8px);
   -webkit-backdrop-filter:blur(8px);
   cursor:pointer;
@@ -26,7 +26,7 @@ button.ims-fav-heart,
 }
 button.ims-fav-heart:after,
 .ims-dash-home-visual.hp-home button.ims-original-fav-heart:after{
-  content:"";position:absolute;inset:-5px;border-radius:50%;
+  content:"";position:absolute;inset:-8px;border-radius:50%;
 }
 button.ims-fav-heart:hover,
 .ims-dash-home-visual.hp-home button.ims-original-fav-heart:hover{
@@ -43,8 +43,8 @@ button.ims-fav-heart[aria-pressed="true"],
 }
 button.ims-fav-heart .ims-heart-svg,
 .ims-dash-home-visual.hp-home button.ims-original-fav-heart .ims-heart-svg{
-  width:17px!important;height:17px!important;display:block;
-  stroke:currentColor;stroke-width:1.75;
+  width:15px!important;height:15px!important;display:block;
+  stroke:currentColor;stroke-width:1.8;
   stroke-linecap:round;stroke-linejoin:round;
   fill:none;pointer-events:none;
   transition:fill .18s ease,transform .18s ease;
@@ -97,12 +97,12 @@ html[lang="ar"] button.ims-fav-detail{font-family:var(--ar-text,"Imsfrane Tajawa
 @media(max-width:620px){
   button.ims-fav-heart,
   .ims-dash-home-visual.hp-home button.ims-original-fav-heart{
-    inset-block-start:8px!important;inset-inline-end:8px!important;
-    width:32px!important;height:32px!important;
-    min-width:32px!important;min-height:32px!important;
+    inset-block-start:7px!important;inset-inline-end:7px!important;
+    width:27px!important;height:27px!important;
+    min-width:27px!important;min-height:27px!important;
   }
   button.ims-fav-heart .ims-heart-svg,
-  .ims-dash-home-visual.hp-home button.ims-original-fav-heart .ims-heart-svg{width:16px!important;height:16px!important}
+  .ims-dash-home-visual.hp-home button.ims-original-fav-heart .ims-heart-svg{width:14px!important;height:14px!important}
   button.ims-fav-detail{font-size:11px!important;padding:9px 12px!important}
 }
 @media(prefers-reduced-motion:reduce){
