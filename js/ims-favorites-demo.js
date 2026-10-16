@@ -11,7 +11,7 @@ const lang=m[1],catalog=["rafting","kayak","camping","randonnee","vtt","quad","h
 }[lang];
 let db,user=null,items=new Set(),busy=new Set();
 const key="ims-demo-fav-pending";
-const css=document.createElement("style");css.textContent='.ims-fav-target{position:relative!important}.ims-fav-heart{position:absolute;z-index:20;inset-block-start:10px;inset-inline-end:10px;display:grid;place-items:center;width:34px;height:34px;min-width:34px;min-height:34px;padding:0;margin:0;border-radius:50%;background:rgba(255,255,255,.96);border:1px solid rgba(207,194,159,.95);color:#27513c;box-shadow:0 4px 15px rgba(8,37,26,.18);cursor:pointer}.ims-fav-heart[aria-pressed=true]{background:#204d39;color:#f4d388;border-color:#bfa367}.ims-fav-detail{display:inline-flex;align-items:center;gap:8px;cursor:pointer}.ims-fav-heart:focus-visible,.ims-fav-detail:focus-visible{outline:3px solid #c6a43f;outline-offset:3px}@media(max-width:600px){.ims-fav-heart{inset-block-start:7px;inset-inline-end:7px;width:32px;height:32px;min-height:32px;min-width:32px}}';document.head.append(css);const pro=document.createElement("link");pro.rel="stylesheet";pro.href="/Imsfrane-demo/css/ims-favorites-pro.css?v=20261016petite-heart-v2";document.head.append(pro);
+const css=document.createElement("style");css.textContent='.ims-fav-target{position:relative!important}.ims-fav-heart{position:absolute;z-index:20;inset-block-start:10px;inset-inline-end:10px;display:grid;place-items:center;width:29px;height:29px;min-width:29px;min-height:29px;padding:0;margin:0;border-radius:50%;background:rgba(255,255,255,.96);border:1px solid rgba(207,194,159,.95);color:#27513c;box-shadow:0 4px 15px rgba(8,37,26,.18);cursor:pointer}.ims-fav-heart[aria-pressed=true]{background:#204d39;color:#f4d388;border-color:#bfa367}.ims-fav-detail{display:inline-flex;align-items:center;gap:8px;cursor:pointer}.ims-fav-heart:focus-visible,.ims-fav-detail:focus-visible{outline:3px solid #c6a43f;outline-offset:3px}@media(max-width:600px){.ims-fav-heart{inset-block-start:7px;inset-inline-end:7px;width:27px;height:27px;min-height:27px;min-width:27px}}';document.head.append(css);const pro=document.createElement("link");pro.rel="stylesheet";pro.href="/Imsfrane-demo/css/ims-favorites-pro.css?v=20261016petite-heart-v3";document.head.append(pro);
 
 function message(t){let n=document.getElementById("imsFavToast");if(!n){n=document.createElement("div");n.id="imsFavToast";n.setAttribute("role","status");n.style.cssText="position:fixed;z-index:2147483100;bottom:86px;left:50%;transform:translateX(-50%);max-width:calc(100vw - 28px);background:#153d2e;color:white;border:1px solid #c6a43f;border-radius:12px;padding:12px 19px;font:700 13px system-ui;box-shadow:0 9px 27px #0004;text-align:center";document.body.append(n)}n.textContent=t;n.hidden=false;setTimeout(()=>n.hidden=true,3500)}
 
@@ -40,7 +40,7 @@ function place(){
   const slug=catalog.find(id=>card.classList.contains("hp-"+id));
   if(slug)addHeart(slug,card);
  });
- document.querySelectorAll("main .activity-card,main .experience-card,main .tour-card,main .program-card,main .service-card,main .related-card,main .activity-tile,main .destination-card").forEach(card=>{
+ document.querySelectorAll("main .activity-card,main .experience-card,main .tour-card,main .program-card,main .service-card,main .related-card,main .activity-tile,main .destination-card,main .gp-card,main .card").forEach(card=>{
   const links=Array.from(card.querySelectorAll("a[href]"));
   const slug=links.map(matchLink).find(Boolean);
   if(slug)addHeart(slug,card);
