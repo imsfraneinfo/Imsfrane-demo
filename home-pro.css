@@ -782,3 +782,39 @@ html[lang="ar"] .hp-home .hp-activity-grid>.hp-activity-card .hp-activity-bottom
  .hp-home .hp-activity-grid>.hp-activity-card,
  .hp-home .hp-activity-grid>.hp-activity-card>.hp-activity-image>img{transition:none!important}
 }
+
+/* Compact, equal-size photo labels across all activity cards and languages. */
+html .hp-home .hp-activity-grid>.hp-activity-card>.hp-activity-image>.hp-photo-tag{
+ box-sizing:border-box;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ width:144px;
+ max-width:calc(100% - 52px);
+ height:32px;
+ padding:3px 6px;
+ inset-block-start:10px;
+ inset-inline-start:10px;
+ font-size:9px;
+ font-weight:700;
+ line-height:1.2;
+ text-align:center;
+ border-radius:5px;
+}
+html[lang="ar"] .hp-home .hp-activity-grid>.hp-activity-card>.hp-activity-image>.hp-photo-tag{
+ font-size:9px;
+ line-height:1.2;
+ text-align:center;
+}
+@media(max-width:600px){
+ html .hp-home .hp-activity-grid>.hp-activity-card>.hp-activity-image>.hp-photo-tag{
+  width:120px;
+  max-width:calc(100% - 46px);
+  height:30px;
+  inset-block-start:7px;
+  inset-inline-start:7px;
+  padding:2px 4px;
+  font-size:8.5px;
+  line-height:1.2;
+ }
+}
