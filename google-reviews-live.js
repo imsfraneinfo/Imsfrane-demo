@@ -179,6 +179,12 @@
     },{rootMargin:'0px',threshold:0.05});
     observer.observe(section);
   }
-  if(document.readyState==='complete')observeReviews();
-  else window.addEventListener('load',observeReviews,{once:true});
+  let watching=false;
+  function begin(){if(watching)return;watching=true;observeReviews()}
+  // Live reviews are requested when a visitor starts exploring the page.
+  // This avoids loading an entire map engine for an unattended first view.
+  window.addEventListener('scroll',begin,{once:true,passive:true});
+  window.addEventListener('pointerdown',begin,{once:true,passive:true});
+  window.addEventListener('keydown',begin,{once:true});
+  if(window.scrollY>0)begin();
 })();

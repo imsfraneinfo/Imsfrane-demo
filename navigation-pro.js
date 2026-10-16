@@ -192,7 +192,13 @@ function refreshAccount(u){
  var accountUser=null;
  entry.addEventListener("click",async function(e){e.preventDefault();oldFocus=entry;dialog.hidden=false;document.body.style.overflow="hidden";message("");render();q(".ims-login-close").focus();try{var db=await getClient(),r=await db.auth.getUser();accountUser=r.data?.user||null;refreshAccount(accountUser)}catch(e){message(e.message||"Connection error")}});
  q(".ims-demo-logout").onclick=async function(){try{var db=await getClient(),r=await db.auth.signOut();if(r.error)throw r.error;accountUser=null;refreshAccount(null);close()}catch(e){message(e.message)}};
- (async function(){try{var db=await getClient(),r=await db.auth.getUser();accountUser=r.data?.user||null;refreshAccount(accountUser);db.auth.onAuthStateChange(function(_event,session){accountUser=session?.user||null;refreshAccount(accountUser)})}catch(e){}})();
+ // Hydrate existing accounts immediately; an anonymous visitor does not need
+ // the authentication SDK until opening the login modal.
+ function hasAccountSession(){try{return Object.keys(localStorage).some(k=>k.startsWith('sb-')&&k.endsWith('-auth-token')&&localStorage.getItem(k))}catch(e){return true}}
+ let accountHydrated=false;
+ function hydrateAccount(){if(accountHydrated)return;accountHydrated=true;(async function(){try{var db=await getClient(),r=await db.auth.getUser();accountUser=r.data?.user||null;refreshAccount(accountUser);db.auth.onAuthStateChange(function(_event,session){accountUser=session?.user||null;refreshAccount(accountUser)})}catch(e){}})()}
+ if(hasAccountSession())hydrateAccount();
+ window.addEventListener('storage',function(e){if(e.key&&e.key.endsWith('-auth-token')&&e.newValue)hydrateAccount()});
 
  q(".ims-login-close").onclick=close;dialog.addEventListener("click",function(e){if(e.target===dialog)close()});document.addEventListener("keydown",function(e){if(!dialog.hidden&&e.key==="Escape")close()});
  dialog.querySelectorAll(".ims-login-tab").forEach(function(b){b.onclick=function(){mode=b.dataset.mode;render()}});
@@ -203,7 +209,7 @@ function refreshAccount(u){
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",initAccountModal,{once:true});else initAccountModal();
 
-function loadFavoriteHearts(){if(!/^\/Imsfrane-demo\/(fr|en|ar|es)\//.test(location.pathname))return;if(document.querySelector('script[data-ims-fav]'))return;var script=document.createElement("script");script.src="/Imsfrane-demo/js/ims-favorites-demo.js?v=20261016petite-heart-all-pages-v3";script.defer=true;script.dataset.imsFav="yes";document.head.append(script)}
+function loadFavoriteHearts(){if(!/^\/Imsfrane-demo\/(fr|en|ar|es)\//.test(location.pathname))return;if(document.querySelector('script[data-ims-fav]'))return;var script=document.createElement("script");script.src="/Imsfrane-demo/js/ims-favorites-demo.js?v=performance-v3-20261016";script.defer=true;script.dataset.imsFav="yes";document.head.append(script)}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",loadFavoriteHearts,{once:true});else loadFavoriteHearts();
 
 /* Site header: no notification bell. The full inbox stays on members.html. */
