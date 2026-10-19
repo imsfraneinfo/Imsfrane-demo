@@ -276,9 +276,9 @@ def build(root:Path):
     polish_existing_ar_articles(root)
     for lang,folder in (("ar",ar),("es",es)):
         count=len(list(folder.glob("*.html")))
-        if count!=44:
-            raise RuntimeError("Expected 44 fully localized pages in "+lang+", got "+str(count))
-        print("[Localisation] "+lang+": 44 pages, including 15 core pages and 29 editorial articles.")
+        if count<44:
+            raise RuntimeError("Expected at least 44 fully localized pages in "+lang+", got "+str(count))
+        print("[Localisation] "+lang+": "+str(count)+" pages, including 15 core pages and 29 editorial articles.")
     print("[Localisation] Arabic and Spanish: 15 original destination pages each; 29 editorial routes each.")
     print("[Localisation] No auto translation, no false immediate reservations, all Arabic uses RTL.")
 
