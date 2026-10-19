@@ -267,7 +267,7 @@ def build(root:Path):
             if name in ("index.html","memories.html"):
                 continue
             raw=frfile.read_text(encoding="utf-8")
-            if raw.count('src="../images/logo-104.webp"')<2 and "siteHeader" in raw:
+            if len(re.findall(r'<img\b[^>]*\bsrc="[^"]*logo-104\.webp"',raw,re.I))<2 and "siteHeader" in raw:
                 raise RuntimeError("Original site brand HTML unavailable: "+name)
             src=BeautifulSoup(raw,"html.parser")
             orig=src.find("main")
@@ -348,9 +348,10 @@ def build(root:Path):
             # this never changes the original markup or event handlers.
             if src.find("body"):
                 src.body["data-lang"]=lang
-            source_logos=raw.count('src="../images/logo-104.webp"')
+            logo_pattern=r'<img\b[^>]*\bsrc="[^"]*logo-104\.webp"'
+            source_logos=len(re.findall(logo_pattern,raw,re.I))
             built=str(src)
-            if source_logos and built.count('src="../images/logo-104.webp"')!=source_logos:
+            if source_logos and len(re.findall(logo_pattern,built,re.I))!=source_logos:
                 raise RuntimeError("Original branded logo changed "+lang+"/"+name)
             tgt.joinpath(name).write_text(built,encoding="utf-8")
         # The English edition includes one unique slug; preserve its exact layout.
