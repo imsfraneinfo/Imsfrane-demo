@@ -2,7 +2,7 @@ name: Publish Imsfrane demo
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/build-demo.yml', 'rafting-v8.html', 'imsfrane_rafting_mobile_cadrage_corrige_v8*.html', 'images/rafting-new/**', 'quad-content-*.html', 'images/quad-new/**', 'images/IMG_*.webp', 'vtt-content-*.html', 'camping-content-*.html', 'randonnee-content-*.html', 'about-content-*.html', 'remaining-pages-theme.css', 'rebuild_remaining.py', 'build_memories_gallery.py', 'memories-gallery.css', 'build_blog_journal.py', 'blog-journal.css', 'blog-journal.js', 'build_new_articles.py', 'blog_new_topics.json', 'blog_article_research.json', 'blog_expanded_content.json', 'blog-articles.css', 'booking-prices.json', 'booking-pro.css', 'booking-pro.js', 'build_booking_pro.py', 'build_store_pro.py', 'store-products.json', 'store-pro.css', 'store-pro.js', 'build_guide_pro.py', 'guide-pro.css', 'build_home_pro.py', 'home-pro.css', 'home-pro.js', 'menu-preview.html', 'build_navigation_pro.py', 'navigation-pro.css', 'navigation-pro.js', 'build_localized_pages.py', 'localized-pages.json', 'localized-articles-es.json', 'localized-legacy-articles.json', 'build_localized_mirror.py', 'build_exact_locales.py', 'localized-exact-text.json', 'validate_site_locales.py', 'build_arabic_font.py', 'fix_core_demo_language.py', 'install_google_reviews_live.py', 'google-reviews-live.js', 'google-reviews-live.css', 'polish_arabic_currency.py', 'fix_arabic_price_bidi.py', 'arabic-pro.css', 'localized-site.css', 'localized-site.js', 'images/rando-*.webp', 'images/IMG_*.jpeg']
+    paths: ['.github/workflows/build-demo.yml', 'rafting-v8.html', 'imsfrane_rafting_mobile_cadrage_corrige_v8*.html', 'images/rafting-new/**', 'quad-content-*.html', 'images/quad-new/**', 'images/IMG_*.webp', 'vtt-content-*.html', 'camping-content-*.html', 'randonnee-content-*.html', 'about-content-*.html', 'remaining-pages-theme.css', 'rebuild_remaining.py', 'build_memories_gallery.py', 'memories-gallery.css', 'build_blog_journal.py', 'blog-journal.css', 'blog-journal.js', 'build_new_articles.py', 'blog_new_topics.json', 'blog_article_research.json', 'blog_expanded_content.json', 'blog-articles.css', 'booking-prices.json', 'booking-pro.css', 'booking-pro.js', 'build_booking_pro.py', 'build_store_pro.py', 'store-products.json', 'store-pro.css', 'store-pro.js', 'build_guide_pro.py', 'guide-pro.css', 'build_home_pro.py', 'home-pro.css', 'home-pro.js', 'menu-preview.html', 'build_navigation_pro.py', 'navigation-pro.css', 'navigation-pro.js', 'build_localized_pages.py', 'localized-pages.json', 'localized-articles-es.json', 'localized-legacy-articles.json', 'build_localized_mirror.py', 'build_exact_locales.py', 'localized-exact-text.json', 'validate_site_locales.py', 'build_bivouac_showcase.py', 'build_arabic_font.py', 'fix_core_demo_language.py', 'install_google_reviews_live.py', 'google-reviews-live.js', 'google-reviews-live.css', 'polish_arabic_currency.py', 'fix_arabic_price_bidi.py', 'arabic-pro.css', 'localized-site.css', 'localized-site.js', 'images/rando-*.webp', 'images/IMG_*.jpeg']
   workflow_dispatch:
 concurrency:
   group: imsfrane-demo-publish
@@ -527,6 +527,9 @@ jobs:
           # AR/ES routes. Localize the original rafting embedded experience.
           from build_exact_locales import build as match_all_original_pages
           match_all_original_pages(root)
+          # Demo-only visual story built from the user's real bivouac photos.
+          from build_bivouac_showcase import build as build_bivouac_showcase
+          build_bivouac_showcase(root)
           # Apply the approved Triplan-style menu to Demo FR/EN pages and articles.
           # Preserve original logo HTML and do not alter page main content.
           from build_navigation_pro import build as build_navigation
