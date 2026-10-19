@@ -232,6 +232,12 @@ def patch(path, lang, root):
             raise RuntimeError(f"Invalid existing premium menu in {path}")
         if len(re.findall(r'class="atnav-submenu-link"',source))!=6:
             raise RuntimeError(f"Incomplete existing premium menu in {path}")
+        current=path.name
+        source,n=re.subn(r'<div class="atnav-langmini">[\s\S]*?</div></div>',
+                         compact_language(lang,current,root),source,count=1,flags=re.I)
+        if n!=1:
+            raise RuntimeError(f"Existing premium language selector missing in {path}")
+        path.write_text(source,encoding="utf-8")
         return
     if '</head>' not in source or '</body>' not in source or '<body' not in source:
         raise RuntimeError(f"Missing basic HTML document in {path}")
