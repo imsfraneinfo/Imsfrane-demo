@@ -27,11 +27,16 @@ jobs:
           from pathlib import Path
           import re
           root=Path('public')
+          def page_file(lang, slug):
+              """Use the canonical directory route, falling back to legacy HTML."""
+              canonical=root/lang/slug/'index.html'
+              legacy=root/lang/(slug+'.html')
+              return canonical if canonical.is_file() else legacy
           for f in root.rglob('*.html'):
               s=f.read_text(encoding='utf-8')
               s=re.sub(r'(?i)(href|src|action|poster)=(["\'])/(?!/|Imsfrane-demo/)',r'\1=\2/Imsfrane-demo/',s)
               s=s.replace('https://imsfrane.com/fr/', '/Imsfrane-demo/fr/').replace('https://imsfrane.com/en/', '/Imsfrane-demo/en/')
-              if f.as_posix() in ('public/fr/rafting.html','public/en/rafting.html'):
+              if f in (page_file('fr','rafting'),page_file('en','rafting')):
                   css="""<style id="imsfrane-demo-rafting-mobile">
           @media(max-width:650px){
           .hero-media,.hero-media .shot.main{height:320px!important;min-height:320px!important}
@@ -50,7 +55,7 @@ jobs:
           theme=Path('remaining-pages-theme.css').read_text(encoding='utf-8')
           for lang in ('fr','en'):
               for page in ('hebergement','programme','booking','contact','memories','guide','store','blog'):
-                  target=root/lang/(page+'.html')
+                  target=page_file(lang,page)
                   content=target.read_text(encoding='utf-8')
                   content=content.replace('</head>','<style id="imsfrane-remaining-theme">'+theme+'</style></head>',1)
                   target.write_text(content,encoding='utf-8')
@@ -65,7 +70,7 @@ jobs:
               shutil.copy2(src,root/'images'/src.name)
           # VTT pages: keep original site header, navigation and footer.
           for lang in ('fr','en'):
-              target=root/lang/'vtt.html'
+              target=page_file(lang,'vtt')
               source=Path('vtt-content-'+lang+'.html')
               if not (target.exists() and source.exists()):
                   continue
@@ -85,7 +90,7 @@ jobs:
               target.write_text(original,encoding='utf-8')
           # About Us pages: preserve original site header, navigation and footer.
           for lang in ('fr','en'):
-              target=root/lang/'about.html'
+              target=page_file(lang,'about')
               source=Path('about-content-'+lang+'.html')
               if not (target.exists() and source.exists()):
                   raise RuntimeError('Missing About Us demo source or target')
@@ -102,7 +107,7 @@ jobs:
               target.write_text(original,encoding='utf-8')
           # Randonnée pages: preserve original site header, navigation and footer.
           for lang in ('fr','en'):
-              target=root/lang/'randonnee.html'
+              target=page_file(lang,'randonnee')
               source=Path('randonnee-content-'+lang+'.html')
               if not (target.exists() and source.exists()):
                   raise RuntimeError('Missing randonnée demo source or target')
@@ -127,7 +132,7 @@ jobs:
               shutil.copy2(photo,root/'images'/photo.name)
           # Camping pages: preserve site navigation/footer and insert bilingual camping experience.
           for lang in ('fr','en'):
-              target=root/lang/'camping.html'
+              target=page_file(lang,'camping')
               source=Path('camping-content-'+lang+'.html')
               if not (target.exists() and source.exists()):
                   raise RuntimeError('Missing camping demo source or target')
@@ -149,7 +154,7 @@ jobs:
               shutil.copy2(photo,root/'images'/photo.name)
           # Quad pages: retain original navigation and footer; replace main only.
           for lang in ('fr','en'):
-              target=root/lang/'quad.html'
+              target=page_file(lang,'quad')
               source=Path('quad-content-'+lang+'.html')
               if not (target.exists() and source.exists()):
                   continue
@@ -468,7 +473,7 @@ jobs:
               english=re.sub(r'>([^<>]+)<',translate_node,english)
               (root/'rafting-content-en.html').write_text(english,encoding='utf-8')
               for lang in ('fr','en'):
-                  f=root/lang/'rafting.html'
+                  f=page_file(lang,'rafting')
                   original=f.read_text(encoding='utf-8')
                   content_file='rafting-content-en.html' if lang=='en' else 'rafting-content.html'
                   embedded='''<main class="rafting-page" id="mainContent" style="padding:0;max-width:none">
