@@ -64,7 +64,12 @@ with webdriver.Chrome(options=opts) as browser:
                     """)
                     expected_dir = "rtl" if lang == "ar" else "ltr"
                     expected_core = "core-multilingual-v2.js" if lang in ("ar", "es") else "core.min.js"
-                    assert (state["lang"], state["dir"]) == (lang, expected_dir), state
+                    assert state["lang"] == lang, state
+                    if lang == "ar":
+                        assert state["dir"] == "rtl", state
+                    else:
+                        # HTML defaults to LTR when no explicit dir is present.
+                        assert state["dir"] in ("", "ltr"), state
                     assert state["mainDirection"] == expected_dir, state
                     # Current official homepage includes Kayak as a seventh
                     # activity; older interior shells still expose six.
