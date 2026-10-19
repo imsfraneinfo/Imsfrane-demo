@@ -39,14 +39,15 @@ return ["fr","en","ar","es"].includes(rawLanguage) ? rawLanguage : "en";'''
         count=0
         for page in pages:
             s=page.read_text(encoding="utf-8")
-            old='src="../js/core.min.js"'
-            new='src="../js/'+DEST+'"'
-            if s.count(old)>1:
+            old=r'src="(?:\.\./|/Imsfrane-demo/)js/core\.min\.js"'
+            new='src="/Imsfrane-demo/js/'+DEST+'"'
+            matches=re.findall(old,s)
+            if len(matches)>1:
                 raise RuntimeError("Unexpected duplicate original core JS on "+str(page))
             # Independent editorial articles have no original core JS.
             # Their correct lang=ar dir=rtl markup remains untouched.
-            if s.count(old)==1:
-                page.write_text(s.replace(old,new,1),encoding="utf-8")
+            if len(matches)==1:
+                page.write_text(re.sub(old,new,s,count=1),encoding="utf-8")
                 count+=1
         if count<15:
             raise RuntimeError("Expected original core JS on each primary page")
