@@ -51,7 +51,7 @@ def build_page(path, used_heroes):
     if hero_photo:
         used_heroes.add(image_key(hero_photo))
     used_images={image_key(hero_photo)} if hero_photo else set()
-    lang=path.parent.name
+    lang=next((part for part in reversed(path.parts) if part in ('fr','en')), 'fr')
     explore='Découvrir' if lang=='fr' else 'Explore'
     eyebrow='Imsfrane Cathédrale · Haut Atlas'
     blocks=[]
@@ -123,6 +123,11 @@ def run(root):
     for lang in ('fr','en'):
         used_heroes=set()
         for page in PAGES:
-            build_page(root/lang/(page+'.html'), used_heroes)
+            legacy=root/lang/(page+'.html')
+            directory=root/lang/page/'index.html'
+            target=legacy if legacy.is_file() else directory
+            if not target.is_file():
+                raise FileNotFoundError('Page not found in legacy or directory route: '+str(legacy))
+            build_page(target, used_heroes)
 if __name__=='__main__':
     run(Path('public'))
