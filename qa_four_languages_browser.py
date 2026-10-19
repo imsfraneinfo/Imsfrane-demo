@@ -66,7 +66,9 @@ with webdriver.Chrome(options=opts) as browser:
                     expected_core = "core-multilingual-v2.js" if lang in ("ar", "es") else "core.min.js"
                     assert (state["lang"], state["dir"]) == (lang, expected_dir), state
                     assert state["mainDirection"] == expected_dir, state
-                    assert state["menuCount"] == 1 and state["activityCount"] == 6, state
+                    # Current official homepage includes Kayak as a seventh
+                    # activity; older interior shells still expose six.
+                    assert state["menuCount"] == 1 and state["activityCount"] in (6, 7), state
                     assert len(state["links"]) == 4, state
                     assert {link["lang"] for link in state["links"]} == set(LANGS), state
                     for link in state["links"]:
