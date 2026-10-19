@@ -228,7 +228,11 @@ def article_header(lang, logo_prefix):
 def patch(path, lang, root):
     source=path.read_text(encoding="utf-8")
     if 'id="atnavDrawer"' in source:
-        raise RuntimeError(f"Duplicate premium menu in {path}")
+        if source.count('id="atnavDrawer"')!=1 or source.count('id="atnavOpen"')!=1:
+            raise RuntimeError(f"Invalid existing premium menu in {path}")
+        if len(re.findall(r'class="atnav-submenu-link"',source))!=6:
+            raise RuntimeError(f"Incomplete existing premium menu in {path}")
+        return
     if '</head>' not in source or '</body>' not in source or '<body' not in source:
         raise RuntimeError(f"Missing basic HTML document in {path}")
     before_main=re.search(r'<main\b[^>]*>[\s\S]*?</main>',source,flags=re.I)
