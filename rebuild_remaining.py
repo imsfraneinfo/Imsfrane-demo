@@ -110,7 +110,7 @@ def build_page(path, used_heroes):
         blocks.append('<section class="demo-rebuild-section'+(' demo-rebuild-alt' if index%2 else '')+'" id="demo-section-'+str(index)+'"><div class="demo-rebuild-inner">'+media+body+'</div>'+gallery+'</section>')
     hero_picture=hero_photo
     if path.stem=='contact':
-        if hero_photo.rsplit('/',1)[-1] not in ('25.webp','25-800.webp'):
+        if hero_photo.rsplit('/',1)[-1] not in ('25.webp','25-800.webp','contact-rafting-bottom.webp'):
             raise RuntimeError('Unexpected Contact hero source: '+hero_photo)
         hero_picture='../images/contact-rafting-bottom.webp'
     hero='<section class="demo-editorial-hero"><div class="demo-editorial-copy"><span class="demo-editorial-eyebrow">'+eyebrow+'</span><h1>'+html.escape(title)+'</h1><a class="demo-editorial-link" href="#demo-section-0">'+explore+' ↓</a></div><div class="demo-editorial-photo"><img src="'+html.escape(hero_picture,quote=True)+'" alt="'+html.escape(title)+'"></div></section>'
