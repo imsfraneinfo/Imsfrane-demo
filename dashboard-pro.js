@@ -3,7 +3,7 @@
 "use strict";
 const dash=document.getElementById("imsDashUi"),mobile=document.getElementById("imsDashMobileNav"),settings=document.getElementById("imsSettingsPanel");
 if(!dash||!mobile||!settings)return;
-const langs=["fr","en","ar","es"],base="/Imsfrane-demo/";
+const langs=["fr","en","ar","es"],base="/";
 const translations={
  fr:{hello:"BONJOUR,",yourSpace:"VOTRE ESPACE IMSFRANE",welcome:"Votre prochaine aventure commence ici.",official:"↗ Retour au site officiel",dashboard:"Tableau de bord",home:"Accueil",bookings:"Mes commandes",favorites:"Favoris",activities:"Activités",account:"Compte",navigation:"VOTRE NAVIGATION",return:"Reprendre ma visite",returnDesc:"Retrouvez la dernière page que vous avez consultée.",gettingStarted:"VOS PREMIÈRES ÉTAPES",start:"Bien démarrer avec Imsfrane",done:"TERMINÉ",todo:"À COMPLÉTER",stepCreated:"Compte créé",stepCreatedDesc:"Votre compte Imsfrane est prêt.",stepVerified:"Adresse e-mail vérifiée",stepVerifiedDesc:"La vérification dépend de votre méthode de connexion.",stepProfile:"Complétez votre profil",stepProfileDesc:"Ajoutez votre nom public.",completeProfile:"Compléter mon profil →",stepExplore:"Découvrez nos aventures",stepExploreDesc:"Explorez les activités proposées à Imsfrane.",discover:"Découvrir les activités →",savedItems:"favoris sur cet appareil",completion:"profil complété",nextAdventure:"VOTRE PROCHAINE AVENTURE",nextTitle:"Prêt à explorer l’Atlas ?",noBooking:"Vos réservations ne sont pas encore reliées à votre compte.",noBookingDesc:"Découvrez les expériences, puis contactez-nous pour organiser votre aventure.",seeAdventures:"Découvrir les aventures",bookingSection:"MES COMMANDES",bookingTitle:"Suivi de mes expériences",bookingUnavailable:"Aucune réservation synchronisée",bookingExplain:"Les réservations se font actuellement avec notre équipe. Elles n’apparaissent pas encore automatiquement ici.",contactBook:"Réserver une activité",favoriteSection:"MES FAVORIS",favoritesTitle:"Les expériences qui m’inspirent",favoritesHint:"Retrouvez vos activités préférées avec les mêmes photos et informations que sur notre site.",addFavorites:"Parcourir les activités",activitySection:"IMSFRANE · ATLAS",activitiesTitle:"Choisir ma prochaine activité",activityHint:"Enregistrez vos activités préférées ou consultez leur page.",profileSection:"MES INFORMATIONS",profileTitle:"Mon profil et mes préférences",profileHint:"Modifiez vos informations et les préférences de votre compte ci-dessous.",view:"Voir",save:"Ajouter aux favoris",remove:"Retirer des favoris",emptyFavorites:"Vous n’avez pas encore ajouté d’activités favorites.",securityNote:"Cette fonctionnalité est en préparation."},
  en:{hello:"HELLO,",yourSpace:"YOUR IMSFRANE SPACE",welcome:"Your next adventure starts here.",official:"↗ Back to the official website",dashboard:"My dashboard",home:"Home",bookings:"My orders",favorites:"Favorites",activities:"Activities",account:"Account",navigation:"YOUR LAST VISIT",return:"Continue exploring",returnDesc:"Go back to the last page you visited.",gettingStarted:"YOUR FIRST STEPS",start:"Getting started with Imsfrane",done:"COMPLETE",todo:"TO DO",stepCreated:"Account created",stepCreatedDesc:"Your Imsfrane account is ready.",stepVerified:"Email verified",stepVerifiedDesc:"Verification depends on your sign-in method.",stepProfile:"Complete your profile",stepProfileDesc:"Add your public name.",completeProfile:"Complete my profile →",stepExplore:"Explore the adventures",stepExploreDesc:"See the experiences available in Imsfrane.",discover:"Discover activities →",savedItems:"favorites on this device",completion:"profile complete",nextAdventure:"YOUR NEXT ADVENTURE",nextTitle:"Ready to explore the Atlas?",noBooking:"Bookings are not yet linked to your account.",noBookingDesc:"Browse experiences and contact our team to plan your visit.",seeAdventures:"Browse adventures",bookingSection:"MY ORDERS",bookingTitle:"My experiences",bookingUnavailable:"No synced bookings",bookingExplain:"Bookings are currently arranged directly with our team and do not automatically appear here yet.",contactBook:"Book an activity",favoriteSection:"MY FAVORITES",favoritesTitle:"Experiences I love",favoritesHint:"Your saved activities appear here with the same photos and details as on our website.",addFavorites:"Explore activities",activitySection:"IMSFRANE · ATLAS",activitiesTitle:"Choose my next activity",activityHint:"Save activities to favorites or open their pages.",profileSection:"MY DETAILS",profileTitle:"My profile and preferences",profileHint:"Edit your information and account preferences below.",view:"View",save:"Add to favorites",remove:"Remove favorite",emptyFavorites:"You have not saved any favorites yet.",securityNote:"This feature is under development."},
@@ -93,7 +93,7 @@ const activities=[
  },
  {
   "id": "jetski",
-  "photo": "images/jetski-800.webp",
+  "photo": "images/jetski-lake.webp",
   "names": {
    "fr": "Jet Ski",
    "en": "Jet Ski",
@@ -252,7 +252,7 @@ async function renderActivities(){
    This preserves each original image, heading, description, price and card design. */
 const homepageCache=new Map();
 let favoritesRenderVersion=0;
-const fallbackCardImages={"rafting":"images/rafting-new/IMG_9129.webp","kayak":"images/kayak/kayak-group.webp","randonnee":"images/19-800.webp","camping":"images/camping-1-800.webp","vtt":"images/IMG_2604.webp","quad":"images/quad-new/IMG_0310.webp","hebergement":"images/bab2-800.webp","tubing":"images/tubing-800.webp","jetski":"images/jetski-800.webp","4x4":"images/4x4-800.webp","passage":"images/passage-800.webp","zrkan":"images/zrkan-800.webp","anergui":"images/anergui-800.webp","almou":"images/almo-800.webp","ahidous":"images/ahidous-800.webp"};
+const fallbackCardImages={"rafting":"images/rafting-new/IMG_9129.webp","kayak":"images/kayak/kayak-group.webp","randonnee":"images/19-800.webp","camping":"images/camping-1-800.webp","vtt":"images/IMG_2604.webp","quad":"images/quad-new/IMG_0310.webp","hebergement":"images/bab2-800.webp","tubing":"images/tubing-800.webp","jetski":"images/jetski-lake.webp","4x4":"images/4x4-800.webp","passage":"images/passage-800.webp","zrkan":"images/zrkan-800.webp","anergui":"images/anergui-800.webp","almou":"images/almo-800.webp","ahidous":"images/ahidous-800.webp"};
 function sourceHomepage(language){
  if(!homepageCache.has(language)){
   const url=base+language+"/index.html";
@@ -273,8 +273,8 @@ function originalFavoriteCard(id,language,homeDocument,selected=true){
   card.querySelectorAll("a[href]").forEach(link=>{
    try{const href=link.getAttribute("href");if(href)link.href=new URL(href,sourceUrl).href}catch(e){}
   });
-  card.querySelectorAll("img[src],img[data-src]").forEach(img=>{
-   try{const src=img.getAttribute("data-src")||img.getAttribute("src");if(src)img.src=new URL(src,sourceUrl).href;img.removeAttribute("srcset");img.removeAttribute("data-srcset");img.removeAttribute("data-home-lazy")}catch(e){}
+  card.querySelectorAll("img[src]").forEach(img=>{
+   try{const src=img.getAttribute("src");if(src)img.src=new URL(src,sourceUrl).href}catch(e){}
   });
  }else{
   // Network fallback uses the very same image as the actual homepage card.
