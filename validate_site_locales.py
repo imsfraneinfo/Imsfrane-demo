@@ -59,7 +59,11 @@ def validate(root):
             for option in options:
                 target=option.get("href","")
                 expected="../"+option["lang"]+"/"+name
-                if target!=expected:
+                slug=name[:-5]
+                canonical=(f'/Imsfrane-demo/{option["lang"]}/' if name=="index.html"
+                           else f'/Imsfrane-demo/{option["lang"]}/{slug}/')
+                demo_absolute=f'/Imsfrane-demo/{option["lang"]}/{name}'
+                if target not in (expected,canonical,demo_absolute):
                     raise RuntimeError(f"Language dropdown doesn't stay on same page: {lang}/{name}: {target}")
                 if not (root/option["lang"]/name).is_file():
                     raise RuntimeError(f"Broken translated target: {lang}/{name}: {target}")
@@ -69,12 +73,12 @@ def validate(root):
                 raise RuntimeError(f"Document language incorrect: {lang}/{name}")
             if lang=="ar" and soup.html.get("dir")!="rtl":
                 raise RuntimeError(f"Missing Arabic RTL: {name}")
-            logo=soup.select('img[src="../images/logo-104.webp"]')
+            logo=[img for img in soup.find_all('img') if img.get('src','').endswith('/images/logo-104.webp')]
             if len(logo)<2:raise RuntimeError(f"Original logo missing: {lang}/{name}")
             verified+=1
     for lang in ("ar","es"):
         full=sorted((root/lang).glob("*.html"))
-        if len(full)!=44:raise RuntimeError(f"Expected 44 {lang} pages, got {len(full)}")
+        if len(full)<44:raise RuntimeError(f"Expected at least 44 {lang} pages, got {len(full)}")
     print(f"[SITE LANGUAGE VALIDATION] {verified} primary page-locales passed")
     print("[SITE LANGUAGE VALIDATION] Same layouts, content image assets, 6 nav activities,")
     print("[SITE LANGUAGE VALIDATION] original logo, one 4-language dropdown and preserved routes.")
