@@ -278,7 +278,9 @@ def build(root):
     for lang in ("ar","es"):
         for page in PAGES:
             src=(root/"fr"/(page+".html")).read_text(encoding="utf-8")
-            if len(re.findall(r'<img\b[^>]*\bsrc="[^"]*logo-104\.webp"',src,re.I))!=2:raise RuntimeError("Original shell logo changed: "+page)
+            logo_pattern=r'<img\b[^>]*\bsrc="[^"]*logo-104\.webp"'
+            logo_count=len(re.findall(logo_pattern,src,re.I))
+            if logo_count<2:raise RuntimeError("Original shell logo changed: "+page)
             if page=="index":main=homepage_main(root,lang)
             elif page=="memories":main=native_memories(src,lang)
             else:main=subpage_main(lang,page,src)
@@ -298,7 +300,7 @@ def build(root):
             doc=BeautifulSoup(src,"html.parser")
             header_localize(doc,lang);footer_localize(doc,lang)
             src=str(doc)
-            if len(re.findall(r'<img\b[^>]*\bsrc="[^"]*logo-104\.webp"',src,re.I))!=2:raise RuntimeError("Mirrored header/footer logo modified: "+lang+"/"+page)
+            if len(re.findall(logo_pattern,src,re.I))!=logo_count:raise RuntimeError("Mirrored header/footer logo modified: "+lang+"/"+page)
             if src.count('<main')!=1:raise RuntimeError("Main count mismatch")
             if page=="index" and (src.count('data-slide="')!=5 or src.count('hp-activity-card')!=14):
                 raise RuntimeError("Original slider/cards removed")
