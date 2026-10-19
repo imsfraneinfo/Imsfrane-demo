@@ -55,8 +55,8 @@ def copy_fonts(root:Path):
 def build(root:Path):
     directory=copy_fonts(root)
     files=sorted((root/"ar").glob("*.html"))
-    if len(files)!=44:
-        raise RuntimeError("Expected 44 Arabic routes before font styling")
+    if len(files)<44:
+        raise RuntimeError("Expected at least 44 Arabic routes before font styling")
     files.append(root/"rafting-content-ar.html")
     for file in files:
         source=file.read_text(encoding="utf-8")

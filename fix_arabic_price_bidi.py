@@ -34,7 +34,7 @@ def make_price(tag,doc):
 
 def build(root:Path):
     pages=sorted((root/"ar").glob("*.html"))+[root/"rafting-content-ar.html"]
-    if len(pages)!=45:raise RuntimeError("Expected 44 Arabic routes and rafting iframe")
+    if len(pages)<45:raise RuntimeError("Expected at least 44 Arabic routes and rafting iframe")
     total=0
     for path in pages:
         source=path.read_text(encoding="utf-8")

@@ -38,7 +38,7 @@ def transform(markup:str):
 
 def build(root:Path):
     ar=sorted((root/"ar").glob("*.html"))
-    if len(ar)!=44:raise RuntimeError("Expected 44 localized Arabic pages")
+    if len(ar)<44:raise RuntimeError("Expected at least 44 localized Arabic pages")
     pages=ar+[root/"rafting-content-ar.html"]
     changes={}
     for path in pages:

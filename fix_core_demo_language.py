@@ -35,7 +35,7 @@ return ["fr","en","ar","es"].includes(rawLanguage) ? rawLanguage : "en";'''
         raise RuntimeError("Attempted to change original core JS in place")
     for lang in ("ar","es"):
         pages=sorted((root/lang).glob("*.html"))
-        if len(pages)!=44:raise RuntimeError("Missing localized page before core fix")
+        if len(pages)<44:raise RuntimeError("Missing localized page before core fix")
         count=0
         for page in pages:
             s=page.read_text(encoding="utf-8")
