@@ -28,10 +28,21 @@ jobs:
           import re
           root=Path('public')
           def page_file(lang, slug):
-              """Use the canonical directory route, falling back to legacy HTML."""
+              """Demo builders use full legacy HTML pages for stable asset paths."""
               canonical=root/lang/slug/'index.html'
               legacy=root/lang/(slug+'.html')
-              return canonical if canonical.is_file() else legacy
+              return legacy if legacy.is_file() and '<main' in legacy.read_text(encoding='utf-8') else canonical
+          # The official site now uses directory routes and keeps refresh-only
+          # .html stubs. Demo's established builders still use the legacy depth,
+          # so seed them with the canonical page before applying enhancements.
+          for lang in ('fr','en','ar','es'):
+              lang_root=root/lang
+              if not lang_root.is_dir():
+                  continue
+              for canonical in lang_root.glob('*/index.html'):
+                  source=canonical.read_text(encoding='utf-8')
+                  if '<main' in source:
+                      (lang_root/(canonical.parent.name+'.html')).write_text(source,encoding='utf-8')
           for f in root.rglob('*.html'):
               s=f.read_text(encoding='utf-8')
               s=re.sub(r'(?i)(href|src|action|poster)=(["\'])/(?!/|Imsfrane-demo/)',r'\1=\2/Imsfrane-demo/',s)
@@ -571,6 +582,22 @@ jobs:
           # Only Demo homepages are patched, never the official source repository.
           from install_google_reviews_live import install as install_google_reviews
           install_google_reviews(root)
+          # Keep official-style directory URLs usable in Demo while serving the
+          # enhanced legacy-depth pages expected by the existing asset paths.
+          for lang in ('fr','en','ar','es'):
+              lang_root=root/lang
+              if not lang_root.is_dir():
+                  continue
+              for canonical in lang_root.glob('*/index.html'):
+                  slug=canonical.parent.name
+                  legacy=lang_root/(slug+'.html')
+                  if legacy.is_file() and '<main' in legacy.read_text(encoding='utf-8'):
+                      url=f'/Imsfrane-demo/{lang}/{slug}.html'
+                      canonical.write_text(
+                          '<!doctype html><html><head><meta charset="utf-8">'
+                          f'<meta http-equiv="refresh" content="0;url={url}">'
+                          f'<link rel="canonical" href="{url}"></head><body>'
+                          f'<a href="{url}">Open page</a></body></html>',encoding='utf-8')
           (root/'.nojekyll').touch()
           PY
       - uses: peaceiris/actions-gh-pages@v4

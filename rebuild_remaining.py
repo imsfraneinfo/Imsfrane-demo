@@ -125,9 +125,7 @@ def run(root):
         for page in PAGES:
             legacy=root/lang/(page+'.html')
             directory=root/lang/page/'index.html'
-            # Canonical directory routes contain the real page. Legacy .html
-            # files may still exist as refresh-only compatibility stubs.
-            target=directory if directory.is_file() else legacy
+            target=legacy if legacy.is_file() else directory
             if not target.is_file():
                 raise FileNotFoundError('Page not found in legacy or directory route: '+str(legacy))
             build_page(target, used_heroes)

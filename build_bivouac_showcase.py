@@ -111,7 +111,7 @@ def patch_page(path: Path, lang: str, kind: str, marker: str) -> None:
 
 def build(root: Path) -> None:
     for lang in ("fr", "en", "es", "ar"):
-        kayak = root / lang / "kayak" / "index.html"
+        kayak = root / lang / "kayak.html"
         patch_page(kayak, lang, "kayak", '<section class="ky-section ky-gallery-section"')
 
     rafting_pages = {
