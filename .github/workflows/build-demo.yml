@@ -5,6 +5,8 @@ on:
     paths:
       - '.github/workflows/build-demo.yml'
       - 'build_bivouac_showcase.py'
+      - 'build_rafting_50km_article.py'
+      - 'rafting-50km-article.json'
       - 'images/IMG_bivouac-*.webp'
   workflow_dispatch:
 concurrency:
@@ -35,6 +37,8 @@ jobs:
           root = Path("public")
           prefix = "/Imsfrane-demo/"
           source_sha = subprocess.check_output(["git", "-C", "/tmp/official", "rev-parse", "HEAD"], text=True).strip()
+          from build_rafting_50km_article import build as build_article
+          build_article(root)
           
           # Preserve the current official content and adapt only its hosting path.
           def adapt(text):
@@ -50,7 +54,7 @@ jobs:
               return text
           
           for path in root.rglob("*"):
-              if path.is_file() and path.suffix.lower() in (".html", ".css", ".js", ".json", ".webmanifest"):
+              if path.is_file() and path.suffix.lower() in (".html", ".css", ".js", ".json", ".webmanifest", ".xml"):
                   path.write_text(adapt(path.read_text(encoding="utf-8")), encoding="utf-8")
           
           # The favorite loader checks the pathname before loading its buttons.
