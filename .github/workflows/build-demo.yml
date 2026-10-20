@@ -39,7 +39,8 @@ jobs:
           # Preserve the current official content and adapt only its hosting path.
           def adapt(text):
               text = re.sub(r"https://(?:www\.)?imsfrane\.com/", "https://imsfraneinfo.github.io/Imsfrane-demo/", text, flags=re.I)
-              text = re.sub(r"""(["'])/(?!/|Imsfrane-demo/)""", lambda m: m[1] + prefix, text)
+              text = re.sub(r"""(["'])/(?!/|Imsfrane-demo/|["'])""", lambda m: m[1] + prefix, text)
+              text = re.sub(r"""(href|src|action)=(["'])/\2""", lambda m: m[1] + "=" + m[2] + prefix + m[2], text)
               text = re.sub(r"""url\((["']?)/(?!/|Imsfrane-demo/)""", lambda m: "url(" + m[1] + prefix, text)
               text = re.sub(r"""(?i)(content=["']\d+;\s*url=)/(?!/|Imsfrane-demo/)""", lambda m: m[1] + prefix, text)
               # Additional entries inside responsive srcset attributes.
