@@ -2,7 +2,10 @@ name: Publish Imsfrane demo
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/build-demo.yml', 'rafting-v8.html', 'imsfrane_rafting_mobile_cadrage_corrige_v8*.html', 'images/rafting-new/**', 'quad-content-*.html', 'images/quad-new/**', 'images/IMG_*.webp', 'vtt-content-*.html', 'camping-content-*.html', 'randonnee-content-*.html', 'about-content-*.html', 'remaining-pages-theme.css', 'rebuild_remaining.py', 'build_memories_gallery.py', 'memories-gallery.css', 'build_blog_journal.py', 'blog-journal.css', 'blog-journal.js', 'build_new_articles.py', 'blog_new_topics.json', 'blog_article_research.json', 'blog_expanded_content.json', 'blog-articles.css', 'booking-prices.json', 'booking-pro.css', 'booking-pro.js', 'build_booking_pro.py', 'build_store_pro.py', 'store-products.json', 'store-pro.css', 'store-pro.js', 'build_guide_pro.py', 'guide-pro.css', 'build_home_pro.py', 'home-pro.css', 'home-pro.js', 'menu-preview.html', 'build_navigation_pro.py', 'navigation-pro.css', 'navigation-pro.js', 'build_localized_pages.py', 'localized-pages.json', 'localized-articles-es.json', 'localized-legacy-articles.json', 'build_localized_mirror.py', 'build_exact_locales.py', 'localized-exact-text.json', 'validate_site_locales.py', 'build_bivouac_showcase.py', 'build_arabic_font.py', 'fix_core_demo_language.py', 'install_google_reviews_live.py', 'google-reviews-live.js', 'google-reviews-live.css', 'polish_arabic_currency.py', 'fix_arabic_price_bidi.py', 'arabic-pro.css', 'localized-site.css', 'localized-site.js', 'images/rando-*.webp', 'images/IMG_*.jpeg']
+    paths:
+      - '.github/workflows/build-demo.yml'
+      - 'build_bivouac_showcase.py'
+      - 'images/IMG_bivouac-*.webp'
   workflow_dispatch:
 concurrency:
   group: imsfrane-demo-publish
@@ -14,591 +17,79 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Fetch original site and prepare demo
-        env:
-          # A browser-visible key, restricted to this GitHub Pages origin and Maps JS API.
-          GOOGLE_MAPS_BROWSER_KEY: ${{ secrets.GOOGLE_MAPS_BROWSER_KEY }}
+      - name: Copy the latest official website
         run: |
-          git clone --depth 1 https://github.com/imsfraneinfo/imsfraneinfo.git /tmp/original
+          git clone --depth 1 https://github.com/imsfraneinfo/imsfraneinfo.git /tmp/official
           mkdir -p public
-          rsync -a --exclude=.git --exclude=.github --exclude=CNAME /tmp/original/ public/
-          python3 -m pip install --quiet beautifulsoup4 pillow fonttools brotli
+          rsync -a --exclude=.git --exclude=.github --exclude=CNAME /tmp/official/ public/
+      - name: Adapt demo paths and add the bivouac photographs
+        run: |
           python3 - <<'PY'
           from pathlib import Path
+          import json
           import re
-          root=Path('public')
-          def page_file(lang, slug):
-              """Demo builders use full legacy HTML pages for stable asset paths."""
-              canonical=root/lang/slug/'index.html'
-              legacy=root/lang/(slug+'.html')
-              return legacy if legacy.is_file() and '<main' in legacy.read_text(encoding='utf-8') else canonical
-          # The official site now uses directory routes and keeps refresh-only
-          # .html stubs. Demo's established builders still use the legacy depth,
-          # so seed them with the canonical page before applying enhancements.
-          for lang in ('fr','en','ar','es'):
-              lang_root=root/lang
-              if not lang_root.is_dir():
-                  continue
-              for canonical in lang_root.glob('*/index.html'):
-                  source=canonical.read_text(encoding='utf-8')
-                  if '<main' in source:
-                      (lang_root/(canonical.parent.name+'.html')).write_text(source,encoding='utf-8')
-          for f in root.rglob('*.html'):
-              s=f.read_text(encoding='utf-8')
-              s=re.sub(r'(?i)(href|src|action|poster)=(["\'])/(?!/|Imsfrane-demo/)',r'\1=\2/Imsfrane-demo/',s)
-              s=s.replace('https://imsfrane.com/fr/', '/Imsfrane-demo/fr/').replace('https://imsfrane.com/en/', '/Imsfrane-demo/en/')
-              if f in (page_file('fr','rafting'),page_file('en','rafting')):
-                  css="""<style id="imsfrane-demo-rafting-mobile">
-          @media(max-width:650px){
-          .hero-media,.hero-media .shot.main{height:320px!important;min-height:320px!important}
-          .hero-media img,.route-visual img,.story-photos img,.gallery-grid img{width:100%!important;height:100%!important;object-fit:cover!important}
-          .hero-media img{object-position:50% 85%!important}
-          .route-visual{height:255px!important;overflow:hidden!important}
-          .route-visual img{object-position:50% 80%!important}
-          .gallery-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important}
-          }
-          </style>"""
-                  s=s.replace('</head>',css+'</head>',1)
-              f.write_text(s,encoding='utf-8')
-          # Rebuild remaining bilingual page bodies, preserving source images, copy and links.
-          from rebuild_remaining import run as rebuild_pages
-          rebuild_pages(root)
-          theme=Path('remaining-pages-theme.css').read_text(encoding='utf-8')
-          for lang in ('fr','en'):
-              for page in ('hebergement','programme','booking','contact','memories','guide','store','blog'):
-                  target=page_file(lang,page)
-                  content=target.read_text(encoding='utf-8')
-                  content=content.replace('</head>','<style id="imsfrane-remaining-theme">'+theme+'</style></head>',1)
-                  target.write_text(content,encoding='utf-8')
-          # Copy uploaded VTT images from demo main to published site.
           import shutil
-          vtt_images=['IMG_9763','IMG_8810','IMG_8792','IMG_7394','IMG_7410','IMG_2606','IMG_2634','IMG_2629','IMG_2604','IMG_2667']
-          (root/'images').mkdir(parents=True,exist_ok=True)
-          for name in vtt_images:
-              src=Path('images')/(name+'.webp')
-              if not src.is_file():
-                  raise RuntimeError('Missing VTT photo: '+str(src))
-              shutil.copy2(src,root/'images'/src.name)
-          # VTT pages: keep original site header, navigation and footer.
-          for lang in ('fr','en'):
-              target=page_file(lang,'vtt')
-              source=Path('vtt-content-'+lang+'.html')
-              if not (target.exists() and source.exists()):
-                  continue
-              original=target.read_text(encoding='utf-8')
-              vtt=source.read_text(encoding='utf-8')
-              vtt_main=re.search(r'<main[^>]*>.*?</main>',vtt,re.S|re.I)
-              if not vtt_main:
-                  raise RuntimeError('Missing VTT content main')
-              original,n=re.subn(r'<main[^>]*>.*?</main>',lambda m:vtt_main.group(0),original,count=1,flags=re.S|re.I)
-              if n!=1:
-                  raise RuntimeError('Missing original VTT main')
-              vtt_styles=re.findall(r'<style[^>]*>.*?</style>',vtt,re.S|re.I)
-              original=original.replace('</head>',''.join(vtt_styles)+'</head>',1)
-              vtt_script=re.search(r'<script>function show[(]el[)].*?</script>',vtt,re.S|re.I)
-              if vtt_script:
-                  original=original.replace('</body>',vtt_script.group(0)+'</body>',1)
-              target.write_text(original,encoding='utf-8')
-          # About Us pages: preserve original site header, navigation and footer.
-          for lang in ('fr','en'):
-              target=page_file(lang,'about')
-              source=Path('about-content-'+lang+'.html')
-              if not (target.exists() and source.exists()):
-                  raise RuntimeError('Missing About Us demo source or target')
-              original=target.read_text(encoding='utf-8')
-              content=source.read_text(encoding='utf-8')
-              main=re.search(r'<main[^>]*>.*?</main>',content,re.S|re.I)
-              if not main:
-                  raise RuntimeError('Missing About Us content main')
-              original,n=re.subn(r'<main[^>]*>.*?</main>',lambda m:main.group(0),original,count=1,flags=re.S|re.I)
-              if n!=1:
-                  raise RuntimeError('Missing original About Us main')
-              styles=re.findall(r'<style[^>]*>.*?</style>',content,re.S|re.I)
-              original=original.replace('</head>',''.join(styles)+'</head>',1)
-              target.write_text(original,encoding='utf-8')
-          # Randonnée pages: preserve original site header, navigation and footer.
-          for lang in ('fr','en'):
-              target=page_file(lang,'randonnee')
-              source=Path('randonnee-content-'+lang+'.html')
-              if not (target.exists() and source.exists()):
-                  raise RuntimeError('Missing randonnée demo source or target')
-              original=target.read_text(encoding='utf-8')
-              content=source.read_text(encoding='utf-8')
-              main=re.search(r'<main[^>]*>.*?</main>',content,re.S|re.I)
-              if not main:
-                  raise RuntimeError('Missing randonnée content main')
-              original,n=re.subn(r'<main[^>]*>.*?</main>',lambda m:main.group(0),original,count=1,flags=re.S|re.I)
-              if n!=1:
-                  raise RuntimeError('Missing original randonnée main')
-              styles=re.findall(r'<style[^>]*>.*?</style>',content,re.S|re.I)
-              original=original.replace('</head>',''.join(styles)+'</head>',1)
-              script=re.search(r'<script>function randoShow[(]el[)].*?</script>',content,re.S|re.I)
-              if script:
-                  original=original.replace('</body>',script.group(0)+'</body>',1)
-              target.write_text(original,encoding='utf-8')
-          for name in ['6167','7432','4507','2855','2878','7447','7453','6269','6274','7634','7660','4503']:
-              photo=Path('images')/('rando-IMG_'+name+'.webp')
-              if not photo.is_file():
-                  raise RuntimeError('Missing randonnée photo: '+str(photo))
-              shutil.copy2(photo,root/'images'/photo.name)
-          # Camping pages: preserve site navigation/footer and insert bilingual camping experience.
-          for lang in ('fr','en'):
-              target=page_file(lang,'camping')
-              source=Path('camping-content-'+lang+'.html')
-              if not (target.exists() and source.exists()):
-                  raise RuntimeError('Missing camping demo source or target')
-              original=target.read_text(encoding='utf-8')
-              camp=source.read_text(encoding='utf-8')
-              camp_main=re.search(r'<main[^>]*>.*?</main>',camp,re.S|re.I)
-              if not camp_main:
-                  raise RuntimeError('Missing camping main')
-              original,n=re.subn(r'<main[^>]*>.*?</main>',lambda m:camp_main.group(0),original,count=1,flags=re.S|re.I)
-              if n!=1:
-                  raise RuntimeError('Missing original camping main')
-              styles=re.findall(r'<style[^>]*>.*?</style>',camp,re.S|re.I)
-              original=original.replace('</head>',''.join(styles)+'</head>',1)
-              target.write_text(original,encoding='utf-8')
-          # Copy camping photographs when uploaded directly to demo images/.
-          for photo in Path('images').iterdir():
-              if not photo.is_file() or photo.suffix.lower() not in ('.jpeg', '.jpg', '.png', '.webp'):
-                  continue
-              shutil.copy2(photo,root/'images'/photo.name)
-          # Quad pages: retain original navigation and footer; replace main only.
-          for lang in ('fr','en'):
-              target=page_file(lang,'quad')
-              source=Path('quad-content-'+lang+'.html')
-              if not (target.exists() and source.exists()):
-                  continue
-              original=target.read_text(encoding='utf-8')
-              quad=source.read_text(encoding='utf-8')
-              quad_main=re.search(r'<main[^>]*>.*?</main>',quad,re.S|re.I)
-              if not quad_main:
-                  continue
-              original=re.sub(r'<main[^>]*>.*?</main>',quad_main.group(0),original,count=1,flags=re.S|re.I)
-              quad_styles=re.findall(r'<style[^>]*>.*?</style>',quad,re.S|re.I)
-              if quad_styles:
-                  original=original.replace('</head>',''.join(quad_styles)+'</head>',1)
-              quad_script=re.search(r'<script>function show[(]el[)].*?</script>',quad,re.S|re.I)
-              if quad_script:
-                  original=original.replace('</body>',quad_script.group(0)+'</body>',1)
-              target.write_text(original,encoding='utf-8')
-          # Publish new quad images when added to demo images/quad-new.
-          quad_source=Path('images/quad-new')
-          import shutil
-          quad_dest=root/'images/quad-new'
-          quad_dest.mkdir(parents=True,exist_ok=True)
-          quad_names=['IMG_0284','IMG_0270','IMG_0310','IMG_0162','IMG_0179','IMG_9182','IMG_0026','IMG_0037','IMG_0021','IMG_0017','IMG_9087','IMG_9939']
-          for name in quad_names:
-              photo=quad_source/(name+'.webp')
-              if not photo.is_file():
-                  photo=Path('images')/(name+'.webp')
-              if photo.is_file():
-                  shutil.copy2(photo,quad_dest/photo.name)
-          # Preserve the original site header/menu/footer. Insert only V8 content.
-          approved=next(iter(sorted(Path('.').glob('imsfrane_rafting_mobile_cadrage_corrige_v8*.html'))), Path('rafting-v8.html'))
-          if approved.exists():
-              html=approved.read_text(encoding='utf-8')
-              hide='<style>.header,.concept-bar,.season-strip,.progress,footer,.footer{display:none!important}body{padding-top:0!important;margin:0!important}.hero{margin-top:0!important}</style>'
-              # Desktop-only image framing: fill the panels, keeping rafters and rapids in focus.
-              desktop_css="""<style id="rafting-desktop-photo-framing">
-              @media(min-width:871px){
-                .route-visual{height:355px!important;overflow:hidden!important;background:#17353a!important}
-                .route-visual.photo-safe{position:relative!important;isolation:auto!important}
-                .route-visual.photo-safe::before{display:none!important}
-                .route-visual>img,.route-visual.photo-safe>img{position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:cover!important;transform:none!important;z-index:0!important}
-                .route-visual .corner,.route-visual .num,.route-visual .view-original{z-index:2!important}
-                .route-card:nth-child(1) .route-visual>img{object-position:50% 76%!important}
-                .route-card:nth-child(2) .route-visual>img{object-position:50% 76%!important}
-                .route-card:nth-child(3) .route-visual>img{object-position:50% 76%!important}
-                .hero-media,.hero-media .shot{overflow:hidden!important}
-                .hero-media .shot img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:50% 72%!important}
-                .story-photos .big img,.story-photos .little img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:50% 70%!important}
-                .exp-photo img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:50% 72%!important}
-                .gallery-grid img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:50% 70%!important}
-              }
-              </style>"""
-              html=html.replace('</head>',hide+desktop_css+'</head>',1)
-              # Use the new rafting photo collection whenever uploaded to this demo repo.
-              # Keep existing live-site photos as a fallback until the collection is present.
-              new_photos=Path('images')
-              if new_photos.is_dir():
-                  import shutil
-                  target=root/'images/rafting-new'
-                  target.mkdir(parents=True,exist_ok=True)
-                  for photo in new_photos.glob('*.webp'):
-                      shutil.copy2(photo,target/photo.name)
-                  image_sequence=[
-                      'IMG_9296.webp','IMG_0296.webp','IMG_2012.webp',
-                      'IMG_9129.webp','IMG_2089.webp','IMG_1893.webp',
-                      'IMG_2101.webp','IMG_6626.webp','IMG_7076.webp',
-                      'IMG_7886.webp','IMG_9066.webp','IMG_1880.webp',
-                      'IMG_0305.webp','IMG_2060.webp'
-                  ]
-                  image_tags=list(re.finditer(r'<img\b[^>]*>',html))
-                  # Replace image URLs in each actual img tag (regardless of attribute order).
-                  image_tags=[m for m in image_tags if re.search(r'src="https://imsfrane.com/images/[^"]+"',m.group(0))]
-                  for i,m in reversed(list(enumerate(image_tags))):
-                      name=image_sequence[i % len(image_sequence)]
-                      if not (new_photos/name).is_file():
-                          continue
-                      tag=m.group(0)
-                      tag=re.sub(r'src="https://imsfrane.com/images/[^"]+"',
-                                 'src="images/rafting-new/'+name+'"',tag,count=1)
-                      html=html[:m.start()]+tag+html[m.end():]
-              # Complete the photo gallery with all fourteen unique uploaded images.
-              if new_photos.is_dir():
-                  gallery_start=html.find('id="gallery"')
-                  gallery_end=html.find('</div>',gallery_start)
-                  if gallery_start!=-1 and gallery_end!=-1:
-                      gallery_html=html[gallery_start:gallery_end]
-                      # Replace the eight gallery slots with eight unique photos.
-                      gallery_names=['IMG_7886.webp','IMG_9066.webp','IMG_1880.webp','IMG_0305.webp','IMG_2060.webp','IMG_7076.webp','IMG_6626.webp','IMG_2101.webp']
-                      for j,match in reversed(list(enumerate(re.finditer(r'<img\\b[^>]*>',gallery_html)))):
-                          if j>=len(gallery_names):continue
-                          name=gallery_names[j]
-                          tag=re.sub(r'src="[^"]+"','src="images/rafting-new/'+name+'"',match.group(0))
-                          gallery_html=gallery_html[:match.start()]+tag+gallery_html[match.end():]
-                      extra_names=['IMG_9296.webp','IMG_0296.webp','IMG_2012.webp','IMG_9129.webp','IMG_2089.webp','IMG_1893.webp','IMG_9066.webp']
-                      extra=''.join('<button aria-label="Agrandir la photo de rafting '+str(9+j)+'" data-image="'+str(8+j)+'" type="button"><img alt="Rafting Imsfrane — photo '+str(9+j)+'" loading="lazy" src="images/rafting-new/'+name+'"/></button>' for j,name in enumerate(extra_names))
-                      html=html[:gallery_start]+gallery_html+extra+html[gallery_end:]
-              # Show every gallery photograph in its entirety, with its natural aspect ratio.
-              # This overrides V8 fixed-height cards and all mobile crop rules.
-              gallery_css="""<style id="imsfrane-gallery-uncropped">
-              .gallery-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;align-items:start!important;gap:14px!important}
-              .gallery-grid button,.gallery-grid button:first-child,.gallery-grid button:nth-child(4){
-                display:block!important;position:relative!important;grid-column:auto!important;grid-row:auto!important;
-                width:100%!important;height:auto!important;min-height:0!important;aspect-ratio:auto!important;
-                overflow:hidden!important;padding:0!important;background:#e8ede7!important;border-radius:12px!important;
-              }
-              .gallery-grid button img,.gallery-grid img{
-                display:block!important;position:static!important;inset:auto!important;
-                width:100%!important;height:auto!important;max-height:none!important;
-                aspect-ratio:auto!important;object-fit:contain!important;object-position:center center!important;
-                transform:none!important;clip-path:none!important;
-              }
-              @media(max-width:650px){
-                .gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
-                .gallery-grid button,.gallery-grid button:first-child,.gallery-grid button:nth-child(4){
-                  height:auto!important;min-height:0!important;grid-column:auto!important;grid-row:auto!important
-                }
-                .gallery-grid button img,.gallery-grid img{height:auto!important;object-fit:contain!important}
-              }
-              </style>"""
-              html=html.replace('</head>',gallery_css+'</head>',1)
-              (root/'rafting-content.html').write_text(html,encoding='utf-8')
-              translations={
-              "Vivez": "Feel",
-              "la": "the",
-              "rivière.": "river.",
-              "De vrais rapides.": "Real rapids.",
-              "De vrais": "Real",
-              "souvenirs.": "memories.",
-              "Et soudain,": "And suddenly,",
-              "tout devient vivant.": "everything comes alive.",
-              "Deux jours.": "Two days.",
-              "Mille souvenirs.": "A thousand memories.",
-              "Le bon moment,": "The right time,",
-              "la bonne rivière.": "the right river.",
-              "Prêt à rejoindre": "Ready to experience",
-              "la rivière ?": "the river?",
-              "L'Atlas côté rivière.": "The Atlas from the river.",
-              "Choisir son aventure": "Choose your adventure",
-              "Connaître la saison": "Check the season",
-              "Voir l’expérience": "See the experience",
-              "Nos photos sur la rivière": "Our river photos",
-              "Demander une date": "Request a date",
-              "Réponse personnalisée": "Personalized reply",
-              "L'AVENTURE, TOUT SIMPLEMENT": "PURE ADVENTURE",
-              "VOTRE RIVIÈRE, VOTRE RYTHME": "YOUR RIVER, YOUR PACE",
-              "AVANT DE CHOISIR UNE DATE": "BEFORE CHOOSING A DATE",
-              "HAUT ATLAS · OUED AHANSAL · MAROC": "HIGH ATLAS · OUED AHANSAL · MOROCCO",
-              "EXPÉRIENCES AUTHENTIQUES": "AUTHENTIC EXPERIENCES",
-              "IM SFRANE · AZILAL · MAROC": "IMSFRANE · AZILAL · MOROCCO",
-              "Expériences": "Experiences",
-              "De rivière": "Of river",
-              "À partir de / pers.": "From / person",
-              "Explorer les parcours": "Explore routes",
-              "Voir les photos": "View photos",
-              "Aventures nature dans l’Atlas": "Nature adventures in the Atlas",
-              "Accueil": "Home",
-              "Nos parcours": "Our routes",
-              "Saison": "Season",
-              "Expédition": "Expedition",
-              "Galerie": "Gallery",
-              "Juillet parfois possible": "July sometimes possible",
-              "Départs uniquement après confirmation des conditions de la rivière": "Departures only after river conditions are confirmed",
-              "SAISON HABITUELLE : MARS → JUIN": "TYPICAL SEASON: MARCH → JUNE",
-              "Plus qu'une descente : des eaux vives, de grands paysages et cette sensation de liberté qu'on n'oublie pas. Une aventure accompagnée par notre équipe locale, au cœur de l'Atlas.": "More than a rafting trip: whitewater, spectacular landscapes and an unforgettable feeling of freedom. An adventure guided by our local team in the heart of the Atlas Mountains.",
-              "Au pied des montagnes de l’Atlas, l’Oued Ahansal traverse des vallées et des gorges qui se découvrent autrement depuis la rivière.": "At the foot of the Atlas Mountains, the Ahansal River winds through valleys and gorges best discovered from the water.",
-              "Entre éclats de rire, sensations et pauses pour profiter du paysage, chaque sortie est organisée selon le parcours choisi et les conditions du jour.": "From laughter and thrills to scenic breaks, every trip is organized according to the chosen route and daily river conditions.",
-              "Accompagnement local, matériel de sécurité, briefing avant le départ et transferts prévus dans les programmes.": "Local guiding, safety equipment, a pre-departure briefing and transfers as specified in each program.",
-              "L'aventure est ici.": "Adventure starts here.",
-              "La saison habituelle du rafting s’étend de mars à juin. Certaines années, des sorties restent possibles en juillet, si le niveau de l’eau le permet.": "The usual rafting season runs from March to June. In some years, trips may also be possible in July if water levels allow.",
-              "JAN": "JAN",
-              "FÉV": "FEB",
-              "MAR": "MAR",
-              "AVR": "APR",
-              "MAI": "MAY",
-              "JUIN": "JUN",
-              "JUIL": "JUL",
-              "AOÛ": "AUG",
-              "SEP": "SEP",
-              "OCT": "OCT",
-              "NOV": "NOV",
-              "DÉC": "DEC",
-              "Saison habituelle": "Typical season",
-              "Selon niveau d’eau": "Depending on water levels",
-              "Hors saison": "Off-season",
-              "Ce calendrier est indicatif : aucun mois ne garantit un départ. Chaque demande est validée après vérification de la météo, du débit et des conditions de sécurité.": "This calendar is indicative: no month guarantees a departure. Each request is confirmed after checking weather, river flow and safety conditions.",
-              "Choisissez l'intensité.": "Choose your level of adventure.",
-              "Trois parcours pour découvrir les paysages de l'Atlas. Les itinéraires restent adaptés aux conditions réelles de la rivière.": "Three routes to discover the Atlas landscapes. Itineraries are adapted to actual river conditions.",
-              "DÉCOUVERTE": "DISCOVERY",
-              "PARCOURS 01 · OUED AHANSAL": "ROUTE 01 · AHANSAL RIVER",
-              "D'Amougr": "From Amougr",
-              "à Tilouguite": "to Tilouguite",
-              "Une belle première approche de la rivière : sensations, paysages et bons moments au fil de l'eau.": "A great introduction to the river: excitement, scenery and memorable moments on the water.",
-              "Accompagné": "Guided",
-              "Que comprend la sortie ?": "What's included?",
-              "Rendez-vous au lieu convenu": "Meet at the agreed location",
-              "Équipement, briefing et test pratique": "Equipment, briefing and practice session",
-              "Transfert 4×4 vers Amougr": "4×4 transfer to Amougr",
-              "Descente avec pauses, photos et baignade selon conditions": "Rafting with breaks, photos and swimming when conditions allow",
-              "Retour depuis le Pont de Tilouguite": "Return from Tilouguite Bridge",
-              "/ personne": "/ person",
-              "Prix du parcours": "Route price",
-              "Choisir ce parcours": "Choose this route",
-              "AVENTURE": "ADVENTURE",
-              "PARCOURS 02 · OUED MELLOUL": "ROUTE 02 · MELLOUL RIVER",
-              "Du Pont Isgli": "From Isgli Bridge",
-              "Une descente plus longue, avec la traversée des paysages impressionnants des gorges de l'Oued Melloul.": "A longer descent through the spectacular scenery of the Melloul River gorges.",
-              "Gorges du Melloul": "Melloul Gorges",
-              "Transfert jusqu'au Pont Isgli": "Transfer to Isgli Bridge",
-              "Matériel, briefing et test pratique": "Equipment, briefing and practice session",
-              "Descente par les gorges du Melloul": "Descent through the Melloul Gorges",
-              "Arrivée à Tilouguite et retour": "Arrival in Tilouguite and return",
-              "EXPÉDITION": "EXPEDITION",
-              "PARCOURS 03 · 2 JOURS": "ROUTE 03 · 2 DAYS",
-              "La grande": "The great",
-              "expédition": "expedition",
-              "Deux jours entre rivière, bivouac mobile, repas traditionnels et découverte du patrimoine amazigh.": "Two days of rafting, riverside camping, traditional meals and Amazigh heritage.",
-              "Environ 50 km": "About 50 km",
-              "2 jours": "2 days",
-              "Bivouac": "Camping",
-              "Voir les deux destinations": "See both destinations",
-              "Pont Sidi Youssef : 2 500 DH / personne": "Sidi Youssef Bridge: 2,500 MAD / person",
-              "Bin El Ouidane : 3 000 DH / personne": "Bin El Ouidane: 3,000 MAD / person",
-              "Repas, bivouac et découvertes selon le programme": "Meals, camping and cultural visits according to the program",
-              "À partir de": "From",
-              "Découvrir l'expédition": "Explore the expedition",
-              "ÉMOTIONS SUR L’EAU": "THRILLS ON THE WATER",
-              "Un instant dans les rapides, le suivant face à un paysage silencieux : chaque descente a son caractère.": "One moment in the rapids, the next surrounded by peaceful scenery: every descent has its own character.",
-              "L'EXPÉRIENCE SIGNATURE": "OUR SIGNATURE EXPERIENCE",
-              "Une véritable immersion le long de l'Oued Ahansal, avec une nuit en bivouac, des repas locaux et des rencontres avec le patrimoine de la région.": "An immersive journey along the Ahansal River, with a night camping, local meals and opportunities to discover regional heritage.",
-              "Deux possibilités de fin de parcours : au Pont Sidi Youssef ou en poursuivant jusqu'au lac de Bin El Ouidane.": "Two possible endpoints: Sidi Youssef Bridge or continuing to Bin El Ouidane Lake.",
-              "Jour 01 — En route vers l'aventure": "Day 01 — The adventure begins",
-              "Accueil, transfert 4×4, équipement et briefing": "Welcome, 4×4 transfer, equipment and briefing",
-              "Descente de rafting depuis Amougr": "Rafting descent from Amougr",
-              "Déjeuner et temps de repos à Ighrman": "Lunch and rest stop in Ighrman",
-              "Découverte d'Aït Hssine et visite d'une huilerie traditionnelle": "Visit Aït Hssine and a traditional oil mill",
-              "Dîner, feu de camp et nuit en bivouac": "Dinner, campfire and overnight camping",
-              "Jour 02 — Au cœur des gorges": "Day 02 — Into the gorges",
-              "Petit-déjeuner et nouvelle mise à l'eau": "Breakfast and return to the water",
-              "Navigation en direction du Pont Sidi Youssef": "Rafting toward Sidi Youssef Bridge",
-              "Fin de l'expédition ou prolongation vers Bin El Ouidane": "Finish the expedition or continue toward Bin El Ouidane",
-              "Dans l'option lac : bateau, déjeuner et retour": "Lake option: boat, lunch and return",
-              "OPTION A · SIDI YOUSSEF": "OPTION A · SIDI YOUSSEF",
-              "Par personne · Fin au pont et retour en 4×4": "Per person · Finish at the bridge and return by 4×4",
-              "OPTION B · BIN EL OUIDANE": "OPTION B · BIN EL OUIDANE",
-              "Par personne · Lac, bateau et déjeuner inclus": "Per person · Lake, boat and lunch included",
-              "Demander une date pour l'expédition ↗": "Request an expedition date ↗",
-              "La rivière en images.": "The river in pictures.",
-              "Votre aventure en 4 étapes.": "Your adventure in 4 steps.",
-              "Choisissez": "Choose",
-              "Contactez-nous": "Contact us",
-              "Préparez-vous": "Get ready",
-              "Vivez l'Atlas": "Experience the Atlas",
-              "Bon à savoir.": "Good to know.",
-              "Vérifier une date": "Check a date",
-              "Questions fréquentes": "Frequently asked questions",
-              "APERÇU · RAFTING MOBILE V8 · CADRAGE CENTRÉ SUR L’ACTION": "PREVIEW · RAFTING MOBILE V8 · FOCUS ON THE ACTION",
-              "· Juillet parfois possible · Départs uniquement après confirmation des conditions de la rivière": "· July may also be possible · Trips depart only when river conditions are confirmed",
-              "Demander une date ↗": "Request a date ↗",
-              "12 à 50 km": "12 to 50 km",
-              "12, 30 ou 50 km": "12, 30 or 50 km",
-              "Mars à juin, selon débit": "March to June, depending on river flow",
-              "◷ Env. 2–3 h": "◷ Approx. 2–3 hours",
-              "↝ Environ 50 km": "↝ About 50 km",
-              "IMAGES VÉCUES, SOUVENIRS PARTAGÉS": "REAL MOMENTS, SHARED MEMORIES",
-              "Des moments authentiques de rafting dans la région d’Imsfrane.": "Authentic rafting moments in the Imsfrane region.",
-              "Toutes les photos de rafting repérées dans la bibliothèque du site. Touchez une photo pour la voir en entier.": "Rafting photos from our website gallery. Tap any photo to see it in full.",
-              "SIMPLE DU PREMIER MESSAGE AU RETOUR": "SIMPLE FROM FIRST CONTACT TO YOUR RETURN",
-              "Sélectionnez un parcours selon l'expérience recherchée.": "Choose a route that matches the experience you are looking for.",
-              "Envoyez une date et le nombre de participants.": "Tell us your preferred date and group size.",
-              "Après confirmation, rendez-vous, matériel et consignes de sécurité.": "Once confirmed, we arrange your meeting point, equipment and safety briefing.",
-              "Une descente guidée, adaptée aux conditions de la rivière.": "Enjoy a guided rafting trip adapted to the river conditions.",
-              "TOUTES LES RÉPONSES": "YOUR QUESTIONS ANSWERED",
-              "Quelques points essentiels avant de choisir votre parcours.": "A few important things to know before choosing your route.",
-              "Poser une question ↗": "Ask a question ↗",
-              "Quand peut-on pratiquer le rafting ?": "When is the rafting season?",
-              "Habituellement de mars à juin. Selon les années et les niveaux d’eau, juillet peut aussi être possible. Les dates sont toujours confirmées individuellement.": "Usually from March to June. Depending on the year and water levels, July may also be possible. Each date is confirmed individually.",
-              "Le matériel de sécurité est-il fourni ?": "Is safety equipment provided?",
-              "Oui. L'équipe prévoit le matériel de sécurité, le briefing et un test pratique avant la descente. Il faut respecter les consignes du guide pendant toute la sortie.": "Yes. Our team provides safety equipment, a briefing and a practical introduction before the descent. Please follow your guide's instructions throughout the trip.",
-              "Où se fait le rendez-vous ?": "Where do we meet?",
-              "Selon l'organisation : à votre hébergement, au camping ou à un autre point convenu avec l'équipe.": "Depending on the arrangements, we can meet at your accommodation, campsite or another location agreed with our team.",
-              "Les parcours peuvent-ils changer ?": "Can the routes change?",
-              "Oui. Pour des raisons de sécurité, le débit, la météo et les conditions sur la rivière peuvent modifier ou empêcher une sortie.": "Yes. For safety reasons, river flow, weather and on-water conditions may require a route change or cancellation.",
-              "Comment confirmer mon départ ?": "How do I confirm my trip?",
-              "Envoyez votre parcours, la date souhaitée et le nombre de personnes. Nous vérifions les conditions puis vous confirmons si la sortie est possible.": "Send us your preferred route, date and number of participants. We will check the conditions and confirm whether the trip can go ahead.",
-              "VOTRE AVENTURE COMMENCE ICI": "YOUR ADVENTURE STARTS HERE",
-              "Choisissez une expérience et proposez une date. Nous vous répondrons personnellement pour confirmer la faisabilité et les informations de départ.": "Choose your experience and suggest a date. Our local team will reply personally to confirm availability and departure details.",
-              "Contact direct avec notre équipe locale": "Direct contact with our local team",
-              "Vérification des niveaux d’eau et de la météo": "River levels and weather checked before departure",
-              "Pas de paiement sur cette page": "No payment required on this page",
-              "Une demande via WhatsApp, sans réservation automatique.": "Send an enquiry via WhatsApp; booking is not automatic.",
-              "Votre parcours": "Your route",
-              "12 km — Découverte · 400 DH/pers.": "12 km — Discovery · 400 MAD/person",
-              "30 km — Aventure · 800 DH/pers.": "30 km — Adventure · 800 MAD/person",
-              "2 jours — Sidi Youssef · 2 500 DH/pers.": "2 days — Sidi Youssef · 2,500 MAD/person",
-              "2 jours — Bin El Ouidane · 3 000 DH/pers.": "2 days — Bin El Ouidane · 3,000 MAD/person",
-              "Date souhaitée": "Preferred date",
-              "Participants": "Participants",
-              "Prénom (facultatif)": "First name (optional)",
-              "Les départs ont lieu habituellement entre mars et juin. Nous vous confirmerons toute disponibilité.": "Trips usually run from March to June. We will confirm availability for your requested date.",
-              "Envoyer ma demande sur WhatsApp ↗": "Send my enquiry via WhatsApp ↗",
-              "Vous serez redirigé vers WhatsApp avec votre demande préremplie. Aucun paiement ni confirmation immédiate.": "WhatsApp will open with your enquiry prefilled. No payment or immediate booking confirmation is required.",
-              "Des expériences authentiques de nature et d’aventure à Imsfrane, Tilouguite et sur l’Oued Ahansal.": "Authentic outdoor adventures in Imsfrane, Tilouguite and along the Ahansal River.",
-              "Parcours": "Routes",
-              "Contact": "Contact",
-              "Page actuelle ↗": "Current page ↗",
-              "Imsfrane Cathédrale · Concept visuel de démonstration.": "Imsfrane Cathédrale · Design preview.",
-              "Tilouguite · Azilal · Maroc": "Tilouguite · Azilal · Morocco",
-              "Voir les parcours": "View routes",
-              "Experiencela the river.": "Experience the river."
-              }
-              english=html.replace('<html lang="fr"','<html lang="en"')
-              # Translate only visible text nodes, preserving layout and HTML attributes.
-              def translate_node(match):
-                  value=match.group(1)
-                  key=value.strip()
-                  return '>'+value.replace(key,translations[key])+'<' if key in translations else match.group(0)
-              english=re.sub(r'>([^<>]+)<',translate_node,english)
-              (root/'rafting-content-en.html').write_text(english,encoding='utf-8')
-              for lang in ('fr','en'):
-                  f=page_file(lang,'rafting')
-                  original=f.read_text(encoding='utf-8')
-                  content_file='rafting-content-en.html' if lang=='en' else 'rafting-content.html'
-                  embedded='''<main class="rafting-page" id="mainContent" style="padding:0;max-width:none">
-          <iframe id="raftingExperienceFrame" title="Rafting Imsfrane" src="../RAFTING_CONTENT_FILE" loading="eager" scrolling="no" style="display:block;width:100%;height:2500px;border:0;overflow:hidden"></iframe>
-          </main>
-          <script>
-          (function(){
-            var frame=document.getElementById('raftingExperienceFrame');
-            function resize(){try{var d=frame.contentDocument; if(d){frame.style.height=Math.max(d.documentElement.scrollHeight,d.body.scrollHeight)+'px'}}catch(e){}}
-            frame.addEventListener('load',function(){resize();setInterval(resize,900)});
-            window.addEventListener('resize',resize);
-          })();
-          </script>'''
-                  embedded=embedded.replace('RAFTING_CONTENT_FILE',content_file)
-                  begin=original.find('<main')
-                  opening_end=original.find('>',begin)+1
-                  finish=original.find('</main>',opening_end)+len('</main>')
-                  if begin < 0 or finish < len('</main>'):
-                      raise RuntimeError('Cannot find original rafting main')
-                  original=original[:begin]+embedded+original[finish:]
-                  f.write_text(original,encoding='utf-8')
-          # Memories: display all uploaded demo photos and original website archive.
-          from build_memories_gallery import build as build_memories
-          build_memories(root)
-          # Publish all uploaded demo photos before building article pages.
-          for photo in Path('images').iterdir():
-              if photo.suffix.lower() in ('.webp','.jpeg','.jpg','.png'):
-                  shutil.copy2(photo,root/'images'/photo.name)
-          # Generate original long-form articles in French, English and Arabic first.
-          from build_new_articles import build as build_articles
-          build_articles(root)
-          # Blog: rebuild as a searchable editorial magazine using real published articles.
-          from build_blog_journal import build as build_blog
-          build_blog(root)
-          # Demo-only bilingual booking page with live, transparent MAD pricing.
-          from build_booking_pro import build as build_booking
-          build_booking(root)
-          # Demo-only sport-commerce product catalog; preserve original site brand.
-          from build_store_pro import build as build_shop
-          build_shop(root)
-          # Photo-free FR/EN practical guide; never alter the original site logo.
-          from build_guide_pro import build as build_guide
-          build_guide(root)
-          # Bilingual homepage redesign is strictly limited to Demo fr/en index files.
-          from build_home_pro import publish as build_home
-          build_home(root)
-          # Author-edited Arabic and Spanish: fully localized site pages
-          # and topic articles. FR/EN source content remains unchanged.
-          from build_localized_pages import build as build_localized
-          build_localized(root)
-          # Mirror the exact existing website template for the new locales.
-          # Do not modify FR/EN main content or the original image/logo assets.
-          from build_localized_mirror import build as mirror_localized
-          mirror_localized(root)
-          # Keep every original FR layout/section/gallery and interaction on
-          # AR/ES routes. Localize the original rafting embedded experience.
-          from build_exact_locales import build as match_all_original_pages
-          match_all_original_pages(root)
-          # Demo-only visual story built from the user's real bivouac photos.
-          from build_bivouac_showcase import build as build_bivouac_showcase
-          build_bivouac_showcase(root)
-          # Apply the approved Triplan-style menu to Demo FR/EN pages and articles.
-          # Preserve original logo HTML and do not alter page main content.
-          from build_navigation_pro import build as build_navigation
-          build_navigation(root)
-          # Refuse deployment if any of the four locales has different page
-          # structure, missing photos or a broken same-page language menu.
-          from validate_site_locales import validate as validate_locales
-          validate_locales(root)
-          # Critical: official core.min.js supports only fr/en and forcibly
-          # resets Arabic to lang=en/dir=ltr at DOMContentLoaded.
-          # Build a separate four-language script for AR/ES only.
-          from fix_core_demo_language import patch as fix_language_runtime
-          fix_language_runtime(root)
-          # Typography enhancement is restricted to the Arabic edition.
-          # Only <head> is touched; page structure and original images are kept.
-          from build_arabic_font import build as enhance_arabic_font
-          enhance_arabic_font(root)
-          from polish_arabic_currency import build as polish_currency
-          polish_currency(root)
-          # Prevent 2 500 / 3 000 currency values reversing visually in RTL.
-          from fix_arabic_price_bidi import build as isolate_arabic_prices
-          isolate_arabic_prices(root)
-          # Required self-hosted fonts must exist, or do not publish.
-          fonts = root/'fonts'/'arabic'
-          for name in ('Alexandria-VF.woff2','Tajawal-Regular.woff2',
-                       'Tajawal-Medium.woff2','Tajawal-Bold.woff2','Tajawal-ExtraBold.woff2'):
-              asset=fonts/name
-              if not asset.is_file() or asset.stat().st_size<9000:
-                  raise RuntimeError('Arabic typography asset not published: '+str(asset))
-          # Assets are copied from this demo repository, not written to the live site.
-          for asset in ('booking-pro.css','booking-pro.js','store-pro.css','store-pro.js','guide-pro.css','home-pro.css','home-pro.js','menu-preview.html','navigation-pro.css','navigation-pro.js','localized-site.css','localized-site.js','arabic-pro.css'):
-              shutil.copy2(Path(asset),root/asset)
-          # Read live Google Maps rating and up to 5 review excerpts in the visitor's browser.
-          # Only Demo homepages are patched, never the official source repository.
-          from install_google_reviews_live import install as install_google_reviews
-          install_google_reviews(root)
-          # Keep official-style directory URLs usable in Demo while serving the
-          # enhanced legacy-depth pages expected by the existing asset paths.
-          for lang in ('fr','en','ar','es'):
-              lang_root=root/lang
-              if not lang_root.is_dir():
-                  continue
-              for canonical in lang_root.glob('*/index.html'):
-                  slug=canonical.parent.name
-                  legacy=lang_root/(slug+'.html')
-                  if legacy.is_file() and '<main' in legacy.read_text(encoding='utf-8'):
-                      url=f'/Imsfrane-demo/{lang}/{slug}.html'
-                      canonical.write_text(
-                          '<!doctype html><html><head><meta charset="utf-8">'
-                          f'<meta http-equiv="refresh" content="0;url={url}">'
-                          f'<link rel="canonical" href="{url}"></head><body>'
-                          f'<a href="{url}">Open page</a></body></html>',encoding='utf-8')
-          (root/'.nojekyll').touch()
+          import subprocess
+          from build_bivouac_showcase import patch_page
+          
+          root = Path("public")
+          prefix = "/Imsfrane-demo/"
+          source_sha = subprocess.check_output(["git", "-C", "/tmp/official", "rev-parse", "HEAD"], text=True).strip()
+          
+          # Preserve the current official content and adapt only its hosting path.
+          def adapt(text):
+              text = re.sub(r"https://(?:www\.)?imsfrane\.com/", "https://imsfraneinfo.github.io/Imsfrane-demo/", text, flags=re.I)
+              text = re.sub(r"""(["'])/(?!/|Imsfrane-demo/)""", lambda m: m[1] + prefix, text)
+              text = re.sub(r"""url\((["']?)/(?!/|Imsfrane-demo/)""", lambda m: "url(" + m[1] + prefix, text)
+              text = re.sub(r"""(?i)(content=["']\d+;\s*url=)/(?!/|Imsfrane-demo/)""", lambda m: m[1] + prefix, text)
+              # Additional entries inside responsive srcset attributes.
+              def srcset(match):
+                  return re.sub(r"(?<!\S)/(?!/|Imsfrane-demo/)", prefix, match[0])
+              text = re.sub(r"""srcset=(["']).*?\1""", srcset, text, flags=re.S)
+              return text
+          
+          for path in root.rglob("*"):
+              if path.is_file() and path.suffix.lower() in (".html", ".css", ".js", ".json", ".webmanifest"):
+                  path.write_text(adapt(path.read_text(encoding="utf-8")), encoding="utf-8")
+          
+          # The favorite loader checks the pathname before loading its buttons.
+          navigation = root / "navigation-pro.js"
+          if navigation.exists():
+              text = navigation.read_text(encoding="utf-8")
+              text = text.replace(
+                  r'if(!/^\/(fr|en|ar|es)\//.test(location.pathname))return;',
+                  r'if(!/^\/(?:Imsfrane-demo\/)?(fr|en|ar|es)\//.test(location.pathname))return;'
+              )
+              navigation.write_text(text, encoding="utf-8")
+          
+          photos = sorted(Path("images").glob("IMG_bivouac-*.webp"))
+          assert len(photos) == 4, "Expected the four real bivouac photographs"
+          for photo in photos:
+              shutil.copy2(photo, root / "images" / photo.name)
+          
+          pages = []
+          for lang in ("fr", "en", "ar", "es"):
+              kayak = root / lang / "kayak" / "index.html"
+              assert kayak.is_file(), f"Missing current official kayak page: {kayak}"
+              patch_page(kayak, lang, "kayak", '<section class="ky-section ky-gallery-section"')
+              pages.append(kayak)
+              suffix = "" if lang == "fr" else "-" + lang
+              rafting = root / ("rafting-content" + suffix + ".html")
+              patch_page(rafting, lang, "rafting", '<section aria-labelledby="gallery-title"')
+              pages.append(rafting)
+          
+          for page in pages:
+              text = page.read_text(encoding="utf-8")
+              assert text.count('id="bivouac-experience"') == 1, f"Duplicate or missing story: {page}"
+              assert all("/Imsfrane-demo/images/" + photo.name in text for photo in photos), f"Missing photographs: {page}"
+          for lang in ("fr", "en", "ar", "es"):
+              original = Path("/tmp/official") / lang / "index.html"
+              assert (root / lang / "index.html").read_text(encoding="utf-8") == adapt(original.read_text(encoding="utf-8")), f"Homepage changed unexpectedly: {lang}"
+          
+          (root / ".nojekyll").touch()
+          (root / "demo-source.json").write_text(json.dumps({"official_commit": source_sha, "changes": ["kayak and rafting bivouac photographs"], "locales": ["fr", "en", "ar", "es"]}, indent=2), encoding="utf-8")
+          print("Verified current official homepages and 8 bivouac experiences. Official source:", source_sha)
+          
           PY
       - uses: peaceiris/actions-gh-pages@v4
         with:
