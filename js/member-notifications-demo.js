@@ -9,7 +9,7 @@ const C={
  ar:{bell:"الإشعارات",none:"لا توجد إشعارات جديدة.",open:"عرض الإشعارات",close:"إغلاق",markAll:"تحديد الكل كمقروء",refresh:"تحديث",new:"جديد",notice:"تظهر الرسائل داخل حسابك. إرسال البريد الإلكتروني وإشعارات الهاتف غير مفعّل حالياً.",admin:"إنشاء إعلان",preview:"الوضع التجريبي: سيُرسل الاختبار إلى حساب المدير فقط، ولن يصل إلى بقية الأعضاء.",subject:"عنوان الإعلان",body:"نص الرسالة",category:"التصنيف",link:"رابط داخلي اختياري",test:"إرسال تجربة إلى حسابي",sending:"جارٍ الإرسال…",sent:"وصلت الرسالة التجريبية إلى حسابك.",error:"تعذّر إرسال التجربة.",marketing:"إعلان ترويجي: يتطلب الموافقة على التسويق",categories:{news:"الأخبار",rafting:"الرافتينغ",hiking:"المشي الجبلي",camping:"التخييم",vtt:"الدراجات الجبلية",quad:"الكواد",offers:"العروض"},empty:"ليس لديك رسائل حتى الآن.",unread:"غير مقروء",read:"مقروء"},
  es:{bell:"Notificaciones",none:"No hay notificaciones nuevas.",open:"Ver notificaciones",close:"Cerrar",markAll:"Marcar todo leído",refresh:"Actualizar",new:"Nuevo",notice:"Los mensajes aparecen en tu cuenta. El envío por correo electrónico y las notificaciones push aún no están activos.",admin:"Crear anuncio",preview:"Modo DEMO: la prueba llegará solo a tu cuenta administradora. Ningún otro miembro la recibirá.",subject:"Título del anuncio",body:"Mensaje",category:"Tema",link:"Enlace interno opcional",test:"Enviarme una prueba",sending:"Enviando…",sent:"Prueba enviada a tu cuenta.",error:"No se pudo enviar la prueba.",marketing:"Anuncio promocional: requiere consentimiento",categories:{news:"Noticias",rafting:"Rafting",hiking:"Senderismo",camping:"Camping",vtt:"BTT",quad:"Quad",offers:"Ofertas"},empty:"Todavía no tienes mensajes.",unread:"sin leer",read:"leído"}
 };
-const base="/",url="https://ktrcrfoywokuuwzwnqsu.supabase.co",key="sb_publishable_GS2PtVM4vBv7epvV6aZSpA_XQyD9bCj";
+const base="/Imsfrane-demo/",url="https://ktrcrfoywokuuwzwnqsu.supabase.co",key="sb_publishable_GS2PtVM4vBv7epvV6aZSpA_XQyD9bCj";
 const svgns="http://www.w3.org/2000/svg";
 function bellSvg(){const x=document.createElementNS(svgns,"svg");x.setAttribute("viewBox","0 0 24 24");x.setAttribute("aria-hidden","true");x.setAttribute("fill","none");x.setAttribute("stroke","currentColor");x.setAttribute("stroke-width","1.8");x.setAttribute("stroke-linecap","round");x.setAttribute("stroke-linejoin","round");for(const d of ["M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9","M10 21h4"]){const p=document.createElementNS(svgns,"path");p.setAttribute("d",d);x.append(p)}return x}
 let supabase,me=null,rows=[],isAdmin=false,btn,panel,list,status,adminForm;
@@ -36,7 +36,7 @@ function build(){
  const subject=node("input");subject.name="title";subject.maxLength=120;subject.minLength=3;subject.required=true;
  const body=node("textarea");body.name="body";body.maxLength=1500;body.minLength=5;body.required=true;body.rows=5;
  const category=node("select");category.name="category";for(const [k,v] of Object.entries(getLabels().categories)){const option=node("option",null,v);option.value=k;category.append(option)}
- const link=node("input");link.name="link";link.maxLength=220;link.placeholder="/fr/rafting/";
+ const link=node("input");link.name="link";link.maxLength=220;link.placeholder="/Imsfrane-demo/fr/rafting/";
  const send=node("button","ims-notif-send",getLabels().test);send.type="submit";
  form.append(label(getLabels().subject,"ims-notif-subject",subject),label(getLabels().body,"ims-notif-body",body),label(getLabels().category,"ims-notif-category",category),label(getLabels().link,"ims-notif-link",link),send);
  adbox.append(title,preview,form);panel.append(adbox);adminForm=form;
@@ -62,7 +62,7 @@ function build(){
  };
  return {adbox}
 }
-function safeLink(path){if(!path||!/^\/(fr|en|ar|es)\/[a-z0-9/_-]*$/.test(path))return null;return base+path.replace(/^\/(fr|en|ar|es)\//,"/"+current()+"/").slice(1)}
+function safeLink(path){if(!path||!/^\/(fr|en|ar|es)\/[a-z0-9/_-]*$/.test(path))return null;return base+path.replace(/^\/(fr|en|ar|es)\//,"/Imsfrane-demo/"+current()+"/Imsfrane-demo/").slice(1)}
 function paint(){
  if(!btn)return;
  const badge=btn.querySelector(".ims-notif-badge"),unread=rows.filter(r=>!r.read_at).length;
@@ -84,7 +84,7 @@ function paint(){
 async function markOne(id){const r=await supabase.from("member_notifications").update({read_at:new Date().toISOString()}).eq("id",id).eq("user_id",me.id);if(r.error)throw r.error;await load()}
 function report(e){console.warn("Notification service",e);if(status)status.textContent=getLabels().error}
 async function load(){if(!supabase||!me)return;const id=me.id;const r=await supabase.from("member_notifications").select("id,title,body,category,link_path,read_at,created_at").eq("user_id",id).order("created_at",{ascending:false}).limit(80);if(r.error)throw r.error;if(me?.id!==id)return;rows=r.data||[];paint()}
-async function auth(user){me=user;btn.hidden=!user;rows=[];paint();if(!user){panel.hidden=true;return}try{let check=await supabase.from("member_admins").select("user_id").eq("user_id",user.id).maybeSingle();isAdmin=!check.error&&!!check.data;panel.querySelector(".ims-notif-admin").hidden=!(isAdmin&&location.pathname.endsWith("/members.html"));await load()}catch(e){report(e)}}
+async function auth(user){me=user;btn.hidden=!user;rows=[];paint();if(!user){panel.hidden=true;return}try{let check=await supabase.from("member_admins").select("user_id").eq("user_id",user.id).maybeSingle();isAdmin=!check.error&&!!check.data;panel.querySelector(".ims-notif-admin").hidden=!(isAdmin&&location.pathname.endsWith("/Imsfrane-demo/members.html"));await load()}catch(e){report(e)}}
 async function start(){
  if(!document.querySelector(".ims-member-entry,.ims-sitebar .ims-dash-header-lang"))return;
  build();try{const sdk=await import("https://esm.sh/@supabase/supabase-js@2");supabase=sdk.createClient(url,key);const session=await supabase.auth.getSession();await auth(session.data.session?.user||null);supabase.auth.onAuthStateChange((_event,s)=>{setTimeout(()=>auth(s?.user||null).catch(report),0)})}catch(e){report(e)}

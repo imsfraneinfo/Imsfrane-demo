@@ -25,14 +25,14 @@ function render(){
  let translations=["en","es","ar"].map(lang=>'<div class="ims-email-two"><div><label for="imsEmailTitle-'+lang+'">'+lang.toUpperCase()+' · Title</label><input maxlength="120" id="imsEmailTitle-'+lang+'"></div><div><label for="imsEmailBody-'+lang+'">'+lang.toUpperCase()+' · Message</label><textarea maxlength="1500" id="imsEmailBody-'+lang+'" rows="3"></textarea></div></div>').join("");
  widget.innerHTML='<span class="ims-email-kicker">'+escape(t.eyebrow)+'</span><h3>'+escape(t.title)+'</h3><p>'+escape(t.description)+'</p>'
  +'<div id="imsEmailStatus" class="ims-email-alert" role="status" aria-live="polite"></div>'
- +'<form id="imsEmailForm"><div class="ims-email-two"><div><label for="imsEmailCategory">'+escape(t.kind)+'</label><select id="imsEmailCategory">'+category+'</select></div><div><label for="imsEmailDest">'+escape(t.url)+'</label><input id="imsEmailDest" readonly value="/fr/"></div></div>'
+ +'<form id="imsEmailForm"><div class="ims-email-two"><div><label for="imsEmailCategory">'+escape(t.kind)+'</label><select id="imsEmailCategory">'+category+'</select></div><div><label for="imsEmailDest">'+escape(t.url)+'</label><input id="imsEmailDest" readonly value="/Imsfrane-demo/fr/"></div></div>'
  +'<label for="imsEmailTitle">'+escape(t.subject)+'</label><input id="imsEmailTitle" required minlength="3" maxlength="120" placeholder="'+escape(t.subjectPh)+'">'
  +'<label for="imsEmailBody">'+escape(t.message)+'</label><textarea id="imsEmailBody" required minlength="5" maxlength="1500" rows="5" placeholder="'+escape(t.bodyPh)+'"></textarea>'
  +'<details><summary>'+escape(t.translation)+'</summary><p>'+escape(t.translationHint)+'</p>'+translations+'</details>'
  +'<p>'+escape(t.note)+'</p><div class="ims-email-buttons"><button id="imsEmailTest" type="button" class="ims-email-test">'+escape(t.preview)+'</button><button id="imsEmailSend" type="button" class="ims-email-send">'+escape(t.send)+'</button><button id="imsEmailContinue" type="button" class="ims-email-more" hidden>'+escape(t.continue)+'</button></div></form>';
  pane.append(widget);
  const cat=widget.querySelector("#imsEmailCategory"),dest=widget.querySelector("#imsEmailDest");
- cat.addEventListener("change",()=>{dest.value="/fr/"+slugs[cat.value]});
+ cat.addEventListener("change",()=>{dest.value="/Imsfrane-demo/fr/"+slugs[cat.value]});
  widget.querySelector("#imsEmailTest").onclick=()=>submit(true);
  widget.querySelector("#imsEmailSend").onclick=()=>submit(false);
  widget.querySelector("#imsEmailContinue").onclick=()=>dispatch(pendingId);

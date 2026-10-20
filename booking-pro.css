@@ -21,7 +21,7 @@
 #imsfrane-booking .bp-wrap{max-width:1270px;margin:auto;padding:50px 22px 90px}
 #imsfrane-booking .bp-steps{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 36px;padding:0;list-style:none}
 #imsfrane-booking .bp-steps li{display:flex;gap:9px;align-items:center;color:#576e63;font-size:12px;font-weight:750}
-#imsfrane-booking .bp-steps li:not(:last-child):after{content:"/";margin:0 12px;color:#c2cbbf}
+#imsfrane-booking .bp-steps li:not(:last-child):after{content:"/Imsfrane-demo/";margin:0 12px;color:#c2cbbf}
 #imsfrane-booking .bp-steps b{background:#e9e9df;color:#214538;border-radius:50%;width:29px;height:29px;display:inline-grid;place-items:center;font-weight:800}
 #imsfrane-booking .bp-steps li:first-child b{background:#173d34;color:white}
 #imsfrane-booking .bp-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(310px,380px);gap:32px;align-items:start}

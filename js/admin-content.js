@@ -9,7 +9,7 @@
       if(el.children.length===0 && norm(el.textContent)===norm(oldText)){el.textContent=newText; return;}
     }
   }
-  fetch('/content/site-content.json',{cache:'no-store'}).then(function(r){return r.json();}).then(function(c){
+  fetch('/Imsfrane-demo/content/site-content.json',{cache:'no-store'}).then(function(r){return r.json();}).then(function(c){
     var lang=document.body.getAttribute('data-lang')||document.documentElement.lang||'fr'; lang=lang.indexOf('en')===0?'en':'fr';
     var m=(document.body.className||'').match(/page-(rafting|randonnee|camping|vtt|quad|hebergement)/);
     if(m && c.activities && c.activities[m[1]] && c.activities[m[1]][lang]){

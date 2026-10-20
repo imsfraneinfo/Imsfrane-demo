@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /Imsfrane-demo/admin/
+Disallow: /admin/
 
-Sitemap: https://imsfraneinfo.github.io/Imsfrane-demo/sitemap.xml
+Sitemap: https://imsfrane.com/sitemap.xml

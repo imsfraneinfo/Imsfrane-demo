@@ -1,7 +1,7 @@
 /* Imsfrane account inbox. DEMO uses admin-only test delivery; do not broadcast to members from staging. */
 (function(){
 "use strict";
-const demo=location.pathname.startsWith("/"),base=demo?"/":"/";
+const demo=location.pathname.startsWith("/Imsfrane-demo/"),base=demo?"/Imsfrane-demo/":"/Imsfrane-demo/";
 const isMember=location.pathname===base+"members.html",locale=(v)=>["fr","en","ar","es"].includes(v)?v:"fr";
 const lang=()=>locale(document.documentElement.lang||new URLSearchParams(location.search).get("lang")||"fr");
 const translated={
@@ -25,10 +25,10 @@ function localizedLink(raw){
  if(!raw)return null;
  try{let u=new URL(raw,location.origin);if(u.origin!==location.origin||!/^(?:\/Imsfrane-demo)?\/(?:fr|en|ar|es)\/[a-z0-9/_-]*$/.test(u.pathname))return null;
  let path=u.pathname.replace(/^\/,"");
- return base+lang()+"/"+path.replace(/^\/(?:fr|en|ar|es)\//,"");
+ return base+lang()+"/Imsfrane-demo/"+path.replace(/^\/(?:fr|en|ar|es)\//,"");
  }catch(_e){return null}
 }
-function iconBell(){let svg=document.createElementNS("http://www.w3.org/2000/svg","svg");svg.setAttribute("viewBox","0 0 24 24");svg.setAttribute("aria-hidden","true");svg.innerHTML='<path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/>';return svg}
+function iconBell(){let svg=document.createElementNS("http://www.w3.org/2000/svg","svg");svg.setAttribute("viewBox","0 0 24 24");svg.setAttribute("aria-hidden","true");svg.innerHTML='<path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/Imsfrane-demo/>';return svg}
 function renderBadge(){if(!bell)return;badge.textContent=unread>99?"99+":String(unread);badge.hidden=unread===0;bell.setAttribute("aria-label",tr().notifications+(unread?" · "+unread+" "+tr().unread:""));bell.title=tr().notifications}
 function renderNotes(root,compact){
  root.replaceChildren();
@@ -149,7 +149,7 @@ function buildAdmin(){
  const category=el("select");category.name="category";
  for(const c of ["news","rafting","hiking","camping","vtt","quad","offers"]){const opt=el("option","",tr().categories[c]);opt.value=c;category.append(opt)}
  addField(form,tr().category,category);
- const url=el("input");url.name="link";url.type="text";url.placeholder="/fr/rafting/";url.maxLength=220;addField(form,tr().link,url);
+ const url=el("input");url.name="link";url.type="text";url.placeholder="/Imsfrane-demo/fr/rafting/";url.maxLength=220;addField(form,tr().link,url);
  const consent=el("label","ims-notify-check"),marketing=el("input");marketing.type="checkbox";marketing.name="marketing";consent.append(marketing,el("span","",tr().market));form.append(consent);
  const panes=el("div","ims-notify-languages");
  const fields={};
@@ -161,7 +161,7 @@ function buildAdmin(){
  form.append(panes);
  const sample=el("button","ims-notify-example",tr().template);sample.type="button";sample.addEventListener("click",()=>{
   const t=template();for(const l of ["fr","en","ar","es"]){fields[l].title.value=t[l][0];fields[l].body.value=t[l][1]}
-  category.value="rafting";url.value="/fr/rafting/";marketing.checked=false
+  category.value="rafting";url.value="/Imsfrane-demo/fr/rafting/";marketing.checked=false
  });
  const send=el("button","ims-notify-send",tr().send);send.type="submit";
  adminState=el("p","ims-notify-admin-state");adminState.setAttribute("role","status");
