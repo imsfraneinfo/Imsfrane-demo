@@ -22,8 +22,14 @@ CSS = '''<style id="rafting-expedition-editorial">
 .expedition-hero figure{margin:0;max-width:420px;justify-self:center}
 .expedition-hero img,.expedition-photo img{display:block;width:100%!important;height:auto!important;max-height:none!important;aspect-ratio:auto!important;object-fit:contain!important;transform:none!important;border-radius:10px}
 .expedition-hero figcaption{font-size:12px;color:#d4dfd8;padding-top:12px;line-height:1.7}
-.expedition-photo{margin:36px auto 52px;width:100%;max-width:790px}
-.expedition-photo.portrait{max-width:520px}
+.expedition-photo{margin:24px auto 32px;width:100%;max-width:620px}
+.expedition-photo.portrait{max-width:340px}
+.expedition-photo-pair{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:center;margin:24px 0 32px}
+.expedition-photo-pair .expedition-photo{margin:0;max-width:none}
+.expedition-article .article-lead{font-size:19px;line-height:1.8;margin-bottom:30px}
+.expedition-article>section{margin-bottom:30px}
+.expedition-article>section p{font-size:16px;line-height:1.9}
+.expedition-article>section h2{font-size:clamp(25px,3vw,34px)}
 .expedition-photo figcaption{font-size:13px;color:#617269;line-height:1.7;padding:13px 0;border-bottom:1px solid #dce4db}
 .expedition-article section{scroll-margin-top:100px}
 html[lang="ar"] .expedition-hero h1{font-family:"Imsfrane Alexandria",Tahoma,sans-serif;line-height:1.65;font-size:clamp(30px,3.5vw,47px);letter-spacing:0}
@@ -76,10 +82,10 @@ def article(root, lang):
     for i, s in enumerate(d['sections'], 1):
         section = f'<section id="expedition-{i}"><h2>{escape(s["title"])}</h2>'
         section += ''.join('<p>' + escape(p) + '</p>' for p in s['paragraphs'])
-        if s.get('image'):
+        if s.get('image') and s.get('second_image'):
+            section += '<div class="expedition-photo-pair">' + photo(s['image'], s['caption']) + photo(s['second_image'], s['second_caption']) + '</div>'
+        elif s.get('image'):
             section += photo(s['image'], s['caption'])
-        if s.get('second_image'):
-            section += photo(s['second_image'], s['second_caption'])
         sections.append(section + '</section>')
     hero_caption = {
         'fr': 'Un groupe équipé pour le rafting dans la région d’Imsfrane.',
@@ -92,7 +98,7 @@ def article(root, lang):
             '<h1>' + escape(d['title']) + '</h1><p>' + escape(d['subtitle']) + '</p></div>'
             + photo('IMG_7886.webp', hero_caption, True) + '</div></header>'
             '<div class="article-layout"><article class="article-body expedition-article">'
-            '<p class="article-lead">' + escape(d['lead']) + '</p>' + toc + ''.join(sections)
+            '<p class="article-lead">' + escape(d['lead']) + '</p>' + ''.join(sections)
             + '<aside class="article-note">' + escape(d['note']) + '</aside>'
             + f'<a class="article-cta" href="/{lang}/contact/">' + escape(d['cta']) + '</a></article></div></main>')
     source, count = re.subn(r'<main\b[^>]*>.*?</main>', lambda m: main, source, count=1, flags=re.S)

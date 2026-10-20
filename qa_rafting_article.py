@@ -30,7 +30,7 @@ with webdriver.Chrome(options=opts) as browser:
             browser.get(ROOT + lang + '/' + SLUG + '/?article-check=20261020')
             WebDriverWait(browser, 30).until(lambda d: d.execute_script('return !!document.querySelector(".expedition-article")'))
             images = browser.find_elements('css selector', '.expedition-hero img,.expedition-photo img')
-            assert len(images) == 7
+            assert len(images) == 5
             for img in images:
                 browser.execute_script('arguments[0].scrollIntoView({block:"center"})', img)
                 WebDriverWait(browser, 30).until(lambda d: d.execute_script('return arguments[0].complete && arguments[0].naturalWidth>0', img))
@@ -38,7 +38,7 @@ with webdriver.Chrome(options=opts) as browser:
                 assert state['fit'] == 'contain', state
                 assert abs(state['w']/state['h'] - state['nw']/state['nh']) < 0.02, state
             state = browser.execute_script('''return {lang:document.documentElement.lang,dir:document.documentElement.dir,sections:document.querySelectorAll('.expedition-article>section').length,width:document.documentElement.clientWidth,scroll:document.documentElement.scrollWidth,links:[...document.querySelectorAll('.atnav-langmini-panel a[lang]')].map(a=>new URL(a.href).pathname),text:document.querySelector('.expedition-article').innerText,font:getComputedStyle(document.querySelector('.expedition-article')).fontFamily}''')
-            assert state['lang'] == lang and state['sections'] == 10, state
+            assert state['lang'] == lang and state['sections'] == 6, state
             assert state['scroll'] <= state['width'] + 2, state
             assert set(state['links']) == {'/Imsfrane-demo/' + code + '/' + SLUG + '/' for code in ('fr','en','ar','es')}
             if lang == 'ar':
@@ -46,7 +46,9 @@ with webdriver.Chrome(options=opts) as browser:
                 assert not any(word in state['text'] for word in ('غادي', 'ديال', 'باش', 'كتكون'))
             browser.execute_script('window.scrollTo(0,0)')
             browser.save_screenshot(str(OUT / f'article-50km-{lang}-{width}.png'))
-            print('ARTICLE PASS', lang, width, 'seven uncropped images, ten sections', flush=True)
+            day_two = browser.find_element('css selector', '#expedition-5')
+            assert not day_two.find_elements('css selector', 'img'), 'No misleading Imsfrane photograph on day two'
+            print('ARTICLE PASS', lang, width, 'five uncropped images, six concise sections', flush=True)
             browser.get(ROOT + lang + '/blog/?article-check=20261020')
             WebDriverWait(browser, 30).until(lambda d: d.find_elements('css selector', '.journal-card'))
             card = browser.find_element('css selector', '.journal-card a[href*="' + SLUG + '"]')
