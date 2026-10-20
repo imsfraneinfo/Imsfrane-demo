@@ -108,7 +108,7 @@ function simplifyBlogArticleNav(){
  bar.className="ims-blog-return";
  bar.setAttribute("aria-label",text);
  var link=document.createElement("a");
- link.href="blog.html";
+ var blogBase=location.pathname.indexOf("/Imsfrane-demo/")===0?"/Imsfrane-demo/":"/";var blogSlash=String.fromCharCode(47);link.href=blogBase+lang+blogSlash+"blog"+blogSlash;
  link.setAttribute("aria-label",text);
  var arrow=document.createElement("span");
  arrow.className="ims-blog-return-arrow";
