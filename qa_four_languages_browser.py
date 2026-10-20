@@ -8,6 +8,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 import json
+from urllib.parse import urljoin, urlparse
 
 ROOT = "https://imsfraneinfo.github.io/Imsfrane-demo/"
 LANGS = ("fr", "en", "ar", "es")
@@ -77,7 +78,10 @@ with webdriver.Chrome(options=opts) as browser:
                     assert len(state["links"]) == 4, state
                     assert {link["lang"] for link in state["links"]} == set(LANGS), state
                     for link in state["links"]:
-                        assert link["href"] == "../" + link["lang"] + "/" + page, state
+                        target = urlparse(urljoin(browser.current_url, link["href"]))
+                        slug = "" if page == "index.html" else page.removesuffix(".html") + "/"
+                        expected_path = "/Imsfrane-demo/" + link["lang"] + "/" + slug
+                        assert target.netloc == "imsfraneinfo.github.io" and target.path == expected_path, state
                     assert len(state["script"]) == 1 and expected_core in state["script"][0], state
                     assert state["arabicCss"] == (lang == "ar"), state
                     fingerprint = (state["sections"], state["images"], state["forms"])
