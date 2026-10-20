@@ -53,7 +53,7 @@ with webdriver.Chrome(options=opts) as browser:
             print('ARTICLE PASS', lang, width, 'five uncropped images, six concise sections', flush=True)
             back = WebDriverWait(browser, 30).until(lambda d: d.find_element('css selector', '.ims-blog-return a'))
             assert back.get_attribute('href') == ROOT + lang + '/blog/', 'Runtime back-link points into the article directory'
-            browser.execute_script('arguments[0].click()', back)
+            back.click()
             WebDriverWait(browser, 30).until(lambda d: d.find_elements('css selector', '.journal-card'))
             assert browser.current_url.rstrip('/') == (ROOT + lang + '/blog').rstrip('/')
             card = browser.find_element('css selector', '.journal-card a[href*="' + SLUG + '"]')
