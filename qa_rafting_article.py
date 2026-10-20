@@ -20,7 +20,8 @@ with webdriver.Chrome(options=opts) as browser:
     deadline = time.monotonic() + 180
     while True:
         browser.get(ROOT + 'ar/' + SLUG + '/?article-check=20261020')
-        if browser.find_elements('css selector', '.expedition-article'):
+        if (len(browser.find_elements('css selector', '.expedition-article>section')) == 6
+                and len(browser.find_elements('css selector', '.expedition-hero img,.expedition-photo img')) == 5):
             break
         assert time.monotonic() < deadline, 'New article not deployed within three minutes'
         time.sleep(5)
