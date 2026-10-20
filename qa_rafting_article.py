@@ -19,6 +19,12 @@ with webdriver.Chrome(options=opts) as browser:
     # The publish workflow starts before Pages finishes deploying its branch.
     deadline = time.monotonic() + 180
     while True:
+        browser.get(ROOT + 'ar/blog/?layout-check=nohero-20261020')
+        if browser.find_elements('css selector', 'main[data-blog-layout="compact-nohero"]'):
+            break
+        assert time.monotonic() < deadline, 'Updated blog listing not deployed'
+        time.sleep(5)
+    while True:
         browser.get(ROOT + 'ar/' + SLUG + '/?article-check=20261020')
         if (len(browser.find_elements('css selector', '.expedition-article>section')) == 6
                 and len(browser.find_elements('css selector', '.expedition-hero img,.expedition-photo img')) == 5
@@ -56,6 +62,9 @@ with webdriver.Chrome(options=opts) as browser:
             back.click()
             WebDriverWait(browser, 30).until(lambda d: d.find_elements('css selector', '.journal-card'))
             assert browser.current_url.rstrip('/') == (ROOT + lang + '/blog').rstrip('/')
+            assert not browser.find_elements('css selector', '.journal-hero'), 'Blog listing must have no hero'
+            assert browser.find_elements('css selector', 'h1.journal-list-title')
+            assert len(browser.find_elements('css selector', '.journal-card')) == 7
             card = browser.find_element('css selector', '.journal-card a[href*="' + SLUG + '"]')
             assert card.is_displayed(), 'New article must be visible among the first cards'
             card_image = card.find_element('css selector', 'img')

@@ -117,6 +117,21 @@ def add_to_blog(root, lang):
     d = DATA[lang]
     path = root / lang / 'blog' / 'index.html'
     html = path.read_text(encoding='utf-8')
+    # The official source may already contain the approved article after promotion.
+    # Replace its existing card rather than inserting a duplicate on each build.
+    html = re.sub(r'<article class="journal-card"[^>]*>.*?</article>',
+                  lambda m: '' if SLUG in m[0] else m[0], html, flags=re.S)
+    html = re.sub(r'<section class="journal-hero">.*?</section>', '', html, count=1, flags=re.S)
+    label = {'fr': 'Le journal', 'en': 'The journal', 'ar': 'المدونة', 'es': 'El blog'}[lang]
+    if 'journal-list-title' not in html:
+        html = html.replace('<main class="journal-page" id="mainContent">',
+                            '<main class="journal-page" id="mainContent" data-blog-layout="compact-nohero">'
+                            f'<h1 class="journal-list-title">{label}</h1>', 1)
+        html = html.replace('</head>', '<style id="blog-list-nohero">'
+                            'main.journal-page .journal-list-title{font-size:30px;line-height:1.4;color:#193d33;max-width:1220px;margin:24px auto 0;padding:0 20px}'
+                            'main.journal-page .journal-featured{margin:24px auto 40px}'
+                            '@media(max-width:900px){main.journal-page .journal-featured{margin:20px 18px 32px}}'
+                            '</style></head>', 1)
     href = f'/{lang}/{SLUG}/'
     title, description = escape(d['title'], quote=True), escape(d['description'], quote=True)
     card = (f'<article class="journal-card" data-title="{title}" data-description="{description}" data-category="{d["category"]}" data-date="2026-10-20">'
@@ -124,7 +139,7 @@ def add_to_blog(root, lang):
             f'<div class="journal-card-body"><span class="journal-card-category">{d["category"]}</span><h3><a href="{href}">{title}</a></h3><p>{description}</p>'
             f'<div class="journal-card-foot"><span>20 · 10 · 2026</span><a href="{href}">{d["read"]}</a></div></div></article>')
     marker = '<div class="journal-grid" id="journal-grid">'
-    assert marker in html and SLUG not in html
+    assert marker in html
     html = html.replace(marker, marker + card, 1)
     replacements = {
         'fr': [('Six guides pratiques, écrits', 'Des récits et guides pratiques, écrits'), ('Nos six grands guides', 'Nos récits et guides'), ('6 dossiers approfondis', '7 articles et guides')],
@@ -176,6 +191,8 @@ def build(root):
         text = sitemap.read_text(encoding='utf-8')
         items = []
         for lang in LANGS:
+            if f'https://imsfrane.com/{lang}/{SLUG}/</loc>' in text:
+                continue
             alternate = ''.join(f'<xhtml:link rel="alternate" hreflang="{other}" href="https://imsfrane.com/{other}/{SLUG}/"/>' for other in LANGS)
             items.append(f'<url><loc>https://imsfrane.com/{lang}/{SLUG}/</loc><lastmod>2026-10-20</lastmod>{alternate}</url>')
         if 'xmlns:xhtml=' not in text:
