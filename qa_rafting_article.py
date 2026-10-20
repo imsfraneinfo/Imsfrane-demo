@@ -21,7 +21,8 @@ with webdriver.Chrome(options=opts) as browser:
     while True:
         browser.get(ROOT + 'ar/' + SLUG + '/?article-check=20261020')
         if (len(browser.find_elements('css selector', '.expedition-article>section')) == 6
-                and len(browser.find_elements('css selector', '.expedition-hero img,.expedition-photo img')) == 5):
+                and len(browser.find_elements('css selector', '.expedition-hero img,.expedition-photo img')) == 5
+                and browser.find_elements('css selector', 'script[src*="blog-return-20261020"]')):
             break
         assert time.monotonic() < deadline, 'New article not deployed within three minutes'
         time.sleep(5)
@@ -50,8 +51,14 @@ with webdriver.Chrome(options=opts) as browser:
             day_two = browser.find_element('css selector', '#expedition-5')
             assert not day_two.find_elements('css selector', 'img'), 'No misleading Imsfrane photograph on day two'
             print('ARTICLE PASS', lang, width, 'five uncropped images, six concise sections', flush=True)
-            browser.get(ROOT + lang + '/blog/?article-check=20261020')
+            back = WebDriverWait(browser, 30).until(lambda d: d.find_element('css selector', '.ims-blog-return a'))
+            assert back.get_attribute('href') == ROOT + lang + '/blog/', 'Runtime back-link points into the article directory'
+            browser.execute_script('arguments[0].click()', back)
             WebDriverWait(browser, 30).until(lambda d: d.find_elements('css selector', '.journal-card'))
+            assert browser.current_url.rstrip('/') == (ROOT + lang + '/blog').rstrip('/')
             card = browser.find_element('css selector', '.journal-card a[href*="' + SLUG + '"]')
             assert card.is_displayed(), 'New article must be visible among the first cards'
+            card_image = card.find_element('css selector', 'img')
+            crop = browser.execute_script('return getComputedStyle(arguments[0]).objectPosition', card_image)
+            assert crop == '50% 82%', crop
     print('PASS: article and blog discovery in four languages on mobile and desktop', flush=True)
