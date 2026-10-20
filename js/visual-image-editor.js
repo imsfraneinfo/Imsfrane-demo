@@ -4,7 +4,7 @@ const pages=['home',...['fr','en'].flatMap(lang=>['index','about','blog','bookin
 // Add all available page keys from bundled image-settings manifest.
 const available=window.IMSFRANE_IMAGE_PAGES||pages;
 for(const p of available){const o=document.createElement('option');o.value=p;o.textContent=p==='home'?'Home / Accueil':p.replace('-',' / ');page.append(o)}
-const urlFor=p=>p==='home'?'/Imsfrane-demo/':('/Imsfrane-demo/'+p.slice(0,2)+'/Imsfrane-demo/'+p.slice(3)+'.html');
+const urlFor=p=>p==='home'?'/':('/'+p.slice(0,2)+'/'+p.slice(3)+'.html');
 function clone(v){return JSON.parse(JSON.stringify(v))}function key(){return 'imsfrane-preview:'+page.value}
 function saveDraft(){if(data)localStorage.setItem(key(),JSON.stringify(data))}
 function current(){return data?.images?.find(i=>i.id===selected)}

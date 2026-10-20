@@ -180,9 +180,9 @@ body.menu-open{overflow:hidden}
    language=lang;
    document.documentElement.lang=lang;
    document.querySelectorAll("[data-fr][data-en]").forEach(function(el){el.textContent=el.getAttribute("data-"+lang)});
-   document.querySelectorAll("[data-route]").forEach(function(el){el.href=lang+"/Imsfrane-demo/"+el.getAttribute("data-route")});
+   document.querySelectorAll("[data-route]").forEach(function(el){el.href=lang+"/"+el.getAttribute("data-route")});
    document.querySelector(".logo").href=lang+"/Imsfrane-demo/index.html";
-   document.querySelectorAll(".desktop-nav a").forEach(function(a){a.href=a.getAttribute("href").replace(/^(fr|en)\//,lang+"/Imsfrane-demo/")});
+   document.querySelectorAll(".desktop-nav a").forEach(function(a){a.href=a.getAttribute("href").replace(/^(fr|en)\//,lang+"/")});
    document.querySelector(".nav-cta").href=lang+"/Imsfrane-demo/booking.html";
    document.getElementById("switchFR").classList.toggle("active",lang==="fr");
    document.getElementById("switchEN").classList.toggle("active",lang==="en");

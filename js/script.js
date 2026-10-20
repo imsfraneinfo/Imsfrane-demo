@@ -439,7 +439,7 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => {
    ========================= */
 
 function setActiveNavigationLink() {
-    const currentPath = body.dataset.navActive || window.location.pathname.split("/Imsfrane-demo/").pop() || "index.html";
+    const currentPath = body.dataset.navActive || window.location.pathname.split("/").pop() || "index.html";
 
     const navigationLinks = document.querySelectorAll(
         ".navigation-list a"
@@ -452,7 +452,7 @@ function setActiveNavigationLink() {
             return;
         }
 
-        const linkPath = href.split("/Imsfrane-demo/").pop();
+        const linkPath = href.split("/").pop();
 
         link.classList.toggle(
             "active",

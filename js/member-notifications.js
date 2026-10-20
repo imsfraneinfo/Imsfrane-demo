@@ -1,7 +1,7 @@
 /* Imsfrane account inbox. DEMO uses admin-only test delivery; do not broadcast to members from staging. */
 (function(){
 "use strict";
-const demo=location.pathname.startsWith("/Imsfrane-demo/"),base=demo?"/Imsfrane-demo/":"/Imsfrane-demo/";
+const demo=location.pathname.startsWith("/"),base=demo?"/":"/";
 const isMember=location.pathname===base+"members.html",locale=(v)=>["fr","en","ar","es"].includes(v)?v:"fr";
 const lang=()=>locale(document.documentElement.lang||new URLSearchParams(location.search).get("lang")||"fr");
 const translated={
@@ -25,7 +25,7 @@ function localizedLink(raw){
  if(!raw)return null;
  try{let u=new URL(raw,location.origin);if(u.origin!==location.origin||!/^(?:\/Imsfrane-demo)?\/(?:fr|en|ar|es)\/[a-z0-9/_-]*$/.test(u.pathname))return null;
  let path=u.pathname.replace(/^\/,"");
- return base+lang()+"/Imsfrane-demo/"+path.replace(/^\/(?:fr|en|ar|es)\//,"");
+ return base+lang()+"/"+path.replace(/^\/(?:fr|en|ar|es)\//,"");
  }catch(_e){return null}
 }
 function iconBell(){let svg=document.createElementNS("http://www.w3.org/2000/svg","svg");svg.setAttribute("viewBox","0 0 24 24");svg.setAttribute("aria-hidden","true");svg.innerHTML='<path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/Imsfrane-demo/>';return svg}

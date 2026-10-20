@@ -12,7 +12,7 @@ function ensureKayakLinks(){
  function add(selector,markup){
   document.querySelectorAll(selector).forEach(function(menu){
    var first=menu.querySelector('a[href="rafting.html"],a[href$="/Imsfrane-demo/rafting/"],a[href$="/Imsfrane-demo/rafting.html"]');
-   if(!first||menu.querySelector('a[href="/Imsfrane-demo/'+lang+'/Imsfrane-demo/kayak.html"],a[href$="/Imsfrane-demo/kayak.html"],a[href$="/Imsfrane-demo/kayak/"]'))return;
+   if(!first||menu.querySelector('a[href="/'+lang+'/Imsfrane-demo/kayak.html"],a[href$="/Imsfrane-demo/kayak.html"],a[href$="/Imsfrane-demo/kayak/"]'))return;
    var item=document.createElement("li");
    item.innerHTML=markup;
    first.closest("li").insertAdjacentElement("afterend",item);
@@ -20,12 +20,12 @@ function ensureKayakLinks(){
  }
  var current=isKayak?' aria-current="page"':'';
  var cls=isKayak?' active':'';
- add(".atnav-submenu",'<a class="atnav-submenu-link'+cls+'" href="/Imsfrane-demo/'+lang+'/Imsfrane-demo/kayak.html"'+current+'><span class="atnav-subicon"><svg aria-hidden="true"><use href="#atnav-i-water"></use></svg></span><span>'+name+'</span></a>');
- add("ul.dropdown-menu",'<a class="'+cls.trim()+'" href="/Imsfrane-demo/'+lang+'/Imsfrane-demo/kayak.html"'+current+'><i class="fa-solid fa-water" aria-hidden="true"></i><span>'+name+'</span></a>');
+ add(".atnav-submenu",'<a class="atnav-submenu-link'+cls+'" href="/'+lang+'/Imsfrane-demo/kayak.html"'+current+'><span class="atnav-subicon"><svg aria-hidden="true"><use href="#atnav-i-water"></use></svg></span><span>'+name+'</span></a>');
+ add("ul.dropdown-menu",'<a class="'+cls.trim()+'" href="/'+lang+'/Imsfrane-demo/kayak.html"'+current+'><i class="fa-solid fa-water" aria-hidden="true"></i><span>'+name+'</span></a>');
  var footer=document.querySelectorAll("footer.site-footer .footer-column ul");
  footer.forEach(function(ul){
   var first=ul.querySelector('a[href="rafting.html"],a[href$="/Imsfrane-demo/rafting/"],a[href$="/Imsfrane-demo/rafting.html"]');
-  if(!first||ul.querySelector('a[href="/Imsfrane-demo/'+lang+'/Imsfrane-demo/kayak.html"],a[href$="/Imsfrane-demo/kayak.html"],a[href$="/Imsfrane-demo/kayak/"]'))return;
+  if(!first||ul.querySelector('a[href="/'+lang+'/Imsfrane-demo/kayak.html"],a[href$="/Imsfrane-demo/kayak.html"],a[href$="/Imsfrane-demo/kayak/"]'))return;
   var li=document.createElement("li"),a=document.createElement("a");
   a.href="/Imsfrane-demo/"+lang+"/Imsfrane-demo/kayak.html";a.textContent=name;
   li.appendChild(a);first.closest("li").insertAdjacentElement("afterend",li);

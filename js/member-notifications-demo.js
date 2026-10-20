@@ -9,7 +9,7 @@ const C={
  ar:{bell:"الإشعارات",none:"لا توجد إشعارات جديدة.",open:"عرض الإشعارات",close:"إغلاق",markAll:"تحديد الكل كمقروء",refresh:"تحديث",new:"جديد",notice:"تظهر الرسائل داخل حسابك. إرسال البريد الإلكتروني وإشعارات الهاتف غير مفعّل حالياً.",admin:"إنشاء إعلان",preview:"الوضع التجريبي: سيُرسل الاختبار إلى حساب المدير فقط، ولن يصل إلى بقية الأعضاء.",subject:"عنوان الإعلان",body:"نص الرسالة",category:"التصنيف",link:"رابط داخلي اختياري",test:"إرسال تجربة إلى حسابي",sending:"جارٍ الإرسال…",sent:"وصلت الرسالة التجريبية إلى حسابك.",error:"تعذّر إرسال التجربة.",marketing:"إعلان ترويجي: يتطلب الموافقة على التسويق",categories:{news:"الأخبار",rafting:"الرافتينغ",hiking:"المشي الجبلي",camping:"التخييم",vtt:"الدراجات الجبلية",quad:"الكواد",offers:"العروض"},empty:"ليس لديك رسائل حتى الآن.",unread:"غير مقروء",read:"مقروء"},
  es:{bell:"Notificaciones",none:"No hay notificaciones nuevas.",open:"Ver notificaciones",close:"Cerrar",markAll:"Marcar todo leído",refresh:"Actualizar",new:"Nuevo",notice:"Los mensajes aparecen en tu cuenta. El envío por correo electrónico y las notificaciones push aún no están activos.",admin:"Crear anuncio",preview:"Modo DEMO: la prueba llegará solo a tu cuenta administradora. Ningún otro miembro la recibirá.",subject:"Título del anuncio",body:"Mensaje",category:"Tema",link:"Enlace interno opcional",test:"Enviarme una prueba",sending:"Enviando…",sent:"Prueba enviada a tu cuenta.",error:"No se pudo enviar la prueba.",marketing:"Anuncio promocional: requiere consentimiento",categories:{news:"Noticias",rafting:"Rafting",hiking:"Senderismo",camping:"Camping",vtt:"BTT",quad:"Quad",offers:"Ofertas"},empty:"Todavía no tienes mensajes.",unread:"sin leer",read:"leído"}
 };
-const base="/Imsfrane-demo/",url="https://ktrcrfoywokuuwzwnqsu.supabase.co",key="sb_publishable_GS2PtVM4vBv7epvV6aZSpA_XQyD9bCj";
+const base="/",url="https://ktrcrfoywokuuwzwnqsu.supabase.co",key="sb_publishable_GS2PtVM4vBv7epvV6aZSpA_XQyD9bCj";
 const svgns="http://www.w3.org/2000/svg";
 function bellSvg(){const x=document.createElementNS(svgns,"svg");x.setAttribute("viewBox","0 0 24 24");x.setAttribute("aria-hidden","true");x.setAttribute("fill","none");x.setAttribute("stroke","currentColor");x.setAttribute("stroke-width","1.8");x.setAttribute("stroke-linecap","round");x.setAttribute("stroke-linejoin","round");for(const d of ["M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9","M10 21h4"]){const p=document.createElementNS(svgns,"path");p.setAttribute("d",d);x.append(p)}return x}
 let supabase,me=null,rows=[],isAdmin=false,btn,panel,list,status,adminForm;
@@ -62,7 +62,7 @@ function build(){
  };
  return {adbox}
 }
-function safeLink(path){if(!path||!/^\/(fr|en|ar|es)\/[a-z0-9/_-]*$/.test(path))return null;return base+path.replace(/^\/(fr|en|ar|es)\//,"/Imsfrane-demo/"+current()+"/Imsfrane-demo/").slice(1)}
+function safeLink(path){if(!path||!/^\/(fr|en|ar|es)\/[a-z0-9/_-]*$/.test(path))return null;return base+path.replace(/^\/(fr|en|ar|es)\//,"/"+current()+"/").slice(1)}
 function paint(){
  if(!btn)return;
  const badge=btn.querySelector(".ims-notif-badge"),unread=rows.filter(r=>!r.read_at).length;
