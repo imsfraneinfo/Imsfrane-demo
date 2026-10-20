@@ -120,7 +120,7 @@ def add_to_blog(root, lang):
     href = f'/{lang}/{SLUG}/'
     title, description = escape(d['title'], quote=True), escape(d['description'], quote=True)
     card = (f'<article class="journal-card" data-title="{title}" data-description="{description}" data-category="{d["category"]}" data-date="2026-10-20">'
-            f'<a class="journal-card-image" href="{href}"><img src="/images/IMG_7886.webp" alt="{title}" loading="lazy" decoding="async" style="object-position:center 82%"></a>'
+            f'<a class="journal-card-image" href="{href}"><img src="/images/IMG_7886.webp" alt="{title}" loading="lazy" decoding="async" style="object-position:50% 100%!important"></a>'
             f'<div class="journal-card-body"><span class="journal-card-category">{d["category"]}</span><h3><a href="{href}">{title}</a></h3><p>{description}</p>'
             f'<div class="journal-card-foot"><span>20 · 10 · 2026</span><a href="{href}">{d["read"]}</a></div></div></article>')
     marker = '<div class="journal-grid" id="journal-grid">'
@@ -138,7 +138,7 @@ def add_to_blog(root, lang):
     featured = (f'<section class="journal-featured"><div class="journal-featured-copy"><span class="journal-kicker">'
                 + {'fr': 'Nouveau récit', 'en': 'New expedition story', 'ar': 'رحلة جديدة في المدونة', 'es': 'Nuevo relato'}[lang]
                 + f'</span><h2><a href="{href}">{title}</a></h2><p>{description}</p><a class="journal-primary-link" href="{href}">{d["read"]}</a></div>'
-                + f'<a class="journal-featured-photo" href="{href}"><img src="/images/IMG_7886.webp" alt="{title}" loading="lazy" style="object-position:center 82%"></a></section>')
+                + f'<a class="journal-featured-photo" href="{href}"><img src="/images/IMG_7886.webp" alt="{title}" loading="lazy" style="object-position:50% 100%!important"></a></section>')
     html, count = re.subn(r'<section class="journal-featured">.*?</section>', lambda m: featured, html, count=1, flags=re.S)
     assert count == 1
     path.write_text(html, encoding='utf-8')
@@ -161,7 +161,15 @@ def build(root):
         for path in (root / lang).rglob('*.html'):
             html = path.read_text(encoding='utf-8')
             if 'article-nav' in html:
-                html = re.sub(r'(/navigation-pro\.js)(?:\?[^"\s>]*)?', r'\1?v=blog-return-20261020', html)
+                # Render the final link in HTML. Even a cached older script can
+                # no longer replace it with a relative blog.html destination.
+                label = {'fr': 'Tous les articles', 'en': 'All articles', 'ar': 'جميع المقالات', 'es': 'Todos los artículos'}[lang]
+                arrow = '→' if lang == 'ar' else '←'
+                back = (f'<nav class="ims-blog-return" aria-label="{label}">'
+                        f'<a data-article-back="static-v2" href="https://imsfrane.com/{lang}/blog/" aria-label="{label}">'
+                        f'<span class="ims-blog-return-arrow" aria-hidden="true">{arrow}</span><span>{label}</span></a></nav>')
+                html = re.sub(r'<header class="article-nav">.*?</header>', lambda m: back, html, count=1, flags=re.S)
+                html = re.sub(r'(/navigation-pro\.js)(?:\?[^"\s>]*)?', r'\1?v=blog-return-static-v2', html)
                 path.write_text(html, encoding='utf-8')
     sitemap = root / 'sitemap.xml'
     if sitemap.exists():

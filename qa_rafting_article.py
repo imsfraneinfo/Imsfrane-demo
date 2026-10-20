@@ -22,7 +22,7 @@ with webdriver.Chrome(options=opts) as browser:
         browser.get(ROOT + 'ar/' + SLUG + '/?article-check=20261020')
         if (len(browser.find_elements('css selector', '.expedition-article>section')) == 6
                 and len(browser.find_elements('css selector', '.expedition-hero img,.expedition-photo img')) == 5
-                and browser.find_elements('css selector', 'script[src*="blog-return-20261020"]')):
+                and browser.find_elements('css selector', 'a[data-article-back="static-v2"]')):
             break
         assert time.monotonic() < deadline, 'New article not deployed within three minutes'
         time.sleep(5)
@@ -60,5 +60,7 @@ with webdriver.Chrome(options=opts) as browser:
             assert card.is_displayed(), 'New article must be visible among the first cards'
             card_image = card.find_element('css selector', 'img')
             crop = browser.execute_script('return getComputedStyle(arguments[0]).objectPosition', card_image)
-            assert crop == '50% 82%', crop
+            assert crop == '50% 100%', crop
+            featured = browser.find_element('css selector', '.journal-featured-photo img')
+            assert browser.execute_script('return getComputedStyle(arguments[0]).objectPosition', featured) == '50% 100%'
     print('PASS: article and blog discovery in four languages on mobile and desktop', flush=True)
