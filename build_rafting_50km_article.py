@@ -122,13 +122,24 @@ def add_to_blog(root, lang):
     html = re.sub(r'<article class="journal-card"[^>]*>.*?</article>',
                   lambda m: '' if SLUG in m[0] else m[0], html, flags=re.S)
     html = re.sub(r'<section class="journal-hero">.*?</section>', '', html, count=1, flags=re.S)
-    label = {'fr': 'Le journal', 'en': 'The journal', 'ar': 'المدونة', 'es': 'El blog'}[lang]
+    intro = {
+        'fr': ('LE JOURNAL DE L’ATLAS', 'Histoires du Haut Atlas', 'Des récits et guides pratiques, écrits pour comprendre les saisons, préparer ses sorties et découvrir les montagnes et les villages sans précipitation.', 'Explorez nos récits ↓'),
+        'en': ('THE ATLAS JOURNAL', 'Stories from the High Atlas', 'Stories and practical guides to understand the seasons, prepare your outings and discover the mountains and villages at an unhurried pace.', 'Explore our stories ↓'),
+        'ar': ('مجلة الأطلس', 'حكايات من الأطلس الكبير', 'حكايات وأدلة عملية لفهم المواسم، والاستعداد للرحلات، واكتشاف الجبال والقرى على مهل.', 'اكتشف مقالاتنا ↓'),
+        'es': ('EL DIARIO DEL ATLAS', 'Historias del Alto Atlas', 'Relatos y guías prácticas para comprender las estaciones, preparar tus salidas y descubrir las montañas y los pueblos sin prisas.', 'Explora nuestros relatos ↓'),
+    }[lang]
     if 'journal-list-title' not in html:
         html = html.replace('<main class="journal-page" id="mainContent">',
                             '<main class="journal-page" id="mainContent" data-blog-layout="compact-nohero">'
-                            f'<h1 class="journal-list-title">{label}</h1>', 1)
+                            '<header class="journal-text-intro">'
+                            f'<span class="journal-kicker">{escape(intro[0])}</span>'
+                            f'<h1 class="journal-list-title">{escape(intro[1])}</h1>'
+                            f'<p>{escape(intro[2])}</p><a href="#journal-articles">{escape(intro[3])}</a></header>', 1)
         html = html.replace('</head>', '<style id="blog-list-nohero">'
-                            'main.journal-page .journal-list-title{font-size:30px;line-height:1.4;color:#193d33;max-width:1220px;margin:24px auto 0;padding:0 20px}'
+                            'main.journal-page .journal-text-intro{max-width:860px;margin:auto;padding:32px 20px 12px;text-align:center}'
+                            'main.journal-page .journal-list-title{font-size:clamp(32px,4.5vw,52px);line-height:1.25;color:#193d33;margin:12px 0 16px}'
+                            'main.journal-page .journal-text-intro p{font-size:15px;line-height:1.8;color:#567166;margin:0 auto 16px;max-width:720px}'
+                            'main.journal-page .journal-text-intro>a{font-size:13px;font-weight:700;color:#947529;text-underline-offset:4px}'
                             'main.journal-page .journal-featured{margin:24px auto 40px}'
                             '@media(max-width:900px){main.journal-page .journal-featured{margin:20px 18px 32px}}'
                             '</style></head>', 1)
