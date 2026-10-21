@@ -122,7 +122,11 @@ def build(root):
         for p in (root/lang).rglob('*.html'):
             text=p.read_text(encoding='utf-8')
             if '</footer>' not in text or 'ims-privacy-link' in text: continue
-            text=text.replace('</footer>', f'<p><a class="ims-privacy-link" href="/{lang}/privacy/">{WORDS[lang][1]}</a></p></footer>',1)
+            anchor=f'<a class="ims-privacy-link" href="/{lang}/privacy/">{WORDS[lang][1]}</a>'
+            if 'footer-bottom-inner' in text:
+                text=re.sub(r'(<div class="[^"]*footer-bottom-inner[^>]*>)(.*?)(</div>)',lambda m:m[1]+m[2]+anchor+m[3],text,count=1,flags=re.S)
+            else:
+                text=text.replace('</footer>', '<p>'+anchor+'</p></footer>',1)
             write(p,text)
 
     # Remove unpublished implementation instructions from the public policy.

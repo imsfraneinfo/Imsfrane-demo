@@ -108,7 +108,9 @@ jobs:
               assert all("/Imsfrane-demo/images/" + photo.name in text for photo in photos), f"Missing photographs: {page}"
           for lang in ("fr", "en", "ar", "es"):
               original = Path("/tmp/official") / lang / "index.html"
-              assert (root / lang / "index.html").read_text(encoding="utf-8") == adapt(original.read_text(encoding="utf-8")), f"Homepage changed unexpectedly: {lang}"
+              def without_privacy_link(text):
+                  return re.sub(r'<a class="ims-privacy-link"[^>]*>.*?</a>', '', text, flags=re.S)
+              assert without_privacy_link((root / lang / "index.html").read_text(encoding="utf-8")) == without_privacy_link(adapt(original.read_text(encoding="utf-8"))), f"Homepage changed unexpectedly: {lang}"
           
           from build_route_numbers import build as build_route_numbers
           build_route_numbers(root)
