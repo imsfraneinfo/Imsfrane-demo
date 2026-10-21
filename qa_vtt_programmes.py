@@ -19,15 +19,17 @@ with webdriver.Chrome(options=opts) as browser:
     browser.set_page_load_timeout(55)
     deadline = time.monotonic() + 180
     while True:
-        browser.get(ROOT + 'fr/vtt/?v=five-programmes-20261021')
+        browser.get(ROOT + 'fr/vtt/?v=five-programmes-20261021&check=' + str(time.time_ns()))
         if browser.find_elements('css selector', 'main[data-vtt-version="five-programmes-20261021"]'):
             break
-        assert time.monotonic() < deadline, 'The new VTT page was not deployed'
+        if time.monotonic() >= deadline:
+            browser.save_screenshot(str(OUT/'vtt-wait-failure.png'))
+            raise AssertionError({'url': browser.current_url, 'title': browser.title, 'body': browser.find_element('tag name','body').text[:700]})
         time.sleep(5)
     for width, height in ((390,844), (1366,900)):
         browser.set_window_size(width, height)
         for lang, d in DATA.items():
-            browser.get(ROOT + lang + '/vtt/?v=five-programmes-20261021')
+            browser.get(ROOT + lang + '/vtt/?v=five-programmes-20261021&check=' + str(time.time_ns()))
             WebDriverWait(browser,30).until(lambda b: b.find_elements('css selector','main.vt-page'))
             state = browser.execute_script('''const m=document.querySelector('main.vt-page');return {lang:document.documentElement.lang,dir:getComputedStyle(m).direction,width:document.documentElement.clientWidth,scroll:document.documentElement.scrollWidth,h1:m.querySelectorAll('h1').length,images:m.querySelectorAll('img').length,text:m.innerText};''')
             assert state['lang'] == lang and state['h1'] == 1 and state['images'] == 10, state
