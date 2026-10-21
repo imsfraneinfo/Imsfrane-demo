@@ -1,0 +1,27 @@
+name: Verify five VTT programmes
+on:
+  push:
+    branches: [main]
+    paths: ['qa_vtt_programmes.py', '.github/workflows/qa-vtt.yml']
+  workflow_run:
+    workflows: ['Publish Imsfrane demo']
+    branches: [main]
+    types: [completed]
+permissions:
+  contents: read
+jobs:
+  vtt:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 -m pip install --quiet selenium
+      - name: Check programmes, WhatsApp messages and photographs on mobile and desktop
+        run: python3 qa_vtt_programmes.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: vtt-mobile-desktop
+          path: four-language-browser-diagnostics/vtt-*.png
+          if-no-files-found: ignore
