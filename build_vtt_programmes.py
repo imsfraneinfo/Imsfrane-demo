@@ -49,6 +49,8 @@ html[lang="ar"] .vt-page{font-family:'Imsfrane Tajawal',Tahoma,sans-serif;text-a
 @media(max-width:850px){.vt-page .vt-hero-grid{gap:28px;grid-template-columns:1fr 1fr}.vt-page .vt-hero h1{font-size:55px}.vt-page .vt-card-copy{padding:23px}.vt-page .vt-card h3{font-size:31px}}
 @media(max-width:640px){.vt-page .vt-shell{width:calc(100% - 30px)}.vt-page .vt-hero{padding:32px 0 35px}.vt-page .vt-hero-grid{grid-template-columns:1fr;gap:29px}.vt-page .vt-hero h1{font-size:54px;margin:18px 0}.vt-page .vt-hero p{font-size:14px}.vt-page .vt-cover{max-width:330px}.vt-page .vt-actions{margin-top:22px}.vt-page .vt-button{font-size:11px}.vt-page .vt-section{padding:44px 0}.vt-page .vt-rental{grid-template-columns:1fr;margin-bottom:30px}.vt-page .vt-rental-photo{min-height:285px}.vt-page .vt-rental-copy{padding:25px}.vt-page .vt-grid{grid-template-columns:1fr;gap:24px}.vt-page .vt-card-photo{height:240px}.vt-page .vt-heading h2{font-size:41px}.vt-page .vt-card h3{font-size:34px}.vt-page .vt-practical{padding:22px}.vt-page .vt-gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.vt-page .vt-gallery-section{padding:40px 0}.vt-page .vt-tags span{font-size:10px}}
 html[lang="ar"] .vt-page .quad-r-badge{left:auto;right:21px;text-align:right}
+html[lang="ar"] .vt-page :is(.quad-r-badge b,.quad-r-stats strong){font-family:'Imsfrane Alexandria',Tahoma,sans-serif;font-weight:700;letter-spacing:0;line-height:1.55}
+html[lang="ar"] :is(.ims-login-head-copy small,.ims-login-divider){font-family:'Imsfrane Tajawal',Tahoma,sans-serif}
 @media(max-width:650px){html[lang="ar"] .vt-page .quad-r-badge{right:10px}}
 </style>'''
 
@@ -73,7 +75,7 @@ def button(d, program, rental=False):
 def render(lang):
     d = DATA[lang]
     rental = d['programs'][0]
-    body = (f'<main class="vt-page" id="mainContent" data-vtt-version="restored-hero-20261021">'
+    body = (f'<main class="vt-page" id="mainContent" data-vtt-version="arabic-fonts-20261021">'
             '<section class="vt-hero"><div class="vt-shell vt-hero-grid"><div>'
             f'<div class="vt-eyebrow">{esc(d["eyebrow"])}</div><h1>{d["hero"]}</h1><p>{esc(d["intro"])}</p>'
             f'<div class="vt-actions"><a class="vt-button gold" href="#vtt-programmes">{esc(d["choose"])}</a>'
