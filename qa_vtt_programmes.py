@@ -39,7 +39,7 @@ with webdriver.Chrome(options=opts) as browser:
             assert state['dir'] == ('rtl' if lang=='ar' else 'ltr'), state
             assert state['scroll'] <= state['width']+2, state
             if lang == 'ar':
-                fonts = browser.execute_async_script('''const done=arguments[arguments.length-1];document.fonts.ready.then(()=>done({loaded:[...document.fonts].filter(f=>f.status==='loaded').map(f=>f.family),bad:[...document.querySelectorAll('body *')].filter(e=>!["STYLE","SCRIPT"].includes(e.tagName)&&[...e.childNodes].some(n=>n.nodeType===3&&/[\\u0600-\\u06ff]/.test(n.textContent))).filter(e=>!getComputedStyle(e).fontFamily.includes('Imsfrane')).map(e=>e.outerHTML.slice(0,160)),right:getComputedStyle(document.querySelector('.quad-r-badge')).right})));''')
+                fonts = browser.execute_async_script('''const done=arguments[arguments.length-1];document.fonts.ready.then(()=>done({loaded:[...document.fonts].filter(f=>f.status==='loaded').map(f=>f.family),bad:[...document.querySelectorAll('body *')].filter(e=>!["STYLE","SCRIPT"].includes(e.tagName)&&[...e.childNodes].some(n=>n.nodeType===3&&/[\\u0600-\\u06ff]/.test(n.textContent))).filter(e=>!getComputedStyle(e).fontFamily.includes('Imsfrane')).map(e=>e.outerHTML.slice(0,160)),right:getComputedStyle(document.querySelector('.quad-r-badge')).right}));''')
                 assert any('Alexandria' in f for f in fonts['loaded']), fonts
                 assert any('Tajawal' in f for f in fonts['loaded']), fonts
                 assert not fonts['bad'], fonts
