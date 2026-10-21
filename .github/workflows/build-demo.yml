@@ -10,6 +10,7 @@ on:
       - 'vtt-programmes.json'
       - 'build_international_seo.py'
       - 'build_legacy_redirects.py'
+      - 'build_route_numbers.py'
       - 'rafting-50km-article.json'
       - 'images/IMG_bivouac-*.webp'
   workflow_dispatch:
@@ -105,6 +106,8 @@ jobs:
               original = Path("/tmp/official") / lang / "index.html"
               assert (root / lang / "index.html").read_text(encoding="utf-8") == adapt(original.read_text(encoding="utf-8")), f"Homepage changed unexpectedly: {lang}"
           
+          from build_route_numbers import build as build_route_numbers
+          build_route_numbers(root)
           (root / ".nojekyll").touch()
           (root / "robots.txt").write_text("User-agent: *\nAllow: /\n", encoding="utf-8")
           (root / "demo-source.json").write_text(json.dumps({"official_commit": source_sha, "changes": ["kayak and rafting bivouac photographs"], "locales": ["fr", "en", "ar", "es"]}, indent=2), encoding="utf-8")
@@ -116,4 +119,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
           publish_branch: gh-pages
+
 
