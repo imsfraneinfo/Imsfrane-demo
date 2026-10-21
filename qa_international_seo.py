@@ -18,8 +18,8 @@ with webdriver.Chrome(options=opts) as b:
     b.set_page_load_timeout(55)
     deadline = time.monotonic()+180
     while True:
-        b.get(ROOT+'en/vtt/?international-check='+str(time.time_ns()))
-        if b.find_elements('css selector','html[data-international-seo="20261021"]'):
+        b.get(ROOT+'pages/camping.html?international-check='+str(time.time_ns()))
+        if b.current_url.startswith(ROOT+'fr/camping/') and b.find_elements('css selector','main'):
             break
         assert time.monotonic()<deadline, 'New demo build has not appeared'
         time.sleep(5)
