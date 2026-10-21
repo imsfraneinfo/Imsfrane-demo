@@ -45,7 +45,7 @@ with webdriver.Chrome(options=opts) as browser:
                 message = parse_qs(href.query)['text'][0]
                 assert p['name'] in message
                 summary = card.find_element('css selector','summary')
-                browser.execute_script('arguments[0].scrollIntoView({block:"center"})',summary)
+                browser.execute_script('arguments[0].scrollIntoView({block:"center",behavior:"instant"})',summary)
                 summary.click()
                 for step in p['steps']:
                     assert step in card.text
@@ -55,11 +55,11 @@ with webdriver.Chrome(options=opts) as browser:
                     assert d['quote'] in card.text
             images = browser.find_elements('css selector','main.vt-page img')
             for img in images:
-                browser.execute_script('arguments[0].scrollIntoView({block:"center"})',img)
+                browser.execute_script('arguments[0].scrollIntoView({block:"center",behavior:"instant"})',img)
                 WebDriverWait(browser,30).until(lambda b: b.execute_script('return arguments[0].complete && arguments[0].naturalWidth>0',img))
-            browser.execute_script('window.scrollTo(0,0)')
+            browser.execute_script('window.scrollTo({top:0,behavior:"instant"})')
             browser.save_screenshot(str(OUT/f'vtt-{lang}-{width}-hero.png'))
-            browser.execute_script('document.querySelector("#vtt-programmes").scrollIntoView()')
+            browser.execute_script('document.querySelector("#vtt-programmes").scrollIntoView({behavior:"instant"})')
             browser.save_screenshot(str(OUT/f'vtt-{lang}-{width}-programmes.png'))
             print('VTT PASS',lang,width,'five programmes; rental 150; four individual WhatsApp requests; ten loaded photos',flush=True)
 print('PASS: five VTT programmes in four languages, mobile and desktop')
