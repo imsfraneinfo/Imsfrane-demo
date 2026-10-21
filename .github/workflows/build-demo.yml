@@ -8,6 +8,7 @@ on:
       - 'build_rafting_50km_article.py'
       - 'build_vtt_programmes.py'
       - 'vtt-programmes.json'
+      - 'build_international_seo.py'
       - 'rafting-50km-article.json'
       - 'images/IMG_bivouac-*.webp'
   workflow_dispatch:
@@ -43,6 +44,8 @@ jobs:
           build_article(root)
           from build_vtt_programmes import build as build_vtt
           build_vtt(root)
+          from build_international_seo import build as build_international_seo
+          build_international_seo(root)
           
           # Preserve the current official content and adapt only its hosting path.
           def adapt(text):
@@ -55,6 +58,10 @@ jobs:
               def srcset(match):
                   return re.sub(r"(?<!\S)/(?!/|Imsfrane-demo/)", prefix, match[0])
               text = re.sub(r"""srcset=(["']).*?\1""", srcset, text, flags=re.S)
+              # Public preview pages must not compete with the official site.
+              if re.match(r'\s*(?:<!doctype html|<html)', text, re.I):
+                  text = re.sub(r'<meta\b(?=[^>]*name=["\'](?:robots|googlebot)["\'])[^>]*>', '', text, flags=re.I)
+                  text = text.replace('</head>', '<meta name="robots" content="noindex,follow">\n</head>', 1)
               return text
           
           for path in root.rglob("*"):
@@ -96,6 +103,7 @@ jobs:
               assert (root / lang / "index.html").read_text(encoding="utf-8") == adapt(original.read_text(encoding="utf-8")), f"Homepage changed unexpectedly: {lang}"
           
           (root / ".nojekyll").touch()
+          (root / "robots.txt").write_text("User-agent: *\nAllow: /\n", encoding="utf-8")
           (root / "demo-source.json").write_text(json.dumps({"official_commit": source_sha, "changes": ["kayak and rafting bivouac photographs"], "locales": ["fr", "en", "ar", "es"]}, indent=2), encoding="utf-8")
           print("Verified current official homepages and 8 bivouac experiences. Official source:", source_sha)
           
@@ -105,3 +113,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
           publish_branch: gh-pages
+

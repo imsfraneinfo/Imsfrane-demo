@@ -1,0 +1,28 @@
+name: Verify international search improvements
+on:
+  push:
+    branches: [main]
+    paths: ['qa_international_seo.py', '.github/workflows/qa-international.yml']
+  workflow_run:
+    workflows: ['Publish Imsfrane demo']
+    types: [completed]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  international:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install selenium
+      - run: python qa_international_seo.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: international-search-mobile-desktop
+          path: international-search-diagnostics/
+          if-no-files-found: ignore
