@@ -17,6 +17,7 @@ STYLE = '''<style id="rafting-route-number-type">
  right:18px!important;bottom:14px!important;
  direction:ltr;white-space:nowrap;
 }
+html[lang="ar"] body .route-visual .num{font-family:"Montserrat",Arial,sans-serif!important;font-weight:800!important;line-height:1!important;letter-spacing:-.055em!important}
 @media(max-width:650px){.route-visual .num{font-size:58px!important;right:15px!important;bottom:12px!important}}
 </style>'''
 
