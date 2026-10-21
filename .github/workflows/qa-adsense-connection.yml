@@ -1,0 +1,35 @@
+name: Check public AdSense connection
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/qa-adsense-connection.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  connection:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify public files and ad code
+        run: |
+          python -u - <<'PY'
+          from urllib.request import urlopen, Request
+          expected='google.com, pub-5598024978912334, DIRECT, f08c47fec0942fa0'
+          for url in ('https://imsfrane.com/ads.txt','https://www.imsfrane.com/ads.txt','http://imsfrane.com/ads.txt','https://imsfrane.com/robots.txt','https://imsfrane.com/fr/','https://imsfrane.com/en/'):
+              try:
+                  request=Request(url,headers={'User-Agent':'Mozilla/5.0 (compatible; WebsiteConnectionCheck/1.0)'})
+                  with urlopen(request,timeout=25) as r:
+                      body=r.read().decode('utf-8')
+                      print('URL',url,'HTTP',r.status,'FINAL',r.geturl(),'TYPE',r.headers.get('Content-Type'),flush=True)
+                      if '/ads.txt' in url:
+                          print('ADS_TXT_EXACT_MATCH',body.strip()==expected,'BODY',repr(body[:200]),flush=True)
+                      elif '/robots.txt' in url:
+                          print('ROBOTS',repr(body[:1000]),flush=True)
+                      else:
+                          print('ADSENSE_CODE', 'pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5598024978912334' in body, 'IN_HEAD', 'ca-pub-5598024978912334' in body.split('</head>')[0],flush=True)
+              except Exception as e:
+                  print('CONNECTION_ERROR',url,type(e).__name__,str(e),flush=True)
+          PY
