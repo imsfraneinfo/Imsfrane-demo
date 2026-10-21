@@ -9,6 +9,7 @@ on:
       - 'build_vtt_programmes.py'
       - 'vtt-programmes.json'
       - 'build_international_seo.py'
+      - 'build_legacy_redirects.py'
       - 'rafting-50km-article.json'
       - 'images/IMG_bivouac-*.webp'
   workflow_dispatch:
@@ -46,6 +47,8 @@ jobs:
           build_vtt(root)
           from build_international_seo import build as build_international_seo
           build_international_seo(root)
+          from build_legacy_redirects import build as build_legacy_redirects
+          build_legacy_redirects(root)
           
           # Preserve the current official content and adapt only its hosting path.
           def adapt(text):

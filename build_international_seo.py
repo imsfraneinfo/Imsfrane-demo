@@ -3,6 +3,7 @@ from pathlib import Path
 from html import escape
 from urllib.parse import quote
 import re
+import xml.etree.ElementTree as ET
 
 META = {
  'en': {
@@ -90,10 +91,26 @@ def build(root):
                     block += '<details><summary>' + escape(question) + '</summary><p>' + escape(answer) + '</p></details>'
                 message = 'Hello, I would like to plan a ' + {'rafting':'rafting trip','kayak':'kayaking trip with my own equipment','randonnee':'guided hike','vtt':'mountain bike outing'}[page] + ' in Imsfrane. My dates and group size are: '
                 block += '<nav aria-label="Plan your activity"><a href="https://wa.me/212667772551?text=' + quote(message) + '" target="_blank" rel="noopener noreferrer">Ask our local team on WhatsApp ↗</a><a href="/en/guide/">Getting to Imsfrane and planning your stay</a><a href="/en/contact/">Contact and location</a></nav></section>'
+                if page == 'rafting':
+                    block = block.replace('</nav>', '<a href="/en/blog-rafting-50-km-bin-el-ouidane/">Read the 50 km rafting journey to Bin El Ouidane</a></nav>')
                 assert '</main>' in html
                 html = html.replace('</main>', block + '</main>', 1).replace('</head>', CSS + '</head>', 1)
             html = html.replace('<html ', '<html data-international-seo="20261021" ', 1) if 'data-international-seo=' not in html else html
             path.write_text(html, encoding='utf-8')
+    sitemap = root / 'sitemap.xml'
+    if sitemap.is_file():
+        ns = 'http://www.sitemaps.org/schemas/sitemap/0.9'
+        ET.register_namespace('', ns)
+        ET.register_namespace('xhtml', 'http://www.w3.org/1999/xhtml')
+        tree = ET.parse(sitemap)
+        changed = {f'https://imsfrane.com/{lang}/{page}/' for lang,pages in META.items() for page in pages}
+        for url in tree.getroot().findall(f'{{{ns}}}url'):
+            if url.findtext(f'{{{ns}}}loc') in changed:
+                lastmod = url.find(f'{{{ns}}}lastmod')
+                if lastmod is None:
+                    lastmod = ET.SubElement(url, f'{{{ns}}}lastmod')
+                lastmod.text = '2026-10-21'
+        tree.write(sitemap, encoding='utf-8', xml_declaration=True)
     print('International search: 16 activity summaries and four English trip-planning sections')
 
 if __name__ == '__main__':

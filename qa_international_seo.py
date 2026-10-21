@@ -6,6 +6,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from build_international_seo import META
+from build_legacy_redirects import REDIRECTS
 
 ROOT = 'https://imsfraneinfo.github.io/Imsfrane-demo/'
 OUT = Path('international-search-diagnostics')
@@ -22,6 +23,15 @@ with webdriver.Chrome(options=opts) as b:
             break
         assert time.monotonic()<deadline, 'New demo build has not appeared'
         time.sleep(5)
+    for source,target in REDIRECTS.items():
+        b.get(ROOT+source+'?legacy-check='+str(time.time_ns()))
+        expected=ROOT+urlparse(target).path.lstrip('/')
+        WebDriverWait(b,20).until(lambda browser: browser.current_url.startswith(expected))
+        assert b.find_elements('css selector','main'), (source,b.current_url)
+        assert 'Page not found' not in b.title, (source,b.title)
+        if '#activities' in target:
+            assert b.find_elements('id','activities')
+        print('LEGACY PASS',source,'->',target,flush=True)
     for lang, pages in META.items():
         for page, (title, description) in pages.items():
             b.get(ROOT+lang+'/'+page+'/?international-check='+str(time.time_ns()))
