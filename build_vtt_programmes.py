@@ -37,6 +37,7 @@ CSS = '''<style id="vtt-five-programmes">
 .vt-page .vt-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:18px}
 .vt-page .vt-card{border:1px solid #dde5da;border-radius:14px;background:#fff;overflow:hidden;display:flex;flex-direction:column;scroll-margin-top:100px;min-width:0}
 .vt-page .vt-card-photo{height:240px;position:relative;background:#dce5d6;overflow:hidden}.vt-page .vt-card-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 80%;display:block}
+.vt-page #vtt-programme-4 .vt-card-photo img{object-position:50% 100%!important}
 .vt-page .vt-card-photo .vt-number{position:absolute;top:15px;inset-inline-start:16px;padding:9px 11px;background:#123d32;color:#e5ca8c;border-radius:5px}
 .vt-page .vt-card-copy{padding:29px;display:flex;flex-direction:column;flex:1}.vt-page .vt-card h3{font-size:35px;margin:0 0 17px}
 .vt-page .vt-route{font-size:11px;line-height:1.9;border-inline-start:3px solid #d3b66c;padding-inline-start:12px;color:#536e5a;margin:4px 0 20px;overflow-wrap:anywhere}.vt-page .vt-route strong{display:block;color:#294c3a;font-size:10px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px}
@@ -70,7 +71,7 @@ def button(d, program, rental=False):
 def render(lang):
     d = DATA[lang]
     rental = d['programs'][0]
-    body = (f'<main class="vt-page" id="mainContent" data-vtt-version="five-programmes-20261021">'
+    body = (f'<main class="vt-page" id="mainContent" data-vtt-version="restored-hero-20261021">'
             '<section class="vt-hero"><div class="vt-shell vt-hero-grid"><div>'
             f'<div class="vt-eyebrow">{esc(d["eyebrow"])}</div><h1>{d["hero"]}</h1><p>{esc(d["intro"])}</p>'
             f'<div class="vt-actions"><a class="vt-button gold" href="#vtt-programmes">{esc(d["choose"])}</a>'
@@ -103,10 +104,29 @@ def build(root):
     for lang, d in DATA.items():
         path = root / lang / 'vtt' / 'index.html'
         html = path.read_text(encoding='utf-8')
-        html, count = re.subn(r'<main\b[^>]*>.*?</main>', lambda m: render(lang), html, count=1, flags=re.S)
+        original_hero = re.search(r'<section\b(?=[^>]*class="quad-r-hero")[^>]*>.*?</section>', html, re.S)
+        assert original_hero, f'Original VTT hero missing: {path}'
+        hero = original_hero[0]
+        # Keep the established collage, title and hero framing. Only its old
+        # two-hour offer copy is refreshed to match the five approved programmes.
+        hero = re.sub(r'<p class="quad-r-summary">.*?</p>', lambda m: '<p class="quad-r-summary">' + esc(d['intro']) + '</p>', hero, count=1, flags=re.S)
+        rental_label, programmes_label, request_label = {
+            'fr': ('Location VTT', 'Programmes VTT', 'Sur demande'),
+            'en': ('Bike rental', 'MTB programmes', 'On request'),
+            'ar': ('كراء الدراجات', 'برامج للدراجات', 'عند الطلب'),
+            'es': ('Alquiler BTT', 'Programas BTT', 'Bajo petición'),
+        }[lang]
+        currency = 'درهم' if lang == 'ar' else 'DH' if lang == 'fr' else 'MAD'
+        stats = (f'<div class="quad-r-stats"><div><strong><bdi>150 {currency}</bdi></strong><small>{rental_label}</small></div>'
+                 f'<div><strong>5</strong><small>{programmes_label}</small></div>'
+                 f'<div><strong>{request_label}</strong><small>WhatsApp</small></div></div>')
+        hero = re.sub(r'<div class="quad-r-stats">.*?</div></div></div>(?=<div class="quad-r-media">)', lambda m: stats + '</div>', hero, count=1, flags=re.S)
+        main = re.sub(r'<section class="vt-hero">.*?</section>', lambda m: hero, render(lang), count=1, flags=re.S)
+        main = main.replace('<section class="vt-gallery-section">', '<section class="vt-gallery-section" id="gallery">')
+        html, count = re.subn(r'<main\b[^>]*>.*?</main>', lambda m: main, html, count=1, flags=re.S)
         assert count == 1, path
         html = re.sub(r'<title>.*?</title>', '<title>' + esc(d['title']) + ' | Imsfrane Cathédrale</title>', html, count=1, flags=re.S)
-        for key, value in [('description', d['intro']), ('og:title', d['title']), ('og:description', d['intro']), ('og:image', 'https://imsfrane.com/images/IMG_7394.webp')]:
+        for key, value in [('description', d['intro']), ('og:title', d['title']), ('og:description', d['intro']), ('og:image', 'https://imsfrane.com/images/IMG_2606.webp')]:
             pattern = r'(<meta\b(?=[^>]*(?:name|property)="' + re.escape(key) + r'")[^>]*content=")[^"]*(")'
             html = re.sub(pattern, lambda m: m[1] + esc(value, quote=True) + m[2], html)
         # Remove the obsolete page's inline lightbox handlers and route-specific JS.

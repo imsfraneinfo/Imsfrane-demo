@@ -19,8 +19,8 @@ with webdriver.Chrome(options=opts) as browser:
     browser.set_page_load_timeout(55)
     deadline = time.monotonic() + 180
     while True:
-        browser.get(ROOT + 'fr/vtt/?v=five-programmes-20261021&check=' + str(time.time_ns()))
-        if browser.find_elements('css selector', 'main[data-vtt-version="five-programmes-20261021"]'):
+        browser.get(ROOT + 'fr/vtt/?v=restored-hero-20261021&check=' + str(time.time_ns()))
+        if browser.find_elements('css selector', 'main[data-vtt-version="restored-hero-20261021"]'):
             break
         if time.monotonic() >= deadline:
             browser.save_screenshot(str(OUT/'vtt-wait-failure.png'))
@@ -29,10 +29,13 @@ with webdriver.Chrome(options=opts) as browser:
     for width, height in ((390,844), (1366,900)):
         browser.set_window_size(width, height)
         for lang, d in DATA.items():
-            browser.get(ROOT + lang + '/vtt/?v=five-programmes-20261021&check=' + str(time.time_ns()))
+            browser.get(ROOT + lang + '/vtt/?v=restored-hero-20261021&check=' + str(time.time_ns()))
             WebDriverWait(browser,30).until(lambda b: b.find_elements('css selector','main.vt-page'))
             state = browser.execute_script('''const m=document.querySelector('main.vt-page');return {lang:document.documentElement.lang,dir:getComputedStyle(m).direction,width:document.documentElement.clientWidth,scroll:document.documentElement.scrollWidth,h1:m.querySelectorAll('h1').length,images:m.querySelectorAll('img').length,text:m.innerText};''')
-            assert state['lang'] == lang and state['h1'] == 1 and state['images'] == 10, state
+            assert state['lang'] == lang and state['h1'] == 1 and state['images'] == 12, state
+            assert len(browser.find_elements('css selector','.quad-r-hero .quad-r-media img')) == 3
+            taghia_image = browser.find_element('css selector','#vtt-programme-4 .vt-card-photo img')
+            assert browser.execute_script('return getComputedStyle(arguments[0]).objectPosition',taghia_image) == '50% 100%'
             assert state['dir'] == ('rtl' if lang=='ar' else 'ltr'), state
             assert state['scroll'] <= state['width']+2, state
             assert '100 DH' not in state['text'] and '100 MAD' not in state['text'], state
@@ -61,5 +64,5 @@ with webdriver.Chrome(options=opts) as browser:
             browser.save_screenshot(str(OUT/f'vtt-{lang}-{width}-hero.png'))
             browser.execute_script('document.querySelector("#vtt-programmes").scrollIntoView({behavior:"instant"})')
             browser.save_screenshot(str(OUT/f'vtt-{lang}-{width}-programmes.png'))
-            print('VTT PASS',lang,width,'five programmes; rental 150; four individual WhatsApp requests; ten loaded photos',flush=True)
+            print('VTT PASS',lang,width,'original hero restored; Taghia crop at bottom; five programmes; rental 150; WhatsApp verified',flush=True)
 print('PASS: five VTT programmes in four languages, mobile and desktop')
