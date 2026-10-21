@@ -11,6 +11,8 @@ on:
       - 'build_international_seo.py'
       - 'build_legacy_redirects.py'
       - 'build_route_numbers.py'
+      - 'build_adsense_readiness.py'
+      - 'qa_adsense_readiness.py'
       - 'rafting-50km-article.json'
       - 'images/IMG_bivouac-*.webp'
   workflow_dispatch:
@@ -50,6 +52,8 @@ jobs:
           build_international_seo(root)
           from build_legacy_redirects import build as build_legacy_redirects
           build_legacy_redirects(root)
+          from build_adsense_readiness import build as build_adsense_readiness
+          build_adsense_readiness(root)
           
           # Preserve the current official content and adapt only its hosting path.
           def adapt(text):
@@ -108,6 +112,8 @@ jobs:
           
           from build_route_numbers import build as build_route_numbers
           build_route_numbers(root)
+          from qa_adsense_readiness import check as check_adsense_readiness
+          check_adsense_readiness(root)
           (root / ".nojekyll").touch()
           (root / "robots.txt").write_text("User-agent: *\nAllow: /\n", encoding="utf-8")
           (root / "demo-source.json").write_text(json.dumps({"official_commit": source_sha, "changes": ["kayak and rafting bivouac photographs"], "locales": ["fr", "en", "ar", "es"]}, indent=2), encoding="utf-8")
