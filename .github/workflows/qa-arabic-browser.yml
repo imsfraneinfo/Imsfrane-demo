@@ -12,6 +12,7 @@ on:
       - qa_arabic_mobile_layout.py
       - qa_four_languages_browser.py
       - qa_rafting_article.py
+      - qa_vtt_programmes.py
       - .github/workflows/qa-arabic-browser.yml
 permissions:
   contents: read
@@ -37,6 +38,8 @@ jobs:
         run: python3 qa_arabic_mobile_layout.py
       - name: Verify illustrated expedition article and complete photographs
         run: python3 qa_rafting_article.py
+      - name: Verify the five VTT programmes in Chrome
+        run: python3 qa_vtt_programmes.py
       - name: Keep screenshots and text metrics
         uses: actions/upload-artifact@v4
         if: always()

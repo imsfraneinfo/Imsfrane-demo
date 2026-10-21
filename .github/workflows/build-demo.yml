@@ -6,6 +6,8 @@ on:
       - '.github/workflows/build-demo.yml'
       - 'build_bivouac_showcase.py'
       - 'build_rafting_50km_article.py'
+      - 'build_vtt_programmes.py'
+      - 'vtt-programmes.json'
       - 'rafting-50km-article.json'
       - 'images/IMG_bivouac-*.webp'
   workflow_dispatch:
@@ -39,6 +41,8 @@ jobs:
           source_sha = subprocess.check_output(["git", "-C", "/tmp/official", "rev-parse", "HEAD"], text=True).strip()
           from build_rafting_50km_article import build as build_article
           build_article(root)
+          from build_vtt_programmes import build as build_vtt
+          build_vtt(root)
           
           # Preserve the current official content and adapt only its hosting path.
           def adapt(text):
