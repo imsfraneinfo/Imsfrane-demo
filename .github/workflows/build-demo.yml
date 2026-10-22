@@ -31,30 +31,17 @@ jobs:
           git clone --depth 1 https://github.com/imsfraneinfo/imsfraneinfo.git /tmp/official
           mkdir -p public
           rsync -a --exclude=.git --exclude=.github --exclude=CNAME /tmp/official/ public/
-      - name: Adapt demo paths and add the bivouac photographs
+      - name: Adapt demo hosting paths and verify the official mirror
         run: |
           python3 - <<'PY'
           from pathlib import Path
           import json
           import re
-          import shutil
           import subprocess
-          from build_bivouac_showcase import patch_page
           
           root = Path("public")
           prefix = "/Imsfrane-demo/"
           source_sha = subprocess.check_output(["git", "-C", "/tmp/official", "rev-parse", "HEAD"], text=True).strip()
-          from build_rafting_50km_article import build as build_article
-          build_article(root)
-          from build_vtt_programmes import build as build_vtt
-          build_vtt(root)
-          from build_international_seo import build as build_international_seo
-          build_international_seo(root)
-          from build_legacy_redirects import build as build_legacy_redirects
-          build_legacy_redirects(root)
-          from build_adsense_readiness import build as build_adsense_readiness
-          build_adsense_readiness(root)
-          
           # Preserve the current official content and adapt only its hosting path.
           def adapt(text):
               text = re.sub(r"https://(?:www\.)?imsfrane\.com/", "https://imsfraneinfo.github.io/Imsfrane-demo/", text, flags=re.I)
@@ -86,40 +73,28 @@ jobs:
               )
               navigation.write_text(text, encoding="utf-8")
           
-          photos = sorted(Path("images").glob("IMG_bivouac-*.webp"))
-          assert len(photos) == 4, "Expected the four real bivouac photographs"
-          for photo in photos:
-              shutil.copy2(photo, root / "images" / photo.name)
+          # Check every copied text file against the official source after path adaptation.
+          for original in Path("/tmp/official").rglob("*"):
+              relative = original.relative_to("/tmp/official")
+              if not original.is_file() or relative.parts[0] in (".git", ".github") or str(relative) == "CNAME":
+                  continue
+              target = root / relative
+              assert target.is_file(), f"Missing official file: {relative}"
+              if original.suffix.lower() in (".html", ".css", ".js", ".json", ".webmanifest", ".xml"):
+                  expected = adapt(original.read_text(encoding="utf-8"))
+                  if str(relative) == "navigation-pro.js":
+                      expected = expected.replace(
+                          r'if(!/^\/(fr|en|ar|es)\//.test(location.pathname))return;',
+                          r'if(!/^\/(?:Imsfrane-demo\/)?(fr|en|ar|es)\//.test(location.pathname))return;'
+                      )
+                  assert target.read_text(encoding="utf-8") == expected, f"Content mismatch: {relative}"
+              else:
+                  assert target.read_bytes() == original.read_bytes(), f"Asset mismatch: {relative}"
           
-          pages = []
-          for lang in ("fr", "en", "ar", "es"):
-              kayak = root / lang / "kayak" / "index.html"
-              assert kayak.is_file(), f"Missing current official kayak page: {kayak}"
-              patch_page(kayak, lang, "kayak", '<section class="ky-section ky-gallery-section"')
-              pages.append(kayak)
-              suffix = "" if lang == "fr" else "-" + lang
-              rafting = root / ("rafting-content" + suffix + ".html")
-              patch_page(rafting, lang, "rafting", '<section aria-labelledby="gallery-title"')
-              pages.append(rafting)
-          
-          for page in pages:
-              text = page.read_text(encoding="utf-8")
-              assert text.count('id="bivouac-experience"') == 1, f"Duplicate or missing story: {page}"
-              assert all("/Imsfrane-demo/images/" + photo.name in text for photo in photos), f"Missing photographs: {page}"
-          for lang in ("fr", "en", "ar", "es"):
-              original = Path("/tmp/official") / lang / "index.html"
-              def without_privacy_link(text):
-                  return re.sub(r'<a class="ims-privacy-link"[^>]*>.*?</a>', '', text, flags=re.S)
-              assert without_privacy_link((root / lang / "index.html").read_text(encoding="utf-8")) == without_privacy_link(adapt(original.read_text(encoding="utf-8"))), f"Homepage changed unexpectedly: {lang}"
-          
-          from build_route_numbers import build as build_route_numbers
-          build_route_numbers(root)
-          from qa_adsense_readiness import check as check_adsense_readiness
-          check_adsense_readiness(root)
           (root / ".nojekyll").touch()
           (root / "robots.txt").write_text("User-agent: *\nAllow: /\n", encoding="utf-8")
-          (root / "demo-source.json").write_text(json.dumps({"official_commit": source_sha, "changes": ["kayak and rafting bivouac photographs"], "locales": ["fr", "en", "ar", "es"]}, indent=2), encoding="utf-8")
-          print("Verified current official homepages and 8 bivouac experiences. Official source:", source_sha)
+          (root / "demo-source.json").write_text(json.dumps({"official_commit": source_sha, "changes": ["exact official mirror with demo hosting paths and noindex"], "locales": ["fr", "en", "ar", "es"]}, indent=2), encoding="utf-8")
+          print("Verified all official pages and assets. Official source:", source_sha)
           
           PY
       - uses: peaceiris/actions-gh-pages@v4
