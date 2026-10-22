@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/build-demo.yml'
+      - 'build_weekend_offers.py'
       - 'build_bivouac_showcase.py'
       - 'build_rafting_50km_article.py'
       - 'build_vtt_programmes.py'
@@ -114,6 +115,8 @@ jobs:
           print("Verified all official pages and assets. Official source:", source_sha)
           
           PY
+      - name: Build demo weekend offers
+        run: python3 build_weekend_offers.py
       - uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
