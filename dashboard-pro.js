@@ -228,7 +228,7 @@ function renderProgress(){
  const completed={created:!!currentUser,verified:verified,named:named,explored:seen};
  let done=Object.values(completed).filter(Boolean).length;
  for(const [step,flag] of Object.entries(completed)){const card=dash.querySelector('[data-step="'+step+'"]');if(!card)continue;card.classList.toggle("is-done",flag);const status=card.querySelector("small");if(status)status.textContent=flag?tr().done:tr().todo;const dot=card.querySelector(".ims-step-dot");if(dot)dot.textContent=flag?"✓":String(["created","verified","named","explored"].indexOf(step)+1)}
- el("imsDashStepCount").textContent=done+"/Imsfrane-demo/4";el("imsDashMeter").style.width=(done*25)+"%";el("imsProfilePct").textContent=(done*25)+"%";
+ el("imsDashStepCount").textContent=done+"/4";el("imsDashMeter").style.width=(done*25)+"%";el("imsProfilePct").textContent=(done*25)+"%";
 }
 function updateGreeting(){
  if(!currentUser)return;

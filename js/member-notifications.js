@@ -28,7 +28,7 @@ function localizedLink(raw){
  return base+lang()+"/"+path.replace(/^\/(?:fr|en|ar|es)\//,"");
  }catch(_e){return null}
 }
-function iconBell(){let svg=document.createElementNS("http://www.w3.org/2000/svg","svg");svg.setAttribute("viewBox","0 0 24 24");svg.setAttribute("aria-hidden","true");svg.innerHTML='<path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/Imsfrane-demo/>';return svg}
+function iconBell(){let svg=document.createElementNS("http://www.w3.org/2000/svg","svg");svg.setAttribute("viewBox","0 0 24 24");svg.setAttribute("aria-hidden","true");svg.innerHTML='<path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/>';return svg}
 function renderBadge(){if(!bell)return;badge.textContent=unread>99?"99+":String(unread);badge.hidden=unread===0;bell.setAttribute("aria-label",tr().notifications+(unread?" · "+unread+" "+tr().unread:""));bell.title=tr().notifications}
 function renderNotes(root,compact){
  root.replaceChildren();

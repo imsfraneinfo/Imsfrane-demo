@@ -190,12 +190,12 @@ html[lang="ar"] body.atnav-ready main > .article-hero h1{
 }
 html[dir="rtl"] body.atnav-ready main > .article-hero .article-hero-text{direction:rtl;text-align:right}
 /* Per-photograph portrait focal points (crop is different at every viewport). */
-body.atnav-ready main > .article-hero > img[src$="/Imsfrane-demo/raft2.webp"]{--ims-photo-focus:68%}
-body.atnav-ready main > .article-hero > img[src$="/Imsfrane-demo/randonnee-sommet.webp"]{--ims-photo-focus:53%}
-body.atnav-ready main > .article-hero > img[src$="/Imsfrane-demo/blog-gorges.webp"]{--ims-photo-focus:60%}
-body.atnav-ready main > .article-hero > img[src$="/Imsfrane-demo/camping-1.webp"]{--ims-photo-focus:73%}
-body.atnav-ready main > .article-hero > img[src$="/Imsfrane-demo/IMG_9763.webp"]{--ims-photo-focus:64%}
-body.atnav-ready main > .article-hero > img[src$="/Imsfrane-demo/hero.webp"]{--ims-photo-focus:64%}
+body.atnav-ready main > .article-hero > img[src$="/raft2.webp"]{--ims-photo-focus:68%}
+body.atnav-ready main > .article-hero > img[src$="/randonnee-sommet.webp"]{--ims-photo-focus:53%}
+body.atnav-ready main > .article-hero > img[src$="/blog-gorges.webp"]{--ims-photo-focus:60%}
+body.atnav-ready main > .article-hero > img[src$="/camping-1.webp"]{--ims-photo-focus:73%}
+body.atnav-ready main > .article-hero > img[src$="/IMG_9763.webp"]{--ims-photo-focus:64%}
+body.atnav-ready main > .article-hero > img[src$="/hero.webp"]{--ims-photo-focus:64%}
 
 /* Journal landing banner: show the rafting crew, not an obscured bridge. */
 body.atnav-ready main.journal-page .journal-hero{
@@ -210,7 +210,7 @@ body.atnav-ready main.journal-page .journal-hero-bg{
  width:100%!important;height:100%!important;min-height:490px;
  object-fit:cover!important;object-position:center 66%!important;
 }
-body.atnav-ready main.journal-page .journal-hero-bg[src$="/Imsfrane-demo/IMG_5131.webp"]{object-position:center 66%!important}
+body.atnav-ready main.journal-page .journal-hero-bg[src$="/IMG_5131.webp"]{object-position:center 66%!important}
 body.atnav-ready main.journal-page .journal-hero-overlay{display:none!important}
 body.atnav-ready main.journal-page .journal-hero-content{
  grid-column:1;grid-row:1;min-width:0;max-width:unset!important;

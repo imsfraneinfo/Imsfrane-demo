@@ -178,7 +178,7 @@ html[lang="ar"] .hp-home .hp-reviews-unified .hp-live-review-list{padding:0 28px
     if (Number.isFinite(rating) && rating > 0 && rating <= 5 && ratingNode && starsNode) {
       ratingNode.replaceChildren(document.createTextNode(
         rating.toLocaleString(lang === "ar" ? "en-US" : lang, {minimumFractionDigits:1,maximumFractionDigits:1})
-      ), node("small", "", "/Imsfrane-demo/5"));
+      ), node("small", "", "/5"));
       ratingNode.hidden = false;
       const filled = Math.max(0, Math.min(5, Math.round(rating)));
       starsNode.textContent = "★".repeat(filled) + "☆".repeat(5 - filled);
