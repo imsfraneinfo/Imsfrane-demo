@@ -63,6 +63,8 @@ jobs:
               def srcset(match):
                   return re.sub(r"(?<!\S)/(?!/|Imsfrane-demo/)", prefix, match[0])
               text = re.sub(r"""srcset=(["']).*?\1""", srcset, text, flags=re.S)
+              # Bust the previous navigation script cached by browsers and the CDN.
+              text = re.sub(r"""(<script\b[^>]*\bsrc=["'][^"']*navigation-pro\.js)(\?[^"']*)?""", lambda m: m[1] + (m[2] + "&" if m[2] else "?") + "demo=mirror-paths-v2", text)
               # Public preview pages must not compete with the official site.
               if re.match(r'\s*(?:<!doctype html|<html)', text, re.I):
                   text = re.sub(r'<meta\b(?=[^>]*name=["\'](?:robots|googlebot)["\'])[^>]*>', '', text, flags=re.I)
