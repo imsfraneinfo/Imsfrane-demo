@@ -45,7 +45,17 @@ jobs:
           # Preserve the current official content and adapt only its hosting path.
           def adapt(text):
               text = re.sub(r"https://(?:www\.)?imsfrane\.com/", "https://imsfraneinfo.github.io/Imsfrane-demo/", text, flags=re.I)
-              text = re.sub(r"""(["'])/(?!/|Imsfrane-demo/|["'])""", lambda m: m[1] + prefix, text)
+              protected = []
+              def protect(match):
+                  protected.append(match[0])
+                  return "__IMS_PATH_SUFFIX_" + str(len(protected) - 1) + "__"
+              text = re.sub(r"""(?:\[href\$=|\.endsWith\()(["'])/[^"']*\1""", protect, text)
+              # Rewrite actual site-root paths, never suffix selectors or URL fragments.
+              roots = [re.escape(p.name) + ("/" if p.is_dir() else r'''(?=[?\#"'<>\s]|$)''') for p in root.iterdir() if not p.name.startswith(".")]
+              text = re.sub(r"""(["'])/(?=(?:""" + "|".join(roots) + r"""))""", lambda m: m[1] + prefix, text)
+              # Dynamic localized links begin with a standalone slash plus the language.
+              text = re.sub(r"""(["'])/\1(\s*\+\s*lang\b)""", lambda m: m[1] + prefix + m[1] + m[2], text)
+              text = text.replace('href="/\'+lang+', 'href="/Imsfrane-demo/\'+lang+')
               text = re.sub(r"""(href|src|action)=(["'])/\2""", lambda m: m[1] + "=" + m[2] + prefix + m[2], text)
               text = re.sub(r"""url\((["']?)/(?!/|Imsfrane-demo/)""", lambda m: "url(" + m[1] + prefix, text)
               text = re.sub(r"""(?i)(content=["']\d+;\s*url=)/(?!/|Imsfrane-demo/)""", lambda m: m[1] + prefix, text)
@@ -57,6 +67,8 @@ jobs:
               if re.match(r'\s*(?:<!doctype html|<html)', text, re.I):
                   text = re.sub(r'<meta\b(?=[^>]*name=["\'](?:robots|googlebot)["\'])[^>]*>', '', text, flags=re.I)
                   text = text.replace('</head>', '<meta name="robots" content="noindex,follow">\n</head>', 1)
+              for i, value in enumerate(protected):
+                  text = text.replace("__IMS_PATH_SUFFIX_" + str(i) + "__", value)
               return text
           
           for path in root.rglob("*"):
