@@ -45,6 +45,9 @@ jobs:
           # Preserve the current official content and adapt only its hosting path.
           def adapt(text):
               text = re.sub(r"https://(?:www\.)?imsfrane\.com/", "https://imsfraneinfo.github.io/Imsfrane-demo/", text, flags=re.I)
+              # Path guards must recognize the demo subdirectory as well.
+              text = text.replace(r'/^\/(fr|en|ar|es)\//', r'/^\/(?:Imsfrane-demo\/)?(fr|en|ar|es)\//')
+              text = text.replace('ims-favorites-demo.js?v=', 'ims-favorites-demo.js?demo=mirror-paths-v3&v=')
               protected = []
               def protect(match):
                   protected.append(match[0])
@@ -64,7 +67,7 @@ jobs:
                   return re.sub(r"(?<!\S)/(?!/|Imsfrane-demo/)", prefix, match[0])
               text = re.sub(r"""srcset=(["']).*?\1""", srcset, text, flags=re.S)
               # Bust the previous navigation script cached by browsers and the CDN.
-              text = re.sub(r"""(<script\b[^>]*\bsrc=["'][^"']*navigation-pro\.js)(\?[^"']*)?""", lambda m: m[1] + (m[2] + "&" if m[2] else "?") + "demo=mirror-paths-v2", text)
+              text = re.sub(r"""(<script\b[^>]*\bsrc=["'][^"']*navigation-pro\.js)(\?[^"']*)?""", lambda m: m[1] + (m[2] + "&" if m[2] else "?") + "demo=mirror-paths-v3", text)
               # Public preview pages must not compete with the official site.
               if re.match(r'\s*(?:<!doctype html|<html)', text, re.I):
                   text = re.sub(r'<meta\b(?=[^>]*name=["\'](?:robots|googlebot)["\'])[^>]*>', '', text, flags=re.I)
