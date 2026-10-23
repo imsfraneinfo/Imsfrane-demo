@@ -121,7 +121,17 @@ html[dir=rtl] .wo-day h3{font-family:inherit}
 @media(max-width:700px){#weekend-offers{margin-bottom:16px}.hp-home #weekend-offers + #activities{padding-top:24px}.wo-day img{height:230px}.wo-day-body{padding:18px}.wo-page .wo-photo{height:260px;min-height:0}.wo-page .wo-slide{height:auto;min-height:0}.wo-page .wo-copy{padding:24px}.wo-gallery img{height:140px}}
 '''
 # Keep the carousel, replace the former group/tent calculator with a fixed per-person rate.
-JS=JS[:JS.index("let box=document.querySelector('[data-wo-calc]')")]+'''let box=document.querySelector('[data-wo-calc]');if(!box)return;const cfg=JSON.parse(document.getElementById('wo-config').textContent),input=box.querySelector('input'),link=box.querySelector('[data-request]');function update(){const n=Number(input.value),ok=Number.isInteger(n)&&n>=1&&n<=40;input.setCustomValidity(ok?'':cfg.valid);if(!ok){link.removeAttribute('href');link.setAttribute('aria-disabled','true');return}link.removeAttribute('aria-disabled');const fmt=new Intl.NumberFormat(cfg.lang),total=n*cfg.price;box.querySelector('[data-total]').textContent=fmt.format(total)+' MAD';link.href='https://wa.me/212667772551?text='+encodeURIComponent(cfg.msg+' «'+cfg.name+'» — '+n+' '+cfg.people+' — '+cfg.price+' MAD / '+cfg.each+' — '+fmt.format(total)+' MAD / '+cfg.total)}input.addEventListener('input',update);update()})();'''
+JS=JS[:JS.index("let box=document.querySelector('[data-wo-calc]')")]+'''let box=document.querySelector('[data-wo-calc]');if(!box)return;const cfg=JSON.parse(document.getElementById('wo-config').textContent),input=box.querySelector('input'),link=box.querySelector('[data-request]');function update(){const n=Number(input.value),ok=Number.isInteger(n)&&n>=1&&n<=40;input.setCustomValidity(ok?'':cfg.valid);if(!ok){link.removeAttribute('href');link.setAttribute('aria-disabled','true');return}link.removeAttribute('aria-disabled');const fmt=new Intl.NumberFormat(cfg.lang,{maximumFractionDigits:2}),total=n*(cfg.price-cfg.guide)+cfg.guide,each=total/n;document.querySelectorAll('[data-each]').forEach(el=>el.textContent=fmt.format(each));const share=box.querySelector('[data-guide-share]');if(share)share.textContent=fmt.format(cfg.guide/n)+' MAD';box.querySelector('[data-total]').textContent=fmt.format(total)+' MAD';link.href='https://wa.me/212667772551?text='+encodeURIComponent(cfg.msg+' «'+cfg.name+'» — '+n+' '+cfg.people+' — '+fmt.format(each)+' MAD / '+cfg.each+' — '+fmt.format(total)+' MAD / '+cfg.total)}input.addEventListener('input',update);update()})();'''
+
+
+GUIDE_NOTES={
+ 'fr':dict(base='Pour 1 personne',group='pour tout le groupe',note='Le guide coûte 500 MAD pour tout le groupe, à partager entre les participants. Les autres services sont facturés par personne. Modifiez le nombre de personnes pour voir votre prix.',share='Votre part du guide',basis='Prix par personne · guide à 500 MAD partagé entre les participants'),
+ 'en':dict(base='For 1 guest',group='for the whole group',note='The guide costs 500 MAD for the whole group, shared between participants. Other services are priced per person. Change the number of guests to see your price.',share='Your share of the guide',basis='Per-person prices · 500 MAD guide fee shared between guests'),
+ 'es':dict(base='Para 1 persona',group='para todo el grupo',note='El guía cuesta 500 MAD para todo el grupo, repartidos entre los participantes. Los demás servicios se cobran por persona. Cambia el número de personas para ver tu precio.',share='Tu parte del guía',basis='Precios por persona · guía de 500 MAD compartido entre participantes'),
+ 'ar':dict(base='عند الحجز لشخص واحد',group='للمجموعة كاملة',note='ثمن المرشد 500 درهم للمجموعة كاملة، يتقسم على عدد المشاركين. باقي الخدمات محسوبة للشخص الواحد. غيّر عدد الأشخاص باش تعرف الثمن ديالك.',share='نصيبك من ثمن المرشد',basis='أثمنة للشخص · ثمن المرشد 500 درهم يتقسم على المجموعة')
+}
+def guide_fee(i):return 500 if i in (0,1,4) else 0
+def price_note(l,i):return GUIDE_NOTES[l]['base'] if guide_fee(i) else D[l]['each']
 
 def esc(s):return html.escape(str(s),quote=True)
 def picture(src,alt,cls='',eager=False):
@@ -129,10 +139,10 @@ def picture(src,alt,cls='',eager=False):
 def card(l,i):
  d=D[l];c=CONTENT[l]
  short={'fr':['Nos escapades','Sur réservation','Découvrir'],'en':['Our escapes','On request','Explore'],'es':['Nuestras escapadas','Bajo reserva','Descubrir'],'ar':['عروض الويكاند','بالحجز المسبق','اكتشف']}[l]
- return f'''<a class="wo-card" href="{BASE}{l}/{SLUGS[i]}/" aria-label="{esc(c['names'][i])} — {d['view']}">{picture(IMAGES[i],'')}<span class="wo-card-badge">{short[1]}</span><div class="wo-card-copy"><span class="wo-card-tag">{c['tags'][i]}</span><h3>{c['names'][i]}</h3><div class="wo-card-duration">◷ {c['duration'][i]}</div><div class="wo-card-bottom"><div class="wo-card-price"><strong>{PRICES[i]:,} MAD</strong><small>{d['each']}</small></div><span class="wo-card-cta">{short[2]} ↗</span></div></div></a>'''.replace(',000',' 000').replace(',400',' 400').replace(',500',' 500')
+ return f'''<a class="wo-card" href="{BASE}{l}/{SLUGS[i]}/" aria-label="{esc(c['names'][i])} — {d['view']}">{picture(IMAGES[i],'')}<span class="wo-card-badge">{short[1]}</span><div class="wo-card-copy"><span class="wo-card-tag">{c['tags'][i]}</span><h3>{c['names'][i]}</h3><div class="wo-card-duration">◷ {c['duration'][i]}</div><div class="wo-card-bottom"><div class="wo-card-price"><strong>{PRICES[i]:,} MAD</strong><small>{price_note(l,i)}</small></div><span class="wo-card-cta">{short[2]} ↗</span></div></div></a>'''.replace(',000',' 000').replace(',400',' 400').replace(',500',' 500')
 def detail(l,i):
  d=D[l];c=CONTENT[l]
- hero=f'''<article class="wo-slide">{picture(IMAGES[i],c['tags'][i],'wo-photo',True)}<div class="wo-copy"><span class="wo-tag">{c['tags'][i]}</span><h1>{c['names'][i]}</h1><p>{c['descs'][i]}</p><div class="wo-price">{PRICES[i]} <small>{d['unit']}</small></div><p class="wo-basis">{c['duration'][i]}</p></div></article>'''
+ hero=f'''<article class="wo-slide">{picture(IMAGES[i],c['tags'][i],'wo-photo',True)}<div class="wo-copy"><span class="wo-tag">{c['tags'][i]}</span><h1>{c['names'][i]}</h1><p>{c['descs'][i]}</p><div class="wo-price"><span data-each>{PRICES[i]}</span> <small>{d['unit']}</small></div><p class="wo-basis">{c['duration'][i]}</p></div></article>'''
  days=[]
  for n,j in enumerate(SEQUENCES[i]):
   label=c['two'][n] if i==2 else c['days'][n]
@@ -147,8 +157,9 @@ def detail(l,i):
   gallery='<div class="wo-gallery">'+''.join(f'<figure>{picture(src,c["items"][k])}<figcaption>{c["items"][k]}</figcaption></figure>' for src,k in [('quad-new/IMG_0310.webp',2),('vtt-800.webp',3)])+'</div>'
  option=f'<p class="wo-option">{c["option"]}</p>' if i<2 else ''
  season=f'<p class="wo-notes">{d["season"]}</p>' if i>=2 else ''
- rows=''.join(f'<div class="wo-line"><span>{c["items"][k]}</span><b>{v} MAD</b></div>' for k,v in PARTS[i])
- aside=f'''<aside class="wo-box" data-wo-calc><h2>{c['price']}</h2><p class="wo-fine">{d['each']}</p>{rows}<div class="wo-line wo-total"><span>{d['each']}</span><b>{PRICES[i]} MAD</b></div>{option}<div class="wo-fields"><label>{d['people']}<input type="number" min="1" max="40" step="1" value="1" required></label></div><div class="wo-line"><span>{d['total']}</span><b data-total>{PRICES[i]} MAD</b></div><a class="wo-btn" data-request href="https://wa.me/212667772551">{d['request']} ↗</a><p class="wo-fine">{c['requestNote']}</p><p class="wo-fine">{d['weather']}</p></aside>'''
+ rows=''.join(f'<div class="wo-line"><span>{c["items"][k]}<br><small>{GUIDE_NOTES[l]["group"] if k==1 else d["each"]}</small></span><b>{v} MAD</b></div>' for k,v in PARTS[i])
+ guideinfo=(f'<p class="wo-option">{GUIDE_NOTES[l]["note"]}</p><div class="wo-line"><span>{GUIDE_NOTES[l]["share"]}</span><b data-guide-share>500 MAD</b></div>' if guide_fee(i) else '')
+ aside=f'''<aside class="wo-box" data-wo-calc><h2>{c['price']}</h2><p class="wo-fine">{d['each']}</p>{rows}<div class="wo-line wo-total"><span>{d['each']}</span><b><span data-each>{PRICES[i]}</span> MAD</b></div>{option}<div class="wo-fields"><label>{d['people']}<input type="number" min="1" max="40" step="1" value="1" required></label></div>{guideinfo}<div class="wo-line"><span>{d['total']}</span><b data-total>{PRICES[i]} MAD</b></div><a class="wo-btn" data-request href="https://wa.me/212667772551">{d['request']} ↗</a><p class="wo-fine">{c['requestNote']}</p><p class="wo-fine">{d['weather']}</p></aside>'''
  return f'''<main id="mainContent" class="wo wo-page"><a class="wo-back" href="{BASE}{l}/#weekend-offers">← {d['back']}</a>{hero}<div class="wo-grid"><div><h2>{d['program']}</h2>{''.join(days)}{gallery}<h2>{d['included']}</h2><p class="wo-notes">{c['notes'][i]}</p>{season}<div class="wo-prep"><h2>{c['prepareTitle']}</h2><p class="wo-notes">{c['prepare']}</p></div></div>{aside}</div></main>'''
 def build(root=ROOT):
  (root/'weekend-offers.css').write_text(CSS);(root/'weekend-offers.js').write_text(JS)
@@ -157,9 +168,9 @@ def build(root=ROOT):
   # Idempotent for local rebuilds and older demo mirrors.
   source=re.sub(r'<section class="wo" id="weekend-offers".*?</section>','',source,flags=re.S)
   source=re.sub(r'<link[^>]*href="[^"]*weekend-offers.css[^"]*"[^>]*>|<script[^>]*src="[^"]*weekend-offers.js[^"]*"[^>]*></script>','',source)
-  assets=f'<link rel="stylesheet" href="{BASE}weekend-offers.css?v=offers5b"><script defer src="{BASE}weekend-offers.js?v=offers5b"></script>'
+  assets=f'<link rel="stylesheet" href="{BASE}weekend-offers.css?v=guide6"><script defer src="{BASE}weekend-offers.js?v=guide6"></script>'
   title={'fr':'Nos escapades','en':'Our escapes','es':'Nuestras escapadas','ar':'عروض الويكاند'}[l]
-  carousel=f'''<section class="wo" id="weekend-offers" data-wo-carousel aria-label="{title}"><div class="wo-heading"><div><p class="wo-kicker">{d['kicker']}</p><h2>{title}</h2><p class="wo-intro">{c['intro']}</p></div><div class="wo-controls"><button type="button" data-wo-prev aria-label="{d['prev']}">{'→' if l=='ar' else '←'}</button><button type="button" data-wo-pause data-play="{d['play']}" data-pause="{d['pause']}">{d['pause']}</button><button type="button" data-wo-next aria-label="{d['next']}">{'←' if l=='ar' else '→'}</button></div></div><div class="wo-track">{''.join(card(l,i) for i in range(5))}</div><p class="wo-card-basis">{c['basis']}</p></section>'''
+  carousel=f'''<section class="wo" id="weekend-offers" data-wo-carousel aria-label="{title}"><div class="wo-heading"><div><p class="wo-kicker">{d['kicker']}</p><h2>{title}</h2><p class="wo-intro">{c['intro']}</p></div><div class="wo-controls"><button type="button" data-wo-prev aria-label="{d['prev']}">{'→' if l=='ar' else '←'}</button><button type="button" data-wo-pause data-play="{d['play']}" data-pause="{d['pause']}">{d['pause']}</button><button type="button" data-wo-next aria-label="{d['next']}">{'←' if l=='ar' else '→'}</button></div></div><div class="wo-track">{''.join(card(l,i) for i in range(5))}</div><p class="wo-card-basis">{GUIDE_NOTES[l]['basis']}</p></section>'''
   match=re.search(r'<section\b[^>]*\bid="activities"',source);assert match,l
   home.write_text((source[:match.start()]+carousel+source[match.start():]).replace('</head>',assets+'</head>',1))
   for i,slug in enumerate(SLUGS):
@@ -172,7 +183,7 @@ def build(root=ROOT):
    page=re.sub(r'(<link\b[^>]*rel="canonical"[^>]*href=")[^"]+',lambda m:m[1]+'https://imsfraneinfo.github.io'+BASE+l+'/'+slug+'/',page)
    page=re.sub(r'(<meta\b[^>]*(?:name="description"|property="og:description"|name="twitter:description")[^>]*content=")[^"]*',lambda m:m[1]+esc(c['descs'][i]),page)
    page=re.sub(r'<script[^>]*type="application/ld\+json"[^>]*>.*?</script>','',page,flags=re.S)
-   cfg={k:d[k] for k in ('msg','people','total','each')};cfg.update(lang=l,price=PRICES[i],name=c['names'][i],valid=c['valid'])
+   cfg={k:d[k] for k in ('msg','people','total','each')};cfg.update(lang=l,price=PRICES[i],guide=guide_fee(i),name=c['names'][i],valid=c['valid'])
    page=page.replace('</head>',assets+'</head>',1).replace('</body>','<script type="application/json" id="wo-config">'+json.dumps(cfg,ensure_ascii=False)+'</script></body>',1)
    dest=root/l/slug;dest.mkdir(parents=True,exist_ok=True);(dest/'index.html').write_text(page)
   # Preserve old shared links without leaving the obsolete 250 MAD offer online.
