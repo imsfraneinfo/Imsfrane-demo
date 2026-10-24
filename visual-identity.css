@@ -28,3 +28,9 @@ main :is(.btn:not(.alt):not(.ghost):not(.btn-line):not(.btn-outline),.pw-btn-pri
 .page-randonnee .hero :is(.eyebrow,em),.page-randonnee .hero .stats strong{color:#e6bda8!important}
 .camp-page .camp-hero h1 em,.camp-cta .camp-ey,.demo-editorial-hero .demo-editorial-eyebrow,.hp-season-inner .hp-kicker{color:#e6bda8!important}
 .pricebox .amount,.ims-privacy-link{color:#e6bda8!important}
+body.page-randonnee main.rando .hero .eyebrow,body.page-randonnee main.rando .hero .stats strong{color:#e6bda8!important}
+body.atnav-ready .footer-bottom .ims-privacy-link{color:#e6bda8!important}
+.weekend-program .pw-eyebrow{color:#995035!important}
+.weekend-program .pw-price-card .pw-eyebrow{color:#e6bda8!important}
+.kayak-page .ky-final .ky-eyebrow,.ib-bivouac .ib-copy .ib-kicker{color:#e6bda8!important}
+#imsfrane-booking .bp-note{color:#4c6269!important}
