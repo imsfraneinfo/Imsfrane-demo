@@ -20,6 +20,7 @@ def recolour(code):
  # Expand shorthand; preserve opacity exactly.
  if len(code) in (3,4):code=''.join(v*2 for v in code)
  base,alpha=code[:6].lower(),code[6:]
+ if base in ('25d366','22c55e','16a34a','15803d','4caf50','28a745'):return base+alpha
  if base in EXACT:return EXACT[base]+alpha
  r,g,b=rgb(base);h,l,s=colorsys.rgb_to_hls(r,g,b);deg=h*360
  if 30<=deg<=65 and s>=.22 and .16<l<.94:
@@ -60,7 +61,7 @@ main :is(.hp-button-gold,.hp-button-primary,.hp-btn-primary,.quad-r-gold,.camp-b
 .team-about .person-info{border-top-color:#c46a45}.team-about .person-info p{color:#995035}
 .team-about .person-card,.hp-home .hp-activity{box-shadow:0 8px 24px #123e480d}
 main :is(a,button,input,select,textarea):focus-visible{outline-color:#a94f30}
-::selection{background:#dba287;color:#10333c}
+.floating-whatsapp{background:#25d366!important;color:#fff!important}\n::selection{background:#dba287;color:#10333c}
 '''
 
 def build(root=ROOT):
@@ -79,7 +80,7 @@ def build(root=ROOT):
   s=re.sub(r'(\bstyle=)(["\'])(.*?)\2',lambda m:m[1]+m[2]+transform(m[3])+m[2],s,flags=re.S|re.I)
   s=re.sub(r'<link[^>]*href=["\'][^"\']*visual-identity.css[^"\']*["\'][^>]*>','',s)
   if '</head>' in s:
-   s=s.replace('</head>','<link rel="stylesheet" href="/Imsfrane-demo/visual-identity.css?v=ahansal1"></head>',1)
+   s=s.replace('</head>','<link rel="stylesheet" href="/Imsfrane-demo/visual-identity.css?v=ahansal2"></head>',1)
    p.write_text(s);pages+=1
  (root/'visual-identity.css').write_text(OVERRIDES)
  print(f'Ahansal & Atlas: {pages} pages, {changes}/{cssfiles} brand stylesheets; images and scripts unchanged.')
