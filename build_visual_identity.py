@@ -96,7 +96,8 @@ body.atnav-ready .footer-bottom .ims-privacy-link{color:#e6bda8!important}
 .weekend-program .pw-eyebrow{color:#995035!important}
 .weekend-program .pw-hero .pw-eyebrow,.weekend-program .pw-price-card .pw-eyebrow{color:#e6bda8!important}
 .kayak-page .ky-final .ky-eyebrow,.ib-bivouac .ib-copy .ib-kicker{color:#e6bda8!important}
-#imsfrane-booking .bp-note{color:#4c6269!important}
+#imsfrane-booking .bp-note,main p.lead{color:#4c6269!important}
+main :is(.hero,.quad-r-hero,.camp-hero,.vt-hero,.bp-hero,.ky-hero,.cta,.end) p.lead{color:#e3e9e7!important}
 '''
 
 def build(root=ROOT):
@@ -120,16 +121,16 @@ def build(root=ROOT):
    url=m[2]
    if url.startswith(('https:','http:','//')):return m[0]
    url=re.sub(r'([?&])identity=[^&]*',r'\1',url).rstrip('?&')
-   return m[1]+url+('&' if '?' in url else '?')+'identity=contrast7'+m[3]
+   return m[1]+url+('&' if '?' in url else '?')+'identity=contrast8'+m[3]
   s=re.sub(r'(\bhref=["\'])([^"\']+\.css(?:\?[^"\']*)?)(["\'])',bust_css,s)
   def bust_frame(m):
    url=m[2]
    if url.startswith(('https:','http:','//')):return m[0]
    url=re.sub(r'([?&])identity=[^&]*',r'\1',url).rstrip('?&')
-   return m[1]+url+('&' if '?' in url else '?')+'identity=contrast7'+m[3]
+   return m[1]+url+('&' if '?' in url else '?')+'identity=contrast8'+m[3]
   s=re.sub(r'(<iframe\b[^>]*\bsrc=["\'])([^"\']+)(["\'])',bust_frame,s,flags=re.I)
   if '</head>' in s:
-   s=s.replace('</head>','<link rel="stylesheet" href="/Imsfrane-demo/visual-identity.css?v=contrast7"></head>',1)
+   s=s.replace('</head>','<link rel="stylesheet" href="/Imsfrane-demo/visual-identity.css?v=contrast8"></head>',1)
    p.write_text(s);pages+=1
  (root/'visual-identity.css').write_text(OVERRIDES)
  print(f'Ahansal & Atlas: {pages} pages, {changes}/{cssfiles} brand stylesheets; images and scripts unchanged.')
