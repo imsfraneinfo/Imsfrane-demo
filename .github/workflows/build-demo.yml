@@ -6,6 +6,7 @@ on:
       - '.github/workflows/build-demo.yml'
       - 'build_weekend_offers.py'
       - 'build_about_team.py'
+      - 'build_visual_identity.py'
       - 'team-portraits/*.webp.b64'
       - 'build_bivouac_showcase.py'
       - 'build_rafting_50km_article.py'
@@ -121,6 +122,8 @@ jobs:
         run: python3 build_weekend_offers.py
       - name: Build demo About team
         run: python3 build_about_team.py
+      - name: Apply experimental Ahansal and Atlas visual identity
+        run: python3 build_visual_identity.py
       - uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
