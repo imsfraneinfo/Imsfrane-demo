@@ -24,3 +24,7 @@ main :is(a,button,input,select,textarea):focus-visible{outline-color:#a94f30}
 main :is(.btn:not(.alt):not(.ghost):not(.btn-line):not(.btn-outline),.pw-btn-primary),.demo-rebuild-actions a,.demo-rebuild-form button{background:#a94f30!important;color:#fff!important;border-color:#a94f30!important}
 :is(.hp-kicker,.camp-ey,.ky-eyebrow,.gp-section-label,.pw-eyebrow,.journal-kicker,.memories-kicker){color:#995035}
 .ky-season .ky-eyebrow,.end .kicker{color:#e6bda8!important}
+.eyebrow{color:#995035!important}
+.page-randonnee .hero :is(.eyebrow,em),.page-randonnee .hero .stats strong{color:#e6bda8!important}
+.camp-page .camp-hero h1 em,.camp-cta .camp-ey,.demo-editorial-hero .demo-editorial-eyebrow,.hp-season-inner .hp-kicker{color:#e6bda8!important}
+.pricebox .amount,.ims-privacy-link{color:#e6bda8!important}
