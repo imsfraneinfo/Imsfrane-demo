@@ -138,7 +138,7 @@ p {
 ::selection {
     background: var(--gold-500);
     color: var(--green-950);
-}
+;background:#a94f30;color:#fff!important;}
 
 /* =========================================================
    LANGUAGES
@@ -250,7 +250,7 @@ body[data-lang="fr"] div.lang-fr {
     font-weight: 800;
 
     transition: top var(--transition);
-}
+;background:#a94f30;color:#fff!important;}
 
 .skip-link:focus {
     top: 20px;
@@ -515,7 +515,7 @@ body[data-lang="fr"] div.lang-fr {
 .language-button.active {
     background: var(--gold-500);
     color: var(--green-950);
-}
+;background:#a94f30;color:#fff!important;}
 
 .header-book-button {
     display: inline-flex;
@@ -536,12 +536,12 @@ body[data-lang="fr"] div.lang-fr {
     font-weight: 800;
 
     transition: var(--transition);
-}
+;background:#a94f30;color:#fff!important;}
 
 .header-book-button:hover {
     background: var(--gold-400);
     transform: translateY(-2px);
-}
+;background:#a94f30;color:#fff!important;}
 
 /* =========================================================
    MENU BUTTON
@@ -569,7 +569,7 @@ body[data-lang="fr"] div.lang-fr {
 
 .menu-button:hover {
     background: var(--gold-500);
-}
+;background:#a94f30;color:#fff!important;}
 
 .menu-button span {
     width: 19px;
@@ -664,7 +664,7 @@ body[data-lang="fr"] div.lang-fr {
 .navigation-close:hover {
     background: var(--gold-500);
     color: var(--green-950);
-}
+;background:#a94f30;color:#fff!important;}
 
 .navigation-list {
     margin-top: 20px;
@@ -1031,7 +1031,7 @@ body[data-lang="fr"] div.lang-fr {
     color: var(--green-900);
 
     transform: translateY(-50%) scale(1.08);
-}
+;background:#a94f30;color:#fff!important;}
 
 .hero-slider .slider-btn.prev {
     left: 16px;
@@ -1092,7 +1092,7 @@ body[data-lang="fr"] div.lang-fr {
     border-radius: var(--radius-round);
 
     background: var(--gold-500);
-}
+;background:#a94f30;color:#fff!important;}
 
 /* =========================================================
    QUICK BOOKING
@@ -1523,7 +1523,7 @@ body[data-lang="fr"] div.lang-fr {
     color: var(--green-950);
 
     transform: translateY(-2px);
-}
+;background:#a94f30;color:#fff!important;}
 
 .activity-whatsapp-button {
     background: var(--whatsapp);
@@ -1965,7 +1965,7 @@ body[data-lang="fr"] div.lang-fr {
     color: var(--green-950);
 
     transform: translateY(-4px);
-}
+;background:#a94f30;color:#fff!important;}
 
 .footer-column h3 {
     margin-bottom: 18px;
@@ -2115,7 +2115,7 @@ body[data-lang="fr"] div.lang-fr {
 .back-to-top:hover {
     background: var(--gold-500);
     color: var(--green-950);
-}
+;background:#a94f30;color:#fff!important;}
 
 /* =========================================================
    RESPONSIVE 1100
@@ -2749,7 +2749,7 @@ body[data-lang="fr"] div.lang-fr {
             border-radius: 50%;
 
             background: rgba(255, 255, 255, 0.1);
-            color: #d99273;
+            color: #995035;
 
             font-size: 1.65rem;
         }
@@ -2759,7 +2759,7 @@ body[data-lang="fr"] div.lang-fr {
 
             margin-bottom: 8px;
 
-            color: #d99273;
+            color: #995035;
 
             font-family: "Playfair Display", serif;
             font-size: clamp(5.5rem, 16vw, 10rem);
@@ -2899,13 +2899,13 @@ body[data-lang="fr"] div.lang-fr {
             border-color: #cd6f47;
 
             background: rgba(205,111,71, 0.15);
-            color: #d99273;
+            color: #995035;
 
             transform: translateY(-2px);
         }
 
         .error-links i {
-            color: #d99273;
+            color: #995035;
         }
 
         @media (max-width: 700px) {
@@ -3178,7 +3178,7 @@ body[data-lang="fr"] div.lang-fr {
             color: var(--green-950);
 
             transform: translateY(-50%) scale(1.08);
-        }
+        ;background:#a94f30;color:#fff!important;}
 
         .blog-hero .slider-btn.prev {
             left: 18px;
@@ -3230,7 +3230,7 @@ body[data-lang="fr"] div.lang-fr {
             border-radius: var(--radius-round);
 
             background: var(--gold-500);
-        }
+        ;background:#a94f30;color:#fff!important;}
 
         /* =====================================================
            BLOG INTRO
@@ -3521,7 +3521,7 @@ body[data-lang="fr"] div.lang-fr {
             color: var(--green-950);
 
             transform: translateY(-2px);
-        }
+        ;background:#a94f30;color:#fff!important;}
 
         /* =====================================================
            ARTICLE MODAL
@@ -4410,13 +4410,13 @@ body[data-lang="fr"] div.lang-fr {
             font-weight: 800;
 
             transition: var(--transition);
-        }
+        ;background:#a94f30;color:#fff!important;}
 
         .booking-help-link:hover {
             background: var(--gold-400);
 
             transform: translateY(-2px);
-        }
+        ;background:#a94f30;color:#fff!important;}
 
         /* =====================================================
            TRUST LIST
@@ -4493,7 +4493,7 @@ body[data-lang="fr"] div.lang-fr {
             font-family: var(--font-heading);
             font-size: 1.2rem;
             font-weight: 900;
-        }
+        ;background:#a94f30;color:#fff!important;}
 
         .booking-process-card h3 {
             margin-bottom: 10px;
@@ -4804,7 +4804,7 @@ body[data-lang="fr"] div.lang-fr {
             color: var(--green-950);
 
             transform: translateY(-50%) scale(1.08);
-        }
+        ;background:#a94f30;color:#fff!important;}
 
         .camping-hero .slider-btn.prev {
             left: 18px;
@@ -4856,7 +4856,7 @@ body[data-lang="fr"] div.lang-fr {
             border-radius: var(--radius-round);
 
             background: var(--gold-500);
-        }
+        ;background:#a94f30;color:#fff!important;}
 
         /* =====================================================
            ARTICLE
@@ -6754,7 +6754,7 @@ body[data-lang="fr"] div.lang-fr {
             color: var(--green-950);
 
             transform: translateY(-50%) scale(1.08);
-        }
+        ;background:#a94f30;color:#fff!important;}
 
         .guide-hero .slider-btn.prev {
             left: 18px;
@@ -6806,7 +6806,7 @@ body[data-lang="fr"] div.lang-fr {
             border-radius: var(--radius-round);
 
             background: var(--gold-500);
-        }
+        ;background:#a94f30;color:#fff!important;}
 
         /* =====================================================
            INTRODUCTION
@@ -8102,7 +8102,7 @@ body[data-lang="fr"] div.lang-fr {
             color: var(--green-950);
 
             transform: translateY(-50%) scale(1.08);
-        }
+        ;background:#a94f30;color:#fff!important;}
 
         .accommodation-hero .slider-btn.prev {
             left: 18px;
@@ -8154,7 +8154,7 @@ body[data-lang="fr"] div.lang-fr {
             border-radius: var(--radius-round);
 
             background: var(--gold-500);
-        }
+        ;background:#a94f30;color:#fff!important;}
 
         /* =====================================================
            INTRODUCTION
@@ -9353,7 +9353,7 @@ body[data-lang="fr"] div.lang-fr {
             color: var(--green-950);
 
             transform: translateY(-50%) scale(1.08);
-        }
+        ;background:#a94f30;color:#fff!important;}
 
         .memories-hero .slider-btn.prev {
             left: 18px;
@@ -9405,7 +9405,7 @@ body[data-lang="fr"] div.lang-fr {
             border-radius: var(--radius-round);
 
             background: var(--gold-500);
-        }
+        ;background:#a94f30;color:#fff!important;}
 
         /* =====================================================
            INTRO
@@ -9726,7 +9726,7 @@ body[data-lang="fr"] div.lang-fr {
             color: var(--green-950);
 
             transform: translateY(-3px);
-        }
+        ;background:#a94f30;color:#fff!important;}
 
         .memories-load-button.hidden {
             display: none;
@@ -9849,7 +9849,7 @@ body[data-lang="fr"] div.lang-fr {
 
             background: var(--gold-500);
             color: var(--green-950);
-        }
+        ;background:#a94f30;color:#fff!important;}
 
         .memory-category-content h3 {
             margin-bottom: 8px;
@@ -9962,7 +9962,7 @@ body[data-lang="fr"] div.lang-fr {
         .memories-lightbox-next:hover {
             background: var(--gold-500);
             color: var(--green-950);
-        }
+        ;background:#a94f30;color:#fff!important;}
 
         .memories-lightbox-close {
             top: 15px;
@@ -10478,7 +10478,7 @@ body[data-lang="fr"] div.lang-fr {
             color: var(--green-950);
 
             transform: translateY(-50%) scale(1.08);
-        }
+        ;background:#a94f30;color:#fff!important;}
 
         .program-hero .slider-btn.prev {
             left: 18px;
@@ -10530,7 +10530,7 @@ body[data-lang="fr"] div.lang-fr {
             border-radius: var(--radius-round);
 
             background: var(--gold-500);
-        }
+        ;background:#a94f30;color:#fff!important;}
 
         /* =====================================================
            INTRO
@@ -11792,7 +11792,7 @@ body[data-lang="fr"] div.lang-fr {
             color: var(--green-950);
 
             transform: translateY(-50%) scale(1.08);
-        }
+        ;background:#a94f30;color:#fff!important;}
 
         .quad-hero .slider-btn.prev {
             left: 18px;
@@ -11844,7 +11844,7 @@ body[data-lang="fr"] div.lang-fr {
             border-radius: var(--radius-round);
 
             background: var(--gold-500);
-        }
+        ;background:#a94f30;color:#fff!important;}
 
         /* =====================================================
            INTRODUCTION
@@ -12211,7 +12211,7 @@ body[data-lang="fr"] div.lang-fr {
             font-family: var(--font-heading);
             font-size: 1.15rem;
             font-weight: 900;
-        }
+        ;background:#a94f30;color:#fff!important;}
 
         .quad-program-card h3 {
             margin-bottom: 10px;
@@ -12399,7 +12399,7 @@ body[data-lang="fr"] div.lang-fr {
             color: var(--green-950);
 
             font-size: 1.15rem;
-        }
+        ;background:#a94f30;color:#fff!important;}
 
         .quad-safety-card h3 {
             margin-bottom: 8px;
@@ -12841,7 +12841,7 @@ body[data-lang="fr"] div.lang-fr {
         .rafting-kicker {
             display: inline-block;
             margin-bottom: 10px;
-            color: #9f4e2b;
+            color: #995035;
             font-size: 0.7rem;
             font-weight: 900;
             letter-spacing: 0.11em;
@@ -12858,7 +12858,7 @@ body[data-lang="fr"] div.lang-fr {
 
         .rafting-heading p {
             margin: 0;
-            color: #637068;
+            color: #4c6269;
             line-height: 1.85;
         }
 
@@ -12963,7 +12963,7 @@ body[data-lang="fr"] div.lang-fr {
         }
 
         .rafting-hero-label i {
-            color: #cd6f47;
+            color: #995035;
         }
 
         .rafting-hero-content h1 {
@@ -13065,7 +13065,7 @@ body[data-lang="fr"] div.lang-fr {
             place-items: center;
             border-radius: 22px;
             background: #122e35;
-            color: #cd6f47;
+            color: #995035;
             box-shadow: 0 15px 35px rgba(18,46,53, 0.18);
             font-size: 1.55rem;
         }
@@ -13078,7 +13078,7 @@ body[data-lang="fr"] div.lang-fr {
         }
 
         .rafting-intro p {
-            color: #637068;
+            color: #4c6269;
             font-size: 1rem;
             line-height: 1.9;
         }
@@ -13103,7 +13103,7 @@ body[data-lang="fr"] div.lang-fr {
             place-items: center;
             border-radius: 18px;
             background: #122e35;
-            color: #cd6f47;
+            color: #995035;
             font-size: 1.35rem;
         }
 
@@ -13115,7 +13115,7 @@ body[data-lang="fr"] div.lang-fr {
 
         .rafting-safety-box p {
             margin: 0;
-            color: #637068;
+            color: #4c6269;
             font-size: 0.86rem;
             line-height: 1.75;
         }
@@ -13189,7 +13189,7 @@ body[data-lang="fr"] div.lang-fr {
             padding: 7px 13px;
             border-radius: 999px;
             background: #122e35;
-            color: #cd6f47;
+            color: #995035;
             font-size: 0.68rem;
             font-weight: 900;
             letter-spacing: 0.07em;
@@ -13206,7 +13206,7 @@ body[data-lang="fr"] div.lang-fr {
 
         .rafting-route-content > p {
             margin: 0 0 22px;
-            color: #637068;
+            color: #4c6269;
             font-size: 0.91rem;
             line-height: 1.85;
         }
@@ -13225,12 +13225,12 @@ body[data-lang="fr"] div.lang-fr {
             padding: 12px;
             border-radius: 13px;
             background: #f5ebe7;
-            color: #637068;
+            color: #4c6269;
             font-size: 0.75rem;
         }
 
         .rafting-fact i {
-            color: #9f4e2b;
+            color: #995035;
         }
 
         .rafting-program {
@@ -13245,7 +13245,7 @@ body[data-lang="fr"] div.lang-fr {
             display: flex;
             align-items: flex-start;
             gap: 10px;
-            color: #637068;
+            color: #4c6269;
             font-size: 0.8rem;
             line-height: 1.7;
         }
@@ -13253,7 +13253,7 @@ body[data-lang="fr"] div.lang-fr {
         .rafting-program i {
             width: 20px;
             margin-top: 4px;
-            color: #9f4e2b;
+            color: #995035;
             text-align: center;
         }
 
@@ -13279,7 +13279,7 @@ body[data-lang="fr"] div.lang-fr {
         }
 
         .rafting-price-info strong {
-            color: #cd6f47;
+            color: #995035;
             font-family: "Playfair Display", serif;
             font-size: 1.55rem;
         }
@@ -13351,14 +13351,14 @@ body[data-lang="fr"] div.lang-fr {
         .expedition-day li {
             display: flex;
             gap: 9px;
-            color: #637068;
+            color: #4c6269;
             font-size: 0.78rem;
             line-height: 1.7;
         }
 
         .expedition-day li i {
             margin-top: 4px;
-            color: #9f4e2b;
+            color: #995035;
         }
 
         .expedition-options {
@@ -13383,7 +13383,7 @@ body[data-lang="fr"] div.lang-fr {
 
         .expedition-option p {
             margin: 0 0 12px;
-            color: #637068;
+            color: #4c6269;
             font-size: 0.77rem;
             line-height: 1.7;
         }
@@ -13517,7 +13517,7 @@ body[data-lang="fr"] div.lang-fr {
         }
 
         .rafting-faq-question i {
-            color: #9f4e2b;
+            color: #995035;
             transition: transform 0.3s ease;
         }
 
@@ -13533,7 +13533,7 @@ body[data-lang="fr"] div.lang-fr {
         }
 
         .rafting-faq-answer p {
-            color: #637068;
+            color: #4c6269;
             font-size: 0.87rem;
             line-height: 1.8;
         }
@@ -13882,7 +13882,7 @@ body[data-lang="fr"] div.lang-fr {
             background: var(--gold-500);
             color: var(--green-950);
             transform: translateY(-50%) scale(1.08);
-        }
+        ;background:#a94f30;color:#fff!important;}
 
         .hiking-hero .slider-btn.prev {
             left: 18px;
@@ -13921,7 +13921,7 @@ body[data-lang="fr"] div.lang-fr {
             width: 21px;
             border-radius: var(--radius-round);
             background: var(--gold-500);
-        }
+        ;background:#a94f30;color:#fff!important;}
 
         /* =====================================================
            INTRO
@@ -14314,7 +14314,7 @@ body[data-lang="fr"] div.lang-fr {
             color: var(--green-950);
             font-family: var(--font-heading);
             font-weight: 900;
-        }
+        ;background:#a94f30;color:#fff!important;}
 
         .circuit-stop-content h3 {
             margin-bottom: 10px;
@@ -14373,7 +14373,7 @@ body[data-lang="fr"] div.lang-fr {
             background: var(--gold-500);
             color: var(--green-950);
             font-size: 1.15rem;
-        }
+        ;background:#a94f30;color:#fff!important;}
 
         .hiking-safety-card h3 {
             margin-bottom: 8px;
@@ -14920,7 +14920,7 @@ body[data-lang="fr"] div.lang-fr {
             color: var(--green-950);
 
             transform: translateY(-50%) scale(1.08);
-        }
+        ;background:#a94f30;color:#fff!important;}
 
         .store-hero .slider-btn.prev {
             left: 18px;
@@ -14973,7 +14973,7 @@ body[data-lang="fr"] div.lang-fr {
             border-radius: var(--radius-round);
 
             background: var(--gold-500);
-        }
+        ;background:#a94f30;color:#fff!important;}
 
         /* =====================================================
            INTRO
@@ -15495,7 +15495,7 @@ body[data-lang="fr"] div.lang-fr {
             font-family: var(--font-heading);
             font-size: 1.1rem;
             font-weight: 900;
-        }
+        ;background:#a94f30;color:#fff!important;}
 
         .store-order-card h3 {
             margin-bottom: 9px;
@@ -15813,7 +15813,7 @@ body[data-lang="fr"] div.lang-fr {
         }
 
         .vtt-hero-label i {
-            color: #cd6f47;
+            color: #995035;
         }
 
         .vtt-hero-content h1 {
@@ -15922,7 +15922,7 @@ body[data-lang="fr"] div.lang-fr {
         .vtt-kicker {
             display: inline-block;
             margin-bottom: 10px;
-            color: #9f4e2b;
+            color: #995035;
             font-size: 0.7rem;
             font-weight: 900;
             letter-spacing: 0.12em;
@@ -15939,7 +15939,7 @@ body[data-lang="fr"] div.lang-fr {
 
         .vtt-heading p {
             margin: 0;
-            color: #637068;
+            color: #4c6269;
             line-height: 1.85;
         }
 
@@ -15961,7 +15961,7 @@ body[data-lang="fr"] div.lang-fr {
             place-items: center;
             border-radius: 22px;
             background: #122e35;
-            color: #cd6f47;
+            color: #995035;
             font-size: 1.55rem;
             box-shadow: 0 15px 35px rgba(18,46,53, 0.18);
         }
@@ -15974,7 +15974,7 @@ body[data-lang="fr"] div.lang-fr {
         }
 
         .vtt-intro p {
-            color: #637068;
+            color: #4c6269;
             font-size: 1rem;
             line-height: 1.9;
         }
@@ -16003,7 +16003,7 @@ body[data-lang="fr"] div.lang-fr {
             place-items: center;
             border-radius: 18px;
             background: #122e35;
-            color: #cd6f47;
+            color: #995035;
             font-size: 1.3rem;
         }
 
@@ -16015,7 +16015,7 @@ body[data-lang="fr"] div.lang-fr {
 
         .vtt-guide-box p {
             margin: 0;
-            color: #637068;
+            color: #4c6269;
             font-size: 0.86rem;
             line-height: 1.75;
         }
@@ -16071,7 +16071,7 @@ body[data-lang="fr"] div.lang-fr {
             place-items: center;
             border-radius: 18px;
             background: #122e35;
-            color: #cd6f47;
+            color: #995035;
             font-size: 1.3rem;
         }
 
@@ -16085,7 +16085,7 @@ body[data-lang="fr"] div.lang-fr {
         .vtt-price-card > p {
             min-height: 65px;
             margin: 0 0 18px;
-            color: #637068;
+            color: #4c6269;
             font-size: 0.82rem;
             line-height: 1.75;
         }
@@ -16116,7 +16116,7 @@ body[data-lang="fr"] div.lang-fr {
         .vtt-price-list li {
             display: flex;
             gap: 9px;
-            color: #637068;
+            color: #4c6269;
             font-size: 0.76rem;
         }
 
@@ -16190,7 +16190,7 @@ body[data-lang="fr"] div.lang-fr {
             padding: 7px 13px;
             border-radius: 999px;
             background: #122e35;
-            color: #cd6f47;
+            color: #995035;
             font-size: 0.67rem;
             font-weight: 900;
             text-transform: uppercase;
@@ -16206,7 +16206,7 @@ body[data-lang="fr"] div.lang-fr {
 
         .vtt-route-content > p {
             margin: 0 0 24px;
-            color: #637068;
+            color: #4c6269;
             font-size: 0.93rem;
             line-height: 1.9;
         }
@@ -16222,14 +16222,14 @@ body[data-lang="fr"] div.lang-fr {
         .vtt-route-list li {
             display: flex;
             gap: 10px;
-            color: #637068;
+            color: #4c6269;
             font-size: 0.82rem;
         }
 
         .vtt-route-list i {
             width: 19px;
             margin-top: 3px;
-            color: #9f4e2b;
+            color: #995035;
         }
 
         .vtt-route-note {
@@ -16237,7 +16237,7 @@ body[data-lang="fr"] div.lang-fr {
             border-left: 4px solid #cd6f47;
             border-radius: 12px;
             background: #ffffff;
-            color: #637068;
+            color: #4c6269;
             font-size: 0.81rem;
             line-height: 1.75;
         }
@@ -16280,7 +16280,7 @@ body[data-lang="fr"] div.lang-fr {
 
         .vtt-info-card p {
             margin: 0;
-            color: #637068;
+            color: #4c6269;
             font-size: 0.79rem;
             line-height: 1.75;
         }
@@ -16401,7 +16401,7 @@ body[data-lang="fr"] div.lang-fr {
         }
 
         .vtt-faq-question i {
-            color: #9f4e2b;
+            color: #995035;
             transition: transform 0.3s ease;
         }
 
@@ -16417,7 +16417,7 @@ body[data-lang="fr"] div.lang-fr {
         }
 
         .vtt-faq-answer p {
-            color: #637068;
+            color: #4c6269;
             font-size: 0.87rem;
             line-height: 1.8;
         }
@@ -16763,7 +16763,7 @@ body[data-lang="en"] .lang-en, body[data-lang="fr"] .lang-fr { display: revert; 
 
 
 /* Corrected shared components */
-.language-button[aria-current="page"] { background: var(--gold-500); color: var(--green-950); }
+.language-button[aria-current="page"] { background: var(--gold-500); color: var(--green-950); ;background:#a94f30;color:#fff!important;}
 .article-date { margin: -4px 0 22px; color: var(--gray-500); font-size: .85rem; font-weight: 600; }
 .blog-read-button { text-decoration: none; }
 .form-status[aria-live] { min-height: 1.5em; }
@@ -16785,7 +16785,7 @@ body[data-lang="en"] .lang-en, body[data-lang="fr"] .lang-fr { display: revert; 
 .section-heading-light .section-kicker,
 .benefits-section .section-kicker,
 [class*="-cta"] .section-kicker {
-    color: #d99273 !important;
+    color: #995035 !important;
 }
 
 .quick-booking-actions small {
@@ -16829,7 +16829,7 @@ body[data-lang="en"] .lang-en, body[data-lang="fr"] .lang-fr { display: revert; 
 .hero-slider .dot.active::after {
     width: 22px;
     background: var(--gold-500);
-}
+;background:#a94f30;color:#fff!important;}
 
 .hero-slider .slider-btn {
     width: 44px !important;

@@ -37,7 +37,7 @@ button.ims-fav-heart:hover,
 button.ims-fav-heart[aria-pressed="true"],
 .ims-dash-home-visual.hp-home button.ims-original-fav-heart[aria-pressed="true"]{
   background:#19414b!important;
-  color:#db977a!important;
+  color:#995035!important;
   border-color:#d99274!important;
   box-shadow:0 3px 13px rgba(11,37,43,.26)!important;
 }

@@ -8,8 +8,8 @@ body.atnav-ready #siteHeader .brand{flex-shrink:1;min-width:0;text-decoration:no
 body.atnav-ready #siteHeader .brand-content strong{color:#ffffff!important;font-weight:800}
 body.atnav-ready #siteHeader .brand-content small{color:#dfa389!important}
 body.atnav-ready #siteHeader .language-switcher .language-button{color:#f2e6e1!important}
-body.atnav-ready #siteHeader .language-switcher .language-button.active{color:#dd9d82!important}
-body.atnav-ready #siteHeader .header-book-button{background:#c46a45!important;color:#14272c!important;border:1px solid #c46a45!important;border-radius:8px!important;white-space:nowrap;font-weight:850!important}
+body.atnav-ready #siteHeader .language-switcher .language-button.active{color:#995035!important}
+body.atnav-ready #siteHeader .header-book-button{background:#c46a45!important;color:#14272c!important;border:1px solid #c46a45!important;border-radius:8px!important;white-space:nowrap;font-weight:850!important;background:#a94f30;color:#fff!important;}
 body.atnav-ready #siteHeader .header-book-button *{color:inherit!important}
 body.atnav-ready .atnav-open{margin-left:7px;flex:0 0 46px;display:inline-grid!important;place-items:center;width:46px;height:46px;border:1px solid #e8bdaa7a;background:#e9eecb16;color:#f9f7e9;border-radius:9px;cursor:pointer;box-shadow:none}
 body.atnav-ready .atnav-open:hover{background:#f7e7e02a;border-color:#d89072}
@@ -20,7 +20,7 @@ body.atnav-ready .atnav-open svg{width:24px;height:24px;stroke:currentColor;fill
 body.atnav-ready .atnav-desktop{display:flex;align-items:center;gap:clamp(11px,2vw,29px);margin-inline:auto;white-space:nowrap}
 body.atnav-ready .atnav-desktop a{font:700 12px/1.5 Montserrat,"Segoe UI",Arial,sans-serif;color:#f2e7e2;text-decoration:none}
 body.atnav-ready .atnav-desktop a[aria-current="page"],
-body.atnav-ready .atnav-desktop a:hover{color:#dc9b7f}
+body.atnav-ready .atnav-desktop a:hover{color:#995035}
 body.atnav-ready .atnav-desktop a:focus-visible{outline:2px solid #db997d;outline-offset:4px}
 body.atnav-ready.atnav-lock{overflow:hidden!important;touch-action:none}
 .atnav-backdrop{position:fixed;inset:0;background:#051216bb;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:99980;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .28s,visibility .28s}
@@ -41,7 +41,7 @@ body.atnav-ready.atnav-lock{overflow:hidden!important;touch-action:none}
 .atnav-close:hover{background:#da95782a}
 .atnav-intro{padding:23px 0 4px;display:flex;align-items:center;justify-content:space-between;gap:11px}
 .atnav-intro-title{font:700 clamp(19px,2.1vw,24px)/1.2 "Cormorant Garamond",Georgia,serif;color:#f4eae5}
-.atnav-mark{border:1px solid #cd846477;color:#db987c;border-radius:5px;font-size:9px;letter-spacing:.16em;font-weight:800;padding:5px 9px}
+.atnav-mark{border:1px solid #cd846477;color:#995035;border-radius:5px;font-size:9px;letter-spacing:.16em;font-weight:800;padding:5px 9px}
 .atnav-label{display:block;margin:23px 0 7px;color:var(--atnav-gold);font-size:10px;font-weight:850;letter-spacing:.17em;text-transform:uppercase}
 .atnav-label-separated{padding-top:17px;margin-top:18px;border-top:1px solid #ffffff29}
 .atnav-item{width:100%;min-height:51px;padding:10px 0;display:flex;gap:17px;align-items:center;color:#f2efea!important;border:0;background:transparent;text-align:left;font:600 16px/1.5 Montserrat,"Segoe UI",Arial,sans-serif;cursor:pointer}
@@ -171,7 +171,7 @@ body.atnav-ready main > .article-hero > .article-hero-text{
  text-align:start;color:#ffffff!important;
 }
 body.atnav-ready main > .article-hero .article-hero-text span{
- display:block;color:#dd9d82;font-size:clamp(10px,1.05vw,13px);
+ display:block;color:#995035;font-size:clamp(10px,1.05vw,13px);
  letter-spacing:.11em;line-height:1.7;overflow-wrap:anywhere;
 }
 body.atnav-ready main > .article-hero h1{
@@ -336,7 +336,7 @@ body.atnav-ready .atnav-langmini-panel a[lang="ar"] span:last-child{
 }
 
 /* Privacy policy link: visible in shared and article footers. */
-body.atnav-ready .ims-privacy-link{display:inline-block;color:#dc9b7f!important;text-decoration:underline!important;text-underline-offset:4px;margin-inline:9px;font-size:13px;font-weight:600}
+body.atnav-ready .ims-privacy-link{display:inline-block;color:#995035!important;text-decoration:underline!important;text-underline-offset:4px;margin-inline:9px;font-size:13px;font-weight:600}
 body.atnav-ready .ims-privacy-link:hover,body.atnav-ready .ims-privacy-link:focus-visible{color:#ffffff!important}
 
 /* No technical Sitemap links displayed in the public footer, in any language.
