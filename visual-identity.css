@@ -33,4 +33,5 @@ body.atnav-ready .footer-bottom .ims-privacy-link{color:#e6bda8!important}
 .weekend-program .pw-eyebrow{color:#995035!important}
 .weekend-program .pw-hero .pw-eyebrow,.weekend-program .pw-price-card .pw-eyebrow{color:#e6bda8!important}
 .kayak-page .ky-final .ky-eyebrow,.ib-bivouac .ib-copy .ib-kicker{color:#e6bda8!important}
-#imsfrane-booking .bp-note{color:#4c6269!important}
+#imsfrane-booking .bp-note,main p.lead{color:#4c6269!important}
+main :is(.hero,.quad-r-hero,.camp-hero,.vt-hero,.bp-hero,.ky-hero,.cta,.end) p.lead{color:#e3e9e7!important}
