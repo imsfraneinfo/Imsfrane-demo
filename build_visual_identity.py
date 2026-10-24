@@ -42,7 +42,25 @@ def transform(css):
   if original==changed:return m[0]
   values=[int(changed[i:i+2],16) for i in (0,2,4)]
   return m[1]+'('+','.join(map(str,values))+alpha+')'
- return re.sub(r'\b(rgba?)\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(,\s*[.\d]+\s*)?\)',rgba,css)
+ css=re.sub(r'\b(rgba?)\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(,\s*[.\d]+\s*)?\)',rgba,css)
+ # Foreground text needs a darker copper/muted tone on sand than decorative
+ # borders do. Keep pale text intact; dark sections receive explicit overrides.
+ def foreground(m):
+  token=m[2];code=token[1:]
+  if len(code)==3:code=''.join(v*2 for v in code)
+  if len(code)!=6:return m[0]
+  h,l,sat=colorsys.rgb_to_hls(*rgb(code));degree=h*360
+  if 8<=degree<=30 and .32<l<.70:return m[1]+'#995035'
+  if .36<l<.68 and sat<.36:return m[1]+'#4c6269'
+  return m[0]
+ css=re.sub(r'((?<![\w-])color\s*:\s*)(#[0-9a-fA-F]{3,8})\b',foreground,css)
+ # Gold variables are also used for primary action surfaces in older layouts.
+ def button_surface(m):
+  text=m[0]
+  if re.search(r'background(?:-color)?\s*:\s*(?:#[cC]46[aA]45|var\(--[\w-]*(?:gold|accent)[\w-]*\))\s*[;!}]',text):
+   text=text[:-1]+';background:#a94f30;color:#fff!important;}'
+  return text
+ return re.sub(r'[^{}]+\{[^{}]*\}',button_surface,css)
 
 OVERRIDES='''
 /* Ahansal & Atlas — demo palette */
@@ -61,7 +79,14 @@ main :is(.btn-gold,.hp-button-gold,.hp-button-primary,.hp-btn-primary,.quad-r-go
 .team-about .person-info{border-top-color:#c46a45}.team-about .person-info p{color:#995035}
 .team-about .person-card,.hp-home .hp-activity{box-shadow:0 8px 24px #123e480d}
 main :is(a,button,input,select,textarea):focus-visible{outline-color:#a94f30}
-.floating-whatsapp{background:#25d366!important;color:#fff!important}\n::selection{background:#dba287;color:#10333c}
+.floating-whatsapp{background:#087b3c!important;color:#fff!important}\n::selection{background:#dba287;color:#10333c}
+.quad-r-hero .quad-r-copy h1{color:#fff!important}
+.quad-r-hero .quad-r-copy h1 em{color:#e3ad92!important}
+:is(.pricebox,.cta,.end) :is(h1,h2,h3,p){color:#fff!important}
+:is(.quad-r-hero,.vt-hero,.camp-hero,.bp-hero,.ky-hero,.hp-hero,.pricebox,.cta,.end,.ky-season,.company-block) :is(.eyebrow,.kicker,.camp-ey,.ky-eyebrow,.gp-section-label,.pw-eyebrow,.chapter,.tag){color:#e6bda8!important}
+main :is(.btn:not(.alt):not(.ghost):not(.btn-line):not(.btn-outline),.pw-btn-primary),.demo-rebuild-actions a,.demo-rebuild-form button{background:#a94f30!important;color:#fff!important;border-color:#a94f30!important}
+:is(.hp-kicker,.camp-ey,.ky-eyebrow,.gp-section-label,.pw-eyebrow,.journal-kicker,.memories-kicker){color:#995035}
+.ky-season .ky-eyebrow,.end .kicker{color:#e6bda8!important}
 '''
 
 def build(root=ROOT):
@@ -80,7 +105,7 @@ def build(root=ROOT):
   s=re.sub(r'(\bstyle=)(["\'])(.*?)\2',lambda m:m[1]+m[2]+transform(m[3])+m[2],s,flags=re.S|re.I)
   s=re.sub(r'<link[^>]*href=["\'][^"\']*visual-identity.css[^"\']*["\'][^>]*>','',s)
   if '</head>' in s:
-   s=s.replace('</head>','<link rel="stylesheet" href="/Imsfrane-demo/visual-identity.css?v=ahansal2"></head>',1)
+   s=s.replace('</head>','<link rel="stylesheet" href="/Imsfrane-demo/visual-identity.css?v=contrast3"></head>',1)
    p.write_text(s);pages+=1
  (root/'visual-identity.css').write_text(OVERRIDES)
  print(f'Ahansal & Atlas: {pages} pages, {changes}/{cssfiles} brand stylesheets; images and scripts unchanged.')
