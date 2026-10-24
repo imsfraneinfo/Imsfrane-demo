@@ -8,8 +8,8 @@ body.atnav-ready #siteHeader .brand-content small{color:#e3b79f!important}
 html:not([lang=ar]) main :is(h1,h2){font-family:'Cormorant Garamond',Georgia,serif}
 html[lang=ar] main :is(h1,h2,h3){font-family:inherit}
 main :is(.btn,.hp-button,.hp-btn,.wo-btn,.camp-btn,.quad-r-btn,.vt-button,.bp-button){border-radius:11px}
-main :is(.hp-button-gold,.hp-button-primary,.hp-btn-primary,.quad-r-gold,.camp-btn:not(.ghost),.wo-btn),.team-about .team-contact a{background:#a94f30!important;border-color:#a94f30!important;color:#fff!important}
-main :is(.hp-button-gold,.hp-button-primary,.hp-btn-primary,.quad-r-gold,.camp-btn:not(.ghost),.wo-btn):hover,.team-about .team-contact a:hover{background:#8d3e25!important;border-color:#8d3e25!important}
+main :is(.btn-gold,.hp-button-gold,.hp-button-primary,.hp-btn-primary,.quad-r-gold,.camp-btn:not(.ghost),.wo-btn),.team-about .team-contact a{background:#a94f30!important;border-color:#a94f30!important;color:#fff!important}
+main :is(.btn-gold,.hp-button-gold,.hp-button-primary,.hp-btn-primary,.quad-r-gold,.camp-btn:not(.ghost),.wo-btn):hover,.team-about .team-contact a:hover{background:#8d3e25!important;border-color:#8d3e25!important}
 .hp-home .hp-kicker,.team-about .chapter,.team-about .tag{color:#995035}
 .team-about .company-block .chapter{color:#e6bda8}
 .team-about .person-info{border-top-color:#c46a45}.team-about .person-info p{color:#995035}
