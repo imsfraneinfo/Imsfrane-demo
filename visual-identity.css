@@ -1,0 +1,18 @@
+
+/* Ahansal & Atlas — demo palette */
+:root{--primary:#123e48;--primary-color:#123e48;--dark:#10333c;--gold:#c46a45;--accent:#c46a45;--accent-color:#c46a45;--light:#f6f1e8;--identity-petrol:#123e48;--identity-copper:#c46a45;--identity-paper:#f6f1e8}
+body{background-color:#f6f1e8;color:#193a42}
+body.atnav-ready #siteHeader{background:#10333cf2!important;border-bottom-color:#c46a4555!important}
+body.atnav-ready #siteHeader .brand-content small{color:#e3b79f!important}
+.hp-home{--hp-night:#10333c;--hp-forest:#185260;--hp-gold:#dba287;--hp-cream:#f6f1e8;--hp-ink:#123e48;--hp-border:#e1d8cc}
+html:not([lang=ar]) main :is(h1,h2){font-family:'Cormorant Garamond',Georgia,serif}
+html[lang=ar] main :is(h1,h2,h3){font-family:inherit}
+main :is(.btn,.hp-button,.hp-btn,.wo-btn,.camp-btn,.quad-r-btn,.vt-button,.bp-button){border-radius:11px}
+main :is(.hp-button-gold,.hp-button-primary,.hp-btn-primary,.quad-r-gold,.camp-btn:not(.ghost),.wo-btn),.team-about .team-contact a{background:#a94f30!important;border-color:#a94f30!important;color:#fff!important}
+main :is(.hp-button-gold,.hp-button-primary,.hp-btn-primary,.quad-r-gold,.camp-btn:not(.ghost),.wo-btn):hover,.team-about .team-contact a:hover{background:#8d3e25!important;border-color:#8d3e25!important}
+.hp-home .hp-kicker,.team-about .chapter,.team-about .tag{color:#995035}
+.team-about .company-block .chapter{color:#e6bda8}
+.team-about .person-info{border-top-color:#c46a45}.team-about .person-info p{color:#995035}
+.team-about .person-card,.hp-home .hp-activity{box-shadow:0 8px 24px #123e480d}
+main :is(a,button,input,select,textarea):focus-visible{outline-color:#a94f30}
+::selection{background:#dba287;color:#10333c}
