@@ -87,6 +87,10 @@ main :is(a,button,input,select,textarea):focus-visible{outline-color:#a94f30}
 main :is(.btn:not(.alt):not(.ghost):not(.btn-line):not(.btn-outline),.pw-btn-primary),.demo-rebuild-actions a,.demo-rebuild-form button{background:#a94f30!important;color:#fff!important;border-color:#a94f30!important}
 :is(.hp-kicker,.camp-ey,.ky-eyebrow,.gp-section-label,.pw-eyebrow,.journal-kicker,.memories-kicker){color:#995035}
 .ky-season .ky-eyebrow,.end .kicker{color:#e6bda8!important}
+.eyebrow{color:#995035!important}
+.page-randonnee .hero :is(.eyebrow,em),.page-randonnee .hero .stats strong{color:#e6bda8!important}
+.camp-page .camp-hero h1 em,.camp-cta .camp-ey,.demo-editorial-hero .demo-editorial-eyebrow,.hp-season-inner .hp-kicker{color:#e6bda8!important}
+.pricebox .amount,.ims-privacy-link{color:#e6bda8!important}
 '''
 
 def build(root=ROOT):
@@ -104,8 +108,16 @@ def build(root=ROOT):
   s=re.sub(r'(<style\b[^>]*>)(.*?)(</style>)',lambda m:m[1]+transform(m[2])+m[3],s,flags=re.S|re.I)
   s=re.sub(r'(\bstyle=)(["\'])(.*?)\2',lambda m:m[1]+m[2]+transform(m[3])+m[2],s,flags=re.S|re.I)
   s=re.sub(r'<link[^>]*href=["\'][^"\']*visual-identity.css[^"\']*["\'][^>]*>','',s)
+  # The source CSS filenames are stable. Bust them when preview colours change,
+  # including embedded activity pages, so phones do not mix two identities.
+  def bust_css(m):
+   url=m[2]
+   if url.startswith(('https:','http:','//')):return m[0]
+   url=re.sub(r'([?&])identity=[^&]*',r'\1',url).rstrip('?&')
+   return m[1]+url+('&' if '?' in url else '?')+'identity=contrast4'+m[3]
+  s=re.sub(r'(\bhref=["\'])([^"\']+\.css(?:\?[^"\']*)?)(["\'])',bust_css,s)
   if '</head>' in s:
-   s=s.replace('</head>','<link rel="stylesheet" href="/Imsfrane-demo/visual-identity.css?v=contrast3"></head>',1)
+   s=s.replace('</head>','<link rel="stylesheet" href="/Imsfrane-demo/visual-identity.css?v=contrast4"></head>',1)
    p.write_text(s);pages+=1
  (root/'visual-identity.css').write_text(OVERRIDES)
  print(f'Ahansal & Atlas: {pages} pages, {changes}/{cssfiles} brand stylesheets; images and scripts unchanged.')
