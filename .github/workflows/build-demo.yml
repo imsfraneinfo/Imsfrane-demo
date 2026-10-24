@@ -5,6 +5,8 @@ on:
     paths:
       - '.github/workflows/build-demo.yml'
       - 'build_weekend_offers.py'
+      - 'build_about_team.py'
+      - 'team-portraits/*.webp.b64'
       - 'build_bivouac_showcase.py'
       - 'build_rafting_50km_article.py'
       - 'build_vtt_programmes.py'
@@ -117,6 +119,8 @@ jobs:
           PY
       - name: Build demo weekend offers
         run: python3 build_weekend_offers.py
+      - name: Build demo About team
+        run: python3 build_about_team.py
       - uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
