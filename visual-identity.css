@@ -15,4 +15,5 @@ main :is(.hp-button-gold,.hp-button-primary,.hp-btn-primary,.quad-r-gold,.camp-b
 .team-about .person-info{border-top-color:#c46a45}.team-about .person-info p{color:#995035}
 .team-about .person-card,.hp-home .hp-activity{box-shadow:0 8px 24px #123e480d}
 main :is(a,button,input,select,textarea):focus-visible{outline-color:#a94f30}
+.floating-whatsapp{background:#25d366!important;color:#fff!important}
 ::selection{background:#dba287;color:#10333c}

@@ -1533,7 +1533,7 @@ body[data-lang="fr"] div.lang-fr {
 .activity-whatsapp-button:hover {
     background: var(--whatsapp-dark);
 
-    box-shadow: 0 10px 24px rgba(50,169,198, 0.25);
+    box-shadow: 0 10px 24px rgba(37, 211, 102, 0.25);
 
     transform: translateY(-2px);
 }
@@ -2061,7 +2061,7 @@ body[data-lang="fr"] div.lang-fr {
     background: var(--whatsapp);
     color: var(--white);
 
-    box-shadow: 0 15px 40px rgba(50,169,198, 0.35);
+    box-shadow: 0 15px 40px rgba(37, 211, 102, 0.35);
 
     font-size: 0.8rem;
     font-weight: 800;
@@ -2851,7 +2851,7 @@ body[data-lang="fr"] div.lang-fr {
         }
 
         .error-whatsapp-button {
-            background: #32a9c6;
+            background: #25d366;
             color: #ffffff;
         }
 
@@ -4190,7 +4190,7 @@ body[data-lang="fr"] div.lang-fr {
             background: var(--whatsapp-dark);
 
             box-shadow:
-                0 13px 30px rgba(50,169,198, 0.25);
+                0 13px 30px rgba(37, 211, 102, 0.25);
 
             transform: translateY(-3px);
         }
@@ -5810,7 +5810,7 @@ body[data-lang="fr"] div.lang-fr {
             background: var(--whatsapp-dark);
 
             box-shadow:
-                0 13px 30px rgba(50,169,198, 0.25);
+                0 13px 30px rgba(37, 211, 102, 0.25);
 
             transform: translateY(-3px);
         }
@@ -13292,7 +13292,7 @@ body[data-lang="fr"] div.lang-fr {
             gap: 8px;
             padding: 9px 15px;
             border-radius: 999px;
-            background: #32a9c6;
+            background: #25d366;
             color: #ffffff;
             font-size: 0.7rem;
             font-weight: 900;
@@ -16134,7 +16134,7 @@ body[data-lang="fr"] div.lang-fr {
             gap: 8px;
             margin-top: auto;
             border-radius: 999px;
-            background: #32a9c6;
+            background: #25d366;
             color: #ffffff;
             font-size: 0.74rem;
             font-weight: 900;
