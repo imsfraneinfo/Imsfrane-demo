@@ -9,7 +9,7 @@ body.atnav-ready #siteHeader .brand-content strong{color:#ffffff!important;font-
 body.atnav-ready #siteHeader .brand-content small{color:#dfa389!important}
 body.atnav-ready #siteHeader .language-switcher .language-button{color:#f2e6e1!important}
 body.atnav-ready #siteHeader .language-switcher .language-button.active{color:#995035!important}
-body.atnav-ready #siteHeader .header-book-button{background:#c46a45!important;color:#14272c!important;border:1px solid #c46a45!important;border-radius:8px!important;white-space:nowrap;font-weight:850!important;background:#a94f30;color:#fff!important;}
+body.atnav-ready #siteHeader .header-book-button{background:#c46a45!important;color:#14272c!important;border:1px solid #c46a45!important;border-radius:8px!important;white-space:nowrap;font-weight:850!important;background:#a94f30;color:#ffffff!important;;background:#a94f30;color:#fff!important;}
 body.atnav-ready #siteHeader .header-book-button *{color:inherit!important}
 body.atnav-ready .atnav-open{margin-left:7px;flex:0 0 46px;display:inline-grid!important;place-items:center;width:46px;height:46px;border:1px solid #e8bdaa7a;background:#e9eecb16;color:#f9f7e9;border-radius:9px;cursor:pointer;box-shadow:none}
 body.atnav-ready .atnav-open:hover{background:#f7e7e02a;border-color:#d89072}
@@ -26,7 +26,7 @@ body.atnav-ready.atnav-lock{overflow:hidden!important;touch-action:none}
 .atnav-backdrop{position:fixed;inset:0;background:#051216bb;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:99980;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .28s,visibility .28s}
 .atnav-backdrop.is-open{visibility:visible;opacity:1;pointer-events:auto}
 .atnav-drawer,.atnav-drawer *{box-sizing:border-box}
-.atnav-drawer{--atnav-gold:#cf7751;--atnav-ink:#f4f1eb;--atnav-green:#0a2228;position:fixed!important;inset:0 0 0 auto!important;z-index:99981!important;width:min(89vw,450px)!important;max-width:100vw;height:100dvh;max-height:100dvh;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#537178 transparent;transform:translate3d(103%,0,0);transition:transform .31s cubic-bezier(.2,.76,.21,1);background:#0a2228!important;color:var(--atnav-ink)!important;box-shadow:-24px 0 65px #00100970;border-left:1px solid #d27f5c44;font:500 14px/1.6 Montserrat,"Segoe UI",Arial,sans-serif}
+.atnav-drawer{--atnav-gold:#cf7751;--atnav-ink:#f4eeeb;--atnav-green:#0a2228;position:fixed!important;inset:0 0 0 auto!important;z-index:99981!important;width:min(89vw,450px)!important;max-width:100vw;height:100dvh;max-height:100dvh;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#537178 transparent;transform:translate3d(103%,0,0);transition:transform .31s cubic-bezier(.2,.76,.21,1);background:#0a2228!important;color:var(--atnav-ink)!important;box-shadow:-24px 0 65px #00100970;border-left:1px solid #d27f5c44;font:500 14px/1.6 Montserrat,"Segoe UI",Arial,sans-serif}
 .atnav-drawer.is-open{transform:translate3d(0,0,0)}
 .atnav-drawer-inner{padding:24px clamp(20px,5vw,34px) 32px}
 .atnav-drawer svg{width:23px;height:23px;stroke:currentColor;fill:none;stroke-width:2.25;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
@@ -44,7 +44,7 @@ body.atnav-ready.atnav-lock{overflow:hidden!important;touch-action:none}
 .atnav-mark{border:1px solid #cd846477;color:#995035;border-radius:5px;font-size:9px;letter-spacing:.16em;font-weight:800;padding:5px 9px}
 .atnav-label{display:block;margin:23px 0 7px;color:var(--atnav-gold);font-size:10px;font-weight:850;letter-spacing:.17em;text-transform:uppercase}
 .atnav-label-separated{padding-top:17px;margin-top:18px;border-top:1px solid #ffffff29}
-.atnav-item{width:100%;min-height:51px;padding:10px 0;display:flex;gap:17px;align-items:center;color:#f2efea!important;border:0;background:transparent;text-align:left;font:600 16px/1.5 Montserrat,"Segoe UI",Arial,sans-serif;cursor:pointer}
+.atnav-item{width:100%;min-height:51px;padding:10px 0;display:flex;gap:17px;align-items:center;color:#f2ecea!important;border:0;background:transparent;text-align:left;font:600 16px/1.5 Montserrat,"Segoe UI",Arial,sans-serif;cursor:pointer}
 .atnav-item:hover,.atnav-item.is-active,.atnav-submenu a:hover{color:#e1aa93!important}
 .atnav-item-icon,.atnav-subicon{color:var(--atnav-gold);width:26px;height:26px;display:grid;place-items:center;flex:0 0 26px}
 .atnav-item-icon svg{width:23px;height:23px}

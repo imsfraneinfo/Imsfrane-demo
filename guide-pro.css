@@ -21,7 +21,7 @@
 #imsfrane-guide .gp-hero-secondary:hover{background:#ffffff23}
 #imsfrane-guide .gp-hero-aside{padding:28px 27px;background:rgba(255,255,255,.055);backdrop-filter:blur(3px);border:1px solid rgba(255,255,255,.21);border-radius:12px}
 #imsfrane-guide .gp-hero-aside>span{display:inline-block;font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#995035}
-#imsfrane-guide .gp-hero-aside>p{font-size:13px;line-height:1.85;color:#e9e4db;margin:12px 0 22px}
+#imsfrane-guide .gp-hero-aside>p{font-size:13px;line-height:1.85;color:#e9dfdb;margin:12px 0 22px}
 #imsfrane-guide .gp-hero-aside>a{display:inline-flex;align-items:center;gap:10px;color:#e6b7a2!important;font-weight:850;font-size:12px}
 #imsfrane-guide .gp-facts{max-width:1220px;margin:-28px auto 0;position:relative;z-index:3;background:#ffffff;border:1px solid #e8e4dc;border-radius:13px;box-shadow:0 14px 40px #10292f18;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:22px 10px}
 #imsfrane-guide .gp-fact{display:flex;flex-direction:column;gap:4px;align-items:center;justify-content:center;text-align:center;padding:6px 12px;border-right:1px solid #e8e4dd}
@@ -34,7 +34,7 @@
 #imsfrane-guide .gp-side-heading{display:flex;align-items:center;gap:11px;background:#f2f0eb;color:#284a52;padding:18px 17px;font-size:12px;font-weight:850}
 #imsfrane-guide .gp-side-inner>a{display:flex;gap:12px;align-items:center;padding:11px 17px;border-top:1px solid #f2f0ed;color:#4c6269;font-size:12px;font-weight:750;transition:background .2s,color .2s;line-height:1.35}
 #imsfrane-guide .gp-side-inner>a span{font-size:10px;color:#995035;font-weight:900}
-#imsfrane-guide .gp-side-inner>a:hover,#imsfrane-guide .gp-side-inner>a:focus-visible{background:#f2eee7;color:#154753}
+#imsfrane-guide .gp-side-inner>a:hover,#imsfrane-guide .gp-side-inner>a:focus-visible{background:#f2eae7;color:#154753}
 #imsfrane-guide .gp-body{min-width:0}
 #imsfrane-guide .gp-section{padding:0 0 50px;margin:0 0 50px;border-bottom:1px solid #e6e3dd;scroll-margin-top:27px}
 #imsfrane-guide .gp-heading{margin:0 0 25px}
@@ -49,7 +49,7 @@
 #imsfrane-guide .gp-routes{display:grid;gap:14px}
 #imsfrane-guide .gp-route{background:#ffffff;border:1px solid #e6e2db;border-radius:11px;padding:24px 25px;box-shadow:0 6px 20px #152d3309}
 #imsfrane-guide .gp-route-top{display:flex;gap:13px;align-items:center;margin-bottom:16px}
-#imsfrane-guide .gp-route-number{width:39px;height:39px;display:inline-grid;place-items:center;border-radius:9px;background:#f2efe9;color:#275560;font-size:13px;font-weight:900}
+#imsfrane-guide .gp-route-number{width:39px;height:39px;display:inline-grid;place-items:center;border-radius:9px;background:#f2ece9;color:#275560;font-size:13px;font-weight:900}
 #imsfrane-guide .gp-route h3{margin:0;color:#23434b;font-size:15px}
 #imsfrane-guide .gp-journey{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 #imsfrane-guide .gp-journey span{display:inline-flex;align-items:center;gap:9px;border:1px solid #e5e1da;background:#f8f7f4;border-radius:6px;padding:7px 10px;font-weight:750;font-size:11px;color:#33555d}
@@ -60,7 +60,7 @@
 #imsfrane-guide .gp-info p{font-size:12px;line-height:1.8;margin:0}
 #imsfrane-guide .gp-inline-actions{display:flex;gap:10px;flex-wrap:wrap;margin:21px 0 0}
 #imsfrane-guide .gp-inline-actions a{display:inline-flex;align-items:center;gap:9px;padding:9px 14px;border:1px solid #b8ceb7;border-radius:7px;background:#ffffff;color:#2b5c68!important;font-size:12px;font-weight:800}
-#imsfrane-guide .gp-inline-actions a:hover{background:#f5f1ea}
+#imsfrane-guide .gp-inline-actions a:hover{background:#f5edea}
 #imsfrane-guide .gp-hikes{display:grid;gap:14px}
 #imsfrane-guide .gp-hike{background:#ffffff;border:1px solid #e7e3dc;border-radius:11px;padding:23px 26px;box-shadow:0 7px 23px #14323a0a}
 #imsfrane-guide .gp-hike-head{display:grid;grid-template-columns:35px minmax(0,1fr) auto;gap:13px;align-items:center}
@@ -76,7 +76,7 @@
 #imsfrane-guide .gp-fine{font-size:11px;line-height:1.9;color:#4c6269;margin:15px 0 0}
 #imsfrane-guide .gp-table-scroll{width:100%;overflow-x:auto;border:1px solid #e6e2db;border-radius:11px;background:#ffffff;box-shadow:0 6px 24px #1e3b420b}
 #imsfrane-guide table{border-collapse:collapse;width:100%;min-width:580px;font:500 12px/1.7 Montserrat,Arial,sans-serif;text-align:left}
-#imsfrane-guide thead{background:#f1eee8;color:#2a4951}
+#imsfrane-guide thead{background:#f1ebe8;color:#2a4951}
 #imsfrane-guide th,#imsfrane-guide td{padding:14px 15px;border-bottom:1px solid #eeece7;vertical-align:middle}
 #imsfrane-guide thead th{font-size:11px;letter-spacing:.04em;font-weight:900}
 #imsfrane-guide tbody th{font-size:12px;font-weight:800;color:#2f4f57}
@@ -109,7 +109,7 @@
 #imsfrane-guide .gp-last{background:linear-gradient(130deg,#13363f,#0c2931);border-radius:14px;padding:34px 36px;color:#ffffff}
 #imsfrane-guide .gp-last>.gp-section-label{color:#995035}
 #imsfrane-guide .gp-last h2{font-size:clamp(35px,4vw,51px);color:#ffffff;margin:12px 0}
-#imsfrane-guide .gp-last p{font-size:13px;color:#ebe5db;line-height:1.85;margin:0 0 25px}
+#imsfrane-guide .gp-last p{font-size:13px;color:#ebe0db;line-height:1.85;margin:0 0 25px}
 #imsfrane-guide .gp-last>div{display:flex;gap:10px;flex-wrap:wrap}
 #imsfrane-guide .gp-last>div a{display:inline-flex;align-items:center;gap:9px;padding:11px 17px;border-radius:7px;background:#dea086;color:#163036!important;font-weight:850;font-size:12px}
 #imsfrane-guide .gp-last>div a+ a{background:transparent;color:#ffffff!important;border:1px solid #ffffff55}

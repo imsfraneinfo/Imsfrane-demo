@@ -19,7 +19,7 @@
 .ims-email-admin .ims-email-alert{display:block;background:#f8ece7;border:1px solid #e5b5a1;color:#733c24;padding:12px 15px;border-radius:10px;line-height:1.7;font-size:12px;margin:12px 0;overflow-wrap:anywhere}
 .ims-email-admin .ims-email-alert.ok{background:#f7f3ed;border-color:#b0d4b4;color:#27515b}
 .ims-email-admin .ims-email-alert.bad{background:#fef0eb;border-color:#f2bfad;color:#995035}
-.ims-email-admin details{border-top:1px solid #ece7df;padding:12px 0;margin-top:10px}
+.ims-email-admin details{border-top:1px solid #ece3df;padding:12px 0;margin-top:10px}
 .ims-email-admin summary{font-size:13px;font-weight:800;color:#314f56;cursor:pointer}
 .ims-email-admin small{display:block;font-size:11px;color:#4c6269;margin-top:6px}
 .ims-email-admin .ims-email-check{display:flex;align-items:center;gap:8px;margin:13px 0;font-size:12px;color:#294046}

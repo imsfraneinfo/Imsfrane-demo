@@ -21,7 +21,7 @@ body.ims-profile-active .ims-sitebar{position:sticky!important;top:0!important;z
 .ims-dash-welcome-note p{margin:8px 0 15px;color:#ebe8e3}
 .ims-dash-gold-link{display:inline-flex;align-items:center;gap:5px;border-radius:8px;background:#dea086;color:#153138!important;text-decoration:none;font-size:12px;font-weight:850;padding:9px 13px}
 .ims-dash-heading{display:flex;gap:13px;align-items:center;margin:23px 2px}
-.ims-dash-heading-icon{width:52px;height:52px;display:grid;place-items:center;background:#f1eee9;border:1px solid #ddd6ca;border-radius:15px;color:#23454d}
+.ims-dash-heading-icon{width:52px;height:52px;display:grid;place-items:center;background:#f1ebe9;border:1px solid #ddd6ca;border-radius:15px;color:#23454d}
 .ims-dash-ui svg{height:23px;width:23px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
 .ims-dash-heading h2{font:700 clamp(26px,4vw,37px)/1.25 Georgia,serif;color:#0b242a;margin:3px 0 0}
 .ims-dash-tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;margin:0 0 22px;background:#ffffff;padding:6px;border:1px solid #e6e2db;border-radius:13px;box-shadow:0 5px 17px #162f350a}
@@ -122,7 +122,7 @@ html[dir=rtl] .ims-dash-round-arrow{transform:scaleX(-1)}
 @media(max-width:640px){.ims-sitebar .ims-dash-header-lang{min-width:59px!important;padding:7px 5px!important}.ims-sitebar .ims-site-back{font-size:10px!important;max-width:95px!important;white-space:normal!important;text-align:center!important}.ims-sitebar{gap:7px!important}}
 
 /* Private booking requests, never presented as confirmed reservations. */
-.ims-order-list{display:grid;gap:13px;margin-top:18px}.ims-order-card{border:1px solid #e3ded5;background:#fdfef9;border-radius:13px;padding:18px;box-shadow:0 4px 14px #1832380a}.ims-order-card h4{color:#13323a;font-size:17px;margin:0 0 8px;overflow-wrap:anywhere}.ims-order-card p{font-size:13px;color:#4c6269;margin:8px 0;line-height:1.6}.ims-order-card small{display:block;font-size:12px;color:#4c6269;margin:6px 0}.ims-order-card .ims-order-note{font-size:11px;color:#995035}.ims-order-status{display:inline-block;padding:6px 10px;background:#f4e1d9;color:#733920;font-weight:850;font-size:11px;border-radius:8px}.ims-order-confirmed,.ims-order-completed{background:#f3efe7;color:#285662}.ims-order-cancelled{background:#fbece5;color:#995035}
+.ims-order-list{display:grid;gap:13px;margin-top:18px}.ims-order-card{border:1px solid #e3ded5;background:#fdfef9;border-radius:13px;padding:18px;box-shadow:0 4px 14px #1832380a}.ims-order-card h4{color:#13323a;font-size:17px;margin:0 0 8px;overflow-wrap:anywhere}.ims-order-card p{font-size:13px;color:#4c6269;margin:8px 0;line-height:1.6}.ims-order-card small{display:block;font-size:12px;color:#4c6269;margin:6px 0}.ims-order-card .ims-order-note{font-size:11px;color:#995035}.ims-order-status{display:inline-block;padding:6px 10px;background:#f4e1d9;color:#733920;font-weight:850;font-size:11px;border-radius:8px}.ims-order-confirmed,.ims-order-completed{background:#f3ebe7;color:#285662}.ims-order-cancelled{background:#fbece5;color:#995035}
 
 /* Favorites and Activities reuse the actual homepage card HTML and home-pro.css.
    Never replace original photos with different dashboard thumbnails. */
