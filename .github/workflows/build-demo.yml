@@ -7,6 +7,7 @@ on:
       - 'build_weekend_offers.py'
       - 'build_about_team.py'
       - 'build_visual_identity.py'
+      - 'build_image_clarity.py'
       - 'team-portraits/*.webp.b64'
       - 'build_bivouac_showcase.py'
       - 'build_rafting_50km_article.py'
@@ -124,6 +125,10 @@ jobs:
         run: python3 build_about_team.py
       - name: Apply experimental Ahansal and Atlas visual identity
         run: python3 build_visual_identity.py
+      - name: Improve demo image clarity
+        run: |
+          python3 -m pip install Pillow==11.3.0
+          python3 build_image_clarity.py
       - uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
