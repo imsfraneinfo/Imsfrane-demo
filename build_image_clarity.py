@@ -11,7 +11,8 @@ def attr(tag,key):
 def put(tag,key,value):
     pattern=r'(?<![\w-])'+re.escape(key)+r'=["\'][^"\']*["\']'
     if re.search(pattern,tag):return re.sub(pattern,lambda m:key+'="'+value+'"',tag)
-    return tag.rstrip('>')+' '+key+'="'+value+'">'
+    ending='/>' if tag.endswith('/>') else '>'
+    return tag[:-len(ending)].rstrip()+' '+key+'="'+value+'"'+ending
 def build(root=ROOT):
     cache={}; changes=[]
     def dimensions(path):
