@@ -34,8 +34,15 @@ def build(root=ROOT):
                 # Only same-aspect variants of the same named photograph.
                 if nw>w and abs(w/h-nw/nh)<.015:return q
         return None
-    hero=BASE+'images/optimized/'
-    hero_set=', '.join(hero+n+' '+str(w)+'w' for w,n in [(640,'21-640-v3.avif'),(800,'21-800-v3.avif'),(960,'21-960.avif'),(1200,'21-1200.avif')])
+    # Rebuild the mobile hero from the larger source, with moderate compression.
+    # Desktop keeps its existing source selection and download budget.
+    folder=root/'images/clarity';folder.mkdir(parents=True,exist_ok=True)
+    with Image.open(root/'images/21.webp') as original:
+        for w in (640,800,960,1200):
+            sized=original.resize((w,round(original.height*w/original.width)),Image.Resampling.LANCZOS)
+            sized.save(folder/f'hero-{w}.avif','AVIF',quality=65,speed=6)
+    hero=BASE+'images/clarity/'
+    hero_set=', '.join(hero+f'hero-{w}.avif '+str(w)+'w' for w in (640,800,960,1200))
     for p in root.rglob('*.html'):
         if 'admin' in p.parts:continue
         text=p.read_text();before=text
@@ -65,11 +72,12 @@ def build(root=ROOT):
             if tag.startswith('<source'):
                 tag=put(tag,'srcset',hero_set);tag=put(tag,'sizes','100vw')
             elif tag.startswith('<link') and attr(tag,'as')=='image':
-                tag=put(tag,'href',hero+'21-1200.avif');tag=put(tag,'imagesrcset',hero_set);tag=put(tag,'imagesizes','100vw')
+                tag=put(tag,'href',hero+'hero-1200.avif');tag=put(tag,'imagesrcset',hero_set);tag=put(tag,'imagesizes','100vw')
             elif tag.startswith('<img'):
-                tag=put(tag,'src',hero+'21-1200.avif')
+                tag=put(tag,'src',hero+'hero-1200.avif')
             return tag
         text=re.sub(r'<(?:source|link|img)\b[^>]*>',hero_tag,text)
+        text=re.sub(r'(src=["\'][^"\']*images/team/farid-laydi\.webp)(["\'])',r'\1?v=clarity1\2',text)
         if text!=before:p.write_text(text)
     (root/'image-clarity-report.json').write_text(json.dumps(changes,ensure_ascii=False,indent=2))
     print(f'Upgraded {len(changes)} image references; original files and crop styles unchanged.')
