@@ -50,8 +50,8 @@ for lang,t in texts.items():
         submenu=f'<details class="stay-menu"><summary class="atnav-item"><span class="atnav-item-icon"><svg aria-hidden="true"><use href="#atnav-i-bed"></use></svg></span><span>{t[0]}</span></summary><div class="stay-menu-links"><a href="{house}">{t[1]}</a><a href="{gite}">{name}</a></div></details>'
         s=re.sub(pattern,lambda m:submenu,s,flags=re.S)
         # Accommodation is a sibling of Activities, never inside its collapsible list.
-        s=re.sub(r'<li>\\s*<details class="stay-menu">.*?</details>\\s*</li>', '', s, flags=re.S)
-        activity=r'(<div\\b[^>]*id="atnavActivityList"[^>]*>.*?</ul>\\s*</div>)'
+        s=re.sub(r'<li>\s*<details class="stay-menu">.*?</details>\s*</li>', '', s, flags=re.S)
+        activity=r'(<div\b[^>]*id="atnavActivityList"[^>]*>.*?</ul>\s*</div>)'
         if 'id="atnavActivityList"' in s:
             s,n=re.subn(activity,lambda m:m[0]+submenu,s,count=1,flags=re.S)
             assert n==1, f"Could not locate activities container: {p}"
