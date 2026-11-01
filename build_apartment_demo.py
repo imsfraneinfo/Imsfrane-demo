@@ -92,12 +92,44 @@ def build(root):
         (root/f'apartment-content-{lang}.html').write_text(content)
         p=root/lang/'hebergement/index.html'
         outer=p.read_text()
-        frame=f'<main id="mainContent" class="rafting-page" style="padding:0;max-width:none"><iframe id="apartmentExperienceFrame" title="{t[0]}" src="{base}apartment-content-{lang}.html?v=rooms2" loading="eager" scrolling="no" style="display:block;width:100%;height:4200px;border:0;overflow:hidden"></iframe></main>'
+        frame=f'<main id="mainContent" class="rafting-page" style="padding:0;max-width:none"><iframe id="apartmentExperienceFrame" title="{t[0]}" src="{base}apartment-content-{lang}.html?v=rooms3" loading="eager" scrolling="no" style="display:block;width:100%;height:4200px;border:0;overflow:hidden"></iframe></main>'
         outer=re.sub(r'<main\b[^>]*>.*?</main>',lambda _:frame,outer,count=1,flags=re.S)
         outer=re.sub(r'<link[^>]*href="[^"]*apartment-demo.css[^"]*"[^>]*>','',outer)
         outer=re.sub(r'<script\b[^>]*src="[^"]*(?:hebergement.min.js|image-controls.js)[^"]*"[^>]*></script>','',outer)
         outer=re.sub(r'<script\b[^>]*type="application/ld\+json"[^>]*>.*?</script>','',outer,flags=re.S)
-        outer=outer.replace('</body>','''<script>(function(){var f=document.getElementById('apartmentExperienceFrame');f.addEventListener('load',function(){var d=f.contentDocument;function size(){f.style.height=Math.ceil(d.querySelector('main').getBoundingClientRect().height)+'px'}size();new ResizeObserver(size).observe(d.body);window.addEventListener('resize',size);d.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var target=d.querySelector(a.getAttribute('href'));if(target){e.preventDefault();window.scrollTo({top:f.getBoundingClientRect().top+window.scrollY+target.getBoundingClientRect().top-80,behavior:'smooth'})}})})})();</script></body>''')
+        outer=outer.replace('</body>', '''<script>(function () {
+  var frame = document.getElementById('apartmentExperienceFrame');
+  if (!frame) return;
+  var observer;
+  function attach() {
+    var doc = frame.contentDocument;
+    var main = doc && doc.querySelector('main');
+    if (!main) return;
+    function resize() {
+      var height = Math.ceil(main.getBoundingClientRect().height);
+      if (height > 0) frame.style.height = height + 'px';
+    }
+    if (observer) observer.disconnect();
+    observer = new ResizeObserver(resize);
+    observer.observe(main);
+    resize();
+    doc.querySelectorAll('img').forEach(function (img) {
+      if (!img.complete) img.addEventListener('load', resize, {once:true});
+    });
+    if (doc.fonts) doc.fonts.ready.then(resize);
+    doc.querySelectorAll('a[href^="#"]').forEach(function (link) {
+      link.addEventListener('click', function (event) {
+        var target = doc.getElementById(link.getAttribute('href').slice(1));
+        if (!target) return;
+        event.preventDefault();
+        window.scrollTo({top:frame.getBoundingClientRect().top + window.scrollY + target.getBoundingClientRect().top - 80, behavior:'smooth'});
+      });
+    });
+  }
+  frame.addEventListener('load', attach);
+  if (frame.contentDocument && frame.contentDocument.readyState === 'complete') attach();
+})();
+</script></body>''')
         p.write_text(outer)
         (root/lang/'hebergement.html').write_text(outer)
         chooser=root/lang/'hebergements/index.html'
