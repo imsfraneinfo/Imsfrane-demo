@@ -47,8 +47,15 @@ for lang,t in texts.items():
         if '<body' not in s:continue
         # Only navigation links change. Existing house page main remains untouched.
         pattern=r'<a\b[^>]*class="atnav-submenu-link"[^>]*href="[^"]*/hebergement/(?:"|\?)[^>]*>.*?</a>'
-        submenu=f'<details class="stay-menu"><summary>{t[0]}</summary><div class="stay-menu-links"><a href="{house}">{t[1]}</a><a href="{gite}">{name}</a></div></details>'
+        submenu=f'<details class="stay-menu"><summary class="atnav-item"><span class="atnav-item-icon"><svg aria-hidden="true"><use href="#atnav-i-bed"></use></svg></span><span>{t[0]}</span></summary><div class="stay-menu-links"><a href="{house}">{t[1]}</a><a href="{gite}">{name}</a></div></details>'
         s=re.sub(pattern,lambda m:submenu,s,flags=re.S)
+        # Accommodation is a sibling of Activities, never inside its collapsible list.
+        s=re.sub(r'<li>\\s*<details class="stay-menu">.*?</details>\\s*</li>', '', s, flags=re.S)
+        activity=r'(<div\\b[^>]*id="atnavActivityList"[^>]*>.*?</ul>\\s*</div>)'
+        if 'id="atnavActivityList"' in s:
+            s,n=re.subn(activity,lambda m:m[0]+submenu,s,count=1,flags=re.S)
+            assert n==1, f"Could not locate activities container: {p}"
+        s=s.replace('stays-demo.css?v=1','stays-demo.css?v=2')
         # Other entry points (home card, footer) lead to the two-option listing.
         if p not in [folder/'hebergement/index.html',folder/'hebergement.html',folder/'hebergements/index.html',folder/'gite-atlas/index.html']:
             s=s.replace('href="'+house+'"','href="'+listing+'"')
