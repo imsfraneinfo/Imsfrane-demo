@@ -84,3 +84,6 @@ function init(){
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();""")
+
+from build_apartment_demo import build as build_apartment
+build_apartment(root)
