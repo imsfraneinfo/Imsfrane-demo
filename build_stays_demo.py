@@ -11,7 +11,7 @@ texts={
 'es':['Alojamiento','Casa de alquiler','Elige tu estancia','Dos formas de vivir Imsfrane.','Descubre la casa de alquiler o nuestra nueva página Gîte Atlas Cathédrale.','Ver la casa','Descubrir el alojamiento','Una pausa en el corazón del Atlas','Prepara tu estancia en Gîte Atlas Cathédrale con nuestro equipo.','Fotos de ambiente provisionales de la web: no representan Gîte Atlas Cathédrale.','Una estancia a tu ritmo','Indícanos las fechas, el número de viajeros y las comidas deseadas para preparar una propuesta.','Noches y comidas','Fórmulas y precios por confirmar con el alojamiento.','Durante tu estancia','Senderismo, gargantas y actividades según tus preferencias y disponibilidad.','Solicitar información','Precio a consultar','Disponibilidad, instalaciones y condiciones por confirmar antes de reservar.','Todos los alojamientos'],
 'ar':['الإقامة','منزل للكراء','اختر إقامتك','طريقتان للاستمتاع بمسفران.','اكتشف المنزل المتاح للكراء أو صفحة نزل أطلس كاتدرال الجديدة.','اكتشف المنزل','اكتشف النزل','استراحة في قلب الأطلس','خطط لإقامتك في نزل أطلس كاتدرال بمساعدة فريقنا.','صور توضيحية مؤقتة من الإنترنت، ولا تمثل نزل أطلس كاتدرال.','إقامة تناسب رغباتك','أخبرنا بمواعيد زيارتك وعدد المسافرين والوجبات المطلوبة لنعد لك اقتراحاً مناسباً.','المبيت والوجبات','تُؤكّد الصيغ والأثمنة مع النزل.','أنشطة خلال إقامتك','المشي الجبلي والمضايق والأنشطة: برنامج حسب رغباتك والتوفر.','اطلب المعلومات','الثمن عند الطلب','يجب تأكيد التوفر والتجهيزات والشروط قبل الحجز.','جميع خيارات الإقامة']}
 css='''
-.stay-menu{margin:0}.stay-menu>summary{list-style:none}.stay-menu>summary::-webkit-details-marker{display:none}.stay-menu[open]>summary .atnav-chevron{transform:rotate(180deg)}
+/* Accommodation uses the same navigation classes as Activities. */
 .stay-main{background:#f7f5ef;color:#183b32;padding-bottom:80px}.stay-wrap{max-width:1160px;margin:auto;padding:0 24px}.stay-intro{padding:70px 0 36px}.stay-eyebrow{text-transform:uppercase;font:600 12px/1.5 Inter,sans-serif;letter-spacing:2px;color:#896944}.stay-main h1{font:600 clamp(38px,6vw,72px)/1.08 'Playfair Display',serif;margin:18px 0 24px;max-width:850px}.stay-main p{font-size:17px;line-height:1.8;max-width:720px}.stay-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}.stay-card{background:#fff;border:1px solid #deded3;border-radius:20px;overflow:hidden}.stay-card img{width:100%;height:310px;object-fit:cover}.stay-card-body{padding:28px}.stay-main h2{font:600 30px/1.3 'Playfair Display',serif;margin:10px 0 20px}.stay-button{display:inline-flex;background:#173d32;color:#fff!important;padding:14px 22px;border-radius:8px;text-decoration:none;font-weight:600;margin-top:16px}.stay-button:hover{background:#2e5a48}.stay-hero{width:100%;height:clamp(280px,42vw,520px);object-fit:cover;border-radius:20px}.stay-note{font-size:12px!important;color:#726b60;margin:12px 0 38px}.stay-content{display:grid;grid-template-columns:1.5fr 1fr;gap:48px;padding-top:20px}.stay-booking{align-self:start;background:#e9eee5;border:1px solid #d4dfcf;border-radius:18px;padding:28px}.stay-detail{padding:22px 0;border-bottom:1px solid #deded3}.stay-second{width:100%;height:300px;object-fit:cover;border-radius:14px;margin-top:24px}.stay-breadcrumb{display:inline-block;color:#536858;margin-top:30px}.stay-main[dir=rtl] h1,.stay-main[dir=rtl] h2{font-family:Tajawal,Arial,sans-serif}@media(max-width:680px){.stay-grid,.stay-content{grid-template-columns:1fr}.stay-intro{padding-top:38px}.stay-card img{height:240px}.stay-content{gap:24px}.stay-wrap{padding:0 18px}}
 '''
 (root/'stays-demo.css').write_text(css)
@@ -28,7 +28,7 @@ for lang,t in texts.items():
         s=re.sub(r'<link\b[^>]*(?:rel="canonical"|rel="alternate"|rel="preload")[^>]*>','',s)
         s=re.sub(r'<script\b[^>]*src="[^"]*(?:hebergement.min.js|image-controls.js)[^"]*"[^>]*></script>','',s)
         s=re.sub(r'<script\b[^>]*src="[^"]*adsbygoogle[^"]*"[^>]*></script>','',s)
-        s=s.replace('</head>',f'<link rel="stylesheet" href="{base}stays-demo.css?v=3"><meta name="robots" content="noindex,follow"></head>')
+        s=s.replace('</head>',f'<link rel="stylesheet" href="{base}stays-demo.css?v=4"><meta name="robots" content="noindex,follow"></head>')
         for code in texts:
             s=s.replace(base+code+'/hebergement/',base+code+'/'+route+'/') if False else s
         # Only switch the compact language picker, preserving all other links.
@@ -47,22 +47,40 @@ for lang,t in texts.items():
         if '<body' not in s:continue
         # Only navigation links change. Existing house page main remains untouched.
         pattern=r'<a\b[^>]*class="atnav-submenu-link"[^>]*href="[^"]*/hebergement/(?:"|\?)[^>]*>.*?</a>'
-        submenu=f'<details class="stay-menu"><summary class="atnav-item atnav-toggle"><span class="atnav-item-icon"><svg aria-hidden="true"><use href="#atnav-i-bed"></use></svg></span><span>{t[0]}</span><span class="atnav-chevron"><svg aria-hidden="true"><use href="#atnav-i-chevron"></use></svg></span></summary><div class="atnav-activities"><ul class="atnav-submenu"><li><a class="atnav-submenu-link" href="{house}"><span class="atnav-subicon"><svg aria-hidden="true"><use href="#atnav-i-home"></use></svg></span><span>{t[1]}</span></a></li><li><a class="atnav-submenu-link" href="{gite}"><span class="atnav-subicon"><svg aria-hidden="true"><use href="#atnav-i-bed"></use></svg></span><span>{name}</span></a></li></ul></div></details>'
+        submenu=f'<section class="stay-menu"><button class="atnav-item atnav-toggle" id="atnavAccommodation" type="button" aria-expanded="false" aria-controls="atnavAccommodationList"><span class="atnav-item-icon"><svg aria-hidden="true"><use href="#atnav-i-bed"></use></svg></span><span>{t[0]}</span><span class="atnav-chevron"><svg aria-hidden="true"><use href="#atnav-i-chevron"></use></svg></span></button><div class="atnav-activities is-collapsed" id="atnavAccommodationList" aria-hidden="true" inert><ul class="atnav-submenu"><li><a class="atnav-submenu-link" href="{house}"><span class="atnav-subicon"><svg aria-hidden="true"><use href="#atnav-i-home"></use></svg></span><span>{t[1]}</span></a></li><li><a class="atnav-submenu-link" href="{gite}"><span class="atnav-subicon"><svg aria-hidden="true"><use href="#atnav-i-bed"></use></svg></span><span>{name}</span></a></li></ul></div></section>'
         s=re.sub(pattern,lambda m:submenu,s,flags=re.S)
         # Accommodation is a sibling of Activities, never inside its collapsible list.
         s=re.sub(r'<li>\s*<details class="stay-menu">.*?</details>\s*</li>', '', s, flags=re.S)
         s=re.sub(r'<details class="stay-menu">.*?</details>', '', s, flags=re.S)
+        s=re.sub(r'<section class="stay-menu">.*?</section>', '', s, flags=re.S)
         activity=r'(<div\b[^>]*id="atnavActivityList"[^>]*>.*?</ul>\s*</div>)'
         if 'id="atnavActivityList"' in s:
             s,n=re.subn(activity,lambda m:m[0]+submenu,s,count=1,flags=re.S)
             assert n==1, f"Could not locate activities container: {p}"
-        s=s.replace('stays-demo.css?v=3','stays-demo.css?v=3')
+        s=s.replace('stays-demo.css?v=4','stays-demo.css?v=4')
         # Other entry points (home card, footer) lead to the two-option listing.
         if p not in [folder/'hebergement/index.html',folder/'hebergement.html',folder/'hebergements/index.html',folder/'gite-atlas/index.html']:
             s=s.replace('href="'+house+'"','href="'+listing+'"')
             # Restore the direct house link in submenu.
-            s=re.sub(r'(<details class="stay-menu">.*?</details>)', lambda m:m[0].replace('href="'+listing+'"','href="'+house+'"'), s, flags=re.S)
-        if 'stays-demo.css' not in s:s=s.replace('</head>',f'<link rel="stylesheet" href="{base}stays-demo.css?v=3"></head>')
+            s=re.sub(r'(<section class="stay-menu">.*?</section>)', lambda m:m[0].replace('href="'+listing+'"','href="'+house+'"'), s, flags=re.S)
+        if 'stays-demo.css' not in s:s=s.replace('</head>',f'<link rel="stylesheet" href="{base}stays-demo.css?v=4"></head>')
+        if 'accommodation-menu.js' not in s:
+            s=s.replace('</body>',f'<script defer src="{base}accommodation-menu.js?v=4"></script></body>')
         p.write_text(s)
 if Path('gite-atlas-form.html').exists():shutil.copyfile('gite-atlas-form.html',root/'gite-atlas-form.html')
 print('Built accommodation selector and Gite Atlas preview in four languages.')
+
+(root/'accommodation-menu.js').write_text("""(function(){
+function init(){
+ var button=document.getElementById('atnavAccommodation'),list=document.getElementById('atnavAccommodationList');
+ if(!button||!list)return;
+ button.addEventListener('click',function(){
+  var open=button.getAttribute('aria-expanded')!=='true';
+  button.setAttribute('aria-expanded',String(open));
+  list.classList.toggle('is-collapsed',!open);
+  list.setAttribute('aria-hidden',String(!open));
+  list.inert=!open;
+ });
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+})();""")
