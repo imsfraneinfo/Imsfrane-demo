@@ -130,7 +130,7 @@ main.demo-rebuilt-page form button{background:#c46a45;color:#172c31;border:0;pad
 <!-- =====================================================
          NAVIGATION
          ===================================================== -->
-<main id="mainContent" class="rafting-page" style="padding:0;max-width:none"><iframe id="apartmentExperienceFrame" title="Casa de alquiler" src="/Imsfrane-demo/apartment-content-es.html?v=rooms2" loading="eager" scrolling="no" style="display:block;width:100%;height:4200px;border:0;overflow:hidden"></iframe></main>
+<main id="mainContent" class="rafting-page" style="padding:0;max-width:none"><iframe id="apartmentExperienceFrame" title="Casa de alquiler" src="/Imsfrane-demo/apartment-content-es.html?v=rooms3" loading="eager" scrolling="no" style="display:block;width:100%;height:4200px;border:0;overflow:hidden"></iframe></main>
 <!-- =====================================================
          FOOTER
          ===================================================== -->
@@ -162,4 +162,36 @@ main.demo-rebuilt-page form button{background:#c46a45;color:#172c31;border:0;pad
 </footer>
 <a aria-label="Contacter sur WhatsApp" class="floating-whatsapp" href="https://wa.me/212667772551" rel="noopener noreferrer" target="_blank"><i class="fa-brands fa-whatsapp"></i><span class="editable" data-cms-text="hebergement-t151">WhatsApp</span></a>
 <button aria-label="Retour en haut" class="back-to-top" id="backToTop" type="button"><i class="fa-solid fa-chevron-up"></i></button>
-<script defer="" src="/Imsfrane-demo/js/core-multilingual-v2.js"></script><script defer src="/Imsfrane-demo/navigation-pro.js?demo=mirror-paths-v3"></script><script defer src="/Imsfrane-demo/accommodation-menu.js?v=4"></script><script>(function(){var f=document.getElementById('apartmentExperienceFrame');f.addEventListener('load',function(){var d=f.contentDocument;function size(){f.style.height=Math.ceil(d.querySelector('main').getBoundingClientRect().height)+'px'}size();new ResizeObserver(size).observe(d.body);window.addEventListener('resize',size);d.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var target=d.querySelector(a.getAttribute('href'));if(target){e.preventDefault();window.scrollTo({top:f.getBoundingClientRect().top+window.scrollY+target.getBoundingClientRect().top-80,behavior:'smooth'})}})})})();</script></body></html>
+<script defer="" src="/Imsfrane-demo/js/core-multilingual-v2.js"></script><script defer src="/Imsfrane-demo/navigation-pro.js?demo=mirror-paths-v3"></script><script defer src="/Imsfrane-demo/accommodation-menu.js?v=4"></script><script>(function () {
+  var frame = document.getElementById('apartmentExperienceFrame');
+  if (!frame) return;
+  var observer;
+  function attach() {
+    var doc = frame.contentDocument;
+    var main = doc && doc.querySelector('main');
+    if (!main) return;
+    function resize() {
+      var height = Math.ceil(main.getBoundingClientRect().height);
+      if (height > 0) frame.style.height = height + 'px';
+    }
+    if (observer) observer.disconnect();
+    observer = new ResizeObserver(resize);
+    observer.observe(main);
+    resize();
+    doc.querySelectorAll('img').forEach(function (img) {
+      if (!img.complete) img.addEventListener('load', resize, {once:true});
+    });
+    if (doc.fonts) doc.fonts.ready.then(resize);
+    doc.querySelectorAll('a[href^="#"]').forEach(function (link) {
+      link.addEventListener('click', function (event) {
+        var target = doc.getElementById(link.getAttribute('href').slice(1));
+        if (!target) return;
+        event.preventDefault();
+        window.scrollTo({top:frame.getBoundingClientRect().top + window.scrollY + target.getBoundingClientRect().top - 80, behavior:'smooth'});
+      });
+    });
+  }
+  frame.addEventListener('load', attach);
+  if (frame.contentDocument && frame.contentDocument.readyState === 'complete') attach();
+})();
+</script></body></html>
