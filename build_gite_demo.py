@@ -61,7 +61,7 @@ def build(root):
     for lang,d in DATA.items():
         template=(root/f'apartment-content-{lang}.html').read_text()
         head=template.split('<body>')[0]
-        head=re.sub(r'<title>.*?</title>',f'<title>{d["name"]} | Imsfrane</title>',head)
+        head=re.sub(r'<title\b[^>]*>.*?</title>',f'<title>{d["name"]} | Imsfrane</title>',head)
         head=head.replace('</head>','''<style>.hero h1{font-size:clamp(54px,6.4vw,92px)}.gite-price{font:600 40px/1.2 var(--serif);color:#a94f30;margin:20px 0}.step .btn{margin-top:20px;white-space:normal;text-align:center}.gite-form{display:grid;gap:18px}.gite-form label{display:grid;gap:8px;font-size:13px;font-weight:700}.gite-form input,.gite-form select{width:100%;min-width:0;padding:14px;border:1px solid #a6aca9;background:white;color:#163037;font:inherit;border-radius:5px}.gite-form button{cursor:pointer;white-space:normal}.booking-grid>*{min-width:0}.apt-amenities .chip{background:#eee9df;color:#163037;padding:10px 14px;border-radius:20px;font-size:13px}.step{display:flex;flex-direction:column}.step .btn{margin-top:auto}.step p{margin-bottom:24px}.hero-stat strong{font-size:30px}.hero-stat small{line-height:1.6}.gite-note{font-size:12px;line-height:1.8;opacity:.85}[dir=rtl] input[type=date]{direction:ltr}@media(max-width:650px){.hero h1{font-size:58px}.hero-bottom{grid-template-columns:1fr}.hero-stat strong{font-size:28px}.gite-price{font-size:34px}.quicknav-grid{grid-template-columns:1fr 1fr!important}}</style></head>''')
         def img(name,alt,lazy=True):
             return f'<img src="{src}{name}.webp" alt="{escape(alt,quote=True)}" width="1152" height="1536" '+('loading="lazy"' if lazy else 'fetchpriority="high"')+'>'
@@ -102,7 +102,7 @@ document.getElementById('message').value=message;
         (root/f'gite-content-{lang}.html').write_text(head+body+script)
         outer=(root/lang/'hebergement/index.html').read_text()
         outer=outer.replace('apartmentExperienceFrame','giteExperienceFrame').replace(f'apartment-content-{lang}.html?v=rooms3',f'gite-content-{lang}.html?v=atlas1')
-        outer=re.sub(r'<title>.*?</title>',f'<title>{d["name"]} | Imsfrane Cathédrale</title>',outer,flags=re.S)
+        outer=re.sub(r'<title\b[^>]*>.*?</title>',f'<title>{d["name"]} | Imsfrane Cathédrale</title>',outer,flags=re.S)
         outer=re.sub(r'(<iframe[^>]*title=")[^"]*',lambda m:m[1]+d['name'],outer)
         outer=re.sub(r'<meta\b[^>]*(?:property="og:|name="twitter:|name="description")[^>]*>','',outer)
         outer=re.sub(r'<link\b[^>]*(?:rel="canonical"|rel="alternate"|rel="preload")[^>]*>','',outer)
