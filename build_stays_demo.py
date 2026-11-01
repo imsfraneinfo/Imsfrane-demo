@@ -87,3 +87,26 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 
 from build_apartment_demo import build as build_apartment
 build_apartment(root)
+
+# Homepage accommodation card opens the single rental apartment directly.
+home_labels={
+ 'fr':('Maison à louer','Appartement entier à 10 km avant Imsfrane.','300 DH / nuit','À 10 km avant Imsfrane'),
+ 'en':('House for rent','Entire apartment 10 km before Imsfrane.','300 MAD / night','10 km before Imsfrane'),
+ 'es':('Casa de alquiler','Apartamento completo a 10 km antes de Imsfrane.','300 MAD / noche','A 10 km antes de Imsfrane'),
+ 'ar':('منزل للكراء','شقة كاملة على بُعد 10 كلم قبل مسفران.','300 درهم / ليلة','على بُعد 10 كلم قبل مسفران')
+}
+for lang,(label,description,price,location) in home_labels.items():
+    home=root/lang/'index.html'
+    html=home.read_text()
+    def update_home_card(match):
+        card=match[0]
+        card=re.sub(r'href="[^"]*/hebergements?/"',f'href="{base}{lang}/hebergement/"',card)
+        card=re.sub(r'<h3>.*?</h3>',f'<h3>{label}</h3>',card,flags=re.S)
+        card=re.sub(r'<p>.*?</p>',f'<p>{description}</p>',card,flags=re.S)
+        card=re.sub(r'<strong>.*?</strong>',f'<strong>{price}</strong>',card,flags=re.S)
+        card=re.sub(r'aria-label="[^"]*"',f'aria-label="{label}"',card)
+        card=re.sub(r'(<div class="hp-activity-location">.*?<span>).*?(</span>)',lambda m:m[1]+location+m[2],card,flags=re.S)
+        return card
+    html,count=re.subn(r'<article class="hp-activity-card hp-hebergement">.*?</article>',update_home_card,html,flags=re.S)
+    assert count==1, f"Expected one homepage accommodation card: {home}"
+    home.write_text(html)
