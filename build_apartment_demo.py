@@ -7,14 +7,16 @@ def build(root):
     base='/Imsfrane-demo/'
     assets=Path(__file__).parent/'apartment-assets'
     shutil.copytree(assets,root/'images/apartment',dirs_exist_ok=True)
+    shutil.copyfile(root/'images/bab2.webp',root/'images/apartment/bedroom.webp')
     data={
       'fr': ['Maison à louer','Un appartement, rien que pour vous.','Un séjour à Imsfrane avec un salon, une cuisine et un balcon ouvert sur le paysage.', '300 DH','par nuit · appartement entier','Votre appartement','Cuisine','Douche et toilettes','Salon','Chambre pour deux','Deux banquettes','Les photos de l’appartement','Demander les disponibilités','Contactez-nous pour confirmer vos dates et votre réservation.','Tous les hébergements',['Balcon','Salon','Cuisine','Douche et toilettes','Couloir','Vue depuis le balcon'],'Bonjour, je souhaite réserver l’appartement à 300 DH par nuit. Mes dates : … Nombre de voyageurs : …'],
       'en': ['House for rent','An apartment all to yourself.','Stay in Imsfrane with a living room, a kitchen and a balcony overlooking the landscape.','300 MAD','per night · entire apartment','Your apartment','Kitchen','Shower and toilet','Living room','Bedroom for two','Two banquettes','Apartment photos','Check availability','Contact us to confirm your dates and booking.','All accommodation',['Balcony','Living room','Kitchen','Shower and toilet','Hallway','View from the balcony'],'Hello, I would like to book the apartment at 300 MAD per night. Dates: … Number of guests: …'],
       'es': ['Casa de alquiler','Un apartamento solo para ti.','Una estancia en Imsfrane con salón, cocina y un balcón abierto al paisaje.','300 MAD','por noche · apartamento completo','Tu apartamento','Cocina','Ducha y aseo','Salón','Dormitorio para dos','Dos divanes','Fotos del apartamento','Consultar disponibilidad','Contáctanos para confirmar tus fechas y tu reserva.','Todos los alojamientos',['Balcón','Salón','Cocina','Ducha y aseo','Pasillo','Vista desde el balcón'],'Hola, quiero reservar el apartamento a 300 MAD por noche. Fechas: … Número de viajeros: …'],
       'ar': ['منزل للكراء','شقة كاملة ليكم بوحدكم.','إقامة فمسفران، بصالون وكوزينة وبالكون كيطل على المناظر المحيطة.','300 درهم','فالليلة · الشقة كاملة','شنو كاين فالشقة','كوزينة','دوش وطواليط','صالون','بيت نعاس ديال جوج','جوج بانكوات','صور الشقة','سول على التوفر','تواصل معانا باش نأكدو ليك التواريخ والحجز.','جميع خيارات الإقامة',['البالكون','الصالون','الكوزينة','الدوش والطواليط','الممر','الإطلالة من البالكون'],'سلام، بغيت نحجز الشقة بـ300 درهم فالليلة. التواريخ: … عدد الأشخاص: …']
     }
-    names=['balcony','living-room','kitchen','bathroom','hallway','view']
+    names=['balcony','living-room','bedroom','kitchen','bathroom','hallway','view']
     for lang,t in data.items():
+        t[15].insert(2, t[9])
         p=root/lang/'hebergement/index.html'
         s=p.read_text()
         gallery=''.join(f'<figure><a href="{base}images/apartment/{n}.webp" target="_blank" rel="noopener" aria-label="{label}"><img src="{base}images/apartment/{n}.webp" alt="{label}" width="1152" height="1536" loading="lazy"></a><figcaption>{label}</figcaption></figure>' for n,label in zip(names,t[15]))
