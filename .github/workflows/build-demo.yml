@@ -6,6 +6,8 @@ on:
       - '.github/workflows/build-demo.yml'
       - 'build_stays_demo.py'
       - 'build_apartment_demo.py'
+      - 'build_gite_demo.py'
+      - 'gite-assets/**'
       - 'apartment-assets/**'
       - 'build_weekend_offers.py'
       - 'build_about_team.py'

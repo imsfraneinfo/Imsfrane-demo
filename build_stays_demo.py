@@ -110,3 +110,6 @@ for lang,(label,description,price,location) in home_labels.items():
     html,count=re.subn(r'<article class="hp-activity-card hp-hebergement">.*?</article>',update_home_card,html,flags=re.S)
     assert count==1, f"Expected one homepage accommodation card: {home}"
     home.write_text(html)
+
+from build_gite_demo import build as build_gite
+build_gite(root)
