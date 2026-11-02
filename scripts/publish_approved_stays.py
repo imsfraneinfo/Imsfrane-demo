@@ -60,3 +60,37 @@ for page in root.rglob('*.html'):
  html=page.read_text()
  html=re.sub(r'<i\b[^>]*class="([^"]*)"[^>]*>\s*</i>',inline_icon,html)
  page.write_text(html)
+
+# Repair duplicated accommodation fragments left by repeated older builds.
+# Keep the first complete section; the next label belongs inside the same nav.
+menu_pattern=re.compile(r'(<section class="stay-menu">.*?</section>).*?(?=<span class="atnav-label atnav-label-separated">)',re.S)
+repaired=0
+for page in root.rglob('*.html'):
+ if '.git' in page.parts:continue
+ html=page.read_text()
+ fixed=menu_pattern.sub(lambda m:m[1],html)
+ if fixed!=html:
+  page.write_text(fixed);repaired+=1
+ if 'id="atnavAccommodation"' in fixed:
+  assert fixed.count('id="atnavAccommodation"')==1,page
+  section=re.search(r'<section class="stay-menu">.*?</section>',fixed,re.S)[0]
+  assert section.count('class="atnav-submenu-link"')==2,page
+print(f'Repaired accommodation navigation on {repaired} pages')
+
+# Repeated releases must not duplicate the gite favorite hook.
+favorite=root/'js/ims-favorites-demo.js'
+code=favorite.read_text()
+hook=re.compile(r'      const frame=document.getElementById\("giteExperienceFrame"\);.*?      placeGite\(\);',re.S)
+matches=list(hook.finditer(code))
+if len(matches)>1:
+ first=matches[0].start()
+ code=code[:first]+matches[0][0]+hook.sub('',code[matches[0].end():])
+favorite.write_text(code)
+subprocess.run(['node','--check',str(favorite)],check=True)
+nav=root/'navigation-pro.js'
+nav.write_text(re.sub(r'ims-favorites-demo\.js\?[^"]*','ims-favorites-demo.js?v=menu-fix-20261102',nav.read_text()))
+for page in root.rglob('*.html'):
+ if '.git' in page.parts:continue
+ html=page.read_text()
+ html=re.sub(r'navigation-pro\.js\?[^"\s>]*','navigation-pro.js?v=menu-fix-20261102',html)
+ page.write_text(html)
