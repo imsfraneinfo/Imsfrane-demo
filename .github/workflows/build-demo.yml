@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/build-demo.yml'
       - 'build_stays_demo.py'
+      - 'build_rafting_programmes.py'
       - 'build_apartment_demo.py'
       - 'build_gite_demo.py'
       - 'build_booking_demo.py'
@@ -137,6 +138,8 @@ jobs:
           python3 build_image_clarity.py
       - name: Build accommodation choices and Gite Atlas demo
         run: python3 build_stays_demo.py
+      - name: Build four rafting programmes and detail pages
+        run: python3 build_rafting_programmes.py
       - uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
