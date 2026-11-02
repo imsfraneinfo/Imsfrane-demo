@@ -113,6 +113,17 @@ document.getElementById('message').value=message;
         card=f'<article class="stay-card"><img src="{src}exterior.webp" alt="{d["name"]}" loading="lazy"><div class="stay-card-body"><span class="stay-eyebrow">02 · GÎTE ATLAS</span><h2>{d["name"]}</h2><p><strong>250 DH</strong> · {d["night"]}</p><p>{d["included"]}</p><a class="stay-button" href="{base}{lang}/gite-atlas/">{d["discover"]} ↗</a></div></article>'
         listing=re.sub(r'<article class="stay-card">(?:(?!</article>).)*?/gite-atlas/(?:(?!</article>).)*?</article>',lambda _:card,listing,flags=re.S)
         chooser.write_text(listing)
+
+        # Put the auberge beside the existing apartment card on each homepage.
+        home=root/lang/'index.html'
+        html=home.read_text()
+        html=re.sub(r'<article class="hp-activity-card hp-gite-atlas">.*?</article>','',html,flags=re.S)
+        url=f'{base}{lang}/gite-atlas/'
+        card=f'''<article class="hp-activity-card hp-gite-atlas"><a class="hp-activity-image" href="{url}" aria-label="{d['name']}"><img src="{src}exterior.webp" alt="{d['name']}" width="1152" height="1536" loading="lazy" decoding="async"></a><div class="hp-activity-body"><div class="hp-activity-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i><span>{d['amenities'][3]}</span></div><h3>{d['name']}</h3><p>{d['included']}</p><div class="hp-activity-bottom"><strong>250 DH / {d['night']}</strong><a href="{url}" aria-label="{d['discover']} · {d['name']}"><span>{d['discover']}</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div></div></article>'''
+        html,count=re.subn(r'<article class="hp-activity-card hp-hebergement">.*?</article>',lambda m:m[0]+card,html,count=1,flags=re.S)
+        assert count==1, f'Missing apartment homepage card: {home}'
+        home.write_text(html)
+
     print('Built Gite Atlas in FR/EN/ES/AR with real photos and WhatsApp booking.')
 
 if __name__=='__main__':
