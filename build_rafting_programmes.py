@@ -64,7 +64,7 @@ def build(root):
    return f'<img src="{BASE}images/{photo}" alt="{escape(alt,quote=True)}" width="1152" height="1536" '+('loading="lazy"' if lazy else 'fetchpriority="high"')+'>'
   def hero(title,desc,photo,meta,back=False):
    topline=f'<a href="{BASE}{lang}/rafting/" target="_parent">← {t["back"]}</a>' if back else 'IMSFRANE · OUED AHANSAL · ATLAS'
-   return f'<section class="hero"><div class="hero-main"><div class="hero-copy"><div class="topline">{topline}</div><h1>{title}</h1><p class="hero-summary">{desc}</p><div class="hero-acts"><a class="btn btn-gold" href="#{"booking" if back else "programmes"}">{t["book"] if back else t["choose"]} ↓</a></div><div class="hero-bottom"><div class="hero-stat"><strong>{meta}</strong><small>{t["season"]}</small></div></div></div><div class="hero-media"><div class="shot main">{img(photo,desc,False)}</div><div class="shot">{img("rafting-12/IMG_0709.webp" if photo.startswith("rafting-12/") else "rafting-new/IMG_2101.webp",t["daysteps"][0][0],False)}</div><div class="shot">{img("rafting-12/IMG_6625.webp" if photo.startswith("rafting-12/") else "IMG_bivouac-day.webp",t["plan"],False)}</div></div></div></section>'
+   return f'<section class="hero"><div class="hero-main"><div class="hero-copy"><div class="topline">{topline}</div><h1>{title}</h1><p class="hero-summary">{desc}</p><div class="hero-acts"><a class="btn btn-gold" href="#{"booking" if back else "programmes"}">{t["book"] if back else t["choose"]} ↓</a></div><div class="hero-bottom"><div class="hero-stat"><strong>{meta}</strong><small>{t["season"]}</small></div></div></div><div class="hero-media"><div class="shot main">{img(photo,desc,False)}</div><div class="shot">{img("rafting-12/IMG_0709-v2.webp" if photo.startswith("rafting-12/") else "rafting-new/IMG_2101.webp",t["daysteps"][0][0],False)}</div><div class="shot">{img("rafting-12/IMG_6625.webp" if photo.startswith("rafting-12/") else "IMG_bivouac-day.webp",t["plan"],False)}</div></div></div></section>'
   cards=''
   for i,(name,duration,desc) in enumerate(t['routes']):
    cards+=f'<article class="rp-card">{img(CARD_PHOTOS[i],name)}<div class="rp-card-copy"><div class="kicker">0{i+1} · {duration}</div><h3>{name}</h3><p>{desc}</p><div class="rp-price">{prices[i]}</div><div class="rp-meta"><span>{t["price"] if i!=2 else t["return"]}</span>{"<span>"+t["min"]+"</span>" if i==3 else ""}</div><a class="btn btn-dark" href="{BASE}{lang}/rafting/{SLUGS[i]}/" target="_parent">{t["discover"]} ↗</a></div></article>'
@@ -74,7 +74,7 @@ def build(root):
    inner=head.replace('<title>Rafting | Imsfrane</title>',f'<title>{title} | Imsfrane</title>')+'<body><main>'+main+'</main></body></html>'
    (root/innername).write_text(inner)
    outer=outer_source.replace('giteExperienceFrame','raftingProgramFrame')
-   outer=re.sub(r'<iframe\b[^>]*>',f'<iframe id="raftingProgramFrame" title="{title}" src="{BASE}{innername}?v=12km-sixsteps1" scrolling="no" style="display:block;width:100%;height:4200px;border:0"></iframe>',outer,count=1)
+   outer=re.sub(r'<iframe\b[^>]*>',f'<iframe id="raftingProgramFrame" title="{title}" src="{BASE}{innername}?v=12km-sixsteps2" scrolling="no" style="display:block;width:100%;height:4200px;border:0"></iframe>',outer,count=1)
    # Replace inherited resize handlers, including the legacy malformed one.
    outer=re.sub(r'<script\b[^>]*>.*?</script>',lambda m:'' if 'raftingProgramFrame' in m[0] and '<iframe' not in m[0] else m[0],outer,flags=re.S)
    resize="""<script>(function(){
