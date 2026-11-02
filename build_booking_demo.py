@@ -26,7 +26,7 @@ function calculate(){
  if(stay==='weekend')add(t[25],null,t[26]);
  form.querySelectorAll('[data-service]:checked').forEach(input=>{const a=services.find(a=>a.id===input.value);let qty=a.unit==='person'?people:a.unit==='duo'?Math.ceil(people/2):a.unit==='quad'?people:1;add(a.name,a.price===null?null:a.price*qty,a.price===null?t[30]:a.price+' × '+qty);});
  $('summaryList').replaceChildren();lines.forEach(a=>{const li=document.createElement('li'),strong=document.createElement('strong'),small=document.createElement('div');strong.textContent=a.name;small.textContent=a.detail+' · '+(a.amount===null?t[30]:a.amount+' DH');li.append(strong,small);$('summaryList').append(li)});
- $('emptySummary').hidden=lines.length>0;$('total').textContent=total.toLocaleString()+' DH';$('quoteNote').hidden=!quotes;
+ $('emptySummary').hidden=lines.length>0;$('total').textContent=quotes&&total===0?t[30]:total.toLocaleString()+' DH';$('quoteNote').hidden=!quotes;
  $('campNote').hidden=!form.querySelector('[value="camping"]:checked');$('raftNote').hidden=!form.querySelector('[value^="raft"]:checked');
  return {people,nights,lines,total,quotes,stay};
 }
@@ -38,7 +38,7 @@ form.addEventListener('submit',e=>{
  if(c.stay!=='none'&&(!Number.isInteger(c.nights)||c.nights<1||c.nights>45)){$('bookingError').textContent=t[37];return;}
  if(form.querySelector('[value="camping"]:checked')&&c.people<10){$('bookingError').textContent=t[38];return;}
  if($('arrival').value<date){$('arrival').focus();return;}
- const msg=['IMSFRANE · '+t[6],t[10]+': '+$('name').value,t[11]+': '+$('phone').value,t[12]+': '+$('email').value,t[8]+': '+$('arrival').value,t[9]+': '+$('departure').value,t[7]+': '+c.people,'',t[56]+':',...c.lines.map(a=>'- '+a.name+' | '+a.detail+' | '+(a.amount===null?t[30]:a.amount+' DH')),'',t[28]+': '+c.total+' DH'+(c.quotes?' + '+t[40]:''),t[13]+': '+$('notes').value,t[35]].join('\\n');
+ const msg=['IMSFRANE · '+t[6],t[10]+': '+$('name').value,t[11]+': '+$('phone').value,t[12]+': '+$('email').value,t[8]+': '+$('arrival').value,t[9]+': '+$('departure').value,t[7]+': '+c.people,'',t[56]+':',...c.lines.map(a=>'- '+a.name+' | '+a.detail+' | '+(a.amount===null?t[30]:a.amount+' DH')),'',t[28]+': '+(c.quotes&&c.total===0?t[30]:c.total+' DH'+(c.quotes?' + '+t[40]:'')),t[13]+': '+$('notes').value,t[35]].join('\\n');
  window.open('https://wa.me/212667772551?text='+encodeURIComponent(msg),'_blank','noopener');
 });calculate();
 })();'''
@@ -56,7 +56,8 @@ def build(root):
    desc=t[47] if a['id']=='raft50' else ''
    choices+=f'<label class="bk-choice"><input type="checkbox" data-service value="{a["id"]}"><span><strong>{a["name"]}</strong><small>{price} {desc}</small></span></label>'
   opts=[('none',18,''),('house',19,20),('gite250',21,22),('gite350',23,24),('weekend',25,26)]
-  options=''.join(f'<option value="{v}">{t[i]}</option>' for v,i,_ in opts)
+  option_prices={'none':'','house':' · 300 DH','gite250':' · 250 DH / '+t[31],'gite350':' · 350 DH / '+t[31],'weekend':' · '+t[30]}
+  options=''.join(f'<option value="{v}">{t[i]}{option_prices[v]}</option>' for v,i,_ in opts)
   stays=''.join(f'<p class="bk-note"><strong>{t[i]}</strong><br>{t[d]}</p>' for _,i,d in opts if d)
   main=f'''<main id="mainContent"><div class="bk" id="bookingNew" dir="{'rtl' if lang=='ar' else 'ltr'}"><section class="bk-hero"><div class="bk-kicker">IMSFRANE · {t[3]}</div><h1>{t[0]}<br><em>{t[1]}</em></h1><p>{t[2]}</p></section><div class="bk-shell"><nav class="bk-progress" aria-label="{t[3]}"><span><b>01</b>{t[5]}</span><span><b>02</b>{t[4]}</span><span><b>03</b>{t[6]}</span></nav><form id="bookingForm"><div class="bk-layout"><div><section class="bk-panel"><div class="bk-kicker">01 · {t[5]}</div><h2>{t[5]}</h2><div class="bk-fields"><label class="bk-field">{t[7]}<input id="guests" type="number" min="1" max="60" step="1" value="2" required inputmode="numeric"></label><label class="bk-field">{t[8]}<input id="arrival" type="date" required></label><label class="bk-field">{t[9]}<input id="departure" type="date"></label><label class="bk-field">{t[15]}<select id="stay">{options}</select></label></div>{stays}</section><section class="bk-panel"><div class="bk-kicker">02 · {t[4]}</div><h2>{t[16]}</h2><div class="bk-choices">{choices}</div><p class="bk-note bk-alert" id="raftNote" hidden>{t[39]}</p><p class="bk-note bk-alert" id="campNote" hidden>{t[38]}</p></section><section class="bk-panel"><div class="bk-kicker">03 · {t[6]}</div><h2>{t[6]}</h2><div class="bk-fields"><label class="bk-field">{t[10]}<input id="name" autocomplete="name" maxlength="90" required></label><label class="bk-field">{t[11]}<input id="phone" type="tel" autocomplete="tel" minlength="6" maxlength="30" required></label><label class="bk-field bk-full">{t[12]}<input id="email" type="email" autocomplete="email" maxlength="120"></label><label class="bk-field bk-full">{t[13]}<textarea id="notes" rows="4" maxlength="2000" placeholder="{t[14]}"></textarea></label></div><p id="bookingError" class="bk-error" role="alert"></p></section></div><aside class="bk-summary"><div class="bk-kicker">IMSFRANE · ATLAS</div><h2>{t[27]}</h2><p id="emptySummary">{t[34]}</p><ul id="summaryList" aria-live="polite"></ul><p>{t[28]}</p><div class="bk-total" id="total">0 DH</div><p class="bk-quote" id="quoteNote" hidden>+ {t[40]}</p><p>{t[35]}</p><button type="submit" class="bk-send">{t[29]} ↗</button><p>{t[55]}</p></aside></div></form></div></div></main>'''
   page=root/lang/'booking/index.html';html=page.read_text()
@@ -64,8 +65,8 @@ def build(root):
   html=re.sub(r'<script[^>]*src="[^"]*(?:booking-pro.js|pages/booking.min.js)[^"]*"[^>]*></script>','',html)
   html=re.sub(r'<script[^>]*id="bpCatalog"[^>]*>.*?</script>','',html,flags=re.S)
   html=re.sub(r'<title\b[^>]*>.*?</title>',f'<title>{t[3]} | Imsfrane Cathédrale</title>',html,flags=re.S)
-  html=html.replace('</head>',f'<link rel="stylesheet" href="{base}booking-new.css?v=2"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500;600;700;800&family=Tajawal:wght@400;700&display=swap" rel="stylesheet"></head>')
-  html=html.replace('</body>',f'<script id="bookingWords" type="application/json">{json.dumps(t,ensure_ascii=False)}</script><script id="bookingServices" type="application/json">{json.dumps(catalog,ensure_ascii=False)}</script><script defer src="{base}booking-new.js?v=1"></script></body>')
+  html=html.replace('</head>',f'<link rel="stylesheet" href="{base}booking-new.css?v=3"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500;600;700;800&family=Tajawal:wght@400;700&display=swap" rel="stylesheet"></head>')
+  html=html.replace('</body>',f'<script id="bookingWords" type="application/json">{json.dumps(t,ensure_ascii=False)}</script><script id="bookingServices" type="application/json">{json.dumps(catalog,ensure_ascii=False)}</script><script defer src="{base}booking-new.js?v=3"></script></body>')
   page.write_text(html);(root/lang/'booking.html').write_text(html)
  print('Built current demo booking in FR EN ES AR')
 if __name__=='__main__':
