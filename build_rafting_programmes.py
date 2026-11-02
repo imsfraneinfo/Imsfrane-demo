@@ -38,6 +38,7 @@ T={
 'foursteps':[['اليوم الأول · مراكش ← مسفران','الانطلاق من مراكش والوصول إلى منطقة مسفران. التعارف مع الفريق والاستقرار في المخيم على ضفاف وادي أحنصال وقضاء الليلة الأولى هناك.'],['اليوم الثاني · يوم التجديف','بعد الاستعداد والتعليمات، تنطلق المجموعة على النهر برفقة الفريق. في نهاية اليوم، الاستقرار في مخيم المرحلة لقضاء الليلة الثانية. يُؤكّد المقطع الذي سيتم اجتيازه حسب الصبيب.'],['اليوم الثالث · العودة إلى المخيم الرئيسي','العودة إلى المخيم الرئيسي ووقت للاستمتاع بمحيط وادي أحنصال. تُختتم الإقامة بليلة ثالثة في الوادي قبل رحلة اليوم التالي.'],['اليوم الرابع · العودة إلى مراكش','الفطور وتجهيز الأمتعة، ثم النقل للعودة إلى مراكش. يُنسَّق موعد الانطلاق والتوقف مع المجموعة.']]}
 }
 SLUGS=['12-km','30-km','50-km-2-jours','4-jours-marrakech']
+CARD_PHOTOS=['contact-rafting-bottom.webp','raft3.webp','raft1.webp','rafting-new/IMG_9296.webp']
 PHOTOS=['rafting-new/IMG_9129.webp','rafting-new/IMG_2101.webp','rafting-new/IMG_7076.webp','IMG_bivouac-night.webp']
 
 def build(root):
@@ -50,7 +51,7 @@ def build(root):
 .rp-cards{gap:18px}.rp-card{display:grid;grid-template-columns:35% minmax(0,1fr)}.rp-card>img{height:100%;min-height:300px}.rp-card-copy{padding:20px}.rp-card h3{font-size:29px;line-height:1.15;margin:8px 0 12px}.rp-card p{font-size:12px;line-height:1.65;margin:0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}.rp-price{font-size:26px;margin:12px 0}.rp-meta{font-size:10px;gap:6px;margin:0 0 14px}.rp-card .btn{font-size:10px;padding:11px 14px}.rp-card .kicker{font-size:9px;letter-spacing:.08em}
 @media(max-width:900px){.rp-card{grid-template-columns:1fr}.rp-card>img{height:160px;min-height:0}.rp-card-copy{padding:18px}}
 @media(max-width:650px){.rp-cards{gap:16px}.rp-card{grid-template-columns:32% minmax(0,1fr)}.rp-card>img{height:100%;min-height:245px}.rp-card h3{font-size:25px}.rp-card-copy{padding:16px}.rp-card p{-webkit-line-clamp:2}.rp-price{font-size:23px;margin:10px 0}.rp-card .btn{padding:10px 12px;font-size:9px}.rp-meta{margin-bottom:12px}.rp-card .kicker{font-size:8px}}
-</style>'''
+.rp-card{display:flex;flex-direction:column}.rp-card>img{width:100%;height:200px;min-height:0;object-fit:cover;object-position:50% 58%}.rp-card:nth-child(2)>img{object-position:50% 70%}.rp-card:nth-child(3)>img{object-position:50% 65%}.rp-card:nth-child(4)>img{object-position:50% 78%}.rp-card-copy{padding:18px 22px}.rp-card h3{font-size:29px;margin:7px 0 10px}.rp-card p{-webkit-line-clamp:2}.rp-price{margin:10px 0}.rp-meta{margin-bottom:12px}@media(max-width:650px){.rp-card{display:flex}.rp-card>img{height:185px;min-height:0}.rp-card-copy{padding:16px 18px}.rp-card h3{font-size:26px}}</style>'''
   head=head.replace('</head>',extra+'</head>')
   prices=['400 DH','800 DH',t['quote'],'4 000 DH']
   def img(photo,alt,lazy=True):
@@ -61,14 +62,14 @@ def build(root):
    return f'<section class="hero"><div class="hero-main"><div class="hero-copy"><div class="topline">{topline}</div><h1>{title}</h1><p class="hero-summary">{desc}</p><div class="hero-acts"><a class="btn btn-gold" href="#{"booking" if back else "programmes"}">{t["book"] if back else t["choose"]} ↓</a></div><div class="hero-bottom"><div class="hero-stat"><strong>{meta}</strong><small>{t["season"]}</small></div></div></div><div class="hero-media"><div class="shot main">{img(photo,desc,False)}</div><div class="shot">{img("rafting-new/IMG_2101.webp",t["daysteps"][0][0],False)}</div><div class="shot">{img("IMG_bivouac-day.webp",t["routes"][2][0],False)}</div></div></div></section>'
   cards=''
   for i,(name,duration,desc) in enumerate(t['routes']):
-   cards+=f'<article class="rp-card">{img(PHOTOS[i],name)}<div class="rp-card-copy"><div class="kicker">0{i+1} · {duration}</div><h3>{name}</h3><p>{desc}</p><div class="rp-price">{prices[i]}</div><div class="rp-meta"><span>{t["price"] if i!=2 else t["return"]}</span>{"<span>"+t["min"]+"</span>" if i==3 else ""}</div><a class="btn btn-dark" href="{BASE}{lang}/rafting/{SLUGS[i]}/" target="_parent">{t["discover"]} ↗</a></div></article>'
+   cards+=f'<article class="rp-card">{img(CARD_PHOTOS[i],name)}<div class="rp-card-copy"><div class="kicker">0{i+1} · {duration}</div><h3>{name}</h3><p>{desc}</p><div class="rp-price">{prices[i]}</div><div class="rp-meta"><span>{t["price"] if i!=2 else t["return"]}</span>{"<span>"+t["min"]+"</span>" if i==3 else ""}</div><a class="btn btn-dark" href="{BASE}{lang}/rafting/{SLUGS[i]}/" target="_parent">{t["discover"]} ↗</a></div></article>'
   main=hero(t['hero'][0]+'<br><em>'+t['hero'][1]+'</em>',t['intro'],PHOTOS[0],'4 · RAFTING')+f'<section class="section" id="programmes"><div class="container"><div class="kicker">IMSFRANE · RAFTING</div><h2 class="heading">{t["choose"]}</h2><p class="lead" style="margin:24px 0 35px">{t["season"]}</p><div class="rp-cards">{cards}</div></div></section>'
   outer_source=(root/lang/'gite-atlas/index.html').read_text()
   def render(main,slug,title,innername):
    inner=head.replace('<title>Rafting | Imsfrane</title>',f'<title>{title} | Imsfrane</title>')+'<body><main>'+main+'</main></body></html>'
    (root/innername).write_text(inner)
    outer=outer_source.replace('giteExperienceFrame','raftingProgramFrame')
-   outer=re.sub(r'<iframe\b[^>]*>',f'<iframe id="raftingProgramFrame" title="{title}" src="{BASE}{innername}?v=routes2" scrolling="no" style="display:block;width:100%;height:4200px;border:0"></iframe>',outer,count=1)
+   outer=re.sub(r'<iframe\b[^>]*>',f'<iframe id="raftingProgramFrame" title="{title}" src="{BASE}{innername}?v=rafting-photos3" scrolling="no" style="display:block;width:100%;height:4200px;border:0"></iframe>',outer,count=1)
    # Replace inherited resize handlers, including the legacy malformed one.
    outer=re.sub(r'<script\b[^>]*>.*?</script>',lambda m:'' if 'raftingProgramFrame' in m[0] and '<iframe' not in m[0] else m[0],outer,flags=re.S)
    resize="""<script>(function(){
