@@ -62,7 +62,7 @@ def build(root):
         template=(root/f'apartment-content-{lang}.html').read_text()
         head=template.split('<body>')[0]
         head=re.sub(r'<title\b[^>]*>.*?</title>',f'<title>{d["name"]} | Imsfrane</title>',head)
-        head=head.replace('</head>','''<style>.hero h1{font-size:clamp(54px,6.4vw,92px)}.gite-price{font:600 40px/1.2 var(--serif);color:#a94f30;margin:20px 0}.step .btn{margin-top:20px;white-space:normal;text-align:center}.gite-form{display:grid;gap:18px}.gite-form label{display:grid;gap:8px;font-size:13px;font-weight:700}.gite-form input,.gite-form select{width:100%;min-width:0;padding:14px;border:1px solid #a6aca9;background:white;color:#163037;font:inherit;border-radius:5px}.gite-form button{cursor:pointer;white-space:normal}.booking-grid>*{min-width:0}.apt-amenities .chip{background:#eee9df;color:#163037;padding:10px 14px;border-radius:20px;font-size:13px}.step{display:flex;flex-direction:column}.step .btn{margin-top:auto}.step p{margin-bottom:24px}.hero-stat strong{font-size:30px}.hero-stat small{line-height:1.6}.gite-note{font-size:12px;line-height:1.8;opacity:.85}[dir=rtl] input[type=date]{direction:ltr}@media(max-width:650px){.hero h1{font-size:58px}.hero-bottom{grid-template-columns:1fr}.hero-stat strong{font-size:28px}.gite-price{font-size:34px}.quicknav-grid{grid-template-columns:1fr 1fr!important}}</style></head>''')
+        head=head.replace('</head>','''<style>.gite-gallery{padding:36px 0;background:#f0ede8}.gite-gallery-top{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:20px}.gite-gallery h2{font:600 32px/1.3 var(--serif);color:#163037}.gite-gallery-top button{width:44px;height:44px;border:1px solid #a94f30;border-radius:50%;background:transparent;color:#163037;cursor:pointer;font-size:22px}.gite-gallery-track{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:16px;direction:ltr;scrollbar-color:#a94f30 #ddd5ca}.gite-slide{flex:0 0 270px;scroll-snap-align:start;position:relative;border-radius:10px;overflow:hidden;background:#163037}.gite-slide img{display:block;width:100%;height:340px;object-fit:cover}.gite-slide span{position:absolute;bottom:0;left:0;right:0;color:white;padding:28px 15px 15px;background:linear-gradient(transparent,#071c23df);font-size:11px}.gite-gallery-top>div{display:flex;gap:10px;direction:ltr}[dir=rtl] .gite-gallery h2{font-family:Tajawal,Arial,sans-serif}@media(max-width:650px){.gite-slide{flex-basis:78vw}.gite-gallery h2{font-size:25px}.gite-gallery-top button{width:38px;height:38px}}.hero h1{font-size:clamp(54px,6.4vw,92px)}.gite-price{font:600 40px/1.2 var(--serif);color:#a94f30;margin:20px 0}.step .btn{margin-top:20px;white-space:normal;text-align:center}.gite-form{display:grid;gap:18px}.gite-form label{display:grid;gap:8px;font-size:13px;font-weight:700}.gite-form input,.gite-form select{width:100%;min-width:0;padding:14px;border:1px solid #a6aca9;background:white;color:#163037;font:inherit;border-radius:5px}.gite-form button{cursor:pointer;white-space:normal}.booking-grid>*{min-width:0}.apt-amenities .chip{background:#eee9df;color:#163037;padding:10px 14px;border-radius:20px;font-size:13px}.step{display:flex;flex-direction:column}.step .btn{margin-top:auto}.step p{margin-bottom:24px}.hero-stat strong{font-size:30px}.hero-stat small{line-height:1.6}.gite-note{font-size:12px;line-height:1.8;opacity:.85}[dir=rtl] input[type=date]{direction:ltr}@media(max-width:650px){.hero h1{font-size:58px}.hero-bottom{grid-template-columns:1fr}.hero-stat strong{font-size:28px}.gite-price{font-size:34px}.quicknav-grid{grid-template-columns:1fr 1fr!important}}</style></head>''')
         def img(name,alt,lazy=True):
             return f'<img src="{src}{name}.webp" alt="{escape(alt,quote=True)}" width="1152" height="1536" '+('loading="lazy"' if lazy else 'fetchpriority="high"')+'>'
         rooms=''
@@ -76,12 +76,22 @@ def build(root):
         room_options=''.join(f'<option>{escape(n)}</option>' for n in d['roomTypes'])
         chips=''.join(f'<span class="chip">✓ {x}</span>' for x in d['amenities'])
         quick=''.join(f'<a href="#{id}"><span>{i:02}</span><strong>{label}</strong></a>' for i,(id,label) in enumerate(zip(['gite','rooms','programme','booking'],d['nav']),1))
+        gallery_labels={
+          'fr':['Le gîte en images','Photo précédente','Photo suivante','Voir en grand'],
+          'en':['Explore the gîte in photos','Previous photo','Next photo','View full size'],
+          'es':['El alojamiento en imágenes','Foto anterior','Foto siguiente','Ver en grande'],
+          'ar':['اكتشف النزل بالصور','الصورة السابقة','الصورة التالية','عرض الصورة كاملة']
+        }[lang]
+        gallery_items=''
+        for i,n in enumerate([1693,1694,1696,1697,1698,1699,1700,1701,1703,1709,1710,1711,1712,1713,1714,1715,1716,1717],1):
+            gallery_items+=f'<a class="gite-slide" href="{src}photo-{n}.webp" target="_blank" rel="noopener" aria-label="{gallery_labels[3]} · {i}/18"><img src="{src}photo-{n}.webp" alt="{d["name"]} · {i}/18" width="1152" height="1536" loading="lazy"><span>{i:02} / 18 · {gallery_labels[3]} ↗</span></a>'
+        gallery=f'<section class="gite-gallery" aria-label="{gallery_labels[0]}"><div class="container"><div class="gite-gallery-top"><h2>{gallery_labels[0]}</h2><div><button type="button" id="galleryPrev" aria-label="{gallery_labels[1]}">←</button><button type="button" id="galleryNext" aria-label="{gallery_labels[2]}">→</button></div></div><div class="gite-gallery-track" id="giteGallery" tabindex="0">{gallery_items}</div></div></section>'
         f=d['fields']
         hero_title='نزل أطلس' if lang=='ar' else 'Gîte Atlas'
         hero_em='كاتدرال' if lang=='ar' else 'Cathédrale'
         body=f'''<body><main>
 <section class="hero"><div class="hero-main"><div class="hero-copy"><div class="topline">{d['tag']}</div><h1>{hero_title}<br><em>{hero_em}</em></h1><p class="hero-summary">{d['intro']}</p><div class="hero-acts"><a class="btn btn-gold" href="#booking">{d['book']} ↗</a><a class="btn btn-line-light" href="#programme">{d['nav'][2]} ↓</a></div><div class="hero-bottom"><div class="hero-stat"><strong>250 DH</strong><small>{d['night']}<br>{d['included']}</small></div></div></div><div class="hero-media"><div class="shot main">{img('exterior',d['name'],False)}</div><div class="shot">{img('terrace',d['rooms'][3][0],False)}</div><div class="shot">{img('double',d['rooms'][1][0],False)}</div><div class="hero-badge"><span>IMSFRANE · ATLAS</span><b>{d['amenities'][3]}</b></div></div></div></section>
-<nav class="quicknav"><div class="container quicknav-grid">{quick}</div></nav>
+{gallery}\n<nav class="quicknav"><div class="container quicknav-grid">{quick}</div></nav>
 <section class="section" id="gite"><div class="container"><div class="kicker">{d['name']}</div><h2 class="heading">{d['about']}</h2><p class="lead" style="max-width:740px;margin-top:24px">{d['intro']}</p><div class="apt-amenities">{chips}</div></div></section>
 <div id="rooms">{rooms}</div>
 <section class="section" id="programme"><div class="container"><div class="section-header"><h2 class="heading">{d['packages']}</h2></div><div class="steps-grid apt-steps">{cards}</div><p class="apt-note">{d['note']}</p></div></section>
@@ -89,6 +99,12 @@ def build(root):
 </main>'''
         config=json.dumps({'message':d['message'],'labels':f,'programmes':[n+' · '+prices[i]+' / '+d['unit'] for i,n in enumerate(d['packageNames'])]},ensure_ascii=False)
         script='''<script>(function(){
+const track=document.getElementById('giteGallery');
+function moveGallery(direction){
+  track.scrollBy({left:direction*(track.querySelector('.gite-slide').getBoundingClientRect().width+16),behavior:'smooth'});
+}
+document.getElementById('galleryPrev').addEventListener('click',()=>moveGallery(-1));
+document.getElementById('galleryNext').addEventListener('click',()=>moveGallery(1));
 const cfg=CONFIG;
 const form=document.getElementById('giteBooking'),date=document.getElementById('arrival'),plan=document.getElementById('package');
 const now=new Date();date.min=[now.getFullYear(),String(now.getMonth()+1).padStart(2,'0'),String(now.getDate()).padStart(2,'0')].join('-');
@@ -101,7 +117,7 @@ document.getElementById('message').value=message;
 })();</script></body></html>'''.replace('CONFIG',config)
         (root/f'gite-content-{lang}.html').write_text(head+body+script)
         outer=(root/lang/'hebergement/index.html').read_text()
-        outer=outer.replace('apartmentExperienceFrame','giteExperienceFrame').replace(f'apartment-content-{lang}.html?v=rooms3',f'gite-content-{lang}.html?v=atlas1')
+        outer=outer.replace('apartmentExperienceFrame','giteExperienceFrame').replace(f'apartment-content-{lang}.html?v=rooms3',f'gite-content-{lang}.html?v=atlas-gallery1')
         outer=re.sub(r'<title\b[^>]*>.*?</title>',f'<title>{d["name"]} | Imsfrane Cathédrale</title>',outer,flags=re.S)
         outer=re.sub(r'(<iframe[^>]*title=")[^"]*',lambda m:m[1]+d['name'],outer)
         outer=re.sub(r'<meta\b[^>]*(?:property="og:|name="twitter:|name="description")[^>]*>','',outer)
