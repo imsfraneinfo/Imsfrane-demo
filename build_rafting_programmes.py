@@ -65,6 +65,19 @@ def build(root):
    (root/innername).write_text(inner)
    outer=outer_source.replace('giteExperienceFrame','raftingProgramFrame')
    outer=re.sub(r'<iframe\b[^>]*>',f'<iframe id="raftingProgramFrame" title="{title}" src="{BASE}{innername}?v=routes1" scrolling="no" style="display:block;width:100%;height:4200px;border:0"></iframe>',outer,count=1)
+   # Replace inherited resize handlers, including the legacy malformed one.
+   outer=re.sub(r'<script\b[^>]*>.*?</script>',lambda m:'' if 'raftingProgramFrame' in m[0] and '<iframe' not in m[0] else m[0],outer,flags=re.S)
+   resize="""<script>(function(){
+var frame=document.getElementById('raftingProgramFrame');if(!frame)return;
+function attach(){var doc=frame.contentDocument;var main=doc&&doc.querySelector('main');if(!main)return;
+function resize(){var h=Math.ceil(main.getBoundingClientRect().height);if(h>0)frame.style.height=h+'px';}
+new ResizeObserver(resize).observe(main);resize();
+doc.querySelectorAll('img').forEach(function(img){if(!img.complete)img.addEventListener('load',resize,{once:true});});
+if(doc.fonts)doc.fonts.ready.then(resize);
+doc.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var target=doc.getElementById(a.getAttribute('href').slice(1));if(!target)return;e.preventDefault();window.scrollTo({top:frame.getBoundingClientRect().top+window.scrollY+target.getBoundingClientRect().top-80,behavior:'smooth'});});});}
+frame.addEventListener('load',attach);if(frame.contentDocument&&frame.contentDocument.readyState==='complete')attach();
+})();</script>"""
+   outer=outer.replace('</body>',resize+'</body>')
    outer=re.sub(r'<title\b[^>]*>.*?</title>',f'<title>{title} | Imsfrane Cathédrale</title>',outer,flags=re.S)
    outer=re.sub(r'<link\b[^>]*rel="canonical"[^>]*>','',outer)
    outer=re.sub(r'(<div class="atnav-langmini-panel".*?</div>)',lambda m:m[0].replace('/gite-atlas/','/'+slug+'/'),outer,flags=re.S)
