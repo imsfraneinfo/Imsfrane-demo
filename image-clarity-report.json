@@ -1274,41 +1274,6 @@
     "width_after": 1200
   },
   {
-    "page": "ar/hebergement/index.html",
-    "small": "/Imsfrane-demo/images/22-800.webp",
-    "large": "/Imsfrane-demo/images/22.webp",
-    "width_before": 800,
-    "width_after": 1200
-  },
-  {
-    "page": "ar/hebergement/index.html",
-    "small": "/Imsfrane-demo/images/babmsfrane-800.webp",
-    "large": "/Imsfrane-demo/images/babmsfrane.webp",
-    "width_before": 800,
-    "width_after": 1200
-  },
-  {
-    "page": "ar/hebergement/index.html",
-    "small": "/Imsfrane-demo/images/IMG_3580-800.webp",
-    "large": "/Imsfrane-demo/images/IMG_3580.webp",
-    "width_before": 800,
-    "width_after": 1200
-  },
-  {
-    "page": "ar/hebergement/index.html",
-    "small": "/Imsfrane-demo/images/bab2-800.webp",
-    "large": "/Imsfrane-demo/images/bab2.webp",
-    "width_before": 800,
-    "width_after": 1200
-  },
-  {
-    "page": "ar/hebergement/index.html",
-    "small": "/Imsfrane-demo/images/bab3-800.webp",
-    "large": "/Imsfrane-demo/images/bab3.webp",
-    "width_before": 800,
-    "width_after": 1200
-  },
-  {
     "page": "ar/about/index.html",
     "small": "/Imsfrane-demo/images/camping-1-800.webp",
     "large": "/Imsfrane-demo/images/camping-1.webp",
@@ -1582,41 +1547,6 @@
     "width_after": 1200
   },
   {
-    "page": "fr/hebergement/index.html",
-    "small": "/Imsfrane-demo/images/22-800.webp",
-    "large": "/Imsfrane-demo/images/22.webp",
-    "width_before": 800,
-    "width_after": 1200
-  },
-  {
-    "page": "fr/hebergement/index.html",
-    "small": "/Imsfrane-demo/images/babmsfrane-800.webp",
-    "large": "/Imsfrane-demo/images/babmsfrane.webp",
-    "width_before": 800,
-    "width_after": 1200
-  },
-  {
-    "page": "fr/hebergement/index.html",
-    "small": "/Imsfrane-demo/images/IMG_3580-800.webp",
-    "large": "/Imsfrane-demo/images/IMG_3580.webp",
-    "width_before": 800,
-    "width_after": 1200
-  },
-  {
-    "page": "fr/hebergement/index.html",
-    "small": "/Imsfrane-demo/images/bab2-800.webp",
-    "large": "/Imsfrane-demo/images/bab2.webp",
-    "width_before": 800,
-    "width_after": 1200
-  },
-  {
-    "page": "fr/hebergement/index.html",
-    "small": "/Imsfrane-demo/images/bab3-800.webp",
-    "large": "/Imsfrane-demo/images/bab3.webp",
-    "width_before": 800,
-    "width_after": 1200
-  },
-  {
     "page": "fr/about/index.html",
     "small": "/Imsfrane-demo/images/camping-1-800.webp",
     "large": "/Imsfrane-demo/images/camping-1.webp",
@@ -1788,41 +1718,6 @@
     "page": "es/memories/index.html",
     "small": "/Imsfrane-demo/images/21-800.webp",
     "large": "/Imsfrane-demo/images/21.webp",
-    "width_before": 800,
-    "width_after": 1200
-  },
-  {
-    "page": "es/hebergement/index.html",
-    "small": "/Imsfrane-demo/images/22-800.webp",
-    "large": "/Imsfrane-demo/images/22.webp",
-    "width_before": 800,
-    "width_after": 1200
-  },
-  {
-    "page": "es/hebergement/index.html",
-    "small": "/Imsfrane-demo/images/babmsfrane-800.webp",
-    "large": "/Imsfrane-demo/images/babmsfrane.webp",
-    "width_before": 800,
-    "width_after": 1200
-  },
-  {
-    "page": "es/hebergement/index.html",
-    "small": "/Imsfrane-demo/images/IMG_3580-800.webp",
-    "large": "/Imsfrane-demo/images/IMG_3580.webp",
-    "width_before": 800,
-    "width_after": 1200
-  },
-  {
-    "page": "es/hebergement/index.html",
-    "small": "/Imsfrane-demo/images/bab2-800.webp",
-    "large": "/Imsfrane-demo/images/bab2.webp",
-    "width_before": 800,
-    "width_after": 1200
-  },
-  {
-    "page": "es/hebergement/index.html",
-    "small": "/Imsfrane-demo/images/bab3-800.webp",
-    "large": "/Imsfrane-demo/images/bab3.webp",
     "width_before": 800,
     "width_after": 1200
   },
@@ -2096,41 +1991,6 @@
     "page": "en/memories/index.html",
     "small": "/Imsfrane-demo/images/21-800.webp",
     "large": "/Imsfrane-demo/images/21.webp",
-    "width_before": 800,
-    "width_after": 1200
-  },
-  {
-    "page": "en/hebergement/index.html",
-    "small": "/Imsfrane-demo/images/22-800.webp",
-    "large": "/Imsfrane-demo/images/22.webp",
-    "width_before": 800,
-    "width_after": 1200
-  },
-  {
-    "page": "en/hebergement/index.html",
-    "small": "/Imsfrane-demo/images/babmsfrane-800.webp",
-    "large": "/Imsfrane-demo/images/babmsfrane.webp",
-    "width_before": 800,
-    "width_after": 1200
-  },
-  {
-    "page": "en/hebergement/index.html",
-    "small": "/Imsfrane-demo/images/IMG_3580-800.webp",
-    "large": "/Imsfrane-demo/images/IMG_3580.webp",
-    "width_before": 800,
-    "width_after": 1200
-  },
-  {
-    "page": "en/hebergement/index.html",
-    "small": "/Imsfrane-demo/images/bab2-800.webp",
-    "large": "/Imsfrane-demo/images/bab2.webp",
-    "width_before": 800,
-    "width_after": 1200
-  },
-  {
-    "page": "en/hebergement/index.html",
-    "small": "/Imsfrane-demo/images/bab3-800.webp",
-    "large": "/Imsfrane-demo/images/bab3.webp",
     "width_before": 800,
     "width_after": 1200
   },
