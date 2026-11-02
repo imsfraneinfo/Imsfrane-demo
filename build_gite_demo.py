@@ -150,9 +150,12 @@ document.getElementById('message').value=message;
       placeGite();
     ''')
     fav.write_text(js)
+    navigation=root/'navigation-pro.js'
+    navigation.write_text(navigation.read_text().replace('ims-favorites-demo.js?', 'ims-favorites-demo.js?gite=2&'))
     for lang in DATA:
         for page in [root/lang/'index.html',root/lang/'gite-atlas/index.html']:
             html=page.read_text()
+            html=html.replace('navigation-pro.js?', 'navigation-pro.js?gite=2&')
             html=html.replace('ims-favorites-demo.js?', 'ims-favorites-demo.js?gite=2&')
             page.write_text(html)
 
