@@ -7,6 +7,7 @@ on:
       - 'build_stays_demo.py'
       - 'build_apartment_demo.py'
       - 'build_gite_demo.py'
+      - 'build_booking_demo.py'
       - 'gite-assets/**'
       - 'apartment-assets/**'
       - 'build_weekend_offers.py'

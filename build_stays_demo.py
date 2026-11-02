@@ -113,3 +113,6 @@ for lang,(label,description,price,location) in home_labels.items():
 
 from build_gite_demo import build as build_gite
 build_gite(root)
+
+from build_booking_demo import build as build_booking
+build_booking(root)
