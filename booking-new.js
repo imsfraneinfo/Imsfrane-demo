@@ -16,7 +16,7 @@ function calculate(){
  if(stay==='weekend')add(t[25],null,t[26]);
  form.querySelectorAll('[data-service]:checked').forEach(input=>{const a=services.find(a=>a.id===input.value);let qty=a.unit==='person'?people:a.unit==='duo'?Math.ceil(people/2):a.unit==='quad'?people:1;add(a.name,a.price===null?null:a.price*qty,a.price===null?t[30]:a.price+' × '+qty);});
  $('summaryList').replaceChildren();lines.forEach(a=>{const li=document.createElement('li'),strong=document.createElement('strong'),small=document.createElement('div');strong.textContent=a.name;small.textContent=a.detail+' · '+(a.amount===null?t[30]:a.amount+' DH');li.append(strong,small);$('summaryList').append(li)});
- $('emptySummary').hidden=lines.length>0;$('total').textContent=total.toLocaleString()+' DH';$('quoteNote').hidden=!quotes;
+ $('emptySummary').hidden=lines.length>0;$('total').textContent=quotes&&total===0?t[30]:total.toLocaleString()+' DH';$('quoteNote').hidden=!quotes;
  $('campNote').hidden=!form.querySelector('[value="camping"]:checked');$('raftNote').hidden=!form.querySelector('[value^="raft"]:checked');
  return {people,nights,lines,total,quotes,stay};
 }
@@ -28,7 +28,7 @@ form.addEventListener('submit',e=>{
  if(c.stay!=='none'&&(!Number.isInteger(c.nights)||c.nights<1||c.nights>45)){$('bookingError').textContent=t[37];return;}
  if(form.querySelector('[value="camping"]:checked')&&c.people<10){$('bookingError').textContent=t[38];return;}
  if($('arrival').value<date){$('arrival').focus();return;}
- const msg=['IMSFRANE · '+t[6],t[10]+': '+$('name').value,t[11]+': '+$('phone').value,t[12]+': '+$('email').value,t[8]+': '+$('arrival').value,t[9]+': '+$('departure').value,t[7]+': '+c.people,'',t[56]+':',...c.lines.map(a=>'- '+a.name+' | '+a.detail+' | '+(a.amount===null?t[30]:a.amount+' DH')),'',t[28]+': '+c.total+' DH'+(c.quotes?' + '+t[40]:''),t[13]+': '+$('notes').value,t[35]].join('\n');
+ const msg=['IMSFRANE · '+t[6],t[10]+': '+$('name').value,t[11]+': '+$('phone').value,t[12]+': '+$('email').value,t[8]+': '+$('arrival').value,t[9]+': '+$('departure').value,t[7]+': '+c.people,'',t[56]+':',...c.lines.map(a=>'- '+a.name+' | '+a.detail+' | '+(a.amount===null?t[30]:a.amount+' DH')),'',t[28]+': '+(c.quotes&&c.total===0?t[30]:c.total+' DH'+(c.quotes?' + '+t[40]:'')),t[13]+': '+$('notes').value,t[35]].join('\n');
  window.open('https://wa.me/212667772551?text='+encodeURIComponent(msg),'_blank','noopener');
 });calculate();
 })();
