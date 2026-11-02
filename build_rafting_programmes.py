@@ -51,7 +51,7 @@ def build(root):
 .rp-cards{gap:18px}.rp-card{display:grid;grid-template-columns:35% minmax(0,1fr)}.rp-card>img{height:100%;min-height:300px}.rp-card-copy{padding:20px}.rp-card h3{font-size:29px;line-height:1.15;margin:8px 0 12px}.rp-card p{font-size:12px;line-height:1.65;margin:0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}.rp-price{font-size:26px;margin:12px 0}.rp-meta{font-size:10px;gap:6px;margin:0 0 14px}.rp-card .btn{font-size:10px;padding:11px 14px}.rp-card .kicker{font-size:9px;letter-spacing:.08em}
 @media(max-width:900px){.rp-card{grid-template-columns:1fr}.rp-card>img{height:160px;min-height:0}.rp-card-copy{padding:18px}}
 @media(max-width:650px){.rp-cards{gap:16px}.rp-card{grid-template-columns:32% minmax(0,1fr)}.rp-card>img{height:100%;min-height:245px}.rp-card h3{font-size:25px}.rp-card-copy{padding:16px}.rp-card p{-webkit-line-clamp:2}.rp-price{font-size:23px;margin:10px 0}.rp-card .btn{padding:10px 12px;font-size:9px}.rp-meta{margin-bottom:12px}.rp-card .kicker{font-size:8px}}
-.rp-card{display:flex;flex-direction:column}.rp-card>img{width:100%;height:200px;min-height:0;object-fit:cover;object-position:50% 58%}.rp-card:nth-child(2)>img{object-position:50% 70%}.rp-card:nth-child(3)>img{object-position:50% 65%}.rp-card:nth-child(4)>img{object-position:50% 78%}.rp-card-copy{padding:18px 22px}.rp-card h3{font-size:29px;margin:7px 0 10px}.rp-card p{-webkit-line-clamp:2}.rp-price{margin:10px 0}.rp-meta{margin-bottom:12px}@media(max-width:650px){.rp-card{display:flex}.rp-card>img{height:185px;min-height:0}.rp-card-copy{padding:16px 18px}.rp-card h3{font-size:26px}}</style>'''
+.rp-card{display:flex;flex-direction:column}.rp-card>img{width:100%;height:230px;min-height:0;object-fit:cover;object-position:50% 40%}.rp-card:nth-child(2)>img{object-position:50% 58%}.rp-card:nth-child(3)>img{object-position:50% 62%}.rp-card:nth-child(4)>img{object-position:50% 68%}.rp-card-copy{padding:18px 22px}.rp-card h3{font-size:29px;margin:7px 0 10px}.rp-card p{-webkit-line-clamp:2}.rp-price{margin:10px 0}.rp-meta{margin-bottom:12px}@media(max-width:650px){.rp-card{display:flex}.rp-card>img{height:185px;min-height:0}.rp-card-copy{padding:16px 18px}.rp-card h3{font-size:26px}}</style>'''
   head=head.replace('</head>',extra+'</head>')
   prices=['400 DH','800 DH',t['quote'],'4 000 DH']
   def img(photo,alt,lazy=True):
@@ -69,7 +69,7 @@ def build(root):
    inner=head.replace('<title>Rafting | Imsfrane</title>',f'<title>{title} | Imsfrane</title>')+'<body><main>'+main+'</main></body></html>'
    (root/innername).write_text(inner)
    outer=outer_source.replace('giteExperienceFrame','raftingProgramFrame')
-   outer=re.sub(r'<iframe\b[^>]*>',f'<iframe id="raftingProgramFrame" title="{title}" src="{BASE}{innername}?v=rafting-photos3" scrolling="no" style="display:block;width:100%;height:4200px;border:0"></iframe>',outer,count=1)
+   outer=re.sub(r'<iframe\b[^>]*>',f'<iframe id="raftingProgramFrame" title="{title}" src="{BASE}{innername}?v=rafting-photos4" scrolling="no" style="display:block;width:100%;height:4200px;border:0"></iframe>',outer,count=1)
    # Replace inherited resize handlers, including the legacy malformed one.
    outer=re.sub(r'<script\b[^>]*>.*?</script>',lambda m:'' if 'raftingProgramFrame' in m[0] and '<iframe' not in m[0] else m[0],outer,flags=re.S)
    resize="""<script>(function(){
