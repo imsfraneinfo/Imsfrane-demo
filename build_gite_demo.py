@@ -150,6 +150,14 @@ document.getElementById('message').value=message;
       placeGite();
     ''')
     fav.write_text(js)
+    dashboard=root/'dashboard-pro.js'
+    dash=dashboard.read_text()
+    entry={'id':'gite-atlas','photo':'images/gite-atlas/exterior.webp','names':{lang:d['name'] for lang,d in DATA.items()}}
+    dash=dash.replace('const activities=[', 'const activities=['+json.dumps(entry,ensure_ascii=False)+',')
+    dash=dash.replace('const fallbackCardImages={', 'const fallbackCardImages={"gite-atlas":"images/gite-atlas/exterior.webp",')
+    dashboard.write_text(dash)
+    members=root/'members.html'
+    members.write_text(members.read_text().replace('dashboard-pro.js?', 'dashboard-pro.js?gite=2&'))
     navigation=root/'navigation-pro.js'
     navigation.write_text(navigation.read_text().replace('ims-favorites-demo.js?', 'ims-favorites-demo.js?gite=2&'))
     for lang in DATA:
