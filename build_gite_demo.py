@@ -124,6 +124,38 @@ document.getElementById('message').value=message;
         assert count==1, f'Missing apartment homepage card: {home}'
         home.write_text(html)
 
+
+    # Extend the site's existing account favorites to the gite and its iframe hero.
+    fav=root/'js/ims-favorites-demo.js'
+    js=fav.read_text()
+    js=js.replace('"rafting","kayak","camping"', '"gite-atlas","rafting","kayak","camping"')
+    js=js.replace('(rafting|kayak|camping|', '(gite-atlas|rafting|kayak|camping|')
+    js=js.replace('function rerender(){document.querySelectorAll("[data-ims-favorite]").forEach(b=>icon(b,b.dataset.imsFavorite))}', '''function rerender(){
+      document.querySelectorAll("[data-ims-favorite]").forEach(b=>icon(b,b.dataset.imsFavorite));
+      const doc=document.getElementById("giteExperienceFrame")?.contentDocument;
+      if(doc)doc.querySelectorAll("[data-ims-favorite]").forEach(b=>icon(b,b.dataset.imsFavorite));
+    }''')
+    js=js.replace('function place(){', '''function place(){
+      const frame=document.getElementById("giteExperienceFrame");
+      function placeGite(){
+        const doc=frame?.contentDocument,actions=doc?.querySelector(".hero-acts");
+        if(!actions||doc.getElementById("imsGiteFavorite"))return;
+        const b=button("gite-atlas",true);b.id="imsGiteFavorite";
+        b.classList.add("btn","btn-line-light");actions.append(b);
+        const style=doc.createElement("style");
+        style.textContent=".ims-fav-detail{display:inline-flex;align-items:center;gap:8px;cursor:pointer;background:transparent}.ims-fav-detail svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8}.ims-fav-detail[aria-pressed=true] svg{fill:currentColor}";
+        doc.head.append(style);
+      }
+      if(frame&&!frame.dataset.favoriteHook){frame.dataset.favoriteHook="1";frame.addEventListener("load",placeGite);}
+      placeGite();
+    ''')
+    fav.write_text(js)
+    for lang in DATA:
+        for page in [root/lang/'index.html',root/lang/'gite-atlas/index.html']:
+            html=page.read_text()
+            html=html.replace('ims-favorites-demo.js?', 'ims-favorites-demo.js?gite=2&')
+            page.write_text(html)
+
     print('Built Gite Atlas in FR/EN/ES/AR with real photos and WhatsApp booking.')
 
 if __name__=='__main__':
