@@ -144,14 +144,15 @@ document.getElementById('message').value=message;
     # Extend the site's existing account favorites to the gite and its iframe hero.
     fav=root/'js/ims-favorites-demo.js'
     js=fav.read_text()
-    js=js.replace('"rafting","kayak","camping"', '"gite-atlas","rafting","kayak","camping"')
+    if '"gite-atlas"' not in js:
+        js=js.replace('"rafting","kayak","camping"', '"gite-atlas","rafting","kayak","camping"')
     js=js.replace('(rafting|kayak|camping|', '(gite-atlas|rafting|kayak|camping|')
     js=js.replace('function rerender(){document.querySelectorAll("[data-ims-favorite]").forEach(b=>icon(b,b.dataset.imsFavorite))}', '''function rerender(){
       document.querySelectorAll("[data-ims-favorite]").forEach(b=>icon(b,b.dataset.imsFavorite));
       const doc=document.getElementById("giteExperienceFrame")?.contentDocument;
       if(doc)doc.querySelectorAll("[data-ims-favorite]").forEach(b=>icon(b,b.dataset.imsFavorite));
     }''')
-    js=js.replace('function place(){', '''function place(){
+    js=js if 'function placeGite(){' in js else js.replace('function place(){', '''function place(){
       const frame=document.getElementById("giteExperienceFrame");
       function placeGite(){
         const doc=frame?.contentDocument,actions=doc?.querySelector(".hero-acts");
