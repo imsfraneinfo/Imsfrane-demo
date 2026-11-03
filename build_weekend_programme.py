@@ -86,7 +86,7 @@ def build():
   for tag in soup.select('script[type="application/ld+json"],link[rel="preload"][as="image"],link[rel="canonical"],link[hreflang]'):tag.decompose()
   for link in soup.select('link[rel="stylesheet"]'):
    if '/css/pages/programme.min.css' in link.get('href',''):link.decompose()
-  soup.title.string=d['title']+' | '+('مسفران' if lang=='ar' else 'Imsfrane Cathédrale')
+  soup.title.string=d['title']+' | Imsfrane Cathédrale'
   desc=d['subtitle']+' · '+d['price']+' · '+d['person']
   for meta in soup.select('meta[name="description"],meta[property="og:description"],meta[name="twitter:description"]'):meta['content']=desc
   for meta in soup.select('meta[property="og:title"],meta[name="twitter:title"]'):meta['content']=str(soup.title.string)
@@ -102,8 +102,8 @@ def build():
    if href.startswith('https://wa.me/') or href.startswith('https://api.whatsapp.com/'):
     a['href']=wa
   if lang=='ar':
-   # Keep the existing shell, localize its remaining visible labels.
-   labels={'Imsfrane Cathédrale':'مسفران كاتدرائية','WhatsApp':'واتساب','Sitemap':'خريطة الموقع'}
+   # Brand name is invariant in every language; only interface labels are localized.
+   labels={'مسفران كاتدرائية':'Imsfrane Cathédrale','مسفران كاتدرال':'Imsfrane Cathédrale','WhatsApp':'واتساب','Sitemap':'خريطة الموقع'}
    for node in list(soup.find_all(string=True)):
     if node.parent.name in ('script','style'):continue
     text=str(node)
@@ -111,6 +111,9 @@ def build():
     if text!=str(node):node.replace_with(text)
    for el in soup.select('[aria-label]'):
     val=el['aria-label']
+    for translated in ('مسفران كاتدرائية','مسفران كاتدرال'):
+     val=val.replace(translated,'Imsfrane Cathédrale')
+    el['aria-label']=val
     if val in ('Navigation principale','Réseaux sociaux','Retour en haut','Contacter sur WhatsApp','Fermer le menu de navigation'):
      el['aria-label']={'Navigation principale':'التنقل الرئيسي','Réseaux sociaux':'التواصل الاجتماعي','Retour en haut':'العودة إلى الأعلى','Contacter sur WhatsApp':'التواصل عبر واتساب','Fermer le menu de navigation':'إغلاق قائمة التنقل'}[val]
   out=str(soup)
