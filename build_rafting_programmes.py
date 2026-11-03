@@ -64,7 +64,7 @@ def arabic_display(markup):
    part=re.sub(r'(?<=\d)[ \u00a0\u202f](?=\d{3}\b)','',part)
    for old,new in words.items():part=re.sub(r'(?<![A-Za-z])'+re.escape(old)+r'(?![A-Za-z])',new,part)
    part=part.replace('(أموگر)','').replace('(إيسگلي)','')
-   parts[n]=part.translate(str.maketrans('0123456789','٠١٢٣٤٥٦٧٨٩'))
+   parts[n]=part.translate(str.maketrans('٠١٢٣٤٥٦٧٨٩','0123456789'))
  return ''.join(parts)
 
 def build(root):
@@ -83,7 +83,7 @@ def build(root):
   extra += '<style>.rp-twelve-step{padding:50px 0;border-bottom:1px solid #e3dfd6}.rp-twelve-step .container{max-width:1060px}.rp-twelve-step .heading{font-size:36px;line-height:1.4}.rp-step-photos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:25px 0 30px}.rp-step-photos.single{grid-template-columns:1fr}.rp-step-photos img{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;border-radius:12px}.rp-step-photos.single img{max-height:650px;aspect-ratio:auto;object-fit:contain;background:#eeeae3}.rp-step-copy{max-width:900px;margin-inline:auto}.rp-step-copy p{font-size:20px;line-height:1.95;margin-top:20px;color:#263f44;font-weight:500}@media(max-width:650px){.rp-twelve-step{padding:34px 0}.rp-twelve-step .heading{font-size:27px;line-height:1.45}.rp-step-photos{gap:10px}.rp-step-copy p{font-size:18px;line-height:1.95}}</style>'
   extra += '<style>.rp-gallery{padding:50px 0}.rp-gallery .heading{font-size:36px;line-height:1.4}.rp-gallery-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:28px 0}.rp-gallery-grid img{display:block;width:100%;height:auto;border-radius:12px}.rp-gallery .rp-step-copy p{margin-top:28px}@media(max-width:650px){.rp-gallery{padding:34px 0}.rp-gallery .heading{font-size:27px}.rp-gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}}</style>'
   head=head.replace('</head>',extra+'</head>')
-  prices=['٤٠٠ درهم','٨٠٠ درهم',t['quote'],'٤٠٠٠ درهم'] if lang=='ar' else ['400 DH','800 DH',t['quote'],'4 000 DH']
+  prices=['400 درهم','800 درهم',t['quote'],'4000 درهم'] if lang=='ar' else ['400 DH','800 DH',t['quote'],'4 000 DH']
   def img(photo,alt,lazy=True):
    assert (root/'images'/photo).is_file(),photo
    return f'<img src="{BASE}images/{photo}" alt="{escape(alt,quote=True)}" width="1152" height="1536" '+('loading="lazy"' if lazy else 'fetchpriority="high"')+'>'
@@ -100,7 +100,7 @@ def build(root):
    if lang=='ar':inner=arabic_display(inner)
    (root/innername).write_text(inner)
    outer=outer_source.replace('giteExperienceFrame','raftingProgramFrame')
-   outer=re.sub(r'<iframe\b[^>]*>',f'<iframe id="raftingProgramFrame" title="{title}" src="{BASE}{innername}?v=rafting-arabic-only14" scrolling="no" style="display:block;width:100%;height:4200px;border:0"></iframe>',outer,count=1)
+   outer=re.sub(r'<iframe\b[^>]*>',f'<iframe id="raftingProgramFrame" title="{title}" src="{BASE}{innername}?v=rafting-arabic-western15" scrolling="no" style="display:block;width:100%;height:4200px;border:0"></iframe>',outer,count=1)
    # Replace inherited resize handlers, including the legacy malformed one.
    outer=re.sub(r'<script\b[^>]*>.*?</script>',lambda m:'' if 'raftingProgramFrame' in m[0] and '<iframe' not in m[0] else m[0],outer,flags=re.S)
    resize="""<script>(function(){
