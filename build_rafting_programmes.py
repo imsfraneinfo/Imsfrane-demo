@@ -67,6 +67,12 @@ def arabic_display(markup):
    parts[n]=part.translate(str.maketrans('٠١٢٣٤٥٦٧٨٩','0123456789'))
  return ''.join(parts)
 
+
+ARABIC_RAFTING_FONT="<style id=\"rafting-arabic-fonts\">\n@font-face{font-family:\"Imsfrane Alexandria\";src:url(\"/Imsfrane-demo/fonts/arabic/Alexandria-VF.woff2\") format(\"woff2\");font-weight:400 800;font-style:normal;font-display:swap}\n@font-face{font-family:\"Imsfrane Tajawal\";src:url(\"/Imsfrane-demo/fonts/arabic/Tajawal-Regular.woff2\") format(\"woff2\");font-weight:400;font-style:normal;font-display:swap}\n@font-face{font-family:\"Imsfrane Tajawal\";src:url(\"/Imsfrane-demo/fonts/arabic/Tajawal-Medium.woff2\") format(\"woff2\");font-weight:500 600;font-style:normal;font-display:swap}\n@font-face{font-family:\"Imsfrane Tajawal\";src:url(\"/Imsfrane-demo/fonts/arabic/Tajawal-Bold.woff2\") format(\"woff2\");font-weight:700 900;font-style:normal;font-display:swap}\nhtml[lang=\"ar\"]{--ar-display:\"Imsfrane Alexandria\",Tahoma,Arial,sans-serif;--ar-text:\"Imsfrane Tajawal\",Tahoma,Arial,sans-serif;--serif:var(--ar-display)!important;--font:var(--ar-text)!important;font-synthesis:none}\nhtml[lang=\"ar\"] body,html[lang=\"ar\"] :is(p,li,small,a,button,input,select,textarea,label,.kicker,.rp-meta,.topline,.hero-summary,.atnav-lang-code,.brand-content strong,.footer-brand strong){font-family:var(--ar-text)!important;letter-spacing:0!important}\nhtml[lang=\"ar\"] :is(h1,h2,h3,h4,h5,h6,.heading,.hero-stat strong,.rp-price){font-family:var(--ar-display)!important;font-style:normal!important;letter-spacing:0!important}\nhtml[lang=\"ar\"] :is(h1,h2,h3,h4,h5,h6) :is(em,span){font-family:inherit!important;font-style:normal!important}\nhtml[lang=\"ar\"] .rp-price{unicode-bidi:isolate}\n</style>"
+def apply_rafting_arabic_font(markup):
+ preload='<link rel="preload" as="font" type="font/woff2" crossorigin href="'+BASE+'fonts/arabic/Alexandria-VF.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="'+BASE+'fonts/arabic/Tajawal-Regular.woff2">'
+ return markup.replace('</head>',preload+ARABIC_RAFTING_FONT+'</head>',1)
+
 def build(root):
  shutil.copytree(Path(__file__).parent/"rafting-12-assets",root/"images/rafting-12",dirs_exist_ok=True)
  shutil.copytree(Path(__file__).parent/"rafting-30-assets",root/"images/rafting-30",dirs_exist_ok=True)
@@ -97,10 +103,10 @@ def build(root):
   outer_source=(root/lang/'gite-atlas/index.html').read_text()
   def render(main,slug,title,innername):
    inner=head.replace('<title>Rafting | Imsfrane</title>',f'<title>{title} | Imsfrane</title>')+'<body><main>'+main+'</main></body></html>'
-   if lang=='ar':inner=arabic_display(inner)
+   if lang=='ar':inner=apply_rafting_arabic_font(arabic_display(inner))
    (root/innername).write_text(inner)
    outer=outer_source.replace('giteExperienceFrame','raftingProgramFrame')
-   outer=re.sub(r'<iframe\b[^>]*>',f'<iframe id="raftingProgramFrame" title="{title}" src="{BASE}{innername}?v=rafting-arabic-western15" scrolling="no" style="display:block;width:100%;height:4200px;border:0"></iframe>',outer,count=1)
+   outer=re.sub(r'<iframe\b[^>]*>',f'<iframe id="raftingProgramFrame" title="{title}" src="{BASE}{innername}?v=rafting-arabic-font16" scrolling="no" style="display:block;width:100%;height:4200px;border:0"></iframe>',outer,count=1)
    # Replace inherited resize handlers, including the legacy malformed one.
    outer=re.sub(r'<script\b[^>]*>.*?</script>',lambda m:'' if 'raftingProgramFrame' in m[0] and '<iframe' not in m[0] else m[0],outer,flags=re.S)
    resize="""<script>(function(){
@@ -117,7 +123,7 @@ frame.addEventListener('load',attach);if(frame.contentDocument&&frame.contentDoc
    outer=re.sub(r'<title\b[^>]*>.*?</title>',f'<title>{title} | Imsfrane Cathédrale</title>',outer,flags=re.S)
    outer=re.sub(r'<link\b[^>]*rel="canonical"[^>]*>','',outer)
    outer=re.sub(r'(<div class="atnav-langmini-panel".*?</div>)',lambda m:m[0].replace('/gite-atlas/','/'+slug+'/'),outer,flags=re.S)
-   if lang=='ar':outer=arabic_display(outer)
+   if lang=='ar':outer=apply_rafting_arabic_font(arabic_display(outer))
    folder=root/lang/slug;folder.mkdir(parents=True,exist_ok=True);(folder/'index.html').write_text(outer)
   render(main,'rafting','Rafting',f'rafting-programmes-{lang}.html')
   # Keep legacy entry points on the same new listing.
