@@ -58,10 +58,10 @@ def arabic_display(markup):
  words={'Imsfrane Cathédrale':'مسفران كاتدرال','IMSFRANE':'مسفران','OUED AHANSAL':'وادي أحنصال','ATLAS':'الأطلس','RAFTING':'التجديف','Amougr':'أموگر','Isgli':'إيسگلي','DH':'درهم','AR':'العربية','FR':'الفرنسية','EN':'الإنجليزية','ES':'الإسبانية','Aller au contenu':'انتقل إلى المحتوى','Contacter sur WhatsApp':'تواصل عبر واتساب'}
  for n,part in enumerate(parts):
   if part.startswith('<'):
-   if re.match(r'<(?:script|style)\\b',part,re.I):hidden=re.match(r'<(script|style)',part,re.I)[1].lower()
-   elif hidden and re.match(r'</'+hidden+r'\\s*>',part,re.I):hidden=None
+   if re.match(r'<(?:script|style)\b',part,re.I):hidden=re.match(r'<(script|style)',part,re.I)[1].lower()
+   elif hidden and re.match(r'</'+hidden+r'\s*>',part,re.I):hidden=None
   elif not hidden:
-   part=re.sub(r'(?<=\\d)[ \\u00a0\\u202f](?=\\d{3}\\b)','',part)
+   part=re.sub(r'(?<=\d)[ \u00a0\u202f](?=\d{3}\b)','',part)
    for old,new in words.items():part=re.sub(r'(?<![A-Za-z])'+re.escape(old)+r'(?![A-Za-z])',new,part)
    part=part.replace('(أموگر)','').replace('(إيسگلي)','')
    parts[n]=part.translate(str.maketrans('0123456789','٠١٢٣٤٥٦٧٨٩'))
