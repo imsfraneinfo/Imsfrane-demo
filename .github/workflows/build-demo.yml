@@ -13,6 +13,10 @@ on:
       - 'apartment-assets/**'
       - 'build_weekend_offers.py'
       - 'build_weekend_programme.py'
+      - 'build_footer_pro.py'
+      - 'footer-pro.css'
+      - 'footer-pro.js'
+      - 'qa_footer_pro.py'
       - 'weekend-programme.json'
       - 'weekend-programme-assets/**'
       - 'build_about_team.py'
@@ -147,6 +151,10 @@ jobs:
         run: |
           python3 -m pip install beautifulsoup4==4.14.3
           python3 build_weekend_programme.py
+      - name: Unify and validate the footer across every public page
+        run: |
+          python3 build_footer_pro.py
+          python3 qa_footer_pro.py
       - uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
