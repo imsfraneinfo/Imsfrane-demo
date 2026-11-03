@@ -41,12 +41,12 @@
     "stages": [
       [
         "الانطلاق والاستقرار بجانب الوادي",
-        "تنطلق رحلتنا يوم الجمعة من الدار البيضاء، مروراً بالرباط ثم بني ملال، في اتجاه مسفران وسط جبال الأطلس. خلال الطريق، تتغير المناظر تدريجياً من المدن والسهول إلى الطرق الجبلية والوديان.",
-        "عند الوصول، نتوجه إلى مكان التخييم على ضفاف وادي أحنصال، حيث نتعرف على المشاركين ونوزع أماكن المبيت ونستقر في الخيام."
+        "تنطلق رحلتنا يوم الجمعة من الدار البيضاء عند الساعة 18:00، مروراً بالرباط ثم بني ملال، في اتجاه مسفران وسط جبال الأطلس.",
+        "نصل إلى مسفران ليلاً، ونتوجه إلى مكان التخييم على ضفاف وادي أحنصال. نتعرف على المشاركين ونوزع أماكن المبيت ونستقر في الخيام وسط الأجواء الليلية للمخيم."
       ],
       [
-        "أول مساء في المخيم",
-        "مع حلول المساء، نستمتع بأجواء المخيم وسط الطبيعة، ونتناول وجبة العشاء. بين الخيام وهدوء الوادي، نأخذ وقتاً للتعارف والراحة قبل الاستعداد لمغامرة اليوم التالي."
+        "أول ليلة في المخيم",
+        "بعد الاستقرار في الخيام، نستمتع بأجواء المخيم ليلاً وسط الطبيعة ونتناول وجبة العشاء. نأخذ وقتاً للتعارف والراحة قبل الاستعداد لمغامرة اليوم التالي."
       ],
       [
         "الفطور والانطلاق نحو القمة",
@@ -86,7 +86,7 @@
     "gallery": "لمحات من الرحلة",
     "gallerysub": "المخيم والقمة والمضايق والشلالات في صور حقيقية من المنطقة.",
     "captions": [
-      "الخيام على ضفاف وادي أحنصال",
+      "الخيام وأجواء المخيم ليلاً بجانب وادي أحنصال",
       "أجواء المخيم ليلاً",
       "المسار الجبلي نحو قمة مسفران",
       "قمة مسفران وعلامة ارتفاع 1868 متراً",
@@ -147,12 +147,12 @@
     "stages": [
       [
         "Départ et installation au bord de l’eau",
-        "Le vendredi, nous partons de Casablanca, en passant par Rabat puis Beni Mellal, en direction de Msfrane. Au fil du trajet, les villes et les plaines laissent progressivement place aux routes de montagne et aux vallées de l’Atlas.",
-        "À l’arrivée, nous rejoignons le camp sur les rives de l’Oued Ahansal. Nous faisons connaissance avec les participants, répartissons les couchages et prenons le temps de nous installer dans les tentes."
+        "Le vendredi, nous partons de Casablanca à 18:00, en passant par Rabat puis Beni Mellal, en direction de Msfrane, au cœur de l’Atlas.",
+        "Nous arrivons à Msfrane de nuit et rejoignons le camp sur les rives de l’Oued Ahansal. Nous faisons connaissance avec les participants, répartissons les couchages et nous installons dans les tentes, dans l’ambiance nocturne du camp."
       ],
       [
-        "Une première soirée au camp",
-        "À la tombée du jour, nous profitons de l’ambiance du camp en pleine nature et partageons le dîner. Entre les tentes et le calme de la rivière, chacun prend le temps de se reposer et de faire connaissance avant l’aventure du lendemain."
+        "La première nuit au camp",
+        "Une fois installés dans les tentes, nous profitons de l’ambiance nocturne du camp en pleine nature et partageons le dîner. Chacun prend le temps de faire connaissance et de se reposer avant l’aventure du lendemain."
       ],
       [
         "Petit-déjeuner et départ vers le sommet",
@@ -192,7 +192,7 @@
     "gallery": "Quelques instants du séjour",
     "gallerysub": "Le camp, le sommet, les gorges et les cascades : des photographies réelles de la région.",
     "captions": [
-      "Les tentes au bord de l’Oued Ahansal",
+      "Les tentes et l’ambiance nocturne du camp au bord de l’Ahansal",
       "Le camp à la nuit tombée",
       "Le sentier vers le sommet de Msfrane",
       "Le sommet et le panneau d’altitude : 1868 mètres",
@@ -253,12 +253,12 @@
     "stages": [
       [
         "Departure and settling in beside the river",
-        "On Friday, we leave Casablanca, travelling through Rabat and Beni Mellal towards Msfrane. Along the way, cities and plains gradually give way to mountain roads and Atlas valleys.",
-        "On arrival, we head to the campsite beside the Ahansal River. We meet the other participants, arrange sleeping places and settle into the tents."
+        "On Friday, we leave Casablanca at 18:00, travelling through Rabat and Beni Mellal towards Msfrane in the Atlas Mountains.",
+        "We arrive in Msfrane at night and head to the campsite beside the Ahansal River. We meet the other participants, arrange sleeping places and settle into the tents in the night-time atmosphere of the camp."
       ],
       [
-        "Your first evening at camp",
-        "As evening falls, we enjoy the atmosphere of the camp in nature and have dinner. With the tents and quiet river around us, there is time to get to know each other and rest before the next day’s adventure."
+        "Your first night at camp",
+        "After settling into the tents, we enjoy the camp’s night-time atmosphere in nature and have dinner. There is time to get to know each other and rest before the next day’s adventure."
       ],
       [
         "Breakfast and the hike to the summit",
@@ -298,7 +298,7 @@
     "gallery": "Moments from the journey",
     "gallerysub": "The camp, summit, gorges and waterfalls, in real photographs from the area.",
     "captions": [
-      "Tents beside the Ahansal River",
+      "Tents and the camp at night beside the Ahansal River",
       "The camp after dark",
       "The trail towards Msfrane’s summit",
       "The summit and the altitude sign: 1868 metres",
@@ -359,12 +359,12 @@
     "stages": [
       [
         "Salida e instalación junto al río",
-        "El viernes salimos de Casablanca, pasando por Rabat y Beni Mellal, en dirección a Msfrane. Durante el trayecto, las ciudades y las llanuras dan paso poco a poco a las carreteras de montaña y los valles del Atlas.",
-        "Al llegar, nos dirigimos al campamento a orillas del río Ahansal. Conocemos a los demás participantes, distribuimos las plazas para dormir y nos instalamos en las tiendas."
+        "El viernes salimos de Casablanca a las 18:00, pasando por Rabat y Beni Mellal, en dirección a Msfrane, en las montañas del Atlas.",
+        "Llegamos a Msfrane de noche y nos dirigimos al campamento a orillas del río Ahansal. Conocemos a los demás participantes, distribuimos las plazas para dormir y nos instalamos en las tiendas, en el ambiente nocturno del campamento."
       ],
       [
         "La primera noche en el campamento",
-        "Al caer la tarde, disfrutamos del ambiente del campamento en plena naturaleza y cenamos. Entre las tiendas y la tranquilidad del río, tenemos tiempo para conocernos y descansar antes de la aventura del día siguiente."
+        "Una vez instalados en las tiendas, disfrutamos del ambiente nocturno del campamento en plena naturaleza y cenamos. Tenemos tiempo para conocernos y descansar antes de la aventura del día siguiente."
       ],
       [
         "Desayuno y comienzo de la ascensión",
@@ -404,7 +404,7 @@
     "gallery": "Momentos del viaje",
     "gallerysub": "El campamento, la cumbre, las gargantas y las cascadas, en fotografías reales de la zona.",
     "captions": [
-      "Las tiendas junto al río Ahansal",
+      "Las tiendas y el ambiente nocturno del campamento junto al Ahansal",
       "El campamento de noche",
       "El sendero hacia la cumbre de Msfrane",
       "La cumbre y el cartel de altitud: 1868 metros",

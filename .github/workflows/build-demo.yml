@@ -14,6 +14,7 @@ on:
       - 'build_weekend_offers.py'
       - 'build_weekend_programme.py'
       - 'weekend-programme.json'
+      - 'weekend-programme-assets/**'
       - 'build_about_team.py'
       - 'build_visual_identity.py'
       - 'build_image_clarity.py'

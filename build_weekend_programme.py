@@ -3,9 +3,9 @@ from pathlib import Path
 from html import escape as e
 from urllib.parse import quote
 from bs4 import BeautifulSoup
-import json,re
+import json,re,shutil
 ROOT=Path('public'); BASE='/Imsfrane-demo/'
-PHOTOS=[['IMG_6449.jpeg','IMG_4771.jpeg'],['IMG_7987.jpeg'],['rando-IMG_6167.webp'],['rando-IMG_7634.webp','rando-IMG_7447.webp'],['D.webp'],['IMG_9104.jpeg'],['rando-IMG_4507.webp'],['randonnee-cascades.webp'],['18.webp'],['10.webp']]
+PHOTOS=[['weekend-IMG_5277.webp','weekend-IMG_5280.webp'],['IMG_7987.jpeg'],['rando-IMG_6167.webp'],['rando-IMG_7634.webp','rando-IMG_7447.webp'],['D.webp'],['IMG_9104.jpeg'],['rando-IMG_4507.webp'],['randonnee-cascades.webp'],['18.webp'],['10.webp']]
 HERO='weekend-imsfrane-cover.webp'
 CSS='''
 .ims-weekend{--wk-ink:#123e48;--wk-copper:#a94f30;--wk-paper:#f6f1e8;background:var(--wk-paper);color:var(--wk-ink);padding-bottom:0}
@@ -46,6 +46,8 @@ def media(names,caption,lang):
 
 T=json.loads(Path('weekend-programme.json').read_text())
 def build():
+ for image in Path('weekend-programme-assets').glob('*.webp'):
+  shutil.copy2(image,ROOT/'images'/('weekend-'+image.name))
  from PIL import Image,ImageOps
  # A high-quality derivative of the original photograph; no synthetic imagery.
  with Image.open(ROOT/'images/1000254454.jpg') as original:
