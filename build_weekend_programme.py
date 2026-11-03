@@ -5,7 +5,7 @@ from urllib.parse import quote
 from bs4 import BeautifulSoup
 import json,re,shutil
 ROOT=Path('public'); BASE='/Imsfrane-demo/'
-PHOTOS=[['weekend-IMG_5277.webp','weekend-IMG_5280.webp'],['IMG_7987.jpeg'],['rando-IMG_6167.webp'],['rando-IMG_7634.webp','rando-IMG_7447.webp'],['D.webp'],['IMG_9104.jpeg'],['rando-IMG_4507.webp'],['randonnee-cascades.webp'],['18.webp'],['10.webp']]
+PHOTOS=[['IMG_6449.jpeg','IMG_4771.jpeg'],['weekend-IMG_5277.webp','weekend-IMG_5280.webp'],['rando-IMG_6167.webp'],['rando-IMG_7634.webp','rando-IMG_7447.webp'],['D.webp'],['IMG_9104.jpeg'],['rando-IMG_4507.webp'],['randonnee-cascades.webp'],['18.webp'],['10.webp']]
 HERO='weekend-imsfrane-cover.webp'
 CSS='''
 .ims-weekend{--wk-ink:#123e48;--wk-copper:#a94f30;--wk-paper:#f6f1e8;background:var(--wk-paper);color:var(--wk-ink);padding-bottom:0}
