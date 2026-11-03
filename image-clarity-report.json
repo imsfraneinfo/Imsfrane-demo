@@ -1,8 +1,36 @@
 [
   {
+    "page": "rafting-50-km-2-jours-ar.html",
+    "small": "/Imsfrane-demo/images/4x4-800.webp",
+    "large": "/Imsfrane-demo/images/4x4.webp",
+    "width_before": 800,
+    "width_after": 1200
+  },
+  {
+    "page": "rafting-50-km-2-jours-es.html",
+    "small": "/Imsfrane-demo/images/4x4-800.webp",
+    "large": "/Imsfrane-demo/images/4x4.webp",
+    "width_before": 800,
+    "width_after": 1200
+  },
+  {
+    "page": "rafting-50-km-2-jours-fr.html",
+    "small": "/Imsfrane-demo/images/4x4-800.webp",
+    "large": "/Imsfrane-demo/images/4x4.webp",
+    "width_before": 800,
+    "width_after": 1200
+  },
+  {
     "page": "404.html",
     "small": "/Imsfrane-demo/images/21-800.webp",
     "large": "/Imsfrane-demo/images/21.webp",
+    "width_before": 800,
+    "width_after": 1200
+  },
+  {
+    "page": "rafting-50-km-2-jours-en.html",
+    "small": "/Imsfrane-demo/images/4x4-800.webp",
+    "large": "/Imsfrane-demo/images/4x4.webp",
     "width_before": 800,
     "width_after": 1200
   },
