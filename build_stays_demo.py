@@ -67,9 +67,9 @@ for lang,t in texts.items():
         if 'stays-demo.css' not in s:s=s.replace('</head>',f'<link rel="stylesheet" href="{base}stays-demo.css?v=4"></head>')
         if 'accommodation-menu.js' not in s:
             s=s.replace('</body>',f'<script defer src="{base}accommodation-menu.js?v=4"></script></body>')
-        s=re.sub(r'<li>\\s*</li>','',s)
+        s=re.sub(r'<li>\s*</li>','',s)
         if lang=='ar':
-            s=re.sub(r'<aside\\b[^>]*id="atnavDrawer"[^>]*>.*?</aside>',lambda m:m[0].replace('>Camping<','>التخييم<').replace('>Rafting<','>التجديف<').replace('>WhatsApp<','>واتساب<'),s,flags=re.S)
+            s=re.sub(r'<aside\b[^>]*id="atnavDrawer"[^>]*>.*?</aside>',lambda m:m[0].replace('>Camping<','>التخييم<').replace('>Rafting<','>التجديف<').replace('>WhatsApp<','>واتساب<'),s,flags=re.S)
         p.write_text(s)
 if Path('gite-atlas-form.html').exists():shutil.copyfile('gite-atlas-form.html',root/'gite-atlas-form.html')
 print('Built accommodation selector and Gite Atlas preview in four languages.')
