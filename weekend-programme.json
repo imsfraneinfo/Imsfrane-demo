@@ -41,12 +41,12 @@
     "stages": [
       [
         "الانطلاق والاستقرار بجانب الوادي",
-        "تنطلق رحلتنا يوم الجمعة من الدار البيضاء عند الساعة 18:00، مروراً بالرباط ثم بني ملال، في اتجاه مسفران وسط جبال الأطلس.",
+        "تنطلق رحلتنا يوم الجمعة من الدار البيضاء عند الساعة 18:00، مروراً بالرباط ثم بني ملال، في اتجاه مسفران وسط جبال الأطلس. نتوقف لتناول وجبة العشاء أثناء الطريق قبل الوصول إلى مسفران.",
         "نصل إلى مسفران ليلاً، ونتوجه إلى مكان التخييم على ضفاف وادي أحنصال. نتعرف على المشاركين ونوزع أماكن المبيت ونستقر في الخيام وسط الأجواء الليلية للمخيم."
       ],
       [
         "أول ليلة في المخيم",
-        "بعد الاستقرار في الخيام، نستمتع بأجواء المخيم ليلاً وسط الطبيعة ونتناول وجبة العشاء. نأخذ وقتاً للتعارف والراحة قبل الاستعداد لمغامرة اليوم التالي."
+        "نصل إلى مسفران في وقت متأخر من الليل، ثم نستقر في الخيام ونخلد إلى النوم استعداداً لرحلة الصباح. لا توجد وجبة عشاء في المخيم ليلة الجمعة."
       ],
       [
         "الفطور والانطلاق نحو القمة",
@@ -90,8 +90,8 @@
       "أجواء المخيم ليلاً",
       "المسار الجبلي نحو قمة مسفران",
       "قمة مسفران وعلامة ارتفاع 1868 متراً",
-      "وجبة جماعية في المخيم",
-      "نار المخيم والخيام ليلاً",
+      "الغداء بجانب وادي أحنصال",
+      "جلسة جماعية حول نار المخيم",
       "مضايق أحنصال",
       "شلالات أوخودن",
       "الشاحنة القديمة أسفل جبل مسفران",
@@ -147,12 +147,12 @@
     "stages": [
       [
         "Départ et installation au bord de l’eau",
-        "Le vendredi, nous partons de Casablanca à 18:00, en passant par Rabat puis Beni Mellal, en direction de Msfrane, au cœur de l’Atlas.",
+        "Le vendredi, nous partons de Casablanca à 18:00, en passant par Rabat puis Beni Mellal, en direction de Msfrane, au cœur de l’Atlas. Nous nous arrêtons pour dîner en route, avant d’arriver à Msfrane.",
         "Nous arrivons à Msfrane de nuit et rejoignons le camp sur les rives de l’Oued Ahansal. Nous faisons connaissance avec les participants, répartissons les couchages et nous installons dans les tentes, dans l’ambiance nocturne du camp."
       ],
       [
         "La première nuit au camp",
-        "Une fois installés dans les tentes, nous profitons de l’ambiance nocturne du camp en pleine nature et partageons le dîner. Chacun prend le temps de faire connaissance et de se reposer avant l’aventure du lendemain."
+        "Nous arrivons à Msfrane tard dans la nuit, nous nous installons dans les tentes puis allons dormir pour nous reposer avant la randonnée du matin. Aucun dîner n’est prévu au camp le vendredi soir."
       ],
       [
         "Petit-déjeuner et départ vers le sommet",
@@ -196,8 +196,8 @@
       "Le camp à la nuit tombée",
       "Le sentier vers le sommet de Msfrane",
       "Le sommet et le panneau d’altitude : 1868 mètres",
-      "Un repas partagé au camp",
-      "Le feu et les tentes de nuit",
+      "Le déjeuner au bord de l’Oued Ahansal",
+      "Un moment ensemble autour du feu de camp",
       "Les gorges de l’Ahansal",
       "Les cascades d’Oukhodene",
       "Le vieux camion au pied de Msfrane",
@@ -253,12 +253,12 @@
     "stages": [
       [
         "Departure and settling in beside the river",
-        "On Friday, we leave Casablanca at 18:00, travelling through Rabat and Beni Mellal towards Msfrane in the Atlas Mountains.",
+        "On Friday, we leave Casablanca at 18:00, travelling through Rabat and Beni Mellal towards Msfrane in the Atlas Mountains. We stop for dinner along the way, before reaching Msfrane.",
         "We arrive in Msfrane at night and head to the campsite beside the Ahansal River. We meet the other participants, arrange sleeping places and settle into the tents in the night-time atmosphere of the camp."
       ],
       [
         "Your first night at camp",
-        "After settling into the tents, we enjoy the camp’s night-time atmosphere in nature and have dinner. There is time to get to know each other and rest before the next day’s adventure."
+        "We arrive in Msfrane late at night, settle into the tents and go to sleep to rest before the morning hike. There is no dinner at camp on Friday night."
       ],
       [
         "Breakfast and the hike to the summit",
@@ -302,8 +302,8 @@
       "The camp after dark",
       "The trail towards Msfrane’s summit",
       "The summit and the altitude sign: 1868 metres",
-      "A shared meal at camp",
-      "Campfire and tents at night",
+      "Lunch beside the Ahansal River",
+      "Time together around the campfire",
       "Ahansal gorges",
       "Oukhodene waterfalls",
       "The old truck below Mount Msfrane",
@@ -359,12 +359,12 @@
     "stages": [
       [
         "Salida e instalación junto al río",
-        "El viernes salimos de Casablanca a las 18:00, pasando por Rabat y Beni Mellal, en dirección a Msfrane, en las montañas del Atlas.",
+        "El viernes salimos de Casablanca a las 18:00, pasando por Rabat y Beni Mellal, en dirección a Msfrane, en las montañas del Atlas. Paramos a cenar durante el trayecto, antes de llegar a Msfrane.",
         "Llegamos a Msfrane de noche y nos dirigimos al campamento a orillas del río Ahansal. Conocemos a los demás participantes, distribuimos las plazas para dormir y nos instalamos en las tiendas, en el ambiente nocturno del campamento."
       ],
       [
         "La primera noche en el campamento",
-        "Una vez instalados en las tiendas, disfrutamos del ambiente nocturno del campamento en plena naturaleza y cenamos. Tenemos tiempo para conocernos y descansar antes de la aventura del día siguiente."
+        "Llegamos a Msfrane tarde por la noche, nos instalamos en las tiendas y nos acostamos para descansar antes de la caminata de la mañana. El viernes no hay cena en el campamento."
       ],
       [
         "Desayuno y comienzo de la ascensión",
@@ -408,8 +408,8 @@
       "El campamento de noche",
       "El sendero hacia la cumbre de Msfrane",
       "La cumbre y el cartel de altitud: 1868 metros",
-      "Una comida en el campamento",
-      "La hoguera y las tiendas de noche",
+      "El almuerzo junto al río Ahansal",
+      "Un momento en grupo alrededor de la hoguera",
       "Las gargantas del Ahansal",
       "Las cascadas de Oukhodene",
       "El camión antiguo al pie de Msfrane",

@@ -5,7 +5,7 @@ from urllib.parse import quote
 from bs4 import BeautifulSoup
 import json,re,shutil
 ROOT=Path('public'); BASE='/Imsfrane-demo/'
-PHOTOS=[['IMG_6449.jpeg','IMG_4771.jpeg'],['weekend-IMG_5277.webp','weekend-IMG_5280.webp'],['rando-IMG_6167.webp'],['rando-IMG_7634.webp','rando-IMG_7447.webp'],['D.webp'],['IMG_9104.jpeg'],['rando-IMG_4507.webp'],['randonnee-cascades.webp'],['18.webp'],['10.webp']]
+PHOTOS=[['IMG_6449.jpeg','IMG_4771.jpeg'],['weekend-IMG_5277.webp','weekend-IMG_5280.webp'],['rando-IMG_6167.webp'],['rando-IMG_7634.webp','rando-IMG_7447.webp'],['weekend-IMG_6899.webp'],['weekend-IMG_9384.webp'],['rando-IMG_4507.webp'],['randonnee-cascades.webp'],['18.webp'],['10.webp']]
 HERO='weekend-imsfrane-cover.webp'
 CSS='''
 .ims-weekend{--wk-ink:#123e48;--wk-copper:#a94f30;--wk-paper:#f6f1e8;background:var(--wk-paper);color:var(--wk-ink);padding-bottom:0}
@@ -30,6 +30,7 @@ CSS='''
 html[lang="ar"] .ims-weekend .wk-eyebrow{letter-spacing:0}html[lang="ar"] .ims-weekend .wk-hero:after{background:linear-gradient(270deg,rgba(10,33,39,.86),rgba(10,33,39,.18)),linear-gradient(0deg,rgba(10,33,39,.8),transparent 90%)}
 @media(min-width:801px){.ims-weekend .wk-stage[data-stage="3"] .wk-media img,.ims-weekend .wk-stage[data-stage="7"] .wk-media img{object-fit:contain;background:#e5ded3}}
 @media(max-width:800px){.ims-weekend .wk-wrap{width:calc(100% - 36px)}.ims-weekend .wk-hero{min-height:620px;padding:90px 0 42px}.ims-weekend h1{font-size:clamp(36px,8vw,55px)}.ims-weekend .wk-hero>img{object-position:50% 40%}.ims-weekend .wk-subtitle{font-size:18px}.ims-weekend .wk-price strong{font-size:29px}.ims-weekend .wk-hero-bottom{align-items:flex-start;flex-direction:column}.ims-weekend .wk-facts{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding-block:16px}.ims-weekend .wk-fact strong{font-size:23px}.ims-weekend .wk-fact span{font-size:12px}.ims-weekend .wk-intro{padding-block:38px 20px}.ims-weekend .wk-intro p{font-size:16px}.ims-weekend .wk-nav a{font-size:12px;padding:10px 13px}.ims-weekend .wk-day{padding-top:32px}.ims-weekend .wk-stage{grid-template-columns:1fr;gap:22px;margin-bottom:38px}.ims-weekend .wk-media img{height:auto;max-height:530px;object-fit:contain;background:#e5ded3}.ims-weekend .wk-pair img{height:290px;object-fit:cover}.ims-weekend .wk-copy p{font-size:16px}.ims-weekend .wk-gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.ims-weekend .wk-gallery img{height:230px}.ims-weekend .wk-info{padding:25px 20px;margin-bottom:38px}.ims-weekend .wk-info dl{grid-template-columns:repeat(2,minmax(0,1fr))}.ims-weekend .wk-gallery-section{padding-block:25px 40px}}
+.ims-weekend .wk-stage{display:flex;flex-direction:column;align-items:stretch;gap:24px}.ims-weekend .wk-stage>.wk-copy{width:100%;max-width:940px;margin-inline:auto}.ims-weekend .wk-stage>figure{width:min(100%,700px);margin-inline:auto}.ims-weekend .wk-stage .wk-media img{height:auto!important;max-height:none!important;object-fit:contain!important}
 @media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
 '''
 
@@ -68,7 +69,7 @@ def build():
    body+=f'<section class="wk-day" id="wk-day-{day+1}"><header class="wk-dayhead"><h2>{e(d["days"][day])}</h2><p>{e(d["dayintro"][day])}</p></header>'
    for i in indices:
     stage=d['stages'][i]
-    body+=f'<article class="wk-stage" data-stage="{i}">{media(PHOTOS[i],d["captions"][i],lang)}<div class="wk-copy"><span class="wk-count">{i+1:02d} / 10</span><h3>{e(stage[0])}</h3>'+''.join(f'<p>{e(p)}</p>' for p in stage[1:])+'</div></article>'
+    body+=f'<article class="wk-stage" data-stage="{i}"><div class="wk-copy"><span class="wk-count">{i+1:02d} / 10</span><h3>{e(stage[0])}</h3>'+''.join(f'<p>{e(p)}</p>' for p in stage[1:])+'</div>'+media(PHOTOS[i],d['captions'][i],lang)+'</article>'
    body+='</section>'
   # Distinct alternative photographs, rather than repeating the stage photographs.
   gallery=[('IMG_7990.jpeg',1),('rando-IMG_7453.webp',3),('rando-IMG_4503.webp',6),('blog-cascades.webp',7)]
@@ -90,7 +91,7 @@ def build():
   for code in T:
    soup.head.append(soup.new_tag('link',rel='alternate',hreflang=code,href='https://imsfraneinfo.github.io'+BASE+code+'/programme/'))
   soup.head.append(soup.new_tag('link',rel='canonical',href='https://imsfraneinfo.github.io'+BASE+lang+'/programme/'))
-  soup.head.append(soup.new_tag('link',rel='stylesheet',href=BASE+'weekend-programme.css?v=1'))
+  soup.head.append(soup.new_tag('link',rel='stylesheet',href=BASE+'weekend-programme.css?v=2'))
   for a in soup.select('a[href]'):
    href=a['href']
    if href.startswith('https://wa.me/') or href.startswith('https://api.whatsapp.com/'):
