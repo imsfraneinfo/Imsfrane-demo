@@ -29,9 +29,9 @@
     "discover": "اكتشف البرنامج",
     "book": "الحجز والاستفسار عبر واتساب",
     "days": [
-      "اليوم الأول – الجمعة",
-      "اليوم الثاني – السبت",
-      "اليوم الثالث – الأحد"
+      "اليوم الأول",
+      "اليوم الثاني",
+      "اليوم الثالث"
     ],
     "dayintro": [
       "الانطلاق والوصول إلى مسفران",
@@ -46,7 +46,7 @@
       ],
       [
         "أول ليلة في المخيم",
-        "نصل إلى مسفران في وقت متأخر من الليل، ثم نستقر في الخيام ونخلد إلى النوم استعداداً لرحلة الصباح. لا توجد وجبة عشاء في المخيم ليلة الجمعة."
+        "نقضي الليلة الأولى في الخيام ونخلد إلى النوم بعد الرحلة، استعداداً للمشي الجبلي صباح اليوم التالي."
       ],
       [
         "الفطور والانطلاق نحو القمة",
@@ -135,9 +135,9 @@
     "discover": "Découvrir le programme",
     "book": "Réserver et s’informer sur WhatsApp",
     "days": [
-      "Jour 1 – Vendredi",
-      "Jour 2 – Samedi",
-      "Jour 3 – Dimanche"
+      "Jour 1",
+      "Jour 2",
+      "Jour 3"
     ],
     "dayintro": [
       "La route vers Msfrane et l’arrivée au camp",
@@ -152,7 +152,7 @@
       ],
       [
         "La première nuit au camp",
-        "Nous arrivons à Msfrane tard dans la nuit, nous nous installons dans les tentes puis allons dormir pour nous reposer avant la randonnée du matin. Aucun dîner n’est prévu au camp le vendredi soir."
+        "Nous passons la première nuit sous la tente et nous reposons après le trajet, avant la randonnée du lendemain matin."
       ],
       [
         "Petit-déjeuner et départ vers le sommet",
@@ -241,9 +241,9 @@
     "discover": "Explore the programme",
     "book": "Book or enquire on WhatsApp",
     "days": [
-      "Day 1 – Friday",
-      "Day 2 – Saturday",
-      "Day 3 – Sunday"
+      "Day 1",
+      "Day 2",
+      "Day 3"
     ],
     "dayintro": [
       "The journey to Msfrane and arrival at camp",
@@ -258,7 +258,7 @@
       ],
       [
         "Your first night at camp",
-        "We arrive in Msfrane late at night, settle into the tents and go to sleep to rest before the morning hike. There is no dinner at camp on Friday night."
+        "We spend our first night in the tents and rest after the journey, ready for the next morning’s hike."
       ],
       [
         "Breakfast and the hike to the summit",
@@ -347,9 +347,9 @@
     "discover": "Descubrir el programa",
     "book": "Reservas y consultas por WhatsApp",
     "days": [
-      "Día 1 – Viernes",
-      "Día 2 – Sábado",
-      "Día 3 – Domingo"
+      "Día 1",
+      "Día 2",
+      "Día 3"
     ],
     "dayintro": [
       "El viaje a Msfrane y la llegada al campamento",
@@ -364,7 +364,7 @@
       ],
       [
         "La primera noche en el campamento",
-        "Llegamos a Msfrane tarde por la noche, nos instalamos en las tiendas y nos acostamos para descansar antes de la caminata de la mañana. El viernes no hay cena en el campamento."
+        "Pasamos la primera noche en las tiendas y descansamos después del viaje, antes de la caminata de la mañana siguiente."
       ],
       [
         "Desayuno y comienzo de la ascensión",

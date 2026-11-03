@@ -76,6 +76,11 @@ def build():
   body+=f'<section class="wk-gallery-section"><h2>{e(d["gallery"])}</h2><p>{e(d["gallerysub"])}</p><div class="wk-gallery">'+''.join(media([name],d['captions'][i],lang) for name,i in gallery)+'</div></section>'
   body+=f'<section class="wk-info"><h2>{e(d["info"])}</h2><dl>'+''.join(f'<div><dt>{e(a)}</dt><dd>{e(b)}</dd></div>' for a,b in d['facts'])+f'</dl><p>{e(d["activities"])}</p><p>{e(d["route"])}</p><p>{e(d["destination"])}</p><p class="wk-note">{e(d["note"])}</p></section></div><section class="wk-final"><h2>{e(d["final"])}</h2><p>{e(d["contact"])}</p>{btn}</section></main>'
   soup.main.replace_with(BeautifulSoup(body,'html.parser'))
+  # Keep only the three day headings; prose flows directly into its photographs.
+  for node in soup.main.select('.wk-copy h3,.wk-count,.wk-dayhead p,.wk-nav,figcaption,.wk-gallery-section h2,.wk-gallery-section>p,.wk-info h2,.wk-info dl,.wk-final h2'):
+   node.decompose()
+  for node in soup.main.select('.wk-info>p:not(.wk-note)'):
+   node.decompose()
   soup.html['lang']=lang;soup.html['dir']='rtl' if lang=='ar' else 'ltr'
   # Remove obsolete Programme pricing, image preloads and structured data.
   for tag in soup.select('script[type="application/ld+json"],link[rel="preload"][as="image"],link[rel="canonical"],link[hreflang]'):tag.decompose()
@@ -91,7 +96,7 @@ def build():
   for code in T:
    soup.head.append(soup.new_tag('link',rel='alternate',hreflang=code,href='https://imsfraneinfo.github.io'+BASE+code+'/programme/'))
   soup.head.append(soup.new_tag('link',rel='canonical',href='https://imsfraneinfo.github.io'+BASE+lang+'/programme/'))
-  soup.head.append(soup.new_tag('link',rel='stylesheet',href=BASE+'weekend-programme.css?v=2'))
+  soup.head.append(soup.new_tag('link',rel='stylesheet',href=BASE+'weekend-programme.css?v=3'))
   for a in soup.select('a[href]'):
    href=a['href']
    if href.startswith('https://wa.me/') or href.startswith('https://api.whatsapp.com/'):
