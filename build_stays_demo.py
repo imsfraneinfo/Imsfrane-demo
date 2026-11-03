@@ -48,7 +48,8 @@ for lang,t in texts.items():
         # Only navigation links change. Existing house page main remains untouched.
         pattern=r'<a\b[^>]*class="atnav-submenu-link"[^>]*href="[^"]*/hebergement/(?:"|\?)[^>]*>.*?</a>'
         submenu=f'<section class="stay-menu"><button class="atnav-item atnav-toggle" id="atnavAccommodation" type="button" aria-expanded="false" aria-controls="atnavAccommodationList"><span class="atnav-item-icon"><svg aria-hidden="true"><use href="#atnav-i-bed"></use></svg></span><span>{t[0]}</span><span class="atnav-chevron"><svg aria-hidden="true"><use href="#atnav-i-chevron"></use></svg></span></button><div class="atnav-activities is-collapsed" id="atnavAccommodationList" aria-hidden="true" inert><ul class="atnav-submenu"><li><a class="atnav-submenu-link" href="{house}"><span class="atnav-subicon"><svg aria-hidden="true"><use href="#atnav-i-home"></use></svg></span><span>{t[1]}</span></a></li><li><a class="atnav-submenu-link" href="{gite}"><span class="atnav-subicon"><svg aria-hidden="true"><use href="#atnav-i-bed"></use></svg></span><span>{name}</span></a></li></ul></div></section>'
-        s=re.sub(pattern,lambda m:submenu,s,flags=re.S)
+        # Remove the complete existing accommodation section before inserting it.
+        # Replacing its house anchor first nests sections and leaves orphan links.
         # Accommodation is a sibling of Activities, never inside its collapsible list.
         s=re.sub(r'<li>\s*<details class="stay-menu">.*?</details>\s*</li>', '', s, flags=re.S)
         s=re.sub(r'<details class="stay-menu">.*?</details>', '', s, flags=re.S)
@@ -66,6 +67,9 @@ for lang,t in texts.items():
         if 'stays-demo.css' not in s:s=s.replace('</head>',f'<link rel="stylesheet" href="{base}stays-demo.css?v=4"></head>')
         if 'accommodation-menu.js' not in s:
             s=s.replace('</body>',f'<script defer src="{base}accommodation-menu.js?v=4"></script></body>')
+        s=re.sub(r'<li>\\s*</li>','',s)
+        if lang=='ar':
+            s=re.sub(r'<aside\\b[^>]*id="atnavDrawer"[^>]*>.*?</aside>',lambda m:m[0].replace('>Camping<','>التخييم<').replace('>Rafting<','>التجديف<').replace('>WhatsApp<','>واتساب<'),s,flags=re.S)
         p.write_text(s)
 if Path('gite-atlas-form.html').exists():shutil.copyfile('gite-atlas-form.html',root/'gite-atlas-form.html')
 print('Built accommodation selector and Gite Atlas preview in four languages.')
