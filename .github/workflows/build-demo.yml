@@ -4,6 +4,9 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/build-demo.yml'
+      - 'build_email_forms.py'
+      - 'website-enquiry.js'
+      - 'website-enquiry.css'
       - 'build_stays_demo.py'
       - 'build_rafting_programmes.py'
       - 'build_apartment_demo.py'
@@ -155,6 +158,8 @@ jobs:
         run: |
           python3 build_footer_pro.py
           python3 qa_footer_pro.py
+      - name: Enable email and WhatsApp enquiries in four languages
+        run: python3 build_email_forms.py
       - uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
