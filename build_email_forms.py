@@ -30,7 +30,7 @@ def build(root):
     s=s.replace('id="email" type="email"','id="email" required type="email"')
    trap='<label class="enquiry-trap" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>'
    s=s.replace('</form>',trap+'</form>',1)
-   s=s.replace('</head>',f'<link rel="stylesheet" href="{base}website-enquiry.css?v=2"></head>',1)
+   s=s.replace('</head>',f'<link rel="stylesheet" href="{base}website-enquiry.css?v=3"></head>',1)
    s=s.replace('</body>',f'<script defer src="{base}website-enquiry.js?v=1"></script></body>',1)
    p.write_text(s)
  booking=root/'booking-new.js';js=booking.read_text()

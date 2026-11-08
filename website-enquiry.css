@@ -22,3 +22,13 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* Keep the WhatsApp label visible in both enquiry forms. */
+.enquiry-actions button[data-channel="whatsapp"] {
+  background: #166534 !important;
+  color: #fff !important;
+  border-color: #166534 !important;
+  -webkit-text-fill-color: #fff !important;
+  opacity: 1;
+}
+.enquiry-actions button[data-channel="whatsapp"]:disabled { opacity: .6; }
