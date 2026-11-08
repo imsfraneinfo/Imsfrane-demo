@@ -87,6 +87,49 @@ def rebuild_contact_page(html, lang, base):
     assert count == 1, f'Missing contact main: {lang}'
     return html
 
+
+ENQUIRY_TOPICS_BY_PAGE = {
+    '': 'custom-trip',
+    'rafting': 'rafting',
+    'kayak': 'kayak',
+    'randonnee': 'hiking',
+    'vtt': 'mountain-bike',
+    'quad': 'quad',
+    'camping': 'camping',
+    'hebergement': 'rental-house',
+    'hebergements': 'rental-house',
+    'gite-atlas': 'gite-atlas',
+    'programme': 'custom-trip',
+    'guide': 'route',
+    'store': 'shop',
+}
+
+def embed_contact_forms(root, base, lang):
+    locale = root / lang
+    source = (locale / 'contact/index.html').read_text()
+    form = re.search(r'<form\b[^>]*\bid="contactForm"[^>]*>.*?</form>', source, flags=re.S)
+    assert form, f'Missing reusable contact form: {lang}'
+    pages = {locale / route / 'index.html': topic for route, topic in ENQUIRY_TOPICS_BY_PAGE.items()}
+    pages.update({path: 'rafting' for path in (locale / 'rafting').glob('*/index.html')})
+    added = 0
+    for path, topic in pages.items():
+        if not path.is_file():
+            continue
+        html = path.read_text()
+        assert 'id="contactForm"' not in html and 'id="bookingForm"' not in html, path
+        selected = form[0].replace('value="" selected disabled', 'value="" disabled', 1)
+        option = f'<option value="{topic}">'
+        assert option in selected, topic
+        selected = selected.replace(option, f'<option value="{topic}" selected>', 1)
+        section = f'<section class="embedded-enquiry" aria-labelledby="enquiryTitle">{selected}</section>'
+        html, count = re.subn(r'</main>', lambda _: section + '</main>', html, count=1, flags=re.I)
+        assert count == 1, f'Missing main section: {path}'
+        html = html.replace('</head>', f'<link rel="stylesheet" href="{base}website-enquiry.css?v=6"></head>', 1)
+        html = html.replace('</body>', f'<script defer src="{base}website-enquiry.js?v=1"></script></body>', 1)
+        path.write_text(html)
+        added += 1
+    print(f'Embedded contact form in {added} pages ({lang})')
+
 def build(root):
  base='/Imsfrane-demo/' if root.name=='public' else '/'
  for name in ('website-enquiry.js','website-enquiry.css'):
@@ -111,9 +154,11 @@ def build(root):
    s=s.replace('</form>',trap+'</form>',1)
    if route=='contact':
     s=rebuild_contact_page(s,lang,base)
-   s=s.replace('</head>',f'<link rel="stylesheet" href="{base}website-enquiry.css?v=5"></head>',1)
+   s=s.replace('</head>',f'<link rel="stylesheet" href="{base}website-enquiry.css?v=6"></head>',1)
    s=s.replace('</body>',f'<script defer src="{base}website-enquiry.js?v=1"></script></body>',1)
    p.write_text(s)
+ for lang in TEXT:
+  embed_contact_forms(root,base,lang)
  booking=root/'booking-new.js';js=booking.read_text()
  old="window.open('https://wa.me/212667772551?text='+encodeURIComponent(msg),'_blank','noopener');"
  new="""if(e.submitter?.dataset.channel==='email'){
