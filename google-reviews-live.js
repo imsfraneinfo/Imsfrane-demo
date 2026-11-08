@@ -216,7 +216,7 @@ html[lang="ar"] .hp-home .hp-reviews-unified .hp-live-review-list{padding:0 28px
       const score = Math.max(0, Math.min(5, Math.round(Number(r.rating) || 0)));
       card.appendChild(node("div", "hp-live-review-stars", "★".repeat(score) + "☆".repeat(5-score)));
       if (r.text) card.appendChild(node("p", "hp-live-review-text", r.text));
-      card.appendChild(link(tx.source + " ↗", r.googleMapsURI || maps || section.querySelector(".hp-google-link").href, "hp-live-review-credit"));
+      card.appendChild(link(tx.source + "", r.googleMapsURI || maps || section.querySelector(".hp-google-link").href, "hp-live-review-credit"));
       cards.push(card);
     }
     if (!cards.length) {
