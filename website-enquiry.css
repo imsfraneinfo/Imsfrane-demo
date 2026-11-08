@@ -32,3 +32,38 @@
   opacity: 1;
 }
 .enquiry-actions button[data-channel="whatsapp"]:disabled { opacity: .6; }
+
+#contactForm.contact-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border: 1px solid #d9e3df;
+  box-shadow: 0 16px 40px #15342612;
+}
+#contactForm .enquiry-intro,
+#contactForm .contact-field-full,
+#contactForm .enquiry-status {
+  grid-column: 1 / -1;
+}
+#contactForm .enquiry-intro {
+  border-block-end: 1px solid #d9e3df;
+  padding-block-end: 18px;
+}
+#contactForm .enquiry-intro h2 { margin: 0 0 6px; color: #183a30; }
+#contactForm .enquiry-intro p { margin: 0; color: #455c53; }
+#contactForm .contact-field { min-width: 0; }
+#contactForm :is(input, select, textarea):not([name="website"]) {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #f7faf9;
+  border: 1px solid #aabeb5;
+  border-radius: 8px;
+  color: #183a30;
+}
+#contactForm :is(input, select, textarea):focus-visible {
+  outline: 2px solid #166534;
+  outline-offset: 2px;
+}
+#contactForm textarea { min-height: 124px; resize: vertical; }
+@media (max-width: 640px) {
+  #contactForm.contact-form { grid-template-columns: minmax(0, 1fr); }
+}
