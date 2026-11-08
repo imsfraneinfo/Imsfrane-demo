@@ -116,6 +116,8 @@ def embed_contact_forms(root, base, lang):
         if not path.is_file():
             continue
         html = path.read_text()
+        if 'class="embedded-enquiry"' in html:
+            continue
         assert 'id="contactForm"' not in html and 'id="bookingForm"' not in html, path
         selected = form[0].replace('value="" selected disabled', 'value="" disabled', 1)
         option = f'<option value="{topic}">'
@@ -141,6 +143,8 @@ def build(root):
  for lang,(email,wa,hint,emailhint) in TEXT.items():
   for route in ('contact','booking'):
    p=root/lang/route/'index.html';s=p.read_text()
+   if 'data-channel="email"' in s and 'data-channel="whatsapp"' in s:
+    continue
    s=re.sub(r'<(?:script|link)\b[^>]*(?:src|href)=["\'][^"\']*website-enquiry\.(?:js|css)[^"\']*["\'][^>]*>(?:</script>)?','',s)
    if route=='contact':
     s=refine_contact(s,lang)
@@ -168,8 +172,9 @@ def build(root):
  new="""if(e.submitter?.dataset.channel==='email'){
  window.ImsEnquiry.send(form,{kind:'booking',name:$('name').value.trim(),email:$('email').value.trim(),subject:t[6],message:msg},$('bookingSendStatus'),e.submitter);
  }else{window.open('https://wa.me/212667772551?text='+encodeURIComponent(msg),'_blank','noopener');}"""
- assert old in js, 'Booking WhatsApp handler changed; review before patching'
- booking.write_text(js.replace(old,new,1))
+ if 'window.ImsEnquiry.send(form' not in js:
+  assert old in js, 'Booking WhatsApp handler changed; review before patching'
+  booking.write_text(js.replace(old,new,1))
  for lang in TEXT:
   for route in ('contact','booking'):
    s=(root/lang/route/'index.html').read_text()
