@@ -104,3 +104,19 @@
 @media (max-width: 800px) {
   .contact-landing-grid { grid-template-columns: minmax(0, 1fr); }
 }
+
+.embedded-enquiry {
+  box-sizing: border-box;
+  width: min(100%, 820px);
+  margin: clamp(30px, 6vw, 72px) auto;
+  padding-inline: clamp(12px, 3vw, 24px);
+  color: #183a30;
+  text-align: start;
+}
+.embedded-enquiry #contactForm { margin: 0; max-width: none; }
+.embedded-enquiry .contact-field { display: flex; flex-direction: column; gap: 6px; }
+.embedded-enquiry .contact-field label { color: #183a30; font-weight: 650; }
+.embedded-enquiry .contact-field-note { color: #455c53; font-size: .82rem; }
+.embedded-enquiry :is(input, select, textarea):not([name="website"]) {
+  padding: 10px 12px; font-family: inherit;
+}
