@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/build-demo.yml'
       - 'build_email_forms.py'
+      - 'remove_decorative_arrows.py'
       - 'website-enquiry.js'
       - 'website-enquiry.css'
       - 'build_stays_demo.py'
@@ -160,6 +161,8 @@ jobs:
           python3 qa_footer_pro.py
       - name: Enable email and WhatsApp enquiries in four languages
         run: python3 build_email_forms.py
+      - name: Remove decorative diagonal arrows across the demo
+        run: python3 remove_decorative_arrows.py public
       - uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
