@@ -122,8 +122,12 @@ def embed_contact_forms(root, base, lang):
         assert option in selected, topic
         selected = selected.replace(option, f'<option value="{topic}" selected>', 1)
         section = f'<section class="embedded-enquiry" aria-labelledby="enquiryTitle">{selected}</section>'
-        html, count = re.subn(r'</main>', lambda _: section + '</main>', html, count=1, flags=re.I)
-        assert count == 1, f'Missing main section: {path}'
+        if path == locale / 'index.html':
+            anchor = r'(<section\b[^>]*\bid="activities"[^>]*>.*?</section>)(?=\s*<section\b[^>]*\bid="destination")'
+            html, count = re.subn(anchor, lambda match: match[0] + section, html, count=1, flags=re.S)
+        else:
+            html, count = re.subn(r'</main>', lambda _: section + '</main>', html, count=1, flags=re.I)
+        assert count == 1, f'Missing enquiry insertion point: {path}'
         html = html.replace('</head>', f'<link rel="stylesheet" href="{base}website-enquiry.css?v=6"></head>', 1)
         html = html.replace('</body>', f'<script defer src="{base}website-enquiry.js?v=1"></script></body>', 1)
         path.write_text(html)
