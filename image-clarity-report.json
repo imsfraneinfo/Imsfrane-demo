@@ -1183,13 +1183,6 @@
     "width_after": 1200
   },
   {
-    "page": "en/contact/index.html",
-    "small": "/Imsfrane-demo/images/24-800.webp",
-    "large": "/Imsfrane-demo/images/24.webp",
-    "width_before": 800,
-    "width_after": 1440
-  },
-  {
     "page": "en/rafting-deux-jours/index.html",
     "small": "/Imsfrane-demo/images/blog-oued-ahansal-800.webp",
     "large": "/Imsfrane-demo/images/blog-oued-ahansal.webp",
@@ -1356,13 +1349,6 @@
     "large": "/Imsfrane-demo/images/21.webp",
     "width_before": 800,
     "width_after": 1200
-  },
-  {
-    "page": "es/contact/index.html",
-    "small": "/Imsfrane-demo/images/24-800.webp",
-    "large": "/Imsfrane-demo/images/24.webp",
-    "width_before": 800,
-    "width_after": 1440
   },
   {
     "page": "es/quad/index.html",
@@ -1631,13 +1617,6 @@
     "width_after": 1200
   },
   {
-    "page": "ar/contact/index.html",
-    "small": "/Imsfrane-demo/images/24-800.webp",
-    "large": "/Imsfrane-demo/images/24.webp",
-    "width_before": 800,
-    "width_after": 1440
-  },
-  {
     "page": "ar/quad/index.html",
     "small": "/Imsfrane-demo/images/quad-800.webp",
     "large": "/Imsfrane-demo/images/quad.webp",
@@ -1902,13 +1881,6 @@
     "large": "/Imsfrane-demo/images/21.webp",
     "width_before": 800,
     "width_after": 1200
-  },
-  {
-    "page": "fr/contact/index.html",
-    "small": "/Imsfrane-demo/images/24-800.webp",
-    "large": "/Imsfrane-demo/images/24.webp",
-    "width_before": 800,
-    "width_after": 1440
   },
   {
     "page": "fr/rafting-deux-jours/index.html",
