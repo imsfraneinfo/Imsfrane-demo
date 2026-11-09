@@ -113,7 +113,7 @@ def build(root):
    (root/innername).write_text(inner)
    outer=outer_source.replace('giteExperienceFrame','raftingProgramFrame')
    outer=outer.replace('</iframe></iframe>','</iframe>')
-   outer=re.sub(r'<iframe\b[^>]*>',f'<iframe id="raftingProgramFrame" title="{title}" src="{BASE}{innername}?v=rafting-real-hero22" scrolling="no" style="display:block;width:100%;height:4200px;border:0"></iframe>',outer,count=1)
+   outer=re.sub(r'<iframe\b[^>]*>',f'<iframe id="raftingProgramFrame" title="{title}" src="{BASE}{innername}?v=rafting-real-hero23" scrolling="no" style="display:block;width:100%;height:4200px;border:0"></iframe>',outer,count=1)
    # Replace inherited resize handlers, including the legacy malformed one.
    outer=re.sub(r'<script\b[^>]*>.*?</script>',lambda m:'' if 'raftingProgramFrame' in m[0] and '<iframe' not in m[0] else m[0],outer,flags=re.S)
    resize="""<script>(function(){
