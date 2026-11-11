@@ -140,3 +140,27 @@ for page in root.rglob('*.html'):
  html=page.read_text()
  html=re.sub(r'<i\b[^>]*class="([^"]*)"[^>]*>\s*</i>',inline_icon,html)
  page.write_text(html)
+
+
+
+# Prioritize accommodation and selected activities on each localized homepage.
+homepage_priority = {
+    'gite-atlas': 0,
+    'hebergement': 1,
+    'vtt': 2,
+    'quad': 3,
+    'rafting': 4,
+}
+homepage_card = re.compile(
+    r'<article class="hp-activity-card hp-([\w-]+)">.*?</article>', re.S
+)
+for lang in home_labels:
+    home = root / lang / 'index.html'
+    html = home.read_text()
+    cards = list(homepage_card.finditer(html))
+    for name in homepage_priority:
+        assert sum(card[1] == name for card in cards) == 1, (home, name)
+    ordered = sorted(cards, key=lambda card: homepage_priority.get(card[1], len(homepage_priority)))
+    replacements = iter(card[0] for card in ordered)
+    home.write_text(homepage_card.sub(lambda _: next(replacements), html))
+
