@@ -182,4 +182,9 @@ def build(root):
    assert 'website-enquiry.js?v=1' in s
  print('Email + WhatsApp forms prepared for Contact and Booking in FR, EN, ES and AR')
 
-if __name__=='__main__': build(Path(sys.argv[1]) if len(sys.argv)>1 else SOURCE/'public')
+if __name__ == '__main__':
+ from build_social_previews import build as build_social_previews
+
+ root = Path(sys.argv[1]) if len(sys.argv)>1 else SOURCE/'public'
+ build(root)
+ build_social_previews(root, 'https://imsfraneinfo.github.io/Imsfrane-demo')
