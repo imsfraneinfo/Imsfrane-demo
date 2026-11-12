@@ -57,6 +57,48 @@
   },
   {
     "page": "fr/index.html",
+    "small": "/Imsfrane-demo/images/optimized/bab2-800-800.avif",
+    "large": "/Imsfrane-demo/images/bab2.webp",
+    "width_before": 800,
+    "width_after": 1200
+  },
+  {
+    "page": "fr/index.html",
+    "small": "/Imsfrane-demo/images/optimized/bab2-800-800.avif",
+    "large": "/Imsfrane-demo/images/bab2.webp",
+    "width_before": 800,
+    "width_after": 1200
+  },
+  {
+    "page": "fr/index.html",
+    "small": "/Imsfrane-demo/images/optimized/IMG_2604-800.avif",
+    "large": "/Imsfrane-demo/images/IMG_2604.webp",
+    "width_before": 800,
+    "width_after": 1152
+  },
+  {
+    "page": "fr/index.html",
+    "small": "/Imsfrane-demo/images/optimized/IMG_2604-800.avif",
+    "large": "/Imsfrane-demo/images/IMG_2604.webp",
+    "width_before": 800,
+    "width_after": 1152
+  },
+  {
+    "page": "fr/index.html",
+    "small": "/Imsfrane-demo/images/optimized/IMG_0310-800.avif",
+    "large": "/Imsfrane-demo/images/IMG_0310.webp",
+    "width_before": 800,
+    "width_after": 1152
+  },
+  {
+    "page": "fr/index.html",
+    "small": "/Imsfrane-demo/images/optimized/IMG_0310-800.avif",
+    "large": "/Imsfrane-demo/images/IMG_0310.webp",
+    "width_before": 800,
+    "width_after": 1152
+  },
+  {
+    "page": "fr/index.html",
     "small": "/Imsfrane-demo/images/optimized/IMG_9129-800.avif",
     "large": "/Imsfrane-demo/images/rafting-new/IMG_9129.webp",
     "width_before": 800,
@@ -108,48 +150,6 @@
     "page": "fr/index.html",
     "small": "/Imsfrane-demo/images/optimized/camping-1-800-800.avif",
     "large": "/Imsfrane-demo/images/camping-1.webp",
-    "width_before": 800,
-    "width_after": 1200
-  },
-  {
-    "page": "fr/index.html",
-    "small": "/Imsfrane-demo/images/optimized/IMG_2604-800.avif",
-    "large": "/Imsfrane-demo/images/IMG_2604.webp",
-    "width_before": 800,
-    "width_after": 1152
-  },
-  {
-    "page": "fr/index.html",
-    "small": "/Imsfrane-demo/images/optimized/IMG_2604-800.avif",
-    "large": "/Imsfrane-demo/images/IMG_2604.webp",
-    "width_before": 800,
-    "width_after": 1152
-  },
-  {
-    "page": "fr/index.html",
-    "small": "/Imsfrane-demo/images/optimized/IMG_0310-800.avif",
-    "large": "/Imsfrane-demo/images/IMG_0310.webp",
-    "width_before": 800,
-    "width_after": 1152
-  },
-  {
-    "page": "fr/index.html",
-    "small": "/Imsfrane-demo/images/optimized/IMG_0310-800.avif",
-    "large": "/Imsfrane-demo/images/IMG_0310.webp",
-    "width_before": 800,
-    "width_after": 1152
-  },
-  {
-    "page": "fr/index.html",
-    "small": "/Imsfrane-demo/images/optimized/bab2-800-800.avif",
-    "large": "/Imsfrane-demo/images/bab2.webp",
-    "width_before": 800,
-    "width_after": 1200
-  },
-  {
-    "page": "fr/index.html",
-    "small": "/Imsfrane-demo/images/optimized/bab2-800-800.avif",
-    "large": "/Imsfrane-demo/images/bab2.webp",
     "width_before": 800,
     "width_after": 1200
   },
@@ -344,6 +344,48 @@
   },
   {
     "page": "ar/index.html",
+    "small": "/Imsfrane-demo/images/optimized/bab2-800-800.avif",
+    "large": "/Imsfrane-demo/images/bab2.webp",
+    "width_before": 800,
+    "width_after": 1200
+  },
+  {
+    "page": "ar/index.html",
+    "small": "/Imsfrane-demo/images/optimized/bab2-800-800.avif",
+    "large": "/Imsfrane-demo/images/bab2.webp",
+    "width_before": 800,
+    "width_after": 1200
+  },
+  {
+    "page": "ar/index.html",
+    "small": "/Imsfrane-demo/images/optimized/IMG_2604-800.avif",
+    "large": "/Imsfrane-demo/images/IMG_2604.webp",
+    "width_before": 800,
+    "width_after": 1152
+  },
+  {
+    "page": "ar/index.html",
+    "small": "/Imsfrane-demo/images/optimized/IMG_2604-800.avif",
+    "large": "/Imsfrane-demo/images/IMG_2604.webp",
+    "width_before": 800,
+    "width_after": 1152
+  },
+  {
+    "page": "ar/index.html",
+    "small": "/Imsfrane-demo/images/optimized/IMG_0310-800.avif",
+    "large": "/Imsfrane-demo/images/IMG_0310.webp",
+    "width_before": 800,
+    "width_after": 1152
+  },
+  {
+    "page": "ar/index.html",
+    "small": "/Imsfrane-demo/images/optimized/IMG_0310-800.avif",
+    "large": "/Imsfrane-demo/images/IMG_0310.webp",
+    "width_before": 800,
+    "width_after": 1152
+  },
+  {
+    "page": "ar/index.html",
     "small": "/Imsfrane-demo/images/optimized/IMG_9129-800.avif",
     "large": "/Imsfrane-demo/images/rafting-new/IMG_9129.webp",
     "width_before": 800,
@@ -395,48 +437,6 @@
     "page": "ar/index.html",
     "small": "/Imsfrane-demo/images/optimized/camping-1-800-800.avif",
     "large": "/Imsfrane-demo/images/camping-1.webp",
-    "width_before": 800,
-    "width_after": 1200
-  },
-  {
-    "page": "ar/index.html",
-    "small": "/Imsfrane-demo/images/optimized/IMG_2604-800.avif",
-    "large": "/Imsfrane-demo/images/IMG_2604.webp",
-    "width_before": 800,
-    "width_after": 1152
-  },
-  {
-    "page": "ar/index.html",
-    "small": "/Imsfrane-demo/images/optimized/IMG_2604-800.avif",
-    "large": "/Imsfrane-demo/images/IMG_2604.webp",
-    "width_before": 800,
-    "width_after": 1152
-  },
-  {
-    "page": "ar/index.html",
-    "small": "/Imsfrane-demo/images/optimized/IMG_0310-800.avif",
-    "large": "/Imsfrane-demo/images/IMG_0310.webp",
-    "width_before": 800,
-    "width_after": 1152
-  },
-  {
-    "page": "ar/index.html",
-    "small": "/Imsfrane-demo/images/optimized/IMG_0310-800.avif",
-    "large": "/Imsfrane-demo/images/IMG_0310.webp",
-    "width_before": 800,
-    "width_after": 1152
-  },
-  {
-    "page": "ar/index.html",
-    "small": "/Imsfrane-demo/images/optimized/bab2-800-800.avif",
-    "large": "/Imsfrane-demo/images/bab2.webp",
-    "width_before": 800,
-    "width_after": 1200
-  },
-  {
-    "page": "ar/index.html",
-    "small": "/Imsfrane-demo/images/optimized/bab2-800-800.avif",
-    "large": "/Imsfrane-demo/images/bab2.webp",
     "width_before": 800,
     "width_after": 1200
   },
@@ -631,6 +631,48 @@
   },
   {
     "page": "es/index.html",
+    "small": "/Imsfrane-demo/images/optimized/bab2-800-800.avif",
+    "large": "/Imsfrane-demo/images/bab2.webp",
+    "width_before": 800,
+    "width_after": 1200
+  },
+  {
+    "page": "es/index.html",
+    "small": "/Imsfrane-demo/images/optimized/bab2-800-800.avif",
+    "large": "/Imsfrane-demo/images/bab2.webp",
+    "width_before": 800,
+    "width_after": 1200
+  },
+  {
+    "page": "es/index.html",
+    "small": "/Imsfrane-demo/images/optimized/IMG_2604-800.avif",
+    "large": "/Imsfrane-demo/images/IMG_2604.webp",
+    "width_before": 800,
+    "width_after": 1152
+  },
+  {
+    "page": "es/index.html",
+    "small": "/Imsfrane-demo/images/optimized/IMG_2604-800.avif",
+    "large": "/Imsfrane-demo/images/IMG_2604.webp",
+    "width_before": 800,
+    "width_after": 1152
+  },
+  {
+    "page": "es/index.html",
+    "small": "/Imsfrane-demo/images/optimized/IMG_0310-800.avif",
+    "large": "/Imsfrane-demo/images/IMG_0310.webp",
+    "width_before": 800,
+    "width_after": 1152
+  },
+  {
+    "page": "es/index.html",
+    "small": "/Imsfrane-demo/images/optimized/IMG_0310-800.avif",
+    "large": "/Imsfrane-demo/images/IMG_0310.webp",
+    "width_before": 800,
+    "width_after": 1152
+  },
+  {
+    "page": "es/index.html",
     "small": "/Imsfrane-demo/images/optimized/IMG_9129-800.avif",
     "large": "/Imsfrane-demo/images/rafting-new/IMG_9129.webp",
     "width_before": 800,
@@ -682,48 +724,6 @@
     "page": "es/index.html",
     "small": "/Imsfrane-demo/images/optimized/camping-1-800-800.avif",
     "large": "/Imsfrane-demo/images/camping-1.webp",
-    "width_before": 800,
-    "width_after": 1200
-  },
-  {
-    "page": "es/index.html",
-    "small": "/Imsfrane-demo/images/optimized/IMG_2604-800.avif",
-    "large": "/Imsfrane-demo/images/IMG_2604.webp",
-    "width_before": 800,
-    "width_after": 1152
-  },
-  {
-    "page": "es/index.html",
-    "small": "/Imsfrane-demo/images/optimized/IMG_2604-800.avif",
-    "large": "/Imsfrane-demo/images/IMG_2604.webp",
-    "width_before": 800,
-    "width_after": 1152
-  },
-  {
-    "page": "es/index.html",
-    "small": "/Imsfrane-demo/images/optimized/IMG_0310-800.avif",
-    "large": "/Imsfrane-demo/images/IMG_0310.webp",
-    "width_before": 800,
-    "width_after": 1152
-  },
-  {
-    "page": "es/index.html",
-    "small": "/Imsfrane-demo/images/optimized/IMG_0310-800.avif",
-    "large": "/Imsfrane-demo/images/IMG_0310.webp",
-    "width_before": 800,
-    "width_after": 1152
-  },
-  {
-    "page": "es/index.html",
-    "small": "/Imsfrane-demo/images/optimized/bab2-800-800.avif",
-    "large": "/Imsfrane-demo/images/bab2.webp",
-    "width_before": 800,
-    "width_after": 1200
-  },
-  {
-    "page": "es/index.html",
-    "small": "/Imsfrane-demo/images/optimized/bab2-800-800.avif",
-    "large": "/Imsfrane-demo/images/bab2.webp",
     "width_before": 800,
     "width_after": 1200
   },
@@ -918,6 +918,48 @@
   },
   {
     "page": "en/index.html",
+    "small": "/Imsfrane-demo/images/optimized/bab2-800-800.avif",
+    "large": "/Imsfrane-demo/images/bab2.webp",
+    "width_before": 800,
+    "width_after": 1200
+  },
+  {
+    "page": "en/index.html",
+    "small": "/Imsfrane-demo/images/optimized/bab2-800-800.avif",
+    "large": "/Imsfrane-demo/images/bab2.webp",
+    "width_before": 800,
+    "width_after": 1200
+  },
+  {
+    "page": "en/index.html",
+    "small": "/Imsfrane-demo/images/optimized/IMG_2604-800.avif",
+    "large": "/Imsfrane-demo/images/IMG_2604.webp",
+    "width_before": 800,
+    "width_after": 1152
+  },
+  {
+    "page": "en/index.html",
+    "small": "/Imsfrane-demo/images/optimized/IMG_2604-800.avif",
+    "large": "/Imsfrane-demo/images/IMG_2604.webp",
+    "width_before": 800,
+    "width_after": 1152
+  },
+  {
+    "page": "en/index.html",
+    "small": "/Imsfrane-demo/images/optimized/IMG_0310-800.avif",
+    "large": "/Imsfrane-demo/images/IMG_0310.webp",
+    "width_before": 800,
+    "width_after": 1152
+  },
+  {
+    "page": "en/index.html",
+    "small": "/Imsfrane-demo/images/optimized/IMG_0310-800.avif",
+    "large": "/Imsfrane-demo/images/IMG_0310.webp",
+    "width_before": 800,
+    "width_after": 1152
+  },
+  {
+    "page": "en/index.html",
     "small": "/Imsfrane-demo/images/optimized/IMG_9129-800.avif",
     "large": "/Imsfrane-demo/images/rafting-new/IMG_9129.webp",
     "width_before": 800,
@@ -969,48 +1011,6 @@
     "page": "en/index.html",
     "small": "/Imsfrane-demo/images/optimized/camping-1-800-800.avif",
     "large": "/Imsfrane-demo/images/camping-1.webp",
-    "width_before": 800,
-    "width_after": 1200
-  },
-  {
-    "page": "en/index.html",
-    "small": "/Imsfrane-demo/images/optimized/IMG_2604-800.avif",
-    "large": "/Imsfrane-demo/images/IMG_2604.webp",
-    "width_before": 800,
-    "width_after": 1152
-  },
-  {
-    "page": "en/index.html",
-    "small": "/Imsfrane-demo/images/optimized/IMG_2604-800.avif",
-    "large": "/Imsfrane-demo/images/IMG_2604.webp",
-    "width_before": 800,
-    "width_after": 1152
-  },
-  {
-    "page": "en/index.html",
-    "small": "/Imsfrane-demo/images/optimized/IMG_0310-800.avif",
-    "large": "/Imsfrane-demo/images/IMG_0310.webp",
-    "width_before": 800,
-    "width_after": 1152
-  },
-  {
-    "page": "en/index.html",
-    "small": "/Imsfrane-demo/images/optimized/IMG_0310-800.avif",
-    "large": "/Imsfrane-demo/images/IMG_0310.webp",
-    "width_before": 800,
-    "width_after": 1152
-  },
-  {
-    "page": "en/index.html",
-    "small": "/Imsfrane-demo/images/optimized/bab2-800-800.avif",
-    "large": "/Imsfrane-demo/images/bab2.webp",
-    "width_before": 800,
-    "width_after": 1200
-  },
-  {
-    "page": "en/index.html",
-    "small": "/Imsfrane-demo/images/optimized/bab2-800-800.avif",
-    "large": "/Imsfrane-demo/images/bab2.webp",
     "width_before": 800,
     "width_after": 1200
   },

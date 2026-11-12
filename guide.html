@@ -1,4 +1,6 @@
 <!doctype html>
 <!-- IMSFRANE_LEGACY_RECOVERY -->
-<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Page déplacée | Imsfrane Cathédrale</title><meta http-equiv="refresh" content="0;url=/Imsfrane-demo/fr/guide/"><link rel="canonical" href="https://imsfraneinfo.github.io/Imsfrane-demo/fr/guide/"><script>location.replace("/Imsfrane-demo/fr/guide/"+location.search+(location.hash||""));</script><meta name="robots" content="noindex,follow">
-<link rel="stylesheet" href="/Imsfrane-demo/visual-identity.css?v=contrast8"></head><body><p>Cette page a changé d’adresse. <a href="/Imsfrane-demo/fr/guide/">Ouvrir la page actuelle</a>.</p></body></html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Page déplacée | Imsfrane Cathédrale</title><meta http-equiv="refresh" content="0;url=/Imsfrane-demo/fr/guide/"><link rel="canonical" href="https://imsfraneinfo.github.io/Imsfrane-demo/fr/guide/"><script>const requestedLanguage = new URLSearchParams(location.search).get("lang");
+const routes = new Map([["fr", "/Imsfrane-demo/fr/guide/"], ["en", "/Imsfrane-demo/en/guide/"], ["es", "/Imsfrane-demo/es/guide/"], ["ar", "/Imsfrane-demo/ar/guide/"]]);
+location.replace((routes.get(requestedLanguage) || routes.get("fr")) + location.search + location.hash);</script><meta name="robots" content="noindex,follow">
+<link rel="stylesheet" href="/Imsfrane-demo/visual-identity.css?v=contrast8"></head><body><p>Cette page a changé d’adresse. <a href="/Imsfrane-demo/fr/guide/">Ouvrir la page actuelle</a>.</p><a href="/Imsfrane-demo/ar/guide/" lang="ar" dir="rtl">الدليل العملي بالعربية</a></body></html>
