@@ -169,6 +169,7 @@ for lang in home_labels:
 # Check the Arabic guide and its language switch after adapting the official site.
 arabic_guide = (root / 'ar' / 'guide' / 'index.html').read_text()
 assert re.search(r'<html\b(?=[^>]*lang="ar")(?=[^>]*dir="rtl")', arabic_guide)
+assert 'id="guide-mobile-rtl"' in arabic_guide, 'Missing Arabic mobile guide styles'
 for lang in home_labels:
     guide = (root / lang / 'guide' / 'index.html').read_text()
     assert f'href="{base}ar/guide/" lang="ar"' in guide, lang
