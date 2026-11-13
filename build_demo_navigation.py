@@ -64,6 +64,6 @@ def build(root):
             html = html.replace('<div class="atnav-article-actions">', menu + '<div class="atnav-article-actions">', 1)
         if 'atnav-desktop-demo' not in html:
             raise ValueError(f'Missing desktop menu insertion point in {page}')
-        html = html.replace('</head>', '<link rel="stylesheet" href="/Imsfrane-demo/fullscreen-menu.css?v=2">\n</head>', 1)
-        html = html.replace('</body>', '<script defer src="/Imsfrane-demo/demo-desktop-menu.js"></script>\n</body>', 1)
+        html = html.replace('</head>', '<link rel="stylesheet" href="/Imsfrane-demo/fullscreen-menu.css?v=3">\n</head>', 1)
+        html = html.replace('</body>', '<script defer src="/Imsfrane-demo/demo-desktop-menu.js?v=3"></script>\n</body>', 1)
         page.write_text(html, encoding='utf-8')

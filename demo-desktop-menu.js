@@ -16,7 +16,7 @@ if (desktopMenu) {
     dropdown.querySelector('summary').focus();
   });
 
-  matchMedia('(min-width: 1100px)').addEventListener('change', (event) => {
+  matchMedia('(min-width: 768px)').addEventListener('change', (event) => {
     if (event.matches && document.querySelector('#atnavDrawer.is-open')) {
       document.querySelector('#atnavClose').click();
       desktopMenu.querySelector('a').focus();
