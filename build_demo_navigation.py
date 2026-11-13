@@ -10,14 +10,15 @@ from bs4 import BeautifulSoup
 SOURCE = Path(__file__).resolve().parent
 
 
-def menu_link(link, image=None):
+def menu_link(link, image=None, link_class=''):
     current = ' aria-current="page"' if link.get('aria-current') == 'page' else ''
     label = escape(link.get_text(' ', strip=True))
+    classes = f' class="{link_class}"' if link_class else ''
     photo = f'<img src="/Imsfrane-demo/images/{image}" alt="" width="480" height="260" loading="lazy" decoding="async">' if image else ''
-    return f'<a href="{escape(link["href"])}"{current}>{photo}<span>{label}</span></a>'
+    return f'<a href="{escape(link["href"])}"{current}{classes}>{photo}<span>{label}</span></a>'
 
 
-def dropdown(label, links, style=''):
+def dropdown(label, links, style='', compact_links=()):
     classes = f'atnav-desktop-group atnav-desktop-{style}' if style else 'atnav-desktop-group'
     if style == 'activities':
         rafting, *other_activities = links
@@ -29,6 +30,7 @@ def dropdown(label, links, style=''):
         items = ''.join(menu_link(link, stay_photos[link['href'].rstrip('/').rsplit('/', 1)[-1].removesuffix('.html')]) for link in links)
     else:
         items = ''.join(menu_link(link) for link in links)
+        items += ''.join(menu_link(link, link_class='atnav-compact-link') for link in compact_links)
     return (f'<details class="{classes}" name="desktop-navigation">'
             f'<summary>{escape(label)}</summary><div class="atnav-desktop-panel">{items}</div></details>')
 
@@ -44,11 +46,16 @@ def desktop_menu(drawer):
     more = [link for link in info_links.select('a') if link is not guide and link is not contact]
     more_label = info_links.find_previous_sibling(class_='atnav-label').get_text(' ', strip=True)
     book = drawer.select_one('.atnav-book')
-    groups = [menu_link(home)]
+    groups = [menu_link(home, link_class='atnav-home')]
     for toggle, style in ((activities, 'activities'), (accommodation, 'stays')):
         links = drawer.find(id=toggle['aria-controls']).select('a')
         groups.append(dropdown(toggle.get_text(' ', strip=True), links, style))
-    groups.extend((menu_link(programme), menu_link(guide), dropdown(more_label, more), menu_link(contact)))
+    groups.extend((
+        menu_link(programme),
+        menu_link(guide, link_class='atnav-wide-link'),
+        dropdown(more_label, more, compact_links=(guide, contact)),
+        menu_link(contact, link_class='atnav-wide-link'),
+    ))
     groups.append(f'<span class="atnav-desktop-book">{menu_link(book)}</span>')
     return f'<nav class="atnav-desktop atnav-desktop-demo" aria-label="{escape(drawer["aria-label"])}">{"".join(groups)}</nav>'
 
@@ -76,6 +83,6 @@ def build(root):
             html = html.replace('<div class="atnav-article-actions">', menu + '<div class="atnav-article-actions">', 1)
         if 'atnav-desktop-demo' not in html:
             raise ValueError(f'Missing desktop menu insertion point in {page}')
-        html = html.replace('</head>', '<link rel="stylesheet" href="/Imsfrane-demo/fullscreen-menu.css?v=4">\n</head>', 1)
+        html = html.replace('</head>', '<link rel="stylesheet" href="/Imsfrane-demo/fullscreen-menu.css?v=5">\n</head>', 1)
         html = html.replace('</body>', '<script defer src="/Imsfrane-demo/demo-desktop-menu.js?v=3"></script>\n</body>', 1)
         page.write_text(html, encoding='utf-8')
