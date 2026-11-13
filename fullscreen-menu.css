@@ -65,3 +65,104 @@ body.atnav-ready.atnav-lock {
     transition: none;
   }
 }
+
+body.atnav-ready .atnav-desktop-demo {
+  display: none !important;
+}
+
+@media (min-width: 1100px) {
+  body.atnav-ready #atnavOpen {
+    display: none !important;
+  }
+
+  body.atnav-ready .atnav-desktop-demo {
+    display: flex !important;
+    gap: clamp(10px, 1.2vw, 22px);
+    padding-inline: 8px;
+  }
+
+  .atnav-desktop-demo > a,
+  .atnav-desktop-group summary,
+  .atnav-desktop-book a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  body.atnav-ready .atnav-desktop-demo a,
+  .atnav-desktop-group summary {
+    color: #f4eeeb;
+    font-size: 13px;
+  }
+
+  body.atnav-ready .atnav-desktop-demo a[aria-current="page"],
+  body.atnav-ready .atnav-desktop-demo a:hover,
+  .atnav-desktop-group summary:hover,
+  .atnav-desktop-group[open] summary {
+    color: #f3b998;
+  }
+
+  .atnav-desktop-group {
+    position: relative;
+  }
+
+  .atnav-desktop-group summary {
+    gap: 7px;
+    list-style: none;
+    cursor: pointer;
+    font-weight: 700;
+  }
+
+  .atnav-desktop-group summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .atnav-desktop-group summary::after {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-inline-end: 1px solid currentColor;
+    border-block-end: 1px solid currentColor;
+    transform: translateY(-2px) rotate(45deg);
+  }
+
+  .atnav-desktop-group[open] summary::after {
+    transform: translateY(1px) rotate(225deg);
+  }
+
+  .atnav-desktop-group summary:focus-visible {
+    outline: 2px solid #f3b998;
+    outline-offset: 3px;
+  }
+
+  .atnav-desktop-panel {
+    position: absolute;
+    inset-block-start: 100%;
+    inset-inline-start: 0;
+    z-index: 10;
+    min-width: 13rem;
+    padding: 6px;
+    border: 1px solid #f3b99855;
+    border-radius: 8px;
+    background: #0a2228;
+    box-shadow: 0 12px 30px #05121655;
+  }
+
+  .atnav-desktop-panel a {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 4px;
+  }
+
+  .atnav-desktop-panel a:hover,
+  .atnav-desktop-panel a:focus-visible {
+    background: #f3b9981a;
+  }
+
+  body.atnav-ready .atnav-desktop-book a {
+    padding-inline: 12px;
+    border-radius: 7px;
+    background: #a94f30;
+    color: #fff;
+  }
+}
