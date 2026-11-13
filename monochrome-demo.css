@@ -28,4 +28,12 @@ body.atnav-ready #siteHeader .atnav-open {
 }
 #atnavDrawer .atnav-book:hover,
 #ims-footer .fp-cta:hover { background: #dedede !important; }
+#atnavDrawer .atnav-drawer-brand:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 5px;
+}
+#atnavDrawer .atnav-drawer-brand:hover strong {
+  text-decoration: underline;
+  text-underline-offset: .25em;
+}
 ::selection { background: #191919; color: #fff; }
