@@ -188,8 +188,3 @@ if __name__ == '__main__':
  root = Path(sys.argv[1]) if len(sys.argv)>1 else SOURCE/'public'
  build(root)
  build_social_previews(root, 'https://imsfraneinfo.github.io/Imsfrane-demo')
- if root.name == 'public':
-  from build_demo_navigation import build as build_demo_navigation
-
-  # Apply the responsive demo header after all translated pages have been generated.
-  build_demo_navigation(root)
