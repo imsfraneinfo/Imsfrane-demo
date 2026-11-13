@@ -183,11 +183,12 @@ def build(root):
  print('Email + WhatsApp forms prepared for Contact and Booking in FR, EN, ES and AR')
 
 if __name__ == '__main__':
- from build_demo_navigation import build as build_demo_navigation
  from build_social_previews import build as build_social_previews
 
  root = Path(sys.argv[1]) if len(sys.argv)>1 else SOURCE/'public'
  build(root)
  build_social_previews(root, 'https://imsfraneinfo.github.io/Imsfrane-demo')
  if root.name == 'public':
+  from build_demo_navigation import build as build_demo_navigation
+
   build_demo_navigation(root)
