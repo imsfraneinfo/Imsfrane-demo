@@ -12,6 +12,7 @@ CSS_COLOR = re.compile(
 INLINE_STYLE = re.compile(r'(<style\b[^>]*>)(.*?)(</style>)', re.I | re.S)
 STYLE_ATTRIBUTE = re.compile(r"""(\sstyle\s*=\s*)(["'])(.*?)\2""", re.I | re.S)
 CSS_LINK = re.compile(r"""(<link\b[^>]*\bhref=["'])([^"'?#]+\.css(?:\?[^"']*)?)(["'])""", re.I)
+MENU_BRAND = re.compile(r'<div class="atnav-drawer-brand">(.*?)</div>', re.S)
 
 OVERRIDES = """
 html body { background-color: #fff; color: #151515; }
@@ -43,6 +44,14 @@ body.atnav-ready #siteHeader .atnav-open {
 }
 #atnavDrawer .atnav-book:hover,
 #ims-footer .fp-cta:hover { background: #dedede !important; }
+#atnavDrawer .atnav-drawer-brand:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 5px;
+}
+#atnavDrawer .atnav-drawer-brand:hover strong {
+  text-decoration: underline;
+  text-underline-offset: .25em;
+}
 ::selection { background: #191919; color: #fff; }
 """
 
@@ -79,7 +88,7 @@ def version_link(match):
     url = match[2]
     if url.startswith(('https:', 'http:', '//')):
         return match[0]
-    return f"{match[1]}{url}{'&' if '?' in url else '?'}palette=bw1{match[3]}"
+    return f"{match[1]}{url}{'&' if '?' in url else '?'}palette=bw2{match[3]}"
 
 
 def build(root: Path):
@@ -92,14 +101,21 @@ def build(root: Path):
             stylesheet.write_text(updated, encoding='utf-8')
 
     for page in root.rglob('*.html'):
-        if 'admin' in page.relative_to(root).parts:
+        parts = page.relative_to(root).parts
+        if 'admin' in parts:
             continue
         original = page.read_text(encoding='utf-8')
         updated = INLINE_STYLE.sub(lambda m: m[1] + transform(m[2]) + m[3], original)
         updated = STYLE_ATTRIBUTE.sub(lambda m: m[1] + m[2] + transform(m[3]) + m[2], updated)
         updated = CSS_LINK.sub(version_link, updated)
+        if parts[0] in ('fr', 'en', 'es', 'ar'):
+            home = f'/Imsfrane-demo/{parts[0]}/'
+            updated = MENU_BRAND.sub(
+                lambda match: f'<a class="atnav-drawer-brand" href="{home}">{match[1]}</a>',
+                updated,
+            )
         if '</head>' in updated:
-            updated = updated.replace('</head>', '<link rel="stylesheet" href="/Imsfrane-demo/monochrome-demo.css?v=1">\n</head>', 1)
+            updated = updated.replace('</head>', '<link rel="stylesheet" href="/Imsfrane-demo/monochrome-demo.css?v=2">\n</head>', 1)
         if updated != original:
             page.write_text(updated, encoding='utf-8')
 

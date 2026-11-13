@@ -191,4 +191,5 @@ if __name__ == '__main__':
  if root.name == 'public':
   from build_monochrome_demo import build as build_monochrome_demo
 
+  # Finish the demo palette and link the menu brand to the localized home.
   build_monochrome_demo(root)
