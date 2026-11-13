@@ -226,30 +226,70 @@ body.atnav-ready .atnav-desktop-demo {
   }
 }
 
-@media (min-width: 768px) and (max-width: 1149px) {
+@media (min-width: 768px) {
   body.atnav-ready #siteHeader .header-inner,
   body.atnav-ready .atnav-article-header {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) auto;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(8px, 1vw, 18px);
+    min-height: 72px !important;
     height: auto !important;
-    column-gap: 12px;
-    row-gap: 0;
-    padding-block: 8px 0 !important;
+  }
+
+  body.atnav-ready #siteHeader .brand,
+  body.atnav-ready .atnav-article-brand {
+    flex: 0 1 auto !important;
+    min-width: 0;
+    gap: 10px;
+  }
+
+  body.atnav-ready #siteHeader .brand-content strong {
+    white-space: nowrap;
   }
 
   body.atnav-ready #siteHeader .header-actions,
   body.atnav-ready .atnav-article-actions {
-    grid-column: 2;
-    grid-row: 1;
+    flex: 0 0 auto;
+    margin-inline-start: 0 !important;
   }
 
   body.atnav-ready .atnav-desktop-demo {
-    grid-column: 1 / -1;
-    grid-row: 2;
-    justify-content: space-between;
-    width: 100%;
-    margin: 5px 0 0;
+    flex: 0 0 auto;
+    margin-inline: auto;
+  }
+
+  body.atnav-ready .atnav-desktop-demo .atnav-compact-link {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1149px) {
+  body.atnav-ready .atnav-desktop-demo {
+    gap: clamp(7px, 1vw, 12px);
     padding-inline: 0;
-    border-top: 1px solid #f3b99830;
+  }
+
+  body.atnav-ready .atnav-desktop-demo > .atnav-home,
+  body.atnav-ready .atnav-desktop-demo > .atnav-wide-link {
+    display: none;
+  }
+
+  body.atnav-ready .atnav-desktop-demo .atnav-compact-link {
+    display: flex;
+  }
+
+  .atnav-desktop-group:not(.atnav-desktop-activities, .atnav-desktop-stays) .atnav-desktop-panel {
+    inset-inline: auto 0;
+  }
+
+  body.atnav-ready .atnav-desktop-demo a,
+  .atnav-desktop-group summary {
+    font-size: 12px;
+  }
+
+  body.atnav-ready .atnav-desktop-book a {
+    padding-inline: 12px;
   }
 }
