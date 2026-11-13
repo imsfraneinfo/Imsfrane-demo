@@ -76,6 +76,7 @@ body.atnav-ready .atnav-desktop-demo {
   }
 
   body.atnav-ready .atnav-desktop-demo {
+    position: relative;
     display: flex !important;
     gap: clamp(10px, 1.2vw, 22px);
     padding-inline: 8px;
@@ -141,27 +142,85 @@ body.atnav-ready .atnav-desktop-demo {
     inset-inline-start: 0;
     z-index: 10;
     min-width: 13rem;
-    padding: 6px;
-    border: 1px solid #f3b99855;
-    border-radius: 8px;
-    background: #0a2228;
-    box-shadow: 0 12px 30px #05121655;
+    padding: 10px;
+    border: 1px solid #dfd7ca;
+    border-radius: 14px;
+    background: #faf7f0;
+    box-shadow: 0 18px 48px #05121655;
   }
 
-  .atnav-desktop-panel a {
-    display: block;
+  body.atnav-ready .atnav-desktop-demo .atnav-desktop-panel a {
+    display: flex;
+    align-items: center;
     padding: 10px 12px;
-    border-radius: 4px;
+    border-radius: 8px;
+    color: #15363e;
+    white-space: normal;
   }
 
-  .atnav-desktop-panel a:hover,
-  .atnav-desktop-panel a:focus-visible {
-    background: #f3b9981a;
+  body.atnav-ready .atnav-desktop-demo .atnav-desktop-panel a[aria-current="page"],
+  body.atnav-ready .atnav-desktop-demo .atnav-desktop-panel a:hover,
+  body.atnav-ready .atnav-desktop-demo .atnav-desktop-panel a:focus-visible {
+    background: #ede4d6;
+    color: #873e27;
+  }
+
+  .atnav-desktop-activities,
+  .atnav-desktop-stays {
+    position: static;
+  }
+
+  .atnav-desktop-activities[open] .atnav-desktop-panel,
+  .atnav-desktop-stays[open] .atnav-desktop-panel {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    inset-inline-start: 50%;
+    width: min(100%, 35rem);
+    translate: -50% 0;
+    padding: 12px;
+  }
+
+  html[dir="rtl"] .atnav-desktop-activities[open] .atnav-desktop-panel,
+  html[dir="rtl"] .atnav-desktop-stays[open] .atnav-desktop-panel {
+    translate: 50% 0;
+  }
+
+  body.atnav-ready .atnav-desktop-demo .atnav-desktop-panel a:has(img) {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: end;
+    padding: 0;
+    overflow: hidden;
+    background: #15363e;
+    color: #fff;
+    font-size: 15px;
+  }
+
+  .atnav-desktop-panel a:has(img) span {
+    padding: 11px 14px;
+  }
+
+  .atnav-desktop-panel img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+  }
+
+  .atnav-desktop-activity-links {
+    display: grid;
+    align-content: center;
+    gap: 3px;
+  }
+
+  .atnav-desktop-activity-links a + a {
+    border-top: 1px solid #dfd7ca;
   }
 
   body.atnav-ready .atnav-desktop-book a {
-    padding-inline: 12px;
-    border-radius: 7px;
+    padding-inline: 17px;
+    border-radius: 100px;
     background: #a94f30;
     color: #fff;
   }
