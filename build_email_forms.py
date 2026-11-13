@@ -191,4 +191,5 @@ if __name__ == '__main__':
  if root.name == 'public':
   from build_demo_navigation import build as build_demo_navigation
 
+  # Apply demo navigation after all translated pages have been generated.
   build_demo_navigation(root)
