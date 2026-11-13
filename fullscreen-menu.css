@@ -1,0 +1,67 @@
+/* The existing navigation dialog fills the demo viewport. */
+body.atnav-ready.atnav-lock {
+  touch-action: auto;
+}
+
+#atnavDrawer.atnav-drawer {
+  inset: 0 !important;
+  width: 100% !important;
+  max-width: none;
+  height: 100vh;
+  height: 100dvh;
+  max-height: none;
+  border: 0;
+  box-shadow: none;
+  visibility: hidden;
+  opacity: 0;
+  transform: none;
+  transition: opacity 180ms ease, visibility 180ms;
+}
+
+#atnavDrawer.is-open {
+  visibility: visible;
+  opacity: 1;
+}
+
+#atnavDrawer .atnav-drawer-inner {
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-block-start: 0;
+  padding-block-end: max(2rem, env(safe-area-inset-bottom));
+}
+
+#atnavDrawer .atnav-drawer-top {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 1;
+  padding-block: 1rem;
+  background: #0a2228;
+}
+
+#atnavDrawer .atnav-item {
+  text-align: start;
+}
+
+@media (min-width: 720px) {
+  #atnavDrawer .atnav-submenu,
+  #atnavDrawer .atnav-secondary {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 1.5rem;
+  }
+
+  #atnavDrawer .atnav-submenu a {
+    min-height: 48px;
+    gap: 0.75rem;
+  }
+
+  #atnavDrawer .atnav-actions {
+    grid-template-columns: repeat(2, minmax(0, 12rem));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #atnavDrawer.atnav-drawer {
+    transition: none;
+  }
+}
