@@ -182,21 +182,12 @@ def build(root):
    assert 'website-enquiry.js?v=1' in s
  print('Email + WhatsApp forms prepared for Contact and Booking in FR, EN, ES and AR')
 
-def add_demo_fullscreen_menu(root):
-    stylesheet = 'fullscreen-menu.css'
-    shutil.copyfile(SOURCE / stylesheet, root / stylesheet)
-    link = f'<link rel="stylesheet" href="/Imsfrane-demo/{stylesheet}">\n'
-    for page in root.rglob('*.html'):
-        html = page.read_text(encoding='utf-8')
-        if 'id="atnavDrawer"' in html and link not in html:
-            page.write_text(html.replace('</head>', link + '</head>', 1), encoding='utf-8')
-
-
 if __name__ == '__main__':
+ from build_demo_navigation import build as build_demo_navigation
  from build_social_previews import build as build_social_previews
 
  root = Path(sys.argv[1]) if len(sys.argv)>1 else SOURCE/'public'
  build(root)
  build_social_previews(root, 'https://imsfraneinfo.github.io/Imsfrane-demo')
  if root.name == 'public':
-  add_demo_fullscreen_menu(root)
+  build_demo_navigation(root)
