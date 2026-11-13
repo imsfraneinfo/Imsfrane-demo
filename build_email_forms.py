@@ -188,3 +188,7 @@ if __name__ == '__main__':
  root = Path(sys.argv[1]) if len(sys.argv)>1 else SOURCE/'public'
  build(root)
  build_social_previews(root, 'https://imsfraneinfo.github.io/Imsfrane-demo')
+ if root.name == 'public':
+  from build_monochrome_demo import build as build_monochrome_demo
+
+  build_monochrome_demo(root)
