@@ -196,4 +196,5 @@ if __name__ == '__main__':
 
   from build_summit_card_demo import build as build_summit_card_demo
 
+  # Add the photo strips to the summit and gorges cards.
   build_summit_card_demo(root)
