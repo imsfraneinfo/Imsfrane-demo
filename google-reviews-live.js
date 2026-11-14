@@ -10,7 +10,7 @@
   const words = {
     fr: {reviews:"avis sur Google", fallback:"Consulter les avis sur Google", source:"Avis Google Maps", stars:"étoiles sur 5"},
     en: {reviews:"Google reviews",fallback:"See reviews on Google",source:"Google Maps reviews",stars:"stars out of 5"},
-    ar: {reviews:"تقييماً على Google",fallback:"شاهد التقييمات على Google",source:"تقييمات Google Maps",stars:"نجوم من 5"},
+    ar: {reviews:"تقييمًا على غوغل",fallback:"شاهد التقييمات على غوغل",source:"تقييمات خرائط غوغل",stars:"نجوم من 5"},
     es: {reviews:"reseñas de Google",fallback:"Ver reseñas en Google",source:"Reseñas de Google Maps",stars:"estrellas de 5"}
   };
   const tx = words[lang] || words.fr;
