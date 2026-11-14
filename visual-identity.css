@@ -1,37 +1,37 @@
 
 /* Ahansal & Atlas — demo palette */
-:root{--primary:#182a23;--primary-color:#182a23;--dark:#13251e;--gold:#797b7a;--accent:#797b7a;--accent-color:#797b7a;--light:#fbfaf4;--identity-petrol:#182a23;--identity-copper:#797b7a;--identity-paper:#fbfaf4}
-body{background-color:#fbfaf4;color:#182a23}
-body.atnav-ready #siteHeader{background:#13251ef2!important;border-bottom-color:#797b7a55!important}
+:root{--primary:#0c2e1f;--primary-color:#0c2e1f;--dark:#07291a;--gold:#787b7a;--accent:#787b7a;--accent-color:#787b7a;--light:#fbfaf4;--identity-petrol:#0c2e1f;--identity-copper:#787b7a;--identity-paper:#fbfaf4}
+body{background-color:#fbfaf4;color:#0c2e1f}
+body.atnav-ready #siteHeader{background:#07291af2!important;border-bottom-color:#787b7a55!important}
 body.atnav-ready #siteHeader .brand-content small{color:#c5c2b7!important}
-.hp-home{--hp-night:#13251e;--hp-forest:#24362f;--hp-gold:#b1afa5;--hp-cream:#fbfaf4;--hp-ink:#182a23;--hp-border:#dfdcd1}
+.hp-home{--hp-night:#07291a;--hp-forest:#183a2b;--hp-gold:#b1afa5;--hp-cream:#fbfaf4;--hp-ink:#0c2e1f;--hp-border:#dfdcd1}
 html:not([lang=ar]) main :is(h1,h2){font-family:'Cormorant Garamond',Georgia,serif}
 html[lang=ar] main :is(h1,h2,h3){font-family:inherit}
 main :is(.btn,.hp-button,.hp-btn,.wo-btn,.camp-btn,.quad-r-btn,.vt-button,.bp-button){border-radius:11px}
-main :is(.btn-gold,.hp-button-gold,.hp-button-primary,.hp-btn-primary,.quad-r-gold,.camp-btn:not(.ghost),.wo-btn),.team-about .team-contact a{background:#5c6460!important;border-color:#5c6460!important;color:#ffffff!important}
-main :is(.btn-gold,.hp-button-gold,.hp-button-primary,.hp-btn-primary,.quad-r-gold,.camp-btn:not(.ghost),.wo-btn):hover,.team-about .team-contact a:hover{background:#283a33!important;border-color:#283a33!important}
-.hp-home .hp-kicker,.team-about .chapter,.team-about .tag{color:#59625e}
+main :is(.btn-gold,.hp-button-gold,.hp-button-primary,.hp-btn-primary,.quad-r-gold,.camp-btn:not(.ghost),.wo-btn),.team-about .team-contact a{background:#56655f!important;border-color:#56655f!important;color:#ffffff!important}
+main :is(.btn-gold,.hp-button-gold,.hp-button-primary,.hp-btn-primary,.quad-r-gold,.camp-btn:not(.ghost),.wo-btn):hover,.team-about .team-contact a:hover{background:#1c3e2f!important;border-color:#1c3e2f!important}
+.hp-home .hp-kicker,.team-about .chapter,.team-about .tag{color:#54645d}
 .team-about .company-block .chapter{color:#cac7bc}
-.team-about .person-info{border-top-color:#797b7a}.team-about .person-info p{color:#59625e}
-.team-about .person-card,.hp-home .hp-activity{box-shadow:0 8px 24px #182a230d}
-main :is(a,button,input,select,textarea):focus-visible{outline-color:#5c6460}
-.floating-whatsapp{background:#59625e!important;color:#ffffff!important}
-::selection{background:#b1afa5;color:#13251e}
+.team-about .person-info{border-top-color:#787b7a}.team-about .person-info p{color:#54645d}
+.team-about .person-card,.hp-home .hp-activity{box-shadow:0 8px 24px #0c2e1f0d}
+main :is(a,button,input,select,textarea):focus-visible{outline-color:#56655f}
+.floating-whatsapp{background:#54645d!important;color:#ffffff!important}
+::selection{background:#b1afa5;color:#07291a}
 .quad-r-hero .quad-r-copy h1{color:#ffffff!important}
 .quad-r-hero .quad-r-copy h1 em{color:#bdbaaf!important}
 :is(.pricebox,.cta,.end) :is(h1,h2,h3,p){color:#ffffff!important}
 :is(.quad-r-hero,.vt-hero,.camp-hero,.bp-hero,.ky-hero,.hp-hero,.pricebox,.cta,.end,.ky-season,.company-block) :is(.eyebrow,.kicker,.camp-ey,.ky-eyebrow,.gp-section-label,.pw-eyebrow,.chapter,.tag){color:#cac7bc!important}
-main :is(.btn:not(.alt):not(.ghost):not(.btn-line):not(.btn-outline),.pw-btn-primary),.demo-rebuild-actions a,.demo-rebuild-form button{background:#5c6460!important;color:#ffffff!important;border-color:#5c6460!important}
-:is(.hp-kicker,.camp-ey,.ky-eyebrow,.gp-section-label,.pw-eyebrow,.journal-kicker,.memories-kicker){color:#59625e}
+main :is(.btn:not(.alt):not(.ghost):not(.btn-line):not(.btn-outline),.pw-btn-primary),.demo-rebuild-actions a,.demo-rebuild-form button{background:#56655f!important;color:#ffffff!important;border-color:#56655f!important}
+:is(.hp-kicker,.camp-ey,.ky-eyebrow,.gp-section-label,.pw-eyebrow,.journal-kicker,.memories-kicker){color:#54645d}
 .ky-season .ky-eyebrow,.end .kicker{color:#cac7bc!important}
-.eyebrow{color:#59625e!important}
+.eyebrow{color:#54645d!important}
 .page-randonnee .hero :is(.eyebrow,em),.page-randonnee .hero .stats strong{color:#cac7bc!important}
 .camp-page .camp-hero h1 em,.camp-cta .camp-ey,.demo-editorial-hero .demo-editorial-eyebrow,.hp-season-inner .hp-kicker{color:#cac7bc!important}
 .pricebox .amount,.ims-privacy-link{color:#cac7bc!important}
 body.page-randonnee main.rando .hero .eyebrow,body.page-randonnee main.rando .hero .stats strong{color:#cac7bc!important}
 body.atnav-ready .footer-bottom .ims-privacy-link{color:#cac7bc!important}
-.weekend-program .pw-eyebrow{color:#59625e!important}
+.weekend-program .pw-eyebrow{color:#54645d!important}
 .weekend-program .pw-hero .pw-eyebrow,.weekend-program .pw-price-card .pw-eyebrow{color:#cac7bc!important}
 .kayak-page .ky-final .ky-eyebrow,.ib-bivouac .ib-copy .ib-kicker{color:#cac7bc!important}
-#imsfrane-booking .bp-note,main p.lead{color:#59625e!important}
+#imsfrane-booking .bp-note,main p.lead{color:#54645d!important}
 main :is(.hero,.quad-r-hero,.camp-hero,.vt-hero,.bp-hero,.ky-hero,.cta,.end) p.lead{color:#f5f2e7!important}

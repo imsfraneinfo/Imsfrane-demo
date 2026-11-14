@@ -14,8 +14,8 @@ button.ims-fav-heart,
   border:1px solid rgba(233,230,219,.94)!important;
   border-radius:50%!important;
   background:rgba(255,255,255,.96)!important;
-  color:#253730!important;
-  box-shadow:0 3px 11px rgba(9,21,17,.16)!important;
+  color:#193b2c!important;
+  box-shadow:0 3px 11px rgba(1,24,14,.16)!important;
   backdrop-filter:blur(8px);
   -webkit-backdrop-filter:blur(8px);
   cursor:pointer;
@@ -31,15 +31,15 @@ button.ims-fav-heart:after,
 button.ims-fav-heart:hover,
 .ims-dash-home-visual.hp-home button.ims-original-fav-heart:hover{
   transform:translateY(-1px)!important;
-  border-color:#797b7a!important;
-  box-shadow:0 5px 16px rgba(9,21,17,.21)!important;
+  border-color:#787b7a!important;
+  box-shadow:0 5px 16px rgba(1,24,14,.21)!important;
 }
 button.ims-fav-heart[aria-pressed="true"],
 .ims-dash-home-visual.hp-home button.ims-original-fav-heart[aria-pressed="true"]{
-  background:#1b2d26!important;
-  color:#59625e!important;
+  background:#0f3122!important;
+  color:#54645d!important;
   border-color:#a3a19a!important;
-  box-shadow:0 3px 13px rgba(12,28,22,.26)!important;
+  box-shadow:0 3px 13px rgba(2,32,18,.26)!important;
 }
 button.ims-fav-heart .ims-heart-svg,
 .ims-dash-home-visual.hp-home button.ims-original-fav-heart .ims-heart-svg{
@@ -59,7 +59,7 @@ button.ims-fav-heart:active .ims-heart-svg,
 }
 button.ims-fav-heart:focus-visible,
 .ims-dash-home-visual.hp-home button.ims-original-fav-heart:focus-visible,
-button.ims-fav-detail:focus-visible{outline:3px solid #797b7a!important;outline-offset:3px!important}
+button.ims-fav-detail:focus-visible{outline:3px solid #787b7a!important;outline-offset:3px!important}
 button.ims-fav-heart:disabled,
 .ims-dash-home-visual.hp-home button.ims-original-fav-heart:disabled{opacity:.55;cursor:wait}
 
@@ -73,21 +73,21 @@ button.ims-fav-detail{
   border:1px solid #d9d6cb!important;
   border-radius:999px!important;
   background:#ffffff!important;
-  color:#22342d!important;
-  box-shadow:0 4px 13px rgba(12,28,22,.08)!important;
+  color:#163829!important;
+  box-shadow:0 4px 13px rgba(2,32,18,.08)!important;
   cursor:pointer;font-size:12px!important;font-weight:750!important;
   line-height:1.4!important;
   text-align:center;
   transition:background .2s ease,border-color .2s ease!important;
 }
-button.ims-fav-detail:hover{border-color:#797b7a!important;background:#fbfaf4!important}
-button.ims-fav-detail[aria-pressed="true"]{background:#fbf9f2!important;color:#172922!important;border-color:#797b7a!important}
+button.ims-fav-detail:hover{border-color:#787b7a!important;background:#fbfaf4!important}
+button.ims-fav-detail[aria-pressed="true"]{background:#fbf9f2!important;color:#0b2d1e!important;border-color:#787b7a!important}
 button.ims-fav-detail .ims-heart-svg{
   width:17px!important;height:17px!important;
   stroke:currentColor;stroke-width:1.8;
   stroke-linecap:round;stroke-linejoin:round;fill:none;flex:none;
 }
-button.ims-fav-detail[aria-pressed="true"] .ims-heart-svg{fill:#797b7a;stroke:#5c6460}
+button.ims-fav-detail[aria-pressed="true"] .ims-heart-svg{fill:#787b7a;stroke:#56655f}
 .ims-heart-label{font:inherit}
 html[lang="ar"] button.ims-fav-detail{font-family:var(--ar-text,"Imsfrane Tajawal",Tahoma,Arial,sans-serif)!important}
 
