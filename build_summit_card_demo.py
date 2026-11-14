@@ -20,9 +20,20 @@ GORGES_ALT = {
     'es': ('Cascada y poza natural', 'El río Ahansal al pie de los acantilados', 'Paso estrecho de las gargantas del Ahansal'),
     'ar': ('شلال وبركة طبيعية', 'واد أحنصال عند سفح الجروف', 'ممر ضيق في مضايق أحنصال'),
 }
+TOUR_ALT = {
+    lang: (summit, gorges[1], gorges[0])
+    for lang, summit, gorges in (
+        ('fr', 'Vue depuis le sommet de Msfrane', GORGES_ALT['fr']),
+        ('en', 'View from the Msfrane summit', GORGES_ALT['en']),
+        ('es', 'Vista desde la cima de Msfrane', GORGES_ALT['es']),
+        ('ar', 'إطلالة من قمة مسفران', GORGES_ALT['ar']),
+    )
+}
+TOUR_PHOTOS = ('rando-IMG_7634.webp', 'gorges-card/river-gorge.webp', 'gorges-card/waterfall.webp')
 CARDS = (
-    ('summit-card', 'rando-IMG_7453.webp', PHOTOS, SUMMIT_ALT),
-    ('gorges-card', 'rando-IMG_6269.webp', GORGES_PHOTOS, GORGES_ALT),
+    ('summit-card', 'rando-IMG_7453.webp', tuple(f'summit-card/{photo}' for photo in PHOTOS), SUMMIT_ALT),
+    ('gorges-card', 'rando-IMG_6269.webp', tuple(f'gorges-card/{photo}' for photo in GORGES_PHOTOS), GORGES_ALT),
+    ('grand-tour-card', 'rando-IMG_7447.webp', TOUR_PHOTOS, TOUR_ALT),
 )
 STYLES = """
 <style>
@@ -42,7 +53,7 @@ STYLES = """
 
 
 def build(root):
-    for card, _, photos, _ in CARDS:
+    for card, photos in (('summit-card', PHOTOS), ('gorges-card', GORGES_PHOTOS)):
         target = root / 'images' / card
         target.mkdir(parents=True, exist_ok=True)
         for photo in photos:
@@ -56,7 +67,7 @@ def build(root):
             if f'{card}-photos hiking-card-photos' in updated:
                 continue
             images = ''.join(
-                f'<img src="/Imsfrane-demo/images/{card}/{photo}" alt="{escape(label)}" '
+                f'<img src="/Imsfrane-demo/images/{photo}" alt="{escape(label)}" '
                 'width="600" height="800" loading="lazy" decoding="async">'
                 for photo, label in zip(photos, labels[lang])
             )
@@ -66,4 +77,4 @@ def build(root):
             if count != 1:
                 raise ValueError(f'Expected one {card} in {page}, found {count}')
         if updated != html:
-            page.write_text(updated.replace('</head>', STYLES + '</head>', 1), encoding='utf-8')
+            page.write_text(updated if STYLES in updated else updated.replace('</head>', STYLES + '</head>', 1), encoding='utf-8')
