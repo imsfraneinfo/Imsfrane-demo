@@ -163,8 +163,6 @@ html body .hp-home .hp-hero .hp-hero-picture-note > span { color: var(--atlas-in
 
 /* Keep hero photographs clear of decorative labels and captions. */
 html body :is(
-  .hp-hero-visual .hp-hero-picture-note,
-  .hp-hero-visual .hp-hero-altitude,
   .ky-hero-photo > .ky-hero-photo-label,
   .quad-r-media :is(.quad-r-badge, .quad-r-vertical),
   .hero-media :is(.hero-badge, .hero-vert),
