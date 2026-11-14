@@ -17,12 +17,16 @@ MENU_BRAND = re.compile(r'<div class="atnav-drawer-brand">(.*?)</div>', re.S)
 
 
 FLOATING_WHATSAPP = re.compile(
-    r'(<a\b[^>]*class="[^"]*\bfloating-whatsapp\b[^"]*"[^>]*>.*?)'
-    r'<span\b[^>]*>[^<]*</span>(\s*</a>)',
+    r'(<a\b[^>]*class="[^"]*\bfloating-whatsapp\b[^"]*"[^>]*>[^<]*(?:(?!</a>).)*)(</a>)',
     re.S,
 )
-CHAT_LABEL = '<span class="whatsapp-chat-label" lang="en" dir="ltr" aria-hidden="true">Chat with us</span>'
-
+PAGE_LANGUAGE = re.compile(r'<html\b[^>]*\blang=["\']([a-z]{2})', re.I)
+CHAT_LABELS = {
+    'ar': 'تواصل معنا',
+    'en': 'Contact us',
+    'es': 'Contáctanos',
+    'fr': 'Contactez-nous',
+}
 
 
 BASELINE = """
@@ -181,15 +185,19 @@ def build(root: Path):
                 lambda match: f'<a class="atnav-drawer-brand" href="{home}">{match[1]}</a>',
                 updated,
             )
+        language = PAGE_LANGUAGE.search(updated)
+        label = CHAT_LABELS.get(language[1].lower() if language else '', CHAT_LABELS['en'])
         updated, floating_links = FLOATING_WHATSAPP.subn(
-            lambda match: match[1] + CHAT_LABEL + match[2], updated,
+            lambda match: (
+                f'{match[1]}<span class="whatsapp-chat-label" aria-hidden="true">{label}</span>{match[2]}'
+            ), updated,
         )
         if floating_links:
             updated = updated.replace(
                 '</body>', '<script defer src="/Imsfrane-demo/whatsapp-chat.js?v=1"></script>\n</body>', 1,
             )
         if '</head>' in updated:
-            updated = updated.replace('</head>', '<link rel="stylesheet" href="/Imsfrane-demo/atlas-identity.css?v=forest4">\n</head>', 1)
+            updated = updated.replace('</head>', '<link rel="stylesheet" href="/Imsfrane-demo/atlas-identity.css?v=forest5">\n</head>', 1)
         if updated != original:
             page.write_text(updated, encoding='utf-8')
 
