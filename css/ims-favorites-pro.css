@@ -81,7 +81,7 @@ button.ims-fav-detail{
   transition:background .2s ease,border-color .2s ease!important;
 }
 button.ims-fav-detail:hover{border-color:#7a7a7a!important;background:#f8f8f8!important}
-button.ims-fav-detail[aria-pressed="true"]{background:#f4f4f4!important;color:#212121!important;border-color:#7a7a7a!important}
+button.ims-fav-detail[aria-pressed="true"]{background:#f7f7f7!important;color:#212121!important;border-color:#7a7a7a!important}
 button.ims-fav-detail .ims-heart-svg{
   width:17px!important;height:17px!important;
   stroke:currentColor;stroke-width:1.8;

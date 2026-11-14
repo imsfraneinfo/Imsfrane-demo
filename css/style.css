@@ -5108,13 +5108,13 @@ body[data-lang="fr"] div.lang-fr {
         }
 
         .camping-included-card .included-icon {
-            color: #717171;
+            color: #5e5e5e;
 
             font-weight: 900;
         }
 
         .camping-included-card .excluded-icon {
-            color: #666666;
+            color: #5e5e5e;
 
             font-weight: 900;
         }
@@ -11146,13 +11146,13 @@ body[data-lang="fr"] div.lang-fr {
         .program-list-included i {
             margin-top: 4px;
 
-            color: #767676;
+            color: #5e5e5e;
         }
 
         .program-list-not-included i {
             margin-top: 4px;
 
-            color: #656565;
+            color: #5e5e5e;
         }
 
         /* =====================================================
@@ -14190,7 +14190,7 @@ body[data-lang="fr"] div.lang-fr {
 
         .hiking-complete-circuit li i {
             margin-top: 4px;
-            color: #767676;
+            color: #5e5e5e;
         }
 
         .hiking-price-box {
@@ -15266,7 +15266,7 @@ body[data-lang="fr"] div.lang-fr {
         .store-product-features i {
             margin-top: 4px;
 
-            color: #767676;
+            color: #5e5e5e;
         }
 
         .store-product-footer {
@@ -16122,7 +16122,7 @@ body[data-lang="fr"] div.lang-fr {
 
         .vtt-price-list i {
             margin-top: 3px;
-            color: #6e6e6e;
+            color: #5e5e5e;
         }
 
         .vtt-book-button {

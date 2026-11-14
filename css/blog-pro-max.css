@@ -4,7 +4,7 @@
 .page-blog .blog-intro{padding:76px 0 44px;background:#fdfdfd}
 .page-blog .blog-intro-content{max-width:950px;margin:auto;text-align:center}
 .page-blog .blog-intro h2{font-family:'Playfair Display',Georgia,serif;font-size:clamp(2.3rem,5vw,4.6rem);line-height:1.12;letter-spacing:-.035em;color:#1c1c1c}
-.page-blog .blog-intro p{max-width:650px;margin:22px auto 0;font-size:1.1rem;line-height:1.85;color:#5f5f5f}
+.page-blog .blog-intro p{max-width:650px;margin:22px auto 0;font-size:1.1rem;line-height:1.85;color:#5e5e5e}
 .page-blog .featured-article-section{padding:28px 0 78px;background:#fdfdfd}
 .page-blog .featured-article{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(0,1fr);align-items:center;gap:0;overflow:hidden;background:#ffffff;border:1px solid #e0e0e0;border-radius:20px;box-shadow:0 24px 65px rgba(23,23,23,.08)}
 .page-blog .featured-article-image{display:flex;align-items:center;justify-content:center;min-width:0;background:#f3f3f3;padding:18px;min-height:430px}
