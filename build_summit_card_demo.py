@@ -21,15 +21,20 @@ GORGES_ALT = {
     'ar': ('شلال وبركة طبيعية', 'واد أحنصال عند سفح الجروف', 'ممر ضيق في مضايق أحنصال'),
 }
 TOUR_ALT = {
-    lang: (summit, gorges[1], gorges[0])
-    for lang, summit, gorges in (
-        ('fr', 'Vue depuis le sommet de Msfrane', GORGES_ALT['fr']),
-        ('en', 'View from the Msfrane summit', GORGES_ALT['en']),
-        ('es', 'Vista desde la cima de Msfrane', GORGES_ALT['es']),
-        ('ar', 'إطلالة من قمة مسفران', GORGES_ALT['ar']),
+    lang: (summit, GORGES_ALT[lang][1], GORGES_ALT[lang][0], truck)
+    for lang, summit, truck in (
+        ('fr', 'Vue depuis le sommet de Msfrane', 'Ancien camion sur le parcours'),
+        ('en', 'View from the Msfrane summit', 'Old truck along the route'),
+        ('es', 'Vista desde la cima de Msfrane', 'Camión antiguo en la ruta'),
+        ('ar', 'إطلالة من قمة مسفران', 'شاحنة قديمة على المسار'),
     )
 }
-TOUR_PHOTOS = ('rando-IMG_7634.webp', 'gorges-card/river-gorge.webp', 'gorges-card/waterfall.webp')
+TOUR_PHOTOS = (
+    'rando-IMG_7634.webp',
+    'gorges-card/river-gorge.webp',
+    'gorges-card/waterfall.webp',
+    'randonnee-camion.webp',
+)
 CARDS = (
     ('summit-card', 'rando-IMG_7453.webp', tuple(f'summit-card/{photo}' for photo in PHOTOS), SUMMIT_ALT),
     ('gorges-card', 'rando-IMG_6269.webp', tuple(f'gorges-card/{photo}' for photo in GORGES_PHOTOS), GORGES_ALT),
@@ -41,6 +46,9 @@ STYLES = """
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 3px;
+}
+.rando .card .grand-tour-card-photos {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 .rando .card .hiking-card-photos img {
   display: block;
