@@ -42,6 +42,20 @@ NUMBERED = {
     'Photo': 'صورة', 'Image': 'صورة',
 }
 SKIP = {'script', 'style', 'code', 'pre'}
+HOURS = re.compile(r'(?<!\w)(\d+)(?:\s*[–—-]\s*(\d+))?\s*(?:h|hrs?|hours?)\b', re.I)
+MINUTES = re.compile(r'(\d+(?:\s*[–—-]\s*\d+)?)\s*(?:min(?:s|utes?)?)\b', re.I)
+
+
+def hours_label(match):
+    start, end = match.groups()
+    if end:
+        unit = 'ساعات' if 3 <= int(end) <= 10 else 'ساعة'
+        return f'من {start} إلى {end} {unit}'
+    if int(start) == 1:
+        return 'ساعة واحدة'
+    if int(start) == 2:
+        return 'ساعتان'
+    return f'{start} ' + ('ساعات' if 3 <= int(start) <= 10 else 'ساعة')
 
 
 def translate(value):
@@ -66,6 +80,8 @@ def translate(value):
     text = TERM_PATTERN.sub(lambda m: TERMS_LOWER[m[0].lower()],text)
     if text in COPY:
         return COPY[text]
+    text = HOURS.sub(hours_label, text)
+    text = MINUTES.sub(lambda match: f'{match[1]} دقيقة', text)
     text = re.sub(r'(?<=\d)\s+m\b',' مترًا',text)
     text = re.sub(r'(?<=\d)\s*(?:km|KM)\b',' كم',text)
     text = re.sub(r'\(\s*\)', '', text)
@@ -107,6 +123,9 @@ def localize(source, page):
                 tag[attr] = translate(tag[attr])
         if tag.name == 'iframe':
             tag['title'] = translate(tag.get('title') or 'المحتوى التفصيلي')
+            frame = tag.get('src', '')
+            if urlsplit(frame).path.endswith('-ar.html') and 'arabic-review=' not in frame:
+                tag['src'] = frame + ('&' if '?' in frame else '?') + 'arabic-review=2'
         if tag.name == 'input' and tag.get('type') in ('submit','reset','button') and tag.get('value'):
             tag['value'] = translate(tag['value'])
         if tag.name == 'a':
@@ -127,6 +146,13 @@ def localize(source, page):
                 for product in data['products']:
                     product['nameAr'], product['unitAr'] = PRODUCTS[product['id']]
             tag.string = json.dumps(data,ensure_ascii=False).replace('</','<\\/')
+        if tag.name == 'script' and page.name == 'gite-content-ar.html' and tag.string:
+            config = re.search(r'const cfg=(\{[^\n]+\});', tag.string)
+            if config:
+                data = json.loads(config[1])
+                data['message'] = translate(data['message']).replace(' (نزل أطلس كاتدرال)', '')
+                data['programmes'] = [translate(label) for label in data['programmes']]
+                tag.string = tag.string[:config.start(1)] + json.dumps(data, ensure_ascii=False) + tag.string[config.end(1):]
     title = doc.title.get_text(' ',strip=True) if doc.title else 'مسفران كاتدرال'
     if doc.title and FOREIGN.search(title):
         heading = doc.find('h1')
@@ -168,7 +194,7 @@ def localize(source, page):
     for script in doc.find_all('script', src=True):
         src = script['src']
         if not src.startswith(('https:', 'http:', '//')) and 'arabic-review=' not in src:
-            script['src'] = src + ('&' if '?' in src else '?') + 'arabic-review=1'
+            script['src'] = src + ('&' if '?' in src else '?') + 'arabic-review=2'
     return doc
 
 

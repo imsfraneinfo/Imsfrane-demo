@@ -201,4 +201,5 @@ if __name__ == '__main__':
 
   from build_arabic_demo_review import build as build_arabic_demo_review
 
+  # Review Arabic wording and measurement labels on the finished demo.
   build_arabic_demo_review(root)
