@@ -217,41 +217,16 @@ html body .error-content {
   margin: clamp(20px, 5vw, 56px) auto;
 }
 
-/* Position the message outside the original floating WhatsApp button. */
+/* Keep the back-to-top button below WhatsApp, with room for the safe area. */
 html body a.floating-whatsapp {
   background: #25d366 !important;
   color: #fff !important;
-  overflow: visible;
 }
 
-html body a.floating-whatsapp > .whatsapp-chat-label {
-  position: absolute;
-  top: 50%;
-  right: calc(100% + 9px);
-  translate: 0 -50%;
-  display: inline-block !important;
-  padding: 7px 11px;
-  border: 1px solid #d2e7d9;
-  border-radius: 8px;
-  background: #fff;
-  color: #103724 !important;
-  box-shadow: 0 3px 12px #09291d24;
-  font-weight: 750;
-  line-height: 1.35;
-  white-space: nowrap;
+html body:has(.back-to-top) a.floating-whatsapp {
+  bottom: calc(72px + env(safe-area-inset-bottom));
 }
 
-html[dir="rtl"] body a.floating-whatsapp > .whatsapp-chat-label {
-  direction: rtl;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .floating-whatsapp > .whatsapp-chat-label.is-scrolling {
-    animation: whatsapp-chat-nudge 420ms ease-in-out;
-  }
-
-  @keyframes whatsapp-chat-nudge {
-    35% { transform: translateY(-4px); }
-    70% { transform: translateY(1px); }
-  }
+html body .back-to-top {
+  bottom: calc(18px + env(safe-area-inset-bottom));
 }
