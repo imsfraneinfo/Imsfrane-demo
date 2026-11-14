@@ -174,7 +174,7 @@ def build(root: Path):
                 updated,
             )
         if '</head>' in updated:
-            updated = updated.replace('</head>', '<link rel="stylesheet" href="/Imsfrane-demo/atlas-identity.css?v=forest1">\n</head>', 1)
+            updated = updated.replace('</head>', '<link rel="stylesheet" href="/Imsfrane-demo/atlas-identity.css?v=forest2">\n</head>', 1)
         if updated != original:
             page.write_text(updated, encoding='utf-8')
 
