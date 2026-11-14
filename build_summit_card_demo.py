@@ -42,6 +42,10 @@ CARDS = (
 )
 STYLES = """
 <style>
+.rando .mosaic .stamp {
+  top: 20px;
+  bottom: auto;
+}
 .rando .card .hiking-card-photos {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
