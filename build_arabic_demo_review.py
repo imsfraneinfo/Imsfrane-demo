@@ -117,6 +117,13 @@ def localize(source, page):
             translated = translate(str(node))
             if translated != str(node):
                 node.replace_with(with_spaces(str(node), translated))
+    for option in doc.select('.atnav-langmini-panel a'):
+        code = option.select_one('.atnav-lang-code')
+        label = code.find_next_sibling('span') if code else None
+        if label and code.get_text(strip=True) == label.get_text(strip=True):
+            code.decompose()
+            label['lang'] = 'ar'
+            label['dir'] = 'rtl'
     for tag in doc.find_all(True):
         for attr in ('aria-label', 'alt', 'title', 'placeholder', 'data-title', 'data-description', 'data-label'):
             if isinstance(tag.get(attr), str):

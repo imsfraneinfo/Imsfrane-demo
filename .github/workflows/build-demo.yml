@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/build-demo.yml'
       - 'build_email_forms.py'
+      - 'build_arabic_demo_review.py'
       - 'build_monochrome_demo.py'
       - 'atlas-identity.css'
       - 'build_jetski_demo.py'
