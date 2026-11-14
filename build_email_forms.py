@@ -198,3 +198,7 @@ if __name__ == '__main__':
 
   # Finish the demo hiking page after the palette has been applied.
   build_summit_card_demo(root)
+
+  from build_arabic_demo_review import build as build_arabic_demo_review
+
+  build_arabic_demo_review(root)
