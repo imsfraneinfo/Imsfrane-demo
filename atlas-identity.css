@@ -216,3 +216,35 @@ html body .error-content {
   grid-row: 2;
   margin: clamp(20px, 5vw, 56px) auto;
 }
+
+/* Keep the floating chat label visible on phones as well as desktop. */
+html body a.floating-whatsapp:has(> .whatsapp-chat-label) {
+  bottom: calc(30px + env(safe-area-inset-bottom));
+  inline-size: max-content;
+  min-inline-size: 52px;
+  max-inline-size: calc(100vw - 30px);
+  min-block-size: 52px;
+  padding: 0 15px;
+  gap: 8px;
+  border-radius: 999px;
+  color: #fff !important;
+  direction: ltr;
+}
+
+html body a.floating-whatsapp > .whatsapp-chat-label {
+  display: inline-block !important;
+  white-space: nowrap;
+  color: inherit;
+  font-weight: 750;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .floating-whatsapp > .whatsapp-chat-label.is-scrolling {
+    animation: whatsapp-chat-nudge 420ms ease-in-out;
+  }
+
+  @keyframes whatsapp-chat-nudge {
+    35% { transform: translateY(-4px); }
+    70% { transform: translateY(1px); }
+  }
+}
