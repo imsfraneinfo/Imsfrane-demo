@@ -242,3 +242,61 @@ html body .hp-home .hp-hero :is(.hp-eyebrow, .hp-hero-foot, .hp-hero-picture-not
   color: #f1d995 !important;
 }
 html body .hp-home .hp-hero .hp-hero-picture-note > span { color: var(--atlas-ink) !important; }
+
+/* Keep hero photographs clear of decorative labels and captions. */
+html body :is(
+  .hp-hero-visual .hp-hero-picture-note,
+  .hp-hero-visual .hp-hero-altitude,
+  .ky-hero-photo > .ky-hero-photo-label,
+  .quad-r-media :is(.quad-r-badge, .quad-r-vertical),
+  .hero-media :is(.hero-badge, .hero-vert),
+  main.rando .hero .mosaic .stamp,
+  .founder-hero .founder-photo figcaption,
+  .members-cover > :is(#heroEyebrow, #heroTitle, #heroDescription)
+) {
+  display: none !important;
+}
+
+/* Keep headings and actions in their own row below full-bleed photos. */
+html body :is(.article-hero, .ims-weekend .wk-hero, .team-about .founder-hero, .error-page) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  padding: 0;
+  min-height: 0;
+  align-items: start;
+}
+html body :is(.article-hero > img, .ims-weekend .wk-hero > img, .team-about .founder-hero .founder-photo, .error-background) {
+  position: relative;
+  inset: auto;
+  z-index: auto;
+  grid-row: 1;
+  width: 100%;
+  height: clamp(240px, 52vw, 580px);
+}
+html body :is(.error-background img, .team-about .founder-photo img) {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+html body .article-shade {
+  display: none;
+}
+html body :is(.ims-weekend .wk-hero, .team-about .founder-hero, .error-background, .members-cover)::after,
+html body .members-cover::before {
+  content: none;
+}
+html body :is(.article-hero-text, .ims-weekend .wk-hero > .wk-wrap, .team-about .founder-hero .team-heading) {
+  grid-row: 2;
+  width: min(1120px, calc(100% - 40px));
+  max-width: none;
+  margin: 0 auto;
+  padding: clamp(24px, 5vw, 58px) 0;
+}
+html body .article-hero {
+  background: var(--atlas-nav);
+}
+html body .error-content {
+  grid-row: 2;
+  margin: clamp(20px, 5vw, 56px) auto;
+}
