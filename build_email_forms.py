@@ -193,3 +193,7 @@ if __name__ == '__main__':
 
   # Finish the demo palette and link the menu brand to the localized home.
   build_monochrome_demo(root)
+
+  from build_summit_card_demo import build as build_summit_card_demo
+
+  build_summit_card_demo(root)
