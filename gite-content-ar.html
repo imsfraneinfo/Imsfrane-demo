@@ -230,7 +230,7 @@ function moveGallery(direction){
 }
 document.getElementById('galleryPrev').addEventListener('click',()=>moveGallery(-1));
 document.getElementById('galleryNext').addEventListener('click',()=>moveGallery(1));
-const cfg={"message": "مرحباً، أود الحجز في نزل أطلس كاتدرال (Gîte Atlas Cathédrale).", "labels": ["البرنامج", "تاريخ الوصول", "عدد الأشخاص", "نوع الغرفة (اختياري)"], "programmes": ["المبيت والعشاء والفطور · 250 DH / للشخص", "إقامة مع جميع الوجبات · 350 DH / للشخص", "نهاية الأسبوع من الجمعة إلى الأحد · الثمن عند الطلب / للشخص"]};
+const cfg={"message": "مرحباً، أود الحجز في نزل أطلس كاتدرال.", "labels": ["البرنامج", "تاريخ الوصول", "عدد الأشخاص", "نوع الغرفة (اختياري)"], "programmes": ["المبيت والعشاء والفطور · 250 درهم / للشخص", "إقامة مع جميع الوجبات · 350 درهم / للشخص", "نهاية الأسبوع من الجمعة إلى الأحد · الثمن عند الطلب / للشخص"]};
 const form=document.getElementById('giteBooking'),date=document.getElementById('arrival'),plan=document.getElementById('package');
 const now=new Date();date.min=[now.getFullYear(),String(now.getMonth()+1).padStart(2,'0'),String(now.getDate()).padStart(2,'0')].join('-');
 document.querySelectorAll('[data-package]').forEach(a=>a.addEventListener('click',()=>{plan.value=a.dataset.package;}));
