@@ -1,4 +1,4 @@
-"""Apply the monochrome palette to the generated demo styles."""
+"""Prepare the shared Atlas identity and navigation links on the demo."""
 from pathlib import Path
 import re
 
@@ -14,91 +14,10 @@ STYLE_ATTRIBUTE = re.compile(r"""(\sstyle\s*=\s*)(["'])(.*?)\2""", re.I | re.S)
 CSS_LINK = re.compile(r"""(<link\b[^>]*\bhref=["'])([^"'?#]+\.css(?:\?[^"']*)?)(["'])""", re.I)
 MENU_BRAND = re.compile(r'<div class="atnav-drawer-brand">(.*?)</div>', re.S)
 
-OVERRIDES = """
-html body { background-color: #fff; color: #151515; }
-
-body.atnav-ready #siteHeader,
-body.atnav-ready .atnav-article-header,
-#atnavDrawer,
-body.atnav-ready .atnav-langmini-panel {
-  background: #fff !important;
-  border-color: #d5d5d5 !important;
-  color: #151515 !important;
-}
-#ims-footer,
-.site-footer {
-  background: #111 !important;
-  border-color: #333 !important;
-}
-body.atnav-ready #siteHeader .brand-content strong,
-body.atnav-ready .atnav-article-brand,
-body.atnav-ready #siteHeader .atnav-desktop a,
-body.atnav-ready .atnav-langmini-panel a,
-#atnavDrawer :is(.atnav-drawer-brand strong, .atnav-intro-title, .atnav-item, .atnav-submenu a, .atnav-languages a) {
-  color: #151515 !important;
-}
-body.atnav-ready #siteHeader .brand-content small,
-#atnavDrawer :is(.atnav-drawer-brand small, .atnav-label, .atnav-mark, .atnav-item-icon, .atnav-subicon, .atnav-chevron) {
-  color: #464646 !important;
-}
-#atnavDrawer :is(.atnav-drawer-top, .atnav-label-separated, .atnav-actions) {
-  border-color: #dedede;
-}
-body.atnav-ready :is(.atnav-open, .atnav-langmini-trigger, .ims-member-entry),
-#atnavDrawer :is(.atnav-close, .atnav-whatsapp, .atnav-languages a) {
-  background: #fff !important;
-  border-color: #b5b5b5 !important;
-  color: #151515 !important;
-}
-body.atnav-ready :is(.atnav-open, .atnav-langmini-trigger, .ims-member-entry):hover,
-body.atnav-ready .atnav-langmini-trigger[aria-expanded="true"],
-body.atnav-ready .atnav-langmini-panel a:is(:hover, :focus-visible, [aria-current="page"]),
-#atnavDrawer :is(.atnav-close, .atnav-whatsapp):hover {
-  background: #eee !important;
-  color: #151515 !important;
-}
-body.atnav-ready #siteHeader .header-book-button,
-body.atnav-ready .atnav-article-book,
-#atnavDrawer .atnav-book {
-  background: #171717 !important;
-  border-color: #171717 !important;
-  color: #fff !important;
-}
-body.atnav-ready #siteHeader .atnav-desktop a:is(:hover, [aria-current="page"]),
-#atnavDrawer :is(.atnav-item, .atnav-submenu a):is(:hover, [aria-current="page"]),
-#atnavDrawer .atnav-drawer-brand:hover strong {
-  text-decoration: underline;
-  text-underline-offset: .25em;
-}
-#atnavDrawer .atnav-drawer-brand:focus-visible {
-  outline: 2px solid #333;
-  outline-offset: 5px;
-}
-#ims-footer .fp-cta {
-  background: #fff !important;
-  border-color: #fff !important;
-  color: #111 !important;
-}
-#ims-footer .fp-cta:hover { background: #dedede !important; }
-
-/* Give labels over busy photographs an opaque reading surface. */
-html body main.rando .mosaic .stamp,
-html body .hp-home .hp-activity-grid > .hp-activity-card > .hp-activity-image > .hp-photo-tag,
-html body .hp-home .hp-destination-label,
-html body .hero-badge {
-  background: #fff !important;
-  color: #151515 !important;
-  border-color: #dedede !important;
-  text-shadow: none;
-}
-html body :is(.hp-destination-label, .hero .hero-badge) { border-radius: 4px; }
-html body .hp-destination-label { padding: .45em .7em; }
-html body .hero-badge :is(b, span, strong) { color: #151515 !important; }
-::selection { background: #191919; color: #fff; }
-"""
 
 
-def grey(red, green, blue):
+
+def neutral_value(red, green, blue):
     value = round(0.2126 * red + 0.7152 * green + 0.0722 * blue)
     if max(red, green, blue) - min(red, green, blue) < 6:
         return value
@@ -109,6 +28,19 @@ def grey(red, green, blue):
     return value
 
 
+def atlas_tone(value):
+    # Tint dark surfaces forest-green and light surfaces like Atlas limestone.
+    if value == 0 or value == 255:
+        return (value, value, value)
+    if value < 128:
+        strength = min(value / 24, (128 - value) / 72, 1)
+        offset = (-10, 8, 1)
+    else:
+        strength = min((value - 128) / 50, (255 - value) / 13, 1)
+        offset = (6, 3, -8)
+    return tuple(max(0, min(255, round(value + delta * strength))) for delta in offset)
+
+
 def transform(css):
     def replace(match):
         if match['protected']:
@@ -117,11 +49,12 @@ def transform(css):
             original = match['hex']
             expanded = ''.join(char * 2 for char in original) if len(original) in (3, 4) else original
             channels = [int(expanded[start:start + 2], 16) for start in (0, 2, 4)]
-            value = grey(*channels)
-            return f'#{value:02x}{value:02x}{value:02x}{expanded[6:]}'
+            value = neutral_value(*channels)
+            return '#' + ''.join(f'{channel:02x}' for channel in atlas_tone(value)) + expanded[6:]
         channels = [int(match[channel]) for channel in ('r', 'g', 'b')]
-        value = grey(*channels)
-        return f"{match['rgb']}({value},{value},{value}{match['alpha'] or ''})"
+        value = neutral_value(*channels)
+        channels = ','.join(str(channel) for channel in atlas_tone(value))
+        return f"{match['rgb']}({channels}{match['alpha'] or ''})"
 
     return CSS_COLOR.sub(replace, css)
 
@@ -130,7 +63,7 @@ def version_link(match):
     url = match[2]
     if url.startswith(('https:', 'http:', '//')):
         return match[0]
-    return f"{match[1]}{url}{'&' if '?' in url else '?'}palette=bw2{match[3]}"
+    return f"{match[1]}{url}{'&' if '?' in url else '?'}palette=atlas1{match[3]}"
 
 
 def build(root: Path):
@@ -157,8 +90,8 @@ def build(root: Path):
                 updated,
             )
         if '</head>' in updated:
-            updated = updated.replace('</head>', '<link rel="stylesheet" href="/Imsfrane-demo/monochrome-demo.css?v=3">\n</head>', 1)
+            updated = updated.replace('</head>', '<link rel="stylesheet" href="/Imsfrane-demo/atlas-identity.css?v=1">\n</head>', 1)
         if updated != original:
             page.write_text(updated, encoding='utf-8')
 
-    (root / 'monochrome-demo.css').write_text(OVERRIDES, encoding='utf-8')
+    (root / 'atlas-identity.css').write_bytes(Path(__file__).with_name('atlas-identity.css').read_bytes())
