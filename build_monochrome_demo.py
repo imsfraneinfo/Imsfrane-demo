@@ -16,42 +16,84 @@ MENU_BRAND = re.compile(r'<div class="atnav-drawer-brand">(.*?)</div>', re.S)
 
 OVERRIDES = """
 html body { background-color: #fff; color: #151515; }
+
 body.atnav-ready #siteHeader,
 body.atnav-ready .atnav-article-header,
 #atnavDrawer,
+body.atnav-ready .atnav-langmini-panel {
+  background: #fff !important;
+  border-color: #d5d5d5 !important;
+  color: #151515 !important;
+}
 #ims-footer,
 .site-footer {
   background: #111 !important;
   border-color: #333 !important;
 }
-body.atnav-ready #siteHeader .brand-content small { color: #d1d1d1 !important; }
-body.atnav-ready #siteHeader .atnav-desktop a[aria-current="page"],
-body.atnav-ready #siteHeader .atnav-desktop a:hover {
+body.atnav-ready #siteHeader .brand-content strong,
+body.atnav-ready .atnav-article-brand,
+body.atnav-ready #siteHeader .atnav-desktop a,
+body.atnav-ready .atnav-langmini-panel a,
+#atnavDrawer :is(.atnav-drawer-brand strong, .atnav-intro-title, .atnav-item, .atnav-submenu a, .atnav-languages a) {
+  color: #151515 !important;
+}
+body.atnav-ready #siteHeader .brand-content small,
+#atnavDrawer :is(.atnav-drawer-brand small, .atnav-label, .atnav-mark, .atnav-item-icon, .atnav-subicon, .atnav-chevron) {
+  color: #464646 !important;
+}
+#atnavDrawer :is(.atnav-drawer-top, .atnav-label-separated, .atnav-actions) {
+  border-color: #dedede;
+}
+body.atnav-ready :is(.atnav-open, .atnav-langmini-trigger, .ims-member-entry),
+#atnavDrawer :is(.atnav-close, .atnav-whatsapp, .atnav-languages a) {
+  background: #fff !important;
+  border-color: #b5b5b5 !important;
+  color: #151515 !important;
+}
+body.atnav-ready :is(.atnav-open, .atnav-langmini-trigger, .ims-member-entry):hover,
+body.atnav-ready .atnav-langmini-trigger[aria-expanded="true"],
+body.atnav-ready .atnav-langmini-panel a:is(:hover, :focus-visible, [aria-current="page"]),
+#atnavDrawer :is(.atnav-close, .atnav-whatsapp):hover {
+  background: #eee !important;
+  color: #151515 !important;
+}
+body.atnav-ready #siteHeader .header-book-button,
+body.atnav-ready .atnav-article-book,
+#atnavDrawer .atnav-book {
+  background: #171717 !important;
+  border-color: #171717 !important;
   color: #fff !important;
+}
+body.atnav-ready #siteHeader .atnav-desktop a:is(:hover, [aria-current="page"]),
+#atnavDrawer :is(.atnav-item, .atnav-submenu a):is(:hover, [aria-current="page"]),
+#atnavDrawer .atnav-drawer-brand:hover strong {
   text-decoration: underline;
-  text-underline-offset: .35em;
+  text-underline-offset: .25em;
 }
-body.atnav-ready #siteHeader .atnav-open {
-  background: #242424;
-  border-color: #777;
-  color: #fff;
+#atnavDrawer .atnav-drawer-brand:focus-visible {
+  outline: 2px solid #333;
+  outline-offset: 5px;
 }
-#atnavDrawer .atnav-book,
 #ims-footer .fp-cta {
   background: #fff !important;
   border-color: #fff !important;
   color: #111 !important;
 }
-#atnavDrawer .atnav-book:hover,
 #ims-footer .fp-cta:hover { background: #dedede !important; }
-#atnavDrawer .atnav-drawer-brand:focus-visible {
-  outline: 2px solid #fff;
-  outline-offset: 5px;
+
+/* Give labels over busy photographs an opaque reading surface. */
+html body main.rando .mosaic .stamp,
+html body .hp-home .hp-activity-grid > .hp-activity-card > .hp-activity-image > .hp-photo-tag,
+html body .hp-home .hp-destination-label,
+html body .hero-badge {
+  background: #fff !important;
+  color: #151515 !important;
+  border-color: #dedede !important;
+  text-shadow: none;
 }
-#atnavDrawer .atnav-drawer-brand:hover strong {
-  text-decoration: underline;
-  text-underline-offset: .25em;
-}
+html body :is(.hp-destination-label, .hero .hero-badge) { border-radius: 4px; }
+html body .hp-destination-label { padding: .45em .7em; }
+html body .hero-badge :is(b, span, strong) { color: #151515 !important; }
 ::selection { background: #191919; color: #fff; }
 """
 
@@ -115,7 +157,7 @@ def build(root: Path):
                 updated,
             )
         if '</head>' in updated:
-            updated = updated.replace('</head>', '<link rel="stylesheet" href="/Imsfrane-demo/monochrome-demo.css?v=2">\n</head>', 1)
+            updated = updated.replace('</head>', '<link rel="stylesheet" href="/Imsfrane-demo/monochrome-demo.css?v=3">\n</head>', 1)
         if updated != original:
             page.write_text(updated, encoding='utf-8')
 
