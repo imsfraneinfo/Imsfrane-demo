@@ -1,4 +1,86 @@
-/* Imsfrane · Atlas sand, river green and terracotta. */
+
+html body { background-color: #fff; color: #151515; }
+
+body.atnav-ready #siteHeader,
+body.atnav-ready .atnav-article-header,
+#atnavDrawer,
+body.atnav-ready .atnav-langmini-panel {
+  background: #fff !important;
+  border-color: #d5d5d5 !important;
+  color: #151515 !important;
+}
+#ims-footer,
+.site-footer {
+  background: #111 !important;
+  border-color: #333 !important;
+}
+body.atnav-ready #siteHeader .brand-content strong,
+body.atnav-ready .atnav-article-brand,
+body.atnav-ready #siteHeader .atnav-desktop a,
+body.atnav-ready .atnav-langmini-panel a,
+#atnavDrawer :is(.atnav-drawer-brand strong, .atnav-intro-title, .atnav-item, .atnav-submenu a, .atnav-languages a) {
+  color: #151515 !important;
+}
+body.atnav-ready #siteHeader .brand-content small,
+#atnavDrawer :is(.atnav-drawer-brand small, .atnav-label, .atnav-mark, .atnav-item-icon, .atnav-subicon, .atnav-chevron) {
+  color: #464646 !important;
+}
+#atnavDrawer :is(.atnav-drawer-top, .atnav-label-separated, .atnav-actions) {
+  border-color: #dedede;
+}
+body.atnav-ready :is(.atnav-open, .atnav-langmini-trigger, .ims-member-entry),
+#atnavDrawer :is(.atnav-close, .atnav-whatsapp, .atnav-languages a) {
+  background: #fff !important;
+  border-color: #b5b5b5 !important;
+  color: #151515 !important;
+}
+body.atnav-ready :is(.atnav-open, .atnav-langmini-trigger, .ims-member-entry):hover,
+body.atnav-ready .atnav-langmini-trigger[aria-expanded="true"],
+body.atnav-ready .atnav-langmini-panel a:is(:hover, :focus-visible, [aria-current="page"]),
+#atnavDrawer :is(.atnav-close, .atnav-whatsapp):hover {
+  background: #eee !important;
+  color: #151515 !important;
+}
+body.atnav-ready #siteHeader .header-book-button,
+body.atnav-ready .atnav-article-book,
+#atnavDrawer .atnav-book {
+  background: #171717 !important;
+  border-color: #171717 !important;
+  color: #fff !important;
+}
+body.atnav-ready #siteHeader .atnav-desktop a:is(:hover, [aria-current="page"]),
+#atnavDrawer :is(.atnav-item, .atnav-submenu a):is(:hover, [aria-current="page"]),
+#atnavDrawer .atnav-drawer-brand:hover strong {
+  text-decoration: underline;
+  text-underline-offset: .25em;
+}
+#atnavDrawer .atnav-drawer-brand:focus-visible {
+  outline: 2px solid #333;
+  outline-offset: 5px;
+}
+#ims-footer .fp-cta {
+  background: #fff !important;
+  border-color: #fff !important;
+  color: #111 !important;
+}
+#ims-footer .fp-cta:hover { background: #dedede !important; }
+
+/* Give labels over busy photographs an opaque reading surface. */
+html body main.rando .mosaic .stamp,
+html body .hp-home .hp-activity-grid > .hp-activity-card > .hp-activity-image > .hp-photo-tag,
+html body .hp-home .hp-destination-label,
+html body .hero-badge {
+  background: #fff !important;
+  color: #151515 !important;
+  border-color: #dedede !important;
+  text-shadow: none;
+}
+html body :is(.hp-destination-label, .hero .hero-badge) { border-radius: 4px; }
+html body .hp-destination-label { padding: .45em .7em; }
+html body .hero-badge :is(b, span, strong) { color: #151515 !important; }
+::selection { background: #191919; color: #fff; }
+
+/* Colour palette for the existing Imsfrane layout. */
 :root {
   --atlas-paper: #f7f3e9;
   --atlas-white: #fffdf8;
@@ -8,24 +90,15 @@
   --atlas-line: #d8d7ca;
   --atlas-clay: #a4432d;
   --atlas-clay-hover: #80321f;
-  --atlas-radius: 14px;
-  --atlas-display: "Cormorant Garamond", Georgia, serif;
-  --atlas-body: Inter, Montserrat, Arial, sans-serif;
 }
-html[lang="ar"] {
-  --atlas-display: var(--ar-display, "Imsfrane Alexandria", Tahoma, sans-serif);
-  --atlas-body: var(--ar-text, "Imsfrane Tajawal", Tahoma, sans-serif);
+html body {
+  background: var(--atlas-paper);
+  color: var(--atlas-ink);
 }
-html body { background: var(--atlas-paper); color: var(--atlas-ink); font-family: var(--atlas-body); }
-html body :is(main, .ims-dash) :is(h1, h2, h3),
-html body :is(.hero h1, .room-section h2, .rp-card h3) {
-  font-family: var(--atlas-display) !important;
+::selection {
+  background: var(--atlas-forest);
+  color: #fff;
 }
-html[lang="ar"] body :is(main, .hero, .room-section) :is(h1, h2, h3) {
-  letter-spacing: 0 !important;
-}
-::selection { background: var(--atlas-forest); color: #fff; }
-
 body.atnav-ready #siteHeader,
 body.atnav-ready .atnav-article-header,
 html body .ims-sitebar,
@@ -33,7 +106,6 @@ html body #header.header {
   background: var(--atlas-white) !important;
   border-color: var(--atlas-line) !important;
   color: var(--atlas-ink) !important;
-  box-shadow: 0 3px 22px #172d2710 !important;
 }
 body.atnav-ready #siteHeader .brand-content strong,
 body.atnav-ready .atnav-article-brand,
@@ -42,11 +114,11 @@ html body .ims-sitebar :is(a, strong),
 html body #header.header :is(a, strong) {
   color: var(--atlas-ink) !important;
 }
-body.atnav-ready #siteHeader .brand-content small { color: var(--atlas-muted) !important; }
+body.atnav-ready #siteHeader .brand-content small {
+  color: var(--atlas-muted) !important;
+}
 body.atnav-ready #siteHeader .atnav-desktop a:is(:hover, [aria-current="page"]) {
   color: var(--atlas-clay) !important;
-  text-decoration: underline;
-  text-underline-offset: .45em;
 }
 body.atnav-ready :is(.atnav-open, .atnav-langmini-trigger, .ims-member-entry),
 body.atnav-ready .atnav-langmini-panel {
@@ -55,8 +127,12 @@ body.atnav-ready .atnav-langmini-panel {
   border-color: #b6beb3 !important;
 }
 body.atnav-ready :is(.atnav-open, .atnav-langmini-trigger, .ims-member-entry):hover,
-body.atnav-ready .atnav-langmini-trigger[aria-expanded="true"] { background: #e9eee5 !important; }
-body.atnav-ready .atnav-langmini-panel a { color: var(--atlas-ink) !important; }
+body.atnav-ready .atnav-langmini-trigger[aria-expanded="true"] {
+  background: #e9eee5 !important;
+}
+body.atnav-ready .atnav-langmini-panel a {
+  color: var(--atlas-ink) !important;
+}
 body.atnav-ready .atnav-langmini-panel a:is(:hover, :focus-visible, [aria-current="page"]) {
   background: #e9eee5 !important;
   color: var(--atlas-forest) !important;
@@ -74,12 +150,17 @@ body #atnavDrawer {
 #atnavDrawer :is(.atnav-drawer-brand small, .atnav-label, .atnav-mark, .atnav-item-icon, .atnav-subicon, .atnav-chevron) {
   color: #f1b497 !important;
 }
-#atnavDrawer :is(.atnav-drawer-top, .atnav-actions, .atnav-label-separated) { border-color: #fff4df40; }
-#atnavDrawer :is(.atnav-close, .atnav-whatsapp) { background: #25483d; color: #fff !important; }
-#atnavDrawer :is(.atnav-book, .atnav-close, .atnav-whatsapp) { border-radius: 8px; }
-#atnavDrawer .atnav-book { background: #f2c6ae !important; color: #262c24 !important; }
-#atnavDrawer :is(a, button):focus-visible { outline: 2px solid #f1b497; outline-offset: 4px; }
-#atnavDrawer :is(.atnav-item, .atnav-submenu a):hover { text-decoration: underline; text-underline-offset: .25em; }
+#atnavDrawer :is(.atnav-drawer-top, .atnav-actions, .atnav-label-separated) {
+  border-color: #fff4df40;
+}
+#atnavDrawer :is(.atnav-close, .atnav-whatsapp) {
+  background: #25483d;
+  color: #fff !important;
+}
+#atnavDrawer .atnav-book {
+  background: #f2c6ae !important;
+  color: #262c24 !important;
+}
 html body :is(#ims-footer, .site-footer) {
   --fp-bg: #17352c;
   --fp-ink: #fffaf0;
@@ -88,23 +169,13 @@ html body :is(#ims-footer, .site-footer) {
   background: #17352c !important;
   color: #fffaf0 !important;
 }
-#ims-footer .fp-cta { background: #f4be9f; border-color: #f4be9f; color: #202d26 !important; }
-
-html body :is(.hp-activity-card, .rp-card, .gp-card, .gp-route, .gp-hike, .stay-card, .sp-card,
-  .journal-card, .person-card, .camp-detail, .vt-card, .ky-service, .ky-program, .wk-stage, .bk-panel, .wo-info-panel, .rando .card) {
-  border: 1px solid var(--atlas-line);
-  border-radius: var(--atlas-radius);
-  box-shadow: 0 8px 22px #172d270a;
+#ims-footer .fp-cta {
+  background: #f4be9f;
+  border-color: #f4be9f;
+  color: #202d26 !important;
 }
 html body :is(.embedded-enquiry form, #contactForm, .bk-panel, .sp-catalog, .hp-activities, .journal-index) {
   background-color: var(--atlas-paper);
-}
-html body :is(main, .booking-section) :is(input:not([type="checkbox"]):not([type="radio"]), select, textarea) {
-  accent-color: var(--atlas-forest);
-}
-html body :is(main, .booking-section) :is(input, select, textarea):focus-visible {
-  outline: 2px solid var(--atlas-clay);
-  outline-offset: 2px;
 }
 html body :is(#siteHeader .header-book-button, .atnav-article-book, .hp-button-gold, .hp-button-primary,
   .quad-r-gold, .btn-gold, .enquiry-email, .wo-btn, .wk-btn-primary, .ky-btn-primary,
@@ -112,7 +183,6 @@ html body :is(#siteHeader .header-book-button, .atnav-article-book, .hp-button-g
   background: var(--atlas-clay) !important;
   color: #fff !important;
   border-color: var(--atlas-clay) !important;
-  border-radius: 8px !important;
 }
 html body :is(#siteHeader .header-book-button, .atnav-article-book, .hp-button-gold, .hp-button-primary,
   .quad-r-gold, .btn-gold, .enquiry-email, .wo-btn, .wk-btn-primary, .ky-btn-primary,
@@ -126,14 +196,10 @@ html body :is(.hp-destination-label, .hero-badge, .hp-hero-picture-note, .hp-her
   background: var(--atlas-white) !important;
   color: var(--atlas-ink) !important;
   border-color: var(--atlas-line) !important;
-  border-radius: 6px;
-  text-shadow: none;
 }
-html body :is(.hp-destination-label, .hp-hero-picture-note) { padding: .55em .8em; }
 html body :is(.hp-hero-picture-note, .hp-hero-altitude, .hero-badge) :is(b, span, strong) {
   color: var(--atlas-ink) !important;
 }
-
 html body .hp-home {
   --hp-night: var(--atlas-forest);
   --hp-forest: var(--atlas-forest);
@@ -142,70 +208,6 @@ html body .hp-home {
   --hp-ink: var(--atlas-ink);
   --hp-border: var(--atlas-line);
 }
-html body .hp-home .hp-hero {
-  background: var(--atlas-paper);
-  color: var(--atlas-ink);
-  padding: clamp(16px, 3.1vw, 50px) 0;
-}
-html body .hp-home .hp-hero-inner {
-  display: grid;
-  position: relative;
-  width: min(94%, 1530px);
-  min-height: 0;
-  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
-  border: 1px solid var(--atlas-line);
-  border-radius: 24px;
-  overflow: hidden;
-  background: var(--atlas-white);
-}
-html body .hp-home .hp-hero-content {
-  min-height: 0;
-  padding: clamp(28px, 5vw, 80px);
-  background: var(--atlas-white);
-  pointer-events: auto;
-}
-html body .hp-home .hp-hero-content::after { display: none; }
-html body .hp-home .hp-hero h1 {
-  color: var(--atlas-ink) !important;
-  font-size: clamp(46px, 5.4vw, 88px) !important;
-  line-height: .98;
-}
-html body .hp-home .hp-hero h1 em { color: var(--atlas-clay) !important; }
-html body .hp-home .hp-hero h1 span,
-html body .hp-home .hp-hero-content > p,
-html body .hp-home .hp-hero-foot { color: var(--atlas-muted) !important; }
-html body .hp-home .hp-hero .hp-eyebrow { color: var(--atlas-clay) !important; }
-html body .hp-home .hp-hero .hp-button-outline {
-  background: var(--atlas-white) !important;
-  color: var(--atlas-ink) !important;
-  border-color: #afb9aa !important;
-  border-radius: 8px;
-}
-html body .hp-home .hp-hero-visual { position: relative; height: auto; min-height: clamp(360px, 39vw, 620px) !important; }
-html body .hp-home .hp-hero-visual::after { background: linear-gradient(to top, #172d2760, transparent 26%) !important; }
-html body .hp-home .hp-scroll { display: none; }
-html body .hp-home .hp-google-reviews { background: #e8eee4; }
-html body .hp-home .hp-activity-bottom strong { color: var(--atlas-forest); }
-
-@media (max-width: 860px) {
-  html body .hp-home .hp-hero-inner { grid-template-columns: 1fr; border-radius: 16px; }
-  html body .hp-home .hp-hero-content { padding: 28px clamp(18px, 5vw, 42px); }
-  html body .hp-home .hp-hero-content > h1 {
-    position: static !important;
-    width: auto !important;
-    height: auto !important;
-    clip-path: none !important;
-    white-space: normal !important;
-    margin: 0 0 16px !important;
-    font-size: clamp(36px, 8vw, 60px) !important;
-  }
-  html body .hp-home .hp-hero h1 span { margin-top: 12px; }
-  html body .hp-home .hp-hero-visual { min-height: clamp(250px, 63vw, 420px) !important; }
-  html body .hp-home .hp-hero-buttons { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  html body .hp-home .hp-hero-buttons .hp-button { padding: 9px; white-space: normal; text-align: center; }
-}
-
-/* Shared surfaces across activity, stay, editorial and account templates. */
 html body :is(.journal-page, .gp-main, .sp-main, .stay-main, .memories-showcase,
   .ims-weekend, .ky-prep-section, .rando .section.light, .camp-section.camp-offer) {
   background-color: var(--atlas-paper);
@@ -224,6 +226,17 @@ html body :is(.rando .hero, .quad-r-hero, .ky-hero, .camp-hero, .wk-hero, .gp-he
 html body :is(.gp-card, .stay-card, .journal-card, .sp-card, .rando .card) :is(h2, h3) {
   color: var(--atlas-ink);
 }
-html body :is(.atnav-close, .atnav-whatsapp, .atnav-langmini-trigger, .atnav-open) svg { color: inherit; }
-html body .hp-hero :is(.hp-slide-arrow, .hp-slide-dot) { border-color: #f7f3e9; }
-html body .hp-hero .hp-slide-dot.is-active { background: #f7f3e9; }
+html body :is(.atnav-close, .atnav-whatsapp, .atnav-langmini-trigger, .atnav-open) svg {
+  color: inherit;
+}
+html body .hp-hero :is(.hp-slide-arrow, .hp-slide-dot) {
+  border-color: #f7f3e9;
+}
+html body .hp-hero .hp-slide-dot.is-active {
+  background: #f7f3e9;
+}
+html body .hp-home .hp-hero h1 em { color: #f4be9f !important; }
+html body .hp-home .hp-hero :is(.hp-eyebrow, .hp-hero-foot, .hp-hero-picture-note > span) {
+  color: #ffe1cd !important;
+}
+html body .hp-home .hp-hero .hp-hero-picture-note > span { color: var(--atlas-ink) !important; }
