@@ -191,7 +191,7 @@ if __name__ == '__main__':
  if root.name == 'public':
   from build_monochrome_demo import build as build_monochrome_demo
 
-  # Apply the shared Atlas identity before page-specific refinements.
+  # Apply only the preview palette before page-specific refinements.
   build_monochrome_demo(root)
 
   from build_summit_card_demo import build as build_summit_card_demo
