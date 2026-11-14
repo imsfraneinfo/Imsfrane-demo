@@ -1,14 +1,14 @@
 
-html body { background-color: #ffffff; color: #151515; }
+html body { background-color: #ffffff; color: #0c1c16; }
 body.atnav-ready #siteHeader,
 body.atnav-ready .atnav-article-header,
 #atnavDrawer,
 #ims-footer,
 .site-footer {
-  background: #111111 !important;
-  border-color: #333333 !important;
+  background: #0a1712 !important;
+  border-color: #293b34 !important;
 }
-body.atnav-ready #siteHeader .brand-content small { color: #d1d1d1 !important; }
+body.atnav-ready #siteHeader .brand-content small { color: #d7d4c9 !important; }
 body.atnav-ready #siteHeader .atnav-desktop a[aria-current="page"],
 body.atnav-ready #siteHeader .atnav-desktop a:hover {
   color: #ffffff !important;
@@ -16,18 +16,18 @@ body.atnav-ready #siteHeader .atnav-desktop a:hover {
   text-underline-offset: .35em;
 }
 body.atnav-ready #siteHeader .atnav-open {
-  background: #242424;
-  border-color: #777777;
+  background: #1a2c25;
+  border-color: #767877;
   color: #ffffff;
 }
 #atnavDrawer .atnav-book,
 #ims-footer .fp-cta {
   background: #ffffff !important;
   border-color: #ffffff !important;
-  color: #111111 !important;
+  color: #0a1712 !important;
 }
 #atnavDrawer .atnav-book:hover,
-#ims-footer .fp-cta:hover { background: #dedede !important; }
+#ims-footer .fp-cta:hover { background: #e4e1d6 !important; }
 #atnavDrawer .atnav-drawer-brand:focus-visible {
   outline: 2px solid #ffffff;
   outline-offset: 5px;
@@ -36,4 +36,4 @@ body.atnav-ready #siteHeader .atnav-open {
   text-decoration: underline;
   text-underline-offset: .25em;
 }
-::selection { background: #191919; color: #ffffff; }
+::selection { background: #0f211a; color: #ffffff; }
