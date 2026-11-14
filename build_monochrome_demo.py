@@ -1,4 +1,4 @@
-"""Prepare the shared Atlas identity and navigation links on the demo."""
+"""Prepare the forest green identity and navigation links on the demo."""
 from pathlib import Path
 import re
 
@@ -112,13 +112,13 @@ def neutral_value(red, green, blue):
     return value
 
 
-def atlas_tone(value):
-    # Tint dark surfaces forest-green and light surfaces like Atlas limestone.
+def forest_tone(value):
+    # Tint dark colours forest green and light colours cream.
     if value == 0 or value == 255:
         return (value, value, value)
     if value < 128:
         strength = min(value / 24, (128 - value) / 72, 1)
-        offset = (-10, 8, 1)
+        offset = (-22, 12, -3)
     else:
         strength = min((value - 128) / 50, (255 - value) / 13, 1)
         offset = (6, 3, -8)
@@ -134,10 +134,10 @@ def transform(css):
             expanded = ''.join(char * 2 for char in original) if len(original) in (3, 4) else original
             channels = [int(expanded[start:start + 2], 16) for start in (0, 2, 4)]
             value = neutral_value(*channels)
-            return '#' + ''.join(f'{channel:02x}' for channel in atlas_tone(value)) + expanded[6:]
+            return '#' + ''.join(f'{channel:02x}' for channel in forest_tone(value)) + expanded[6:]
         channels = [int(match[channel]) for channel in ('r', 'g', 'b')]
         value = neutral_value(*channels)
-        channels = ','.join(str(channel) for channel in atlas_tone(value))
+        channels = ','.join(str(channel) for channel in forest_tone(value))
         return f"{match['rgb']}({channels}{match['alpha'] or ''})"
 
     return CSS_COLOR.sub(replace, css)
@@ -147,7 +147,7 @@ def version_link(match):
     url = match[2]
     if url.startswith(('https:', 'http:', '//')):
         return match[0]
-    return f"{match[1]}{url}{'&' if '?' in url else '?'}palette=atlas2{match[3]}"
+    return f"{match[1]}{url}{'&' if '?' in url else '?'}palette=forest1{match[3]}"
 
 
 def build(root: Path):
@@ -174,7 +174,7 @@ def build(root: Path):
                 updated,
             )
         if '</head>' in updated:
-            updated = updated.replace('</head>', '<link rel="stylesheet" href="/Imsfrane-demo/atlas-identity.css?v=2">\n</head>', 1)
+            updated = updated.replace('</head>', '<link rel="stylesheet" href="/Imsfrane-demo/atlas-identity.css?v=forest1">\n</head>', 1)
         if updated != original:
             page.write_text(updated, encoding='utf-8')
 
