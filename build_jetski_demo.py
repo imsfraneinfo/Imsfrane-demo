@@ -52,6 +52,9 @@ def build():
         card = re.search(r'<article\b[^>]*\bhp-jetski\b[^>]*>.*?</article>', source, re.S)
         assert card, f"Jet Ski card missing: {home_path}"
         linked_card, links = re.subn(r'href="https://wa\.me/[^"]+"', f'href="{detail_url}"', card[0])
+        published = ROOT / lang / "jet-ski" / "index.html"
+        if links == 0 and published.is_file() and card[0].count(f'href="{detail_url}"') == 2:
+            continue
         assert links == 2, f"Unexpected Jet Ski links: {home_path}"
         linked_card = re.sub(r"<strong>.*?</strong>", f"<strong>{price}</strong>", linked_card, count=1)
         if lang == "ar":
