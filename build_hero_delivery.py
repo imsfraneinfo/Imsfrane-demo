@@ -45,6 +45,11 @@ def prioritize(page, root):
     soup = BeautifulSoup(source, 'html.parser')
     if soup.select_one('.hp-hero'):
         updated = re.sub(r'(/images/clarity/hero-\d+\.avif)(?![?\w])', r'\1?hero=2', source)
+        updated = re.sub(
+            r'''(\bsrc=["'])([^"']*?/home-pro\.js)(?:\?[^"']*)?(["'])''',
+            lambda match: f'{match[1]}{match[2]}?v=slider-ready1{match[3]}',
+            updated,
+        )
         if updated != source:
             page.write_text(updated, encoding='utf-8')
         return updated != source
@@ -99,6 +104,7 @@ def prioritize(page, root):
 
 def build(root):
     compress_hero_images(root)
+    (root / 'home-pro.js').write_bytes(Path(__file__).with_name('home-slider.js').read_bytes())
     count = sum(prioritize(page, root) for page in root.rglob('*.html')
                 if not any(part.startswith('.') or part == 'admin'
                            for part in page.relative_to(root).parts))
