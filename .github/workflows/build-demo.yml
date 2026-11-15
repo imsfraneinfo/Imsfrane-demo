@@ -30,6 +30,7 @@ on:
       - 'build_about_team.py'
       - 'build_visual_identity.py'
       - 'build_image_clarity.py'
+      - 'build_hero_delivery.py'
       - 'team-portraits/*.webp.b64'
       - 'build_bivouac_showcase.py'
       - 'build_rafting_50km_article.py'
@@ -169,6 +170,8 @@ jobs:
         run: python3 build_email_forms.py
       - name: Remove decorative diagonal arrows across the demo
         run: python3 remove_decorative_arrows.py public
+      - name: Prioritize visible hero photography
+        run: python3 build_hero_delivery.py public
       - uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
