@@ -6,7 +6,8 @@ if(!hero)return;
 var slides=Array.prototype.slice.call(hero.querySelectorAll(".hp-slide"));
 var dots=Array.prototype.slice.call(hero.querySelectorAll(".hp-slide-dot"));
 var arrows=Array.prototype.slice.call(hero.querySelectorAll(".hp-slide-arrow"));
-if(!slides.length||slides.length!==dots.length)return;
+const count=hero.querySelector(".hp-slide-count-current");
+if(!slides.length)return;
 var index=0, timer=null, paused=false, engaged=false, requested=0;
 var motion=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)");
 var observer=null, inView=true, touchStart=null;
@@ -51,6 +52,7 @@ async function show(next){
  const ready=await loadPhoto(slides[target].querySelector("img"));
  if(!ready||ticket!==requested)return;
  index=target;
+ if(count)count.textContent=String(index+1).padStart(2,"0");
  slides.forEach(function(slide,i){
    var on=i===index;
    slide.classList.toggle("is-active",on);
