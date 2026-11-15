@@ -1351,6 +1351,13 @@
     "width_after": 1200
   },
   {
+    "page": "en/jet-ski/index.html",
+    "small": "/Imsfrane-demo/images/optimized/jetski-lake-800.avif",
+    "large": "/Imsfrane-demo/images/jetski-lake.webp",
+    "width_before": 800,
+    "width_after": 1000
+  },
+  {
     "page": "es/quad/index.html",
     "small": "/Imsfrane-demo/images/quad-800.webp",
     "large": "/Imsfrane-demo/images/quad.webp",
@@ -1615,6 +1622,13 @@
     "large": "/Imsfrane-demo/images/21.webp",
     "width_before": 800,
     "width_after": 1200
+  },
+  {
+    "page": "es/jet-ski/index.html",
+    "small": "/Imsfrane-demo/images/optimized/jetski-lake-800.avif",
+    "large": "/Imsfrane-demo/images/jetski-lake.webp",
+    "width_before": 800,
+    "width_after": 1000
   },
   {
     "page": "ar/quad/index.html",
@@ -1883,6 +1897,13 @@
     "width_after": 1200
   },
   {
+    "page": "ar/jet-ski/index.html",
+    "small": "/Imsfrane-demo/images/optimized/jetski-lake-800.avif",
+    "large": "/Imsfrane-demo/images/jetski-lake.webp",
+    "width_before": 800,
+    "width_after": 1000
+  },
+  {
     "page": "fr/rafting-deux-jours/index.html",
     "small": "/Imsfrane-demo/images/blog-oued-ahansal-800.webp",
     "large": "/Imsfrane-demo/images/blog-oued-ahansal.webp",
@@ -2049,5 +2070,12 @@
     "large": "/Imsfrane-demo/images/21.webp",
     "width_before": 800,
     "width_after": 1200
+  },
+  {
+    "page": "fr/jet-ski/index.html",
+    "small": "/Imsfrane-demo/images/optimized/jetski-lake-800.avif",
+    "large": "/Imsfrane-demo/images/jetski-lake.webp",
+    "width_before": 800,
+    "width_after": 1000
   }
 ]

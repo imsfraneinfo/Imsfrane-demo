@@ -144,7 +144,7 @@ $("#sp-checkout").addEventListener("click",function(){
  if(!chosen.length)return;
  var lines=["*"+i18n.messageTitle+"*",""];
  chosen.forEach(function(p){lines.push("• "+nameOf(p)+" × "+qtyById[p.id]+" — "+money(qtyById[p.id]*p.price)+" ("+unitOf(p)+")")});
- lines.push("",(language==="ar"?"*المجموع التقريبي":"*TOTAL "+(language==="fr"?"INDICATIF":"ESTIMATE"))+": "+money(sum())+"*","",i18n.confirmation);
+ lines.push("",(language==="ar"?"*المجموع التقريبي":(language==="ar"?"*المجموع التقريبي":"*TOTAL "+(language==="fr"?"INDICATIF":"ESTIMATE")))+": "+money(sum())+"*","",i18n.confirmation);
  window.location.assign("https://wa.me/"+config.whatsapp+"?text="+encodeURIComponent(lines.join("\n")))
 });
 updateFilters();renderCart()

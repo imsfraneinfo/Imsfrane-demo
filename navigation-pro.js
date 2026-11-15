@@ -1,7 +1,7 @@
 /* Imsfrane Cathédrale production navigation with multilingual activity favorites. */
 (function(){
 "use strict";
-try{if(/^\/Imsfrane-demo\/(?:fr|en|ar|es)\//.test(location.pathname))sessionStorage.setItem("ims-demo-lastpage",location.href)}catch(e){}
+try{if(/^\/(?:fr|en|ar|es)\//.test(location.pathname))sessionStorage.setItem("ims-demo-lastpage",location.href)}catch(e){}
 /* Kayak page link in every activity menu, Demo only. */
 function ensureKayakLinks(){
  var path=location.pathname;
@@ -204,7 +204,7 @@ function refreshAccount(u){
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",initAccountModal,{once:true});else initAccountModal();
 
-function loadFavoriteHearts(){if(!/^\/(?:Imsfrane-demo\/)?(fr|en|ar|es)\//.test(location.pathname))return;if(document.querySelector('script[data-ims-fav]'))return;var script=document.createElement("script");script.src="/Imsfrane-demo/js/ims-favorites-demo.js?gite=2&demo=mirror-paths-v3&v=menu-fix-20261102";script.defer=true;script.dataset.imsFav="yes";document.head.append(script)}
+function loadFavoriteHearts(){if(!/^\/(?:Imsfrane-demo\/)?(fr|en|ar|es)\//.test(location.pathname))return;if(document.querySelector('script[data-ims-fav]'))return;var script=document.createElement("script");script.src="/Imsfrane-demo/js/ims-favorites-demo.js?gite=2&gite=2&demo=mirror-paths-v3&v=menu-fix-20261102";script.defer=true;script.dataset.imsFav="yes";document.head.append(script)}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",loadFavoriteHearts,{once:true});else loadFavoriteHearts();
 
 /* Site header: no notification bell. The full inbox stays on members.html. */
