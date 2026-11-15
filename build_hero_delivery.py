@@ -45,37 +45,49 @@ SLIDER_LABELS = {
     'fr': ('Photo précédente', 'Photo suivante'),
 }
 SLIDER_STYLE = """
-<style id="hp-slider-counter-style">
-.hp-home .hp-slider-controls:has(.hp-slide-count) {
-  gap: 0;
-  padding: 3px;
-  border-radius: 12px;
-  background: #09291df2;
-  border-color: #f8f6ef4d;
+<style id="hp-slider-progress-style">
+.hp-home .hp-hero-slider .hp-slider-controls {
+  gap: 4px;
+  padding: 2px 5px;
+  border-radius: 999px;
+  background: #09291de8;
+  border-color: #f8f6ef55;
 }
-.hp-home .hp-slider-controls:has(.hp-slide-count) .hp-slide-arrow {
+html[dir="rtl"] .hp-home .hp-hero-slider .hp-slider-controls { direction: rtl; }
+.hp-home .hp-hero-slider .hp-slide-arrow {
   width: 44px;
   height: 44px;
-  border-radius: 8px;
+  border-radius: 50%;
   background: transparent;
+  color: #fffdf7;
   border: 0;
 }
-.hp-home .hp-slider-controls:has(.hp-slide-count) .hp-slide-arrow:hover {
-  background: #ffffff20;
-}
-.hp-home .hp-slide-count {
-  display: inline-flex;
-  justify-content: center;
+.hp-home .hp-hero-slider .hp-slide-arrow:hover { background: #ffffff20; }
+.hp-home .hp-slide-progress {
+  display: flex;
   align-items: center;
-  gap: .4em;
-  min-width: 66px;
-  padding-inline: .4em;
-  color: #f8f6ef;
-  font: 700 12px/1 system-ui, sans-serif;
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
+  gap: 5px;
 }
-.hp-home .hp-slide-count-current { color: #e5b946; }
+.hp-home .hp-slide-progress-segment {
+  width: 12px;
+  height: 3px;
+  border-radius: 4px;
+  background: #f8f6ef70;
+  transition: width .22s ease, background-color .22s ease;
+}
+.hp-home .hp-slide-progress-segment.is-active {
+  width: 24px;
+  background: #e5b946;
+}
+.hp-home .hp-hero-slider .hp-slide-track {
+  transform: translateX(var(--hp-drag-x, 0px));
+  transition: transform .22s ease-out;
+}
+.hp-home .hp-hero-slider.is-dragging .hp-slide-track { transition: none; }
+@media (prefers-reduced-motion: reduce) {
+  .hp-home .hp-hero-slider .hp-slide-track,
+  .hp-home .hp-slide-progress-segment { transition: none; }
+}
 </style>
 """
 
@@ -85,20 +97,27 @@ def replace_slider_dots(source, soup):
     count = len(soup.select('.hp-slide-track .hp-slide'))
     if not count or not dots.search(source):
         return source
-    status = (
-        '<span class="hp-slide-count" dir="ltr">'
-        '<span class="hp-slide-count-current">01</span>'
-        f'<span>/</span><span>{count:02d}</span></span>'
+    segments = ''.join(
+        '<span class="hp-slide-progress-segment'
+        + (' is-active' if index == 0 else '') + '"></span>'
+        for index in range(count)
     )
-    source = dots.sub(status, source, count=1)
-    for arrow, label in zip(soup.select('.hp-slider-controls .hp-slide-arrow'),
-                            SLIDER_LABELS.get(soup.html.get('lang'), SLIDER_LABELS['fr'])):
-        direction = arrow['data-slide-dir']
-        button = re.compile(r'<button\b(?=[^>]*data-slide-dir="'
-                            + re.escape(direction) + r'")[^>]*>')
+    source = dots.sub(f'<span class="hp-slide-progress" aria-hidden="true">{segments}</span>',
+                      source, count=1)
+    lang = soup.html.get('lang', 'fr')
+    labels = SLIDER_LABELS.get(lang, SLIDER_LABELS['fr'])
+    rtl = soup.html.get('dir') == 'rtl'
+    for direction, label in zip(('-1', '1'), labels):
+        left = (direction == '-1') != rtl
+        path = 'M14 6l-6 6 6 6' if left else 'M10 6l6 6-6 6'
+        icon = ('<svg aria-hidden="true" width="19" height="19" viewBox="0 0 24 24" '
+                'fill="none" stroke="currentColor" stroke-width="2" '
+                f'stroke-linecap="round" stroke-linejoin="round"><path d="{path}"/></svg>')
+        button = re.compile(r'(<button\b(?=[^>]*data-slide-dir="'
+                            + direction + r'")[^>]*>).*?</button>', re.S)
         source = button.sub(lambda match: re.sub(r'aria-label="[^"]*"',
-                                                 f'aria-label="{label}"',
-                                                 match[0]), source, count=1)
+                                                 f'aria-label="{label}"', match[1])
+                            + icon + '</button>', source, count=1)
     return source.replace('</head>', SLIDER_STYLE + '</head>', 1)
 
 
@@ -111,7 +130,7 @@ def prioritize(page, root):
         updated = re.sub(r'(/images/clarity/hero-\d+\.avif)(?![?\w])', r'\1?hero=2', source)
         updated = re.sub(
             r'''(\bsrc=["'])([^"']*?/home-pro\.js)(?:\?[^"']*)?(["'])''',
-            lambda match: f'{match[1]}{match[2]}?v=slider-counter1{match[3]}',
+            lambda match: f'{match[1]}{match[2]}?v=slider-progress1{match[3]}',
             updated,
         )
         updated = replace_slider_dots(updated, soup)
