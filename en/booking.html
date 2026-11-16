@@ -210,6 +210,70 @@ main.demo-rebuilt-page form button{background:#787b7a;color:#01180e;border:0;pad
 <link rel="stylesheet" href="/Imsfrane-demo/atlas-identity.css?v=forest6&identity=contrast8&palette=forest1">
 <meta name="robots" content="noindex,follow">
 <link rel="stylesheet" href="/Imsfrane-demo/visual-identity.css?v=contrast8&palette=forest1"><link rel="stylesheet" href="/Imsfrane-demo/booking-new.css?v=3&palette=forest1"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500;600;700;800&family=Tajawal:wght@400;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/Imsfrane-demo/footer-pro.css?v=1&palette=forest1"><link rel="stylesheet" href="/Imsfrane-demo/atlas-identity.css?v=forest7">
+<style id="booking-layout-tidy">
+#bookingNew {
+  --bk-space: clamp(14px,2vw,22px);
+  --bk-radius: 12px;
+  --bk-control: 48px;
+}
+#bookingNew .bk-hero {
+  padding-block:clamp(32px,5vw,56px) clamp(49px,6vw,72px);
+}
+#bookingNew .bk-hero h1 { font-size:clamp(38px,6vw,72px); margin-block:10px 12px; }
+#bookingNew .bk-hero p { margin-block:0; }
+#bookingNew .bk-progress {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  align-items:center;
+  padding:var(--bk-space);
+  gap:10px;
+  margin-bottom:var(--bk-space);
+}
+#bookingNew .bk-layout { gap:var(--bk-space); }
+#bookingNew .bk-panel,
+#bookingNew .bk-summary { border-radius:var(--bk-radius); padding:var(--bk-space); }
+#bookingNew .bk-panel { margin-bottom:var(--bk-space); }
+#bookingNew h2 { font-size:clamp(24px,3vw,33px); margin-block:0 16px; }
+#bookingNew .bk-fields { gap:14px; align-items:end; }
+#bookingNew .bk-field { gap:6px; min-width:0; }
+#bookingNew .bk-field :is(input:not([type="checkbox"]):not([type="range"]),select) {
+  min-height:var(--bk-control);
+  border-radius:8px;
+  padding-block:9px;
+}
+#bookingNew .bk-field textarea { border-radius:8px; }
+#bookingNew :is(.bk-choices,.bk-stays) { gap:8px; grid-auto-rows:1fr; }
+#bookingNew .bk-choice {
+  display:grid;
+  grid-template-columns:18px minmax(0,1fr);
+  align-items:center;
+  gap:10px;
+  min-height:56px;
+  padding:10px 12px;
+  border-radius:8px;
+}
+#bookingNew .bk-choice input { margin:0; }
+#bookingNew .bk-choice small { margin-block:2px 0; }
+#bookingNew .bk-note { margin-top:12px; }
+#bookingNew .bk-summary ul { margin-block:12px; }
+#bookingNew .bk-summary li { padding-block:10px; }
+#bookingNew .bk-summary .bk-send {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  width:100%;
+  min-height:var(--bk-control);
+  padding:10px 12px;
+  border-radius:8px;
+  text-align:center;
+  margin-block:10px 0;
+}
+@media (max-width:460px) {
+  #bookingNew .bk-progress { padding:12px; }
+  #bookingNew .bk-progress b { margin-block-end:3px; }
+}
+</style>
 </head><body class="page-booking atnav-ready" data-lang="en" data-nav-active="booking.html">
 <nav aria-label="Main navigation" class="main-navigation" id="mainNavigation" inert="">
 <div class="navigation-header"><strong class="editable" data-cms-text="booking-t2">Imsfrane Cathédrale</strong><button aria-label="Close navigation menu" class="navigation-close" id="navigationClose" type="button"><i class="fa-solid fa-xmark"></i></button></div>
