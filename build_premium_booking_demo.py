@@ -44,8 +44,7 @@ def update_catalog(page, lang):
         'Quad · 1 personne','Quad · 2 personnes').replace('Quad · 1 rider','Quad · 2 riders').replace(
         'Quad · 1 persona','Quad · 2 personas').replace('دراجة رباعية · شخص واحد','دراجة رباعية · شخصان')
     page = page[:quad_start] + quad + '\n' + duo + page[quad_end:]
-    page = page.replace('"quad","jetski"', '"quad","quadDuo","jetski"').replace(
-        'img.src=PHOTO[s.id]||PHOTO.other', 'img.src=PHOTO[s.id==="quadDuo"?"quad":s.id]||PHOTO.other')
+    page = page.replace('"quad","jetski"', '"quad","quadDuo","jetski"')
     page = page.replace('Week-end camping','Week-end nature').replace(
         'Camping weekend','Nature weekend').replace('Fin de semana camping','Fin de semana en la naturaleza').replace(
         'ويكاند تخييم','عطلة نهاية الأسبوع في الطبيعة')
@@ -60,78 +59,44 @@ def update_catalog(page, lang):
     page = page.replace('selected.price*(selected.unit===', '(["quad","quadDuo"].includes(selected.id)?quadTotal(p):selected.price*(selected.unit===')
     page = page.replace('?nights*p:p);', '?nights*p:p));').replace('?n*p:p));', '?n*p:p)));')
     page = page.replace('رافتينغ ·', 'التجديف ·')
-    return build_editorial(page, lang)
+    return build_simple(page)
 
-EDITORIAL = {
-    'ar': ('تاريخ المغادرة *', 'يجب أن يكون تاريخ المغادرة بعد تاريخ الوصول.', 'اختر تجربة من إمسفران'),
-    'fr': ('Date de départ *', 'La date de départ doit être après la date d’arrivée.', 'Choisissez une expérience à Imsfrane'),
-    'en': ('Check-out date *', 'Check-out must be after check-in.', 'Choose an Imsfrane experience'),
-    'es': ('Fecha de salida *', 'La salida debe ser posterior a la llegada.', 'Elige una experiencia en Imsfrane'),
-}
-
-
-def build_editorial(source, lang):
-    import json
+def build_simple(source):
     from bs4 import BeautifulSoup
 
-    location = Path(__file__).resolve().parent
     page = BeautifulSoup(source, 'html.parser')
-    robots = page.find('meta', attrs={'name': 'robots'})
+    robots = page.find('meta', attrs={'name':'robots'})
     if robots is None:
-        robots = page.new_tag('meta', attrs={'name': 'robots'})
+        robots = page.new_tag('meta', attrs={'name':'robots'})
         page.head.append(robots)
     robots['content'] = 'noindex,follow'
+    for element in page.select('img, picture, .brandmark, .hero .eyebrow, .hero .pillrow, .how-it-works, .badge, .summary .trust, .summary .sum-top .eyebrow'):
+        element.decompose()
+    for style in page.find_all('style'):
+        if style.string:
+            style.string.replace_with(re.sub(r"url\([^)]*\)", "none", style.string))
 
-    shell = page.select_one('.shell')
-    form = page.select_one('#bookingForm')
-    summary = page.select_one('.summary')
-    library = page.new_tag('section', attrs={'class': 'booking-library'})
-    form.select_one('.how-it-works').decompose()
-    form.select_one('.badge').decompose()
-    introduction = form.select_one('.section-title')
-    heading = introduction.h2.extract()
-    introduction.decompose()
-    form.select_one('[data-i="hint1"]').decompose()
-    form.select_one('.divider').decompose()
-    library.extend([heading, form.select_one('#bookingTabs').extract(), form.select_one('#choices').extract()])
-    form.append(form.select_one('#pricingNote').extract())
-
-    article = page.new_tag('div', attrs={'class': 'booking-main'})
-    feature = page.new_tag('section', attrs={'class': 'booking-feature'})
-    feature.append(page.new_tag('img', id='bookingFeaturePhoto', alt='', fetchpriority='high'))
-    feature_copy = page.new_tag('div', attrs={'class': 'booking-feature-copy', 'aria-live': 'polite'})
-    title = page.new_tag('h2', id='bookingFeatureTitle')
-    title.string = EDITORIAL[lang][2]
-    feature_copy.extend([title, page.new_tag('p', id='bookingFeatureDetail')])
-    feature.append(feature_copy)
-    article.extend([feature, form.extract(), summary.extract()])
-    shell.extend([library, article])
-
-    css = page.new_tag('style', id='booking-editorial-style')
-    css.string = (location / 'booking-editorial.css').read_text(encoding='utf-8')
+    css = page.new_tag('style', id='booking-simple-style')
+    css.string = Path(__file__).with_name('booking-simple.css').read_text(encoding='utf-8')
     page.head.append(css)
     script = page.find('script')
-    js = script.string
-    js = js.replace('renderChoices();$("pricingNote")', 'renderChoices();updateFeature();$("pricingNote")')
-    js = js.replace('renderChoices();summary()});', 'renderChoices();updateFeature();summary()});')
+    js = re.sub(r'const PHOTO=\{[^\n]+?\};', '', script.string)
+    js, replaced = re.subn(r' const media=document.createElement\("span"\);.*?media.append\(img,icon,tick\);\n', '', js, flags=re.S)
+    assert replaced == 1
+    js = js.replace('b.append(media,content)', 'b.append(content)')
     js = re.sub(r'activeGroup=Object.keys\(GROUPS\)\.find\(g=>g!=="all"&&GROUPS\[g\]\.includes\(s.id\)\)\|\|"all";', '', js)
-    js = js.replace('if(end&&end<start){$("endDate").setCustomValidity(txt().dateError);',
-                    'if(end&&(end<start||($("endDate").required&&end===start))){$("endDate").setCustomValidity(EDITORIAL[lang][1]);')
+    js = js.replace('end&&end<start', 'end&&(end<start||(end===start&&["night","personNight"].includes(selected.unit)))')
     js = js.replace('e.preventDefault();if(!$("bookingForm").reportValidity())return;',
                     'e.preventDefault();channel=e.submitter?.dataset.channel||"wa";if(!$("bookingForm").reportValidity())return;')
-    js = js.replace('const requested=', 'const EDITORIAL='+json.dumps(EDITORIAL,ensure_ascii=False)+';\n'
-                    +(location / 'booking-editorial.js').read_text(encoding='utf-8')+'\nconst requested=',1)
     script.string.replace_with(js)
     return str(page)
 
 
 def build(root, official):
-    prefix = '/Imsfrane-demo'
     for lang in ('fr', 'en', 'es', 'ar'):
         file = Path(lang) / 'booking' / 'index.html'
         page = update_catalog((official / file).read_text(encoding='utf-8'), lang)
         page = page.replace('https://imsfrane.com/', 'https://imsfraneinfo.github.io/Imsfrane-demo/')
-        page = page.replace('"/images/', f'"{prefix}/images/')
         for destination in (root / file, root / lang / 'booking.html'):
             destination.parent.mkdir(parents=True, exist_ok=True)
             destination.write_text(page, encoding='utf-8')
