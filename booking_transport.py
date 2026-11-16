@@ -28,6 +28,42 @@ COPY = {
 }
 
 
+
+POLICIES = {
+    "fr": ("Conditions d’annulation et de report",
+           "Si vous annulez plus de 5 jours avant la date prévue, nous vous remboursons intégralement. À 5 jours ou moins, les sommes versées ne sont pas remboursées, car le transport, les guides et l’équipe sont réservés à l’avance.",
+           "Si la météo ou le niveau de la rivière ne permettent pas le rafting, nous proposons une autre date et remboursons intégralement tout montant déjà payé."),
+    "en": ("Cancellation and rescheduling",
+           "If you cancel more than 5 days before the scheduled date, you receive a full refund. If you cancel 5 days or less before the date, payments are non-refundable because transport, guides and staff are booked in advance.",
+           "If weather or river levels prevent rafting, we offer another date and refund any amount already paid in full."),
+    "es": ("Cancelaciones y cambios de fecha",
+           "Si cancelas con más de 5 días de antelación, te devolvemos íntegramente lo abonado. Si cancelas cuando faltan 5 días o menos, no se devuelve lo abonado, ya que el transporte, los guías y el equipo se reservan con antelación.",
+           "Si el tiempo o el nivel del río impiden hacer rafting, proponemos otra fecha y devolvemos íntegramente cualquier importe ya abonado."),
+    "ar": ("شروط الإلغاء والتأجيل",
+           "إذا ألغيت الحجز قبل الموعد بأكثر من 5 أيام، نعيد لك كامل المبلغ المدفوع. إذا ألغيت قبل الموعد بـ5 أيام أو أقل، فلا يُسترد المبلغ لأننا نحجز النقل والمرشدين والفريق مسبقًا.",
+           "إذا لم يسمح الطقس أو مستوى النهر بالتجديف، نقترح موعدًا آخر ونعيد لك كامل المبلغ الذي دفعته."),
+}
+
+
+def add_policy(page, container, lang):
+    if container is None or container.select_one(".booking-cancellation-policy"):
+        return
+    title, cancellation, rafting = POLICIES[lang]
+    section = page.new_tag("div", attrs={"class": "booking-cancellation-policy"})
+    heading = page.new_tag("strong")
+    heading.string = title
+    section.append(heading)
+    for copy in (cancellation, rafting):
+        paragraph = page.new_tag("p")
+        paragraph.string = copy
+        section.append(paragraph)
+    actions = container.select_one(".enquiry-actions")
+    if actions:
+        actions.insert_before(section)
+    else:
+        container.append(section)
+
+
 def read(path):
     return BeautifulSoup(path.read_text(encoding="utf-8"), "html.parser")
 
@@ -61,14 +97,16 @@ def guide(path, words, booking_url):
     save(path, page)
 
 
-def booking(path, words, guide_url):
+def booking(path, words, guide_url, lang):
     page = read(path)
     services_node = page.select_one("#bookingServices")
     if not services_node:
         return
+    add_policy(page, page.select_one('.bk-summary'), lang)
     services = json.loads(services_node.string)
     position = next(i for i, service in enumerate(services) if service["id"] == "transport")
     if any(service["id"] == "transportBeniMellal" for service in services):
+        save(path, page)
         return
     services[position]["name"] = words[5]
     services.insert(position, {
@@ -105,7 +143,7 @@ def update_site(root, prefix):
         base = f"{prefix}{lang}/"
         guide(folder / "guide/index.html", words, base + "booking/")
         for name in ("booking/index.html", "booking.html"):
-            booking(folder / name, words, base + "guide/")
+            booking(folder / name, words, base + "guide/", lang)
         for name in ("rafting", "gite-atlas"):
             path = folder / name / "index.html"
             page = read(path)
@@ -114,6 +152,9 @@ def update_site(root, prefix):
                 note = page.new_tag("p", attrs={"class": "ims-meeting-note"})
                 note.string = words[8]
                 overview.append(note)
+            if overview and name == "rafting":
+                add_policy(page, overview, lang)
+            if overview:
                 save(path, page)
 
     path = root / "booking-new.js"
