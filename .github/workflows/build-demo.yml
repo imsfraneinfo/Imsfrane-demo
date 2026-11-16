@@ -18,6 +18,7 @@ on:
       - 'build_gite_demo.py'
       - 'build_booking_demo.py'
       - 'booking-premium.html'
+      - 'build_premium_booking_demo.py'
       - 'gite-assets/**'
       - 'apartment-assets/**'
       - 'build_weekend_offers.py'
@@ -173,8 +174,8 @@ jobs:
         run: python3 remove_decorative_arrows.py public
       - name: Prioritize visible hero photography
         run: python3 build_hero_delivery.py public
-      - name: Publish independent premium booking preview
-        run: cp booking-premium.html public/booking-premium.html
+      - name: Apply premium booking to existing demo routes in four languages
+        run: python3 build_premium_booking_demo.py public
       - uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
