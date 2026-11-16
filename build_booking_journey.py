@@ -1,4 +1,5 @@
 """Keep published offers and their booking links consistent in each language."""
+from copy import deepcopy
 import json
 import re
 import sys
@@ -87,6 +88,15 @@ def home(path, lang, words):
         duplicate.decompose()
     if reviews:
         more.insert_after(reviews.extract())
+        hero_reviews = deepcopy(reviews)
+        hero_reviews["id"] = "google-reviews-under-hero"
+        title = hero_reviews.select_one("[id]")
+        if title:
+            title["id"] += "-under-hero"
+            hero_reviews["aria-labelledby"] = title["id"]
+        page.select_one(".hp-hero").insert_after(hero_reviews)
+        script = page.select_one("script[src*='google-reviews-live.js']")
+        script["src"] = script["src"].split("?")[0] + "?v=two-sections1"
     page.head.append(BeautifulSoup(
         "<style>.ims-more{margin-block:1.5rem}.ims-more summary{cursor:pointer;font-weight:700;padding:12px 0}"
         ".ims-more .hp-activity-grid{margin-top:1rem}.hp-home .hp-google-reviews{margin-block:1.5rem}</style>",
@@ -212,7 +222,47 @@ def add_hiking_links(path, base, label):
     save(path, page)
 
 
+
+def render_reviews_in_both_sections():
+    path = ROOT / "google-reviews-live.js"
+    script = path.read_text(encoding="utf-8")
+
+    def replace(before, after):
+        nonlocal script
+        if script.count(before) != 1:
+            raise ValueError(f"Google reviews source changed near {before!r}")
+        script = script.replace(before, after, 1)
+
+    replace('  const section = document.querySelector(".hp-google-reviews[data-google-place-id]");',
+            '  const sections = Array.from(document.querySelectorAll(".hp-google-reviews[data-google-place-id]"));\n'
+            '  const [section] = sections;')
+    nodes_start = script.index('  const ratingNode')
+    nodes_end = script.index('  const key', nodes_start)
+    nodes = script[nodes_start:nodes_end]
+    replace(nodes, '')
+    replace('  if (countNode) countNode.textContent = tx.fallback;',
+            '  for (const block of sections) {\n'
+            '    const count = block.querySelector(".hp-review-count");\n'
+            '    if (count) count.textContent = tx.fallback;\n'
+            '  }')
+    replace('function carousel(cards)', 'function carousel(cards, section, reviewList)')
+    replace('    document.head.appendChild(style);',
+            '    if (!document.getElementById("hp-review-carousel-style")) {\n'
+            '      style.id = "hp-review-carousel-style";\n'
+            '      document.head.appendChild(style);\n'
+            '    }')
+    replace('  function show(place) {',
+            '  function show(place) {\n'
+            '    sections.forEach(section => renderSection(place, section));\n'
+            '  }\n'
+            '  function renderSection(place, section) {\n'
+            + ''.join('  ' + line for line in nodes.splitlines(keepends=True)).rstrip())
+    replace('    carousel(cards);', '    carousel(cards, section, reviewList);')
+    replace('    observer.observe(section);', '    sections.forEach(block => observer.observe(block));')
+    path.write_text(script, encoding="utf-8")
+
 def main():
+    render_reviews_in_both_sections()
     for lang, words in LOCALES.items():
         folder = ROOT / lang
         base = f"/Imsfrane-demo/{lang}/"
