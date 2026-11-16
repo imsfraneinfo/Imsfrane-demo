@@ -4,20 +4,34 @@ import re
 import sys
 
 COMPACT = """
-<style id="compact-booking-cards">
-#choices.choices { grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
-#choices .choice { display:flex; flex-direction:column; border-radius:12px; min-width:0; }
+<style id="uniform-booking-cards">
+#choices.choices {
+  grid-template-columns:repeat(auto-fill,minmax(132px,1fr));
+  grid-auto-rows:1fr;
+  justify-items:start;
+  gap:10px;
+}
+#choices .choice {
+  display:grid;
+  grid-template-rows:auto 1fr;
+  align-content:stretch;
+  width:100%;
+  max-width:172px;
+  min-width:0;
+  min-height:0;
+  border-radius:11px;
+}
 #choices .choice.selected { border:1px solid #1d6746; box-shadow:0 0 0 2px #dcefe0; }
-#choices .choice-image { height:clamp(72px,9vw,105px); background:#edf1e9; }
-#choices .choice-image img { object-fit:contain; transform:none; }
+#choices .choice-image { width:100%; height:auto; aspect-ratio:16/10; background:#edf1e9; }
+#choices .choice-image img { position:absolute; inset:0; object-fit:contain; transform:none; }
 #choices .choice-icon { display:none; }
 #choices .choice-selected { inset:6px 6px auto auto; width:20px; height:20px; font-size:12px; }
-#choices .choice-content { padding:8px 9px 10px; min-height:0; gap:3px; }
+#choices .choice-content { padding:8px 9px 9px; min-height:0; gap:3px; }
 #choices .choice-content strong { font-size:13px; overflow-wrap:anywhere; }
 #choices .choice-content small, #choices .choice-time { font-size:11px; line-height:1.35; }
+#choices .choice-content small { margin-top:auto; }
 @media(max-width:560px) {
-  #choices.choices { grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
-  #choices .choice-image { height:78px; }
+  #choices.choices { grid-template-columns:repeat(2,minmax(0,172px)); gap:8px; }
 }
 </style>
 """
