@@ -231,7 +231,7 @@ html[lang="ar"] .hp-home .hp-reviews-unified .hp-live-review-list{padding:0 28px
       if (r.text) {
         const text = node("p", "hp-live-review-text", r.text);
         text.dir = "auto";
-        if (r.text.length > 250) text.tabIndex = 0;
+        text.tabIndex = 0;
         card.appendChild(text);
       }
       card.appendChild(link(tx.source + "", r.googleMapsURI || maps || section.querySelector(".hp-google-link").href, "hp-live-review-credit"));
