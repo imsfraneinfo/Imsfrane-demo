@@ -85,6 +85,13 @@ def build_simple(source):
     assert replaced == 1
     js = js.replace('b.append(media,content)', 'b.append(content)')
     js = re.sub(r'activeGroup=Object.keys\(GROUPS\)\.find\(g=>g!=="all"&&GROUPS\[g\]\.includes\(s.id\)\)\|\|"all";', '', js)
+    js = js.replace('function summary(){', """function summary(){
+      const stay=["night","personNight"].includes(selected.unit);
+      $("endDate").required=stay;
+      document.querySelector('label[for="endDate"]').textContent=stay
+        ? {ar:"تاريخ المغادرة *",fr:"Date de départ *",en:"Check-out date *",es:"Fecha de salida *"}[lang]
+        : txt().endDate;
+    """)
     js = js.replace('end&&end<start', 'end&&(end<start||(end===start&&["night","personNight"].includes(selected.unit)))')
     js = js.replace('e.preventDefault();if(!$("bookingForm").reportValidity())return;',
                     'e.preventDefault();channel=e.submitter?.dataset.channel||"wa";if(!$("bookingForm").reportValidity())return;')
