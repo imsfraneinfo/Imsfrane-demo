@@ -4,7 +4,8 @@
  */
 (function () {
   "use strict";
-  const section = document.querySelector(".hp-google-reviews[data-google-place-id]");
+  const sections = Array.from(document.querySelectorAll(".hp-google-reviews[data-google-place-id]"));
+  const [section] = sections;
   if (!section) return;
   const lang = (document.documentElement.lang || "fr").slice(0, 2).toLowerCase();
   const words = {
@@ -14,13 +15,12 @@
     es: {reviews:"reseñas de Google",fallback:"Ver reseñas en Google",source:"Reseñas de Google Maps",stars:"estrellas de 5"}
   };
   const tx = words[lang] || words.fr;
-  const ratingNode = section.querySelector(".hp-google-rating-number");
-  const starsNode = section.querySelector(".hp-google-stars");
-  const countNode = section.querySelector(".hp-review-count");
-  const reviewList = section.querySelector(".hp-live-review-list");
   const key = (window.IMSFRANE_GOOGLE_MAPS_KEY || "").trim();
   const placeId = section.getAttribute("data-google-place-id");
-  if (countNode) countNode.textContent = tx.fallback;
+  for (const block of sections) {
+    const count = block.querySelector(".hp-review-count");
+    if (count) count.textContent = tx.fallback;
+  }
   // Troubleshooting visible only when opened with ?reviews-debug=1. Never reveal key.
   const debug = new URLSearchParams(location.search).has("reviews-debug");
   let debugNode;
@@ -67,7 +67,7 @@
     if (text != null) el.textContent = String(text);
     return el;
   }
-  function carousel(cards) {
+  function carousel(cards, section, reviewList) {
     const labels = {
       fr: {previous:"Avis précédent",next:"Avis suivant",pause:"Mettre en pause",play:"Reprendre le défilement",name:"Avis des visiteurs"},
       en: {previous:"Previous review",next:"Next review",pause:"Pause reviews",play:"Resume reviews",name:"Visitor reviews"},
@@ -110,7 +110,10 @@ html[lang="ar"] .hp-home .hp-reviews-unified .hp-live-review-list{padding:0 28px
 .hp-home .hp-review-carousel .hp-live-review-stars{letter-spacing:2px}
 .hp-home .hp-review-carousel .hp-review-controls{border-top:1px solid #edf0e9}
 @media(max-width:760px){.hp-home .hp-google-reviews + .hp-activities{padding-top:10px}.hp-home .hp-google-reviews + .hp-activities .hp-section-row{margin-bottom:16px}}`;
-    document.head.appendChild(style);
+    if (!document.getElementById("hp-review-carousel-style")) {
+      style.id = "hp-review-carousel-style";
+      document.head.appendChild(style);
+    }
     const inner = section.querySelector(".hp-reviews-inner");
     if (inner) {
       inner.classList.add("hp-reviews-unified");
@@ -168,6 +171,13 @@ html[lang="ar"] .hp-home .hp-reviews-unified .hp-live-review-list{padding:0 28px
     select(0); schedule();
   }
   function show(place) {
+    sections.forEach(section => renderSection(place, section));
+  }
+  function renderSection(place, section) {
+    const ratingNode = section.querySelector(".hp-google-rating-number");
+    const starsNode = section.querySelector(".hp-google-stars");
+    const countNode = section.querySelector(".hp-review-count");
+    const reviewList = section.querySelector(".hp-live-review-list");
     diagnostic("SUCCESS: Google returned rating and reviews.");
     const rating = Number(place.rating);
     const count = Number(place.userRatingCount);
@@ -223,7 +233,7 @@ html[lang="ar"] .hp-home .hp-reviews-unified .hp-live-review-list{padding:0 28px
       diagnostic("SUCCESS: reviewsReturned=" + reviews.length + " but all are empty.");
       return;
     }
-    carousel(cards);
+    carousel(cards, section, reviewList);
     reviewList.hidden = false;
     diagnostic("SUCCESS: " + cards.length + " review cards rendered; " +
       "visible=" + (getComputedStyle(reviewList).display !== "none"));
@@ -299,7 +309,7 @@ html[lang="ar"] .hp-home .hp-reviews-unified .hp-live-review-list{padding:0 28px
     const observer=new IntersectionObserver(entries=>{
       if(entries.some(entry=>entry.isIntersecting)){observer.disconnect();loadReviews()}
     },{rootMargin:'0px',threshold:0.05});
-    observer.observe(section);
+    sections.forEach(block => observer.observe(block));
   }
   let watching=false;
   function begin(){if(watching)return;watching=true;observeReviews()}
