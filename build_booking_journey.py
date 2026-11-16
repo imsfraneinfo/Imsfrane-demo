@@ -1,6 +1,7 @@
 """Keep published offers and their booking links consistent in each language."""
 from copy import deepcopy
 import json
+import shutil
 import re
 import sys
 from pathlib import Path
@@ -88,6 +89,14 @@ def home(path, lang, words):
         duplicate.decompose()
     if reviews:
         more.insert_after(reviews.extract())
+        mark = reviews.select_one(".hp-google-mark")
+        if mark:
+            mark.clear()
+            mark.attrs.pop("aria-hidden", None)
+            mark.append(page.new_tag("img", src="/Imsfrane-demo/review-assets/google-maps.svg",
+                                     alt="Google Maps", translate="no"))
+        page.head.append(page.new_tag("link", rel="stylesheet",
+                             href="/Imsfrane-demo/review-assets/reviews.css?v=1"))
         hero_reviews = deepcopy(reviews)
         hero_reviews["id"] = "google-reviews-under-hero"
         title = hero_reviews.select_one("[id]")
@@ -96,7 +105,7 @@ def home(path, lang, words):
             hero_reviews["aria-labelledby"] = title["id"]
         page.select_one(".hp-hero").insert_after(hero_reviews)
         script = page.select_one("script[src*='google-reviews-live.js']")
-        script["src"] = script["src"].split("?")[0] + "?v=two-sections1"
+        script["src"] = script["src"].split("?")[0] + "?v=maps-cards1"
     page.head.append(BeautifulSoup(
         "<style>.ims-more{margin-block:1.5rem}.ims-more summary{cursor:pointer;font-weight:700;padding:12px 0}"
         ".ims-more .hp-activity-grid{margin-top:1rem}.hp-home .hp-google-reviews{margin-block:1.5rem}</style>",
@@ -257,11 +266,24 @@ def render_reviews_in_both_sections():
             '  }\n'
             '  function renderSection(place, section) {\n'
             + ''.join('  ' + line for line in nodes.splitlines(keepends=True)).rstrip())
+    replace('      const authorName = author.displayName || "Google Maps";',
+            '      const authorName = author.displayName || "Google Maps";\n'
+            '      const avatar = node("span", "hp-review-avatar", Array.from(authorName.trim())[0] || "G");\n'
+            '      avatar.setAttribute("aria-hidden", "true");\n'
+            '      header.appendChild(avatar);')
+    replace('      if (r.text) card.appendChild(node("p", "hp-live-review-text", r.text));',
+            '      if (r.text) {\n'
+            '        const text = node("p", "hp-live-review-text", r.text);\n'
+            '        text.dir = "auto";\n'
+            '        if (r.text.length > 250) text.tabIndex = 0;\n'
+            '        card.appendChild(text);\n'
+            '      }')
     replace('    carousel(cards);', '    carousel(cards, section, reviewList);')
     replace('    observer.observe(section);', '    sections.forEach(block => observer.observe(block));')
     path.write_text(script, encoding="utf-8")
 
 def main():
+    shutil.copytree(Path(__file__).with_name("review-assets"), ROOT / "review-assets", dirs_exist_ok=True)
     render_reviews_in_both_sections()
     for lang, words in LOCALES.items():
         folder = ROOT / lang
