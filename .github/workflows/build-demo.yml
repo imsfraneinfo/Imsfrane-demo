@@ -18,6 +18,7 @@ on:
       - 'build_gite_demo.py'
       - 'build_booking_demo.py'
       - 'booking-layout.css'
+      - 'build_booking_journey.py'
       - 'gite-assets/**'
       - 'apartment-assets/**'
       - 'build_weekend_offers.py'
@@ -187,6 +188,8 @@ jobs:
                           page = page.replace("</head>", '<style id="booking-layout-tidy">\n' + style + "</style>\n</head>", 1)
                           path.write_text(page, encoding="utf-8")
           PYBOOKING
+      - name: Align published offers and booking links
+        run: python3 build_booking_journey.py
       - uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
