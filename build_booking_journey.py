@@ -93,10 +93,12 @@ def home(path, lang, words):
         if mark:
             mark.clear()
             mark.attrs.pop("aria-hidden", None)
+            mark.append(page.new_tag("img", src="/Imsfrane-demo/review-assets/google-g.png",
+                                     alt="", attrs={"class": "hp-google-color-icon"}))
             mark.append(page.new_tag("img", src="/Imsfrane-demo/review-assets/google-maps.svg",
                                      alt="Google Maps", translate="no"))
         page.head.append(page.new_tag("link", rel="stylesheet",
-                             href="/Imsfrane-demo/review-assets/reviews.css?v=1"))
+                             href="/Imsfrane-demo/review-assets/reviews.css?v=2"))
         hero_reviews = deepcopy(reviews)
         hero_reviews["id"] = "google-reviews-under-hero"
         title = hero_reviews.select_one("[id]")
@@ -275,7 +277,7 @@ def render_reviews_in_both_sections():
             '      if (r.text) {\n'
             '        const text = node("p", "hp-live-review-text", r.text);\n'
             '        text.dir = "auto";\n'
-            '        if (r.text.length > 250) text.tabIndex = 0;\n'
+            '        text.tabIndex = 0;\n'
             '        card.appendChild(text);\n'
             '      }')
     replace('    carousel(cards);', '    carousel(cards, section, reviewList);')

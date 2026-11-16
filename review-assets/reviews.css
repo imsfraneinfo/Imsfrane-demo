@@ -120,3 +120,89 @@
   .hp-home .hp-google-reviews .hp-reviews-inner .hp-google-link { grid-column: 1 / -1; grid-row: 3; }
   .hp-home .hp-google-reviews .hp-reviews-inner .hp-live-review-list.hp-review-carousel { grid-column: 1 / -1; grid-row: 2; }
 }
+
+/* Compact review strip: summary beside the current review, controls below it. */
+.hp-home .hp-google-reviews {
+  padding: 12px 0;
+}
+.hp-home .hp-google-reviews .hp-reviews-inner,
+.hp-home .hp-google-reviews .hp-reviews-inner.hp-reviews-unified {
+  width: min(820px, calc(100% - 32px));
+  grid-template-columns: minmax(148px, 175px) minmax(0, 1fr);
+  grid-template-rows: auto auto 1fr;
+  align-items: start;
+  gap: 4px 16px;
+}
+.hp-home .hp-google-reviews .hp-reviews-inner .hp-google-mark {
+  gap: 8px;
+  border: 0;
+  border-radius: 0;
+  padding: 5px 10px 5px 0;
+  background: transparent;
+}
+.hp-google-reviews .hp-google-mark .hp-google-color-icon {
+  width: 23px;
+  height: 23px;
+  object-fit: contain;
+}
+.hp-home .hp-google-reviews .hp-reviews-inner .hp-google-rating-number {
+  font-size: 31px;
+}
+.hp-home .hp-google-reviews .hp-reviews-inner .hp-google-link {
+  min-height: 34px;
+  align-self: start;
+}
+.hp-home .hp-google-reviews .hp-reviews-inner .hp-live-review-list.hp-review-carousel {
+  padding: 10px 13px 6px;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px #1637220a;
+}
+.hp-home .hp-google-reviews .hp-review-track > .hp-live-review-card {
+  min-height: 0;
+}
+.hp-home .hp-google-reviews .hp-live-review-header {
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 1px 8px;
+}
+.hp-google-reviews .hp-review-avatar {
+  width: 30px;
+  height: 30px;
+  font-size: 13px;
+}
+.hp-home .hp-google-reviews .hp-live-review-author {
+  font-size: 13px;
+}
+.hp-home .hp-google-reviews .hp-live-review-text {
+  max-height: 3.1em;
+  margin-block: 0 4px;
+  line-height: 1.5;
+  font-size: 13px;
+}
+.hp-home .hp-google-reviews .hp-live-review-stars {
+  margin-block: 3px;
+  font-size: 12px;
+}
+.hp-home .hp-google-reviews .hp-review-controls {
+  margin-top: 3px;
+  padding-top: 2px;
+}
+.hp-home .hp-google-reviews .hp-review-controls button {
+  min-width: 36px;
+  height: 32px;
+}
+@media (max-width: 760px) {
+  .hp-home .hp-google-reviews .hp-reviews-inner,
+  .hp-home .hp-google-reviews .hp-reviews-inner.hp-reviews-unified {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: auto auto auto;
+    align-items: center;
+    gap: 4px 8px;
+  }
+  .hp-home .hp-google-reviews .hp-reviews-inner .hp-google-rating { grid-column: 2; grid-row: 1; }
+  .hp-home .hp-google-reviews .hp-reviews-inner .hp-google-rating-number { font-size: 25px; }
+  .hp-home .hp-google-reviews .hp-reviews-inner .hp-live-review-list.hp-review-carousel {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+  .hp-home .hp-google-reviews .hp-reviews-inner .hp-google-link { grid-column: 1 / -1; grid-row: 3; }
+}
