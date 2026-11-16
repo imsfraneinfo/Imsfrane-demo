@@ -8,6 +8,8 @@ from pathlib import Path
 
 from bs4 import BeautifulSoup
 
+from booking_transport import update_site
+
 ROOT = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("public")
 LOCALES = {
     "fr": ("Demander une réservation", "Voir les autres activités", "Demander sur WhatsApp",
@@ -286,6 +288,19 @@ def render_reviews_in_both_sections():
 
 def main():
     shutil.copytree(Path(__file__).with_name("review-assets"), ROOT / "review-assets", dirs_exist_ok=True)
+    # The demo starts from the latest official pages, which may already include this update.
+    if 'const selectedActivity = selection.get' in (ROOT / "booking-new.js").read_text(encoding="utf-8"):
+        for lang, words in LOCALES.items():
+            fix_rafting_frames(lang)
+            base = f"/Imsfrane-demo/{lang}/"
+            for name, service in (("rafting", "rafting"), ("gite-atlas", "gite250"),
+                                  ("rafting/12-km", "raft12"), ("rafting/30-km", "raft30"),
+                                  ("rafting/50-km-2-jours", "raft50")):
+                path = ROOT / lang / name / "index.html"
+                if path.is_file() and not read(path).select_one(".ims-booking-overview"):
+                    add_overview(path, base, lang, words, service)
+        update_site(ROOT, "/Imsfrane-demo/")
+        return
     render_reviews_in_both_sections()
     for lang, words in LOCALES.items():
         folder = ROOT / lang
@@ -322,6 +337,7 @@ const activity = Array.from(form.querySelectorAll('[data-service]'))
 if (activity) activity.checked = true;
 calculate();""")
     js.write_text(script, encoding="utf-8")
+    update_site(ROOT, "/Imsfrane-demo/")
 
 
 if __name__ == "__main__":

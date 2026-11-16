@@ -19,6 +19,7 @@ on:
       - 'build_booking_demo.py'
       - 'booking-layout.css'
       - 'build_booking_journey.py'
+      - 'booking_transport.py'
       - 'gite-assets/**'
       - 'apartment-assets/**'
       - 'build_weekend_offers.py'
