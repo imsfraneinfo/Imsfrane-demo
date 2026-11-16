@@ -47,6 +47,51 @@
 
 <link rel="stylesheet" href="/Imsfrane-demo/atlas-identity.css?v=forest6&identity=contrast8&palette=forest1">
 
+
+<style id="hp-slider-progress-style">
+.hp-home .hp-hero-slider .hp-slider-controls {
+  gap: 4px;
+  padding: 2px 5px;
+  border-radius: 999px;
+  background: #021c11e8;
+  border-color: #fbfaf455;
+}
+html[dir="rtl"] .hp-home .hp-hero-slider .hp-slider-controls { direction: rtl; }
+.hp-home .hp-hero-slider .hp-slide-arrow {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: transparent;
+  color: #ffffff;
+  border: 0;
+}
+.hp-home .hp-hero-slider .hp-slide-arrow:hover { background: #ffffff20; }
+.hp-home .hp-slide-progress {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.hp-home .hp-slide-progress-segment {
+  width: 12px;
+  height: 3px;
+  border-radius: 4px;
+  background: #fbfaf470;
+  transition: width .22s ease, background-color .22s ease;
+}
+.hp-home .hp-slide-progress-segment.is-active {
+  width: 24px;
+  background: #787b7a;
+;background:#56655f;color:#ffffff!important;}
+.hp-home .hp-hero-slider .hp-slide-track {
+  transform: translateX(var(--hp-drag-x, 0px));
+  transition: transform .22s ease-out;
+}
+.hp-home .hp-hero-slider.is-dragging .hp-slide-track { transition: none; }
+@media (prefers-reduced-motion: reduce) {
+  .hp-home .hp-hero-slider .hp-slide-track,
+  .hp-home .hp-slide-progress-segment { transition: none; }
+}
+</style>
 <meta name="robots" content="noindex,follow">
 <link rel="stylesheet" href="/Imsfrane-demo/visual-identity.css?v=contrast8&palette=forest1"><link rel="stylesheet" href="/Imsfrane-demo/footer-pro.css?v=1&palette=forest1"><meta property="og:type" content="website">
 <meta property="og:title" content="Imsfrane Morocco | Rafting, Kayaking &amp; Atlas Adventures">
@@ -65,51 +110,6 @@
 <meta name="twitter:image" content="https://imsfraneinfo.github.io/Imsfrane-demo/images/social/21-f30c174bab-1200x630.jpg">
 <meta name="twitter:image:alt" content="Imsfrane Morocco | Rafting, Kayaking &amp; Atlas Adventures">
 <link rel="stylesheet" href="/Imsfrane-demo/atlas-identity.css?v=forest7">
-
-<style id="hp-slider-progress-style">
-.hp-home .hp-hero-slider .hp-slider-controls {
-  gap: 4px;
-  padding: 2px 5px;
-  border-radius: 999px;
-  background: #09291de8;
-  border-color: #f8f6ef55;
-}
-html[dir="rtl"] .hp-home .hp-hero-slider .hp-slider-controls { direction: rtl; }
-.hp-home .hp-hero-slider .hp-slide-arrow {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: transparent;
-  color: #fffdf7;
-  border: 0;
-}
-.hp-home .hp-hero-slider .hp-slide-arrow:hover { background: #ffffff20; }
-.hp-home .hp-slide-progress {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-.hp-home .hp-slide-progress-segment {
-  width: 12px;
-  height: 3px;
-  border-radius: 4px;
-  background: #f8f6ef70;
-  transition: width .22s ease, background-color .22s ease;
-}
-.hp-home .hp-slide-progress-segment.is-active {
-  width: 24px;
-  background: #e5b946;
-}
-.hp-home .hp-hero-slider .hp-slide-track {
-  transform: translateX(var(--hp-drag-x, 0px));
-  transition: transform .22s ease-out;
-}
-.hp-home .hp-hero-slider.is-dragging .hp-slide-track { transition: none; }
-@media (prefers-reduced-motion: reduce) {
-  .hp-home .hp-hero-slider .hp-slide-track,
-  .hp-home .hp-slide-progress-segment { transition: none; }
-}
-</style>
 </head><body class="page-index atnav-ready" data-lang="en" data-nav-active="index.html">
 <nav aria-label="Main navigation" class="main-navigation" id="mainNavigation" inert="">
 <div class="navigation-header"><strong class="editable" data-cms-text="index-t2">Imsfrane Cathédrale</strong><button aria-label="Close navigation menu" class="navigation-close" id="navigationClose" type="button"><i class="fa-solid fa-xmark"></i></button></div>

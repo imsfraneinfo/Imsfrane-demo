@@ -34,6 +34,50 @@ html[lang="ar"] .hp-home .hp-activity-bottom{margin-top:auto;min-height:55px}
 <link href="/Imsfrane-demo/monochrome.css?v=1&amp;identity=contrast8&amp;palette=forest1&amp;identity=contrast8&amp;palette=forest1" rel="stylesheet"/>
 <link href="/Imsfrane-demo/atlas-identity.css?v=forest6&amp;identity=contrast8&amp;palette=forest1" rel="stylesheet"/>
 </link>
+<style id="hp-slider-progress-style">
+.hp-home .hp-hero-slider .hp-slider-controls {
+  gap: 4px;
+  padding: 2px 5px;
+  border-radius: 999px;
+  background: #021c11e8;
+  border-color: #fbfaf455;
+}
+html[dir="rtl"] .hp-home .hp-hero-slider .hp-slider-controls { direction: rtl; }
+.hp-home .hp-hero-slider .hp-slide-arrow {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: transparent;
+  color: #ffffff;
+  border: 0;
+}
+.hp-home .hp-hero-slider .hp-slide-arrow:hover { background: #ffffff20; }
+.hp-home .hp-slide-progress {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.hp-home .hp-slide-progress-segment {
+  width: 12px;
+  height: 3px;
+  border-radius: 4px;
+  background: #fbfaf470;
+  transition: width .22s ease, background-color .22s ease;
+}
+.hp-home .hp-slide-progress-segment.is-active {
+  width: 24px;
+  background: #787b7a;
+;background:#56655f;color:#ffffff!important;}
+.hp-home .hp-hero-slider .hp-slide-track {
+  transform: translateX(var(--hp-drag-x, 0px));
+  transition: transform .22s ease-out;
+}
+.hp-home .hp-hero-slider.is-dragging .hp-slide-track { transition: none; }
+@media (prefers-reduced-motion: reduce) {
+  .hp-home .hp-hero-slider .hp-slide-track,
+  .hp-home .hp-slide-progress-segment { transition: none; }
+}
+</style>
 <meta content="noindex,follow" name="robots"/>
 <link href="/Imsfrane-demo/visual-identity.css?v=contrast8&amp;palette=forest1" rel="stylesheet"/><link href="/Imsfrane-demo/footer-pro.css?v=1&amp;palette=forest1" rel="stylesheet"/><meta content="website" property="og:type"/>
 <meta content="مسفران المغرب | التجديف والكاياك ومغامرات الأطلس" property="og:title"/>
@@ -52,51 +96,6 @@ html[lang="ar"] .hp-home .hp-activity-bottom{margin-top:auto;min-height:55px}
 <meta content="https://imsfraneinfo.github.io/Imsfrane-demo/images/social/21-f30c174bab-1200x630.jpg" name="twitter:image"/>
 <meta content="مسفران المغرب | التجديف والكاياك ومغامرات الأطلس" name="twitter:image:alt"/>
 <link href="/Imsfrane-demo/atlas-identity.css?v=forest7" rel="stylesheet"/>
-
-<style id="hp-slider-progress-style">
-.hp-home .hp-hero-slider .hp-slider-controls {
-  gap: 4px;
-  padding: 2px 5px;
-  border-radius: 999px;
-  background: #09291de8;
-  border-color: #f8f6ef55;
-}
-html[dir="rtl"] .hp-home .hp-hero-slider .hp-slider-controls { direction: rtl; }
-.hp-home .hp-hero-slider .hp-slide-arrow {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: transparent;
-  color: #fffdf7;
-  border: 0;
-}
-.hp-home .hp-hero-slider .hp-slide-arrow:hover { background: #ffffff20; }
-.hp-home .hp-slide-progress {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-.hp-home .hp-slide-progress-segment {
-  width: 12px;
-  height: 3px;
-  border-radius: 4px;
-  background: #f8f6ef70;
-  transition: width .22s ease, background-color .22s ease;
-}
-.hp-home .hp-slide-progress-segment.is-active {
-  width: 24px;
-  background: #e5b946;
-}
-.hp-home .hp-hero-slider .hp-slide-track {
-  transform: translateX(var(--hp-drag-x, 0px));
-  transition: transform .22s ease-out;
-}
-.hp-home .hp-hero-slider.is-dragging .hp-slide-track { transition: none; }
-@media (prefers-reduced-motion: reduce) {
-  .hp-home .hp-hero-slider .hp-slide-track,
-  .hp-home .hp-slide-progress-segment { transition: none; }
-}
-</style>
 </head><body class="page-index atnav-ready" data-lang="ar" data-nav-active="index.html">
 <nav aria-label="القائمة الرئيسية" class="main-navigation" id="mainNavigation" inert="">
 <div class="navigation-header"><strong class="editable" data-cms-text="index-t2">مسفران كاتدرال</strong><button aria-label="إغلاق قائمة التنقل" class="navigation-close" id="navigationClose" type="button"><i class="fa-solid fa-xmark"></i></button></div>
@@ -154,7 +153,7 @@ html[dir="rtl"] .hp-home .hp-hero-slider .hp-slider-controls { direction: rtl; }
 </div>
 <div class="hp-hero-foot">مسفران · تيلوكيت · إقليم أزيلال · المغرب</div>
 </div>
-<div aria-roledescription="carousel" class="hp-hero-visual hp-hero-slider" role="region"><div class="hp-slide-track"><div aria-hidden="false" class="hp-slide is-active" data-slide="0"><picture><source media="(max-width: 860px)" sizes="100vw" srcset="/Imsfrane-demo/images/clarity/hero-640.avif?hero=2 640w, /Imsfrane-demo/images/clarity/hero-800.avif?hero=2 800w, /Imsfrane-demo/images/clarity/hero-960.avif?hero=2 960w, /Imsfrane-demo/images/clarity/hero-1200.avif?hero=2 1200w" type="image/avif"/><source media="(min-width: 861px)" sizes="(max-width: 860px) 100vw, 47vw" srcset="/Imsfrane-demo/images/optimized/21-640-v3.avif 640w, /Imsfrane-demo/images/optimized/21-800-v3.avif 800w, /Imsfrane-demo/images/optimized/21-960.avif 960w, /Imsfrane-demo/images/optimized/21-1200.avif 1200w" type="image/avif"/><img alt="واد أحنصال والمناظر الصخرية في مسفران كاتدرال" class="hp-hero-image" decoding="async" fetchpriority="high" height="1600" sizes="(max-width: 860px) 100vw, 47vw" src="/Imsfrane-demo/images/clarity/hero-1200.avif?hero=2" srcset="/Imsfrane-demo/images/clarity/hero-1200.avif?hero=2 1200w, /Imsfrane-demo/images/hero.webp 1440w" width="1200"/></picture></div><div aria-hidden="true" class="hp-slide" data-slide="1"><img alt="التجديف في واد أحنصال" class="hp-hero-image" data-src="/Imsfrane-demo/images/optimized/24-1200.avif" data-srcset="/Imsfrane-demo/images/optimized/24-640.avif 640w, /Imsfrane-demo/images/optimized/24-800.avif 800w, /Imsfrane-demo/images/optimized/24-960.avif 960w, /Imsfrane-demo/images/optimized/24-1200.avif 1200w, /Imsfrane-demo/images/24.webp 1440w" decoding="async" height="1600" loading="lazy" sizes="(max-width: 860px) 100vw, 47vw" width="1200"/></div><div aria-hidden="true" class="hp-slide" data-slide="2"><img alt="جولة بالدراجات الرباعية قرب جبل مسفران" class="hp-hero-image" data-src="/Imsfrane-demo/images/optimized/27-1200.avif" data-srcset="/Imsfrane-demo/images/optimized/27-640.avif 640w, /Imsfrane-demo/images/optimized/27-800.avif 800w, /Imsfrane-demo/images/optimized/27-960.avif 960w, /Imsfrane-demo/images/optimized/27-1200.avif 1200w" decoding="async" height="1600" loading="lazy" sizes="(max-width: 860px) 100vw, 47vw" width="1200"/></div><div aria-hidden="true" class="hp-slide" data-slide="3"><img alt="مياه واد أحنصال بين الجروف الصخرية للأطلس" class="hp-hero-image" data-src="/Imsfrane-demo/images/optimized/hero-ahansal-gorge-1200.avif" data-srcset="/Imsfrane-demo/images/optimized/hero-ahansal-gorge-640.avif 640w, /Imsfrane-demo/images/optimized/hero-ahansal-gorge-960.avif 960w, /Imsfrane-demo/images/optimized/hero-ahansal-gorge-1200.avif 1200w" decoding="async" height="1600" loading="lazy" sizes="(max-width: 860px) 100vw, 47vw" style="object-position:50% 50%!important" width="1200"/></div><div aria-hidden="true" class="hp-slide" data-slide="4"><img alt="ركوب الدراجات الجبلية في الأطلس" class="hp-hero-image" data-src="/Imsfrane-demo/images/optimized/31-1200.avif" data-srcset="/Imsfrane-demo/images/optimized/31-640.avif 640w, /Imsfrane-demo/images/optimized/31-800.avif 800w, /Imsfrane-demo/images/optimized/31-960.avif 960w, /Imsfrane-demo/images/optimized/31-1200.avif 1200w, /Imsfrane-demo/images/31.webp 1440w" decoding="async" height="1600" loading="lazy" sizes="(max-width: 860px) 100vw, 47vw" width="1200"/></div></div><div aria-label="معرض صور مسفران" class="hp-slider-controls"><button aria-label="الصورة السابقة" class="hp-slide-arrow" data-slide-dir="-1" type="button"><svg aria-hidden="true" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6l6 6-6 6"/></svg></button><span class="hp-slide-progress" aria-hidden="true"><span class="hp-slide-progress-segment is-active"></span><span class="hp-slide-progress-segment"></span><span class="hp-slide-progress-segment"></span><span class="hp-slide-progress-segment"></span><span class="hp-slide-progress-segment"></span></span><button aria-label="الصورة التالية" class="hp-slide-arrow" data-slide-dir="1" type="button"><svg aria-hidden="true" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 6l-6 6 6 6"/></svg></button></div>
+<div aria-roledescription="carousel" class="hp-hero-visual hp-hero-slider" role="region"><div class="hp-slide-track"><div aria-hidden="false" class="hp-slide is-active" data-slide="0"><picture><source media="(max-width: 860px)" sizes="100vw" srcset="/Imsfrane-demo/images/clarity/hero-640.avif?hero=2 640w, /Imsfrane-demo/images/clarity/hero-800.avif?hero=2 800w, /Imsfrane-demo/images/clarity/hero-960.avif?hero=2 960w, /Imsfrane-demo/images/clarity/hero-1200.avif?hero=2 1200w" type="image/avif"/><source media="(min-width: 861px)" sizes="(max-width: 860px) 100vw, 47vw" srcset="/Imsfrane-demo/images/optimized/21-640-v3.avif 640w, /Imsfrane-demo/images/optimized/21-800-v3.avif 800w, /Imsfrane-demo/images/optimized/21-960.avif 960w, /Imsfrane-demo/images/optimized/21-1200.avif 1200w" type="image/avif"/><img alt="واد أحنصال والمناظر الصخرية في مسفران كاتدرال" class="hp-hero-image" decoding="async" fetchpriority="high" height="1600" sizes="(max-width: 860px) 100vw, 47vw" src="/Imsfrane-demo/images/clarity/hero-1200.avif?hero=2" srcset="/Imsfrane-demo/images/clarity/hero-1200.avif?hero=2 1200w, /Imsfrane-demo/images/hero.webp 1440w" width="1200"/></picture></div><div aria-hidden="true" class="hp-slide" data-slide="1"><img alt="التجديف في واد أحنصال" class="hp-hero-image" data-src="/Imsfrane-demo/images/optimized/24-1200.avif" data-srcset="/Imsfrane-demo/images/optimized/24-640.avif 640w, /Imsfrane-demo/images/optimized/24-800.avif 800w, /Imsfrane-demo/images/optimized/24-960.avif 960w, /Imsfrane-demo/images/optimized/24-1200.avif 1200w, /Imsfrane-demo/images/24.webp 1440w" decoding="async" height="1600" loading="lazy" sizes="(max-width: 860px) 100vw, 47vw" width="1200"/></div><div aria-hidden="true" class="hp-slide" data-slide="2"><img alt="جولة بالدراجات الرباعية قرب جبل مسفران" class="hp-hero-image" data-src="/Imsfrane-demo/images/optimized/27-1200.avif" data-srcset="/Imsfrane-demo/images/optimized/27-640.avif 640w, /Imsfrane-demo/images/optimized/27-800.avif 800w, /Imsfrane-demo/images/optimized/27-960.avif 960w, /Imsfrane-demo/images/optimized/27-1200.avif 1200w" decoding="async" height="1600" loading="lazy" sizes="(max-width: 860px) 100vw, 47vw" width="1200"/></div><div aria-hidden="true" class="hp-slide" data-slide="3"><img alt="مياه واد أحنصال بين الجروف الصخرية للأطلس" class="hp-hero-image" data-src="/Imsfrane-demo/images/optimized/hero-ahansal-gorge-1200.avif" data-srcset="/Imsfrane-demo/images/optimized/hero-ahansal-gorge-640.avif 640w, /Imsfrane-demo/images/optimized/hero-ahansal-gorge-960.avif 960w, /Imsfrane-demo/images/optimized/hero-ahansal-gorge-1200.avif 1200w" decoding="async" height="1600" loading="lazy" sizes="(max-width: 860px) 100vw, 47vw" style="object-position:50% 50%!important" width="1200"/></div><div aria-hidden="true" class="hp-slide" data-slide="4"><img alt="ركوب الدراجات الجبلية في الأطلس" class="hp-hero-image" data-src="/Imsfrane-demo/images/optimized/31-1200.avif" data-srcset="/Imsfrane-demo/images/optimized/31-640.avif 640w, /Imsfrane-demo/images/optimized/31-800.avif 800w, /Imsfrane-demo/images/optimized/31-960.avif 960w, /Imsfrane-demo/images/optimized/31-1200.avif 1200w, /Imsfrane-demo/images/31.webp 1440w" decoding="async" height="1600" loading="lazy" sizes="(max-width: 860px) 100vw, 47vw" width="1200"/></div></div><div aria-label="معرض صور مسفران" class="hp-slider-controls"><button aria-label="الصورة السابقة" class="hp-slide-arrow" data-slide-dir="-1" type="button"><svg aria-hidden="true" fill="none" height="19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="19"><path d="M10 6l6 6-6 6"></path></svg></button><span aria-hidden="true" class="hp-slide-progress"><span class="hp-slide-progress-segment is-active"></span><span class="hp-slide-progress-segment"></span><span class="hp-slide-progress-segment"></span><span class="hp-slide-progress-segment"></span><span class="hp-slide-progress-segment"></span></span><button aria-label="الصورة التالية" class="hp-slide-arrow" data-slide-dir="1" type="button"><svg aria-hidden="true" fill="none" height="19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="19"><path d="M14 6l-6 6 6 6"></path></svg></button></div>
 <div class="hp-hero-picture-note"><span>الأطلس الكبير · المغرب</span><strong>بين النهر والجبل</strong></div>
 <div class="hp-hero-altitude"><i aria-hidden="true" class="fa-solid fa-mountain-sun"></i><strong>1 868 مترًا</strong><span>جبل مسفران</span></div>
 </div>

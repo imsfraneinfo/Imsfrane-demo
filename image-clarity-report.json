@@ -36,7 +36,7 @@
   },
   {
     "page": "fr/index.html",
-    "small": "/Imsfrane-demo/images/clarity/hero-1200.avif",
+    "small": "/Imsfrane-demo/images/clarity/hero-1200.avif?hero=2",
     "large": "/Imsfrane-demo/images/hero.webp",
     "width_before": 1200,
     "width_after": 1440
@@ -323,7 +323,7 @@
   },
   {
     "page": "ar/index.html",
-    "small": "/Imsfrane-demo/images/clarity/hero-1200.avif",
+    "small": "/Imsfrane-demo/images/clarity/hero-1200.avif?hero=2",
     "large": "/Imsfrane-demo/images/hero.webp",
     "width_before": 1200,
     "width_after": 1440
@@ -610,7 +610,7 @@
   },
   {
     "page": "es/index.html",
-    "small": "/Imsfrane-demo/images/clarity/hero-1200.avif",
+    "small": "/Imsfrane-demo/images/clarity/hero-1200.avif?hero=2",
     "large": "/Imsfrane-demo/images/hero.webp",
     "width_before": 1200,
     "width_after": 1440
@@ -897,7 +897,7 @@
   },
   {
     "page": "en/index.html",
-    "small": "/Imsfrane-demo/images/clarity/hero-1200.avif",
+    "small": "/Imsfrane-demo/images/clarity/hero-1200.avif?hero=2",
     "large": "/Imsfrane-demo/images/hero.webp",
     "width_before": 1200,
     "width_after": 1440
