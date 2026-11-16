@@ -289,6 +289,50 @@ main.demo-rebuilt-page form button{background:#787b7a;color:#01180e;border:0;pad
   #bookingNew .bk-progress { padding:12px; }
   #bookingNew .bk-progress b { margin-block-end:3px; }
 }
+
+/* Equal native control boxes, including date inputs in mobile Safari. */
+#bookingNew { --bk-control:52px; font-size:16px; }
+#bookingNew .bk-field > :is(input:not([type="checkbox"]):not([type="range"]),select) {
+  -webkit-appearance:none;
+  appearance:none;
+  display:block;
+  box-sizing:border-box;
+  inline-size:100%;
+  max-inline-size:100%;
+  min-inline-size:0;
+  height:var(--bk-control) !important;
+  min-height:var(--bk-control) !important;
+  margin:0;
+  padding:0 12px;
+  font-size:16px;
+  line-height:normal;
+}
+#bookingNew .bk-field > input[type="date"]::-webkit-date-and-time-value {
+  min-height:1.2em;
+  text-align:start;
+}
+#bookingNew .bk-field > select {
+  padding-inline-end:34px;
+  background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);
+  background-position:calc(100% - 16px) 50%,calc(100% - 11px) 50%;
+  background-size:5px 5px;
+  background-repeat:no-repeat;
+}
+#bookingNew[dir="rtl"] .bk-field > select { background-position:11px 50%,16px 50%; }
+#bookingNew .bk-hero h1 { font-size:clamp(42px,6.4vw,76px); }
+#bookingNew .bk-hero p { font-size:16px; }
+#bookingNew h2 { font-size:clamp(28px,3.3vw,36px); }
+#bookingNew .bk-kicker { font-size:13px; }
+#bookingNew .bk-progress { font-size:clamp(12px,2.5vw,14px); }
+#bookingNew .bk-field,
+#bookingNew .bk-choice,
+#bookingNew .bk-summary li,
+#bookingNew .bk-summary .bk-send { font-size:16px; }
+#bookingNew .bk-field textarea { font-size:16px; }
+#bookingNew .bk-note,
+#bookingNew .bk-choice small,
+#bookingNew .bk-summary p,
+#bookingNew .bk-error { font-size:14px; }
 </style>
 </head><body class="page-booking atnav-ready" data-lang="en" data-nav-active="booking.html">
 <nav aria-label="Main navigation" class="main-navigation" id="mainNavigation" inert="">
