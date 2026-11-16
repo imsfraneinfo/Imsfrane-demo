@@ -211,6 +211,9 @@ html[lang="ar"] .hp-home .hp-reviews-unified .hp-live-review-list{padding:0 28px
       const header = node("div", "hp-live-review-header");
       const author = r.authorAttribution || {};
       const authorName = author.displayName || "Google Maps";
+      const avatar = node("span", "hp-review-avatar", Array.from(authorName.trim())[0] || "G");
+      avatar.setAttribute("aria-hidden", "true");
+      header.appendChild(avatar);
       const authorUri = safeUrl(author.uri);
       if (authorUri) header.appendChild(link(authorName, authorUri, "hp-live-review-author"));
       else header.appendChild(node("strong", "hp-live-review-author", authorName));
@@ -225,7 +228,12 @@ html[lang="ar"] .hp-home .hp-reviews-unified .hp-live-review-list{padding:0 28px
       card.appendChild(header);
       const score = Math.max(0, Math.min(5, Math.round(Number(r.rating) || 0)));
       card.appendChild(node("div", "hp-live-review-stars", "★".repeat(score) + "☆".repeat(5-score)));
-      if (r.text) card.appendChild(node("p", "hp-live-review-text", r.text));
+      if (r.text) {
+        const text = node("p", "hp-live-review-text", r.text);
+        text.dir = "auto";
+        if (r.text.length > 250) text.tabIndex = 0;
+        card.appendChild(text);
+      }
       card.appendChild(link(tx.source + "", r.googleMapsURI || maps || section.querySelector(".hp-google-link").href, "hp-live-review-credit"));
       cards.push(card);
     }
