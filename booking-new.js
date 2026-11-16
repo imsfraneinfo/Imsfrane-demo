@@ -11,7 +11,7 @@ function calculate(){
  const nights=start&&end?Math.round((Date.parse(end)-Date.parse(start))/86400000):1;
  const lines=[];let total=0,quotes=false;
  const stay=$('stay').value;$('departure').required=stay!=='none';
- const limit=stay==='house'?5:stay==='none'?60:30;
+ const limit=stay==='house'?6:stay==='none'?60:30;
  $('guests').max=limit;
  const accommodationFits=people<=limit;
  function add(name,amount,detail){lines.push({name,amount,detail});if(amount===null)quotes=true;else total+=amount;}
