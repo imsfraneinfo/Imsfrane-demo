@@ -60,25 +60,17 @@ def update_catalog(page, lang):
     page = page.replace('selected.price*(selected.unit===', '(["quad","quadDuo"].includes(selected.id)?quadTotal(p):selected.price*(selected.unit===')
     page = page.replace('?nights*p:p);', '?nights*p:p));').replace('?n*p:p));', '?n*p:p)));')
     page = page.replace('رافتينغ ·', 'التجديف ·')
-    return build_journey(page, lang)
+    return build_editorial(page, lang)
 
-JOURNEY = {
-    'ar': ('التجربة', 'تفاصيل الرحلة', 'مراجعة الطلب', 'السابق', 'أكمل الحجز', 'راجع طلبك',
-           'راجع التجربة والتواريخ والثمن التقديري، ثم اختر كيف ترسل الطلب.',
-           'يجب أن يكون تاريخ المغادرة بعد تاريخ الوصول.', 'تاريخ المغادرة *'),
-    'fr': ('Expérience', 'Détails du séjour', 'Vérification', 'Retour', 'Continuer', 'Vérifier ma demande',
-           'Vérifiez votre expérience, vos dates et le tarif estimé, puis choisissez le mode d’envoi.',
-           'La date de départ doit être postérieure à la date d’arrivée.', 'Date de départ *'),
-    'en': ('Experience', 'Trip details', 'Review', 'Back', 'Continue', 'Review my request',
-           'Check your experience, dates and estimated price, then choose how to send your request.',
-           'Check-out must be after check-in.', 'Check-out date *'),
-    'es': ('Experiencia', 'Detalles del viaje', 'Revisión', 'Atrás', 'Continuar', 'Revisar mi solicitud',
-           'Comprueba la experiencia, las fechas y el precio estimado, y elige cómo enviar tu solicitud.',
-           'La salida debe ser posterior a la llegada.', 'Fecha de salida *'),
+EDITORIAL = {
+    'ar': ('تاريخ المغادرة *', 'يجب أن يكون تاريخ المغادرة بعد تاريخ الوصول.', 'اختر تجربة من إمسفران'),
+    'fr': ('Date de départ *', 'La date de départ doit être après la date d’arrivée.', 'Choisissez une expérience à Imsfrane'),
+    'en': ('Check-out date *', 'Check-out must be after check-in.', 'Choose an Imsfrane experience'),
+    'es': ('Fecha de salida *', 'La salida debe ser posterior a la llegada.', 'Elige una experiencia en Imsfrane'),
 }
 
 
-def build_journey(source, lang):
+def build_editorial(source, lang):
     import json
     from bs4 import BeautifulSoup
 
@@ -89,77 +81,46 @@ def build_journey(source, lang):
         robots = page.new_tag('meta', attrs={'name': 'robots'})
         page.head.append(robots)
     robots['content'] = 'noindex,follow'
-    hero = page.select_one('.hero-inner')
-    copy = page.new_tag('div')
-    for child in list(hero.contents):
-        copy.append(child.extract())
-    hero.append(copy)
-    hero.append(page.new_tag('img', src='/images/rando-IMG_6167.webp', alt='',
-                            attrs={'class': 'journey-photo', 'fetchpriority': 'high'}))
 
+    shell = page.select_one('.shell')
     form = page.select_one('#bookingForm')
+    summary = page.select_one('.summary')
+    library = page.new_tag('section', attrs={'class': 'booking-library'})
     form.select_one('.how-it-works').decompose()
     form.select_one('.badge').decompose()
-    for divider in form.select('.divider'):
-        divider.decompose()
-    headers = form.select('.section-title')
-    steps = page.new_tag('ol', attrs={'class': 'journey-steps'})
-    for index, label in enumerate(JOURNEY[lang][:3]):
-        item = page.new_tag('li', attrs={'data-booking-step': str(index)})
-        item.string = label
-        if index == 0:
-            item['aria-current'] = 'step'
-        steps.append(item)
-    form.insert(0, steps)
-    page.select_one('.shell')['data-stage'] = '0'
+    introduction = form.select_one('.section-title')
+    heading = introduction.h2.extract()
+    introduction.decompose()
+    form.select_one('[data-i="hint1"]').decompose()
+    form.select_one('.divider').decompose()
+    library.extend([heading, form.select_one('#bookingTabs').extract(), form.select_one('#choices').extract()])
+    form.append(form.select_one('#pricingNote').extract())
 
-    experience, details, review = [page.new_tag('section', attrs={'class': 'journey-panel'})
-                                   for _ in range(3)]
-    for header in headers:
-        header.h2['tabindex'] = '-1'
-    for child in list(form.children):
-        if child is steps:
-            continue
-        if child is headers[1] or child is headers[2] or details.contents:
-            details.append(child.extract())
-        else:
-            experience.append(child.extract())
-    headers[2]['class'].append('journey-contact')
-    heading = page.new_tag('h2', id='journeyReviewTitle', tabindex='-1')
-    heading.string = JOURNEY[lang][2]
-    hint = page.new_tag('p', id='journeyReviewHint', attrs={'class': 'hint'})
-    hint.string = JOURNEY[lang][6]
-    review.extend([heading, hint])
-    details['hidden'] = ''
-    review['hidden'] = ''
-    form.extend([experience, details, review])
+    article = page.new_tag('div', attrs={'class': 'booking-main'})
+    feature = page.new_tag('section', attrs={'class': 'booking-feature'})
+    feature.append(page.new_tag('img', id='bookingFeaturePhoto', alt='', fetchpriority='high'))
+    feature_copy = page.new_tag('div', attrs={'class': 'booking-feature-copy', 'aria-live': 'polite'})
+    title = page.new_tag('h2', id='bookingFeatureTitle')
+    title.string = EDITORIAL[lang][2]
+    feature_copy.extend([title, page.new_tag('p', id='bookingFeatureDetail')])
+    feature.append(feature_copy)
+    article.extend([feature, form.extract(), summary.extract()])
+    shell.extend([library, article])
 
-    actions = page.new_tag('div', attrs={'class': 'journey-actions'})
-    for direction, label in [('Prev', JOURNEY[lang][3]), ('Next', JOURNEY[lang][4])]:
-        button = page.new_tag('button', id='journey'+direction, type='button',
-                              attrs={'class': 'journey-'+direction.lower()})
-        button.string = label
-        if direction == 'Prev':
-            button['hidden'] = ''
-        actions.append(button)
-    form.append(actions)
-    submit = page.new_tag('div', id='journeySubmit', hidden='')
-    buttons = page.select('.summary [data-channel]')
-    buttons[0].insert_before(submit)
-    for button in buttons:
-        submit.append(button.extract())
-
-    css = page.new_tag('style', id='booking-journey-style')
-    css.string = (location / 'booking-journey.css').read_text(encoding='utf-8')
+    css = page.new_tag('style', id='booking-editorial-style')
+    css.string = (location / 'booking-editorial.css').read_text(encoding='utf-8')
     page.head.append(css)
     script = page.find('script')
     js = script.string
-    js = js.replace('renderChoices();$("pricingNote")', 'renderChoices();renderJourney();$("pricingNote")')
-    js = js.replace('e.preventDefault();if(!$("bookingForm").reportValidity())return;',
-                    'e.preventDefault();if(stage!==2)return;channel=e.submitter?.dataset.channel||"wa";if(!$("bookingForm").reportValidity())return;')
+    js = js.replace('renderChoices();$("pricingNote")', 'renderChoices();updateFeature();$("pricingNote")')
+    js = js.replace('renderChoices();summary()});', 'renderChoices();updateFeature();summary()});')
     js = re.sub(r'activeGroup=Object.keys\(GROUPS\)\.find\(g=>g!=="all"&&GROUPS\[g\]\.includes\(s.id\)\)\|\|"all";', '', js)
-    js = js.replace('const requested=', 'const JOURNEY='+json.dumps(JOURNEY,ensure_ascii=False)+';\n'
-                    +(location / 'booking-journey.js').read_text(encoding='utf-8')+'\nconst requested=',1)
+    js = js.replace('if(end&&end<start){$("endDate").setCustomValidity(txt().dateError);',
+                    'if(end&&(end<start||($("endDate").required&&end===start))){$("endDate").setCustomValidity(EDITORIAL[lang][1]);')
+    js = js.replace('e.preventDefault();if(!$("bookingForm").reportValidity())return;',
+                    'e.preventDefault();channel=e.submitter?.dataset.channel||"wa";if(!$("bookingForm").reportValidity())return;')
+    js = js.replace('const requested=', 'const EDITORIAL='+json.dumps(EDITORIAL,ensure_ascii=False)+';\n'
+                    +(location / 'booking-editorial.js').read_text(encoding='utf-8')+'\nconst requested=',1)
     script.string.replace_with(js)
     return str(page)
 
