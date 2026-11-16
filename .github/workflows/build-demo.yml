@@ -17,6 +17,7 @@ on:
       - 'build_apartment_demo.py'
       - 'build_gite_demo.py'
       - 'build_booking_demo.py'
+      - 'booking-layout.css'
       - 'gite-assets/**'
       - 'apartment-assets/**'
       - 'build_weekend_offers.py'
@@ -172,6 +173,20 @@ jobs:
         run: python3 remove_decorative_arrows.py public
       - name: Prioritize visible hero photography
         run: python3 build_hero_delivery.py public
+      - name: Align the original booking form and summary
+        run: |
+          python3 - <<'PYBOOKING'
+          from pathlib import Path
+          style = Path("booking-layout.css").read_text(encoding="utf-8")
+          for lang in ("fr", "en", "es", "ar"):
+              for name in ("booking/index.html", "booking.html"):
+                  path = Path("public") / lang / name
+                  if path.is_file():
+                      page = path.read_text(encoding="utf-8")
+                      if 'id="bookingNew"' in page:
+                          page = page.replace("</head>", '<style id="booking-layout-tidy">\n' + style + "</style>\n</head>", 1)
+                          path.write_text(page, encoding="utf-8")
+          PYBOOKING
       - uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
