@@ -84,6 +84,11 @@ def build_journey(source, lang):
 
     location = Path(__file__).resolve().parent
     page = BeautifulSoup(source, 'html.parser')
+    robots = page.find('meta', attrs={'name': 'robots'})
+    if robots is None:
+        robots = page.new_tag('meta', attrs={'name': 'robots'})
+        page.head.append(robots)
+    robots['content'] = 'noindex,follow'
     hero = page.select_one('.hero-inner')
     copy = page.new_tag('div')
     for child in list(hero.contents):
@@ -166,7 +171,6 @@ def build(root, official):
         page = update_catalog((official / file).read_text(encoding='utf-8'), lang)
         page = page.replace('https://imsfrane.com/', 'https://imsfraneinfo.github.io/Imsfrane-demo/')
         page = page.replace('"/images/', f'"{prefix}/images/')
-        page = re.sub(r'<meta name="robots"[^>]*>', '<meta name="robots" content="noindex,follow">', page)
         for destination in (root / file, root / lang / 'booking.html'):
             destination.parent.mkdir(parents=True, exist_ok=True)
             destination.write_text(page, encoding='utf-8')
