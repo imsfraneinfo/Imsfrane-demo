@@ -1,0 +1,37 @@
+.oz-main,.oz-card{color:#143326;background:#faf8f1}
+.oz-hero{display:block;background:#143326}
+.oz-hero img{display:block;width:100%;height:clamp(240px,47vw,620px);object-fit:cover;object-position:50% 51%}
+.oz-wrap{width:min(100% - 36px,1050px);margin-inline:auto}
+.oz-intro{padding-block:36px 24px}
+.oz-intro h1{max-width:21ch;font-size:clamp(2rem,5.5vw,4rem);line-height:1.12;margin-block:.4em}
+.oz-intro>p:not(.oz-meta){max-width:62ch;font-size:clamp(1rem,2vw,1.25rem)}
+.oz-back,.oz-credits a{color:inherit;text-decoration:underline;text-underline-offset:.2em}
+.oz-meta{font-weight:700;color:#476451;margin-block:16px 8px}
+.oz-button{display:inline-flex;align-items:center;min-height:44px;padding:10px 22px;border-radius:8px;background:#164533;color:white;text-decoration:none;font-weight:700}
+.oz-button:hover,.oz-button:focus-visible{background:#24634a;color:white}
+.oz-section{padding-block:28px}
+.oz-section h2{font-size:clamp(1.5rem,4vw,2.25rem);margin-block:0 18px}
+.oz-timeline{list-style:none;padding:0;margin:0;border-block-start:1px solid #dbded1}
+.oz-timeline li{display:grid;grid-template-columns:5.5rem minmax(0,1fr);gap:12px;padding-block:18px;border-block-end:1px solid #dbded1}
+.oz-timeline time{justify-self:start;height:max-content;background:#e6eee2;border-radius:8px;padding:4px 10px;font-weight:800;font-variant-numeric:tabular-nums}
+.oz-timeline h3{margin:0 0 5px;font-size:1.15rem}
+.oz-timeline p{margin:0;max-width:68ch}
+.oz-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.oz-gallery figure{margin:0}
+.oz-gallery img{display:block;width:100%;height:clamp(180px,32vw,340px);object-fit:cover;border-radius:12px}
+.oz-gallery figcaption{padding-block:8px;font-weight:650}
+.oz-credits{color:#415949;font-size:.85rem}
+.oz-final{padding-block:0 48px}
+.oz-programme-list{padding-block:30px}
+.oz-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);border-radius:14px;overflow:hidden;border:1px solid #dbded1}
+.oz-card-image{display:block;min-height:200px}
+.oz-card-image img{display:block;width:100%;height:100%;object-fit:cover}
+.oz-card-body{padding:clamp(16px,4vw,34px)}
+.oz-card-body h2{margin:0 0 12px;font-size:clamp(1.35rem,3vw,2rem)}
+.oz-card-body h2 a{color:inherit}
+@media(max-width:600px){
+ .oz-card,.oz-gallery{grid-template-columns:1fr}
+ .oz-card-image{min-height:0}
+ .oz-card-image img{height:auto;aspect-ratio:16/9}
+ .oz-timeline li{grid-template-columns:4.5rem minmax(0,1fr);gap:8px}
+}

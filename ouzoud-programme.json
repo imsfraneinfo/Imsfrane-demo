@@ -1,0 +1,94 @@
+{
+  "fr": {
+    "title": "Cascades d’Ouzoud et village de Tanaghmelt",
+    "day": "Excursion à la journée",
+    "meet": "Rendez-vous à Ouzoud",
+    "back": "Tous les programmes",
+    "open": "Découvrir la journée",
+    "ask": "Demander les disponibilités",
+    "date": "Date souhaitée",
+    "guests": "Nombre de personnes",
+    "schedule": "Programme de la journée",
+    "gallery": "Ouzoud en images",
+    "photos": ["Vue panoramique des cascades d’Ouzoud", "Les cascades vues d’en bas", "Les oliviers d’Ouzoud"],
+    "credits": "Crédits photo · images redimensionnées pour le web",
+    "intro": "Une journée à pied entre les cascades d’Ouzoud, les oliviers et le village de Tanaghmelt.",
+    "stages": [
+      ["Accueil et belvédère panoramique", "Rendez-vous à Ouzoud, puis marche jusqu’au premier belvédère pour voir les cascades d’en haut et prendre des photos."],
+      ["Descente au pied des cascades", "Descente à pied avec des pauses photo. Une courte balade en barque est possible si le service fonctionne. La baignade est facultative et se fait uniquement dans une zone autorisée, si les conditions de la rivière le permettent ce jour-là."],
+      ["Sentier des oliviers et moulins", "Remontée par le sentier des oliviers, avec un arrêt aux moulins traditionnels si la visite est possible."],
+      ["Déjeuner marocain face aux cascades", "Pause déjeuner sur une terrasse avec vue sur les cascades. Un repas végétarien est possible."],
+      ["Balade dans le village de Tanaghmelt", "Découverte de l’architecture traditionnelle. Thé, pain maison et huile d’olive peuvent être organisés à l’avance avec un hôte local."],
+      ["Fin de l’excursion", "La journée se termine à Ouzoud."]
+    ]
+  },
+  "en": {
+    "title": "Ouzoud Waterfalls & Village Walk",
+    "day": "Full-day outing",
+    "meet": "Meet in Ouzoud",
+    "back": "All programmes",
+    "open": "View itinerary",
+    "ask": "Ask about availability",
+    "date": "Preferred date",
+    "guests": "Number of people",
+    "schedule": "Day itinerary",
+    "gallery": "Ouzoud photo gallery",
+    "photos": ["Panoramic view of Ouzoud Waterfalls", "The waterfalls from below", "Olive trees in Ouzoud"],
+    "credits": "Photo credits · images resized for the web",
+    "intro": "A full day on foot exploring Ouzoud Waterfalls, the olive groves and Tanaghmelt village.",
+    "stages": [
+      ["Welcome and panoramic viewpoint", "Meet in Ouzoud and walk to the first viewpoint for a look at the falls from above and time for photos."],
+      ["Walk down to the foot of the falls", "Walk down with photo stops. Take an optional short boat ride if the service is running. Swimming is optional and only possible in a permitted area when river conditions allow on the day."],
+      ["Olive trail and traditional mills", "Walk back up through the olive groves and stop at the traditional mills if they can be visited."],
+      ["Moroccan lunch overlooking the falls", "Pause for lunch on a terrace overlooking the waterfalls. A vegetarian meal is available."],
+      ["Walk through Tanaghmelt village", "Explore the village’s traditional architecture. Tea, homemade bread and olive oil can be arranged in advance with a local host."],
+      ["End of the outing", "The day ends in Ouzoud."]
+    ]
+  },
+  "es": {
+    "title": "Cascadas de Ouzoud y pueblo de Tanaghmelt",
+    "day": "Excursión de día completo",
+    "meet": "Encuentro en Ouzoud",
+    "back": "Todos los programas",
+    "open": "Ver itinerario",
+    "ask": "Consultar disponibilidad",
+    "date": "Fecha deseada",
+    "guests": "Número de personas",
+    "schedule": "Itinerario del día",
+    "gallery": "Ouzoud en imágenes",
+    "photos": ["Vista panorámica de las cascadas de Ouzoud", "Las cascadas vistas desde abajo", "Olivos de Ouzoud"],
+    "credits": "Créditos fotográficos · imágenes redimensionadas para la web",
+    "intro": "Un día a pie entre las cascadas de Ouzoud, los olivares y el pueblo de Tanaghmelt.",
+    "stages": [
+      ["Bienvenida y mirador panorámico", "Nos encontramos en Ouzoud y caminamos hasta el primer mirador para ver las cascadas desde arriba y hacer fotos."],
+      ["Descenso al pie de las cascadas", "Bajamos a pie con paradas para hacer fotos. Si funciona el servicio, se puede dar un paseo corto en barca. El baño es opcional y solo en una zona autorizada, si las condiciones del río lo permiten ese día."],
+      ["Sendero de los olivos y molinos", "Subimos por el sendero entre los olivos y paramos en los molinos tradicionales si se pueden visitar."],
+      ["Almuerzo marroquí con vistas a las cascadas", "Pausa para almorzar en una terraza con vistas a las cascadas. Hay opción vegetariana."],
+      ["Paseo por el pueblo de Tanaghmelt", "Descubrimos la arquitectura tradicional del pueblo. Se puede organizar con antelación una visita a un anfitrión local para tomar té con pan casero y aceite de oliva."],
+      ["Fin de la excursión", "La jornada termina en Ouzoud."]
+    ]
+  },
+  "ar": {
+    "title": "أوزود بين الشلالات ودوّار تناغملت",
+    "day": "جولة ليوم كامل",
+    "meet": "اللقاء في أوزود",
+    "back": "جميع البرامج",
+    "open": "اطّلع على البرنامج",
+    "ask": "سولنا على التوفر",
+    "date": "التاريخ المطلوب",
+    "guests": "عدد الأشخاص",
+    "schedule": "برنامج اليوم",
+    "gallery": "أوزود بالصور",
+    "photos": ["إطلالة بانورامية على شلالات أوزود", "شلالات أوزود من الأسفل", "أشجار الزيتون في أوزود"],
+    "credits": "حقوق الصور · عُدّلت أبعاد الصور للعرض على الويب",
+    "intro": "يوم كامل مشيًا بين شلالات أوزود وأشجار الزيتون ودوّار تناغملت.",
+    "stages": [
+      ["الاستقبال والمطلّ البانورامي", "نلتقي في أوزود ونتوجه إلى أول مطلّ لمشاهدة الشلالات من الأعلى والتقاط الصور."],
+      ["النزول إلى أسفل الشلالات", "ننزل مشيًا مع وقفات للتصوير. يمكن القيام بجولة قصيرة بالقارب إذا كانت الخدمة متاحة. السباحة اختيارية وفي مكان يُسمح فيه بالسباحة فقط، إذا سمحت ظروف الوادي في ذلك اليوم."],
+      ["مسلك الزيتون والطواحين", "نصعد عبر مسلك الزيتون ونتوقف عند الطواحين التقليدية إذا أمكن زيارتها."],
+      ["غداء مغربي مطلّ على الشلالات", "نتوقف لتناول الغداء على تراس يطلّ على الشلالات، مع إمكانية اختيار وجبة نباتية."],
+      ["جولة في دوّار تناغملت", "نتعرّف على المعمار التقليدي للدوّار. ويمكن ترتيب جلسة شاي مع خبز الدار وزيت الزيتون مسبقًا مع مضيف محلي."],
+      ["نهاية الجولة", "تختتم الجولة في أوزود."]
+    ]
+  }
+}
