@@ -233,7 +233,7 @@ def build(root):
             fix_guide_faq(doc)
             style = doc.new_tag('style', id='guide-rtl-route-arrows')
             style.string = (
-                'html[dir="rtl"] .imsfrane-guide .gp-journey span:not(:last-child)::after'
+                'html[dir="rtl"] #imsfrane-guide .gp-journey span:not(:last-child)::after'
                 '{content:"←"}'
             )
             doc.head.append(style)
