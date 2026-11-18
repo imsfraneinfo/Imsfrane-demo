@@ -11,11 +11,10 @@
 .oz-button:hover,.oz-button:focus-visible{background:#24634a;color:white}
 .oz-section{padding-block:28px}
 .oz-section h2{font-size:clamp(1.5rem,4vw,2.25rem);margin-block:0 18px}
-.oz-timeline{list-style:none;padding:0;margin:0;border-block-start:1px solid #dbded1}
-.oz-timeline li{display:grid;grid-template-columns:5.5rem minmax(0,1fr);gap:12px;padding-block:18px;border-block-end:1px solid #dbded1}
-.oz-timeline time{justify-self:start;height:max-content;background:#e6eee2;border-radius:8px;padding:4px 10px;font-weight:800;font-variant-numeric:tabular-nums}
-.oz-timeline h3{margin:0 0 5px;font-size:1.15rem}
-.oz-timeline p{margin:0;max-width:68ch}
+.oz-stages{border-block-start:1px solid #dbded1}
+.oz-stage{display:grid;gap:16px;padding-block:24px;border-block-end:1px solid #dbded1}
+.oz-stage h3{margin:0 0 5px;font-size:1.15rem}
+.oz-stage p{margin:0;max-width:68ch}
 .oz-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .oz-gallery figure{margin:0}
 .oz-gallery img{display:block;width:100%;height:clamp(180px,32vw,340px);object-fit:cover;border-radius:12px}
@@ -33,13 +32,12 @@
  .oz-card,.oz-gallery{grid-template-columns:1fr}
  .oz-card-image{min-height:0}
  .oz-card-image img{height:auto;aspect-ratio:16/9}
- .oz-timeline li{grid-template-columns:4.5rem minmax(0,1fr);gap:8px}
 }
-.oz-stage-photos{grid-column:2;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,225px),1fr));gap:12px}
+.oz-stage-photos{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,225px),1fr));gap:12px}
 .oz-stage-photos figure{margin:0}
 .oz-stage-photos img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:center 58%;border-radius:12px}
 .oz-stage-photos figcaption{padding-block:6px;color:#415949;font-size:.875rem}
 @media(max-width:600px){
- .oz-stage-photos{grid-column:1/-1;grid-template-columns:1fr}
+ .oz-stage-photos{grid-template-columns:1fr}
  .oz-stage-photos img{aspect-ratio:4/3}
 }
