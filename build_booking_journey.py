@@ -1,5 +1,6 @@
 """Keep published offers and their booking links consistent in each language."""
 from copy import deepcopy
+from html import escape
 import json
 import shutil
 import re
@@ -190,7 +191,7 @@ def add_overview(path, base, lang, words, service):
         "font-weight:700;text-decoration:underline;text-underline-offset:3px;display:inline-block}</style>",
         "html.parser"))
     if frame:
-        frame.insert_before(area)
+        frame.insert_after(area)
     elif service == "vtt":
         rental = main.select_one(".vt-rental-copy")
         if rental:
@@ -294,12 +295,14 @@ def main():
             fix_rafting_frames(lang)
             base = f"/Imsfrane-demo/{lang}/"
             for name, service in (("rafting", "rafting"), ("gite-atlas", "gite250"),
+                                  ("rafting/4-jours-marrakech", "raft4"),
                                   ("rafting/12-km", "raft12"), ("rafting/30-km", "raft30"),
                                   ("rafting/50-km-2-jours", "raft50")):
                 path = ROOT / lang / name / "index.html"
                 if path.is_file() and not read(path).select_one(".ims-booking-overview"):
                     add_overview(path, base, lang, words, service)
         update_site(ROOT, "/Imsfrane-demo/")
+        refine_published_journey()
         return
     render_reviews_in_both_sections()
     for lang, words in LOCALES.items():
@@ -338,6 +341,136 @@ if (activity) activity.checked = true;
 calculate();""")
     js.write_text(script, encoding="utf-8")
     update_site(ROOT, "/Imsfrane-demo/")
+    refine_published_journey()
+
+
+STAY_COMPARISON = {
+    "fr": ("300 DH / nuit pour le logement entier", "1 à 6 personnes · cuisine équipée",
+           "250 DH / personne / nuit", "Jusqu’à 30 personnes · dîner et petit-déjeuner inclus",
+           "Comparer les hébergements à Imsfrane", "Une question sur cette offre ?"),
+    "en": ("300 MAD / night for the entire apartment", "1–6 guests · equipped kitchen",
+           "250 MAD / person / night", "Up to 30 guests · dinner and breakfast included",
+           "Compare accommodation in Imsfrane", "A question about this offer?"),
+    "es": ("300 MAD / noche por el apartamento entero", "1–6 personas · cocina equipada",
+           "250 MAD / persona / noche", "Hasta 30 personas · cena y desayuno incluidos",
+           "Compara los alojamientos en Imsfrane", "¿Tienes alguna pregunta sobre esta oferta?"),
+    "ar": ("300 درهم في الليلة للشقة كاملة", "من شخص واحد إلى 6 أشخاص · مطبخ مجهز",
+           "250 درهمًا للشخص في الليلة", "حتى 30 شخصًا · يشمل العشاء والفطور",
+           "قارن خيارات الإقامة في إمسفران", "هل لديك سؤال عن هذا العرض؟"),
+}
+ORIGIN = "https://imsfraneinfo.github.io"
+
+
+def canonical(page, path):
+    for tag in page.select('link[rel="canonical"]'):
+        tag.decompose()
+    page.head.append(page.new_tag("link", rel="canonical", href=ORIGIN + path))
+
+
+def redirect(path, lang, target, label):
+    script = f"location.replace({json.dumps(target)} + location.search + location.hash);"
+    path.write_text(
+        f'<!doctype html><html lang="{lang}"><head><meta charset="utf-8">'
+        f'<title>{escape(label)}</title><meta name="robots" content="noindex,follow">'
+        f'<meta http-equiv="refresh" content="0;url={escape(target)}">'
+        f'<link rel="canonical" href="{ORIGIN}{escape(target)}">'
+        f'<script>{script}</script></head><body>'
+        f'<a href="{escape(target)}">{escape(label)}</a></body></html>',
+        encoding="utf-8",
+    )
+
+
+def compare_stays(path, base, lang):
+    page = read(path)
+    house_price, house_details, gite_price, gite_details, title, _ = STAY_COMPARISON[lang]
+    cards = page.select(".stay-card-body")
+    assert len(cards) == 2, path
+    for card, cost, details in zip(cards, (house_price, gite_price), (house_details, gite_details)):
+        for old in card.find_all("p", recursive=False):
+            old.decompose()
+        cost_line = page.new_tag("p")
+        strong = page.new_tag("strong")
+        strong.string = cost
+        cost_line.append(strong)
+        detail_line = page.new_tag("p")
+        detail_line.string = details
+        card.h2.insert_after(detail_line)
+        card.h2.insert_after(cost_line)
+    canonical(page, base + "hebergements/")
+    page.title.string = f"{title} | Imsfrane Cathédrale"
+    save(path, page)
+
+
+def set_booking_link(button, base, service, label):
+    button["href"] = booking_link(base, service)
+    button["target"] = "_parent"
+    for attr in ("rel", "data-package"):
+        button.attrs.pop(attr, None)
+    button.string = label
+
+
+def simplify_offer_embed(path, base, service, label):
+    page = read(path)
+    if service == "house":
+        for button in page.select('.hero-acts a[href*="wa.me"], .booking-section a[href*="wa.me"]'):
+            set_booking_link(button, base, service, label)
+    else:
+        for button in page.select('.hero-acts a[href="#booking"], .quicknav a[href="#booking"]'):
+            set_booking_link(button, base, service, label)
+        for button, plan in zip(page.select(".step a[data-package]"), ("gite250", "gite350", "weekend")):
+            set_booking_link(button, base, plan, label)
+        form = page.select_one(".booking-section form")
+        assert form, path
+        action = page.new_tag("a", attrs={"class": "btn btn-gold"})
+        set_booking_link(action, base, service, label)
+        form.replace_with(action)
+        for script in page.select("script"):
+            code = script.string or ""
+            if ".rp-form" in code:
+                script.decompose()
+            if "const form=document.getElementById('giteBooking')" in code:
+                start = code.index("const cfg=")
+                script.string = code[:start] + "})();"
+    save(path, page)
+
+
+def refine_published_journey():
+    detail_routes = {
+        "12-km": "raft12", "30-km": "raft30",
+        "50-km-2-jours": "raft50", "4-jours-marrakech": "raft4",
+    }
+    for lang, words in LOCALES.items():
+        folder = ROOT / lang
+        base = f"/Imsfrane-demo/{lang}/"
+        compare_stays(folder / "hebergements/index.html", base, lang)
+        for name, service in (("apartment-content", "house"), ("gite-content", "gite250")):
+            simplify_offer_embed(ROOT / f"{name}-{lang}.html", base, service, words[0])
+        for route, service in detail_routes.items():
+            simplify_offer_embed(ROOT / f"rafting-{route}-{lang}.html", base, service, words[0])
+        offer_routes = ["hebergement", "gite-atlas", "rafting"]
+        offer_routes.extend(f"rafting/{route}" for route in detail_routes)
+        for route in offer_routes:
+            path = folder / route / "index.html"
+            page = read(path)
+            canonical(page, base + route + "/")
+            enquiry = page.select_one("main .embedded-enquiry")
+            if enquiry:
+                details = page.new_tag("details", attrs={"class": "embedded-enquiry"})
+                summary = page.new_tag("summary")
+                summary.string = STAY_COMPARISON[lang][5]
+                enquiry.wrap(details)
+                enquiry["class"].remove("embedded-enquiry")
+                details.insert(0, summary)
+            save(path, page)
+        # The guide aliases already redirect. Consolidate the other duplicate entry points.
+        for route in ("programme", "booking"):
+            page = read(folder / route / "index.html")
+            canonical(page, base + route + "/")
+            if route == "booking":
+                script = page.select_one("script[src*='booking-new.js']")
+                script["src"] = script["src"].split("?")[0] + "?v=offer-journey1"
+            save(folder / route / "index.html", page)
+            redirect(folder / (route + ".html"), lang, base + route + "/", page.title.get_text())
 
 
 if __name__ == "__main__":

@@ -244,8 +244,12 @@ def patch_script(root, file, replacements):
 
 
 def runtime(root):
+    booking = root / 'booking-new.js'
+    if "const arabic = document.documentElement.lang === 'ar';" not in booking.read_text():
+        patch_script(root, 'booking-new.js', [
+            ("const services=JSON.parse", "const arabic = document.documentElement.lang === 'ar';\nconst currency = arabic ? ' درهم' : ' DH';\nconst services=JSON.parse"),
+        ])
     patch_script(root, 'booking-new.js', [
-        ("const services=JSON.parse", "const arabic = document.documentElement.lang === 'ar';\nconst currency = arabic ? ' درهم' : ' DH';\nconst services=JSON.parse"),
         ("+' DH'", "+currency"),
         ("['IMSFRANE · '+t[6]", "[(arabic ? 'مسفران · ' : 'IMSFRANE · ')+t[6]"),
     ])

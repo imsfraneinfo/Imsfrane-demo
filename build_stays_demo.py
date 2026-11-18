@@ -118,9 +118,6 @@ for lang,(label,description,price,location) in home_labels.items():
 from build_gite_demo import build as build_gite
 build_gite(root)
 
-from build_booking_demo import build as build_booking
-build_booking(root)
-
 # Inline social icons remain visible when the external icon font is unavailable.
 icons={
  'fa-facebook-f':'<path d="M14 21v-8h3l.5-4H14V7c0-1 .4-1.5 1.7-1.5H18V2.2C17.3 2.1 16.2 2 15 2c-3 0-5 1.8-5 5v2H7v4h3v8z"/>',
