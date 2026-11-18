@@ -477,4 +477,4 @@ if __name__ == "__main__":
     from build_ouzoud_programme import build as build_ouzoud
 
     main()
-    build_ouzoud(ROOT, "/Imsfrane-demo/")
+    build_ouzoud(ROOT, prefix="/Imsfrane-demo/")

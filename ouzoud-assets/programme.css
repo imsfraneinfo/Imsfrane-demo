@@ -35,3 +35,11 @@
  .oz-card-image img{height:auto;aspect-ratio:16/9}
  .oz-timeline li{grid-template-columns:4.5rem minmax(0,1fr);gap:8px}
 }
+.oz-stage-photos{grid-column:2;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,225px),1fr));gap:12px}
+.oz-stage-photos figure{margin:0}
+.oz-stage-photos img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:center 58%;border-radius:12px}
+.oz-stage-photos figcaption{padding-block:6px;color:#415949;font-size:.875rem}
+@media(max-width:600px){
+ .oz-stage-photos{grid-column:1/-1;grid-template-columns:1fr}
+ .oz-stage-photos img{aspect-ratio:4/3}
+}

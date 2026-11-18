@@ -12,7 +12,7 @@ SLUG = "ouzoud-tanaghmelt"
 TIMES = ("09:30", "10:00", "11:30", "13:00", "14:30", "16:30")
 CREDITS = (
     ("Anas Souir", "شلالات_أوزود_الساحرة.jpg", "4.0"),
-    ("Mohamed Bourazza", "Cascades_d%27ouzoud.jpg", "4.0"),
+    ("Leyla sellami", "Le_th%C3%A9_marocain.jpg", "4.0"),
     ("Arnaud 25", "Cascades_d%27Ouzoud_023.JPG", "3.0"),
 )
 
@@ -20,17 +20,34 @@ CREDITS = (
 def render(data, prefix, programme, whatsapp):
     assets = prefix + "ouzoud-assets/"
     e = escape
-    stages = "".join(
-        f'<li><time datetime="{time}" dir="ltr">{time}</time>'
-        f'<div><h3>{e(title)}</h3><p>{e(body)}</p></div></li>'
-        for time, (title, body) in zip(TIMES, data["stages"], strict=True)
+    stage_photos = (
+        (("viewpoint", 760, 1013, 0),),
+        (("boat", 760, 1013, 1), ("basin", 760, 1013, 2)),
+        (("olives", 720, 540, None),),
+        (("terraces", 760, 1013, 3),),
+        (("tea", 760, 570, 4),),
+        (("walk", 760, 1013, 5),),
     )
-    gallery = "".join(
-        f'<figure><img src="{assets}{name}.webp" width="{width}" height="{height}" '
-        f'alt="{e(label)}" loading="lazy" decoding="async"><figcaption>{e(label)}</figcaption></figure>'
-        for (name, width, height), label in zip(
-            (("falls", 640, 853), ("olives", 720, 540)), data["photos"][1:], strict=True
+
+    def photo(name, width, height, label):
+        return (
+            f'<figure><img src="{assets}{name}.webp" width="{width}" height="{height}" '
+            f'alt="{e(label)}" loading="lazy" decoding="async"><figcaption>{e(label)}</figcaption></figure>'
         )
+
+    stages = []
+    for time, (title, body), images in zip(TIMES, data["stages"], stage_photos, strict=True):
+        photos = "".join(
+            photo(name, w, h, data["photos"][2] if index is None else data["stage_photos"][index])
+            for name, w, h, index in images
+        )
+        stages.append(
+            f'<li><time datetime="{time}" dir="ltr">{time}</time>'
+            f'<div><h3>{e(title)}</h3><p>{e(body)}</p></div>'
+            f'<div class="oz-stage-photos">{photos}</div></li>'
+        )
+    gallery = photo("falls", 760, 1013, data["photos"][1]) + photo(
+        "olives", 720, 540, data["photos"][2]
     )
     credits = " · ".join(
         f'<a href="https://commons.wikimedia.org/wiki/File:{e(file)}">{e(author)}</a> '
@@ -57,7 +74,7 @@ def render(data, prefix, programme, whatsapp):
         </header>
         <section class="oz-section">
           <h2>{e(data["schedule"])}</h2>
-          <ol class="oz-timeline">{stages}</ol>
+          <ol class="oz-timeline">{''.join(stages)}</ol>
         </section>
         <section class="oz-section">
           <h2>{e(data["gallery"])}</h2>
