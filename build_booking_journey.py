@@ -9,6 +9,8 @@ from pathlib import Path
 
 from bs4 import BeautifulSoup
 
+from build_ouzoud_programme import build as build_ouzoud
+
 from booking_transport import update_site
 
 ROOT = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("public")
@@ -474,7 +476,5 @@ def refine_published_journey():
 
 
 if __name__ == "__main__":
-    from build_ouzoud_programme import build as build_ouzoud
-
     main()
     build_ouzoud(ROOT, prefix="/Imsfrane-demo/")

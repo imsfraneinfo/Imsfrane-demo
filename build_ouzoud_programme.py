@@ -9,7 +9,6 @@ from bs4 import BeautifulSoup
 
 SOURCE = Path(__file__).resolve().parent
 SLUG = "ouzoud-tanaghmelt"
-TIMES = ("09:30", "10:00", "11:30", "13:00", "14:30", "16:30")
 CREDITS = (
     ("Anas Souir", "شلالات_أوزود_الساحرة.jpg", "4.0"),
     ("Leyla sellami", "Le_th%C3%A9_marocain.jpg", "4.0"),
@@ -36,15 +35,15 @@ def render(data, prefix, programme, whatsapp):
         )
 
     stages = []
-    for time, (title, body), images in zip(TIMES, data["stages"], stage_photos, strict=True):
+    for (title, body), images in zip(data["stages"], stage_photos, strict=True):
         photos = "".join(
             photo(name, w, h, data["photos"][2] if index is None else data["stage_photos"][index])
             for name, w, h, index in images
         )
         stages.append(
-            f'<li><time datetime="{time}" dir="ltr">{time}</time>'
+            '<article class="oz-stage">'
             f'<div><h3>{e(title)}</h3><p>{e(body)}</p></div>'
-            f'<div class="oz-stage-photos">{photos}</div></li>'
+            f'<div class="oz-stage-photos">{photos}</div></article>'
         )
     gallery = photo("falls", 760, 1013, data["photos"][1]) + photo(
         "olives", 720, 540, data["photos"][2]
@@ -67,14 +66,14 @@ def render(data, prefix, programme, whatsapp):
       <div class="oz-wrap">
         <header class="oz-intro">
           <a class="oz-back" href="{programme}">{e(data["back"])}</a>
-          <p class="oz-meta">{e(data["day"])} · <bdi dir="ltr">09:30–16:30</bdi> · {e(data["meet"])}</p>
+          <p class="oz-meta">{e(data["day"])} · {e(data["meet"])}</p>
           <h1>{e(data["title"])}</h1>
           <p>{e(data["intro"])}</p>
           {button}
         </header>
         <section class="oz-section">
           <h2>{e(data["schedule"])}</h2>
-          <ol class="oz-timeline">{''.join(stages)}</ol>
+          <div class="oz-stages">{''.join(stages)}</div>
         </section>
         <section class="oz-section">
           <h2>{e(data["gallery"])}</h2>
@@ -95,7 +94,7 @@ def build(root, prefix):
         detail = f"{programme}{SLUG}/"
         source = root / lang / "programme/index.html"
         listing = BeautifulSoup(source.read_text(encoding="utf-8"), "html.parser")
-        listing.head.append(listing.new_tag("link", rel="stylesheet", href=prefix + "ouzoud-assets/programme.css"))
+        listing.head.append(listing.new_tag("link", rel="stylesheet", href=prefix + "ouzoud-assets/programme.css?v=story1"))
         page = BeautifulSoup(str(listing), "html.parser")
         phone = next(a["href"].split("?")[0] for a in listing.select('a[href^="https://wa.me/"]'))
         message = f'{data["title"]}\n{data["date"]}: …\n{data["guests"]}: …'
@@ -146,7 +145,7 @@ def build(root, prefix):
               <img src="{prefix}ouzoud-assets/hero-mobile.webp" width="780" height="522" alt="{e(data["photos"][0])}" loading="lazy" decoding="async">
             </a>
             <div class="oz-card-body">
-              <p class="oz-meta">{e(data["day"])} · <bdi dir="ltr">09:30–16:30</bdi></p>
+              <p class="oz-meta">{e(data["day"])}</p>
               <h2><a href="{detail}">{e(data["title"])}</a></h2>
               <p>{e(data["intro"])}</p>
               <a class="oz-button" href="{detail}">{e(data["open"])}</a>
