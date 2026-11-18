@@ -205,11 +205,32 @@ def localize(source, page):
     return doc
 
 
+GUIDE_FAQ_ANSWERS = {
+    'هل تشمل الأسعار النقل؟':
+        'قد يكون النقل مشمولًا في بعض العروض. راجع تفاصيل العرض أو اطلب من الفريق تأكيد ما يشمله السعر والتكلفة الإجمالية قبل الحجز.',
+    'هل يمكن بدء المشي الجبلي من مكان الإقامة؟':
+        'يمكن ترتيب الانطلاق من مكان إقامتك حسب موقعه والمسار الذي تختاره. اتفق مع الفريق مسبقًا على نقطة اللقاء وموعد الانطلاق.',
+    'هل يُحتسب سعر الخيمة لكل شخص؟':
+        'يُحتسب السعر للخيمة كاملةً في الليلة الواحدة. السعر هو 60 درهمًا لخيمة تتسع لشخص واحد، و120 درهمًا لخيمة لشخصين، و150 درهمًا لثلاثة أشخاص، و200 درهم لأربعة أشخاص.',
+    'كيف أحجز أو أطلب مساراً خاصاً؟':
+        'أرسل تواريخ زيارتك، وعدد المسافرين، ومدينة الانطلاق، والأنشطة التي ترغب فيها عبر نموذج الحجز أو واتساب. سيتواصل معك الفريق لتأكيد التوفر وترتيب المسار.',
+}
+
+
+def fix_guide_faq(doc):
+    for item in doc.select("details.gp-faq"):
+        question = item.summary.get_text(strip=True)
+        if question in GUIDE_FAQ_ANSWERS:
+            item.p.string = GUIDE_FAQ_ANSWERS[question]
+
+
 def build(root):
     pages = sorted((root/'ar').rglob('*.html')) + sorted(root.glob('*-ar.html'))
     runtime(root)
     for page in pages:
         doc = localize(page.read_text(), page)
+        if page == root / 'ar/guide/index.html':
+            fix_guide_faq(doc)
         page.write_text(str(doc),encoding='utf-8')
     footer = root / 'footer-pro-content-ar.json'
     content = json.loads(footer.read_text())
