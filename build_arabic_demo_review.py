@@ -231,6 +231,12 @@ def build(root):
         doc = localize(page.read_text(), page)
         if page == root / 'ar/guide/index.html':
             fix_guide_faq(doc)
+            style = doc.new_tag('style', id='guide-rtl-route-arrows')
+            style.string = (
+                'html[dir="rtl"] .imsfrane-guide .gp-journey span:not(:last-child)::after'
+                '{content:"←"}'
+            )
+            doc.head.append(style)
         page.write_text(str(doc),encoding='utf-8')
     footer = root / 'footer-pro-content-ar.json'
     content = json.loads(footer.read_text())
