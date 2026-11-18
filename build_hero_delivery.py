@@ -122,6 +122,17 @@ def prioritize(page, root):
             image['data-src'] = image.attrs.pop('src')
             if 'srcset' in image.attrs:
                 image['data-srcset'] = image.attrs.pop('srcset')
+        # These styles belong to sections below the homepage hero.
+        for link in soup.head.select('link[rel="stylesheet"][href]'):
+            filename = Path(urlsplit(link['href']).path).name
+            if filename not in {'footer-pro.css', 'website-enquiry.css'} or link.find_parent('noscript'):
+                continue
+            fallback = soup.new_tag('noscript')
+            fallback.append(BeautifulSoup(str(link), 'html.parser').link)
+            link.insert_after(fallback)
+            link['media'] = 'print'
+            link['onload'] = "this.onload=null;this.media='all'"
+            link['fetchpriority'] = 'low'
         updated = str(soup)
         if updated != source:
             page.write_text(updated, encoding='utf-8')
