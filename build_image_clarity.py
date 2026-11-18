@@ -35,13 +35,10 @@ def build(root=ROOT):
                 # Only same-aspect variants of the same named photograph.
                 if nw>w and abs(w/h-nw/nh)<.015:return q
         return None
-    # Rebuild the mobile hero from the larger source, with moderate compression.
-    # Desktop keeps its existing source selection and download budget.
-    folder=root/'images/clarity';folder.mkdir(parents=True,exist_ok=True)
-    with Image.open(root/'images/21.webp') as original:
-        for w in (640,800,960,1200):
-            sized=original.resize((w,round(original.height*w/original.width)),Image.Resampling.LANCZOS)
-            sized.save(folder/f'hero-{w}.avif','AVIF',quality=65,speed=6)
+    # Reuse the published hero variants byte-for-byte.
+    folder=root/'images/clarity'
+    for w in (640,800,960,1200):
+        assert (folder/f'hero-{w}.avif').is_file()
     hero=BASE+'images/clarity/'
     hero_set=', '.join(hero+f'hero-{w}.avif '+str(w)+'w' for w in (640,800,960,1200))
     for p in root.rglob('*.html'):

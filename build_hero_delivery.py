@@ -1,12 +1,10 @@
 """Prioritize the visible hero photos in the generated website."""
-from io import BytesIO
 from pathlib import Path
 import re
 import sys
 from urllib.parse import unquote, urlsplit
 
 from bs4 import BeautifulSoup
-from PIL import Image
 
 
 def image_path(root, url):
@@ -15,27 +13,6 @@ def image_path(root, url):
         return None
     path = unquote(parsed.path).removeprefix('/Imsfrane-demo/').lstrip('/')
     return root / path
-
-
-def compress_image(path, format, quality, max_size=None):
-    original_size = path.stat().st_size
-    with Image.open(path) as image:
-        if max_size:
-            image.thumbnail(max_size, Image.Resampling.LANCZOS)
-        compressed = BytesIO()
-        image.save(compressed, format, quality=quality, icc_profile=image.info.get('icc_profile'))
-    if compressed.tell() < original_size:
-        print(f'{path.name}: {original_size} → {compressed.tell()} bytes')
-        path.write_bytes(compressed.getvalue())
-
-
-def compress_hero_images(root):
-    for path in (root / 'images/clarity').glob('hero-*.avif'):
-        compress_image(path, 'AVIF', quality=62)
-    for filename in ('rando-IMG_6167.webp', 'rando-IMG_7453.webp', 'rando-IMG_6269.webp'):
-        path = root / 'images' / filename
-        if path.is_file():
-            compress_image(path, 'WEBP', quality=81, max_size=(1080, 1440))
 
 
 SLIDER_LABELS = {
@@ -130,10 +107,22 @@ def prioritize(page, root):
         updated = re.sub(r'(/images/clarity/hero-\d+\.avif)(?![?\w])', r'\1?hero=2', source)
         updated = re.sub(
             r'''(\bsrc=["'])([^"']*?/home-pro\.js)(?:\?[^"']*)?(["'])''',
-            lambda match: f'{match[1]}{match[2]}?v=slider-progress1{match[3]}',
+            lambda match: f'{match[1]}{match[2]}?v=slider-on-demand2{match[3]}',
             updated,
         )
         updated = replace_slider_dots(updated, soup)
+        soup = BeautifulSoup(updated, 'html.parser')
+        for image in soup.select('.hp-activity-image img[src][loading="lazy"]'):
+            if image.find_parent('noscript') or image.find_parent('picture'):
+                continue
+            fallback = soup.new_tag('noscript')
+            fallback.append(BeautifulSoup(str(image), 'html.parser').img)
+            image.insert_after(fallback)
+            image['data-home-lazy'] = ''
+            image['data-src'] = image.attrs.pop('src')
+            if 'srcset' in image.attrs:
+                image['data-srcset'] = image.attrs.pop('srcset')
+        updated = str(soup)
         if updated != source:
             page.write_text(updated, encoding='utf-8')
         return updated != source
@@ -187,7 +176,6 @@ def prioritize(page, root):
 
 
 def build(root):
-    compress_hero_images(root)
     (root / 'home-pro.js').write_bytes(Path(__file__).with_name('home-slider.js').read_bytes())
     count = sum(prioritize(page, root) for page in root.rglob('*.html')
                 if not any(part.startswith('.') or part == 'admin'
