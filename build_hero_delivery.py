@@ -1,7 +1,6 @@
 """Prioritize the visible hero photos in the generated website."""
 from pathlib import Path
 import re
-from shutil import copyfile
 import sys
 from urllib.parse import unquote, urlsplit
 
@@ -99,32 +98,6 @@ def replace_slider_dots(source, soup):
     return source.replace('</head>', SLIDER_STYLE + '</head>', 1)
 
 
-TRUCK_ALT = {
-    'fr': 'Le vieux camion au pied de la Cathédrale d’Imsfrane',
-    'en': 'The old truck at the foot of Imsfrane Cathedral',
-    'es': 'El viejo camión al pie de la Catedral de Imsfrane',
-    'ar': 'الشاحنة القديمة عند سفح جبل مسفران',
-}
-TRUCK_PHOTO = 'homepage-assets/imsfrane-truck.jpeg'
-
-
-def set_preview_hero(soup):
-    image = soup.select_one('.hp-hero-slider .hp-slide.is-active img')
-    picture = image.find_parent('picture')
-    for variant in picture.select('source'):
-        variant.decompose()
-    for attr in ('srcset', 'sizes'):
-        image.attrs.pop(attr, None)
-    url = '/Imsfrane-demo/' + TRUCK_PHOTO
-    image.attrs.update(src=url, width='1280', height='1099', alt=TRUCK_ALT[soup.html['lang']])
-    for preload in soup.head.select('link[rel="preload"][as="image"]'):
-        preload.decompose()
-    meta = soup.head.select_one('meta[name="viewport"]')
-    meta.insert_after(soup.new_tag('link', rel='preload', attrs={
-        'as': 'image', 'href': url, 'fetchpriority': 'high',
-    }))
-
-
 def prioritize(page, root):
     source = page.read_text(encoding='utf-8')
     if '<img' not in source and '<iframe' not in source:
@@ -160,8 +133,6 @@ def prioritize(page, root):
             link['media'] = 'print'
             link['onload'] = "this.onload=null;this.media='all'"
             link['fetchpriority'] = 'low'
-        if page.parent.parent == root and page.name == "index.html" and page.parent.name in TRUCK_ALT:
-            set_preview_hero(soup)
         updated = str(soup)
         if updated != source:
             page.write_text(updated, encoding='utf-8')
@@ -216,9 +187,6 @@ def prioritize(page, root):
 
 
 def build(root):
-    photo = root / TRUCK_PHOTO
-    photo.parent.mkdir(parents=True, exist_ok=True)
-    copyfile(Path(__file__).with_name("homepage-assets") / photo.name, photo)
     (root / 'home-pro.js').write_bytes(Path(__file__).with_name('home-slider.js').read_bytes())
     count = sum(prioritize(page, root) for page in root.rglob('*.html')
                 if not any(part.startswith('.') or part == 'admin'
