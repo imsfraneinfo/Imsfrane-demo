@@ -1,7 +1,7 @@
 {
   "fr": {
-    "title": "Cascades d’Ouzoud et village de Tanaghmelt",
-    "day": "Excursion à la journée",
+    "title": "Cascades d’Ouzoud et observation des singes",
+    "day": "Visite à Ouzoud",
     "meet": "Rendez-vous à Ouzoud",
     "back": "Tous les programmes",
     "open": "Découvrir la journée",
@@ -12,49 +12,28 @@
     "gallery": "Ouzoud en images",
     "photos": [
       "Vue panoramique des cascades d’Ouzoud",
-      "Les cascades vues d’en bas",
-      "Les oliviers d’Ouzoud"
+      "Les cascades vues d’en bas"
     ],
     "credits": "Crédits photo · images redimensionnées pour le web",
-    "intro": "Une journée à pied entre les cascades d’Ouzoud, les oliviers et le village de Tanaghmelt.",
+    "intro": "Une visite à Ouzoud pour découvrir les cascades et observer les macaques de Barbarie, s’ils se montrent.",
     "stages": [
       [
-        "Accueil et belvédère panoramique",
-        "Rendez-vous à Ouzoud, puis marche jusqu’au premier belvédère pour voir les cascades d’en haut et prendre des photos."
+        "Découvrir les cascades",
+        "Du belvédère au pied des cascades, profitez de différents points de vue et faites des pauses photo."
       ],
       [
-        "Descente au pied des cascades",
-        "Descente à pied avec des pauses photo. Une courte balade en barque est possible si le service fonctionne. La baignade est facultative et se fait uniquement dans une zone autorisée, si les conditions de la rivière le permettent ce jour-là."
-      ],
-      [
-        "Sentier des oliviers et moulins",
-        "Remontée par le sentier des oliviers, avec un arrêt aux moulins traditionnels si la visite est possible."
-      ],
-      [
-        "Déjeuner marocain face aux cascades",
-        "Pause déjeuner sur une terrasse avec vue sur les cascades. Un repas végétarien est possible."
-      ],
-      [
-        "Balade dans le village de Tanaghmelt",
-        "Découverte de l’architecture traditionnelle. Thé, pain maison et huile d’olive peuvent être organisés à l’avance avec un hôte local."
-      ],
-      [
-        "Fin de l’excursion",
-        "La journée se termine à Ouzoud."
+        "Observer les macaques",
+        "Ouvrez l’œil le long des sentiers. Si des macaques se montrent, observez-les à distance, sans les nourrir."
       ]
     ],
     "stage_photos": [
       "La vallée d’Ouzoud depuis le belvédère",
-      "Une barque au pied des cascades",
-      "Le bassin au pied des cascades",
-      "Les terrasses sur le versant d’Ouzoud",
-      "Thé marocain · photo d’illustration",
-      "Au bord des cascades d’Ouzoud"
+      "Un macaque de Barbarie à Ouzoud"
     ]
   },
   "en": {
-    "title": "Ouzoud Waterfalls & Village Walk",
-    "day": "Full-day outing",
+    "title": "Ouzoud Waterfalls & Monkey Watching",
+    "day": "Ouzoud excursion",
     "meet": "Meet in Ouzoud",
     "back": "All programmes",
     "open": "View itinerary",
@@ -65,49 +44,28 @@
     "gallery": "Ouzoud photo gallery",
     "photos": [
       "Panoramic view of Ouzoud Waterfalls",
-      "The waterfalls from below",
-      "Olive trees in Ouzoud"
+      "The waterfalls from below"
     ],
     "credits": "Photo credits · images resized for the web",
-    "intro": "A full day on foot exploring Ouzoud Waterfalls, the olive groves and Tanaghmelt village.",
+    "intro": "Visit the Ouzoud waterfalls and look out for Barbary macaques along the trails.",
     "stages": [
       [
-        "Welcome and panoramic viewpoint",
-        "Meet in Ouzoud and walk to the first viewpoint for a look at the falls from above and time for photos."
+        "Discover the waterfalls",
+        "Walk from the viewpoint to the foot of the falls, with stops for photos along the way."
       ],
       [
-        "Walk down to the foot of the falls",
-        "Walk down with photo stops. Take an optional short boat ride if the service is running. Swimming is optional and only possible in a permitted area when river conditions allow on the day."
-      ],
-      [
-        "Olive trail and traditional mills",
-        "Walk back up through the olive groves and stop at the traditional mills if they can be visited."
-      ],
-      [
-        "Moroccan lunch overlooking the falls",
-        "Pause for lunch on a terrace overlooking the waterfalls. A vegetarian meal is available."
-      ],
-      [
-        "Walk through Tanaghmelt village",
-        "Explore the village’s traditional architecture. Tea, homemade bread and olive oil can be arranged in advance with a local host."
-      ],
-      [
-        "End of the outing",
-        "The day ends in Ouzoud."
+        "Watch for Barbary macaques",
+        "Look out for macaques along the trails. If you spot any, watch from a distance and avoid feeding them."
       ]
     ],
     "stage_photos": [
       "Ouzoud valley from the viewpoint",
-      "A boat at the foot of the waterfalls",
-      "The pool at the foot of the waterfalls",
-      "Terraces on the Ouzoud hillside",
-      "Moroccan tea · illustrative photo",
-      "Beside the Ouzoud waterfalls"
+      "A Barbary macaque at Ouzoud Falls"
     ]
   },
   "es": {
-    "title": "Cascadas de Ouzoud y pueblo de Tanaghmelt",
-    "day": "Excursión de día completo",
+    "title": "Cascadas de Ouzoud y observación de monos",
+    "day": "Excursión a Ouzoud",
     "meet": "Encuentro en Ouzoud",
     "back": "Todos los programas",
     "open": "Ver itinerario",
@@ -118,49 +76,28 @@
     "gallery": "Ouzoud en imágenes",
     "photos": [
       "Vista panorámica de las cascadas de Ouzoud",
-      "Las cascadas vistas desde abajo",
-      "Olivos de Ouzoud"
+      "Las cascadas vistas desde abajo"
     ],
     "credits": "Créditos fotográficos · imágenes redimensionadas para la web",
-    "intro": "Un día a pie entre las cascadas de Ouzoud, los olivares y el pueblo de Tanaghmelt.",
+    "intro": "Visita las cascadas de Ouzoud y busca macacos de Berbería durante el paseo.",
     "stages": [
       [
-        "Bienvenida y mirador panorámico",
-        "Nos encontramos en Ouzoud y caminamos hasta el primer mirador para ver las cascadas desde arriba y hacer fotos."
+        "Descubre las cascadas",
+        "Camina desde el mirador hasta el pie de las cascadas, con paradas para hacer fotos."
       ],
       [
-        "Descenso al pie de las cascadas",
-        "Bajamos a pie con paradas para hacer fotos. Si funciona el servicio, se puede dar un paseo corto en barca. El baño es opcional y solo en una zona autorizada, si las condiciones del río lo permiten ese día."
-      ],
-      [
-        "Sendero de los olivos y molinos",
-        "Subimos por el sendero entre los olivos y paramos en los molinos tradicionales si se pueden visitar."
-      ],
-      [
-        "Almuerzo marroquí con vistas a las cascadas",
-        "Pausa para almorzar en una terraza con vistas a las cascadas. Hay opción vegetariana."
-      ],
-      [
-        "Paseo por el pueblo de Tanaghmelt",
-        "Descubrimos la arquitectura tradicional del pueblo. Se puede organizar con antelación una visita a un anfitrión local para tomar té con pan casero y aceite de oliva."
-      ],
-      [
-        "Fin de la excursión",
-        "La jornada termina en Ouzoud."
+        "Observa a los macacos",
+        "Busca macacos durante el paseo. Si aparecen, obsérvalos a distancia y evita darles comida."
       ]
     ],
     "stage_photos": [
       "El valle de Ouzoud desde el mirador",
-      "Una barca al pie de las cascadas",
-      "La poza al pie de las cascadas",
-      "Terrazas en la ladera de Ouzoud",
-      "Té marroquí · foto ilustrativa",
-      "Junto a las cascadas de Ouzoud"
+      "Un macaco de Berbería en Ouzoud"
     ]
   },
   "ar": {
-    "title": "أوزود بين الشلالات ودوّار تناغملت",
-    "day": "جولة ليوم كامل",
+    "title": "شلالات أوزود ومشاهدة القرود",
+    "day": "جولة في أوزود",
     "meet": "اللقاء في أوزود",
     "back": "جميع البرامج",
     "open": "اطّلع على البرنامج",
@@ -171,44 +108,23 @@
     "gallery": "أوزود بالصور",
     "photos": [
       "إطلالة بانورامية على شلالات أوزود",
-      "شلالات أوزود من الأسفل",
-      "أشجار الزيتون في أوزود"
+      "شلالات أوزود من الأسفل"
     ],
     "credits": "حقوق الصور · عُدّلت أبعاد الصور للعرض على الويب",
-    "intro": "يوم كامل مشيًا بين شلالات أوزود وأشجار الزيتون ودوّار تناغملت.",
+    "intro": "جولة لاكتشاف شلالات أوزود ومشاهدة قرود المكاك البربري إن ظهرت على المسار.",
     "stages": [
       [
-        "الاستقبال والمطلّ البانورامي",
-        "نلتقي في أوزود ونتوجه إلى أول مطلّ لمشاهدة الشلالات من الأعلى والتقاط الصور."
+        "اكتشاف شلالات أوزود",
+        "نمشي من المطلّ إلى أسفل الشلالات، مع وقفات لمشاهدة المناظر والتقاط الصور."
       ],
       [
-        "النزول إلى أسفل الشلالات",
-        "ننزل مشيًا مع وقفات للتصوير. يمكن القيام بجولة قصيرة بالقارب إذا كانت الخدمة متاحة. السباحة اختيارية وفي مكان يُسمح فيه بالسباحة فقط، إذا سمحت ظروف الوادي في ذلك اليوم."
-      ],
-      [
-        "مسلك الزيتون والطواحين",
-        "نصعد عبر مسلك الزيتون ونتوقف عند الطواحين التقليدية إذا أمكن زيارتها."
-      ],
-      [
-        "غداء مغربي مطلّ على الشلالات",
-        "نتوقف لتناول الغداء على تراس يطلّ على الشلالات، مع إمكانية اختيار وجبة نباتية."
-      ],
-      [
-        "جولة في دوّار تناغملت",
-        "نتعرّف على المعمار التقليدي للدوّار. ويمكن ترتيب جلسة شاي مع خبز الدار وزيت الزيتون مسبقًا مع مضيف محلي."
-      ],
-      [
-        "نهاية الجولة",
-        "تختتم الجولة في أوزود."
+        "مشاهدة قرود المكاك",
+        "نبحث عن القرود على طول المسار. إذا ظهرت، نشاهدها من بعيد ونتجنب إطعامها."
       ]
     ],
     "stage_photos": [
       "وادي أوزود من المطلّ",
-      "قارب عند أسفل شلالات أوزود",
-      "حوض الماء أسفل الشلالات",
-      "تراسات على سفح وادي أوزود",
-      "شاي مغربي · صورة توضيحية",
-      "بجانب شلالات أوزود"
+      "قرد مكاك بربري في شلالات أوزود"
     ]
   }
 }

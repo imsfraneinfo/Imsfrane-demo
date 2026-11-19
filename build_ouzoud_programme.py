@@ -8,25 +8,17 @@ from urllib.parse import urlencode, urlsplit
 from bs4 import BeautifulSoup
 
 SOURCE = Path(__file__).resolve().parent
-SLUG = "ouzoud-tanaghmelt"
+SLUG = "ouzoud"
 CREDITS = (
-    ("Anas Souir", "شلالات_أوزود_الساحرة.jpg", "4.0"),
-    ("Leyla sellami", "Le_th%C3%A9_marocain.jpg", "4.0"),
-    ("Arnaud 25", "Cascades_d%27Ouzoud_023.JPG", "3.0"),
+    ("Anas Souir", "شلالات_أوزود_الساحرة.jpg", "by-sa/4.0", "CC BY-SA 4.0"),
+    ("Jakub Hałun", "Macaca_sylvanus,_Ouzoud_Falls,_Morocco,_20250126_1427_7488.jpg", "by/4.0", "CC BY 4.0"),
 )
 
 
 def render(data, prefix, programme, whatsapp):
     assets = prefix + "ouzoud-assets/"
     e = escape
-    stage_photos = (
-        (("viewpoint", 760, 1013, 0),),
-        (("boat", 760, 1013, 1), ("basin", 760, 1013, 2)),
-        (("olives", 720, 540, None),),
-        (("terraces", 760, 1013, 3),),
-        (("tea", 760, 570, 4),),
-        (("walk", 760, 1013, 5),),
-    )
+    stage_photos = (("viewpoint", 760, 1013), ("macaque", 540, 900))
 
     def photo(name, width, height, label):
         return (
@@ -35,23 +27,19 @@ def render(data, prefix, programme, whatsapp):
         )
 
     stages = []
-    for (title, body), images in zip(data["stages"], stage_photos, strict=True):
-        photos = "".join(
-            photo(name, w, h, data["photos"][2] if index is None else data["stage_photos"][index])
-            for name, w, h, index in images
-        )
+    for (title, body), (name, w, h), label in zip(data["stages"], stage_photos, data["stage_photos"], strict=True):
         stages.append(
             '<article class="oz-stage">'
             f'<div><h3>{e(title)}</h3><p>{e(body)}</p></div>'
-            f'<div class="oz-stage-photos">{photos}</div></article>'
+            f'<div class="oz-stage-photos">{photo(name, w, h, label)}</div></article>'
         )
     gallery = photo("falls", 760, 1013, data["photos"][1]) + photo(
-        "olives", 720, 540, data["photos"][2]
+        "walk", 760, 1013, data["photos"][1]
     )
     credits = " · ".join(
         f'<a href="https://commons.wikimedia.org/wiki/File:{e(file)}">{e(author)}</a> '
-        f'(<a href="https://creativecommons.org/licenses/by-sa/{version}/">CC BY-SA {version}</a>)'
-        for author, file, version in CREDITS
+        f'(<a href="https://creativecommons.org/licenses/{license_path}/">{license_label}</a>)'
+        for author, file, license_path, license_label in CREDITS
     )
     button = (
         f'<a class="oz-button" href="{e(whatsapp)}" target="_blank" rel="noopener noreferrer">'
@@ -94,7 +82,7 @@ def build(root, prefix):
         detail = f"{programme}{SLUG}/"
         source = root / lang / "programme/index.html"
         listing = BeautifulSoup(source.read_text(encoding="utf-8"), "html.parser")
-        listing.head.append(listing.new_tag("link", rel="stylesheet", href=prefix + "ouzoud-assets/programme.css?v=story1"))
+        listing.head.append(listing.new_tag("link", rel="stylesheet", href=prefix + "ouzoud-assets/programme.css?v=ouzoud2"))
         page = BeautifulSoup(str(listing), "html.parser")
         phone = next(a["href"].split("?")[0] for a in listing.select('a[href^="https://wa.me/"]'))
         message = f'{data["title"]}\n{data["date"]}: …\n{data["guests"]}: …'
@@ -136,6 +124,15 @@ def build(root, prefix):
         target = source.parent / SLUG / "index.html"
         target.parent.mkdir(exist_ok=True)
         target.write_text(str(page), encoding="utf-8")
+        legacy = source.parent / "ouzoud-tanaghmelt"
+        legacy.mkdir(exist_ok=True)
+        (legacy / "index.html").write_text(
+            f'<!doctype html><html lang="{lang}"><head><meta charset="utf-8">'
+            f'<meta name="robots" content="noindex"><link rel="canonical" href="{origin}{detail}">'
+            f'<meta http-equiv="refresh" content="0;url={detail}"><title>{escape(data["title"])}</title>'
+            f'</head><body><a href="{detail}">{escape(data["title"])}</a></body></html>',
+            encoding="utf-8",
+        )
 
         e = escape
         card = f'''

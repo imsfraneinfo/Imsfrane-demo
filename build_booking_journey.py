@@ -477,4 +477,4 @@ def refine_published_journey():
 
 if __name__ == "__main__":
     main()
-    build_ouzoud(ROOT, prefix="/Imsfrane-demo/")
+    build_ouzoud(root=ROOT, prefix="/Imsfrane-demo/")
