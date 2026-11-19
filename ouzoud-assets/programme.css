@@ -41,3 +41,11 @@
  .oz-stage-photos{grid-template-columns:1fr}
  .oz-stage-photos img{aspect-ratio:4/3}
 }
+.oz-stage{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:clamp(18px,5vw,54px)}
+.oz-stage:nth-child(even) .oz-stage-photos{grid-column:1;grid-row:1}
+.oz-stage:nth-child(even)>div:first-child{grid-column:2;grid-row:1}
+.oz-stage-photos img{object-position:50% 42%}
+@media(max-width:700px){
+ .oz-stage{grid-template-columns:1fr}
+ .oz-stage:nth-child(even) .oz-stage-photos,.oz-stage:nth-child(even)>div:first-child{grid-column:auto;grid-row:auto}
+}
