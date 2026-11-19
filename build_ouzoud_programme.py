@@ -10,7 +10,6 @@ from bs4 import BeautifulSoup
 SOURCE = Path(__file__).resolve().parent
 SLUG = "ouzoud"
 CREDITS = (
-    ("Anas Souir", "شلالات_أوزود_الساحرة.jpg", "by-sa/4.0", "CC BY-SA 4.0"),
     ("Jakub Hałun", "Macaca_sylvanus,_Ouzoud_Falls,_Morocco,_20250126_1427_7488.jpg", "by/4.0", "CC BY 4.0"),
 )
 
@@ -18,59 +17,60 @@ CREDITS = (
 def render(data, prefix, programme, whatsapp):
     assets = prefix + "ouzoud-assets/"
     e = escape
-    stage_photos = (("viewpoint", 760, 1013), ("macaque", 540, 900))
+    stage_photos = ("viewpoint", "boat", "basin", "macaque")
 
-    def photo(name, width, height, label):
-        return (
-            f'<figure><img src="{assets}{name}.webp" width="{width}" height="{height}" '
-            f'alt="{e(label)}" loading="lazy" decoding="async"><figcaption>{e(label)}</figcaption></figure>'
-        )
+    def photo(name, label, eager=False):
+        width, height = (540, 900) if name == "macaque" else (760, 1013)
+        priority = 'fetchpriority="high"' if eager else 'loading="lazy"'
+        return (f'<img src="{assets}{name}.webp" width="{width}" height="{height}" '
+                f'alt="{e(label)}" {priority} decoding="async">')
 
-    stages = []
-    for (title, body), (name, w, h), label in zip(data["stages"], stage_photos, data["stage_photos"], strict=True):
-        stages.append(
-            '<article class="oz-stage">'
-            f'<div><h3>{e(title)}</h3><p>{e(body)}</p></div>'
-            f'<div class="oz-stage-photos">{photo(name, w, h, label)}</div></article>'
-        )
-    gallery = photo("falls", 760, 1013, data["photos"][1]) + photo(
-        "walk", 760, 1013, data["photos"][1]
+    stages = "".join(
+        f'<section class="rp-twelve-step"><div class="container">'
+        f'<h2 class="heading">{e(title)}</h2>'
+        f'<div class="rp-step-photos single">{photo(name, label)}</div>'
+        f'<div class="rp-step-copy"><p>{e(body)}</p></div></div></section>'
+        for (title, body), name, label in zip(data["stages"], stage_photos, data["stage_photos"], strict=True)
     )
+    hero_photos = "".join(
+        f'<div class="shot{" main" if index == 0 else ""}">{photo(name, label, index == 0)}</div>'
+        for index, (name, label) in enumerate((
+            ("falls", data["photos"][1]), ("viewpoint", data["stage_photos"][0]),
+            ("boat", data["stage_photos"][1]),
+        ))
+    )
+    gallery = "".join(photo(name, data["photos"][1]) for name in ("walk", "falls", "terraces"))
     credits = " · ".join(
-        f'<a href="https://commons.wikimedia.org/wiki/File:{e(file)}">{e(author)}</a> '
-        f'(<a href="https://creativecommons.org/licenses/{license_path}/">{license_label}</a>)'
+        f'<a target="_blank" rel="noopener" href="https://commons.wikimedia.org/wiki/File:{e(file)}">{e(author)}</a> '
+        f'(<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/{license_path}/">{license_label}</a>)'
         for author, file, license_path, license_label in CREDITS
     )
-    button = (
-        f'<a class="oz-button" href="{e(whatsapp)}" target="_blank" rel="noopener noreferrer">'
-        f'{e(data["ask"])}</a>'
-    )
-    return f'''
-    <main id="mainContent" class="oz-main">
-      <picture class="oz-hero">
-        <source media="(max-width: 700px)" srcset="{assets}hero-mobile.webp" width="780" height="522">
-        <img src="{assets}hero.webp" width="1600" height="1071" alt="{e(data["photos"][0])}" fetchpriority="high">
-      </picture>
-      <div class="oz-wrap">
-        <header class="oz-intro">
-          <a class="oz-back" href="{programme}">{e(data["back"])}</a>
-          <p class="oz-meta">{e(data["day"])} · {e(data["meet"])}</p>
-          <h1>{e(data["title"])}</h1>
-          <p>{e(data["intro"])}</p>
-          {button}
-        </header>
-        <section class="oz-section">
-          <h2>{e(data["schedule"])}</h2>
-          <div class="oz-stages">{''.join(stages)}</div>
-        </section>
-        <section class="oz-section">
-          <h2>{e(data["gallery"])}</h2>
-          <div class="oz-gallery">{gallery}</div>
-          <p class="oz-credits">{e(data["credits"])}<br>{credits}</p>
-        </section>
-        <div class="oz-final">{button}</div>
-      </div>
-    </main>'''
+    button = (f'<a class="btn btn-gold" href="{e(whatsapp)}" target="_blank" rel="noopener noreferrer">'
+              f'{e(data["ask"])}</a>')
+    return f"""
+    <main>
+      <section class="hero">
+        <div class="hero-main">
+          <div class="hero-copy">
+            <div class="topline"><a href="{programme}" target="_parent">{e(data["back"])}</a></div>
+            <h1>{e(data["title"])}</h1>
+            <p class="hero-summary">{e(data["intro"])}</p>
+            <div class="hero-acts">{button}</div>
+          </div>
+          <div class="hero-media">{hero_photos}</div>
+        </div>
+      </section>
+      <section class="section rp-section-note"><div class="container">
+        <h2 class="heading">{e(data["schedule"])}</h2><p>{e(data["meet"])}</p>
+      </div></section>
+      {stages}
+      <section class="rp-gallery"><div class="container">
+        <h2 class="heading">{e(data["gallery"])}</h2>
+        <div class="rp-gallery-grid">{gallery}</div>
+        <p>{e(data["credits"])} · {credits}</p>
+      </div></section>
+      <section class="section booking-section"><div class="container">{button}</div></section>
+    </main>"""
 
 
 def build(root, prefix):
@@ -87,7 +87,34 @@ def build(root, prefix):
         phone = next(a["href"].split("?")[0] for a in listing.select('a[href^="https://wa.me/"]'))
         message = f'{data["title"]}\n{data["date"]}: …\n{data["guests"]}: …'
         whatsapp = phone + "?" + urlencode({"text": message})
-        page.main.replace_with(BeautifulSoup(render(data, prefix, programme, whatsapp), "html.parser"))
+        embed_name = f"ouzoud-{lang}.html"
+        template = root / f"rafting-12-km-{lang}.html"
+        embed = BeautifulSoup(template.read_text(encoding="utf-8"), "html.parser")
+        embed.main.replace_with(BeautifulSoup(render(data, prefix, programme, whatsapp), "html.parser"))
+        embed.title.string = data["title"]
+        for script in embed.select("script"):
+            script.decompose()
+        for preload in embed.select('link[rel="preload"][as="image"]'):
+            preload.decompose()
+        (root / embed_name).write_text(str(embed), encoding="utf-8")
+
+        main = page.new_tag("main", id="mainContent")
+        iframe = page.new_tag("iframe", id="ouzoudFrame", src=f"{prefix}{embed_name}?v=rafting-layout1",
+                              title=data["title"], style="display:block;width:100%;height:1800px;border:0")
+        main.append(iframe)
+        page.main.replace_with(main)
+        resize = page.new_tag("script")
+        resize.string = """(() => {
+  const frame = document.getElementById('ouzoudFrame');
+  frame.addEventListener('load', () => {
+    const main = frame.contentDocument.querySelector('main');
+    if (!main) return;
+    const fit = () => { frame.style.height = Math.ceil(main.getBoundingClientRect().height) + 'px'; };
+    new ResizeObserver(fit).observe(main);
+    fit();
+  });
+})();"""
+        page.body.append(resize)
         for anchor in page.select('a[href^="https://wa.me/"], a[href^="https://api.whatsapp.com/"]'):
             anchor["href"] = whatsapp
         page.html["dir"] = "rtl" if lang == "ar" else "ltr"
@@ -106,8 +133,8 @@ def build(root, prefix):
         meta_values = {
             "description": data["intro"], "og:description": data["intro"], "twitter:description": data["intro"],
             "og:title": data["title"], "twitter:title": data["title"],
-            "og:image": origin + prefix + "ouzoud-assets/hero.webp",
-            "twitter:image": origin + prefix + "ouzoud-assets/hero.webp", "og:url": origin + detail,
+            "og:image": origin + prefix + "ouzoud-assets/falls.webp",
+            "twitter:image": origin + prefix + "ouzoud-assets/falls.webp", "og:url": origin + detail,
         }
         for key, value in meta_values.items():
             attr = "property" if key.startswith("og:") else "name"
@@ -139,7 +166,7 @@ def build(root, prefix):
         <section class="wk-wrap oz-programme-list">
           <article class="oz-card">
             <a href="{detail}" class="oz-card-image" aria-label="{e(data["title"])}">
-              <img src="{prefix}ouzoud-assets/hero-mobile.webp" width="780" height="522" alt="{e(data["photos"][0])}" loading="lazy" decoding="async">
+              <img src="{prefix}ouzoud-assets/falls.webp" width="760" height="1013" alt="{e(data["photos"][1])}" loading="lazy" decoding="async">
             </a>
             <div class="oz-card-body">
               <p class="oz-meta">{e(data["day"])}</p>

@@ -22,12 +22,22 @@
         "Du belvédère au pied des cascades, profitez de différents points de vue et faites des pauses photo."
       ],
       [
+        "Une balade en barque",
+        "Si les barques sont en service, vous pouvez embarquer pour une courte balade au pied des cascades. Depuis l’eau, on découvre les chutes sous un autre angle."
+      ],
+      [
+        "Une pause baignade",
+        "Si vous avez envie de vous baigner, l’équipe vous indiquera où c’est autorisé et si les conditions du jour s’y prêtent."
+      ],
+      [
         "Observer les macaques",
         "Ouvrez l’œil le long des sentiers. Si des macaques se montrent, observez-les à distance, sans les nourrir."
       ]
     ],
     "stage_photos": [
       "La vallée d’Ouzoud depuis le belvédère",
+      "Une balade en barque",
+      "Une pause baignade",
       "Un macaque de Barbarie à Ouzoud"
     ]
   },
@@ -54,12 +64,22 @@
         "Walk from the viewpoint to the foot of the falls, with stops for photos along the way."
       ],
       [
+        "A short boat ride",
+        "If the boats are operating, you can hop aboard for a short ride at the foot of the falls. The view from the water gives you a different perspective on the cascades."
+      ],
+      [
+        "An optional swim",
+        "If you’d like a swim, the team can tell you where swimming is permitted and whether conditions on the day allow it."
+      ],
+      [
         "Watch for Barbary macaques",
         "Look out for macaques along the trails. If you spot any, watch from a distance and avoid feeding them."
       ]
     ],
     "stage_photos": [
       "Ouzoud valley from the viewpoint",
+      "A short boat ride",
+      "An optional swim",
       "A Barbary macaque at Ouzoud Falls"
     ]
   },
@@ -86,12 +106,22 @@
         "Camina desde el mirador hasta el pie de las cascadas, con paradas para hacer fotos."
       ],
       [
+        "Un paseo en barca",
+        "Si las barcas están en servicio, puedes dar un paseo corto al pie de las cascadas. Desde el agua, verás las cataratas desde otra perspectiva."
+      ],
+      [
+        "Una pausa para bañarse",
+        "Si te apetece bañarte, el equipo te indicará dónde está permitido y si las condiciones del día lo permiten."
+      ],
+      [
         "Observa a los macacos",
         "Busca macacos durante el paseo. Si aparecen, obsérvalos a distancia y evita darles comida."
       ]
     ],
     "stage_photos": [
       "El valle de Ouzoud desde el mirador",
+      "Un paseo en barca",
+      "Una pausa para bañarse",
       "Un macaco de Berbería en Ouzoud"
     ]
   },
@@ -118,12 +148,22 @@
         "نمشي من المطلّ إلى أسفل الشلالات، مع وقفات لمشاهدة المناظر والتقاط الصور."
       ],
       [
+        "جولة قصيرة بالقارب",
+        "إذا كانت القوارب تعمل، يمكنك ركوب قارب صغير في جولة عند أسفل الشلالات. من الماء سترى الشلالات من زاوية مختلفة."
+      ],
+      [
+        "استراحة للسباحة",
+        "إذا رغبت في السباحة، يُطلعك الفريق على الأماكن المسموح بها وما إذا كانت ظروف ذلك اليوم مناسبة."
+      ],
+      [
         "مشاهدة قرود المكاك",
         "نبحث عن القرود على طول المسار. إذا ظهرت، نشاهدها من بعيد ونتجنب إطعامها."
       ]
     ],
     "stage_photos": [
       "وادي أوزود من المطلّ",
+      "جولة قصيرة بالقارب",
+      "استراحة للسباحة",
       "قرد مكاك بربري في شلالات أوزود"
     ]
   }
