@@ -25,11 +25,19 @@ def render(data, prefix, programme, whatsapp):
         return (f'<img src="{assets}{name}.webp" width="{width}" height="{height}" '
                 f'alt="{e(label)}" {priority} decoding="async">')
 
+    credits = " · ".join(
+        f'<a target="_blank" rel="noopener" href="https://commons.wikimedia.org/wiki/File:{e(file)}">{e(author)}</a> '
+        f'(<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/{license_path}/">{license_label}</a>)'
+        for author, file, license_path, license_label in CREDITS
+    )
     stages = "".join(
         f'<section class="rp-twelve-step"><div class="container">'
         f'<h2 class="heading">{e(title)}</h2>'
         f'<div class="rp-step-photos single">{photo(name, label)}</div>'
-        f'<div class="rp-step-copy"><p>{e(body)}</p></div></div></section>'
+        f'<div class="rp-step-copy"><p>{e(body)}</p></div>'
+        + (f'<details><summary>{e(data["photo_credit_label"])}</summary>'
+           f'<p>{credits} · {e(data["credits"])}</p></details>' if name == "macaque" else "")
+        + "</div></section>"
         for (title, body), name, label in zip(data["stages"], stage_photos, data["stage_photos"], strict=True)
     )
     hero_photos = "".join(
@@ -40,11 +48,6 @@ def render(data, prefix, programme, whatsapp):
         ))
     )
     gallery = "".join(photo(name, data["photos"][1]) for name in ("walk", "falls", "terraces"))
-    credits = " · ".join(
-        f'<a target="_blank" rel="noopener" href="https://commons.wikimedia.org/wiki/File:{e(file)}">{e(author)}</a> '
-        f'(<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/{license_path}/">{license_label}</a>)'
-        for author, file, license_path, license_label in CREDITS
-    )
     button = (f'<a class="btn btn-gold" href="{e(whatsapp)}" target="_blank" rel="noopener noreferrer">'
               f'{e(data["ask"])}</a>')
     return f"""
@@ -67,7 +70,6 @@ def render(data, prefix, programme, whatsapp):
       <section class="rp-gallery"><div class="container">
         <h2 class="heading">{e(data["gallery"])}</h2>
         <div class="rp-gallery-grid">{gallery}</div>
-        <p>{e(data["credits"])} · {credits}</p>
       </div></section>
       <section class="section booking-section"><div class="container">{button}</div></section>
     </main>"""

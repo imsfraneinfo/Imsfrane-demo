@@ -31,7 +31,7 @@
       ],
       [
         "Observer les macaques",
-        "Ouvrez l’œil le long des sentiers. Si des macaques se montrent, observez-les à distance, sans les nourrir."
+        "Nous faisons une halte à un belvédère face aux cascades où les macaques passent parfois. S’ils sont là, vous pouvez les photographier avec les chutes en arrière-plan, en gardant vos distances."
       ]
     ],
     "stage_photos": [
@@ -39,7 +39,8 @@
       "Une balade en barque",
       "Une pause baignade",
       "Un macaque de Barbarie à Ouzoud"
-    ]
+    ],
+    "photo_credit_label": "Source de la photo du macaque"
   },
   "en": {
     "title": "Ouzoud Waterfalls & Monkey Watching",
@@ -73,7 +74,7 @@
       ],
       [
         "Watch for Barbary macaques",
-        "Look out for macaques along the trails. If you spot any, watch from a distance and avoid feeding them."
+        "We stop at a viewpoint overlooking the falls where macaques sometimes appear. If they’re around, you can photograph them from a distance with the waterfalls in the background."
       ]
     ],
     "stage_photos": [
@@ -81,7 +82,8 @@
       "A short boat ride",
       "An optional swim",
       "A Barbary macaque at Ouzoud Falls"
-    ]
+    ],
+    "photo_credit_label": "Macaque photo credit"
   },
   "es": {
     "title": "Cascadas de Ouzoud y observación de monos",
@@ -115,7 +117,7 @@
       ],
       [
         "Observa a los macacos",
-        "Busca macacos durante el paseo. Si aparecen, obsérvalos a distancia y evita darles comida."
+        "Paramos en un mirador frente a las cascadas por donde a veces pasan los macacos. Si aparecen, puedes fotografiarlos desde una distancia prudente, con las cascadas de fondo."
       ]
     ],
     "stage_photos": [
@@ -123,7 +125,8 @@
       "Un paseo en barca",
       "Una pausa para bañarse",
       "Un macaco de Berbería en Ouzoud"
-    ]
+    ],
+    "photo_credit_label": "Crédito de la foto del macaco"
   },
   "ar": {
     "title": "شلالات أوزود ومشاهدة القرود",
@@ -157,7 +160,7 @@
       ],
       [
         "مشاهدة قرود المكاك",
-        "نبحث عن القرود على طول المسار. إذا ظهرت، نشاهدها من بعيد ونتجنب إطعامها."
+        "نتوقف عند مطلّ على الشلالات تمرّ به قرود المكاك أحيانًا. إذا ظهرت، يمكن تصويرها من بعيد مع الشلالات في الخلفية."
       ]
     ],
     "stage_photos": [
@@ -165,6 +168,7 @@
       "جولة قصيرة بالقارب",
       "استراحة للسباحة",
       "قرد مكاك بربري في شلالات أوزود"
-    ]
+    ],
+    "photo_credit_label": "مصدر صورة المكاك"
   }
 }
