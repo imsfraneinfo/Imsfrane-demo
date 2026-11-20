@@ -188,3 +188,29 @@ def build(root, prefix):
         </section>'''
         listing.main.select_one(".wk-hero").insert_after(BeautifulSoup(card, "html.parser"))
         source.write_text(str(listing), encoding="utf-8")
+
+        home_path = root / lang / "index.html"
+        home = BeautifulSoup(home_path.read_text(encoding="utf-8"), "html.parser")
+        more = home.select_one("details.ims-more")
+        grid = more.find_previous_sibling(class_="hp-activity-grid") if more else None
+        if grid is None:
+            grid = home.select_one(".hp-activity-grid")
+        if grid is None:
+            raise ValueError(f"Homepage activity grid missing: {home_path}")
+        home_card = f"""
+        <article class="hp-activity-card hp-ouzoud">
+          <a class="hp-activity-image" href="{detail}" aria-label="{e(data["title"])}">
+            <img src="{prefix}ouzoud-assets/falls.webp" width="760" height="1013"
+                 alt="{e(data["photos"][1])}" loading="lazy" decoding="async">
+          </a>
+          <div class="hp-activity-body">
+            <div class="hp-activity-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+              <span>{'أوزود' if lang == 'ar' else 'Ouzoud'}</span>
+            </div>
+            <h3>{e(data["title"])}</h3>
+            <p>{e(data["intro"])}</p>
+            <div class="hp-activity-bottom"><a href="{detail}"><span>{e(data["open"])}</span></a></div>
+          </div>
+        </article>"""
+        grid.append(BeautifulSoup(home_card, "html.parser"))
+        home_path.write_text(str(home), encoding="utf-8")
