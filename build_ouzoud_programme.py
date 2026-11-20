@@ -9,37 +9,37 @@ from bs4 import BeautifulSoup
 
 SOURCE = Path(__file__).resolve().parent
 SLUG = "ouzoud"
-CREDITS = (
-    ("Jakub Hałun", "Macaca_sylvanus,_Ouzoud_Falls,_Morocco,_20250126_1427_7488.jpg", "by/4.0", "CC BY 4.0"),
-)
-
-
 def render(data, prefix, programme, whatsapp):
     assets = prefix + "ouzoud-assets/"
     e = escape
     stage_photos = ("viewpoint", "boat", "basin", "macaque")
 
     def photo(name, label, eager=False):
-        width, height = (540, 900) if name == "macaque" else (760, 1013)
+        width, height = 760, 1013
         priority = 'fetchpriority="high"' if eager else 'loading="lazy"'
         return (f'<img src="{assets}{name}.webp" width="{width}" height="{height}" '
                 f'alt="{e(label)}" {priority} decoding="async">')
 
-    credits = " · ".join(
-        f'<a target="_blank" rel="noopener" href="https://commons.wikimedia.org/wiki/File:{e(file)}">{e(author)}</a> '
-        f'(<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/{license_path}/">{license_label}</a>)'
-        for author, file, license_path, license_label in CREDITS
-    )
-    stages = "".join(
-        f'<section class="rp-twelve-step"><div class="container">'
-        f'<h2 class="heading">{e(title)}</h2>'
-        f'<div class="rp-step-photos single">{photo(name, label)}</div>'
-        f'<div class="rp-step-copy"><p>{e(body)}</p></div>'
-        + (f'<details><summary>{e(data["photo_credit_label"])}</summary>'
-           f'<p>{credits} · {e(data["credits"])}</p></details>' if name == "macaque" else "")
-        + "</div></section>"
-        for (title, body), name, label in zip(data["stages"], stage_photos, data["stage_photos"], strict=True)
-    )
+    stages = []
+    for (title, body), name, label in zip(data["stages"], stage_photos, data["stage_photos"], strict=True):
+        if name == "macaque":
+            photos = "".join(
+                f'<img src="{assets}{file}.jpg" width="{width}" height="1536" '
+                f'alt="{e(caption)}" loading="lazy" decoding="async">'
+                for (file, width), caption in zip(
+                    (("macaque-young", 898), ("macaque-adult", 888)), data["macaque_photos"], strict=True
+                )
+            )
+            photo_class = "pair oz-macaque-pair"
+        else:
+            photos = photo(name, label)
+            photo_class = "single"
+        stages.append(
+            f'<section class="rp-twelve-step"><div class="container">'
+            f'<h2 class="heading">{e(title)}</h2>'
+            f'<div class="rp-step-photos {photo_class}">{photos}</div>'
+            f'<div class="rp-step-copy"><p>{e(body)}</p></div></div></section>'
+        )
     hero_photos = "".join(
         f'<div class="shot{" main" if index == 0 else ""}">{photo(name, label, index == 0)}</div>'
         for index, (name, label) in enumerate((
@@ -66,7 +66,7 @@ def render(data, prefix, programme, whatsapp):
       <section class="section rp-section-note"><div class="container">
         <h2 class="heading">{e(data["schedule"])}</h2><p>{e(data["meet"])}</p>
       </div></section>
-      {stages}
+      {''.join(stages)}
       <section class="rp-gallery"><div class="container">
         <h2 class="heading">{e(data["gallery"])}</h2>
         <div class="rp-gallery-grid">{gallery}</div>
@@ -94,6 +94,14 @@ def build(root, prefix):
         embed = BeautifulSoup(template.read_text(encoding="utf-8"), "html.parser")
         embed.main.replace_with(BeautifulSoup(render(data, prefix, programme, whatsapp), "html.parser"))
         embed.title.string = data["title"]
+        style = embed.new_tag("style")
+        style.string = (
+            ".rp-twelve-step .rp-step-photos.oz-macaque-pair"
+            "{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}"
+            ".rp-twelve-step .rp-step-photos.oz-macaque-pair img"
+            "{width:100%;height:auto;aspect-ratio:auto;object-fit:contain}"
+        )
+        embed.head.append(style)
         for script in embed.select("script"):
             script.decompose()
         for preload in embed.select('link[rel="preload"][as="image"]'):
@@ -101,7 +109,7 @@ def build(root, prefix):
         (root / embed_name).write_text(str(embed), encoding="utf-8")
 
         main = page.new_tag("main", id="mainContent")
-        iframe = page.new_tag("iframe", id="ouzoudFrame", src=f"{prefix}{embed_name}?v=rafting-layout1",
+        iframe = page.new_tag("iframe", id="ouzoudFrame", src=f"{prefix}{embed_name}?v=macaque-pair1",
                               title=data["title"], style="display:block;width:100%;height:1800px;border:0")
         main.append(iframe)
         page.main.replace_with(main)

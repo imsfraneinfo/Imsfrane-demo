@@ -14,7 +14,6 @@
       "Vue panoramique des cascades d’Ouzoud",
       "Les cascades vues d’en bas"
     ],
-    "credits": "Crédits photo · images redimensionnées pour le web",
     "intro": "Une visite à Ouzoud pour découvrir les cascades et observer les macaques de Barbarie, s’ils se montrent.",
     "stages": [
       [
@@ -40,7 +39,10 @@
       "Une pause baignade",
       "Un macaque de Barbarie à Ouzoud"
     ],
-    "photo_credit_label": "Source de la photo du macaque"
+    "macaque_photos": [
+      "Un jeune macaque à Ouzoud",
+      "Un macaque adulte sous les feuilles"
+    ]
   },
   "en": {
     "title": "Ouzoud Waterfalls & Monkey Watching",
@@ -57,7 +59,6 @@
       "Panoramic view of Ouzoud Waterfalls",
       "The waterfalls from below"
     ],
-    "credits": "Photo credits · images resized for the web",
     "intro": "Visit the Ouzoud waterfalls and look out for Barbary macaques along the trails.",
     "stages": [
       [
@@ -83,7 +84,10 @@
       "An optional swim",
       "A Barbary macaque at Ouzoud Falls"
     ],
-    "photo_credit_label": "Macaque photo credit"
+    "macaque_photos": [
+      "A young macaque at Ouzoud",
+      "An adult macaque under the leaves"
+    ]
   },
   "es": {
     "title": "Cascadas de Ouzoud y observación de monos",
@@ -100,7 +104,6 @@
       "Vista panorámica de las cascadas de Ouzoud",
       "Las cascadas vistas desde abajo"
     ],
-    "credits": "Créditos fotográficos · imágenes redimensionadas para la web",
     "intro": "Visita las cascadas de Ouzoud y busca macacos de Berbería durante el paseo.",
     "stages": [
       [
@@ -126,7 +129,10 @@
       "Una pausa para bañarse",
       "Un macaco de Berbería en Ouzoud"
     ],
-    "photo_credit_label": "Crédito de la foto del macaco"
+    "macaque_photos": [
+      "Un macaco joven en Ouzoud",
+      "Un macaco adulto bajo las hojas"
+    ]
   },
   "ar": {
     "title": "شلالات أوزود ومشاهدة القرود",
@@ -143,7 +149,6 @@
       "إطلالة بانورامية على شلالات أوزود",
       "شلالات أوزود من الأسفل"
     ],
-    "credits": "حقوق الصور · عُدّلت أبعاد الصور للعرض على الويب",
     "intro": "جولة لاكتشاف شلالات أوزود ومشاهدة قرود المكاك البربري إن ظهرت على المسار.",
     "stages": [
       [
@@ -169,6 +174,9 @@
       "استراحة للسباحة",
       "قرد مكاك بربري في شلالات أوزود"
     ],
-    "photo_credit_label": "مصدر صورة المكاك"
+    "macaque_photos": [
+      "قرد مكاك صغير في أوزود",
+      "قرد مكاك بالغ بين أوراق الشجر"
+    ]
   }
 }
