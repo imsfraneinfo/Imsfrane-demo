@@ -32,23 +32,35 @@ COPY = {
 POLICIES = {
     "fr": ("Conditions d’annulation et de report",
            "Si vous annulez plus de 5 jours avant la date prévue, nous vous remboursons intégralement. À 5 jours ou moins, les sommes versées ne sont pas remboursées, car le transport, les guides et l’équipe sont réservés à l’avance.",
-           "Si la météo ou le niveau de la rivière ne permettent pas le rafting, nous proposons une autre date et remboursons intégralement tout montant déjà payé."),
+           "Si la météo ou le niveau de la rivière ne permettent pas le rafting, nous proposons une autre date. Si elle ne vous convient pas, nous vous remboursons intégralement."),
     "en": ("Cancellation and rescheduling",
            "If you cancel more than 5 days before the scheduled date, you receive a full refund. If you cancel 5 days or less before the date, payments are non-refundable because transport, guides and staff are booked in advance.",
-           "If weather or river levels prevent rafting, we offer another date and refund any amount already paid in full."),
+           "If weather or river levels prevent rafting, we offer another date. If it does not suit you, we refund any amount already paid in full."),
     "es": ("Cancelaciones y cambios de fecha",
            "Si cancelas con más de 5 días de antelación, te devolvemos íntegramente lo abonado. Si cancelas cuando faltan 5 días o menos, no se devuelve lo abonado, ya que el transporte, los guías y el equipo se reservan con antelación.",
-           "Si el tiempo o el nivel del río impiden hacer rafting, proponemos otra fecha y devolvemos íntegramente cualquier importe ya abonado."),
+           "Si el tiempo o el nivel del río impiden hacer rafting, proponemos otra fecha. Si no te conviene, te devolvemos íntegramente lo abonado."),
     "ar": ("شروط الإلغاء والتأجيل",
            "إذا ألغيت الحجز قبل الموعد بأكثر من 5 أيام، نعيد لك كامل المبلغ المدفوع. إذا ألغيت قبل الموعد بـ5 أيام أو أقل، فلا يُسترد المبلغ لأننا نحجز النقل والمرشدين والفريق مسبقًا.",
-           "إذا لم يسمح الطقس أو مستوى النهر بالتجديف، نقترح موعدًا آخر ونعيد لك كامل المبلغ الذي دفعته."),
+           "إذا لم يسمح الطقس أو مستوى النهر بالتجديف، نقترح موعدًا آخر. إذا لم يناسبك، نعيد لك كامل المبلغ الذي دفعته."),
+}
+
+
+DEPOSIT = {
+    "fr": "Pour une activité, l’équipe confirme d’abord la disponibilité. Vous versez ensuite un acompte de 20 %, puis le solde de 80 % après l’activité.",
+    "en": "For an activity, our team confirms availability first. You then pay a 20% deposit and the remaining 80% after the activity.",
+    "es": "Para reservar una actividad, el equipo confirma primero la disponibilidad. Después pagas un anticipo del 20 % y el 80 % restante al terminar la actividad.",
+    "ar": "لحجز نشاط، يؤكّد الفريق التوفّر أولًا. بعد ذلك تدفع عربونًا بنسبة 20٪، وتسدد المبلغ المتبقي بنسبة 80٪ بعد النشاط.",
 }
 
 
 def add_policy(page, container, lang):
-    if container is None or container.select_one(".booking-cancellation-policy"):
+    if container is None:
         return
     title, cancellation, rafting = POLICIES[lang]
+    section = page.select_one(".booking-cancellation-policy")
+    if section:
+        section.find_all("p", recursive=False)[1].string = rafting
+        return
     section = page.new_tag("div", attrs={"class": "booking-cancellation-policy"})
     heading = page.new_tag("strong")
     heading.string = title
@@ -102,7 +114,13 @@ def booking(path, words, guide_url, lang):
     services_node = page.select_one("#bookingServices")
     if not services_node:
         return
-    add_policy(page, page.select_one('.bk-summary'), lang)
+    summary = page.select_one(".bk-summary")
+    add_policy(page, summary, lang)
+    quote = summary.select_one("#quoteNote")
+    if quote and not summary.select_one(".booking-deposit-note"):
+        deposit = page.new_tag("p", attrs={"class": "booking-deposit-note"})
+        deposit.string = DEPOSIT[lang]
+        quote.find_next_sibling("p").insert_after(deposit)
     services = json.loads(services_node.string)
     position = next(i for i, service in enumerate(services) if service["id"] == "transport")
     if any(service["id"] == "transportBeniMellal" for service in services):
@@ -152,9 +170,9 @@ def update_site(root, prefix):
                 note = page.new_tag("p", attrs={"class": "ims-meeting-note"})
                 note.string = words[8]
                 overview.append(note)
-            if overview and name == "rafting":
+            if name == "rafting":
                 add_policy(page, overview, lang)
-            if overview:
+            if overview or name == "rafting":
                 save(path, page)
 
     path = root / "booking-new.js"
