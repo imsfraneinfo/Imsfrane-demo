@@ -292,7 +292,7 @@ def render_reviews_in_both_sections():
 def main():
     shutil.copytree(Path(__file__).with_name("review-assets"), ROOT / "review-assets", dirs_exist_ok=True)
     # The demo starts from the latest official pages, which may already include this update.
-    if 'const selectedActivity = selection.get' in (ROOT / "booking-new.js").read_text(encoding="utf-8"):
+    if 'const selectedStay = selection.get' in (ROOT / "booking-new.js").read_text(encoding="utf-8"):
         for lang, words in LOCALES.items():
             fix_rafting_frames(lang)
             base = f"/Imsfrane-demo/{lang}/"

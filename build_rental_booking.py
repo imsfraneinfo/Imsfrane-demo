@@ -461,7 +461,7 @@ def build(root, rentals):
             heading = note.strong.extract()
             note.clear()
             note.extend([heading, page.new_tag("br"), f"{capacity} {linens}"])
-        page.select_one('script[src*="booking-new.js"]')["src"] = "/Imsfrane-demo/booking-new.js?v=offers5"
+        page.select_one('script[src*="booking-new.js"]')["src"] = "/Imsfrane-demo/booking-new.js?v=offers7"
         add_offers(page, root, lang)
         add_booking_controls(page, lang)
         rate, _, _, _ = PACKAGE_COPY[lang]
