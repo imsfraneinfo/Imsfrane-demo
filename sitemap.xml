@@ -1080,4 +1080,36 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://imsfraneinfo.github.io/Imsfrane-demo/ar/rafting/4-jours-marrakech/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://imsfraneinfo.github.io/Imsfrane-demo/en/rafting/4-jours-marrakech/" />
   </url>
+  <url>
+    <loc>https://imsfraneinfo.github.io/Imsfrane-demo/fr/programme/ouzoud/</loc>
+    <lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://imsfraneinfo.github.io/Imsfrane-demo/fr/programme/ouzoud/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://imsfraneinfo.github.io/Imsfrane-demo/en/programme/ouzoud/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://imsfraneinfo.github.io/Imsfrane-demo/es/programme/ouzoud/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://imsfraneinfo.github.io/Imsfrane-demo/ar/programme/ouzoud/" />
+  </url>
+  <url>
+    <loc>https://imsfraneinfo.github.io/Imsfrane-demo/en/programme/ouzoud/</loc>
+    <lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://imsfraneinfo.github.io/Imsfrane-demo/fr/programme/ouzoud/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://imsfraneinfo.github.io/Imsfrane-demo/en/programme/ouzoud/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://imsfraneinfo.github.io/Imsfrane-demo/es/programme/ouzoud/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://imsfraneinfo.github.io/Imsfrane-demo/ar/programme/ouzoud/" />
+  </url>
+  <url>
+    <loc>https://imsfraneinfo.github.io/Imsfrane-demo/es/programme/ouzoud/</loc>
+    <lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://imsfraneinfo.github.io/Imsfrane-demo/fr/programme/ouzoud/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://imsfraneinfo.github.io/Imsfrane-demo/en/programme/ouzoud/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://imsfraneinfo.github.io/Imsfrane-demo/es/programme/ouzoud/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://imsfraneinfo.github.io/Imsfrane-demo/ar/programme/ouzoud/" />
+  </url>
+  <url>
+    <loc>https://imsfraneinfo.github.io/Imsfrane-demo/ar/programme/ouzoud/</loc>
+    <lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://imsfraneinfo.github.io/Imsfrane-demo/fr/programme/ouzoud/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://imsfraneinfo.github.io/Imsfrane-demo/en/programme/ouzoud/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://imsfraneinfo.github.io/Imsfrane-demo/es/programme/ouzoud/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://imsfraneinfo.github.io/Imsfrane-demo/ar/programme/ouzoud/" />
+  </url>
 </urlset>
