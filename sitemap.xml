@@ -1087,6 +1087,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://imsfraneinfo.github.io/Imsfrane-demo/en/programme/ouzoud/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://imsfraneinfo.github.io/Imsfrane-demo/es/programme/ouzoud/" />
     <xhtml:link rel="alternate" hreflang="ar" href="https://imsfraneinfo.github.io/Imsfrane-demo/ar/programme/ouzoud/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://imsfraneinfo.github.io/Imsfrane-demo/en/programme/ouzoud/" />
   </url>
   <url>
     <loc>https://imsfraneinfo.github.io/Imsfrane-demo/en/programme/ouzoud/</loc>
@@ -1095,6 +1096,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://imsfraneinfo.github.io/Imsfrane-demo/en/programme/ouzoud/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://imsfraneinfo.github.io/Imsfrane-demo/es/programme/ouzoud/" />
     <xhtml:link rel="alternate" hreflang="ar" href="https://imsfraneinfo.github.io/Imsfrane-demo/ar/programme/ouzoud/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://imsfraneinfo.github.io/Imsfrane-demo/en/programme/ouzoud/" />
   </url>
   <url>
     <loc>https://imsfraneinfo.github.io/Imsfrane-demo/es/programme/ouzoud/</loc>
@@ -1103,6 +1105,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://imsfraneinfo.github.io/Imsfrane-demo/en/programme/ouzoud/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://imsfraneinfo.github.io/Imsfrane-demo/es/programme/ouzoud/" />
     <xhtml:link rel="alternate" hreflang="ar" href="https://imsfraneinfo.github.io/Imsfrane-demo/ar/programme/ouzoud/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://imsfraneinfo.github.io/Imsfrane-demo/en/programme/ouzoud/" />
   </url>
   <url>
     <loc>https://imsfraneinfo.github.io/Imsfrane-demo/ar/programme/ouzoud/</loc>
@@ -1111,6 +1114,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://imsfraneinfo.github.io/Imsfrane-demo/en/programme/ouzoud/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://imsfraneinfo.github.io/Imsfrane-demo/es/programme/ouzoud/" />
     <xhtml:link rel="alternate" hreflang="ar" href="https://imsfraneinfo.github.io/Imsfrane-demo/ar/programme/ouzoud/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://imsfraneinfo.github.io/Imsfrane-demo/en/programme/ouzoud/" />
   </url>
   <url>
     <loc>https://imsfraneinfo.github.io/Imsfrane-demo/fr/weekend-nature/</loc>
@@ -1271,5 +1275,37 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://imsfraneinfo.github.io/Imsfrane-demo/es/rafting-randonnee-maison/" />
     <xhtml:link rel="alternate" hreflang="ar" href="https://imsfraneinfo.github.io/Imsfrane-demo/ar/rafting-randonnee-maison/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://imsfraneinfo.github.io/Imsfrane-demo/en/rafting-randonnee-maison/" />
+  </url>
+  <url>
+    <loc>https://imsfraneinfo.github.io/Imsfrane-demo/fr/jet-ski/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://imsfraneinfo.github.io/Imsfrane-demo/fr/jet-ski/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://imsfraneinfo.github.io/Imsfrane-demo/en/jet-ski/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://imsfraneinfo.github.io/Imsfrane-demo/es/jet-ski/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://imsfraneinfo.github.io/Imsfrane-demo/ar/jet-ski/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://imsfraneinfo.github.io/Imsfrane-demo/en/jet-ski/" />
+  </url>
+  <url>
+    <loc>https://imsfraneinfo.github.io/Imsfrane-demo/en/jet-ski/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://imsfraneinfo.github.io/Imsfrane-demo/fr/jet-ski/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://imsfraneinfo.github.io/Imsfrane-demo/en/jet-ski/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://imsfraneinfo.github.io/Imsfrane-demo/es/jet-ski/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://imsfraneinfo.github.io/Imsfrane-demo/ar/jet-ski/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://imsfraneinfo.github.io/Imsfrane-demo/en/jet-ski/" />
+  </url>
+  <url>
+    <loc>https://imsfraneinfo.github.io/Imsfrane-demo/es/jet-ski/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://imsfraneinfo.github.io/Imsfrane-demo/fr/jet-ski/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://imsfraneinfo.github.io/Imsfrane-demo/en/jet-ski/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://imsfraneinfo.github.io/Imsfrane-demo/es/jet-ski/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://imsfraneinfo.github.io/Imsfrane-demo/ar/jet-ski/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://imsfraneinfo.github.io/Imsfrane-demo/en/jet-ski/" />
+  </url>
+  <url>
+    <loc>https://imsfraneinfo.github.io/Imsfrane-demo/ar/jet-ski/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://imsfraneinfo.github.io/Imsfrane-demo/fr/jet-ski/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://imsfraneinfo.github.io/Imsfrane-demo/en/jet-ski/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://imsfraneinfo.github.io/Imsfrane-demo/es/jet-ski/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://imsfraneinfo.github.io/Imsfrane-demo/ar/jet-ski/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://imsfraneinfo.github.io/Imsfrane-demo/en/jet-ski/" />
   </url>
 </urlset>
