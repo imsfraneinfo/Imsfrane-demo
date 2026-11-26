@@ -162,6 +162,57 @@ def set_metadata(page, name, content):
         tag["content"] = content
 
 
+SEARCH_COPY = {
+    "fr": (
+        "Comparez les deux appartements près d’Imsfrane et le Gîte Atlas Cathédrale. Consultez les tarifs, les équipements et les formules avec repas.",
+        "Descente guidée de 12 km sur l’Oued Ahansal à Imsfrane. Environ 2 heures, matériel et briefing compris, à 400 DH par personne.",
+        "Rafting de 50 km en 2 jours d’Imsfrane à Bin El Ouidane. Bivouac, repas et retour à Msfrane compris, à 2 500 DH par personne.",
+    ),
+    "en": (
+        "Compare two apartments near Imsfrane with Gîte Atlas Cathédrale. See rates, facilities and meal plans.",
+        "A guided 12 km rafting trip on the Ahansal River at Imsfrane. Around 2 hours, with equipment and briefing included, for 400 MAD per person.",
+        "Raft 50 km over two days from Imsfrane to Bin El Ouidane. Camp, meals and the return to Msfrane are included for 2,500 MAD per person.",
+    ),
+    "es": (
+        "Compara dos apartamentos cerca de Imsfrane con el Gîte Atlas Cathédrale. Consulta los precios, las instalaciones y las opciones con comidas.",
+        "Descenso guiado de 12 km por el río Ahansal en Imsfrane. Unas 2 horas, con equipo e instrucciones incluidos, por 400 MAD por persona.",
+        "Descenso de 50 km en dos días de Imsfrane a Bin El Ouidane. Incluye acampada, comidas y regreso a Msfrane por 2.500 MAD por persona.",
+    ),
+    "ar": (
+        "قارن بين شقتين قرب إمسفران ونزل أطلس كاتدرال، وتعرّف على الأسعار والتجهيزات وخيارات الإقامة مع الوجبات.",
+        "رحلة تجديف بإرشاد على امتداد 12 كيلومترًا في وادي أحنصال بإمسفران، تستغرق نحو ساعتين وتشمل المعدات والإرشادات مقابل 400 درهم للشخص.",
+        "رحلة تجديف ليومين تمتد 50 كيلومترًا من إمسفران إلى بين الويدان. تشمل التخييم والوجبات والعودة إلى مسفران مقابل 2,500 درهم للشخص.",
+    ),
+}
+
+SEARCH_ROUTES = (
+    "gite-atlas", "jet-ski", "rafting", "hebergements", "rafting/30-km",
+    "rafting/50-km-2-jours", "rafting/4-jours-marrakech", "rafting/12-km",
+)
+
+
+def update_search_metadata(root, origin):
+    for lang, descriptions in SEARCH_COPY.items():
+        descriptions = dict(zip(("hebergements", "rafting/12-km", "rafting/50-km-2-jours"), descriptions))
+        for route in SEARCH_ROUTES:
+            path = root / lang / route / "index.html"
+            page = read(path)
+            if route in descriptions:
+                set_metadata(page, "description", descriptions[route])
+            canonical = page.select_one('link[rel="canonical"]')
+            if canonical is None:
+                canonical = page.new_tag("link", rel="canonical")
+                page.head.append(canonical)
+            canonical["href"] = f"{origin}/{lang}/{route}/"
+            for old in page.select('link[rel="alternate"][hreflang]'):
+                old.decompose()
+            for code in (*SEARCH_COPY, "x-default"):
+                locale = "en" if code == "x-default" else code
+                page.head.append(page.new_tag("link", rel="alternate", hreflang=code,
+                                              href=f"{origin}/{locale}/{route}/"))
+            save(path, page)
+
+
 def update_package_pages(root, lang):
     _, unit, rafting30, rafting4 = PACKAGE_COPY[lang]
     folder = root / lang
@@ -452,3 +503,4 @@ def build(root, rentals):
 
 if __name__ == "__main__":
     build(Path("public"), Path(".preview-rentals"))
+    update_search_metadata(Path("public"), "https://imsfraneinfo.github.io/Imsfrane-demo")
