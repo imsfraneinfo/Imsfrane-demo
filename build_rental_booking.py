@@ -240,6 +240,105 @@ def add_offers(page, root, lang):
     save(path, gite)
 
 
+BOOKING_CONTROLS = {
+    "fr": ("Nombre de quads solo", "Nombre de quads duo",
+           "Le départ doit être après l’arrivée. La durée maximale est de 45 nuits."),
+    "en": ("Number of solo quads", "Number of two-rider quads",
+           "Check-out must be after check-in. The maximum stay is 45 nights."),
+    "es": ("Número de quads individuales", "Número de quads para dos",
+           "La salida debe ser posterior a la llegada. La estancia máxima es de 45 noches."),
+    "ar": ("عدد الدراجات الرباعية الفردية", "عدد الدراجات الرباعية لشخصين",
+           "يجب أن يكون تاريخ المغادرة بعد الوصول. الحد الأقصى للإقامة 45 ليلة."),
+}
+
+
+def add_booking_controls(page, lang):
+    solo, duo, dates = BOOKING_CONTROLS[lang]
+    for service, text in (("quadSolo", solo), ("quadDuo", duo)):
+        if page.select_one(f'#{service}Quantity'):
+            continue
+        offer = page.select_one(f'input[value="{service}"]').find_parent("label")
+        wrapper = page.new_tag("div", hidden="", attrs={"class": "bk-quad-quantity"})
+        label = page.new_tag("label", attrs={"class": "bk-field", "for": service + "Quantity"})
+        label.append(text)
+        label.append(page.new_tag("input", id=service + "Quantity", type="number",
+                                  value="1", min="1", max="60", step="1", inputmode="numeric", disabled=""))
+        wrapper.append(label)
+        offer.insert_after(wrapper)
+
+    if not page.select_one("#bookingDateError"):
+        departure = page.select_one("#departure")
+        error = page.new_tag("small", id="bookingDateError", role="status", hidden="")
+        error["data-message"] = dates
+        departure["aria-describedby"] = error["id"]
+        departure.insert_after(error)
+
+
+def update_booking_controls(code):
+    if "function syncBookingLanguageLinks" in code:
+        return code
+
+    changes = (
+        ("const nights=start&&end?Math.round((Date.parse(end)-Date.parse(start))/86400000):1;",
+         "const nights=start&&end?Math.round((Date.parse(end)-Date.parse(start))/86400000):0;"),
+        (" const accommodationFits=people<=limit;",
+         """ const datesInvalid = Boolean(start && end && (nights < 1 || (stay !== 'none' && nights > 45)));
+ const dateError = $('bookingDateError');
+ dateError.hidden = !datesInvalid;
+ dateError.textContent = datesInvalid ? dateError.dataset.message : '';
+ $('departure').setCustomValidity(dateError.textContent);
+ const accommodationFits = people <= limit && start >= date && nights >= 1 && nights <= 45;
+ const quadQuantities = {};
+ for (const service of ['quadSolo', 'quadDuo']) {
+   const input = $(service + 'Quantity');
+   const selected = selectedServices.some(offer => offer.id === service);
+   input.disabled = !selected;
+   input.required = selected;
+   input.closest('.bk-quad-quantity').hidden = !selected;
+   quadQuantities[service] = selected && input.validity.valid ? Number(input.value) : 0;
+ }"""),
+        ("let qty=a.unit==='person'?people:a.unit==='duo'?Math.ceil(people/2):a.unit==='quad'?people:1;",
+         """const qty = a.unit === 'person' ? people : (quadQuantities[a.id] ?? 1); if (!qty) return;"""),
+        (" return {people,nights,lines,total,quotes,stay};",
+         """ syncBookingLanguageLinks(stay, selectedServices, quadQuantities);
+ return {people,nights,lines,total,quotes,stay};"""),
+        ("""const selectedActivity = selection.get('activity');
+const activity = Array.from(form.querySelectorAll('[data-service]'))
+  .find(input => input.value === selectedActivity);
+if (activity) activity.checked = true;""",
+         """const selectedActivities = selection.getAll('activity');
+for (const input of form.querySelectorAll('[data-service]')) {
+  if (selectedActivities.includes(input.value)) input.checked = true;
+}
+for (const service of ['quadSolo', 'quadDuo']) {
+  const quantity = Number(selection.get(service));
+  if (Number.isInteger(quantity) && quantity >= 1 && quantity <= 60) {
+    $(service + 'Quantity').value = quantity;
+  }
+}"""),
+        ("form.addEventListener('input',calculate);",
+         """function syncBookingLanguageLinks(stay, selectedServices, quantities) {
+ const bookingState = new URLSearchParams();
+ if (stay !== 'none') bookingState.set('stay', stay);
+ for (const service of selectedServices) {
+   bookingState.append('activity', service.id);
+   if (quantities[service.id]) bookingState.set(service.id, quantities[service.id]);
+ }
+ for (const link of document.querySelectorAll('a[lang][href], a[hreflang][href]')) {
+   const url = new URL(link.href);
+   if (url.origin !== location.origin || !url.pathname.endsWith('/booking/')) continue;
+   url.search = bookingState.toString();
+   link.href = url.href;
+ }
+}
+form.addEventListener('input',calculate);"""),
+    )
+    for before, after in changes:
+        assert code.count(before) == 1, before
+        code = code.replace(before, after)
+    return code
+
+
 def build(root, rentals):
     script = root / "booking-new.js"
     code = script.read_text()
@@ -273,7 +372,7 @@ def build(root, rentals):
     if after not in code:
         assert code.count(before) == 1
         code = code.replace(before, after)
-    script.write_text(code)
+    script.write_text(update_booking_controls(code))
 
     for lang, words in COPY.items():
         first, second, linens, comparison, ask, greeting, dates, rafting, gite = words
@@ -311,8 +410,9 @@ def build(root, rentals):
             heading = note.strong.extract()
             note.clear()
             note.extend([heading, page.new_tag("br"), f"{capacity} {linens}"])
-        page.select_one('script[src*="booking-new.js"]')["src"] = "/Imsfrane-demo/booking-new.js?v=offers4"
+        page.select_one('script[src*="booking-new.js"]')["src"] = "/Imsfrane-demo/booking-new.js?v=offers5"
         add_offers(page, root, lang)
+        add_booking_controls(page, lang)
         rate, _, _, _ = PACKAGE_COPY[lang]
         option = page.select_one('#stay option[value="gite350"]')
         option.string = option.get_text().rsplit(" · ", 1)[0] + " · " + rate
