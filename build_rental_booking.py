@@ -1,5 +1,8 @@
 """Keep apartment and tent listings aligned with the direct booking form."""
 import json
+import re
+from html import escape
+from xml.etree import ElementTree
 from pathlib import Path
 from urllib.parse import urlencode
 
@@ -501,6 +504,53 @@ def build(root, rentals):
             save(path, page)
 
 
+def add_default_languages(root, origin):
+    sitemap = root / "sitemap.xml"
+    xml = sitemap.read_text()
+    namespace = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
+    xhtml = "{http://www.w3.org/1999/xhtml}"
+    sitemap_entries = {}
+    for entry in ElementTree.fromstring(xml):
+        url = entry.findtext(namespace + "loc")
+        if not url.startswith(origin + "/"):
+            continue
+        relative = url[len(origin) + 1:].strip("/")
+        route = relative.split("/", 1)[1] if "/" in relative else ""
+        default = f"{origin}/en/{route}/" if route else f"{origin}/en/"
+        alternates = {link.get("hreflang"): link.get("href") for link in entry.findall(xhtml + "link")}
+        assert alternates.get("en") == default, url
+        if "x-default" not in alternates:
+            sitemap_entries[url] = default
+        path = root / relative / "index.html"
+        source = path.read_text()
+        page = read(path)
+        fallback = page.select_one('link[rel="alternate"][hreflang="x-default"]')
+        if fallback and fallback["href"] == default:
+            continue
+        tag = f'<link rel="alternate" hreflang="x-default" href="{escape(default, quote=True)}">'
+        if fallback:
+            pattern = r"""<link\b(?=[^>]*\bhreflang=['"]x-default['"])[^>]*>"""
+            source, count = re.subn(pattern, lambda _: tag, source, count=1, flags=re.I)
+        else:
+            source, count = re.subn(r"</head>", lambda m: tag + "\n" + m[0], source, count=1, flags=re.I)
+        assert count == 1, url
+        path.write_text(source)
+
+    def add_sitemap_default(match):
+        block = match[0]
+        url = re.search(r"<loc>(.*?)</loc>", block, re.S).group(1)
+        default = sitemap_entries.get(url)
+        if default is None:
+            return block
+        tag = f'    <xhtml:link rel="alternate" hreflang="x-default" href="{escape(default, quote=True)}" />'
+        return re.sub(r"[ \t]*</url>$", lambda _: tag + "\n  </url>", block)
+
+    updated = re.sub(r"<url>.*?</url>", add_sitemap_default, xml, flags=re.S)
+    if updated != xml:
+        sitemap.write_text(updated)
+
+
 if __name__ == "__main__":
     build(Path("public"), Path(".preview-rentals"))
     update_search_metadata(Path("public"), "https://imsfraneinfo.github.io/Imsfrane-demo")
+    add_default_languages(Path("public"), "https://imsfraneinfo.github.io/Imsfrane-demo")
