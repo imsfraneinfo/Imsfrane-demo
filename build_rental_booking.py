@@ -86,6 +86,73 @@ PACKAGE_COPY = {
 }
 
 
+PROGRAMME_COPY = {
+    "fr": ("Autres idées de week-end", "Cascades d’Ouzoud · visite guidée",
+           "300 DH par sortie · Barque facultative : 30 DH par personne, à régler séparément"),
+    "en": ("More weekend trips", "Ouzoud Falls · guided visit",
+           "300 MAD per outing · Optional boat ride: 30 MAD per person, paid separately"),
+    "es": ("Más escapadas de fin de semana", "Cascadas de Ouzoud · visita guiada",
+           "300 MAD por salida · Paseo en barca opcional: 30 MAD por persona, pago aparte"),
+    "ar": ("خيارات أخرى لعطلة نهاية الأسبوع", "شلالات أوزود · زيارة مع مرشد",
+           "300 درهم للجولة · جولة القارب اختيارية: 30 درهمًا للشخص تُدفع بشكل منفصل"),
+}
+
+
+def add_ouzoud(page, lang, services):
+    _, name, details = PROGRAMME_COPY[lang]
+    if not any(service["id"] == "ouzoud" for service in services):
+        services.append({"id": "ouzoud", "name": name, "price": 300, "unit": "group"})
+    if not page.select_one('input[value="ouzoud"]'):
+        custom = page.select_one('input[value="custom"]').find_parent("label")
+        label = page.new_tag("label", attrs={"class": "bk-choice"})
+        label.append(page.new_tag("input", attrs={"data-service": "", "type": "checkbox", "value": "ouzoud"}))
+        copy = page.new_tag("span")
+        for element, text in (("strong", name), ("small", details)):
+            tag = page.new_tag(element)
+            tag.string = text
+            copy.append(tag)
+        label.append(copy)
+        custom.insert_before(label)
+
+
+def update_programme_navigation(root, lang, prefix):
+    folder = root / lang
+    for route in ("camping", "quad", "randonnee", "store"):
+        path = folder / route / "index.html"
+        page = read(path)
+        main = page.select_one("main")
+        skip = page.select_one('a[href="#mainContent"]')
+        if skip and not page.select_one("#mainContent"):
+            main["id"] = main.get("id", "mainContent")
+            main["tabindex"] = "-1"
+            skip["href"] = "#" + main["id"]
+            save(path, page)
+
+    path = folder / "programme/index.html"
+    page = read(path)
+    section = page.select_one("#weekend-trips")
+    if section is None:
+        section = page.new_tag("section", id="weekend-trips", attrs={"class": "wk-wrap oz-programme-list"})
+        heading = page.new_tag("h2")
+        heading.string = PROGRAMME_COPY[lang][0]
+        section.append(heading)
+        listing = page.new_tag("ul")
+        for slug in SLUGS:
+            offer = read(folder / slug / "index.html")
+            link = page.new_tag("a", href=f"{prefix}{lang}/{slug}/")
+            link.string = offer.select_one("main h1").get_text(" ", strip=True)
+            item = page.new_tag("li")
+            item.append(link)
+            listing.append(item)
+        section.append(listing)
+        ouzoud = page.select_one(".oz-programme-list")
+        if ouzoud:
+            ouzoud.insert_after(section)
+        else:
+            page.select_one("main").append(section)
+        save(path, page)
+
+
 def set_metadata(page, name, content):
     for attribute, key in (("name", name), ("property", f"og:{name}"), ("name", f"twitter:{name}")):
         tag = page.select_one(f'meta[{attribute}="{key}"]')
@@ -129,6 +196,7 @@ def add_offers(page, root, lang):
     services = json.loads(service_data.string)
     service = next(service for service in services if service["id"] == "raft4")
     service.update(name=programme, price=4000, minGuests=4)
+    add_ouzoud(page, lang, services)
     service_data.string = json.dumps(services, ensure_ascii=False)
     offer = page.select_one('input[value="raft4"]').parent
     offer.strong.string = programme
@@ -253,6 +321,7 @@ def build(root, rentals):
         full_board.contents[-1].replace_with(rate + " · " + details.split(" · ", 1)[-1])
         save(path, page)
         update_package_pages(root, lang)
+        update_programme_navigation(root, lang, "/Imsfrane-demo/")
 
         path = folder / "camping/index.html"
         page = read(path)
