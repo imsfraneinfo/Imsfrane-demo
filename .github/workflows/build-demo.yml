@@ -20,6 +20,7 @@ on:
       - 'booking-layout.css'
       - 'build_booking_journey.py'
       - 'booking_transport.py'
+      - 'build_rental_booking.py'
       - 'gite-assets/**'
       - 'apartment-assets/**'
       - 'build_weekend_offers.py'
@@ -146,6 +147,12 @@ jobs:
           print("Verified all official pages and assets. Official source:", source_sha)
           
           PY
+      - name: Preserve the current two-apartment pages
+        run: |
+          mkdir -p .preview-rentals
+          for lang in fr en es ar; do
+            cp "public/$lang/hebergement/index.html" ".preview-rentals/$lang.html"
+          done
       - name: Build demo weekend offers
         run: python3 build_weekend_offers.py
       - name: Build demo About team
@@ -192,6 +199,8 @@ jobs:
           PYBOOKING
       - name: Align published offers and booking links
         run: python3 build_booking_journey.py
+      - name: Update apartment capacity, campsite enquiries and booking validation
+        run: python3 build_rental_booking.py
       - name: Align AdSense with the active publisher
         run: python3 sync_adsense_publisher.py public
       - uses: peaceiris/actions-gh-pages@v4
