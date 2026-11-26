@@ -1,4 +1,5 @@
 """Keep apartment and tent listings aligned with the direct booking form."""
+import json
 from pathlib import Path
 from urllib.parse import urlencode
 
@@ -52,6 +53,71 @@ COPY = {
 }
 
 
+OFFERS = {
+    "fr": ("Louer une tente", "Programme de 4 jours au départ de Marrakech",
+           "4 000 DH par personne · 4 participants minimum", "Choisir la demi-pension",
+           "350 DH par personne · Pension complète", "Choisir la pension complète"),
+    "en": ("Rent a tent", "4-day programme from Marrakech",
+           "4,000 MAD per person · Minimum 4 participants", "Choose half board",
+           "350 MAD per person · Full board", "Choose full board"),
+    "es": ("Alquilar una tienda", "Programa de 4 días desde Marrakech",
+           "4.000 MAD por persona · Mínimo 4 participantes", "Elegir media pensión",
+           "350 MAD por persona · Pensión completa", "Elegir pensión completa"),
+    "ar": ("استئجار خيمة", "برنامج أربعة أيام انطلاقًا من مراكش",
+           "4,000 درهم للشخص · أربعة مشاركين على الأقل", "اختر الإقامة مع العشاء والفطور",
+           "350 درهمًا للشخص · إقامة مع جميع الوجبات", "اختر الإقامة مع جميع الوجبات"),
+}
+
+
+def add_offers(page, root, lang):
+    tent, programme, price, half, full_price, full = OFFERS[lang]
+    service_data = page.select_one("#bookingServices")
+    services = json.loads(service_data.string)
+    service = next(service for service in services if service["id"] == "raft4")
+    service.update(name=programme, price=4000, minGuests=4)
+    service_data.string = json.dumps(services, ensure_ascii=False)
+    offer = page.select_one('input[value="raft4"]').parent
+    offer.strong.string = programme
+    offer.small.string = price
+    link = page.select_one('a[href$="/camping/#camp-prices"]')
+    if link is None:
+        link = page.new_tag("a", href=f"/Imsfrane-demo/{lang}/camping/#camp-prices")
+        note = page.new_tag("p", attrs={"class": "bk-note"})
+        note.append(link)
+        page.select_one("#campNote").insert_after(note)
+    link.string = tent
+
+    path = root / lang / "rafting/4-jours-marrakech/index.html"
+    detail = read(path)
+    action = detail.select_one('.ims-booking-overview a[href*="activity=raft4"]')
+    row = action.parent
+    action.extract()
+    row.clear()
+    row.extend([price + " · ", action])
+    save(path, detail)
+
+    path = root / lang / "gite-atlas/index.html"
+    gite = read(path)
+    half_link = gite.select_one('.ims-booking-overview a[href*="stay=gite250"]')
+    half_link.string = half
+    if not gite.select_one('.ims-booking-overview a[href*="stay=gite350"]'):
+        row = gite.new_tag("p")
+        action = gite.new_tag("a", href=half_link["href"].replace("stay=gite250", "stay=gite350"))
+        action.string = full
+        row.extend([full_price + " · ", action])
+        half_link.parent.insert_after(row)
+    for action in gite.select('.ims-booking-overview a[href*="stay=gite"]'):
+        action["class"] = ["gite-plan-button"]
+    if not gite.select_one("#gite-plan-buttons"):
+        style = gite.new_tag("style", id="gite-plan-buttons")
+        style.string = (
+            ".ims-booking-overview .gite-plan-button{background:#173525;color:#fff;"
+            "padding:8px 13px;border-radius:7px;text-decoration:none;margin-block:4px}"
+        )
+        gite.head.append(style)
+    save(path, gite)
+
+
 def build(root, rentals):
     script = root / "booking-new.js"
     code = script.read_text()
@@ -66,8 +132,19 @@ def build(root, rentals):
  if(!form.reportValidity())return;"""),
     )
     for before, after in changes:
-        assert code.count(before) == 1, before
-        code = code.replace(before, after)
+        if after not in code:
+            assert code.count(before) == 1, before
+            code = code.replace(before, after)
+    limits = " $('guests').max=limit;"
+    assert limits in code
+    code = code.replace(limits, limits + """
+ const selectedServices = [...form.querySelectorAll('[data-service]:checked')]
+   .map(input => services.find(service => service.id === input.value));
+ const minGuests = Math.max(1, ...selectedServices.map(service => service.minGuests || 1));
+ $('guests').min = minGuests;""", 1)
+    before = "form.querySelectorAll('[data-service]:checked').forEach(input=>{const a=services.find(a=>a.id===input.value);"
+    assert before in code
+    code = code.replace(before, "selectedServices.forEach(a=>{if(people < (a.minGuests || 1) || minGuests > limit)return;")
     script.write_text(code)
 
     for lang, words in COPY.items():
@@ -78,7 +155,10 @@ def build(root, rentals):
         cards = page.select("main .rental-card")
         assert len(cards) == 2, lang
         for card, copy in zip(cards, (first, second)):
-            note = page.new_tag("p")
+            note = card.select_one(".rental-capacity") or page.new_tag("p", attrs={"class": "rental-capacity"})
+            for old in card.find_all("p", recursive=False):
+                if old is not note and old.get_text(strip=True) == f"{copy} {linens}":
+                    old.decompose()
             note.string = f"{copy} {linens}"
             card.select_one(".rental-price").insert_after(note)
         save(path, page)
@@ -88,7 +168,8 @@ def build(root, rentals):
         card = page.select_one(".stay-card-body")
         lines = card.find_all("p", recursive=False)
         lines[0].string = comparison
-        lines[1].decompose()
+        for line in lines[1:]:
+            line.decompose()
         save(path, page)
 
         path = folder / "booking/index.html"
@@ -102,7 +183,8 @@ def build(root, rentals):
             heading = note.strong.extract()
             note.clear()
             note.extend([heading, page.new_tag("br"), f"{capacity} {linens}"])
-        page.select_one('script[src*="booking-new.js"]')["src"] += "&rental=2"
+        page.select_one('script[src*="booking-new.js"]')["src"] = "/Imsfrane-demo/booking-new.js?v=offers3"
+        add_offers(page, root, lang)
         save(path, page)
 
         path = folder / "camping/index.html"
@@ -111,6 +193,8 @@ def build(root, rentals):
         assert len(tariffs) >= 4, lang
         for card, price in zip(tariffs, (60, 120, 150, 200)):
             assert card.strong.get_text(strip=True).startswith(str(price)), lang
+            for old in card.select('a[href*="wa.me"]'):
+                old.decompose()
             details = card.get_text(" · ", strip=True)
             query = urlencode({"text": f"{greeting}\n{details}\n{dates}"})
             action = page.new_tag("a", href=f"https://wa.me/212667772551?{query}",
