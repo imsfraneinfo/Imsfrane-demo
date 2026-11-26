@@ -43,6 +43,7 @@ on:
       - 'build_legacy_redirects.py'
       - 'build_route_numbers.py'
       - 'build_adsense_readiness.py'
+      - 'sync_adsense_publisher.py'
       - 'qa_adsense_readiness.py'
       - 'rafting-50km-article.json'
       - 'images/IMG_bivouac-*.webp'
@@ -191,6 +192,8 @@ jobs:
           PYBOOKING
       - name: Align published offers and booking links
         run: python3 build_booking_journey.py
+      - name: Align AdSense with the active publisher
+        run: python3 sync_adsense_publisher.py public
       - uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
