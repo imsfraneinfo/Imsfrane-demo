@@ -4,6 +4,7 @@ from pathlib import Path
 from urllib.parse import urlencode
 
 from booking_transport import read, save
+from build_weekend_offers import SLUGS
 
 COPY = {
     "fr": (
@@ -56,17 +57,70 @@ COPY = {
 OFFERS = {
     "fr": ("Louer une tente", "Programme de 4 jours au départ de Marrakech",
            "4 000 DH par personne · 4 participants minimum", "Choisir la demi-pension",
-           "350 DH par personne · Pension complète", "Choisir la pension complète"),
+           "350 DH par personne et par nuit · Pension complète", "Choisir la pension complète"),
     "en": ("Rent a tent", "4-day programme from Marrakech",
            "4,000 MAD per person · Minimum 4 participants", "Choose half board",
-           "350 MAD per person · Full board", "Choose full board"),
+           "350 MAD per person per night · Full board", "Choose full board"),
     "es": ("Alquilar una tienda", "Programa de 4 días desde Marrakech",
            "4.000 MAD por persona · Mínimo 4 participantes", "Elegir media pensión",
-           "350 MAD por persona · Pensión completa", "Elegir pensión completa"),
+           "350 MAD por persona y noche · Pensión completa", "Elegir pensión completa"),
     "ar": ("استئجار خيمة", "برنامج أربعة أيام انطلاقًا من مراكش",
            "4,000 درهم للشخص · أربعة مشاركين على الأقل", "اختر الإقامة مع العشاء والفطور",
-           "350 درهمًا للشخص · إقامة مع جميع الوجبات", "اختر الإقامة مع جميع الوجبات"),
+           "350 درهمًا للشخص في الليلة · إقامة مع جميع الوجبات", "اختر الإقامة مع جميع الوجبات"),
 }
+
+
+PACKAGE_COPY = {
+    "fr": ("350 DH par personne et par nuit", "par personne et par nuit",
+           "Rafting de 30 km sur l’Oued Ahansal à Imsfrane : environ 4 heures, équipement et briefing inclus, 800 DH par personne.",
+           "Séjour rafting de 4 jours au départ de Marrakech vers Imsfrane, à 4 000 DH par personne pour un groupe d’au moins 4 participants."),
+    "en": ("350 MAD per person per night", "per person per night",
+           "Raft 30 km on the Ahansal River at Imsfrane. Around 4 hours, equipment and briefing included, 800 MAD per person.",
+           "A four-day rafting trip from Marrakech to Imsfrane. 4,000 MAD per person for groups of at least four."),
+    "es": ("350 MAD por persona y noche", "por persona y noche",
+           "Rafting de 30 km por el río Ahansal en Imsfrane. Unas 4 horas, equipo e instrucciones incluidos, 800 MAD por persona.",
+           "Viaje de rafting de cuatro días desde Marrakech a Imsfrane. 4.000 MAD por persona para grupos de cuatro o más."),
+    "ar": ("350 درهمًا للشخص في الليلة", "للشخص في الليلة",
+           "تجديف لمسافة 30 كيلومترًا في وادي أحنصال بإمسفران، يستغرق نحو أربع ساعات ويشمل المعدات والإرشادات مقابل 800 درهم للشخص.",
+           "رحلة تجديف لأربعة أيام من مراكش إلى إمسفران بسعر 4,000 درهم للشخص، للمجموعات من أربعة مشاركين فأكثر."),
+}
+
+
+def set_metadata(page, name, content):
+    for attribute, key in (("name", name), ("property", f"og:{name}"), ("name", f"twitter:{name}")):
+        tag = page.select_one(f'meta[{attribute}="{key}"]')
+        if tag is None:
+            tag = page.new_tag("meta", attrs={attribute: key})
+            page.head.append(tag)
+        tag["content"] = content
+
+
+def update_package_pages(root, lang):
+    _, unit, rafting30, rafting4 = PACKAGE_COPY[lang]
+    folder = root / lang
+    assert read(folder / "index.html").select_one("#activities"), lang
+    for slug in SLUGS:
+        path = folder / slug / "index.html"
+        page = read(path)
+        back = page.select_one("a.wo-back")
+        back["href"] = back["href"].split("#")[0] + "#activities"
+        title = page.select_one("main h1").get_text(" ", strip=True) + " | Imsfrane Cathédrale"
+        page.title.string = title
+        for attribute, key in (("property", "og:title"), ("name", "twitter:title")):
+            tag = page.select_one(f'meta[{attribute}="{key}"]')
+            if tag:
+                tag["content"] = title
+        save(path, page)
+    for route, description in (("30-km", rafting30), ("4-jours-marrakech", rafting4)):
+        path = folder / "rafting" / route / "index.html"
+        page = read(path)
+        set_metadata(page, "description", description)
+        save(path, page)
+    path = root / f"gite-content-{lang}.html"
+    page = read(path)
+    offer = page.select_one('.step a[href*="stay=gite350"]').find_parent("article")
+    offer.small.string = unit
+    save(path, page)
 
 
 def add_offers(page, root, lang):
@@ -135,16 +189,22 @@ def build(root, rentals):
         if after not in code:
             assert code.count(before) == 1, before
             code = code.replace(before, after)
-    limits = " $('guests').max=limit;"
-    assert limits in code
-    code = code.replace(limits, limits + """
+    if "const selectedServices" not in code:
+        limits = " $('guests').max=limit;"
+        assert limits in code
+        code = code.replace(limits, limits + """
  const selectedServices = [...form.querySelectorAll('[data-service]:checked')]
    .map(input => services.find(service => service.id === input.value));
  const minGuests = Math.max(1, ...selectedServices.map(service => service.minGuests || 1));
  $('guests').min = minGuests;""", 1)
-    before = "form.querySelectorAll('[data-service]:checked').forEach(input=>{const a=services.find(a=>a.id===input.value);"
-    assert before in code
-    code = code.replace(before, "selectedServices.forEach(a=>{if(people < (a.minGuests || 1) || minGuests > limit)return;")
+        before = "form.querySelectorAll('[data-service]:checked').forEach(input=>{const a=services.find(a=>a.id===input.value);"
+        assert before in code
+        code = code.replace(before, "selectedServices.forEach(a=>{if(people < (a.minGuests || 1) || minGuests > limit)return;")
+    before = "add(t[23],nights===1?350*people:null,t[24]+(nights!==1?' · '+t[30]:''));"
+    after = "add(t[23],350*people*Math.max(nights,1),'350 × '+people+' × '+Math.max(nights,1)+' '+t[33]);"
+    if after not in code:
+        assert code.count(before) == 1
+        code = code.replace(before, after)
     script.write_text(code)
 
     for lang, words in COPY.items():
@@ -183,9 +243,16 @@ def build(root, rentals):
             heading = note.strong.extract()
             note.clear()
             note.extend([heading, page.new_tag("br"), f"{capacity} {linens}"])
-        page.select_one('script[src*="booking-new.js"]')["src"] = "/Imsfrane-demo/booking-new.js?v=offers3"
+        page.select_one('script[src*="booking-new.js"]')["src"] = "/Imsfrane-demo/booking-new.js?v=offers4"
         add_offers(page, root, lang)
+        rate, _, _, _ = PACKAGE_COPY[lang]
+        option = page.select_one('#stay option[value="gite350"]')
+        option.string = option.get_text().rsplit(" · ", 1)[0] + " · " + rate
+        full_board = page.select_one("#stay").find_parent("section").select(".bk-note")[3]
+        details = full_board.contents[-1].strip()
+        full_board.contents[-1].replace_with(rate + " · " + details.split(" · ", 1)[-1])
         save(path, page)
+        update_package_pages(root, lang)
 
         path = folder / "camping/index.html"
         page = read(path)
